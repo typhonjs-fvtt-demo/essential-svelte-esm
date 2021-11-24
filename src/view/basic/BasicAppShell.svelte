@@ -1,0 +1,115 @@
+<script>
+   import { getContext }         from 'svelte';
+   import { fade, scale }        from 'svelte/transition';
+   import { TJSDialog, TJSMenu } from '@typhonjs-fvtt/runtime/svelte/application';
+   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
+
+   export let elementRoot;
+   export let message;
+
+   const foundryApp = getContext('external').foundryApp;
+
+   let draggable = foundryApp.draggable;
+   let minimizable = foundryApp.minimizable;
+   let resizable = foundryApp.resizable;
+
+   $: foundryApp.draggable = draggable;
+   $: foundryApp.minimizable = minimizable;
+   $: foundryApp.resizable = resizable;
+
+   function onClick()
+   {
+      TJSDialog.prompt({
+         title: 'A modal dialog!',
+         draggable: false,
+         modal: true,
+         content: 'A cool modal dialog!',  // You can set content with a Svelte component!
+         label: 'Ok'
+      });
+   }
+
+   function onContextClick(event)
+   {
+      TJSMenu.createContext({
+         x: event.pageX,
+         y: event.pageY,
+         items: [
+            {
+               label: 'Context menu item 1',
+               icon: 'fas fa-link',
+               onclick: () => console.log('ITEM 1 Selected')
+            },
+            {
+               label: 'Context menu item 2',
+               icon: 'fas fa-key',
+               onclick: () => console.log('ITEM 2 Selected')
+            },
+         ]
+      });
+   }
+</script>
+
+<svelte:options accessors={true}/>
+
+<ApplicationShell bind:elementRoot transition={scale} transitionOptions={{duration: 1000}}>
+   <main in:fade={{duration: 5000}} on:contextmenu|preventDefault={onContextClick}>
+      <h1>Hello {message}!</h1>
+      <label>
+         Message:&nbsp;<input bind:value={message}>
+      </label>
+      <button on:click={onClick}>Launch a modal dialog</button>
+      <div class=container>
+         Make application:
+         <label><input type=checkbox bind:checked={draggable}> Draggable</label>
+         <label><input type=checkbox bind:checked={minimizable}> Minimizable</label>
+         <label><input type=checkbox bind:checked={resizable}> Resizable</label>
+      </div>
+      <div class=bottom>
+         <a href="https://svelte.dev/tutorial">Interactive Svelte tutorial (highly recommended)</a>
+         <br>
+         <a href="https://www.youtube.com/playlist?list=PLoKaNN3BjQX3mxDEVG3oGJx2ByXnue_gR">Svelte tutorial videos</a>
+      </div>
+   </main>
+</ApplicationShell>
+
+<style lang="scss">
+   main {
+      text-align: center;
+      padding: 1em;
+      max-width: 240px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+
+      button, div.bottom {
+         margin-top: auto;
+      }
+
+      div.container {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         border-radius: 10px;
+         border: 2px solid rgba(0, 0, 0, 0.2);
+         padding: 10px;
+         margin-top: auto;
+      }
+
+      h1 {
+         color: #ff3e00;
+         text-transform: uppercase;
+         font-size: 4em;
+         font-weight: 100;
+      }
+
+      label {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+
+      @media (min-width: 640px) {
+         max-width: none;
+      }
+   }
+</style>
