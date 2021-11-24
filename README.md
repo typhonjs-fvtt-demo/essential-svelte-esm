@@ -1,2 +1,2 @@
-# demo-svelte-esm
-A demo module and template to get started with the TyphonJS Runtime Library and Svelte w/ ESM.
+# template-svelte-esm
+Provides a bare bones ES Modules template repo to get set up with using the the [TyphonJS Runtime Library](https://github.com/typhonjs-fvtt-lib/typhonjs) and [Svelte](https://svelte.dev/). 
