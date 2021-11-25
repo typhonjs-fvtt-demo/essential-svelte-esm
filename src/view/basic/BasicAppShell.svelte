@@ -75,9 +75,6 @@
 <style lang="scss">
    main {
       text-align: center;
-      padding: 1em;
-      max-width: 240px;
-      margin: 0 auto;
       display: flex;
       flex-direction: column;
 
@@ -106,10 +103,6 @@
          display: flex;
          align-items: center;
          justify-content: center;
-      }
-
-      @media (min-width: 640px) {
-         max-width: none;
       }
    }
 </style>
