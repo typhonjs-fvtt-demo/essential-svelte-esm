@@ -9,13 +9,13 @@
 
    const foundryApp = getContext('external').foundryApp;
 
-   let draggable = foundryApp.draggable;
-   let minimizable = foundryApp.minimizable;
-   let resizable = foundryApp.resizable;
+   let draggable = foundryApp.reactive.draggable;
+   let minimizable = foundryApp.reactive.minimizable;
+   let resizable = foundryApp.reactive.resizable;
 
-   $: foundryApp.draggable = draggable;
-   $: foundryApp.minimizable = minimizable;
-   $: foundryApp.resizable = resizable;
+   $: foundryApp.reactive.draggable = draggable;
+   $: foundryApp.reactive.minimizable = minimizable;
+   $: foundryApp.reactive.resizable = resizable;
 
    function onClick()
    {
