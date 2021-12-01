@@ -11,7 +11,10 @@ import {
 
 const s_COMPRESS = true;
 const s_SOURCEMAPS = true;
-const s_TYPHONJS_MODULE_LIB = true;
+
+// Set to true to enable linking against the TRL module library.
+// You must add a Foundry module dependency on the `typhonjs` Foundry package or manually install it.
+const s_TYPHONJS_MODULE_LIB = false;
 
 const postcssMain = postcssConfig({
    extract: 'template-svelte-esm.css',
