@@ -35,7 +35,7 @@ Discord server to ask any questions.
 ## What Is Happening Here?
 - The message input box is bound to the top title. Type in a new message to see it dynamically update the title from 
 `Hello Foundry`.
-- Clicking on the `Launch a modal dialog` shows off the really neat modal dialog capability of TRL. This creates 
+- Clicking on the `Launch a modal dialog` button shows off the really neat modal dialog capability of TRL. This creates 
 a dialog using a "glasspane" approach that prevents users from interacting with the rest of the Foundry UI without 
 causing Foundry itself to pause. (`TJSDialog.prompt`)
 - The checkboxes for `draggable`, `minimizable` and `resizable` show a few of the reactive Application options that 
