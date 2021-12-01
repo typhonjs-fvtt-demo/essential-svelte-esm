@@ -1,5 +1,11 @@
 ![template-svelte-esm](https://i.imgur.com/rmfWSrs.jpg)
 
+
+[![TyphonJS Discord](https://img.shields.io/discord/737953117999726592?label=TyphonJS%20Discord)](https://discord.gg/mnbgN8f)
+[![Twitch](https://img.shields.io/twitch/status/typhonrt?style=social)](https://www.twitch.tv/typhonrt)
+[![Code Style](https://img.shields.io/badge/code%20style-allman-yellowgreen.svg?style=flat)](https://en.wikipedia.org/wiki/Indent_style#Allman_style)
+[![License](https://img.shields.io/badge/license-MIT-yellowgreen.svg?style=flat)](https://github.com/typhonjs-fvtt-demo/template-svelte-esm/blob/main/LICENSE)
+
 Provides a "Hello World" ES Modules template repo to get set up with using the the 
 [TyphonJS Runtime Library](https://github.com/typhonjs-fvtt-lib/typhonjs) and [Svelte](https://svelte.dev/) on 
 [Foundry VTT](https://foundryvtt.com/).
@@ -7,7 +13,8 @@ Provides a "Hello World" ES Modules template repo to get set up with using the t
 ##About:
 Getting started with a new library or development methodology can be difficult. This demo module 
 provides the essentials with working with Svelte and various aspects that are provided with the TyphonJS Runtime 
-Library.
+Library. Please stop by the [![TyphonJS Discord](https://img.shields.io/discord/737953117999726592?label=TyphonJS)](https://discord.gg/mnbgN8f) 
+Discord server to ask any questions.
 
 ##Installation:
 1. Create your version of the template in a new repo by clicking on the "template" button above. 
