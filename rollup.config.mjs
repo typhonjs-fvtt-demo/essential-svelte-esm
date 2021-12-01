@@ -12,8 +12,9 @@ import {
 const s_COMPRESS = true;
 const s_SOURCEMAPS = true;
 
-// Set to true to enable linking against the TRL module library.
-// You must add a Foundry module dependency on the `typhonjs` Foundry package or manually install it.
+// Set to true to enable linking against the TyphonJS Runtime Library module.
+// You must add a Foundry module dependency on the `typhonjs` Foundry package or manually install it in Foundry from:
+// https://github.com/typhonjs-fvtt-lib/typhonjs/releases/latest/download/module.json
 const s_TYPHONJS_MODULE_LIB = false;
 
 const postcssMain = postcssConfig({
