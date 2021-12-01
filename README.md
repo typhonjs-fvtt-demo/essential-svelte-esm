@@ -10,13 +10,13 @@ Provides a "Hello World" ES Modules template repo to get set up with using the t
 [TyphonJS Runtime Library](https://github.com/typhonjs-fvtt-lib/typhonjs) and [Svelte](https://svelte.dev/) on 
 [Foundry VTT](https://foundryvtt.com/).
 
-##About:
+## About:
 Getting started with a new library or development methodology can be difficult. This demo module 
 provides the essentials with working with Svelte and various aspects that are provided with the TyphonJS Runtime 
 Library. Please stop by the [![TyphonJS Discord](https://img.shields.io/discord/737953117999726592?label=TyphonJS)](https://discord.gg/mnbgN8f) 
 Discord server to ask any questions.
 
-##Installation:
+## Installation:
 1. Create your version of the template in a new repo by clicking on the "template" button above. 
 2. Use WebStorm or VSCode to clone your repo into the Foundry VTT data / modules directory (make sure to keep the name 
 `template-svelte-esm` as the folder installed in your module directory).
@@ -29,10 +29,10 @@ Discord server to ask any questions.
 8. Enable `Template Svelte (ESM)` under `Manage Modules`.
 9. On reload the Hello Foundry UI will transition in with a scaling transition.
 
-##Snapshot:
+## Snapshot:
 ![template-svelte-esm](https://i.imgur.com/HMnxa4u.jpg)
 
-##What Is Happening Here?
+## What Is Happening Here?
 - The message input box is bound to the top title. Type in a new message to see it dynamically update the title from 
 `Hello Foundry`.
 - Clicking on the `Launch a modal dialog` shows off the really neat modal dialog capability of TRL. This creates 
@@ -48,7 +48,7 @@ options that are reactive with TRL application shells.
 tutorial is highly recommended and well put together and goes through the core concepts of working with Svelte that you 
 can apply to your usage of TRL. 
 
-##About the TyphonJS Runtime Library:
+## About the TyphonJS Runtime Library:
 The TyphonJS Runtime Library (TRL) brings an exciting new library resource for all Foundry VTT developers to build
 advanced modules and game systems using Svelte. A Svelte UI component library built for Foundry and extensions to the 
 core Foundry UI / Application framework make it easy to create declarative Svelte based UIs in a method familiar to 
