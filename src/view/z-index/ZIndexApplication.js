@@ -1,8 +1,8 @@
 import { SvelteApplication }  from '@typhonjs-fvtt/runtime/svelte/application';
 
-import BasicAppShell          from './BasicAppShell.svelte';
+import ZIndexAppShell         from './ZIndexAppShell.svelte';
 
-export default class BasicApplication extends SvelteApplication
+export default class ZIndexApplication extends SvelteApplication
 {
    /**
     * @inheritDoc
@@ -18,15 +18,15 @@ export default class BasicApplication extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
-         id: 'template-svelte-esm',
+         id: 'z-index-esm',
          resizable: true,
          minimizable: true,
          width: 500,
-         height: 320,
-         title: 'Template Svelte (ESM)',
+         height: 225,
+         title: 'Template Svelte (ESM) - Z-Index',
 
          svelte: {
-            class: BasicAppShell,
+            class: ZIndexAppShell,
             target: document.body,
             intro: true,
             props: {
@@ -34,5 +34,9 @@ export default class BasicApplication extends SvelteApplication
             }
          }
       });
+   }
+
+   onSvelteMount()
+   {
    }
 }

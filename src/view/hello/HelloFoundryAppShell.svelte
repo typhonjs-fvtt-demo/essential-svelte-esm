@@ -9,13 +9,18 @@
 
    const foundryApp = getContext('external').foundryApp;
 
+   // Provides one-way bindings to application options. If changed externally updates will not be received here.
+   // Below in the `input element` for draggable you could also just set it to `{foundryApp.reactive.draggable}` and
+   // omit the reactive statement below.
    let draggable = foundryApp.reactive.draggable;
-   let minimizable = foundryApp.reactive.minimizable;
-   let resizable = foundryApp.reactive.resizable;
 
+   // This is a reactive statement. When `draggable` changes `foundryApp.reactive.draggable` is set.
    $: foundryApp.reactive.draggable = draggable;
-   $: foundryApp.reactive.minimizable = minimizable;
-   $: foundryApp.reactive.resizable = resizable;
+
+   // Provides two-way bindings to application options. By using the stores external updates will be received here.
+   const storeMinimizable = foundryApp.reactive.storeAppOptions.minimizable;
+   const storeResizable = foundryApp.reactive.storeAppOptions.resizable;
+   const storeTitle = foundryApp.reactive.storeAppOptions.title;
 
    function onClick()
    {
@@ -57,12 +62,16 @@
       <label>
          Message:&nbsp;<input bind:value={message}>
       </label>
+      <br>
+      <label>
+         Change title:&nbsp;<input bind:value={$storeTitle}>
+      </label>
       <button on:click={onClick}>Launch a modal dialog</button>
       <div class=container>
          Make application:
          <label><input type=checkbox bind:checked={draggable}> Draggable</label>
-         <label><input type=checkbox bind:checked={minimizable}> Minimizable</label>
-         <label><input type=checkbox bind:checked={resizable}> Resizable</label>
+         <label><input type=checkbox bind:checked={$storeMinimizable}> Minimizable</label>
+         <label><input type=checkbox bind:checked={$storeResizable}> Resizable</label>
       </div>
       <div class=bottom>
          <a href="https://svelte.dev/tutorial">Interactive Svelte tutorial (highly recommended)</a>
