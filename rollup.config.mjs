@@ -9,14 +9,15 @@ import {
    terserConfig,
    typhonjsRuntime }       from '@typhonjs-fvtt/runtime/rollup';
 
-const s_COMPRESS = true;
-const s_SOURCEMAPS = true;
+const s_COMPRESS = false;  // Set to true to compress the module bundle.
+const s_SOURCEMAPS = true; // Generate sourcemaps for the bundle (recommended).
 
 // Set to true to enable linking against the TyphonJS Runtime Library module.
 // You must add a Foundry module dependency on the `typhonjs` Foundry package or manually install it in Foundry from:
 // https://github.com/typhonjs-fvtt-lib/typhonjs/releases/latest/download/module.json
 const s_TYPHONJS_MODULE_LIB = false;
 
+// Creates a standard configuration for PostCSS with autoprefixer & postcss-preset-env.
 const postcssMain = postcssConfig({
    extract: 'template-svelte-esm.css',
    compress: s_COMPRESS,
@@ -29,7 +30,7 @@ export default () =>
    // minified / mangled.
    const outputPlugins = s_COMPRESS ? [terser(terserConfig())] : [];
 
-   // Defines whether source maps are generated / loaded from the .env file.
+   // Defines whether source maps are generated / loaded.
    const sourcemap = s_SOURCEMAPS;
 
    return [
@@ -54,13 +55,17 @@ export default () =>
                   handler(warning);
                },
             }),
+
             postcss(postcssMain),
+
             resolve({
                browser: true,
                dedupe: ['svelte']
             }),
-            // sourcemaps()
+
+            // When s_TYPHONJS_MODULE_LIB is true transpile against the Foundry module version of TRL.
             s_TYPHONJS_MODULE_LIB && typhonjsRuntime(),
+
             babel({
                babelHelpers: 'bundled',
                presets: [

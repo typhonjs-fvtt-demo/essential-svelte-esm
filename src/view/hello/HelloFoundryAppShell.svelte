@@ -1,7 +1,7 @@
 <script>
    import { getContext }         from 'svelte';
    import { fade, scale }        from 'svelte/transition';
-   import { TJSDialog, TJSMenu } from '@typhonjs-fvtt/runtime/svelte/application';
+   import { TJSDialog }          from '@typhonjs-fvtt/runtime/svelte/application';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
    export let elementRoot;
@@ -32,32 +32,12 @@
          label: 'Ok'
       });
    }
-
-   function onContextClick(event)
-   {
-      TJSMenu.createContext({
-         x: event.pageX,
-         y: event.pageY,
-         items: [
-            {
-               label: 'Context menu item 1',
-               icon: 'fas fa-link',
-               onclick: () => console.log('ITEM 1 Selected')
-            },
-            {
-               label: 'Context menu item 2',
-               icon: 'fas fa-key',
-               onclick: () => console.log('ITEM 2 Selected')
-            },
-         ]
-      });
-   }
 </script>
 
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot transition={scale} transitionOptions={{duration: 1000}}>
-   <main in:fade={{duration: 5000}} on:contextmenu|preventDefault={onContextClick}>
+   <main in:fade={{duration: 5000}}>
       <h1>Hello {message}!</h1>
       <label>
          Message:&nbsp;<input bind:value={message}>
