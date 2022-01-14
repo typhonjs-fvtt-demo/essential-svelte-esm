@@ -43,7 +43,6 @@ can be dynamically changed during runtime. If you click off 'draggable' the appl
 likewise turn off minimizable prevents the window from being minimized when clicking the title bar. Clicking off 
 resizable dynamically turns off the resize capability of the window. There are several additional standard application 
 options that are reactive with TRL application shells.
-- Right clicking brings up a demo context menu. (`TJSMenu.createContext`)
 - At the bottom are a couple of resources for you to start your learning adventure about Svelte. The interactive Svelte
 tutorial is highly recommended and well put together and goes through the core concepts of working with Svelte that you 
 can apply to your usage of TRL. 
