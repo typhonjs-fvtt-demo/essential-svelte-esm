@@ -23,7 +23,7 @@ export default class HelloFoundryApplication extends SvelteApplication
          minimizable: true,
          width: 500,
          height: 320,
-         title: 'Template Svelte (ESM) - Hello Foundry',
+         title: 'Essential Svelte (ESM) - Hello Foundry',
 
          svelte: {
             class: HelloFoundryAppShell,

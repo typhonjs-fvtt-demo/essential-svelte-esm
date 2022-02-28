@@ -3,7 +3,7 @@ import { SvelteApplication }     from '@typhonjs-fvtt/runtime/svelte/application
 import MenuAppShell              from './MenuAppShell.svelte';
 
 import HelloFoundryApplication   from './hello/HelloFoundryApplication.js';
-import ZIndexApplication         from './z-index/ZIndexApplication.js';
+import PositionApplication       from './position/PositionApplication.js';
 
 export default class MenuApplication extends SvelteApplication
 {
@@ -37,7 +37,7 @@ export default class MenuApplication extends SvelteApplication
             props: {
                buttons: [
                   { title: 'Hello Foundry', class: HelloFoundryApplication },
-                  { title: 'Z-Index', class: ZIndexApplication }
+                  { title: 'Position', class: PositionApplication }
                ]
             }
          }

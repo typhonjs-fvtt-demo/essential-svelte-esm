@@ -7,20 +7,20 @@
    export let elementRoot;
    export let message;
 
-   const foundryApp = getContext('external').foundryApp;
+   const application = getContext('external').application;
 
    // Provides one-way bindings to application options. If changed externally updates will not be received here.
-   // Below in the `input element` for draggable you could also just set it to `{foundryApp.reactive.draggable}` and
+   // Below in the `input element` for draggable you could also just set it to `{application.reactive.draggable}` and
    // omit the reactive statement below.
-   let draggable = foundryApp.reactive.draggable;
+   let draggable = application.reactive.draggable;
 
-   // This is a reactive statement. When `draggable` changes `foundryApp.reactive.draggable` is set.
-   $: foundryApp.reactive.draggable = draggable;
+   // This is a reactive statement. When `draggable` changes `application.reactive.draggable` is set.
+   $: application.reactive.draggable = draggable;
 
    // Provides two-way bindings to application options. By using the stores external updates will be received here.
-   const storeMinimizable = foundryApp.reactive.storeAppOptions.minimizable;
-   const storeResizable = foundryApp.reactive.storeAppOptions.resizable;
-   const storeTitle = foundryApp.reactive.storeAppOptions.title;
+   const storeMinimizable = application.reactive.storeAppOptions.minimizable;
+   const storeResizable = application.reactive.storeAppOptions.resizable;
+   const storeTitle = application.reactive.storeAppOptions.title;
 
    function onClick()
    {
