@@ -9,7 +9,7 @@
     "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)"
   ],
   "dependencies": {
-    "@typhonjs-fvtt/runtime": "0.0.5",
+    "@typhonjs-fvtt/runtime": "^0.0.7",
     "svelte": "^3.46.0"
   },
   "devDependencies": {
@@ -21,6 +21,7 @@
     "eslint": "^8",
     "rollup": "^2"
   },
+
   "browserslist": [">5%", "not IE 11"],
   "scripts": {
     "build": "rollup --config",
