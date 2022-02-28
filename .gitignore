@@ -1,6 +1,6 @@
+.idea
 .DS_Store
 template-svelte-esm.lock
-idea/
 .vscode/**/*
 !.vscode/extensions.json
 dist/
