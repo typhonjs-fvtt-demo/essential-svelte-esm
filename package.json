@@ -1,6 +1,6 @@
 {
   "name": "template-svelte-esm",
-  "description": "Provides a bare bones ES Modules template repo to get set up with using the the TyphonJS Runtime Library and Svelte.",
+  "description": "Provides essential TRL demos for reactivity and beyond.",
   "license": "MIT",
   "private": true,
   "type": "module",
@@ -10,7 +10,8 @@
   ],
   "dependencies": {
     "@typhonjs-fvtt/runtime": "^0.0.7",
-    "svelte": "^3.46.0"
+    "svelte": "^3.46.0",
+    "svelte-preprocess": "^4.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7",
