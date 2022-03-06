@@ -19,7 +19,7 @@ const s_TYPHONJS_MODULE_LIB = false;
 
 // Creates a standard configuration for PostCSS with autoprefixer & postcss-preset-env.
 const postcssMain = postcssConfig({
-   extract: 'template-svelte-esm.css',
+   extract: 'essential-svelte-esm.css',
    compress: s_COMPRESS,
    sourceMap: s_SOURCEMAPS
 });
@@ -42,7 +42,7 @@ export default () =>
       {  // The main module bundle
          input: `src/init.js`,
          output: {
-            file: `dist/template-svelte-esm.js`,
+            file: `dist/essential-svelte-esm.js`,
             format: 'es',
             plugins: outputPlugins,
             sourcemap

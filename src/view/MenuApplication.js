@@ -21,14 +21,14 @@ export default class MenuApplication extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
-         id: 'menu-app-esm',
+         id: 'essential-svelte-esm',
          headerButtonNoClose: true,
          resizable: false,
          minimizable: true,
          popOut: false,
          width: 200,
          height: 'auto',
-         title: 'Template Svelte (ESM)',
+         title: 'EssentialESM.title',
 
          svelte: {
             class: MenuAppShell,
