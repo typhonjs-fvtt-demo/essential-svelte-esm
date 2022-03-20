@@ -1,3 +1,7 @@
+<!--
+Dialog content presenting a button to add a custom chat message that is enhanced in the `renderChatMessage` found
+in `./src/init.js`
+-->
 <script>
    async function onClick()
    {
