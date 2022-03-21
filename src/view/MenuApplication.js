@@ -4,6 +4,7 @@ import {
 
 import MenuAppShell              from './MenuAppShell.svelte';
 
+import HeaderButtonsApplication  from './header-buttons/HeaderButtonsApplication.js';
 import HelloFoundryApplication   from './hello/HelloFoundryApplication.js';
 import PositionApplication       from './position/PositionApplication.js';
 import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
@@ -41,6 +42,7 @@ export default class MenuApplication extends SvelteApplication
                buttons: [
                   { title: 'Hello Foundry', class: HelloFoundryApplication },
                   { title: 'Position', class: PositionApplication },
+                  { title: 'Header Buttons', class: HeaderButtonsApplication },
                   { title: 'Chat Message', onclick: () => new TJSDialog(
                      {
                         title: 'Essential Svelte (ESM) - Chat Message',
