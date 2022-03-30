@@ -31,6 +31,11 @@ module.
 9. On reload the Essential Svelte menu app appears next to the Foundry sidebar. Click the buttons to launch various 
 demos.
 
+## Direct Foundry Install Link:
+You may also install this demo module directly with the following link by pasting it into `manifest URL` field in the 
+`add-on modules / install module` screen:
+`https://github.com/typhonjs-fvtt-demo/essential-svelte-esm/releases/latest/download/module.json`
+
 ## Snapshot:
 ![essential-svelte-esm](https://i.imgur.com/BzxBShv.jpg)
 
