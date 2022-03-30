@@ -33,10 +33,6 @@
       display: flex;
       flex-direction: column;
 
-      button {
-         margin-top: auto;
-      }
-
       div.container {
          display: flex;
          align-items: center;
