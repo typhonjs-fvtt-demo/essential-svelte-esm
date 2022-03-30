@@ -10,10 +10,6 @@
    const headerButtonNoClose = application.reactive.storeAppOptions.headerButtonNoClose;
    const headerButtonNoLabel = application.reactive.storeAppOptions.headerButtonNoLabel;
    const headerNoTitleMinimized = application.reactive.storeAppOptions.headerNoTitleMinimized;
-
-   function onClick()
-   {
-   }
 </script>
 
 <svelte:options accessors={true}/>
@@ -28,7 +24,6 @@
          <label><input type=checkbox bind:checked={$headerButtonNoLabel}> No Button Labels</label>
          <label><input type=checkbox bind:checked={$headerNoTitleMinimized}> No Title (Minimized)</label>
       </div>
-      <button on:click={onClick}>Add Button</button>
    </main>
 </ApplicationShell>
 
