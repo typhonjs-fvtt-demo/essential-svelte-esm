@@ -13,7 +13,7 @@
   "readme": "https://github.com/typhonjs-fvtt-demo/essential-svelte-esm/blob/master/README.md",
   "bugs": "https://github.com/typhonjs-fvtt-demo/essential-svelte-esm/issues",
   "changelog": "https://github.com/typhonjs-fvtt-demo/essential-svelte-esm/releases/latest/",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "9",
   "esmodules": [

@@ -1,5 +1,6 @@
 {
   "name": "essential-svelte-esm",
+  "version": "0.0.1",
   "description": "Provides essential TRL demos for reactivity and beyond.",
   "license": "MIT",
   "private": true,
