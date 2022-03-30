@@ -1,6 +1,6 @@
 .idea
 .DS_Store
-template-svelte-esm.lock
+essential-svelte-esm.lock
 .vscode/**/*
 !.vscode/extensions.json
 dist/
