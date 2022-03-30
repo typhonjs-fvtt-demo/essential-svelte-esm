@@ -9,17 +9,44 @@
 
    function onClick(button)
    {
-      const NewApplication = button.class;
-      const existingApp = apps.get(NewApplication.defaultOptions.id);
+      let app;
 
-      if (existingApp)
+      // If `onclick` defined execute the function.
+      if (typeof button.onclick === 'function')
       {
-         existingApp.render(true, { focus: true });
+         app = button.onclick();
+
+         // If an Application is returned then attempt to select an existing app by ID / render it.
+         if (app instanceof Application)
+         {
+            const existingApp = apps.get(app.id);
+
+            if (existingApp)
+            {
+               existingApp.render(true, { focus: true });
+            }
+            else
+            {
+               apps.set(app.id, app.render(true, { focus: true }));
+            }
+         }
       }
-      else
+
+      // If `class` is defined then instantiate a new one or render an existing Application.
+      else if (button.class)
       {
-         const app = new NewApplication().render(true, { focus: true });
-         apps.set(NewApplication.defaultOptions.id, app);
+         const NewApplication = button.class;
+         const existingApp = apps.get(NewApplication.defaultOptions.id);
+
+         if (existingApp)
+         {
+            existingApp.render(true, { focus: true });
+         }
+         else
+         {
+            const app = new NewApplication().render(true, { focus: true });
+            apps.set(NewApplication.defaultOptions.id, app);
+         }
       }
    }
 </script>
