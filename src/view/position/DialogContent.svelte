@@ -5,22 +5,30 @@
 
    let position;
 
-   let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex;
+   let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, translateX, translateY, translateZ,
+    zIndex;
 
    $:
    {
       position = application.position;
 
-      ({top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex} = position.stores);
+      ({top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, translateX, translateY, translateZ,
+       zIndex} = position.stores);
    }
 
    let innerWidth, innerHeight
-   let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale;
+   let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale, nullishTranslateX, nullishTranslateY,
+    nullishTranslateZ;
 
    $: if (rotateX) { nullishRotateX = Number.isFinite($rotateX) ? $rotateX : 'null'; }
    $: if (rotateY) { nullishRotateY = Number.isFinite($rotateY) ? $rotateY : 'null'; }
    $: if (rotateZ) { nullishRotateZ = Number.isFinite($rotateZ) ? $rotateZ : 'null'; }
+
    $: if (scale) { nullishScale = Number.isFinite($scale) ? $scale : 'null'; }
+
+   $: if (translateX) { nullishTranslateX = Number.isFinite($translateX) ? $translateX : 'null'; }
+   $: if (translateY) { nullishTranslateY = Number.isFinite($translateY) ? $translateY : 'null'; }
+   $: if (translateZ) { nullishTranslateZ = Number.isFinite($translateZ) ? $translateZ : 'null'; }
 
    let easing = easingFuncs.linear;
 
@@ -78,6 +86,24 @@
       <label for=scale>scale:</label>
       <input type=range min=0 max=5 step=0.01 id=scale bind:value={$scale}>
       <input type=text bind:value={nullishScale} readonly>
+   </div>
+
+   <div>
+      <label for=translateX>translateX:</label>
+      <input type=range min=0 max=360 id=translateX bind:value={$translateX}>
+      <input type=text bind:value={nullishTranslateX} readonly>
+   </div>
+
+   <div>
+      <label for=translateY>translateY:</label>
+      <input type=range min=0 max=360 id=translateY bind:value={$translateY}>
+      <input type=text bind:value={nullishTranslateY} readonly>
+   </div>
+
+   <div>
+      <label for=translateZ>translateZ:</label>
+      <input type=range min=0 max=360 id=translateZ bind:value={$translateZ}>
+      <input type=text bind:value={nullishTranslateZ} readonly>
    </div>
 
    <div>

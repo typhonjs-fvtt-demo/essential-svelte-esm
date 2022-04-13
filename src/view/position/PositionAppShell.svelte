@@ -6,15 +6,23 @@
 
    const application = getContext('external').application;
 
-   const { top, left, width, height, rotateX, rotateY, rotateZ, scale, zIndex } = application.position.stores;
+   const { top, left, width, height, rotateX, rotateY, rotateZ, scale, translateX, translateY, translateZ,
+    zIndex } = application.position.stores;
+
    const { dragging, resizing } = application.reactive.storeUIState;
 
-   let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale;
+   let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale, nullishTranslateX, nullishTranslateY,
+    nullishTranslateZ;
 
    $: nullishRotateX = Number.isFinite($rotateX) ? $rotateX : 'null';
    $: nullishRotateY = Number.isFinite($rotateY) ? $rotateY : 'null';
    $: nullishRotateZ = Number.isFinite($rotateZ) ? $rotateZ : 'null';
+
    $: nullishScale = Number.isFinite($scale) ? $scale : 'null';
+
+   $: nullishTranslateX = Number.isFinite($translateX) ? $translateX : 'null';
+   $: nullishTranslateY = Number.isFinite($translateY) ? $translateY : 'null';
+   $: nullishTranslateZ = Number.isFinite($translateZ) ? $translateZ : 'null';
 </script>
 
 <svelte:options accessors={true}/>
@@ -34,6 +42,12 @@
          rotateX: <input type=text bind:value={nullishRotateX} readonly>
          rotateY: <input type=text bind:value={nullishRotateY} readonly>
          rotateZ: <input type=text bind:value={nullishRotateZ} readonly>
+      </label>
+
+      <label>
+         translateX: <input type=text bind:value={nullishTranslateX} readonly>
+         translateY: <input type=text bind:value={nullishTranslateY} readonly>
+         translateZ: <input type=text bind:value={nullishTranslateZ} readonly>
       </label>
 
       <label>

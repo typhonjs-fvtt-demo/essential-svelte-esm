@@ -4,10 +4,12 @@ import {
 
 import MenuAppShell              from './MenuAppShell.svelte';
 
+import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
 import HeaderButtonsApplication  from './header-buttons/HeaderButtonsApplication.js';
 import HelloFoundryApplication   from './hello/HelloFoundryApplication.js';
 import PositionApplication       from './position/PositionApplication.js';
-import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
+import PositionBoxApplication    from './position-box/PositionBoxApplication.js';
+import PositionCarouselApp       from './position-carousel/PositionCarouselApp.js';
 
 export default class MenuApplication extends SvelteApplication
 {
@@ -48,7 +50,9 @@ export default class MenuApplication extends SvelteApplication
                         title: 'Essential Svelte (ESM) - Chat Message',
                         content: ChatDialogContent
                      }, { id: 'essential-esm-chat-dialog' })
-                  }
+                  },
+                  { title: 'Position (Box)', class: PositionBoxApplication },
+                  { title: 'Position (Carousel)', class: PositionCarouselApp },
                ]
             }
          }
