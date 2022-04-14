@@ -45,12 +45,10 @@
       border-radius: 0.25em;
       border: solid brown 2px;
       font-size: 12px;
-      /*will-change: left, top, width, height;*/
    }
    div.debug {
       position: absolute;
       background: rgba(100, 200, 255, 0.2);
       pointer-events: none;
-      /*will-change: left, top, width, height;*/
    }
 </style>
