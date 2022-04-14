@@ -1,0 +1,128 @@
+<script>
+   import * as easingFuncs          from 'svelte/easing';
+   import { boxStore, validator }   from './boxStore.js';
+
+   const storeDuration = boxStore.duration;
+   const storeEasing = boxStore.easing;
+
+   const storeDebug = boxStore.debug;
+   const storeLabels = boxStore.labels;
+</script>
+
+<div class="header flex">
+   <div class="container flex-vert">
+      <div class=group>
+         <button on:click={() => boxStore.add(5)}>Add 5</button>
+         <button on:click={() => boxStore.add(50)}>Add 50</button>
+         <button on:click={() => boxStore.removeRandom(50)}>Remove 50</button>
+         <button on:click={() => boxStore.removeAll()}>Remove All</button>
+      </div>
+      <div class=group>
+         <button on:click={() => boxStore.randomLocation()}>Random Location</button>
+         <button on:click={() => boxStore.randomScaleRot()}>Random Scale / Rotation</button>
+      </div>
+   </div>
+   <div class="container flex-vert">
+      <div class=flex>
+         <label class=duration for=duration>Duration:</label>
+         <input type=range min=100 max=3000 id=duration bind:value={$storeDuration}>
+         <input type=text bind:value={$storeDuration} readonly>
+      </div>
+      <div class=flex>
+         <label for=easing>Easing:</label>
+         <select id=easing bind:value={$storeEasing}>
+            {#each Object.keys(easingFuncs) as prop}
+               <option value={easingFuncs[prop]}>{prop}</option>
+            {/each}
+         </select>
+         <div class=flex-spacer></div>
+      </div>
+   </div>
+   <div class="container flex-vert">
+      <div class=flex>
+         <div class=flex>
+            <span>Validation:</span>
+            <input type=checkbox bind:checked={validator.enabled}/>
+         </div>
+         <span style="width: 5.5em">Count: {$boxStore.length}</span>
+      </div>
+      <div class=flex>
+         <span>Debug:</span>
+         <label><input type=checkbox bind:checked={$storeDebug}> Enable</label>
+         <label><input type=checkbox bind:checked={$storeLabels}> Labels</label>
+      </div>
+   </div>
+</div>
+
+<style lang="scss">
+   button {
+      width: fit-content;
+      height: 20px;
+      line-height: 18px;
+   }
+
+   div.container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.25em;
+      border: 2px solid rgba(60,60,207,0.8);
+      padding: 0 0.25em;
+      height: 95%;
+      margin-left: 0.25em
+   }
+
+   div.header {
+      background: linear-gradient(337deg, rgba(2,0,36,0.75) 0%, rgba(40,40,207,0.5) 48%, rgba(149,171,176,0.75) 100%);
+      border-bottom: solid black 1px;
+      white-space: nowrap;
+   }
+
+   div.group {
+      padding-top: 0.25em;
+   }
+
+   input { color: white; margin: 3px 3px }
+   input[type=range] { max-width: 3.75em }
+   input[type=text] { max-width: 3em }
+
+   select {
+      color: white;
+      margin: 3px 6px;
+   }
+
+   select option {
+      background: rgba(60,60,207,0.8);
+      color: inherit;
+   }
+
+   .flex {
+      display: flex;
+      height: fit-content;
+      align-items: center;
+   }
+
+   .flex-spacer {
+      flex: 1;
+   }
+
+   .flex-vert {
+      display: flex;
+      flex-direction: column;
+      height: fit-content;
+      justify-content: center;
+      align-items: center;
+   }
+
+   label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+   }
+
+   span {
+      margin-left: 0.25em;
+      color: white;
+   }
+</style>

@@ -1,5 +1,7 @@
-import { writable } from 'svelte/store';
-import { Position } from '@typhonjs-fvtt/runtime/svelte/application';
+import * as easingFuncs    from "svelte/easing";
+import { get, writable }   from 'svelte/store';
+
+import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
 
 let idCntr = 0;
 
@@ -19,7 +21,7 @@ function getRandomColor()
 
 function getPosition(width, height)
 {
-   const bound = getRandomInt(60, 120);
+   const bound = getRandomInt(90, 140);
 
    return new Position(void 0, {
       top: getRandomInt(0, height),
@@ -35,8 +37,10 @@ let data = [];
 
 const boxStore = writable(data);
 
-// Add debug writable to track debug state.
+boxStore.easing = writable(easingFuncs.linear);
+boxStore.duration = writable(1000);
 boxStore.debug = writable(false);
+boxStore.labels = writable(false);
 
 boxStore.add = (count = 1) =>
 {
@@ -61,18 +65,24 @@ boxStore.randomLocation = () =>
    const width = element.offsetWidth;
    const height = element.offsetHeight;
 
+   const duration = get(boxStore.duration);
+   const easing = get(boxStore.easing);
+
    for (const entry of data)
    {
-      entry.position.animateTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) });
+      entry.position.animateTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) }, { duration, easing });
    }
 };
 
 boxStore.randomScaleRot = () =>
 {
+   const duration = get(boxStore.duration);
+   const easing = get(boxStore.easing);
+
    for (const entry of data)
    {
       const scale = getRandomInt(50, 200) / 100;
-      entry.position.animateTo({ scale, rotateZ: getRandomInt(0, 360) });
+      entry.position.animateTo({ scale, rotateZ: getRandomInt(0, 360) }, { duration, easing });
    }
 };
 
