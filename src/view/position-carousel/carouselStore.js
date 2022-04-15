@@ -1,5 +1,7 @@
-import { writable } from 'svelte/store';
-import { Position } from '@typhonjs-fvtt/runtime/svelte/application';
+import { writable }     from 'svelte/store';
+import * as easingFuncs from 'svelte/easing';
+
+import { Position }     from '@typhonjs-fvtt/runtime/svelte/application';
 
 const s_CELL_WIDTH = 190;
 const s_CELL_HEIGHT = 120;
@@ -13,7 +15,8 @@ function getRandomInt(min, max)
 
 function getRandomColor()
 {
-   return `rgba(${getRandomInt(100, 255)}, ${getRandomInt(100, 255)}, ${getRandomInt(100, 255)}, 0.5)`;
+   return `linear-gradient(337deg, rgba(2,0,36,0.75) 0%, rgba(${getRandomInt(100, 255)}, ${getRandomInt(100, 255)}, ${
+    getRandomInt(100, 255)}, 0.5) 50%, rgba(149,171,176,0.75) 100%)`;
 }
 
 function getPosition()
@@ -32,6 +35,8 @@ const data = [];
 const carouselStore = writable(data);
 
 carouselStore.selectedIndex = writable(1);
+carouselStore.duration = writable(1000);
+carouselStore.easing = writable(easingFuncs.linear);
 
 carouselStore.theta = 0;
 carouselStore.radius = 0;
@@ -53,13 +58,13 @@ carouselStore.setCells = (count) =>
       }
 
       // Update cell data
-      carouselStore.theta = data.length ? 360 / data.length : 0;
-      carouselStore.radius = data.length ? Math.round((s_CELL_WIDTH / 2) / Math.tan(Math.PI / data.length)) : 0;
+      carouselStore.theta = array.length ? 360 / array.length : 0;
+      carouselStore.radius = array.length ? Math.round((s_CELL_WIDTH / 2) / Math.tan(Math.PI / array.length)) : 0;
 
-      for (let cntr = 0; cntr < data.length; cntr++)
+      for (let cntr = 0; cntr < array.length; cntr++)
       {
          const cellAngle = carouselStore.theta * cntr;
-         data[cntr].position.set({ rotateY: cellAngle, translateZ: carouselStore.radius });
+         array[cntr].position.set({ rotateY: cellAngle, translateZ: carouselStore.radius });
       }
 
       return array;

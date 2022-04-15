@@ -1,5 +1,4 @@
 <script>
-   import * as easing               from 'svelte/easing';
    import { applyPosition }         from '@typhonjs-fvtt/runtime/svelte/action';
    import { applyStyles }           from '@typhonjs-fvtt/runtime/svelte/action';
    import { Position }              from '@typhonjs-fvtt/runtime/svelte/application';
@@ -16,6 +15,8 @@
    })
 
    const selectedIndex = carouselStore.selectedIndex;
+   const storeDuration = carouselStore.duration;
+   const storeEasing = carouselStore.easing;
 
    const storeTransform = position.stores.transform;
 
@@ -83,7 +84,8 @@
          console.log(`! Carousel - same length`);
 
          const angle = carouselStore.theta * $selectedIndex * -1;
-         position.animateTo({ translateZ: -carouselStore.radius, rotateY: angle }, { duration: 750, easing: easing.elasticOut });
+         position.animateTo({ translateZ: -carouselStore.radius, rotateY: angle },
+          { duration: $storeDuration, easing: $storeEasing });
       }
    }
 </script>
@@ -98,15 +100,13 @@
       min-width: 100%;
       min-height: 100%;
       position: absolute;
-      /*transform: translateZ(-288px);*/
       transform-style: preserve-3d;
-      /*transition: transform 1s;*/
    }
 
+   /* TODO: Remove; testing */
    div.debug {
       position: absolute;
       background: rgba(100, 200, 255, 0.2);
       pointer-events: none;
-      /*will-change: left, top, width, height;*/
    }
 </style>
