@@ -6,8 +6,6 @@
 
    import { carouselStore }         from './carouselStore.js';
 
-   export let selectedIndex;
-
    const position = new Position(void 0, {
       top: 0,
       left: 0,
@@ -17,8 +15,11 @@
       transformOrigin: 'center'
    })
 
+   const selectedIndex = carouselStore.selectedIndex;
+
    const storeTransform = position.stores.transform;
-   let stylesDebug = {};
+
+   let stylesDebug;
 
    $:
    {
@@ -35,9 +36,7 @@
    }
 
 
-      let currentLength = $carouselStore.length;
-
-   $: console.log(selectedIndex);
+   let currentLength = $carouselStore.length;
 
    let carouselTransform = 'none';
 
@@ -53,25 +52,25 @@
 
       if (currentLength !== length)
       {
-         console.log(`! Carousel - new length - current selectedIndex: ${selectedIndex}`);
+         console.log(`! Carousel - new length - current selectedIndex: ${$selectedIndex}`);
 
          const direction = currentLength - length;
 
          // selectedIndex = (selectedIndex % length + length) % length
-         const newIndex = (selectedIndex % currentLength + currentLength) % currentLength
+         const newIndex = ($selectedIndex % currentLength + currentLength) % currentLength
 
-         selectedIndex = newIndex >= length ? length - 1 : newIndex;
+         $selectedIndex = newIndex >= length ? length - 1 : newIndex;
 
          currentLength = length;
 
-         console.log(`! Carousel - new length - new selectedIndex: ${selectedIndex}`);
+         console.log(`! Carousel - new length - new selectedIndex: ${$selectedIndex}`);
 
          // const angle = carouselStore.theta * selectedIndex * -1;
-         const resetAngle = carouselStore.theta * (selectedIndex + direction > 0 ? -1 : 1) * -1;
+         const resetAngle = carouselStore.theta * ($selectedIndex + direction > 0 ? -1 : 1) * -1;
 
          position.set({ translateZ: -carouselStore.radius, rotateY: resetAngle }).elementUpdated.then(() =>
          {
-            const angle = carouselStore.theta * selectedIndex * -1;
+            const angle = carouselStore.theta * $selectedIndex * -1;
             position.animateTo({ translateZ: -carouselStore.radius, rotateY: angle })
          });
 
@@ -83,7 +82,7 @@
       {
          console.log(`! Carousel - same length`);
 
-         const angle = carouselStore.theta * selectedIndex * -1;
+         const angle = carouselStore.theta * $selectedIndex * -1;
          position.animateTo({ translateZ: -carouselStore.radius, rotateY: angle }, { duration: 750, easing: easing.elasticOut });
       }
    }

@@ -18,30 +18,20 @@ function getRandomColor()
 
 function getPosition()
 {
-   const pos = new Position(void 0, {
+   return new Position(void 0, {
       top: 10,
       left: 10,
       width: s_CELL_WIDTH,
       height: s_CELL_HEIGHT,
       transformOrigin: 'center',
    });
-
-   // console.log(`! carouselStore - getPosition - pos.transformOrigin: ${pos.transformOrigin}`);
-
-   return pos;
-
-   // return new Position(void 0, {
-   //    top: 10,
-   //    left: 10,
-   //    width: s_CELL_WIDTH,
-   //    height: s_CELL_HEIGHT,
-   //    transformOrigin: 'center',
-   // });
 }
 
 const data = [];
 
 const carouselStore = writable(data);
+
+carouselStore.selectedIndex = writable(1);
 
 carouselStore.theta = 0;
 carouselStore.radius = 0;

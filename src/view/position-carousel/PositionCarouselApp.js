@@ -21,8 +21,8 @@ export default class PositionBoxApplication extends SvelteApplication
          id: 'position-carousel',
          title: 'Position (Carousel)',
          width: 750,
-         height: 750,
-         resizable: true,
+         height: 400,
+         resizable: false,
          minimizable: true,
 
          svelte: {

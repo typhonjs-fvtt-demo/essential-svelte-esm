@@ -1,4 +1,4 @@
-import * as easingFuncs    from "svelte/easing";
+import * as easingFuncs    from 'svelte/easing';
 import { get, writable }   from 'svelte/store';
 
 import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
