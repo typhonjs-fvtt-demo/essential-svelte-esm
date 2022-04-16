@@ -1,10 +1,12 @@
 <script>
    import { applyPosition }         from '@typhonjs-fvtt/runtime/svelte/action';
-   import { applyStyles }           from '@typhonjs-fvtt/runtime/svelte/action';
    import { Position }              from '@typhonjs-fvtt/runtime/svelte/application';
 
    import { carouselStore }         from './carouselStore.js';
 
+   // We can use Position to control the outer carousel rotational changes to keep the current selected index visible.
+   // Using Position allows us to solve several issues from resetting the rotation / selected index when cell length
+   // changes and animating when just selected index changes.
    const position = new Position(void 0, {
       top: 0,
       left: 0,
@@ -22,68 +24,39 @@
 
    let stylesDebug;
 
-   $:
-   {
-      const boundingRect = $storeTransform.boundingRect;
-
-      stylesDebug = {
-         left: `${boundingRect.x}px`,
-         top: `${boundingRect.y}px`,
-         width: `${boundingRect.width}px`,
-         height: `${boundingRect.height}px`
-      }
-
-      console.log(`!! stylesDebug: `, stylesDebug)
-   }
-
-
    let currentLength = $carouselStore.length;
 
    let carouselTransform = 'none';
 
-   /**
-    * TODO: Note: Left to the reader. For easy smooth scrolling backward and forward `selectedIndex` may diverge quite
-    * a bit from the range of cells causing an increasing negative or positive rotation for the `div.carousel` element.
-    * When cell count is changed the indexing will be off and depending on how far away
-    */
-
-   $: if ($carouselStore)
+   // This reactive block triggers when the cell array length or selected index changes.
+   $:
    {
       const length = $carouselStore.length;
 
+      // Cell count has changed.
       if (currentLength !== length)
       {
-         console.log(`! Carousel - new length - current selectedIndex: ${$selectedIndex}`);
+         const currentIndex = $selectedIndex;
 
-         const direction = currentLength - length;
+         // Reset selected index by
+         const newIndex = (currentIndex % currentLength + currentLength) % currentLength
 
-         // selectedIndex = (selectedIndex % length + length) % length
-         const newIndex = ($selectedIndex % currentLength + currentLength) % currentLength
-
-         $selectedIndex = newIndex >= length ? length - 1 : newIndex;
+         // Adjust index to within bounds of the length.
+         const cappedIndex = newIndex >= length ? length - 1 : newIndex;
 
          currentLength = length;
 
-         console.log(`! Carousel - new length - new selectedIndex: ${$selectedIndex}`);
+         const resetAngle = carouselStore.theta * cappedIndex * -1;
 
-         // const angle = carouselStore.theta * selectedIndex * -1;
-         const resetAngle = carouselStore.theta * ($selectedIndex + direction > 0 ? -1 : 1) * -1;
+         // TODO: in the future when animation is fixed we can potentially animate `translateZ`.
+         position.set({ translateZ: -carouselStore.radius, rotateY: resetAngle });
 
-         position.set({ translateZ: -carouselStore.radius, rotateY: resetAngle }).elementUpdated.then(() =>
-         {
-            const angle = carouselStore.theta * $selectedIndex * -1;
-            position.animateTo({ translateZ: -carouselStore.radius, rotateY: angle })
-         });
-
-         // position.set({ translateZ: -carouselStore.radius, rotateY: angle });
-
-         // position.animateTo({ translateZ: -carouselStore.radius, rotateY: angle }, { duration: 750, easing: easing.elasticOut });
+         $selectedIndex = cappedIndex;
       }
-      else
+      else // Just animate to new selected index.
       {
-         console.log(`! Carousel - same length`);
-
          const angle = carouselStore.theta * $selectedIndex * -1;
+
          position.animateTo({ translateZ: -carouselStore.radius, rotateY: angle },
           { duration: $storeDuration, easing: $storeEasing });
       }
@@ -93,7 +66,6 @@
 <div class=carousel use:applyPosition={position}>
    <slot></slot>
 </div>
-<div class=debug use:applyStyles={stylesDebug}></div>
 
 <style>
    .carousel {
@@ -101,12 +73,5 @@
       min-height: 100%;
       position: absolute;
       transform-style: preserve-3d;
-   }
-
-   /* TODO: Remove; testing */
-   div.debug {
-      position: absolute;
-      background: rgba(100, 200, 255, 0.2);
-      pointer-events: none;
    }
 </style>

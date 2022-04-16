@@ -35,7 +35,7 @@ const data = [];
 const carouselStore = writable(data);
 
 carouselStore.selectedIndex = writable(1);
-carouselStore.duration = writable(1000);
+carouselStore.duration = writable(500);
 carouselStore.easing = writable(easingFuncs.linear);
 
 carouselStore.theta = 0;
@@ -70,5 +70,8 @@ carouselStore.setCells = (count) =>
       return array;
    });
 };
+
+// Set initial cells
+carouselStore.setCells(10);
 
 export { carouselStore };

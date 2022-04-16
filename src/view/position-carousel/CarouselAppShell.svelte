@@ -4,7 +4,7 @@
    import { carouselStore }         from './carouselStore.js';
    import Carousel                  from './Carousel.svelte';
    import Cell                      from './Cell.svelte';
-   import Header                    from './Header.svelte';
+   import CarouselHeader            from './CarouselHeader.svelte';
 
    export let elementRoot;
 </script>
@@ -12,7 +12,7 @@
 <svelte:options accessors={true}/>
 
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
-   <Header />
+   <CarouselHeader />
    <div class=scene>
       <Carousel>
          {#each $carouselStore as cell (cell.id)}

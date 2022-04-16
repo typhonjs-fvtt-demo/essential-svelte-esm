@@ -8,24 +8,32 @@
    const storeDuration = carouselStore.duration;
    const storeEasing = carouselStore.easing;
 
-   let cellCount = 9;
+   let cellCount = $carouselStore.length;
 
-   $: carouselStore.setCells(cellCount);
+   const setCells = foundry.utils.debounce(() => carouselStore.setCells(cellCount), 80);
+
+   $: setCells(cellCount);
 </script>
 
 <div class=header>
-   <span>Cells:</span>
-   <input class="cells-range" type="range" min="3" max="15" bind:value={cellCount} />
-   <span>{$carouselStore.length}</span>
-   <label class=duration for=duration>Duration:</label>
-   <input type=range min=0 max=3000 id=duration bind:value={$storeDuration}>
-   <input type=text bind:value={$storeDuration} readonly>
-   <label for=easing>Easing:</label>
-   <select id=easing bind:value={$storeEasing}>
-      {#each Object.keys(easingFuncs) as prop}
-         <option value={easingFuncs[prop]}>{prop}</option>
-      {/each}
-   </select>
+   <label class=duration for=cells>
+      Cells:
+      <input class=cells-range type=range min=3 max=16 id=cells bind:value={cellCount} />
+      <input type=text bind:value={$carouselStore.length} readonly>
+   </label>
+   <label class=duration for=duration>
+      Duration:
+      <input type=range min=0 max=3000 id=duration bind:value={$storeDuration}>
+      <input type=text bind:value={$storeDuration} readonly>
+   </label>
+   <label for=easing>
+      Easing:
+      <select id=easing bind:value={$storeEasing}>
+         {#each Object.keys(easingFuncs) as prop}
+            <option value={easingFuncs[prop]}>{prop}</option>
+         {/each}
+      </select>
+   </label>
    <button on:click={() => $selectedIndex++}>Next</button>
    <button on:click={() => $selectedIndex--}>Previous</button>
 </div>
@@ -43,7 +51,7 @@
       border-bottom: solid black 1px;
       height: 30px;
       align-items: center;
-      padding-left: 0.5em;
+      padding-left: 0.25em;
       white-space: nowrap;
    }
 
@@ -52,11 +60,12 @@
       align-items: center;
       justify-content: center;
       color: white;
+      padding-left: 0.25em;
    }
 
-   input { color: white; margin: 3px 3px }
-   input[type=range] { max-width: 3.75em }
-   input[type=text] { max-width: 3em }
+   input { color: white; margin: 3px 6px }
+   input[type=range] { max-width: 12em }
+   input[type=text] { max-width: 2.75em }
 
    select {
       color: white;
@@ -66,10 +75,5 @@
    select option {
       background: rgba(60,60,207,0.8);
       color: inherit;
-   }
-
-   span {
-      margin-left: 0.5em;
-      color: white;
    }
 </style>
