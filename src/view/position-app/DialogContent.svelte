@@ -5,20 +5,21 @@
 
    let position;
 
-   let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, translateX, translateY, translateZ,
-    zIndex;
+   let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex;
+
+   let minWidth, minHeight, maxWidth, maxHeight;
 
    $:
    {
       position = application.position;
 
-      ({top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, translateX, translateY, translateZ,
-       zIndex} = position.stores);
+      ({top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex} = position.stores);
+
+      ({minWidth, minHeight, maxWidth, maxHeight} = position.stores);
    }
 
    let innerWidth, innerHeight
-   let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale, nullishTranslateX, nullishTranslateY,
-    nullishTranslateZ;
+   let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale;
 
    $: if (rotateX) { nullishRotateX = Number.isFinite($rotateX) ? $rotateX : 'null'; }
    $: if (rotateY) { nullishRotateY = Number.isFinite($rotateY) ? $rotateY : 'null'; }
@@ -26,9 +27,12 @@
 
    $: if (scale) { nullishScale = Number.isFinite($scale) ? $scale : 'null'; }
 
-   $: if (translateX) { nullishTranslateX = Number.isFinite($translateX) ? $translateX : 'null'; }
-   $: if (translateY) { nullishTranslateY = Number.isFinite($translateY) ? $translateY : 'null'; }
-   $: if (translateZ) { nullishTranslateZ = Number.isFinite($translateZ) ? $translateZ : 'null'; }
+   let nullishMinWidth, nullishMinHeight, nullishMaxWidth, nullishMaxHeight;
+
+   $: if (minWidth) { nullishMinWidth = Number.isFinite($minWidth) ? $minWidth : 'null'; }
+   $: if (minHeight) { nullishMinHeight = Number.isFinite($minHeight) ? $minHeight : 'null'; }
+   $: if (maxWidth) { nullishMaxWidth = Number.isFinite($maxWidth) ? $maxWidth : 'null'; }
+   $: if (maxHeight) { nullishMaxHeight = Number.isFinite($maxHeight) ? $maxHeight : 'null'; }
 
    let easing = easingFuncs.linear;
 
@@ -89,21 +93,27 @@
    </div>
 
    <div>
-      <label for=translateX>translateX:</label>
-      <input type=range min=0 max=360 id=translateX bind:value={$translateX}>
-      <input type=text bind:value={nullishTranslateX} readonly>
+      <label for=minWidth>minWidth:</label>
+      <input type=range min=0 max=360 id=minWidth bind:value={$minWidth}>
+      <input type=text bind:value={nullishMinWidth} readonly>
    </div>
 
    <div>
-      <label for=translateY>translateY:</label>
-      <input type=range min=0 max=360 id=translateY bind:value={$translateY}>
-      <input type=text bind:value={nullishTranslateY} readonly>
+      <label for=minHeight>minHeight:</label>
+      <input type=range min=0 max=360 id=minHeight bind:value={$minHeight}>
+      <input type=text bind:value={nullishMinHeight} readonly>
    </div>
 
    <div>
-      <label for=translateZ>translateZ:</label>
-      <input type=range min=0 max=360 id=translateZ bind:value={$translateZ}>
-      <input type=text bind:value={nullishTranslateZ} readonly>
+      <label for=maxWidth>maxWidth:</label>
+      <input type=range min=0 max=360 id=maxWidth bind:value={$maxWidth}>
+      <input type=text bind:value={nullishMaxWidth} readonly>
+   </div>
+
+   <div>
+      <label for=maxHeight>maxHeight:</label>
+      <input type=range min=0 max=360 id=maxHeight bind:value={$maxHeight}>
+      <input type=text bind:value={nullishMaxHeight} readonly>
    </div>
 
    <div>
