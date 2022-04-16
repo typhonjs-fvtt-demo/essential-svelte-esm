@@ -7,13 +7,19 @@
    import CarouselHeader            from './CarouselHeader.svelte';
 
    export let elementRoot;
+
+   const storePerspective = carouselStore.perspective;
+
+   let perspective;
+
+   $: perspective = `${$storePerspective}px`;
 </script>
 
 <svelte:options accessors={true}/>
 
-<TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
+<TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0, overflow: 'hidden' }}>
    <CarouselHeader />
-   <div class=scene>
+   <div class=scene style:perspective>
       <Carousel>
          {#each $carouselStore as cell (cell.id)}
             <Cell {cell} />
@@ -28,6 +34,5 @@
       width: 210px;
       height: 140px;
       margin: 80px auto;
-      perspective: 1000px;
    }
 </style>

@@ -46,7 +46,7 @@
 
          currentLength = length;
 
-         const resetAngle = carouselStore.theta * cappedIndex * -1;
+         const resetAngle = -carouselStore.theta * cappedIndex;
 
          // TODO: in the future when animation is fixed we can potentially animate `translateZ`.
          position.set({ translateZ: -carouselStore.radius, rotateY: resetAngle });
@@ -55,10 +55,9 @@
       }
       else // Just animate to new selected index.
       {
-         const angle = carouselStore.theta * $selectedIndex * -1;
+         const angle = -carouselStore.theta * $selectedIndex;
 
-         position.animateTo({ translateZ: -carouselStore.radius, rotateY: angle },
-          { duration: $storeDuration, easing: $storeEasing });
+         position.animateTo({ rotateY: angle }, { duration: $storeDuration, easing: $storeEasing });
       }
    }
 </script>

@@ -20,8 +20,8 @@ export default class PositionBoxApplication extends SvelteApplication
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'position-carousel',
          title: 'Position (Carousel)',
-         width: 750,
-         height: 400,
+         width: 775,
+         height: 420,
          resizable: false,
          minimizable: true,
 

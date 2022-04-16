@@ -75,7 +75,7 @@
       font-weight: bold;
       color: white;
       text-align: center;
-      transition: transform 1s, border-color 100ms;
+      transition: transform 750ms, border-color 100ms;
    }
 
    .highlight {
