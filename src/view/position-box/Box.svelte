@@ -6,8 +6,7 @@
    export let box;
 </script>
 
-<div use:applyPosition={box.position} use:draggable={{ position: box.position }} style:background={box.color}>
-</div>
+<div use:applyPosition={box.position} use:draggable={{ position: box.position }} style:background={box.color}></div>
 
 <style>
    div {

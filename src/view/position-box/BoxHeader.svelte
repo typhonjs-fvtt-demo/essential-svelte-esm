@@ -35,7 +35,6 @@
                <option value={easingFuncs[prop]}>{prop}</option>
             {/each}
          </select>
-         <div class=flex-spacer></div>
       </div>
    </div>
    <div class="container flex-vert">
@@ -100,10 +99,6 @@
       display: flex;
       height: fit-content;
       align-items: center;
-   }
-
-   .flex-spacer {
-      flex: 1;
    }
 
    .flex-vert {

@@ -7,7 +7,7 @@
 
    import Box                       from './Box.svelte';
    import BoxDebug                  from './BoxDebug.svelte';
-   import Header                    from './Header.svelte';
+   import BoxHeader                 from './BoxHeader.svelte';
 
    export let elementRoot;
 
@@ -26,7 +26,7 @@
 <svelte:options accessors={true}/>
 
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
-   <Header />
+   <BoxHeader />
    <main bind:this={validator.element} bind:offsetWidth={validator.width} bind:offsetHeight={validator.height}>
       {#each $boxStore as box (box.id)}
          <svelte:component this={component} {box} />
