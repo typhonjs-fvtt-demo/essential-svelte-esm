@@ -7,6 +7,7 @@
    const application = getContext('external').application;
 
    const { top, left, width, height, rotateX, rotateY, rotateZ, scale, zIndex } = application.position.stores;
+
    const { dragging, resizing } = application.reactive.storeUIState;
 
    let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale;
@@ -14,6 +15,7 @@
    $: nullishRotateX = Number.isFinite($rotateX) ? $rotateX : 'null';
    $: nullishRotateY = Number.isFinite($rotateY) ? $rotateY : 'null';
    $: nullishRotateZ = Number.isFinite($rotateZ) ? $rotateZ : 'null';
+
    $: nullishScale = Number.isFinite($scale) ? $scale : 'null';
 </script>
 

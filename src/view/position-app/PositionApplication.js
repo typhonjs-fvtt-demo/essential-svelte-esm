@@ -7,7 +7,7 @@ import DialogContent       from './DialogContent.svelte';
 
 export default class PositionApplication extends SvelteApplication
 {
-   /** @type {PositionDialog} */
+   /** @type {Application} */
    #dialog;
 
    /**
@@ -46,7 +46,7 @@ export default class PositionApplication extends SvelteApplication
       return super.close(options);
    }
 
-   async onSvelteMount()
+   onSvelteMount()
    {
       this.#dialog = new TJSDialog({
          title: 'Adjust Position',

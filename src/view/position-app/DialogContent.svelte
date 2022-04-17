@@ -7,11 +7,15 @@
 
    let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex;
 
+   let minWidth, minHeight, maxWidth, maxHeight;
+
    $:
    {
       position = application.position;
 
       ({top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex} = position.stores);
+
+      ({minWidth, minHeight, maxWidth, maxHeight} = position.stores);
    }
 
    let innerWidth, innerHeight
@@ -20,7 +24,15 @@
    $: if (rotateX) { nullishRotateX = Number.isFinite($rotateX) ? $rotateX : 'null'; }
    $: if (rotateY) { nullishRotateY = Number.isFinite($rotateY) ? $rotateY : 'null'; }
    $: if (rotateZ) { nullishRotateZ = Number.isFinite($rotateZ) ? $rotateZ : 'null'; }
+
    $: if (scale) { nullishScale = Number.isFinite($scale) ? $scale : 'null'; }
+
+   let nullishMinWidth, nullishMinHeight, nullishMaxWidth, nullishMaxHeight;
+
+   $: if (minWidth) { nullishMinWidth = Number.isFinite($minWidth) ? $minWidth : 'null'; }
+   $: if (minHeight) { nullishMinHeight = Number.isFinite($minHeight) ? $minHeight : 'null'; }
+   $: if (maxWidth) { nullishMaxWidth = Number.isFinite($maxWidth) ? $maxWidth : 'null'; }
+   $: if (maxHeight) { nullishMaxHeight = Number.isFinite($maxHeight) ? $maxHeight : 'null'; }
 
    let easing = easingFuncs.linear;
 
@@ -78,6 +90,30 @@
       <label for=scale>scale:</label>
       <input type=range min=0 max=5 step=0.01 id=scale bind:value={$scale}>
       <input type=text bind:value={nullishScale} readonly>
+   </div>
+
+   <div>
+      <label for=minWidth>minWidth:</label>
+      <input type=range min=0 max=360 id=minWidth bind:value={$minWidth}>
+      <input type=text bind:value={nullishMinWidth} readonly>
+   </div>
+
+   <div>
+      <label for=minHeight>minHeight:</label>
+      <input type=range min=0 max=360 id=minHeight bind:value={$minHeight}>
+      <input type=text bind:value={nullishMinHeight} readonly>
+   </div>
+
+   <div>
+      <label for=maxWidth>maxWidth:</label>
+      <input type=range min=0 max=360 id=maxWidth bind:value={$maxWidth}>
+      <input type=text bind:value={nullishMaxWidth} readonly>
+   </div>
+
+   <div>
+      <label for=maxHeight>maxHeight:</label>
+      <input type=range min=0 max=360 id=maxHeight bind:value={$maxHeight}>
+      <input type=text bind:value={nullishMaxHeight} readonly>
    </div>
 
    <div>

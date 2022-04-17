@@ -26,7 +26,7 @@ const postcssMain = postcssConfig({
 
 const s_RESOLVE_CONFIG = {
    browser: true,
-   dedupe: ['svelte']
+   dedupe: ['svelte', '@typhonjs-fvtt/runtime']
 }
 
 export default () =>
