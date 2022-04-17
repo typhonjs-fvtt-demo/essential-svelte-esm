@@ -1,6 +1,7 @@
 <script>
    import { getContext }            from 'svelte';
 
+   import { resizeObserver }        from '@typhonjs-fvtt/runtime/svelte/action';
    import { TJSApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
    import { boxStore, validator }   from './boxStore.js';
@@ -27,14 +28,14 @@
 
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
    <BoxHeader />
-   <main bind:this={validator.element} bind:offsetWidth={validator.width} bind:offsetHeight={validator.height}>
+   <main use:resizeObserver={validator}>
       {#each $boxStore as box (box.id)}
          <svelte:component this={component} {box} />
       {/each}
    </main>
 </TJSApplicationShell>
 
-<style lang="scss">
+<style lang=scss>
    main {
       position: relative;
       height: 100%;

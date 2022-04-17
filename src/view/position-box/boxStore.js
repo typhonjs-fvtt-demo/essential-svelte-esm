@@ -44,9 +44,8 @@ boxStore.labels = writable(false);
 
 boxStore.add = (count = 1) =>
 {
-   const element = validator.element;
-   const width = element.offsetWidth;
-   const height = element.offsetHeight;
+   const width = validator.width;
+   const height = validator.height;
 
    boxStore.update((array) =>
    {
@@ -61,9 +60,8 @@ boxStore.add = (count = 1) =>
 
 boxStore.randomLocation = () =>
 {
-   const element = validator.element;
-   const width = element.offsetWidth;
-   const height = element.offsetHeight;
+   const width = validator.width;
+   const height = validator.height;
 
    const duration = get(boxStore.duration);
    const easing = get(boxStore.easing);
