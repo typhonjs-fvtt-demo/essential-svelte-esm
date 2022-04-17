@@ -12,8 +12,7 @@
       left: 0,
       width: 'auto',
       height: 'auto',
-      translateZ: -288,
-      transformOrigin: 'center'
+      translateZ: -288  // This is subtle, but we set translateZ here to make it take as the first transformation.
    })
 
    const selectedIndex = carouselStore.selectedIndex;

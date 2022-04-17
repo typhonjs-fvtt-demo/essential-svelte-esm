@@ -28,8 +28,7 @@ function getPosition(width, height)
       left: getRandomInt(0, width),
       width: bound,
       height: bound,
-      transformOrigin: 'center',
-      validators: validator
+      validator
    });
 }
 
