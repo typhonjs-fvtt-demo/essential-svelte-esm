@@ -14,6 +14,5 @@
       border-radius: 0.25em;
       border: solid brown 2px;
       will-change: transform;
-      contain: style;
    }
 </style>
