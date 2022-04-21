@@ -45,7 +45,6 @@
       border-radius: 0.25em;
       border: solid brown 2px;
       font-size: 12px;
-      will-change: transform;
    }
    div.debug {
       position: absolute;
