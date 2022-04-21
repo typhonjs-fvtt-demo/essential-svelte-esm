@@ -13,6 +13,7 @@
       position: absolute;
       border-radius: 0.25em;
       border: solid brown 2px;
-      will-change: top, left, transform;
+      will-change: transform;
+      contain: style;
    }
 </style>
