@@ -21,8 +21,6 @@
 
    const storeTransform = position.stores.transform;
 
-   let stylesDebug;
-
    let currentLength = $carouselStore.length;
 
    let carouselTransform = 'none';
