@@ -3,6 +3,8 @@
 
    export let application = void 0;
 
+   const storeDebug = application.storeDebug;
+
    let position;
 
    let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex;
@@ -125,7 +127,7 @@
    <hr>
 
    <div>
-      <label class=duration for=duration>Duration:</label>
+      <label for=duration>Duration:</label>
       <input type=range min=100 max=3000 id=duration bind:value={duration}>
       <input type=text bind:value={duration} readonly>
    </div>
@@ -150,6 +152,8 @@
       </select>
    </div>
 
+   <hr>
+
    <div>
       <button on:click={() => position.animateTo({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, easing })}>Animate flip</button>
       <button on:click={() => position.reset()}>Reset</button>
@@ -158,6 +162,13 @@
    <div>
       <button on:click={() => application.state.save({ name: 'save-1' })}>Save Position</button>
       <button on:click={() => application.state.restore({ name: 'save-1', animateTo: true, easing, duration })}>Restore Position</button>
+   </div>
+
+   <hr>
+
+   <div style="justify-content: flex-start">
+      <input type=checkbox id=debug bind:checked={$storeDebug}>
+      Debug: Show transform bounding rectangle.
    </div>
 </main>
 
