@@ -1,10 +1,12 @@
 <script>
-   import * as easingFuncs          from 'svelte/easing';
-   import { boxStore, validator }   from './boxStore.js';
+   import * as easingFuncs from 'svelte/easing';
+
+   import { boxStore }     from './boxStore.js';
 
    const storeDuration = boxStore.duration;
    const storeEasing = boxStore.easing;
-
+   const storeValidator = boxStore.validator;
+   const storeAuto = boxStore.auto;
    const storeDebug = boxStore.debug;
    const storeLabels = boxStore.labels;
 </script>
@@ -24,6 +26,17 @@
    </div>
    <div class="container flex-vert">
       <div class=flex>
+         <span>Set width / height to `auto`:</span>
+         <input type=checkbox bind:checked={$storeAuto}>
+      </div>
+      <div class=flex>
+         <span>Debug:</span>
+         <label><input type=checkbox bind:checked={$storeDebug}> Enable</label>
+         <label><input type=checkbox bind:checked={$storeLabels}> Labels</label>
+      </div>
+   </div>
+   <div class="container flex-vert">
+      <div class=flex>
          <label class=duration for=duration>Duration:</label>
          <input type=range min=0 max=3000 id=duration bind:value={$storeDuration}>
          <input type=text bind:value={$storeDuration} readonly>
@@ -38,17 +51,10 @@
       </div>
    </div>
    <div class="container flex-vert">
+      <span style="width: 6.5em">Count: {$boxStore.length}</span>
       <div class=flex>
-         <div class=flex>
-            <span>Validation:</span>
-            <input type=checkbox bind:checked={validator.enabled}/>
-         </div>
-         <span style="width: 5.5em">Count: {$boxStore.length}</span>
-      </div>
-      <div class=flex>
-         <span>Debug:</span>
-         <label><input type=checkbox bind:checked={$storeDebug}> Enable</label>
-         <label><input type=checkbox bind:checked={$storeLabels}> Labels</label>
+         <span>Validation:</span>
+         <input type=checkbox bind:checked={$storeValidator}/>
       </div>
    </div>
 </div>
@@ -117,7 +123,6 @@
    }
 
    span {
-      margin-left: 0.25em;
       color: white;
    }
 </style>
