@@ -142,7 +142,6 @@ boxStore.changePadding = () =>
       {
          el.style.padding = '5px';
          resizeObserver.updateCache(el);
-         entry.position.set();
       }
    }
 };
