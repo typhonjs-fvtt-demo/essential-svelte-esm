@@ -33,7 +33,8 @@
     "rollup-plugin-sourcemaps": "^0.6",
     "rollup-plugin-svelte": "^7",
     "rollup-plugin-terser": "^7",
-    "sass": "^1"
+    "sass": "^1",
+    "svelte-preprocess": "^4.10.0"
   },
   "browserslist": [">5%", "not IE 11"],
   "scripts": {

@@ -3,6 +3,8 @@ import { get, writable }   from 'svelte/store';
 
 import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
 
+import { resizeObserver }  from '@typhonjs-fvtt/runtime/svelte/action';
+
 let idCntr = 0;
 
 const validator = new Position.Validators.TransformBounds({ constrain: false });
@@ -129,6 +131,19 @@ boxStore.setDimension = (offsetWidth, offsetHeight) =>
 
    // Force validation for all Position instances.
    for (const entry of data) { entry.position.set(); }
+};
+
+boxStore.changePadding = () =>
+{
+   for (const entry of data)
+   {
+      const el = entry.position.element;
+      if (el instanceof HTMLElement)
+      {
+         el.style.padding = '5px';
+         resizeObserver.updateCache(el);
+      }
+   }
 };
 
 export { boxStore, validator };

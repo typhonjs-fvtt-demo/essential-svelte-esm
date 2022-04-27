@@ -18,6 +18,7 @@
          <button on:click={() => boxStore.add(50)}>Add 50</button>
          <button on:click={() => boxStore.removeRandom(50)}>Remove 50</button>
          <button on:click={() => boxStore.removeAll()}>Remove All</button>
+         <button on:click={() => boxStore.changePadding()}>Padding</button>
       </div>
       <div class=group>
          <button on:click={() => boxStore.randomLocation()}>Random Location</button>
