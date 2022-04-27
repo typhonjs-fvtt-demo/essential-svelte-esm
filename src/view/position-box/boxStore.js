@@ -133,17 +133,4 @@ boxStore.setDimension = (offsetWidth, offsetHeight) =>
    for (const entry of data) { entry.position.set(); }
 };
 
-boxStore.changePadding = () =>
-{
-   for (const entry of data)
-   {
-      const el = entry.position.element;
-      if (el instanceof HTMLElement)
-      {
-         el.style.padding = '5px';
-         resizeObserver.updateCache(el);
-      }
-   }
-};
-
 export { boxStore, validator };
