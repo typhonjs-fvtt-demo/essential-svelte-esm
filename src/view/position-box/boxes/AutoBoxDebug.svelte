@@ -2,14 +2,18 @@
    import {
       applyPosition,
       applyStyles,
-      draggable }       from '@typhonjs-fvtt/runtime/svelte/action';
+      draggable,
+      resizeObserver }  from '@typhonjs-fvtt/runtime/svelte/action';
 
-   import { boxStore }  from './boxStore.js';
+   import { boxStore }  from '../boxStore.js';
 
    export let box;
 
    const labels = boxStore.labels;
    const transform = box.position.stores.transform;
+
+   // This is run once when the component is created. It sets the position width / height to 'auto'.
+   box.position.set({ width: 'auto', height: 'auto' });
 
    let cornersText = '';
 
@@ -34,7 +38,11 @@
    }
 </script>
 
-<div class=box use:applyPosition={box.position} use:draggable={{ position: box.position }} style:background={box.color}>
+<div class=box
+     use:applyPosition={box.position}
+     use:draggable={{ position: box.position }}
+     use:resizeObserver={box.position}
+     style:background={box.color}>
    {#if $labels}{@html cornersText}{/if}
 </div>
 <div class=debug use:applyStyles={stylesDebug}></div>
@@ -45,10 +53,14 @@
       border-radius: 0.25em;
       border: solid brown 2px;
       font-size: 12px;
+      padding: 10px;
+      min-width: 50px;
+      min-height: 50px;
    }
    div.debug {
       position: absolute;
       background: rgba(100, 200, 255, 0.2);
       pointer-events: none;
+      will-change: top, left, width, height;
    }
 </style>

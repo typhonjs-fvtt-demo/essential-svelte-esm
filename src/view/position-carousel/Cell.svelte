@@ -52,7 +52,6 @@
       // Add the relative distance between new and adjusted index and add that to the current index.
       $selectedIndex = currentIndex + (newIndex - adjustedIndex);
    }
-
 </script>
 
 <div use:applyPosition={cell.position}

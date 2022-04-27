@@ -34,7 +34,10 @@ export default class MenuApplication extends SvelteApplication
          popOut: false,
          width: 200,
          height: 'auto',
+         positionOrtho: false,
+         transformOrigin: null,
          title: 'EssentialESM.title',
+         zIndex: 95,
 
          svelte: {
             class: MenuAppShell,

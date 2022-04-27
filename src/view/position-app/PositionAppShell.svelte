@@ -2,6 +2,8 @@
    import { getContext }         from 'svelte';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
+   import { applyStyles }   from '@typhonjs-fvtt/runtime/svelte/action';
+
    export let elementRoot;
 
    const application = getContext('external').application;
@@ -10,6 +12,8 @@
 
    const { dragging, resizing } = application.reactive.storeUIState;
 
+   const storeDebug = application.storeDebug;
+
    let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale;
 
    $: nullishRotateX = Number.isFinite($rotateX) ? $rotateX : 'null';
@@ -17,6 +21,20 @@
    $: nullishRotateZ = Number.isFinite($rotateZ) ? $rotateZ : 'null';
 
    $: nullishScale = Number.isFinite($scale) ? $scale : 'null';
+
+   let stylesDebug = {};
+
+   const transform = application.position.stores.transform;
+
+   $:
+   {
+      const boundingRect = $transform.boundingRect;
+
+      stylesDebug.left = `${boundingRect.x}px`;
+      stylesDebug.top = `${boundingRect.y}px`;
+      stylesDebug.width = `${boundingRect.width}px`;
+      stylesDebug.height = `${boundingRect.height}px`;
+   }
 </script>
 
 <svelte:options accessors={true}/>
@@ -52,6 +70,9 @@
       </div>
    </main>
 </ApplicationShell>
+{#if $storeDebug}
+   <div class=debug use:applyStyles={stylesDebug}></div>
+{/if}
 
 <style lang="scss">
    main {
@@ -78,5 +99,13 @@
          align-items: center;
          justify-content: center;
       }
+   }
+
+   div.debug {
+      position: absolute;
+      background: rgba(100, 200, 255, 0.2);
+      pointer-events: none;
+      will-change: top, left, width, height;
+      z-index: 999999;
    }
 </style>

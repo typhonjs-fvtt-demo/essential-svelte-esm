@@ -1,3 +1,5 @@
+import { writable }        from 'svelte/store';
+
 import {
    SvelteApplication,
    TJSDialog }             from '@typhonjs-fvtt/runtime/svelte/application';
@@ -9,6 +11,13 @@ export default class PositionApplication extends SvelteApplication
 {
    /** @type {Application} */
    #dialog;
+
+   /**
+    * Provides a store to enable / disable debug mode which overlays the transform bounding box.
+    *
+    * @type {Writable<boolean>}
+    */
+   #storeDebug = writable(false);
 
    /**
     * @inheritDoc
@@ -38,6 +47,8 @@ export default class PositionApplication extends SvelteApplication
          }
       });
    }
+
+   get storeDebug() { return this.#storeDebug; }
 
    /** @inheritDoc */
    async close(options)
