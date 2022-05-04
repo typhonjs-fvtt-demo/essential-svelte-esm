@@ -2,10 +2,13 @@ import * as easingFuncs    from 'svelte/easing';
 import { get, writable }   from 'svelte/store';
 
 import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
-
-import { resizeObserver }  from '@typhonjs-fvtt/runtime/svelte/action';
+import {
+   gsap,
+   GsapPosition }          from '@typhonjs-fvtt/runtime/svelte/gsap';
 
 let idCntr = 0;
+
+let gsapTimeline;
 
 const validator = new Position.Validators.TransformBounds({ constrain: false });
 
@@ -31,6 +34,7 @@ function getPosition(width, height, auto)
       width: auto ? 'auto' : bounds,
       height: auto ? 'auto' : bounds,
       ortho: true,
+      updateImmediate: true,
       validator
    });
 
@@ -45,7 +49,7 @@ let data = [];
 const boxStore = writable(data);
 
 boxStore.auto = writable(false);
-boxStore.easing = writable(easingFuncs.linear);
+boxStore.easing = writable('linear');
 boxStore.duration = writable(1000);
 boxStore.validator = writable(true);
 boxStore.debug = writable(false);
@@ -69,13 +73,63 @@ boxStore.add = (count = 1) =>
    });
 };
 
+boxStore.gsapTimeline = () =>
+{
+   const width = validator.width;
+   const height = validator.height;
+
+   // Kill & stop any existing timeline.
+   if (gsapTimeline !== void 0) { gsapTimeline.kill(); }
+
+   const duration = get(boxStore.duration) / 1000;
+   const doubleDuration = duration * 2;
+
+   // GSAP is loaded w/ the Svelte easing functions and are accessible by prepending `svelte-` and the function name.
+   const ease = `svelte-${get(boxStore.easing)}`;
+
+   // Create new GSAP timeline.
+   gsapTimeline = gsap.timeline({ paused: true });
+
+   // Create and add unique timelines for each position instance to main timeline.
+   for (const entry of data)
+   {
+      gsapTimeline.add(GsapPosition.timeline(entry.position, [
+         { type: 'to', vars: { left: getRandomInt(0, width), duration, ease }, position: '<' },
+         { type: 'to', vars: { rotateZ: getRandomInt(0, 360), duration: doubleDuration, ease }, position: '<' },
+         { type: 'to', target: 'element', vars: { opacity: 0.6, duration, ease }, position: '<-=25%' },
+         { type: 'to', vars: { top: getRandomInt(0, height), duration, ease } },
+         { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: '<-=75%' }
+      ]), '<');
+   }
+};
+
+boxStore.gsapTimelinePause = () =>
+{
+   if (gsapTimeline !== void 0) { gsapTimeline.pause(); }
+};
+
+boxStore.gsapTimelinePlay = () =>
+{
+   if (gsapTimeline !== void 0) { gsapTimeline.play(); }
+};
+
+boxStore.gsapTimelineRestart = () =>
+{
+   if (gsapTimeline !== void 0) { gsapTimeline.restart(); }
+};
+
+boxStore.gsapTimelineReverse = () =>
+{
+   if (gsapTimeline !== void 0) { gsapTimeline.reverse(); }
+};
+
 boxStore.randomLocation = () =>
 {
    const width = validator.width;
    const height = validator.height;
 
    const duration = get(boxStore.duration);
-   const easing = get(boxStore.easing);
+   const easing = easingFuncs[get(boxStore.easing)];
 
    for (const entry of data)
    {
@@ -86,7 +140,7 @@ boxStore.randomLocation = () =>
 boxStore.randomScaleRot = () =>
 {
    const duration = get(boxStore.duration);
-   const easing = get(boxStore.easing);
+   const easing = easingFuncs[get(boxStore.easing)];
 
    for (const entry of data)
    {

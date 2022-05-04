@@ -23,6 +23,13 @@
          <button on:click={() => boxStore.randomLocation()}>Random Location</button>
          <button on:click={() => boxStore.randomScaleRot()}>Random Scale / Rotation</button>
       </div>
+      <div class=group>
+         <button on:click={() => boxStore.gsapTimeline()}>GSAP Timeline</button>
+         <button on:click={() => boxStore.gsapTimelinePlay()}>Play</button>
+         <button on:click={() => boxStore.gsapTimelinePause()}>Pause</button>
+         <button on:click={() => boxStore.gsapTimelineReverse()}>Reverse</button>
+         <button on:click={() => boxStore.gsapTimelineRestart()}>Restart</button>
+      </div>
    </div>
    <div class="container flex-vert">
       <div class=flex>
@@ -45,7 +52,7 @@
          <label for=easing>Easing:</label>
          <select id=easing bind:value={$storeEasing}>
             {#each Object.keys(easingFuncs) as prop}
-               <option value={easingFuncs[prop]}>{prop}</option>
+               <option value={prop}>{prop}</option>
             {/each}
          </select>
       </div>
