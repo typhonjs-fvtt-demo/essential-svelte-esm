@@ -20,8 +20,8 @@ export default class PositionBoxApplication extends SvelteApplication
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'position-box',
          title: 'Position (Box)',
-         width: 795,
-         height: 800,
+         width: 840,
+         height: 850,
          resizable: true,
          minimizable: true,
 
