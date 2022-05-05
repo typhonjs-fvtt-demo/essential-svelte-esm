@@ -96,7 +96,7 @@ boxStore.gsapTimeline = () =>
       gsapTimeline.add(GsapPosition.timeline(entry.position, [
          { type: 'to', vars: { left: getRandomInt(0, width), duration, ease }, position: '<' },
          { type: 'to', vars: { rotateZ: getRandomInt(0, 360), duration: doubleDuration, ease }, position: '<' },
-         { type: 'to', target: 'element', vars: { opacity: 0.6, duration, ease }, position: '<-=25%' },
+         { type: 'to', target: 'element', vars: { opacity: 0.6, duration, ease }, position: '<-=50%' },
          { type: 'to', vars: { top: getRandomInt(0, height), duration, ease } },
          { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: '<-=75%' }
       ]), '<');

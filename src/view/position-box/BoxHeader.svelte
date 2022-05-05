@@ -24,11 +24,11 @@
          <button on:click={() => boxStore.randomScaleRot()}>Random Scale / Rotation</button>
       </div>
       <div class=group>
-         <button on:click={() => boxStore.gsapTimeline()}>GSAP Timeline</button>
-         <button on:click={() => boxStore.gsapTimelinePlay()}>Play</button>
-         <button on:click={() => boxStore.gsapTimelinePause()}>Pause</button>
-         <button on:click={() => boxStore.gsapTimelineReverse()}>Reverse</button>
-         <button on:click={() => boxStore.gsapTimelineRestart()}>Restart</button>
+         <button on:click={() => boxStore.gsapTimeline()}>Create GSAP Timeline</button>
+         <button on:click={() => boxStore.gsapTimelinePlay()}><i class="fas fa-play"></i></button>
+         <button on:click={() => boxStore.gsapTimelineReverse()}><i class="fas fa-backward"></i></button>
+         <button on:click={() => boxStore.gsapTimelinePause()}><i class="fas fa-pause"></i></button>
+         <button on:click={() => boxStore.gsapTimelineRestart()}><i class="fas fa-arrow-left"></i></button>
       </div>
    </div>
    <div class="container flex-vert">
@@ -69,8 +69,8 @@
 <style lang="scss">
    button {
       width: fit-content;
-      height: 20px;
-      line-height: 18px;
+      height: 16px;
+      line-height: 14px;
    }
 
    div.container {
