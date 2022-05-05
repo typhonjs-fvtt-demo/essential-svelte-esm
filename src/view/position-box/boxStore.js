@@ -4,7 +4,14 @@ import { get, writable }   from 'svelte/store';
 import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
 import {
    gsap,
+   CustomEase,
+   CustomWiggle,
    GsapPosition }          from '@typhonjs-fvtt/runtime/svelte/gsap';
+
+gsap.registerPlugin(CustomEase, CustomWiggle);
+
+// Defines a custom ease w/ the CustomWiggle plugin.
+const customWiggle = 'wiggle({type:anticipate, wiggles:10})';
 
 let idCntr = 0;
 
@@ -95,10 +102,11 @@ boxStore.gsapTimeline = () =>
    {
       gsapTimeline.add(GsapPosition.timeline(entry.position, [
          { type: 'to', vars: { left: getRandomInt(0, width), duration, ease }, position: '<' },
-         { type: 'to', vars: { rotateZ: getRandomInt(0, 360), duration: doubleDuration, ease }, position: '<' },
+         { type: 'to', vars: { rotateZ: getRandomInt(0, 360), duration, ease }, position: '<' },
          { type: 'to', target: 'element', vars: { opacity: 0.6, duration, ease }, position: '<-=50%' },
          { type: 'to', vars: { top: getRandomInt(0, height), duration, ease } },
-         { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: '<-=75%' }
+         { type: 'to', vars: { rotateZ: '+=20', duration: doubleDuration, ease: customWiggle }, position: '<+=50%' },
+         { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: '<+=10%' },
       ]), '<');
    }
 };
