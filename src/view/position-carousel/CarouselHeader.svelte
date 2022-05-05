@@ -39,7 +39,7 @@
          Easing:
          <select id=easing bind:value={$storeEasing}>
             {#each Object.keys(easingFuncs) as prop}
-               <option value={easingFuncs[prop]}>{prop}</option>
+               <option value={`svelte-${prop}`}>{prop}</option>
             {/each}
          </select>
       </label>

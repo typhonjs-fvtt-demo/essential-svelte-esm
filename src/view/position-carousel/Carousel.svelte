@@ -1,8 +1,9 @@
 <script>
-   import { applyPosition }         from '@typhonjs-fvtt/runtime/svelte/action';
-   import { Position }              from '@typhonjs-fvtt/runtime/svelte/application';
+   import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
+   import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
+   import { GsapPosition }    from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-   import { carouselStore }         from './carouselStore.js';
+   import { carouselStore }   from './carouselStore.js';
 
    // We can use Position to control the outer carousel rotational changes to keep the current selected index visible.
    // Using Position allows us to solve several issues from resetting the rotation / selected index when cell length
@@ -24,6 +25,8 @@
    let currentLength = $carouselStore.length;
 
    let carouselTransform = 'none';
+
+   let gsapRotateY;
 
    // This reactive block triggers when the cell array length or selected index changes.
    $:
@@ -54,7 +57,11 @@
       {
          const angle = -carouselStore.theta * $selectedIndex;
 
-         position.animateTo({ rotateY: angle }, { duration: $storeDuration, easing: $storeEasing });
+         if (gsapRotateY) { gsapRotateY.kill(); }
+
+         gsapRotateY = GsapPosition.to(position, { rotateY: angle, duration: $storeDuration / 1000, ease: $storeEasing });
+
+         // position.animateTo({ rotateY: angle }, { duration: $storeDuration, easing: $storeEasing });
       }
    }
 </script>
