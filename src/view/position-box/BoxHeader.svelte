@@ -3,12 +3,16 @@
 
    import { boxStore }     from './boxStore.js';
 
-   const storeDuration = boxStore.duration;
-   const storeEasing = boxStore.easing;
-   const storeValidator = boxStore.validator;
+   const storeStagger = boxStore.stagger;
+
    const storeAuto = boxStore.auto;
    const storeDebug = boxStore.debug;
    const storeLabels = boxStore.labels;
+
+   const storeDuration = boxStore.duration;
+   const storeEasing = boxStore.easing;
+
+   const storeValidator = boxStore.validator;
 </script>
 
 <div class="header flex">
@@ -24,11 +28,21 @@
          <button on:click={() => boxStore.randomScaleRot()}>Random Scale / Rotation</button>
       </div>
       <div class=group>
-         <button on:click={() => boxStore.gsapTimeline()}>Create GSAP Timeline</button>
+         <button on:click={() => boxStore.gsapTimeline()}>New Timeline</button>
          <button on:click={() => boxStore.gsapTimelinePlay()}><i class="fas fa-play"></i></button>
          <button on:click={() => boxStore.gsapTimelineReverse()}><i class="fas fa-backward"></i></button>
          <button on:click={() => boxStore.gsapTimelinePause()}><i class="fas fa-pause"></i></button>
          <button on:click={() => boxStore.gsapTimelineRestart()}><i class="fas fa-arrow-left"></i></button>
+<!--         <button on:click={() => boxStore.gsapTimelineRestart()}>acddd<i class="fas fa-arrow-left"></i></button>-->
+
+<!--
+style="font-size: 12px"
+style="width: 14px; height: 14px"
+
+      align-items: start; justify-content: start;
+-->
+<!--         <div style="margin: 0; width: fit-content; transform: scale(0.5)"><label><input type=checkbox bind:checked={$storeStagger}>Delay</label></div>-->
+         <span style="transform: scale(0.75)"><label><input type=checkbox bind:checked={$storeStagger}>Stagger</label></span>
       </div>
    </div>
    <div class="container flex-vert">
@@ -38,8 +52,8 @@
       </div>
       <div class=flex>
          <span>Debug:</span>
-         <label><input type=checkbox bind:checked={$storeDebug}> Enable</label>
-         <label><input type=checkbox bind:checked={$storeLabels}> Labels</label>
+         <label><input type=checkbox bind:checked={$storeDebug}>Enable</label>
+         <label><input type=checkbox bind:checked={$storeLabels}>Labels</label>
       </div>
    </div>
    <div class="container flex-vert">
@@ -69,8 +83,8 @@
 <style lang="scss">
    button {
       width: fit-content;
-      height: 16px;
-      line-height: 14px;
+      height: 22px;
+      line-height: 20px;
    }
 
    div.container {
@@ -91,6 +105,7 @@
    }
 
    div.group {
+      display: flex;
       padding-top: 0.25em;
    }
 
