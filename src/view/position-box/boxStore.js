@@ -83,32 +83,30 @@ boxStore.add = (count = 1) =>
    });
 };
 
-boxStore.gsapTimeline = () =>
+boxStore.gsapTimelineCreate = () =>
 {
    const width = validator.width;
    const height = validator.height;
 
+   // width & height divided by 6; used for motion path.
    const width6 = width / 6;
    const height6 = height / 6;
-
-   // Kill & stop any existing timeline.
-   if (gsapTimeline !== void 0) { gsapTimeline.kill(); }
 
    // GSAP duration is in seconds not milliseconds.
    const duration = get(boxStore.duration) / 1000;
    const doubleDuration = duration * 2;
 
-   // Stagger start time of each box in the timeline.
+   // Stagger enabled state and cumulative time.
    const stagger = get(boxStore.stagger);
+   let staggerTime = 0;
 
    // GSAP is loaded w/ the Svelte easing functions and are accessible by prepending `svelte-` and the function name.
    const ease = `svelte-${get(boxStore.easing)}`;
 
-   // Defines the Bézier curve to animate along which will vary from the starting position of each box.
-   // This data is for the MotionPathPlugin.
+   // Defines the Bézier curve to animate along which will vary from the starting position of each box. This curve
+   // is based on current width / height. This data is for the MotionPathPlugin.
    const motionVars = {
       motionPath: {
-         // path: [{ left: 200, top: 200 }, { left: 300, top: 100 }, { left: 400, top: 300 }],
          path: [
             { left: width6 * 3, top: height6 * 3 },
             { left: width6, top: height6 * 4 },
@@ -121,16 +119,20 @@ boxStore.gsapTimeline = () =>
       ease
    };
 
-   // Create new GSAP timeline.
-   gsapTimeline = gsap.timeline({ paused: true });
+   // Kill & stop any existing timeline.
+   if (gsapTimeline !== void 0) { gsapTimeline.kill(); }
 
-   let staggerTime = 0;
+   // Create new GSAP timeline; start paused.
+   gsapTimeline = gsap.timeline({ paused: true });
 
    // Create and add unique timelines for each position instance to main timeline.
    for (const entry of data)
    {
-      // Composes a GSAP timeline from data. Note: the `rotation` alias is used instead of rotateZ as this
-      // timeline includes use of CustomWiggle & MotionPathPlugin that output data to `rotation`.
+      // Composes a GSAP timeline from data. Either stagger each box by 0.1 seconds or schedule all to start at the
+      // same time.
+      //
+      // Note: the `rotation` alias is used instead of rotateZ as this timeline includes use of CustomWiggle &
+      // MotionPathPlugin that output data to `rotation`.
       gsapTimeline.add(GsapPosition.timeline(entry.position, [
          { type: 'to', vars: { left: getRandomInt(0, width), duration, ease }, position: '<' },
          { type: 'to', vars: { rotation: getRandomInt(0, 360), duration, ease }, position: '<' },

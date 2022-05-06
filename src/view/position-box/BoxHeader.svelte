@@ -28,20 +28,11 @@
          <button on:click={() => boxStore.randomScaleRot()}>Random Scale / Rotation</button>
       </div>
       <div class=group>
-         <button on:click={() => boxStore.gsapTimeline()}>New Timeline</button>
+         <button on:click={() => boxStore.gsapTimelineCreate()}>New Timeline</button>
          <button on:click={() => boxStore.gsapTimelinePlay()}><i class="fas fa-play"></i></button>
          <button on:click={() => boxStore.gsapTimelineReverse()}><i class="fas fa-backward"></i></button>
          <button on:click={() => boxStore.gsapTimelinePause()}><i class="fas fa-pause"></i></button>
          <button on:click={() => boxStore.gsapTimelineRestart()}><i class="fas fa-arrow-left"></i></button>
-<!--         <button on:click={() => boxStore.gsapTimelineRestart()}>acddd<i class="fas fa-arrow-left"></i></button>-->
-
-<!--
-style="font-size: 12px"
-style="width: 14px; height: 14px"
-
-      align-items: start; justify-content: start;
--->
-<!--         <div style="margin: 0; width: fit-content; transform: scale(0.5)"><label><input type=checkbox bind:checked={$storeStagger}>Delay</label></div>-->
          <span style="transform: scale(0.75)"><label><input type=checkbox bind:checked={$storeStagger}>Stagger</label></span>
       </div>
    </div>
