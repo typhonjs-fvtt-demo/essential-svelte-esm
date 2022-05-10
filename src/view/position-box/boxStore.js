@@ -38,12 +38,11 @@ function getPosition(width, height, auto)
 {
    const bounds = getRandomInt(90, 140);
 
-   const position = new Position(void 0, {
+   const position = new Position({
       top: getRandomInt(0, height),
       left: getRandomInt(0, width),
       width: auto ? 'auto' : bounds,
       height: auto ? 'auto' : bounds,
-      updateImmediate: true,
       validator
    });
 
@@ -169,7 +168,7 @@ boxStore.gsapTimelineCreate = () =>
 
    const staggerFunc = (time = 0.1) => ({ index }) => index * time;
 
-   gsapTimeline.add(GsapCompose.timeline(data, createTimelineData(), { position: stagger ? staggerFunc() : '<' }));
+   gsapTimeline.add(GsapCompose.timeline(data, createTimelineData, { position: stagger ? staggerFunc() : '<' }));
 
    // gsapTimeline.add(GsapCompose.timeline(allPositions, createTimelineData, { position: stagger ? staggerFunc() : '<' }));
    // gsapTimeline.add(GsapCompose.timeline([data[0], data[1]], createTimelineData));
