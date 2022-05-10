@@ -1,7 +1,7 @@
 <script>
    import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
    import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
-   import { GsapPosition }    from '@typhonjs-fvtt/runtime/svelte/gsap';
+   import { GsapCompose }    from '@typhonjs-fvtt/runtime/svelte/gsap';
 
    import { carouselStore }   from './carouselStore.js';
 
@@ -59,7 +59,7 @@
 
          if (gsapRotateY) { gsapRotateY.kill(); }
 
-         gsapRotateY = GsapPosition.to(position, { rotateY: angle, duration: $storeDuration / 1000, ease: $storeEasing });
+         gsapRotateY = GsapCompose.to(position, { rotateY: angle, duration: $storeDuration / 1000, ease: $storeEasing });
 
          // position.animateTo({ rotateY: angle }, { duration: $storeDuration, easing: $storeEasing });
       }
