@@ -1,15 +1,16 @@
-import * as easingFuncs    from 'svelte/easing';
-import { get, writable }   from 'svelte/store';
+import * as easingFuncs       from 'svelte/easing';
+import { get, writable }      from 'svelte/store';
 
-import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
-import {
-   gsap,
-   CustomEase,
-   CustomWiggle,
-   MotionPathPlugin,
-   GsapPosition }          from '@typhonjs-fvtt/runtime/svelte/gsap';
+import { Position }           from '@typhonjs-fvtt/runtime/svelte/application';
 
-gsap.registerPlugin(CustomEase, CustomWiggle, MotionPathPlugin);
+import { GsapCompose }        from '@typhonjs-fvtt/runtime/svelte/gsap';
+
+import { CustomEase }         from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/CustomEase';
+import { MotionPathPlugin }   from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/MotionPathPlugin';
+import { CustomWiggle }       from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/CustomWiggle';
+import { InertiaPlugin }      from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
+
+GsapCompose.registerPlugin(CustomEase, CustomWiggle, MotionPathPlugin, InertiaPlugin);
 
 // Defines a custom ease w/ the CustomWiggle plugin. This is used below to set a variable amount of wiggle count
 // depending on the duration of the animation; more wiggles the lower the duration.
@@ -98,7 +99,6 @@ boxStore.gsapTimelineCreate = () =>
 
    // Stagger enabled state and cumulative time.
    const stagger = get(boxStore.stagger);
-   let staggerTime = 0;
 
    // GSAP is loaded w/ the Svelte easing functions and are accessible by prepending `svelte-` and the function name.
    const ease = `svelte-${get(boxStore.easing)}`;
@@ -115,37 +115,65 @@ boxStore.gsapTimelineCreate = () =>
          ],
          alignOrigin: [0.5, 0.5],
       },
-      duration,
+      duration: doubleDuration,
       ease
    };
 
    // Kill & stop any existing timeline.
    if (gsapTimeline !== void 0) { gsapTimeline.kill(); }
 
-   // Create new GSAP timeline; start paused.
-   gsapTimeline = gsap.timeline({ paused: true });
+   // Create new GSAP timeline; in paused state.
+   gsapTimeline = GsapCompose.timeline({ paused: true });
 
-   // Create and add unique timelines for each position instance to main timeline.
+   const allPositions = [];
    for (const entry of data)
    {
-      // Composes a GSAP timeline from data. Either stagger each box by 0.1 seconds or schedule all to start at the
-      // same time.
-      //
-      // Note: the `rotation` alias is used instead of rotateZ as this timeline includes use of CustomWiggle &
-      // MotionPathPlugin that output data to `rotation`.
-      gsapTimeline.add(GsapPosition.timeline(entry.position, [
-         { type: 'to', vars: { left: getRandomInt(0, width), duration, ease }, position: '<' },
-         { type: 'to', vars: { rotation: getRandomInt(0, 360), duration, ease }, position: '<' },
-         { type: 'to', target: 'element', vars: { opacity: 0.4, duration, ease }, position: '<-=50%' },
-         { type: 'to', vars: { top: getRandomInt(0, height), duration, ease } },
-         { type: 'to', vars: { rotation: '+=20', duration: doubleDuration, ease: customWiggle() }, position: '<+=50%' },
-         { type: 'to', vars: motionVars },
-         { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: '<+=10%' },
-         { type: 'to', vars: { rotation: getRandomInt(540, 720), duration, ease }, position: '<' }
-      ]), stagger ? staggerTime : '<');
-
-      staggerTime += 0.1;
+      allPositions.push(entry.position);
    }
+
+   // GsapCompose.to(data, {
+   //    left: getRandomInt(0, width),
+   //    top: getRandomInt(0, height),
+   //    duration,
+   //    ease
+   // });
+
+   // gsapTimeline.add(GsapCompose.to(data, {
+   //    left: getRandomInt(0, width),
+   //    top: getRandomInt(0, height),
+   //    duration,
+   //    ease
+   // }));
+
+   // gsapTimeline.add(GsapCompose.fromTo(data, {
+   //    left: getRandomInt(0, width),
+   //    top: getRandomInt(0, height),
+   // }, {
+   //    left: getRandomInt(0, width),
+   //    top: getRandomInt(0, height),
+   //    duration,
+   //    ease
+   // }));
+
+   // // Note: the `rotation` alias is used instead of rotateZ as this timeline includes use of CustomWiggle &
+   // // MotionPathPlugin that output data to `rotation`.
+   const createTimelineData = () => [
+      { type: 'to', vars: { left: getRandomInt(0, width), duration, ease }, position: '<' },
+      { type: 'to', vars: { rotation: getRandomInt(0, 360), duration, ease }, position: '<' },
+      { type: 'to', target: 'element', vars: { opacity: 0.4, duration, ease }, position: '<-=50%' },
+      { type: 'to', vars: { top: getRandomInt(0, height), duration, ease } },
+      { type: 'to', vars: { rotation: '+=20', duration: doubleDuration, ease: customWiggle() }, position: '<+=50%' },
+      { type: 'to', vars: motionVars },
+      { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: '<+=10%' },
+      { type: 'to', vars: { rotation: getRandomInt(540, 720), duration, ease }, position: '<' }
+   ];
+
+   const staggerFunc = (time = 0.1) => ({ index }) => index * time;
+
+   gsapTimeline.add(GsapCompose.timeline(data, createTimelineData(), { position: stagger ? staggerFunc() : '<' }));
+
+   // gsapTimeline.add(GsapCompose.timeline(allPositions, createTimelineData, { position: stagger ? staggerFunc() : '<' }));
+   // gsapTimeline.add(GsapCompose.timeline([data[0], data[1]], createTimelineData));
 };
 
 boxStore.gsapTimelinePause = () =>
