@@ -25,7 +25,8 @@ function getPosition()
       top: 10,
       left: 10,
       width: s_CELL_WIDTH,
-      height: s_CELL_HEIGHT
+      height: s_CELL_HEIGHT,
+      ortho: false
    });
 }
 

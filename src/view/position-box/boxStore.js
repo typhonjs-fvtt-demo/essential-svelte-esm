@@ -43,7 +43,6 @@ function getPosition(width, height, auto)
       left: getRandomInt(0, width),
       width: auto ? 'auto' : bounds,
       height: auto ? 'auto' : bounds,
-      ortho: true,
       updateImmediate: true,
       validator
    });
