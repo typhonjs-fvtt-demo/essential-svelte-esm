@@ -1,8 +1,8 @@
 <script>
    import { getContext }         from 'svelte';
-   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
-   import { applyStyles }   from '@typhonjs-fvtt/runtime/svelte/action';
+   import { applyStyles }        from '@typhonjs-fvtt/runtime/svelte/action';
+   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
    export let elementRoot;
 
