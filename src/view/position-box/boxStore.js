@@ -1,9 +1,10 @@
-import * as easingFuncs       from 'svelte/easing';
 import { get, writable }      from 'svelte/store';
 
 import { Position }           from '@typhonjs-fvtt/runtime/svelte/application';
 
-import { GsapCompose }        from '@typhonjs-fvtt/runtime/svelte/gsap';
+import {
+   easingFunc,
+   GsapCompose }              from '@typhonjs-fvtt/runtime/svelte/gsap';
 
 import { CustomEase }         from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/CustomEase';
 import { MotionPathPlugin }   from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/MotionPathPlugin';
@@ -58,7 +59,7 @@ const boxStore = writable(data);
 
 boxStore.stagger = writable(false);
 boxStore.auto = writable(false);
-boxStore.easing = writable('linear');
+boxStore.easing = writable(easingFunc.linear);
 boxStore.duration = writable(1000);
 boxStore.validator = writable(true);
 boxStore.debug = writable(false);
@@ -82,6 +83,32 @@ boxStore.add = (count = 1) =>
    });
 };
 
+boxStore.animateToLocation = () =>
+{
+   const width = validator.width;
+   const height = validator.height;
+
+   const duration = get(boxStore.duration);
+   const easing = get(boxStore.easing);
+
+   for (const entry of data)
+   {
+      entry.position.animateTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) }, { duration, easing });
+   }
+};
+
+boxStore.animateToScaleRot = () =>
+{
+   const duration = get(boxStore.duration);
+   const easing = get(boxStore.easing);
+
+   for (const entry of data)
+   {
+      const scale = getRandomInt(50, 200) / 100;
+      entry.position.animateTo({ scale, rotateZ: getRandomInt(0, 360) }, { duration, easing });
+   }
+};
+
 boxStore.gsapTimelineCreate = () =>
 {
    const width = validator.width;
@@ -99,7 +126,7 @@ boxStore.gsapTimelineCreate = () =>
    const stagger = get(boxStore.stagger);
 
    // GSAP is loaded w/ the Svelte easing functions and are accessible by prepending `svelte-` and the function name.
-   const ease = `svelte-${get(boxStore.easing)}`;
+   const ease = get(boxStore.easing);
 
    // Defines the Bézier curve to animate along which will vary from the starting position of each box. This curve
    // is based on current width / height. This data is for the MotionPathPlugin.
@@ -192,32 +219,6 @@ boxStore.gsapTimelineRestart = () =>
 boxStore.gsapTimelineReverse = () =>
 {
    if (gsapTimeline !== void 0) { gsapTimeline.reverse(); }
-};
-
-boxStore.randomLocation = () =>
-{
-   const width = validator.width;
-   const height = validator.height;
-
-   const duration = get(boxStore.duration);
-   const easing = easingFuncs[get(boxStore.easing)];
-
-   for (const entry of data)
-   {
-      entry.position.animateTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) }, { duration, easing });
-   }
-};
-
-boxStore.randomScaleRot = () =>
-{
-   const duration = get(boxStore.duration);
-   const easing = easingFuncs[get(boxStore.easing)];
-
-   for (const entry of data)
-   {
-      const scale = getRandomInt(50, 200) / 100;
-      entry.position.animateTo({ scale, rotateZ: getRandomInt(0, 360) }, { duration, easing });
-   }
 };
 
 boxStore.remove = (id) =>

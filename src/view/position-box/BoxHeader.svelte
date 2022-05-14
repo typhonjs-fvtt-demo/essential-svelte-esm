@@ -1,7 +1,9 @@
 <script>
-   import * as easingFuncs from 'svelte/easing';
+   import {
+      easingFunc,
+      easingList }      from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-   import { boxStore }     from './boxStore.js';
+   import { boxStore }  from './boxStore.js';
 
    const storeStagger = boxStore.stagger;
 
@@ -24,8 +26,8 @@
          <button on:click={() => boxStore.removeAll()}>Remove All</button>
       </div>
       <div class=group>
-         <button on:click={() => boxStore.randomLocation()}>Random Location</button>
-         <button on:click={() => boxStore.randomScaleRot()}>Random Scale / Rotation</button>
+         <button on:click={() => boxStore.animateToLocation()}>AnimateTo Location</button>
+         <button on:click={() => boxStore.animateToScaleRot()}>Scale / Rotation</button>
       </div>
       <div class=group>
          <button on:click={() => boxStore.gsapTimelineCreate()}>New Timeline</button>
@@ -56,8 +58,8 @@
       <div class=flex>
          <label for=easing>Easing:</label>
          <select id=easing bind:value={$storeEasing}>
-            {#each Object.keys(easingFuncs) as prop}
-               <option value={prop}>{prop}</option>
+            {#each easingList as entry}
+               <option value={easingFunc[entry]}>{entry}</option>
             {/each}
          </select>
       </div>
