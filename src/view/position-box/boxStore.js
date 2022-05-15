@@ -6,12 +6,11 @@ import {
    easingFunc,
    GsapCompose }              from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-import { CustomEase }         from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/CustomEase';
-import { MotionPathPlugin }   from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/MotionPathPlugin';
-import { CustomWiggle }       from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/CustomWiggle';
-import { InertiaPlugin }      from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
-
-GsapCompose.registerPlugin(CustomEase, CustomWiggle, MotionPathPlugin, InertiaPlugin);
+// Imports the loading / automatic GSAP plugin registration.
+import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/CustomEase';
+import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/MotionPathPlugin';
+import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/CustomWiggle';
+import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
 
 // Defines a custom ease w/ the CustomWiggle plugin. This is used below to set a variable amount of wiggle count
 // depending on the duration of the animation; more wiggles the lower the duration.
@@ -185,11 +184,11 @@ boxStore.gsapTimelineCreate = () =>
    const createTimelineData = () => [
       { type: 'to', vars: { left: getRandomInt(0, width), duration, ease }, position: '<' },
       { type: 'to', vars: { rotation: getRandomInt(0, 360), duration, ease }, position: '<' },
-      { type: 'to', target: 'element', vars: { opacity: 0.4, duration, ease }, position: '<-=50%' },
+      { type: 'to', target: 'element', vars: { opacity: 0.4, duration, ease }, position: duration / 2 },
       { type: 'to', vars: { top: getRandomInt(0, height), duration, ease } },
       { type: 'to', vars: { rotation: '+=20', duration: doubleDuration, ease: customWiggle() }, position: '<+=50%' },
       { type: 'to', vars: motionVars },
-      { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: '<+=10%' },
+      { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: `-=${duration}` },
       { type: 'to', vars: { rotation: getRandomInt(540, 720), duration, ease }, position: '<' }
    ];
 
