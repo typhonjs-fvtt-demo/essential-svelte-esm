@@ -28,6 +28,7 @@
       <div class=group>
          <button on:click={() => boxStore.animateToLocation()}>AnimateTo Location</button>
          <button on:click={() => boxStore.animateToScaleRot()}>Scale / Rotation</button>
+         <button on:click={() => boxStore.animateToCancel()}><i class="fas fa-stop"></i></button>
       </div>
       <div class=group>
          <button on:click={() => boxStore.gsapTimelineCreate()}>New Timeline</button>

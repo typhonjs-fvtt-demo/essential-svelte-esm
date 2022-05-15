@@ -1,12 +1,12 @@
-import { get, writable }      from 'svelte/store';
+import { get, writable }   from 'svelte/store';
 
-import { Position }           from '@typhonjs-fvtt/runtime/svelte/application';
+import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
 
 import {
    easingFunc,
-   GsapCompose }              from '@typhonjs-fvtt/runtime/svelte/gsap';
+   GsapCompose }           from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-// Imports the loading / automatic GSAP plugin registration.
+// Imports the loading code / automatic GSAP plugin registration.
 import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/CustomEase';
 import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/MotionPathPlugin';
 import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/CustomWiggle';
@@ -80,6 +80,11 @@ boxStore.add = (count = 1) =>
 
       return array;
    });
+};
+
+boxStore.animateToCancel = () =>
+{
+   Position.Animation.cancelAll();
 };
 
 boxStore.animateToLocation = () =>
