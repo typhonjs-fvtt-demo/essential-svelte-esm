@@ -4,21 +4,18 @@
    import { draggable }          from '@typhonjs-fvtt/runtime/svelte/action';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
-   import {
-      draggableGsap,
-      GsapCompose }              from '@typhonjs-fvtt/runtime/svelte/gsap';
+   import { draggableGsap }      from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-   import { InertiaPlugin }      from '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
+   // Imports the loading / automatic GSAP plugin registration.
+   import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
 
    import {
       optionComponents,
-      optionStores }            from './options/index.js';
+      optionStores }             from './options/index.js';
 
    export let elementRoot;
 
    let draggableSelected = draggable;
-
-   GsapCompose.registerPlugin(InertiaPlugin);
 
    let draggableOptionStore;
    let draggableOptionComp;
@@ -54,14 +51,8 @@
          </select>
       </div>
 
-<!--      <div class=flex>-->
-<!--         <label class=duration for=duration>Duration:</label>-->
-<!--         <input type=range min=0 max=3000 id=duration bind:value={$storeDuration}>-->
-<!--         <input type=text bind:value={$storeDuration} readonly>-->
-<!--      </div>-->
-
       <hr>
-         <svelte:component this={draggableOptionComp} options={$draggableOptionStore} position={application.position} />
+         <svelte:component this={draggableOptionComp} options={$draggableOptionStore} />
       <hr>
    </main>
 </ApplicationShell>
