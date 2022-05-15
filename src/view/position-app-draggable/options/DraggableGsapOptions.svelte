@@ -2,15 +2,8 @@
    import { easingList } from '@typhonjs-fvtt/runtime/svelte/gsap';
 
    export let options;
-   export let position;
 
-   const tweenEnd = () =>
-   {
-// const test = { top: Math.round(position.top / 100) * 100, left: Math.round(position.left / 100) * 100 };
-// console.log(`! tweenEnd - test: `, test);
-
-      return { top: Math.round(position.top / 100) * 100, left: Math.round(position.left / 100) * 100 };
-   }
+   const tweenEnd = ({ top, left }) => ({ top: Math.round(top / 100) * 100, left: Math.round(left / 100) * 100 });
 
    let endOnGrid = false;
 
@@ -21,7 +14,7 @@
    <div class=flex>
       <input type=checkbox bind:checked={options.ease}/>
       <span>Ease:</span>
-      <button on:click={() => options.resetEase()}>Reset</button>
+      <button on:click={() => options.resetEase()}><i class="fas fa-trash"></i></button>
    </div>
 
    <div class=flex>
@@ -42,7 +35,7 @@
    <div class=flex>
       <input type=checkbox bind:checked={options.inertia}/>
       <span>Inertia:</span>
-      <button on:click={() => options.resetInertia()}>Reset</button>
+      <button on:click={() => options.resetInertia()}><i class="fas fa-trash"></button>
    </div>
 
    <div class=flex>
@@ -59,14 +52,14 @@
 
    <div class=flex>
       <label for=inertiaResistance>Resistance:</label>
-      <input type=range min=-100 max=100 id=inertiaResistance bind:value={options.inertiaResistance}>
+      <input type=range min=0 max=10000 id=inertiaResistance bind:value={options.inertiaResistance}>
       <input type=text bind:value={options.inertiaResistance} readonly>
    </div>
 
    <div class=flex>
-      <label for=inertiaVelocity>Velocity:</label>
-      <input type=range min=0 max=3 step=0.1 id=inertiaVelocity bind:value={options.inertiaVelocity}>
-      <input type=text bind:value={options.inertiaVelocity} readonly>
+      <label for=inertiaVelocityScale>Velocity Scale:</label>
+      <input type=range min=0 max=3 step=0.1 id=inertiaVelocityScale bind:value={options.inertiaVelocityScale}>
+      <input type=text bind:value={options.inertiaVelocityScale} readonly>
    </div>
 
    <div class=flex>
@@ -76,6 +69,10 @@
 </section>
 
 <style lang=scss>
+   button {
+      width: fit-content;
+   }
+
    section {
       text-align: center;
       display: flex;
