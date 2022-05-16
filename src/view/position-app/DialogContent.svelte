@@ -36,7 +36,7 @@
    $: if (maxWidth) { nullishMaxWidth = Number.isFinite($maxWidth) ? $maxWidth : 'null'; }
    $: if (maxHeight) { nullishMaxHeight = Number.isFinite($maxHeight) ? $maxHeight : 'null'; }
 
-   let easing = easingFuncs.linear;
+   let ease = easingFuncs.linear;
 
    let duration = 1000;
 </script>
@@ -134,7 +134,7 @@
 
    <div>
       <label for=easing>Easing:</label>
-      <select id=easing bind:value={easing}>
+      <select id=easing bind:value={ease}>
          {#each Object.keys(easingFuncs) as prop}
             <option value={easingFuncs[prop]}>
                {prop}
@@ -155,13 +155,13 @@
    <hr>
 
    <div>
-      <button on:click={() => position.animateTo({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, easing })}>Animate flip</button>
+      <button on:click={() => position.animateTo({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, ease })}>Animate flip</button>
       <button on:click={() => position.reset()}>Reset</button>
    </div>
 
    <div>
       <button on:click={() => application.state.save({ name: 'save-1' })}>Save Position</button>
-      <button on:click={() => application.state.restore({ name: 'save-1', animateTo: true, easing, duration })}>Restore Position</button>
+      <button on:click={() => application.state.restore({ name: 'save-1', animateTo: true, ease, duration })}>Restore Position</button>
    </div>
 
    <hr>

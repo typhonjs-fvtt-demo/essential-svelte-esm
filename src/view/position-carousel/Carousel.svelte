@@ -18,15 +18,11 @@
 
    const selectedIndex = carouselStore.selectedIndex;
    const storeDuration = carouselStore.duration;
-   const storeEasing = carouselStore.easing;
-
-   const storeTransform = position.stores.transform;
+   const storeEase = carouselStore.ease;
 
    let currentLength = $carouselStore.length;
 
-   let carouselTransform = 'none';
-
-   let gsapRotateY;
+   let gsapRotateY, gsapTranslateZ;
 
    // This reactive block triggers when the cell array length or selected index changes.
    $:
@@ -51,6 +47,12 @@
          // TODO: in the future when animation is fixed we can potentially animate `translateZ`.
          position.set({ translateZ: -carouselStore.radius, rotateY: resetAngle });
 
+         // position.set({ rotateY: resetAngle });
+         //
+         // if (gsapTranslateZ) { gsapTranslateZ.kill(); }
+         //
+         // GsapCompose.to(position, { translateZ: -carouselStore.radius, duration: 0.5, ease: 'power3.out' });
+
          $selectedIndex = cappedIndex;
       }
       else // Just animate to new selected index.
@@ -59,9 +61,7 @@
 
          if (gsapRotateY) { gsapRotateY.kill(); }
 
-         gsapRotateY = GsapCompose.to(position, { rotateY: angle, duration: $storeDuration / 1000, ease: $storeEasing });
-
-         // position.animateTo({ rotateY: angle }, { duration: $storeDuration, easing: $storeEasing });
+         gsapRotateY = GsapCompose.to(position, { rotateY: angle, duration: $storeDuration / 1000, ease: $storeEase });
       }
    }
 </script>

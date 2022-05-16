@@ -6,7 +6,7 @@
    const selectedIndex = carouselStore.selectedIndex;
 
    const storeDuration = carouselStore.duration;
-   const storeEasing = carouselStore.easing;
+   const storeEase = carouselStore.ease;
    const storePerspective = carouselStore.perspective;
 
    let cellCount = $carouselStore.length;
@@ -37,7 +37,7 @@
       </label>
       <label for=easing>
          Easing:
-         <select id=easing bind:value={$storeEasing}>
+         <select id=easing bind:value={$storeEase}>
             {#each Object.keys(easingFuncs) as prop}
                <option value={`svelte-${prop}`}>{prop}</option>
             {/each}

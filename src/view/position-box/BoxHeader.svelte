@@ -12,7 +12,7 @@
    const storeLabels = boxStore.labels;
 
    const storeDuration = boxStore.duration;
-   const storeEasing = boxStore.easing;
+   const storeEase = boxStore.ease;
 
    const storeValidator = boxStore.validator;
 </script>
@@ -58,7 +58,7 @@
       </div>
       <div class=flex>
          <label for=easing>Easing:</label>
-         <select id=easing bind:value={$storeEasing}>
+         <select id=easing bind:value={$storeEase}>
             {#each easingList as entry}
                <option value={easingFunc[entry]}>{entry}</option>
             {/each}
