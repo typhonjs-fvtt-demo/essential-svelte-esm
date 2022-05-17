@@ -61,7 +61,7 @@
 
          if (gsapRotateY) { gsapRotateY.kill(); }
 
-         gsapRotateY = GsapCompose.to(position, { rotateY: angle, duration: $storeDuration / 1000, ease: $storeEase });
+         gsapRotateY = GsapCompose.to(position, { rotateY: angle, duration: $storeDuration, ease: $storeEase });
       }
    }
 </script>

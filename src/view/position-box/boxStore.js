@@ -59,7 +59,7 @@ const boxStore = writable(data);
 boxStore.stagger = writable(false);
 boxStore.auto = writable(false);
 boxStore.ease = writable(easingFunc.linear);
-boxStore.duration = writable(1000);
+boxStore.duration = writable(1);
 boxStore.validator = writable(true);
 boxStore.debug = writable(false);
 boxStore.labels = writable(false);
@@ -122,8 +122,7 @@ boxStore.gsapTimelineCreate = () =>
    const width6 = width / 6;
    const height6 = height / 6;
 
-   // GSAP duration is in seconds not milliseconds.
-   const duration = get(boxStore.duration) / 1000;
+   const duration = get(boxStore.duration);
    const doubleDuration = duration * 2;
 
    // Stagger enabled state and cumulative time.

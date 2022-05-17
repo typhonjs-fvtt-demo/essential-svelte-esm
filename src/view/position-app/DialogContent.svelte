@@ -38,7 +38,7 @@
 
    let ease = easingFuncs.linear;
 
-   let duration = 1000;
+   let duration = 1;
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight/>
@@ -128,7 +128,7 @@
 
    <div>
       <label for=duration>Duration:</label>
-      <input type=range min=100 max=3000 id=duration bind:value={duration}>
+      <input type=range min=0 max=3 step=0.1 id=duration bind:value={duration}>
       <input type=text bind:value={duration} readonly>
    </div>
 

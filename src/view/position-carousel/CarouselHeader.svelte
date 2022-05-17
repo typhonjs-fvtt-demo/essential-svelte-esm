@@ -32,7 +32,7 @@
    <div class="container flex-vert">
       <label for=duration>
          Duration:
-         <input type=range min=0 max=3000 id=duration bind:value={$storeDuration}>
+         <input type=range min=0 max=3 step=0.1 id=duration bind:value={$storeDuration}>
          <input type=text bind:value={$storeDuration} readonly>
       </label>
       <label for=easing>

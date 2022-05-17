@@ -35,7 +35,7 @@ const data = [];
 const carouselStore = writable(data);
 
 carouselStore.selectedIndex = writable(1);
-carouselStore.duration = writable(500);
+carouselStore.duration = writable(0.5);
 carouselStore.ease = writable('svelte-linear');
 carouselStore.perspective = writable(1000);
 
