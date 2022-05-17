@@ -1,6 +1,12 @@
 <script>
    import * as easingFuncs from 'svelte/easing';
 
+   import {
+      optionComponents,
+      optionStores,
+      optionValues,
+      storeDraggable }     from './options/index.js';
+
    export let application = void 0;
 
    const storeDebug = application.storeDebug;
@@ -10,6 +16,13 @@
    let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex;
 
    let minWidth, minHeight, maxWidth, maxHeight;
+
+   let draggableOptions, draggableOptionComp;
+
+   $: {
+      draggableOptionComp = optionComponents[$storeDraggable];
+      draggableOptions = optionStores[$storeDraggable];
+   }
 
    $:
    {
@@ -164,6 +177,20 @@
       <button on:click={() => application.state.restore({ name: 'save-1', animateTo: true, ease, duration })}>Restore Position</button>
    </div>
 
+   <hr>
+
+   <div>
+      <label for=draggableSelect>Draggable Implementation:</label>
+      <select id=draggableSelect bind:value={$storeDraggable}>
+         {#each Object.entries(optionValues) as [key, value]}
+            {(console.log(`! template - option - value name: ${value?.name}; key: ${key}`), '')}
+            <option value={value}>{key}</option>
+         {/each}
+      </select>
+   </div>
+
+   <hr>
+      <svelte:component this={draggableOptionComp} options={$draggableOptions} />
    <hr>
 
    <div style="justify-content: flex-start">
