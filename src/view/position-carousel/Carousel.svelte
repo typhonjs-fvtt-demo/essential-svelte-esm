@@ -22,6 +22,7 @@
 
    let currentLength = $carouselStore.length;
 
+   // Stores the GSAP tween / timeline to be able to kill them.
    let gsapRotateY, gsapTranslateZ;
 
    // This reactive block triggers when the cell array length or selected index changes.
@@ -44,14 +45,12 @@
 
          const resetAngle = -carouselStore.theta * cappedIndex;
 
-         // TODO: in the future when animation is fixed we can potentially animate `translateZ`.
-         position.set({ translateZ: -carouselStore.radius, rotateY: resetAngle });
+         if (gsapTranslateZ) { gsapTranslateZ.kill(); }
 
-         // position.set({ rotateY: resetAngle });
-         //
-         // if (gsapTranslateZ) { gsapTranslateZ.kill(); }
-         //
-         // GsapCompose.to(position, { translateZ: -carouselStore.radius, duration: 0.5, ease: 'power3.out' });
+         gsapTranslateZ = GsapCompose.timeline(position, [
+            { type: 'set', vars: { rotateY: resetAngle } },
+            { type: 'to', vars: { translateZ: -carouselStore.radius, duration: 0.5, ease: 'power3.out' } }
+         ]);
 
          $selectedIndex = cappedIndex;
       }
