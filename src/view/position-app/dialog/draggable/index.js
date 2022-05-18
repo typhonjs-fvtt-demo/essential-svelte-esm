@@ -3,12 +3,12 @@ import { writable }           from 'svelte/store';
 import { draggable }          from '@typhonjs-fvtt/runtime/svelte/action';
 import { draggableGsap }      from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-import DraggableOptions       from './DraggableOptions.svelte';
-import DraggableGsapOptions   from './DraggableGsapOptions.svelte';
+import OptionsDraggable       from './OptionsDraggable.svelte';
+import OptionsDraggableGsap   from './OptionsDraggableGsap.svelte';
 
 export const optionComponents = {
-  [draggable]: DraggableOptions,
-  [draggableGsap]: DraggableGsapOptions,
+  [draggable]: OptionsDraggable,
+  [draggableGsap]: OptionsDraggableGsap,
 };
 
 export const optionStores = {

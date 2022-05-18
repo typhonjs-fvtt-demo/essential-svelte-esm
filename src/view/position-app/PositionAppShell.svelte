@@ -4,12 +4,9 @@
    import { applyStyles }        from '@typhonjs-fvtt/runtime/svelte/action';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
-   // Imports the loading / automatic GSAP plugin registration.
-   import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
-
    import {
       optionStores,
-      storeDraggable }           from './options/index.js';
+      storeDraggable }           from './dialog/draggable/index.js';
 
    export let elementRoot;
 
