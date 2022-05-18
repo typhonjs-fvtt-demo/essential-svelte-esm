@@ -14,7 +14,7 @@
 </script>
 
 <main>
-   <h3>Adjust `position` of parent application:</h3>
+   <h3>Adjust `Position` of <a on:click={() => application.bringToTop()}><u>parent application</u></a>:</h3>
 
    <hr>
 
@@ -26,7 +26,7 @@
       <PosAnimateTo {application}/>
    </TJSSvgFolder>
 
-   <TJSSvgFolder label={'GSAP Timeline:'}>
+   <TJSSvgFolder label={'GSAP Timeline / Tween:'}>
       <PosGsap {position} />
    </TJSSvgFolder>
 

@@ -61,10 +61,10 @@
       gsapTimeline = GsapCompose.timeline({ paused: true });
 
       gsapTimeline.add(GsapCompose.timeline(position, [
-         { type: 'to', vars: { left: getRandomInt(width6, width6 * 5), duration, ease }, position: '<' },
+         { type: 'to', vars: { left: getRandomInt(width6 * 2, width6 * 4), duration, ease }, position: '<' },
          { type: 'to', vars: { rotation: getRandomInt(0, 360), duration, ease }, position: '<' },
          { type: 'to', target: 'element', vars: { opacity: 0.4, duration, ease }, position: duration / 2 },
-         { type: 'to', vars: { top: getRandomInt(0, height), duration, ease } },
+         { type: 'to', vars: { top: getRandomInt(height6 * 2, height * 4), duration, ease } },
          { type: 'to', vars: { rotation: '+=20', duration: doubleDuration, ease: customWiggle() }, position: '<+=50%' },
          { type: 'to', vars: motionVars },
          { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: `-=${duration}` },
@@ -151,17 +151,14 @@
 
       padding: 0.25em;
 
-      input { margin: 6px }
-      input[type=text] { max-width: 2.5em }
+      input { margin: 0.5em; }
+      input[type=text] { max-width: 2.5em; }
 
-      select { margin: 6px; width: fit-content; }
+      select { margin: 0.5em; width: fit-content; }
 
       button {
          white-space: nowrap;
-
-         &:not(:last-child) {
-            margin-right: 0.5em;
-         }
+         margin: 0.25em;
       }
 
       div {

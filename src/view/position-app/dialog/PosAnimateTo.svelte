@@ -48,12 +48,12 @@
 
       padding: 0.25em;
 
-      input { margin: 6px }
-      input[type=text] { max-width: 2.5em }
+      input { margin: 0.5em; }
+      input[type=text] { max-width: 2.5em; }
 
-      select { margin: 6px; width: fit-content; }
+      select { margin: 0.5em; width: fit-content; }
 
-      button { margin: 3px; }
+      button { margin: 0.25em; }
 
       div {
          display: flex;

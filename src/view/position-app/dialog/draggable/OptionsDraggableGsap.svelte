@@ -82,28 +82,20 @@
       display: flex;
       flex-direction: column;
 
-      div:not(:last-child) {
-         margin-bottom: 0.25em
-      }
+      div:not(:last-child) { margin-bottom: 0.25em; }
 
-      a {
-         margin-left: 0.5em;
-      }
+      a { margin-left: 0.5em; }
 
-      input[type=text] { max-width: 3.5em }
+      input[type=text] { max-width: 3.5em; }
 
       .flex {
          display: flex;
          height: fit-content;
          align-items: center;
 
-         *:not(:last-child) {
-            margin-right: 0.25em;
-         }
+         *:not(:last-child) { margin-right: 0.25em; }
 
-         span:not(:first-child), label:not(:first-child) {
-            margin-left: 0.5em;
-         }
+         span:not(:first-child), label:not(:first-child) { margin-left: 0.5em; }
       }
 
       hr { width: 96% }

@@ -38,7 +38,7 @@
 
       padding: 0.25em;
 
-      select { margin: 6px; width: fit-content; }
+      select { margin: 0.5em; width: fit-content; }
 
       label {
          text-align: right;

@@ -115,12 +115,12 @@
 
       padding: 0.25em;
 
-      input { margin: 6px }
-      input[type=text] { max-width: 3.5em }
+      input { margin: 0.5em; }
+      input[type=text] { max-width: 3.5em; }
 
-      input[type=text].small { max-width: 2.5em }
+      input[type=text].small { max-width: 2.5em; }
 
-      select { margin: 6px; width: fit-content; }
+      select { margin: 0.5em; width: fit-content; }
 
       div {
          display: flex;
