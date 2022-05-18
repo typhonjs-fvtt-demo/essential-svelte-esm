@@ -64,7 +64,7 @@
          { type: 'to', vars: { left: getRandomInt(width6 * 2, width6 * 4), duration, ease }, position: '<' },
          { type: 'to', vars: { rotation: getRandomInt(0, 360), duration, ease }, position: '<' },
          { type: 'to', target: 'element', vars: { opacity: 0.4, duration, ease }, position: duration / 2 },
-         { type: 'to', vars: { top: getRandomInt(height6 * 2, height * 4), duration, ease } },
+         { type: 'to', vars: { top: getRandomInt(height6 * 2, height6 * 4), duration, ease } },
          { type: 'to', vars: { rotation: '+=20', duration: doubleDuration, ease: customWiggle() }, position: '<+=50%' },
          { type: 'to', vars: motionVars },
          { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: `-=${duration}` },
