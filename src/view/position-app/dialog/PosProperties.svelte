@@ -1,24 +1,13 @@
 <script>
-   import * as easingFuncs from 'svelte/easing';
-
-   export let application = void 0;
-
-   const storeDebug = application.storeDebug;
-
-   let position;
+   export let position;
 
    let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex;
 
    let minWidth, minHeight, maxWidth, maxHeight;
 
-   $:
-   {
-      position = application.position;
+   ({top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex} = position.stores);
 
-      ({top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex} = position.stores);
-
-      ({minWidth, minHeight, maxWidth, maxHeight} = position.stores);
-   }
+   ({minWidth, minHeight, maxWidth, maxHeight} = position.stores);
 
    let innerWidth, innerHeight
    let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale;
@@ -35,112 +24,73 @@
    $: if (minHeight) { nullishMinHeight = Number.isFinite($minHeight) ? $minHeight : 'null'; }
    $: if (maxWidth) { nullishMaxWidth = Number.isFinite($maxWidth) ? $maxWidth : 'null'; }
    $: if (maxHeight) { nullishMaxHeight = Number.isFinite($maxHeight) ? $maxHeight : 'null'; }
-
-   let easing = easingFuncs.linear;
-
-   let duration = 1000;
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight/>
 
-<main>
-   <h3>Adjust `position` of parent application:</h3>
-
-   <div>
+<section>
+   <div class=flex>
       <label for=top>top:</label>
       <input type=range min=0 max={innerHeight} id=top bind:value={$top}>
       <input type=text bind:value={$top} readonly>
-   </div>
 
-   <div>
       <label for=left>left:</label>
       <input type=range min=0 max={innerWidth} id=left bind:value={$left}>
       <input type=text bind:value={$left} readonly>
    </div>
 
-   <div>
+   <div class=flex>
       <label for=width>width:</label>
       <input type=range min=395 max={innerWidth} id=width bind:value={$width}>
       <input type=text bind:value={$width} readonly>
-   </div>
 
-   <div>
       <label for=height>height:</label>
       <input type=range min=240 max={innerHeight} id=height bind:value={$height}>
       <input type=text bind:value={$height} readonly>
    </div>
 
-   <div>
+   <div class=flex>
       <label for=rotateX>rotateX:</label>
       <input type=range min=0 max=360 id=rotateX bind:value={$rotateX}>
       <input type=text bind:value={nullishRotateX} readonly>
-   </div>
 
-   <div>
-      <label for=rotateY>rotateY:</label>
+      <label for=rotateY>Y:</label>
       <input type=range min=0 max=360 id=rotateY bind:value={$rotateY}>
       <input type=text bind:value={nullishRotateY} readonly>
-   </div>
 
-   <div>
-      <label for=rotateZ>rotateZ:</label>
+      <label for=rotateZ>Z:</label>
       <input type=range min=0 max=360 id=rotateZ bind:value={$rotateZ}>
       <input type=text bind:value={nullishRotateZ} readonly>
    </div>
 
-   <div>
-      <label for=scale>scale:</label>
-      <input type=range min=0 max=5 step=0.01 id=scale bind:value={$scale}>
-      <input type=text bind:value={nullishScale} readonly>
-   </div>
-
-   <div>
+   <div class=flex>
       <label for=minWidth>minWidth:</label>
-      <input type=range min=0 max=360 id=minWidth bind:value={$minWidth}>
+      <input type=range min=0 max=450 id=minWidth bind:value={$minWidth}>
       <input type=text bind:value={nullishMinWidth} readonly>
-   </div>
 
-   <div>
       <label for=minHeight>minHeight:</label>
-      <input type=range min=0 max=360 id=minHeight bind:value={$minHeight}>
+      <input type=range min=0 max=450 id=minHeight bind:value={$minHeight}>
       <input type=text bind:value={nullishMinHeight} readonly>
    </div>
 
-   <div>
+   <div class=flex>
       <label for=maxWidth>maxWidth:</label>
-      <input type=range min=0 max=360 id=maxWidth bind:value={$maxWidth}>
+      <input type=range min=0 max={innerWidth} id=maxWidth bind:value={$maxWidth}>
       <input type=text bind:value={nullishMaxWidth} readonly>
-   </div>
 
-   <div>
       <label for=maxHeight>maxHeight:</label>
-      <input type=range min=0 max=360 id=maxHeight bind:value={$maxHeight}>
+      <input type=range min=0 max={innerHeight} id=maxHeight bind:value={$maxHeight}>
       <input type=text bind:value={nullishMaxHeight} readonly>
    </div>
 
-   <div>
+   <div class=flex>
+      <label for=scale>scale:</label>
+      <input type=range min=0 max=5 step=0.01 id=scale bind:value={$scale}>
+      <input type=text class=small bind:value={nullishScale} readonly>
+
       <label for=zIndex>zIndex:</label>
       <input type=range min=0 max=500 id=zIndex bind:value={$zIndex}>
-      <input type=text bind:value={$zIndex} readonly>
-   </div>
-
-   <hr>
-
-   <div>
-      <label for=duration>Duration:</label>
-      <input type=range min=100 max=3000 id=duration bind:value={duration}>
-      <input type=text bind:value={duration} readonly>
-   </div>
-
-   <div>
-      <label for=easing>Easing:</label>
-      <select id=easing bind:value={easing}>
-         {#each Object.keys(easingFuncs) as prop}
-            <option value={easingFuncs[prop]}>
-               {prop}
-            </option>
-         {/each}
-      </select>
+      <input type=text class=small bind:value={$zIndex} readonly>
 
       <label for=transformOrigin>Transform Origin:</label>
       <select id=transformOrigin bind:value={$transformOrigin}>
@@ -151,51 +101,48 @@
          {/each}
       </select>
    </div>
+</section>
 
-   <hr>
-
-   <div>
-      <button on:click={() => position.animateTo({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, easing })}>Animate flip</button>
-      <button on:click={() => position.reset()}>Reset</button>
-   </div>
-
-   <div>
-      <button on:click={() => application.state.save({ name: 'save-1' })}>Save Position</button>
-      <button on:click={() => application.state.restore({ name: 'save-1', animateTo: true, easing, duration })}>Restore Position</button>
-   </div>
-
-   <hr>
-
-   <div style="justify-content: flex-start">
-      <input type=checkbox id=debug bind:checked={$storeDebug}>
-      Debug: Show transform bounding rectangle.
-   </div>
-</main>
-
-<style lang="scss">
-   main {
+<style lang=scss>
+   section {
       text-align: center;
       display: flex;
       flex-direction: column;
 
-      input { margin: 6px }
-      input[type=text] { max-width: 6em }
+      border: 0.1em solid rgba(0, 0, 0, 0.2);
+      border-radius: 1em;
+      background: rgba(0, 0, 0, 0.1);
 
-      select { margin: 6px; width: fit-content; }
+      padding: 0.25em;
 
-      button { margin: 3px; }
+      input { margin: 0.5em; }
+      input[type=text] { max-width: 3.5em; }
+
+      input[type=text].small { max-width: 2.5em; }
+
+      select { margin: 0.5em; width: fit-content; }
 
       div {
          display: flex;
          align-items: center;
          justify-content: center;
+
+         .flex {
+            height: fit-content;
+
+            *:not(:last-child) {
+               margin-right: 0.25em;
+            }
+
+            label:not(:first-child) {
+               margin-left: 0.5em;
+            }
+         }
       }
 
       label {
          text-align: right;
          width: 6em;
       }
-
-      hr { width: 96% }
    }
 </style>

@@ -1,8 +1,12 @@
 <script>
    import { getContext }         from 'svelte';
+
+   import { applyStyles }        from '@typhonjs-fvtt/runtime/svelte/action';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
-   import { applyStyles }   from '@typhonjs-fvtt/runtime/svelte/action';
+   import {
+      optionStores,
+      storeDraggable }           from './dialog/draggable/index.js';
 
    export let elementRoot;
 
@@ -26,6 +30,10 @@
 
    const transform = application.position.stores.transform;
 
+   let draggableOptionsStore;
+
+   $: draggableOptionsStore = optionStores[$storeDraggable];
+
    $:
    {
       const boundingRect = $transform.boundingRect;
@@ -39,7 +47,7 @@
 
 <svelte:options accessors={true}/>
 
-<ApplicationShell bind:elementRoot>
+<ApplicationShell bind:elementRoot draggable={$storeDraggable} draggableOptions={$draggableOptionsStore}>
    <main>
       <h1>Reactive `position`</h1>
 

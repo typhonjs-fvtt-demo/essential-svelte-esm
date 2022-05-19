@@ -1,11 +1,24 @@
-import * as easingFuncs    from 'svelte/easing';
 import { get, writable }   from 'svelte/store';
 
 import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
 
-import { resizeObserver }  from '@typhonjs-fvtt/runtime/svelte/action';
+import {
+   easingFunc,
+   GsapCompose }           from '@typhonjs-fvtt/runtime/svelte/gsap';
+
+// Imports the loading code / automatic GSAP plugin registration.
+import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/CustomEase';
+import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/MotionPathPlugin';
+import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/CustomWiggle';
+import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
+
+// Defines a custom ease w/ the CustomWiggle plugin. This is used below to set a variable amount of wiggle count
+// depending on the duration of the animation; more wiggles the lower the duration.
+const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${count}, type: ${type} })`;
 
 let idCntr = 0;
+
+let gsapTimeline;
 
 const validator = new Position.Validators.TransformBounds({ constrain: false });
 
@@ -25,12 +38,11 @@ function getPosition(width, height, auto)
 {
    const bounds = getRandomInt(90, 140);
 
-   const position = new Position(void 0, {
+   const position = new Position({
       top: getRandomInt(0, height),
       left: getRandomInt(0, width),
       width: auto ? 'auto' : bounds,
       height: auto ? 'auto' : bounds,
-      ortho: true,
       validator
    });
 
@@ -44,9 +56,10 @@ let data = [];
 
 const boxStore = writable(data);
 
+boxStore.stagger = writable(false);
 boxStore.auto = writable(false);
-boxStore.easing = writable(easingFuncs.linear);
-boxStore.duration = writable(1000);
+boxStore.ease = writable(easingFunc.linear);
+boxStore.duration = writable(1);
 boxStore.validator = writable(true);
 boxStore.debug = writable(false);
 boxStore.labels = writable(false);
@@ -69,30 +82,146 @@ boxStore.add = (count = 1) =>
    });
 };
 
-boxStore.randomLocation = () =>
+boxStore.animateToCancel = () =>
+{
+   Position.Animation.cancelAll();
+};
+
+boxStore.animateToLocation = () =>
 {
    const width = validator.width;
    const height = validator.height;
 
    const duration = get(boxStore.duration);
-   const easing = get(boxStore.easing);
+   const ease = get(boxStore.ease);
 
    for (const entry of data)
    {
-      entry.position.animateTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) }, { duration, easing });
+      entry.position.animateTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) }, { duration, ease });
    }
 };
 
-boxStore.randomScaleRot = () =>
+boxStore.animateToScaleRot = () =>
 {
    const duration = get(boxStore.duration);
-   const easing = get(boxStore.easing);
+   const ease = get(boxStore.ease);
 
    for (const entry of data)
    {
       const scale = getRandomInt(50, 200) / 100;
-      entry.position.animateTo({ scale, rotateZ: getRandomInt(0, 360) }, { duration, easing });
+      entry.position.animateTo({ scale, rotateZ: getRandomInt(0, 360) }, { duration, ease });
    }
+};
+
+boxStore.gsapTimelineCreate = () =>
+{
+   const width = validator.width;
+   const height = validator.height;
+
+   // width & height divided by 6; used for motion path.
+   const width6 = width / 6;
+   const height6 = height / 6;
+
+   const duration = get(boxStore.duration);
+   const doubleDuration = duration * 2;
+
+   // Stagger enabled state and cumulative time.
+   const stagger = get(boxStore.stagger);
+
+   // GSAP is loaded w/ the Svelte easing functions and are accessible by prepending `svelte-` and the function name.
+   const ease = get(boxStore.ease);
+
+   // Defines the Bézier curve to animate along which will vary from the starting position of each box. This curve
+   // is based on current width / height. This data is for the MotionPathPlugin.
+   const motionVars = {
+      motionPath: {
+         path: [
+            { left: width6 * 3, top: height6 * 3 },
+            { left: width6, top: height6 * 4 },
+            { left: width6 * 3, top: height6 },
+            { left: width6 * 4, top: height6 * 3 }
+         ],
+         alignOrigin: [0.5, 0.5],
+      },
+      duration: doubleDuration,
+      ease
+   };
+
+   // Kill & stop any existing timeline.
+   if (gsapTimeline !== void 0) { gsapTimeline.kill(); }
+
+   // Create new GSAP timeline; in paused state.
+   gsapTimeline = GsapCompose.timeline({ paused: true });
+
+   const allPositions = [];
+   for (const entry of data)
+   {
+      allPositions.push(entry.position);
+   }
+
+   // GsapCompose.to(data, {
+   //    left: getRandomInt(0, width),
+   //    top: getRandomInt(0, height),
+   //    duration,
+   //    ease
+   // });
+
+   // gsapTimeline.add(GsapCompose.to(data, {
+   //    left: getRandomInt(0, width),
+   //    top: getRandomInt(0, height),
+   //    duration,
+   //    ease
+   // }));
+
+   // gsapTimeline.add(GsapCompose.fromTo(data, {
+   //    left: getRandomInt(0, width),
+   //    top: getRandomInt(0, height),
+   // }, {
+   //    left: getRandomInt(0, width),
+   //    top: getRandomInt(0, height),
+   //    duration,
+   //    ease
+   // }));
+
+   // // Note: the `rotation` alias is used instead of rotateZ as this timeline includes use of CustomWiggle &
+   // // MotionPathPlugin that output data to `rotation`.
+   const createTimelineData = () => [
+      { type: 'to', vars: { left: getRandomInt(0, width), duration, ease }, position: '<' },
+      { type: 'to', vars: { rotation: getRandomInt(0, 360), duration, ease }, position: '<' },
+      { type: 'to', target: 'element', vars: { opacity: 0.4, duration, ease }, position: duration / 2 },
+      { type: 'to', vars: { top: getRandomInt(0, height), duration, ease } },
+      { type: 'to', vars: { rotation: '+=20', duration: doubleDuration, ease: customWiggle() }, position: '<+=50%' },
+      { type: 'to', vars: motionVars },
+      { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: `-=${duration}` },
+      { type: 'to', vars: { rotation: getRandomInt(540, 720), duration, ease }, position: '<' }
+   ];
+
+   const staggerFunc = (time = 0.1) => ({ index }) => index * time;
+
+   gsapTimeline.add(GsapCompose.timeline(data, createTimelineData, { position: stagger ? staggerFunc() : '<' }));
+
+   // gsapTimeline.add(GsapCompose.timeline(allPositions, createTimelineData, { position: stagger ? staggerFunc() : '<' }));
+   // gsapTimeline.add(GsapCompose.timeline([data[0], data[1]], createTimelineData));
+};
+
+boxStore.gsapTimelinePause = () =>
+{
+   if (gsapTimeline !== void 0) { gsapTimeline.pause(); }
+};
+
+boxStore.gsapTimelinePlay = () =>
+{
+   if (gsapTimeline !== void 0) { gsapTimeline.play(); }
+};
+
+boxStore.gsapTimelineRestart = () =>
+{
+   if (gsapTimeline !== void 0) { gsapTimeline.restart(); }
+};
+
+boxStore.gsapTimelineReverse = () =>
+{
+   if (gsapTimeline !== void 0) { gsapTimeline.reverse(); }
 };
 
 boxStore.remove = (id) =>

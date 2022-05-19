@@ -1,8 +1,9 @@
 <script>
-   import { applyPosition }         from '@typhonjs-fvtt/runtime/svelte/action';
-   import { Position }              from '@typhonjs-fvtt/runtime/svelte/application';
+   import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
+   import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
+   import { GsapCompose }    from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-   import { carouselStore }         from './carouselStore.js';
+   import { carouselStore }   from './carouselStore.js';
 
    // We can use Position to control the outer carousel rotational changes to keep the current selected index visible.
    // Using Position allows us to solve several issues from resetting the rotation / selected index when cell length
@@ -17,13 +18,12 @@
 
    const selectedIndex = carouselStore.selectedIndex;
    const storeDuration = carouselStore.duration;
-   const storeEasing = carouselStore.easing;
-
-   const storeTransform = position.stores.transform;
+   const storeEase = carouselStore.ease;
 
    let currentLength = $carouselStore.length;
 
-   let carouselTransform = 'none';
+   // Stores the GSAP tween / timeline to be able to kill them.
+   let gsapRotateY, gsapTranslateZ;
 
    // This reactive block triggers when the cell array length or selected index changes.
    $:
@@ -45,8 +45,12 @@
 
          const resetAngle = -carouselStore.theta * cappedIndex;
 
-         // TODO: in the future when animation is fixed we can potentially animate `translateZ`.
-         position.set({ translateZ: -carouselStore.radius, rotateY: resetAngle });
+         if (gsapTranslateZ) { gsapTranslateZ.kill(); }
+
+         gsapTranslateZ = GsapCompose.timeline(position, [
+            { type: 'set', vars: { rotateY: resetAngle } },
+            { type: 'to', vars: { translateZ: -carouselStore.radius, duration: 0.5, ease: 'power3.out' } }
+         ]);
 
          $selectedIndex = cappedIndex;
       }
@@ -54,7 +58,9 @@
       {
          const angle = -carouselStore.theta * $selectedIndex;
 
-         position.animateTo({ rotateY: angle }, { duration: $storeDuration, easing: $storeEasing });
+         if (gsapRotateY) { gsapRotateY.kill(); }
+
+         gsapRotateY = GsapCompose.to(position, { rotateY: angle, duration: $storeDuration, ease: $storeEase });
       }
    }
 </script>

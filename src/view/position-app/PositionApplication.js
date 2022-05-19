@@ -5,7 +5,7 @@ import {
    TJSDialog }             from '@typhonjs-fvtt/runtime/svelte/application';
 
 import PositionAppShell    from './PositionAppShell.svelte';
-import DialogContent       from './DialogContent.svelte';
+import DialogContent       from './dialog/DialogContent.svelte';
 
 export default class PositionApplication extends SvelteApplication
 {
@@ -65,6 +65,6 @@ export default class PositionApplication extends SvelteApplication
             class: DialogContent,
             props: { application: this }
          }
-      }, { headerButtonNoClose: true }).render(true, { focus: true });
+      }, { headerButtonNoClose: true, width: 500 }).render(true, { focus: true });
    }
 }

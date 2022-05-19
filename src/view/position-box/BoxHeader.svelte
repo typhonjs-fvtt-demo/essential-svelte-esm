@@ -1,14 +1,20 @@
 <script>
-   import * as easingFuncs from 'svelte/easing';
+   import {
+      easingFunc,
+      easingList }      from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-   import { boxStore }     from './boxStore.js';
+   import { boxStore }  from './boxStore.js';
 
-   const storeDuration = boxStore.duration;
-   const storeEasing = boxStore.easing;
-   const storeValidator = boxStore.validator;
+   const storeStagger = boxStore.stagger;
+
    const storeAuto = boxStore.auto;
    const storeDebug = boxStore.debug;
    const storeLabels = boxStore.labels;
+
+   const storeDuration = boxStore.duration;
+   const storeEase = boxStore.ease;
+
+   const storeValidator = boxStore.validator;
 </script>
 
 <div class="header flex">
@@ -20,8 +26,17 @@
          <button on:click={() => boxStore.removeAll()}>Remove All</button>
       </div>
       <div class=group>
-         <button on:click={() => boxStore.randomLocation()}>Random Location</button>
-         <button on:click={() => boxStore.randomScaleRot()}>Random Scale / Rotation</button>
+         <button on:click={() => boxStore.animateToLocation()}>AnimateTo Location</button>
+         <button on:click={() => boxStore.animateToScaleRot()}>Scale / Rotation</button>
+         <button on:click={() => boxStore.animateToCancel()}><i class="fas fa-stop"></i></button>
+      </div>
+      <div class=group>
+         <button on:click={() => boxStore.gsapTimelineCreate()}>New Timeline</button>
+         <button on:click={() => boxStore.gsapTimelinePlay()}><i class="fas fa-play"></i></button>
+         <button on:click={() => boxStore.gsapTimelineReverse()}><i class="fas fa-backward"></i></button>
+         <button on:click={() => boxStore.gsapTimelinePause()}><i class="fas fa-pause"></i></button>
+         <button on:click={() => boxStore.gsapTimelineRestart()}><i class="fas fa-arrow-left"></i></button>
+         <span style="transform: scale(0.75)"><label><input type=checkbox bind:checked={$storeStagger}>Stagger</label></span>
       </div>
    </div>
    <div class="container flex-vert">
@@ -31,21 +46,21 @@
       </div>
       <div class=flex>
          <span>Debug:</span>
-         <label><input type=checkbox bind:checked={$storeDebug}> Enable</label>
-         <label><input type=checkbox bind:checked={$storeLabels}> Labels</label>
+         <label><input type=checkbox bind:checked={$storeDebug}>Enable</label>
+         <label><input type=checkbox bind:checked={$storeLabels}>Labels</label>
       </div>
    </div>
    <div class="container flex-vert">
       <div class=flex>
-         <label class=duration for=duration>Duration:</label>
-         <input type=range min=0 max=3000 id=duration bind:value={$storeDuration}>
+         <label class=duration for=duration>Duration (seconds):</label>
+         <input type=range min=0 max=3 step=0.1 id=duration bind:value={$storeDuration}>
          <input type=text bind:value={$storeDuration} readonly>
       </div>
       <div class=flex>
          <label for=easing>Easing:</label>
-         <select id=easing bind:value={$storeEasing}>
-            {#each Object.keys(easingFuncs) as prop}
-               <option value={easingFuncs[prop]}>{prop}</option>
+         <select id=easing bind:value={$storeEase}>
+            {#each easingList as entry}
+               <option value={easingFunc[entry]}>{entry}</option>
             {/each}
          </select>
       </div>
@@ -62,8 +77,8 @@
 <style lang="scss">
    button {
       width: fit-content;
-      height: 20px;
-      line-height: 18px;
+      height: 22px;
+      line-height: 20px;
    }
 
    div.container {
@@ -84,12 +99,13 @@
    }
 
    div.group {
+      display: flex;
       padding-top: 0.25em;
    }
 
    input { color: white; margin: 3px 3px }
    input[type=range] { max-width: 3.75em }
-   input[type=text] { max-width: 3em }
+   input[type=text] { max-width: 2em }
 
    select {
       color: white;

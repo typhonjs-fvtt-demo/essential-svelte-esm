@@ -25,7 +25,8 @@ function getPosition()
       top: 10,
       left: 10,
       width: s_CELL_WIDTH,
-      height: s_CELL_HEIGHT
+      height: s_CELL_HEIGHT,
+      ortho: false
    });
 }
 
@@ -34,8 +35,8 @@ const data = [];
 const carouselStore = writable(data);
 
 carouselStore.selectedIndex = writable(1);
-carouselStore.duration = writable(500);
-carouselStore.easing = writable(easingFuncs.linear);
+carouselStore.duration = writable(0.5);
+carouselStore.ease = writable('svelte-linear');
 carouselStore.perspective = writable(1000);
 
 carouselStore.theta = 0;

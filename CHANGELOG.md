@@ -1,4 +1,14 @@
 # Changelog
+## Release 0.0.4
+- Updated @typhonjs-fvtt/runtime to ['0.0.12'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0012).
+- Stage #1 of the massive core animation engine updates.
+- Easy loading of GSAP. GsapCompose that bridges TRL Position system for reactive animations.
+- position-app / box / carousel updated w/ GSAP animation examples.
+
+## Release 0.0.3
+- Updated @typhonjs-fvtt/runtime to ['0.0.11'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0011).
+- Native animation upgrades.  
+
 ## Release 0.0.2
 - Updated @typhonjs-fvtt/runtime to ['0.0.9'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-008).
 - Added Position (Box) & Position (Carousel) demos.

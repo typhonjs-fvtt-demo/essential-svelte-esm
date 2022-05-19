@@ -1,8 +1,9 @@
 <script>
    import {
       applyPosition,
-      draggable,
-      resizeObserver }  from '@typhonjs-fvtt/runtime/svelte/action';
+      resizeObserver }        from '@typhonjs-fvtt/runtime/svelte/action';
+
+   import { draggableGsap }   from '@typhonjs-fvtt/runtime/svelte/gsap';
 
    export let box;
 
@@ -11,7 +12,7 @@
 </script>
 
 <div use:applyPosition={box.position}
-     use:draggable={{ position: box.position }}
+     use:draggableGsap={{ position: box.position, inertia: true }}
      use:resizeObserver={box.position}
      style:background={box.color}></div>
 

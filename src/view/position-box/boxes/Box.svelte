@@ -1,7 +1,6 @@
 <script>
-   import {
-      applyPosition,
-      draggable } from '@typhonjs-fvtt/runtime/svelte/action';
+   import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
+   import { draggableGsap }   from '@typhonjs-fvtt/runtime/svelte/gsap';
 
    export let box;
 
@@ -11,7 +10,7 @@
 </script>
 
 <div use:applyPosition={box.position}
-     use:draggable={{ position: box.position }}
+     use:draggableGsap={{ position: box.position, inertia: true }}
      style:background={box.color}>
 </div>
 

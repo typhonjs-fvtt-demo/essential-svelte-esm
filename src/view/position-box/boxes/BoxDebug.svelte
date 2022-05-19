@@ -1,10 +1,11 @@
 <script>
    import {
       applyPosition,
-      applyStyles,
-      draggable }       from '@typhonjs-fvtt/runtime/svelte/action';
+      applyStyles }           from '@typhonjs-fvtt/runtime/svelte/action';
 
-   import { boxStore }  from '../boxStore.js';
+   import { draggableGsap }   from '@typhonjs-fvtt/runtime/svelte/gsap';
+
+   import { boxStore }        from '../boxStore.js';
 
    export let box;
 
@@ -40,7 +41,7 @@
 
 <div class=box
      use:applyPosition={box.position}
-     use:draggable={{ position: box.position }}
+     use:draggableGsap={{ position: box.position, inertia: true }}
      style:background={box.color}>
    {#if $labels}{@html cornersText}{/if}
 </div>

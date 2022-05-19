@@ -6,7 +6,7 @@
    const selectedIndex = carouselStore.selectedIndex;
 
    const storeDuration = carouselStore.duration;
-   const storeEasing = carouselStore.easing;
+   const storeEase = carouselStore.ease;
    const storePerspective = carouselStore.perspective;
 
    let cellCount = $carouselStore.length;
@@ -32,14 +32,14 @@
    <div class="container flex-vert">
       <label for=duration>
          Duration:
-         <input type=range min=0 max=3000 id=duration bind:value={$storeDuration}>
+         <input type=range min=0 max=3 step=0.1 id=duration bind:value={$storeDuration}>
          <input type=text bind:value={$storeDuration} readonly>
       </label>
       <label for=easing>
          Easing:
-         <select id=easing bind:value={$storeEasing}>
+         <select id=easing bind:value={$storeEase}>
             {#each Object.keys(easingFuncs) as prop}
-               <option value={easingFuncs[prop]}>{prop}</option>
+               <option value={`svelte-${prop}`}>{prop}</option>
             {/each}
          </select>
       </label>
