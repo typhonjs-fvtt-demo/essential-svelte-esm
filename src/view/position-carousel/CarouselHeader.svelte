@@ -1,5 +1,7 @@
 <script>
-   import * as easingFuncs    from 'svelte/easing';
+   import {
+      easingFunc,
+      easingList }      from '@typhonjs-fvtt/runtime/svelte/gsap';
 
    import { carouselStore }   from './carouselStore.js';
 
@@ -38,8 +40,8 @@
       <label for=easing>
          Easing:
          <select id=easing bind:value={$storeEase}>
-            {#each Object.keys(easingFuncs) as prop}
-               <option value={`svelte-${prop}`}>{prop}</option>
+            {#each easingList as entry}
+               <option value={easingFunc[entry]}>{entry}</option>
             {/each}
          </select>
       </label>
