@@ -1,7 +1,6 @@
 <script>
    import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
    import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
-   import { GsapCompose }    from '@typhonjs-fvtt/runtime/svelte/gsap';
 
    import { easingFunc }      from '@typhonjs-fvtt/runtime/svelte/gsap';
 
@@ -23,9 +22,6 @@
    const storeEase = carouselStore.ease;
 
    let currentLength = $carouselStore.length;
-
-   // Stores the GSAP tween / timeline to be able to kill them.
-   let gsapRotateY, gsapTranslateZ;
 
    let animateRotateY, animateTranslateZ;
 
@@ -49,13 +45,6 @@
 
          const resetAngle = -carouselStore.theta * cappedIndex;
 
-         // if (gsapTranslateZ) { gsapTranslateZ.kill(); }
-         //
-         // gsapTranslateZ = GsapCompose.timeline(position, [
-         //    { type: 'set', vars: { rotateY: resetAngle } },
-         //    { type: 'to', vars: { translateZ: -carouselStore.radius, duration: 0.5, ease: 'power3.out' } }
-         // ]);
-
          if (animateTranslateZ) { animateTranslateZ.cancel(); }
 
          position.set({ rotateY: resetAngle });
@@ -68,10 +57,6 @@
       else // Just animate to new selected index.
       {
          const angle = -carouselStore.theta * $selectedIndex;
-
-         // if (gsapRotateY) { gsapRotateY.kill(); }
-
-         // gsapRotateY = GsapCompose.to(position, { rotateY: angle, duration: $storeDuration, ease: $storeEase });
 
          if (animateRotateY) { animateRotateY.cancel(); }
 
