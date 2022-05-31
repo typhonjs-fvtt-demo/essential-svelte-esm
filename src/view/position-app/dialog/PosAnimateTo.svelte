@@ -9,7 +9,27 @@
 
    let ease = easingFunc.linear;
 
+   let flipping, restoring;
+
    let duration = 1;
+
+   function animateY()
+   {
+      if (flipping) { return; }
+
+      flipping = true;
+      position.animateTo({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, ease }).finished.then(
+       () => flipping = false);
+   }
+
+   function restore()
+   {
+      if (restoring) { return; }
+
+      restoring = true;
+      application.state.restore({ name: 'save-1', animateTo: true, async: true, ease, duration }).then(
+       () => restoring = false);
+   }
 </script>
 
 <section>
@@ -29,9 +49,9 @@
    </div>
 
    <div>
-      <button on:click={() => position.animateTo({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, ease })}>Flip</button>
+      <button on:click={animateY}>Flip</button>
       <button on:click={() => application.state.save({ name: 'save-1' })}>Save</button>
-      <button on:click={() => application.state.restore({ name: 'save-1', animateTo: true, ease, duration })}>Restore</button>
+      <button on:click={restore}>Restore</button>
       <button on:click={() => position.reset()}>Reset</button>
    </div>
 </section>
