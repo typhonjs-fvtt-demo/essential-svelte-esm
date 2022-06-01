@@ -104,8 +104,6 @@ boxStore.animateToLocation = () =>
    if (animateTo) { animateTo.cancel(); }
 
    animateTo = Position.Animate.to(data, createPositionData, { duration, ease });
-
-   animateTo.finished.then(() => console.log(`!! Animation Location Finished`));
 };
 
 boxStore.animateToScaleRot = () =>
