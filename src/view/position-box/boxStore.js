@@ -18,6 +18,8 @@ const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${c
 
 let idCntr = 0;
 
+let animateTo, animateScaleRot;
+
 let gsapTimeline;
 
 const validator = new Position.Validators.TransformBounds({ constrain: false });
@@ -52,6 +54,7 @@ function getPosition(width, height, auto)
    return position;
 }
 
+/** @type {{id: number, position: Position, color: string}[]} */
 let data = [];
 
 const boxStore = writable(data);
@@ -84,7 +87,8 @@ boxStore.add = (count = 1) =>
 
 boxStore.animateToCancel = () =>
 {
-   Position.Animation.cancelAll();
+   Position.Animate.cancelAll();
+   animateTo = animateScaleRot = void 0;
 };
 
 boxStore.animateToLocation = () =>
@@ -95,10 +99,13 @@ boxStore.animateToLocation = () =>
    const duration = get(boxStore.duration);
    const ease = get(boxStore.ease);
 
-   for (const entry of data)
-   {
-      entry.position.animateTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) }, { duration, ease });
-   }
+   const createPositionData = () => ({ top: getRandomInt(0, height), left: getRandomInt(0, width) });
+
+   if (animateTo) { animateTo.cancel(); }
+
+   animateTo = Position.Animate.to(data, createPositionData, { duration, ease });
+
+   animateTo.finished.then(() => console.log(`!! Animation Location Finished`));
 };
 
 boxStore.animateToScaleRot = () =>
@@ -106,11 +113,11 @@ boxStore.animateToScaleRot = () =>
    const duration = get(boxStore.duration);
    const ease = get(boxStore.ease);
 
-   for (const entry of data)
-   {
-      const scale = getRandomInt(50, 200) / 100;
-      entry.position.animateTo({ scale, rotateZ: getRandomInt(0, 360) }, { duration, ease });
-   }
+   const createPositionData = () => ({ scale: getRandomInt(50, 200) / 100, rotateZ: getRandomInt(0, 360) });
+
+   if (animateScaleRot) { animateScaleRot.cancel(); }
+
+   animateScaleRot = Position.Animate.to(data, createPositionData, { duration, ease });
 };
 
 boxStore.gsapTimelineCreate = () =>
@@ -153,36 +160,6 @@ boxStore.gsapTimelineCreate = () =>
    // Create new GSAP timeline; in paused state.
    gsapTimeline = GsapCompose.timeline({ paused: true });
 
-   const allPositions = [];
-   for (const entry of data)
-   {
-      allPositions.push(entry.position);
-   }
-
-   // GsapCompose.to(data, {
-   //    left: getRandomInt(0, width),
-   //    top: getRandomInt(0, height),
-   //    duration,
-   //    ease
-   // });
-
-   // gsapTimeline.add(GsapCompose.to(data, {
-   //    left: getRandomInt(0, width),
-   //    top: getRandomInt(0, height),
-   //    duration,
-   //    ease
-   // }));
-
-   // gsapTimeline.add(GsapCompose.fromTo(data, {
-   //    left: getRandomInt(0, width),
-   //    top: getRandomInt(0, height),
-   // }, {
-   //    left: getRandomInt(0, width),
-   //    top: getRandomInt(0, height),
-   //    duration,
-   //    ease
-   // }));
-
    // // Note: the `rotation` alias is used instead of rotateZ as this timeline includes use of CustomWiggle &
    // // MotionPathPlugin that output data to `rotation`.
    const createTimelineData = () => [
@@ -199,9 +176,6 @@ boxStore.gsapTimelineCreate = () =>
    const staggerFunc = (time = 0.1) => ({ index }) => index * time;
 
    gsapTimeline.add(GsapCompose.timeline(data, createTimelineData, { position: stagger ? staggerFunc() : '<' }));
-
-   // gsapTimeline.add(GsapCompose.timeline(allPositions, createTimelineData, { position: stagger ? staggerFunc() : '<' }));
-   // gsapTimeline.add(GsapCompose.timeline([data[0], data[1]], createTimelineData));
 };
 
 boxStore.gsapTimelinePause = () =>
