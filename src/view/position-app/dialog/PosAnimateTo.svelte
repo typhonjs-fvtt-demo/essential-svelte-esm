@@ -18,7 +18,7 @@
       if (flipping) { return; }
 
       flipping = true;
-      position.animateTo({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, ease }).finished.then(
+      position.animate.to({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, ease }).finished.then(
        () => flipping = false);
    }
 
