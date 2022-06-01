@@ -52,7 +52,7 @@
       <button on:click={animateY}>Flip</button>
       <button on:click={() => application.state.save({ name: 'save-1' })}>Save</button>
       <button on:click={restore}>Restore</button>
-      <button on:click={() => position.reset()}>Reset</button>
+      <button on:click={() => position.state.reset()}>Reset</button>
    </div>
 </section>
 
