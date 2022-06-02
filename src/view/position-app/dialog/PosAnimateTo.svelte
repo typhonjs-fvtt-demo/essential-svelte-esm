@@ -9,17 +9,19 @@
 
    let ease = easingFunc.linear;
 
-   let flipping, restoring;
+   /** {TJSBasicAnimation} - pending TS declaration */
+   let flipping;
+
+   /** @type {boolean} */
+   let restoring;
 
    let duration = 1;
 
    function animateY()
    {
-      if (flipping) { return; }
+      if (flipping?.isActive) { return; }
 
-      flipping = true;
-      position.animate.to({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, ease }).finished.then(
-       () => flipping = false);
+      flipping = position.animate.to({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, ease });
    }
 
    function restore()
