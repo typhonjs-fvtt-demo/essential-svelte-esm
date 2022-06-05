@@ -49,7 +49,7 @@
 
          position.set({ rotateY: resetAngle });
 
-         animateTranslateZ = position.animateTo({ translateZ: -carouselStore.radius },
+         animateTranslateZ = position.animate.to({ translateZ: -carouselStore.radius },
           { duration: 0.5, ease: easingFunc['power3.out'] });
 
          $selectedIndex = cappedIndex;
@@ -60,7 +60,7 @@
 
          if (animateRotateY) { animateRotateY.cancel(); }
 
-         animateRotateY = position.animateTo({ rotateY: angle }, { duration: $storeDuration, ease: $storeEase });
+         animateRotateY = position.animate.to({ rotateY: angle }, { duration: $storeDuration, ease: $storeEase });
       }
    }
 </script>
