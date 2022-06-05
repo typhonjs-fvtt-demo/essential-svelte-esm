@@ -12,8 +12,8 @@ export const optionComponents = {
 };
 
 export const optionStores = {
-   [draggable]: draggable.options(),
-   [draggableGsap]: draggableGsap.options(),
+   [draggable]: draggable.options({ ease: true }),
+   [draggableGsap]: draggableGsap.options({ ease: true }),
 };
 
 export const optionValues = {
