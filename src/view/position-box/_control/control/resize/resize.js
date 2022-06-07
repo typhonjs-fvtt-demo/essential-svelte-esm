@@ -1,5 +1,3 @@
-import { resizeCallback } from './resizeCallback.js';
-
 /**
  * Provides an action to enable pointer dragging that tracks relative changes. Sends data to
  * {@link ControlsStore.dragging}.
@@ -8,15 +6,15 @@ import { resizeCallback } from './resizeCallback.js';
  *
  * @param {object}            params - Required parameters.
  *
- * @param {*}                 params.id - An ID for the hit box.
+ * @param {number}            params.id - An ID for the hit box.
  *
- * @param {ControlStore}      params.control - The associated control.
+ * @param {Function}          params.resizeCallback - Callback function on resize.
  *
  * @param {boolean}           [params.active=true] - A boolean value; attached to a readable store.
  *
  * @returns {{update: Function, destroy: Function}} The action lifecycle methods.
  */
-export function resize(node, { id, control, active = true })
+export function resize(node, { id, resizeCallback, active = true })
 {
    /**
     * Stores the initial X / Y on drag down.
@@ -98,7 +96,7 @@ export function resize(node, { id, control, active = true })
       lastDragPoint.x = event.clientX;
       lastDragPoint.y = event.clientY;
 
-      resizeCallback(id, dX, dY, control, event.shiftKey);
+      resizeCallback(id, dX, dY, event);
    }
 
    /**

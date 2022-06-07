@@ -1,25 +1,6 @@
-import { controls } from '../../layer/ControlsStore.js';
-
 import { hitboxCallback } from './constants.js';
 
-export function resizeCallback(id, dX, dY, control, shiftKey)
-{
-   console.log(`! resizeCallback - 0 - id: ${id}; dX: ${dX}; dY: ${dY}`);
-
-   if (shiftKey)
-   {
-      for (const entry of controls.selected.get())
-      {
-         entry.position.set(applyResizeData(id, dX, dY, entry));
-      }
-   }
-   else
-   {
-      control.position.set(applyResizeData(id, dX, dY, control));
-   }
-}
-
-function applyResizeData(id, dX, dY, control)
+export function applyResizeData(id, dX, dY, control)
 {
    const data = hitboxCallback[id];
 

@@ -5,7 +5,6 @@
 
    import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action'
 
-   import { controls }        from '../layer/ControlsStore.js';
    import { draggable }       from './draggable.js';
 
    import ResizeControl       from './resize/ResizeControl.svelte';
@@ -14,9 +13,22 @@
 
    setContext('pcControl', control)
 
-   const pclBoundingRect = getContext('pclBoundingRect');
+   const controls = getContext('pclControls');
 
    const storeSelected = control.stores.selected;
+
+   const dragUpdate = { left: '', top: '' };
+
+   function dragging(dX, dY)
+   {
+      for (const control of controls.selected.values())
+      {
+         dragUpdate.left = `${dX >= 0 ? '+' : '' }${dX}`;
+         dragUpdate.top = `${dY >= 0 ? '+' : '' }${dY}`;
+
+         control.position.set(dragUpdate);
+      }
+   }
 
    function onClick(event)
    {
@@ -54,7 +66,7 @@
 </script>
 
 <div use:applyPosition={control.position}
-     use:draggable={{ active: $storeSelected }}
+     use:draggable={{ dragging, active: $storeSelected }}
      on:click={onClick}
      on:pointerdown={onPointerDown}
 >
