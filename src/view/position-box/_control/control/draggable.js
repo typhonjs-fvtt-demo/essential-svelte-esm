@@ -47,7 +47,8 @@ export function draggable(node, { active = true })
    {
       // Drag handlers
       node.addEventListener(...handlers.dragDown);
-      // node.classList.add('draggable');
+
+      node.style.cursor = 'grab';
    }
 
    /**
@@ -59,7 +60,8 @@ export function draggable(node, { active = true })
       node.removeEventListener(...handlers.dragDown);
       node.removeEventListener(...handlers.dragMove);
       node.removeEventListener(...handlers.dragUp);
-      // node.classList.remove('draggable');
+
+      node.style.cursor = null;
    }
 
    if (active)
@@ -87,6 +89,8 @@ export function draggable(node, { active = true })
       node.addEventListener(...handlers.dragUp);
 
       node.setPointerCapture(event.pointerId);
+
+      node.style.cursor = 'grabbing';
    }
 
    /**
@@ -128,6 +132,8 @@ export function draggable(node, { active = true })
 
       node.removeEventListener(...handlers.dragMove);
       node.removeEventListener(...handlers.dragUp);
+
+      node.style.cursor = 'grab';
    }
 
    return {
