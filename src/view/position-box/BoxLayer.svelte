@@ -12,6 +12,8 @@
    import BoxDebug                  from './boxes/BoxDebug.svelte';
    import BoxHeader                 from './BoxHeader.svelte';
 
+   import PositionControlLayer      from './_control/layer/PositionControlLayer.svelte';
+
    export let elementRoot;
 
    const application = getContext('external').application;
@@ -46,9 +48,11 @@
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
    <BoxHeader />
    <main use:resizeObserver={boxStore}>
+      <PositionControlLayer position={application.position} components={$boxStore}>
       {#each $boxStore as box (box.id)}
          <svelte:component this={component} {box} />
       {/each}
+      </PositionControlLayer>
    </main>
 </TJSApplicationShell>
 

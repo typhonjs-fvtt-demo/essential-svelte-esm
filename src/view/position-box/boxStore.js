@@ -18,7 +18,7 @@ const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${c
 
 let idCntr = 0;
 
-let animateTo, animateScaleRot;
+let animateScaleRot, animateTo;
 
 let gsapTimeline;
 
@@ -99,11 +99,27 @@ boxStore.animateToLocation = () =>
    const duration = get(boxStore.duration);
    const ease = get(boxStore.ease);
 
+   // Stagger enabled state and cumulative time.
+   const stagger = get(boxStore.stagger);
+
    const createPositionData = () => ({ top: getRandomInt(0, height), left: getRandomInt(0, width) });
+   const createOptionsData = ({ index }) => ({ delay: index * 0.1, duration, ease });
 
    if (animateTo) { animateTo.cancel(); }
 
-   animateTo = Position.Animate.to(data, createPositionData, { duration, ease });
+   animateTo = Position.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+
+   // animateTo = Position.Animate.from(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+
+   // animateTo = Position.Animate.fromTo(data, createPositionData, createPositionData,
+   //  stagger ? createOptionsData : { duration, ease });
+
+   // animateTo.finished.then(() => console.log(`!! Animation Location Finished`));
+
+   // for (const entry of data)
+   // {
+   //    entry.position.animate.fromTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) }, { top: getRandomInt(0, height), left: getRandomInt(0, width) }, { duration, ease });
+   // }
 };
 
 boxStore.animateToScaleRot = () =>
@@ -111,11 +127,17 @@ boxStore.animateToScaleRot = () =>
    const duration = get(boxStore.duration);
    const ease = get(boxStore.ease);
 
+   // Stagger enabled state and cumulative time.
+   const stagger = get(boxStore.stagger);
+
    const createPositionData = () => ({ scale: getRandomInt(50, 200) / 100, rotateZ: getRandomInt(0, 360) });
+   const createOptionsData = ({ index }) => ({ delay: index * 0.1, duration, ease });
 
    if (animateScaleRot) { animateScaleRot.cancel(); }
 
-   animateScaleRot = Position.Animate.to(data, createPositionData, { duration, ease });
+   animateScaleRot = Position.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+
+   animateScaleRot.finished.then(() => console.log(`!! Animation Scale / Rotate Finished`));
 };
 
 boxStore.gsapTimelineCreate = () =>
