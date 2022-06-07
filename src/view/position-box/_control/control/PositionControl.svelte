@@ -56,8 +56,8 @@
      on:pointerdown={onPointerDown}
      on:mousemove={onMouseMove}
 >
-   <ResizeControl />
    {#if $storeSelected}
+      <ResizeControl />
       <div class=border />
    {/if}
 </div>

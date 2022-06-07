@@ -16,6 +16,5 @@
 <style>
    div {
       position: absolute;
-      background: blue;
    }
 </style>
