@@ -1,5 +1,7 @@
 <script>
-   import { getContext }      from 'svelte'
+   import {
+      getContext,
+      setContext }            from 'svelte'
 
    import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action'
 
@@ -9,6 +11,8 @@
    import ResizeControl       from './resize/ResizeControl.svelte';
 
    export let control;
+
+   setContext('pcControl', control)
 
    const pclBoundingRect = getContext('pclBoundingRect');
 
@@ -38,14 +42,6 @@
       }
    }
 
-   function onMouseMove(event)
-   {
-      const x = event.clientX - pclBoundingRect.left - control.position.left;
-      const y = event.clientY - pclBoundingRect.top - control.position.top;
-
-      // console.log(`! mouse - x: ${x} y: ${y}`);
-   }
-
    function onPointerDown(event)
    {
       // Prevent pointer down events when not selected. Prevents pointer / mouse input on the control layer.
@@ -61,7 +57,6 @@
      use:draggable={{ active: $storeSelected }}
      on:click={onClick}
      on:pointerdown={onPointerDown}
-     on:mousemove={onMouseMove}
 >
    {#if $storeSelected}
       <ResizeControl />

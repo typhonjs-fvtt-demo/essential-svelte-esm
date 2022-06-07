@@ -122,6 +122,11 @@ class SelectedAPI
       this.#selected.clear();
    }
 
+   get()
+   {
+      return this.#selected;
+   }
+
    remove(control)
    {
       if (this.#selected.delete(control))

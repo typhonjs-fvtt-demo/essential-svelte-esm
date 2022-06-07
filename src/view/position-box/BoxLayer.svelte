@@ -48,7 +48,7 @@
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
    <BoxHeader />
    <main use:resizeObserver={boxStore}>
-      <PositionControlLayer position={application.position} components={$boxStore}>
+      <PositionControlLayer components={$boxStore}>
       {#each $boxStore as box (box.id)}
          <svelte:component this={component} {box} />
       {/each}
