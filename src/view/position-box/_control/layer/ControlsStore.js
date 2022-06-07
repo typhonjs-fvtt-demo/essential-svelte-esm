@@ -1,7 +1,25 @@
-import { ControlStore } from "../control/ControlStore.js";
+import { writable }        from 'svelte/store';
+
+import { propertyStore }   from '@typhonjs-fvtt/runtime/svelte/store';
+
+import { ControlStore }    from '../control/ControlStore.js';
 
 export class ControlsStore
 {
+   #controls = [];
+
+   #controlMap = new Map();
+
+   #data = writable({
+      enabled: false
+   });
+
+   #selectedMap = new Map();
+
+   #selectedAPI = new SelectedAPI(this.#selectedMap);
+
+   #stores;
+
    /**
     * Stores the subscribers.
     *
@@ -9,17 +27,28 @@ export class ControlsStore
     */
    #subscriptions = [];
 
-   #controls = [];
-
-   #controlMap = new Map();
-
-   #selectedMap = new Map();
-
-   #selectedAPI = new SelectedAPI(this.#selectedMap);
-
    constructor()
    {
+      this.#stores = {
+         enabled: propertyStore(this.#data, 'enabled')
+      };
+
+      Object.freeze(this.#stores);
    }
+
+   get enabled() { return this.#data.enabled; }
+
+   /**
+    * @returns {SelectedAPI} Selected API
+    */
+   get selected() { return this.#selectedAPI; }
+
+   /**
+    * @returns {*} Stores.
+    */
+   get stores() { return this.#stores; }
+
+   set enabled(enabled) { this.#stores.enabled.set(enabled); }
 
    /**
     * @returns {IterableIterator<any>} Keys for all controls.
@@ -28,11 +57,6 @@ export class ControlsStore
    {
       return this.#controlMap.keys();
    }
-
-   /**
-    * @returns {SelectedAPI} Selected API
-    */
-   get selected() { return this.#selectedAPI; }
 
    updateComponents(components)
    {

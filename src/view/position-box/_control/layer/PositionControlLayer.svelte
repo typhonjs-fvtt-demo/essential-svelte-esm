@@ -11,10 +11,27 @@
    setContext('pclControls', controls);
 
    $: controls.updateComponents(components);
+
+   function onKeyDown(event)
+   {
+      if (event.key === 'Control') { controls.enabled = true; }
+   }
+
+   function onKeyUp(event)
+   {
+      if (event.key === 'Control') { controls.enabled = false; }
+   }
+
+   function onMouseDown(event)
+   {
+      if (!event.ctrlKey) { controls.selected.clear(); }
+   }
 </script>
 
+<svelte:body on:keydown={onKeyDown} on:keyup={onKeyUp} />
+
 {#if active}
-<div on:mousedown={() => controls.selected.clear()}>
+<div on:mousedown|capture={onMouseDown}>
    {#each $controls as control (control.id)}
       <PositionControl {control} />
    {/each}

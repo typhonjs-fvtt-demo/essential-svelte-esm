@@ -40,7 +40,7 @@ export function draggable(node, { dragging, active = true })
       // Drag handlers
       node.addEventListener(...handlers.dragDown);
 
-      node.style.cursor = 'grab';
+      // node.style.cursor = 'grab';
    }
 
    /**
@@ -115,7 +115,8 @@ export function draggable(node, { dragging, active = true })
       node.removeEventListener(...handlers.dragMove);
       node.removeEventListener(...handlers.dragUp);
 
-      node.style.cursor = 'grab';
+      node.style.cursor = null;
+      // node.style.cursor = 'grab';
    }
 
    return {

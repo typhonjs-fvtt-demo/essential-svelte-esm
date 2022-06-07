@@ -31,10 +31,10 @@
 
 <div use:applyStyles={data.styles}
      use:resize={{ id: data.id, resizeCallback }}
-     on:pointerdown|preventDefault|stopPropagation={capture}
+     on:pointerdown|preventDefault|stopPropagation={() => control.resizing = true}
      on:pointermove|preventDefault|stopPropagation={capture}
      on:pointerover|preventDefault|stopPropagation={capture}
-     on:pointerup|preventDefault|stopPropagation={capture}
+     on:pointerup|preventDefault|stopPropagation={() => control.resizing = false}
 />
 
 <style>

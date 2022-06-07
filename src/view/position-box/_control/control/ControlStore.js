@@ -7,6 +7,7 @@ export class ControlStore
    #component;
 
    #data = writable({
+      resizing: false,
       selected: false
    });
 
@@ -23,10 +24,35 @@ export class ControlStore
       const position = component.position.duplicate();
       position.subscribe((data) => component.position.set({ ...data, immediateElementUpdate: true }));
 
+      // To accomplish bidirectional updates Must ignore updates from the control position when set from the
+      // target component position.
+      let ignoreRoundRobin = false;
+
       this.#position = component.position.duplicate();
-      this.#position.subscribe((data) => component.position.set({ ...data, immediateElementUpdate: true }));
+
+      /**
+       * Update component position, but only when ignoring round-robin callback.
+       */
+      this.#position.subscribe((data) =>
+      {
+         if (!ignoreRoundRobin)
+         {
+            component.position.set({ ...data, immediateElementUpdate: true });
+         }
+      });
+
+      /**
+       * Sets the local control position store, but temporarily sets ignoreRoundRobin callback;
+       */
+      component.position.subscribe((data) =>
+      {
+         ignoreRoundRobin = true;
+         this.#position.set({ ...data, immediateElementUpdate: true });
+         ignoreRoundRobin = false;
+      });
 
       this.#stores = {
+         resizing: propertyStore(this.#data, 'resizing'),
          selected: propertyStore(this.#data, 'selected')
       };
 

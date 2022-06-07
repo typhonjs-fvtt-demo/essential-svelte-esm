@@ -15,7 +15,9 @@
 
    const controls = getContext('pclControls');
 
-   const storeSelected = control.stores.selected;
+   const { enabled } = controls.stores;
+
+   const { resizing, selected } = control.stores;
 
    const dragUpdate = { left: '', top: '' };
 
@@ -32,54 +34,52 @@
 
    function onClick(event)
    {
-      if ($storeSelected)
-      {
-         // Remove selection if <ctrl> key is pressed.
-         if (event.ctrlKey)
-         {
-            controls.selected.remove(control);
-         }
-      }
-      else
-      {
-         // Add control to selection if <ctrl> key is pressed otherwise set control as only selected item.
-         if (event.ctrlKey)
-         {
-            controls.selected.add(control);
-         }
-         else
-         {
-            controls.selected.set(control);
-         }
-      }
-   }
+      // Only handle click events when <ctrl> key pressed.
+      if (!event.ctrlKey) { return; }
 
-   function onPointerDown(event)
-   {
-      // Prevent pointer down events when not selected. Prevents pointer / mouse input on the control layer.
-      if (!$storeSelected)
+      // Remove selection if <ctrl> key is pressed.
+      if ($selected)
       {
-         event.preventDefault();
-         event.stopPropagation();
+         controls.selected.remove(control);
+      }
+      else // Add control to selection if <ctrl> key is pressed otherwise set control as only selected item.
+      {
+         controls.selected.add(control);
       }
    }
 </script>
 
 <div use:applyPosition={control.position}
-     use:draggable={{ dragging, active: $storeSelected }}
+     use:draggable={{ dragging, active: $selected && !$enabled }}
      on:click={onClick}
-     on:pointerdown={onPointerDown}
+     class:enabled={$enabled || $selected}
+     class:cursor-default={$enabled && !$resizing}
+     class:cursor-grab={$selected && !$enabled}
 >
-   {#if $storeSelected}
-      <ResizeControl />
-      <div class=border />
-   {/if}
+    {#if $selected}
+       <ResizeControl />
+       <div class=border />
+    {/if}
 </div>
 
 <style>
    div {
       position: absolute;
       z-index: 999999;
+      pointer-events: none;
+   }
+
+   .cursor-default {
+      cursor: default;
+   }
+
+   .cursor-grab {
+      cursor: grab;
+   }
+
+   .enabled {
+      /*cursor: grab;*/
+      pointer-events: auto;
    }
 
    div.border {
