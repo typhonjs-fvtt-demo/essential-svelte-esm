@@ -1,6 +1,6 @@
 import { ControlStore } from "../control/ControlStore.js";
 
-class ControlsStore
+export class ControlsStore
 {
    /**
     * Stores the subscribers.
@@ -13,15 +13,20 @@ class ControlsStore
 
    #controlMap = new Map();
 
-   #selected = new Set();
+   #selectedMap = new Map();
 
-   #dragUpdate = { left: '', top: '' };
-
-   #selectedAPI = new SelectedAPI(this.#selected);
+   #selectedAPI = new SelectedAPI(this.#selectedMap);
 
    constructor()
    {
+   }
 
+   /**
+    * @returns {IterableIterator<any>} Keys for all controls.
+    */
+   keys()
+   {
+      return this.#controlMap.keys();
    }
 
    /**
@@ -29,22 +34,10 @@ class ControlsStore
     */
    get selected() { return this.#selectedAPI; }
 
-   dragging(dX, dY)
-   {
-      const dragUpdate = this.#dragUpdate;
-
-      for (const control of this.#selected)
-      {
-         dragUpdate.left = `${dX >= 0 ? '+' : '' }${dX}`;
-         dragUpdate.top = `${dY >= 0 ? '+' : '' }${dY}`;
-
-         control.position.set(dragUpdate);
-      }
-   }
-
    updateComponents(components)
    {
       const controlMap = this.#controlMap;
+      const selectedMap = this.#selectedMap;
 
       const removeIDs = new Set(controlMap.keys());
 
@@ -59,12 +52,26 @@ class ControlsStore
          controlMap.set(component.id, new ControlStore(component));
       }
 
-      for (const id of removeIDs) { controlMap.delete(id); }
+      for (const id of removeIDs)
+      {
+         selectedMap.delete(id);
+         controlMap.delete(id);
+      }
 
-      this.#controls = [...this.#controlMap.values()];
+      this.#controls = [...controlMap.values()];
 
       this.#updateSubscribers();
    }
+
+   /**
+    * @returns {IterableIterator<any>} All controls.
+    */
+   values()
+   {
+      return this.#controlMap.values();
+   }
+
+// -------------------------------------------------------------------------------------------------------------------
 
    #updateSubscribers()
    {
@@ -101,55 +108,68 @@ class ControlsStore
 class SelectedAPI
 {
    /**
-    * @type {Set<object>}
+    * @type {Map<*, object>}
     */
-   #selected;
+   #selectedMap;
 
-   constructor(selected)
+   constructor(selectedMap)
    {
-      this.#selected = selected;
+      this.#selectedMap = selectedMap;
    }
 
    add(control)
    {
-      this.#selected.add(control);
+      this.#selectedMap.set(control.id, control);
       control.selected = true;
    }
 
    clear()
    {
-      for (const control of this.#selected) { control.selected = false; }
-      this.#selected.clear();
+      for (const control of this.#selectedMap.values()) { control.selected = false; }
+      this.#selectedMap.clear();
    }
 
-   get()
+   /**
+    * @returns {IterableIterator<[*, Object]>} Selected control entries iterator.
+    */
+   entries()
    {
-      return this.#selected;
+      return this.#selectedMap.entries();
+   }
+
+   /**
+    * @returns {IterableIterator<Object>} Selected controls iterator.
+    */
+   values()
+   {
+      return this.#selectedMap.values();
+   }
+
+   /**
+    * @returns {IterableIterator<*>} Selected control keys iterator.
+    */
+   keys()
+   {
+      return this.#selectedMap.keys();
    }
 
    remove(control)
    {
-      if (this.#selected.delete(control))
-      {
-         control.selected = false;
-         this.#selected.delete(control);
-      }
+      if (this.#selectedMap.delete(control.id)) { control.selected = false; }
    }
 
    set(control)
    {
-      control.selected = true;
-
       // Remove this control from the selected set.
-      this.#selected.delete(control);
+      this.#selectedMap.delete(control.id);
 
       // Set all other selected controls to false.
-      for (const entry of this.#selected) { entry.selected = false; }
+      for (const entry of this.#selectedMap.values()) { entry.selected = false; }
 
-      this.#selected.clear();
+      this.#selectedMap.clear();
 
-      this.#selected.add(control);
+      this.#selectedMap.set(control.id, control);
+
+      control.selected = true;
    }
 }
-
-export const controls = new ControlsStore();

@@ -1,19 +1,26 @@
 <script>
-   import PositionControl  from '../control/PositionControl.svelte';
+   import { setContext }      from 'svelte';
 
-   import { controls }     from './ControlsStore.js';
+   import PositionControl     from '../control/PositionControl.svelte';
+   import { ControlsStore }   from './ControlsStore.js';
 
    export let components;
+   export let active = true;
+
+   const controls = new ControlsStore();
+   setContext('pclControls', controls);
 
    $: controls.updateComponents(components);
 </script>
 
+{#if active}
 <div on:mousedown={() => controls.selected.clear()}>
    {#each $controls as control (control.id)}
       <PositionControl {control} />
    {/each}
    <slot />
 </div>
+{/if}
 
 <style>
    div {
