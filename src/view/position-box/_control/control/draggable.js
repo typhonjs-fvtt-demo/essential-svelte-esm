@@ -22,14 +22,6 @@ export function draggable(node, { active = true })
    const lastDragPoint = { x: 0, y: 0 };
 
    /**
-    * Stores the current dragging state and gates the move pointer as the dragging store is not
-    * set until the first pointer move.
-    *
-    * @type {boolean}
-    */
-   let dragging = false;
-
-   /**
     * Remember event handlers associated with this action so they may be later unregistered.
     *
     * @type {object}
@@ -78,8 +70,6 @@ export function draggable(node, { active = true })
    {
       event.preventDefault();
 
-      dragging = false;
-
       // Record initial position.
       lastDragPoint.x = event.clientX;
       lastDragPoint.y = event.clientY;
@@ -102,12 +92,6 @@ export function draggable(node, { active = true })
    {
       event.preventDefault();
 
-      // Only set store dragging on first move event.
-      if (!dragging)
-      {
-         dragging = true;
-      }
-
       /** @type {number} */
       const dX = event.clientX - lastDragPoint.x;
       const dY = event.clientY - lastDragPoint.y;
@@ -127,8 +111,6 @@ export function draggable(node, { active = true })
    function onDragPointerUp(event)
    {
       event.preventDefault();
-
-      dragging = false;
 
       node.removeEventListener(...handlers.dragMove);
       node.removeEventListener(...handlers.dragUp);
