@@ -3,8 +3,6 @@
 
    import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action'
 
-   // import { draggable }       from '@typhonjs-fvtt/runtime/svelte/action'
-
    import { controls }        from '../layer/ControlsStore.js';
    import { draggable }       from './draggable.js';
 
@@ -18,16 +16,25 @@
 
    function onClick(event)
    {
-      // If already selected return early.
-      if ($storeSelected) { return; }
-
-      if (event.ctrlKey)
+      if ($storeSelected)
       {
-         controls.addSelected(control);
+         // Remove selection if <ctrl> key is pressed.
+         if (event.ctrlKey)
+         {
+            controls.selected.remove(control);
+         }
       }
       else
       {
-         controls.setSelected(control);
+         // Add control to selection if <ctrl> key is pressed otherwise set control as only selected item.
+         if (event.ctrlKey)
+         {
+            controls.selected.add(control);
+         }
+         else
+         {
+            controls.selected.set(control);
+         }
       }
    }
 

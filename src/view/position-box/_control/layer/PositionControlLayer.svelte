@@ -31,16 +31,10 @@
          boundingRect.right = rect.right;
       }
    }
-
-   function onMouseDown(event)
-   {
-console.log(`! PCL - onMouseDown`)
-      controls.clearSelected()
-   }
 </script>
 
 <div bind:this={el}
-     on:mousedown={onMouseDown}
+     on:mousedown={() => controls.selected.clear()}
      >
    {#each $controls as control (control.id)}
       <PositionControl {control} />

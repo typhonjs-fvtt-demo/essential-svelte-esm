@@ -17,22 +17,17 @@ class ControlsStore
 
    #dragUpdate = { left: '', top: '' };
 
+   #selectedAPI = new SelectedAPI(this.#selected);
+
    constructor()
    {
 
    }
 
-   addSelected(control)
-   {
-      this.#selected.add(control);
-      control.selected = true;
-   }
-
-   clearSelected()
-   {
-      for (const control of this.#selected) { control.selected = false; }
-      this.#selected.clear();
-   }
+   /**
+    * @returns {SelectedAPI} Selected API
+    */
+   get selected() { return this.#selectedAPI; }
 
    dragging(dX, dY)
    {
@@ -45,21 +40,6 @@ class ControlsStore
 
          control.position.set(dragUpdate);
       }
-   }
-
-   setSelected(control)
-   {
-      control.selected = true;
-
-      // Remove this control from the selected set.
-      this.#selected.delete(control);
-
-      // Set all other selected controls to false.
-      for (const entry of this.#selected) { entry.selected = false; }
-
-      this.#selected.clear();
-
-      this.#selected.add(control);
    }
 
    updateComponents(components)
@@ -115,6 +95,55 @@ class ControlsStore
          const index = this.#subscriptions.findIndex((sub) => sub === handler);
          if (index >= 0) { this.#subscriptions.splice(index, 1); }
       };
+   }
+}
+
+class SelectedAPI
+{
+   /**
+    * @type {Set<object>}
+    */
+   #selected;
+
+   constructor(selected)
+   {
+      this.#selected = selected;
+   }
+
+   add(control)
+   {
+      this.#selected.add(control);
+      control.selected = true;
+   }
+
+   clear()
+   {
+      for (const control of this.#selected) { control.selected = false; }
+      this.#selected.clear();
+   }
+
+   remove(control)
+   {
+      if (this.#selected.delete(control))
+      {
+         control.selected = false;
+         this.#selected.delete(control);
+      }
+   }
+
+   set(control)
+   {
+      control.selected = true;
+
+      // Remove this control from the selected set.
+      this.#selected.delete(control);
+
+      // Set all other selected controls to false.
+      for (const entry of this.#selected) { entry.selected = false; }
+
+      this.#selected.clear();
+
+      this.#selected.add(control);
    }
 }
 
