@@ -48,11 +48,18 @@
          controls.selected.add(control);
       }
    }
+
+   function onPointerDown()
+   {
+      // If already selected set as primary control.
+      if ($selected) { controls.selected.setPrimary(control); }
+   }
 </script>
 
 <div use:applyPosition={control.position}
      use:draggable={{ dragging, active: $selected && !$enabled }}
      on:click={onClick}
+     on:pointerdown={onPointerDown}
      class:enabled={$enabled || $selected}
      class:cursor-default={$enabled && !$resizing}
      class:cursor-grab={$selected && !$enabled}

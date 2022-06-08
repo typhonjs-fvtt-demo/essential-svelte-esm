@@ -59,24 +59,15 @@ export class ControlStore
 
    get component() { return this.#component; }
 
-   get isPrimary() { return this.#component.id; }
-
    get id() { return this.#component.id; }
 
    get position() { return this.#position; }
-
-   get resizing() { return this.#data.resizing; }
-
-   /**
-    * @returns {boolean} Component selected.
-    */
-   get selected() { return this.#data.selected; }
 
    get stores() { return this.#stores; }
 
    set isPrimary(isPrimary)
    {
-      this.#stores.resizing.set(isPrimary);
+      this.#stores.isPrimary.set(isPrimary);
    }
 
    set resizing(resizing)

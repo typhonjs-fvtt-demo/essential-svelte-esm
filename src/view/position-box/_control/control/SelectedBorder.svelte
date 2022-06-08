@@ -5,10 +5,13 @@
 
    const control = getContext('pcControl');
 
-   const { selected } = control.stores;
+   const { isPrimary, selected } = control.stores;
 </script>
 
-<div class="border" class:selected={$selected}/>
+<div class="border"
+     class:selected={$selected && !$isPrimary}
+     class:primary={$selected && $isPrimary}
+/>
 
 <style>
    div.border {

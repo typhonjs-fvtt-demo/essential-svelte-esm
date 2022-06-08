@@ -8,12 +8,18 @@ export class ControlsStore
 {
    #controls = [];
 
+   /**
+    * @type {Map<*, ControlStore>}
+    */
    #controlMap = new Map();
 
    #data = writable({
       enabled: false
    });
 
+   /**
+    * @type {Map<*, ControlStore>}
+    */
    #selectedMap = new Map();
 
    #selectedAPI = new SelectedAPI(this.#selectedMap);
@@ -23,7 +29,7 @@ export class ControlsStore
    /**
     * Stores the subscribers.
     *
-    * @type {(function(PositionData): void)[]}
+    * @type {(function(ControlStore[]): void)[]}
     */
    #subscriptions = [];
 
@@ -36,8 +42,6 @@ export class ControlsStore
       Object.freeze(this.#stores);
    }
 
-   get enabled() { return this.#data.enabled; }
-
    /**
     * @returns {SelectedAPI} Selected API
     */
@@ -48,6 +52,9 @@ export class ControlsStore
     */
    get stores() { return this.#stores; }
 
+   /**
+    * @param {boolean}  enabled - New enabled state.
+    */
    set enabled(enabled) { this.#stores.enabled.set(enabled); }
 
    /**
@@ -61,7 +68,7 @@ export class ControlsStore
    updateComponents(components)
    {
       const controlMap = this.#controlMap;
-      const selectedMap = this.#selectedMap;
+      const selected = this.#selectedAPI;
 
       const removeIDs = new Set(controlMap.keys());
 
@@ -78,7 +85,7 @@ export class ControlsStore
 
       for (const id of removeIDs)
       {
-         selectedMap.delete(id);
+         selected.removeById(id);
          controlMap.delete(id);
       }
 
@@ -88,7 +95,7 @@ export class ControlsStore
    }
 
    /**
-    * @returns {IterableIterator<any>} All controls.
+    * @returns {IterableIterator<ControlStore>} All controls.
     */
    values()
    {
@@ -132,29 +139,55 @@ export class ControlsStore
 class SelectedAPI
 {
    /**
-    * @type {Map<*, object>}
+    * @type {Map<*, ControlStore>}
     */
    #selectedMap;
 
+   /**
+    * @type {ControlStore}
+    */
+   #primaryControl;
+
+   /**
+    * @param {Map<*, ControlStore>} selectedMap - Main store selected map.
+    */
    constructor(selectedMap)
    {
       this.#selectedMap = selectedMap;
    }
 
+   /**
+    * @param {ControlStore}   control - A control store.
+    */
    add(control)
    {
       this.#selectedMap.set(control.id, control);
+
+      if (this.#primaryControl)
+      {
+         this.#primaryControl.isPrimary = false;
+         this.#primaryControl = void 0;
+      }
+
+      this.#primaryControl = control;
+      control.isPrimary = true;
       control.selected = true;
    }
 
    clear()
    {
+      if (this.#primaryControl)
+      {
+         this.#primaryControl.isPrimary = false;
+         this.#primaryControl = void 0;
+      }
+
       for (const control of this.#selectedMap.values()) { control.selected = false; }
       this.#selectedMap.clear();
    }
 
    /**
-    * @returns {IterableIterator<[*, Object]>} Selected control entries iterator.
+    * @returns {IterableIterator<[*, ControlStore]>} Selected control entries iterator.
     */
    entries()
    {
@@ -162,11 +195,11 @@ class SelectedAPI
    }
 
    /**
-    * @returns {IterableIterator<Object>} Selected controls iterator.
+    * @returns {ControlStore} The primary control store.
     */
-   values()
+   getPrimary()
    {
-      return this.#selectedMap.values();
+      return this.#primaryControl;
    }
 
    /**
@@ -177,13 +210,51 @@ class SelectedAPI
       return this.#selectedMap.keys();
    }
 
+   /**
+    * @param {ControlStore}   control - A control store.
+    */
    remove(control)
    {
+      if (this.#primaryControl === control)
+      {
+         this.#primaryControl.isPrimary = false;
+         this.#primaryControl = void 0;
+      }
+
       if (this.#selectedMap.delete(control.id)) { control.selected = false; }
    }
 
+   /**
+    * @param {*}   controlId - An ID for a control store to remove.
+    */
+   removeById(controlId)
+   {
+      if (this.#primaryControl?.id === controlId)
+      {
+         this.#primaryControl.isPrimary = false;
+         this.#primaryControl = void 0;
+      }
+
+      const control = this.#selectedMap.get(controlId);
+
+      if (control)
+      {
+         control.selected = false;
+         this.#selectedMap.delete(controlId);
+      }
+   }
+
+   /**
+    * @param {ControlStore}   control - A control store.
+    */
    set(control)
    {
+      if (this.#primaryControl && this.#primaryControl !== control)
+      {
+         this.#primaryControl.isPrimary = false;
+         this.#primaryControl = void 0;
+      }
+
       // Remove this control from the selected set.
       this.#selectedMap.delete(control.id);
 
@@ -194,6 +265,29 @@ class SelectedAPI
 
       this.#selectedMap.set(control.id, control);
 
+      this.#primaryControl = control;
+      control.isPrimary = true;
+
       control.selected = true;
+   }
+
+   setPrimary(control)
+   {
+      if (this.#primaryControl && this.#primaryControl !== control)
+      {
+         this.#primaryControl.isPrimary = false;
+         this.#primaryControl = void 0;
+      }
+
+      this.#primaryControl = control;
+      control.isPrimary = true;
+   }
+
+   /**
+    * @returns {IterableIterator<Object>} Selected controls iterator.
+    */
+   values()
+   {
+      return this.#selectedMap.values();
    }
 }
