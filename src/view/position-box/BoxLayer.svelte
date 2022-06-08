@@ -24,11 +24,13 @@
 
    let component;
 
+   const boundingRect = new DOMRect(0, 0, 0, 0);
+
    // Reactive statement to switch the box component between four variations depending on the auto & debug options.
    $: {
       component = $storeAuto ?
        $storeDebug ? AutoBoxDebug : AutoBox :
-       $storeDebug ? BoxDebug : Box;
+        $storeDebug ? BoxDebug : Box;
    }
 
    $:
@@ -41,14 +43,25 @@
          for (const box of $boxStore) { box.position.set(); }
       }
    }
+
+   function setDimension(offsetWidth, offsetHeight)
+   {
+      validator.setDimension(offsetWidth, offsetHeight);
+
+      boundingRect.width = offsetWidth;
+      boundingRect.height = offsetHeight;
+
+      // Force validation for all Position instances.
+      for (const box of $boxStore) { box.position.set(); }
+   }
 </script>
 
 <svelte:options accessors={true}/>
 
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
    <BoxHeader />
-   <main use:resizeObserver={boxStore}>
-      <PositionControlLayer components={$boxStore}>
+   <main use:resizeObserver={setDimension}>
+      <PositionControlLayer components={$boxStore} {boundingRect} validate={$storeValidator}>
       {#each $boxStore as box (box.id)}
          <svelte:component this={component} {box} />
       {/each}

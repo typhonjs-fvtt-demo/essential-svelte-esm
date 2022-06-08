@@ -248,12 +248,4 @@ boxStore.removeAll = () =>
    boxStore.set(data);
 };
 
-boxStore.setDimension = (offsetWidth, offsetHeight) =>
-{
-   validator.setDimension(offsetWidth, offsetHeight);
-
-   // Force validation for all Position instances.
-   for (const entry of data) { entry.position.set(); }
-};
-
 export { boxStore, validator };
