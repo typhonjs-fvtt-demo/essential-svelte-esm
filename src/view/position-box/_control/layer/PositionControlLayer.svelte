@@ -14,12 +14,12 @@
 
    function onKeyDown(event)
    {
-      if (event.key === 'Control') { controls.enabled = true; }
+      if (event.key === 'Control' && !event.repeat) { controls.enabled = true; }
    }
 
    function onKeyUp(event)
    {
-      if (event.key === 'Control') { controls.enabled = false; }
+      if (event.key === 'Control' && !event.repeat) { controls.enabled = false; }
    }
 
    function onMouseDown(event)

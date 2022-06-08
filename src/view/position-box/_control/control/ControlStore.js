@@ -2,6 +2,8 @@ import { writable }        from 'svelte/store';
 
 import { propertyStore }   from '@typhonjs-fvtt/runtime/svelte/store';
 
+import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
+
 export class ControlStore
 {
    #component;
@@ -16,6 +18,11 @@ export class ControlStore
 
    #stores;
 
+   /**
+    * @type {Function[]}
+    */
+   #unsubscribe = [];
+
    constructor(component)
    {
       this.#component = component;
@@ -24,29 +31,28 @@ export class ControlStore
       // target component position.
       let ignoreRoundRobin = false;
 
-      // TODO duplicate to take additional options or perhaps a copy constructor is better.
-      this.#position = component.position.duplicate();
+      this.#position = Position.duplicate(component.position, { calculateTransform: true });
 
       /**
        * Update component position, but only when ignoring round-robin callback.
        */
-      this.#position.subscribe((data) =>
+      this.#unsubscribe.push(this.#position.subscribe((data) =>
       {
          if (!ignoreRoundRobin)
          {
             component.position.set({ ...data, immediateElementUpdate: true });
          }
-      });
+      }));
 
       /**
        * Sets the local control position store, but temporarily sets ignoreRoundRobin callback;
        */
-      component.position.subscribe((data) =>
+      this.#unsubscribe.push(component.position.subscribe((data) =>
       {
          ignoreRoundRobin = true;
          this.#position.set({ ...data, immediateElementUpdate: true });
          ignoreRoundRobin = false;
-      });
+      }));
 
       this.#stores = {
          isPrimary: propertyStore(this.#data, 'isPrimary'),
@@ -78,5 +84,17 @@ export class ControlStore
    set selected(selected)
    {
       this.#stores.selected.set(selected);
+   }
+
+   /**
+    * Cleans up all subscriptions and removes references to tracked component data.
+    */
+   destroy()
+   {
+      for (const unsubscribe of this.#unsubscribe) { unsubscribe(); }
+
+      this.#unsubscribe = void 0;
+      this.#component = void 0;
+      this.#position = void 0;
    }
 }

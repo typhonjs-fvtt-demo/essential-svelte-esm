@@ -20,6 +20,9 @@
 
    const { resizing, selected } = control.stores;
 
+   // Must store position as control is a store and will trigger updates to applyPosition action.
+   const position = control.position;
+
    const dragUpdate = { left: '', top: '' };
 
    function dragging(dX, dY)
@@ -55,8 +58,7 @@
       if ($selected) { controls.selected.setPrimary(control); }
    }
 </script>
-
-<div use:applyPosition={control.position}
+<div use:applyPosition={position}
      use:draggable={{ dragging, active: $selected && !$enabled }}
      on:click={onClick}
      on:pointerdown={onPointerDown}

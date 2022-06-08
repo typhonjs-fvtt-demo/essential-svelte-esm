@@ -85,8 +85,13 @@ export class ControlsStore
 
       for (const id of removeIDs)
       {
+         const control = controlMap.get(id);
+
          selected.removeById(id);
          controlMap.delete(id);
+
+         // Remove subscriptions to Position instances.
+         if (control) { control.destroy(); }
       }
 
       this.#controls = [...controlMap.values()];
