@@ -13,6 +13,12 @@
 
    const capture = () => null;
 
+   function onPointerDown()
+   {
+      control.resizing = true;
+      controls.selected.setPrimary(control);
+   }
+
    function resizeCallback(id, dX, dY, event)
    {
       if (event.shiftKey)
@@ -31,7 +37,7 @@
 
 <div use:applyStyles={data.styles}
      use:resize={{ id: data.id, resizeCallback }}
-     on:pointerdown|preventDefault|stopPropagation={() => control.resizing = true}
+     on:pointerdown|preventDefault|stopPropagation={onPointerDown}
      on:pointermove|preventDefault|stopPropagation={capture}
      on:pointerover|preventDefault|stopPropagation={capture}
      on:pointerup|preventDefault|stopPropagation={() => control.resizing = false}
