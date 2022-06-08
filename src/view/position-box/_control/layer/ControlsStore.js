@@ -13,16 +13,16 @@ export class ControlsStore
     */
    #controlMap = new Map();
 
-   #data = writable({
-      enabled: false
-   });
-
    /**
-    * @type {Map<*, ControlStore>}
+    * @type {ControlsData}
     */
-   #selectedMap = new Map();
+   #data = {
+      boundingRect: void 0,
+      enabled: false,
+      validate: true
+   };
 
-   #selectedAPI = new SelectedAPI(this.#selectedMap);
+   #selectedAPI = new SelectedAPI(this.#data);
 
    #stores;
 
@@ -35,12 +35,26 @@ export class ControlsStore
 
    constructor()
    {
+      const dataStore = writable(this.#data);
+
       this.#stores = {
-         enabled: propertyStore(this.#data, 'enabled')
+         boundingRect: propertyStore(dataStore, 'boundingRect'),
+         enabled: propertyStore(dataStore, 'enabled'),
+         validate: propertyStore(dataStore, 'validate')
       };
 
       Object.freeze(this.#stores);
    }
+
+   /**
+    * @returns {DOMRect} Returns any validation bounding rect.
+    */
+   get boundingRect() { return this.#data.boundingRect; }
+
+   /**
+    * @returns {boolean} Returns enabled state.
+    */
+   get enabled() { return this.#data.enabled; }
 
    /**
     * @returns {SelectedAPI} Selected API
@@ -53,9 +67,24 @@ export class ControlsStore
    get stores() { return this.#stores; }
 
    /**
+    * @returns {boolean} Returns if on-drag validation is enabled.
+    */
+   get validate() { return this.#data.validate; }
+
+   /**
+    * @param {DOMRect|void}  boundingRect - Assigns the validation bounding rect.
+    */
+   set boundingRect(boundingRect) { this.#stores.boundingRect.set(boundingRect); }
+
+   /**
     * @param {boolean}  enabled - New enabled state.
     */
    set enabled(enabled) { this.#stores.enabled.set(enabled); }
+
+   /**
+    * @param {boolean}  validate - New on-drag validation state.
+    */
+   set validate(validate) { this.#stores.validate.set(validate); }
 
    /**
     * @returns {IterableIterator<any>} Keys for all controls.
@@ -144,9 +173,25 @@ export class ControlsStore
 class SelectedAPI
 {
    /**
-    * @type {Map<*, ControlStore>}
+    * Stores the main ControlStore data object.
+    *
+    * @type {ControlsData}
     */
-   #selectedMap;
+   #data;
+
+   /**
+    * Data to send selected control position instances.
+    *
+    * @type {{top: string, left: string}}
+    */
+   #dragUpdate = { left: '', top: '' };
+
+   /**
+    * Stores the bound onDrag event handler.
+    *
+    * @type {(dX: number, dY: number) => void}
+    */
+   #onDragBound;
 
    /**
     * @type {ControlStore}
@@ -154,19 +199,55 @@ class SelectedAPI
    #primaryControl;
 
    /**
-    * @param {Map<*, ControlStore>} selectedMap - Main store selected map.
+    * @type {Map<*, ControlStore>}
     */
-   constructor(selectedMap)
+   #selectedMap = new Map();
+
+   /**
+    * @type {Map<*, TransformData>}
+    */
+   #transformDataMap = new Map();
+
+   /**
+    * @type {Map<*, Function>}
+    */
+   #unsubscribeMap = new Map();
+
+   #boundingRect = new DOMRect();
+
+   /**
+    * @param {ControlsData} data - The main ControlStore data object.
+    */
+   constructor(data)
    {
-      this.#selectedMap = selectedMap;
+      this.#data = data;
+
+      this.#onDragBound = this.#onDrag.bind(this);
    }
+
+   /**
+    * @returns {DOMRect} The combined selected controls bounding rect.
+    */
+   get boundingRect()
+   {
+      return this.#boundingRect;
+   }
+
+   /**
+    * Returns the bound on drag event handler. The callback expects a delta X / Y value.
+    *
+    * @returns {(dX: number, dY: number) => void} onDrag event handler
+    */
+   get onDrag() { return this.#onDragBound; }
 
    /**
     * @param {ControlStore}   control - A control store.
     */
    add(control)
    {
-      this.#selectedMap.set(control.id, control);
+      const controlId = control.id;
+
+      this.#selectedMap.set(controlId, control);
 
       if (this.#primaryControl)
       {
@@ -177,6 +258,15 @@ class SelectedAPI
       this.#primaryControl = control;
       control.isPrimary = true;
       control.selected = true;
+
+      // TODO: FIGURE OUT OPTIMIZATION TO AVOID SUBSCRIBING IF NO BOUNDS ARE SET.
+      const unsubscribe = control.position.stores.transform.subscribe((data) =>
+      {
+         this.#transformDataMap.set(controlId, data);
+         this.#updateBounds();
+      });
+
+      this.#unsubscribeMap.set(controlId, unsubscribe);
    }
 
    clear()
@@ -187,7 +277,16 @@ class SelectedAPI
          this.#primaryControl = void 0;
       }
 
-      for (const control of this.#selectedMap.values()) { control.selected = false; }
+      for (const control of this.#selectedMap.values())
+      {
+         const unsubscribe = this.#unsubscribeMap.get(control.id);
+         if (typeof unsubscribe === 'function') { unsubscribe(); }
+
+         control.selected = false;
+      }
+
+      this.#transformDataMap.clear();
+      this.#unsubscribeMap.clear();
       this.#selectedMap.clear();
    }
 
@@ -215,6 +314,56 @@ class SelectedAPI
       return this.#selectedMap.keys();
    }
 
+   #onDrag(dX, dY)
+   {
+      const dragUpdate = this.#dragUpdate;
+
+      const validationRect = this.#data.boundingRect;
+      const validate = this.#data.validate;
+
+      if (validate && validationRect)
+      {
+         const boundingRect = this.#boundingRect;
+
+         boundingRect.x += dX;
+         boundingRect.y += dY;
+
+         const initialX = boundingRect.x;
+         const initialY = boundingRect.y;
+
+         if (boundingRect.bottom > validationRect.bottom)
+         {
+            boundingRect.y += validationRect.bottom - boundingRect.bottom;
+         }
+
+         if (boundingRect.right > validationRect.right)
+         {
+            boundingRect.x += validationRect.right - boundingRect.right;
+         }
+
+         if (boundingRect.top < 0)
+         {
+            boundingRect.y += Math.abs(boundingRect.top);
+         }
+
+         if (boundingRect.left < 0)
+         {
+            boundingRect.x += Math.abs(boundingRect.left);
+         }
+
+         dX -= initialX - boundingRect.x;
+         dY -= initialY - boundingRect.y;
+      }
+
+      for (const control of this.values())
+      {
+         dragUpdate.left = `${dX >= 0 ? '+' : '' }${dX}`;
+         dragUpdate.top = `${dY >= 0 ? '+' : '' }${dY}`;
+
+         control.position.set(dragUpdate);
+      }
+   }
+
    /**
     * @param {ControlStore}   control - A control store.
     */
@@ -226,7 +375,19 @@ class SelectedAPI
          this.#primaryControl = void 0;
       }
 
-      if (this.#selectedMap.delete(control.id)) { control.selected = false; }
+      const controlId = control.id;
+
+      if (this.#selectedMap.delete(controlId))
+      {
+         const unsubscribe = this.#unsubscribeMap.get(controlId);
+         this.#unsubscribeMap.delete(controlId);
+
+         if (typeof unsubscribe === 'function') { unsubscribe(); }
+
+         this.#transformDataMap.delete(controlId);
+
+         control.selected = false;
+      }
    }
 
    /**
@@ -244,36 +405,16 @@ class SelectedAPI
 
       if (control)
       {
-         control.selected = false;
+         const unsubscribe = this.#unsubscribeMap.get(controlId);
+         this.#unsubscribeMap.delete(controlId);
+
+         if (typeof unsubscribe === 'function') { unsubscribe(); }
+
+         this.#transformDataMap.delete(controlId);
          this.#selectedMap.delete(controlId);
+
+         control.selected = false;
       }
-   }
-
-   /**
-    * @param {ControlStore}   control - A control store.
-    */
-   set(control)
-   {
-      if (this.#primaryControl && this.#primaryControl !== control)
-      {
-         this.#primaryControl.isPrimary = false;
-         this.#primaryControl = void 0;
-      }
-
-      // Remove this control from the selected set.
-      this.#selectedMap.delete(control.id);
-
-      // Set all other selected controls to false.
-      for (const entry of this.#selectedMap.values()) { entry.selected = false; }
-
-      this.#selectedMap.clear();
-
-      this.#selectedMap.set(control.id, control);
-
-      this.#primaryControl = control;
-      control.isPrimary = true;
-
-      control.selected = true;
    }
 
    setPrimary(control)
@@ -289,6 +430,33 @@ class SelectedAPI
    }
 
    /**
+    * Processes all selected controls transformed bounds to create a single combined bounding rect.
+    */
+   #updateBounds()
+   {
+      let maxX = Number.MIN_SAFE_INTEGER;
+      let maxY = Number.MIN_SAFE_INTEGER;
+      let minX = Number.MAX_SAFE_INTEGER;
+      let minY = Number.MAX_SAFE_INTEGER;
+
+      for (const transformData of this.#transformDataMap.values())
+      {
+         const controlRect = transformData.boundingRect;
+
+         if (controlRect.right > maxX) { maxX = controlRect.right; }
+         if (controlRect.left < minX) { minX = controlRect.left; }
+         if (controlRect.bottom > maxY) { maxY = controlRect.bottom; }
+         if (controlRect.top < minY) { minY = controlRect.top; }
+      }
+
+      const boundingRect = this.#boundingRect;
+      boundingRect.x = minX;
+      boundingRect.y = minY;
+      boundingRect.width = maxX - minX;
+      boundingRect.height = maxY - minY;
+   }
+
+   /**
     * @returns {IterableIterator<Object>} Selected controls iterator.
     */
    values()
@@ -296,3 +464,13 @@ class SelectedAPI
       return this.#selectedMap.values();
    }
 }
+
+/**
+ * @typedef {object} ControlsData
+ *
+ * @property {DOMRect} boundingRect -
+ *
+ * @property {boolean} enabled -
+ *
+ * @property {boolean} validate -
+ */

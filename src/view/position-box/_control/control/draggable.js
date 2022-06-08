@@ -6,13 +6,13 @@
  *
  * @param {object}            params - Required parameters.
  *
- * @param {Function}          params.dragging - A callback for dragging events.
+ * @param {Function}          params.onDrag - A callback for dragging events.
  *
  * @param {boolean}           [params.active=true] - A boolean value; attached to a readable store.
  *
  * @returns {{update: Function, destroy: Function}} The action lifecycle methods.
  */
-export function draggable(node, { dragging, active = true })
+export function draggable(node, { onDrag, active = true })
 {
    /**
     * Stores the initial X / Y on drag down.
@@ -100,7 +100,7 @@ export function draggable(node, { dragging, active = true })
       lastDragPoint.x = event.clientX;
       lastDragPoint.y = event.clientY;
 
-      dragging(dX, dY);
+      onDrag(dX, dY);
    }
 
    /**

@@ -5,11 +5,17 @@
    import { ControlsStore }   from './ControlsStore.js';
 
    export let components;
+
    export let active = true;
+   export let boundingRect = void 0;
+   export let validate = true;
 
    const controls = new ControlsStore();
+
    setContext('pclControls', controls);
 
+   $: controls.boundingRect = boundingRect;
+   $: controls.validate = validate
    $: controls.updateComponents(components);
 
    function onKeyDown(event)

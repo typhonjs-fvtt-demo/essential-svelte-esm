@@ -20,21 +20,10 @@
 
    const { resizing, selected } = control.stores;
 
+   const onDrag = controls.selected.onDrag;
+
    // Must store position as control is a store and will trigger updates to applyPosition action.
    const position = control.position;
-
-   const dragUpdate = { left: '', top: '' };
-
-   function dragging(dX, dY)
-   {
-      for (const control of controls.selected.values())
-      {
-         dragUpdate.left = `${dX >= 0 ? '+' : '' }${dX}`;
-         dragUpdate.top = `${dY >= 0 ? '+' : '' }${dY}`;
-
-         control.position.set(dragUpdate);
-      }
-   }
 
    function onClick(event)
    {
@@ -59,7 +48,7 @@
    }
 </script>
 <div use:applyPosition={position}
-     use:draggable={{ dragging, active: $selected && !$enabled }}
+     use:draggable={{ onDrag, active: $selected && !$enabled }}
      on:click={onClick}
      on:pointerdown={onPointerDown}
      class:enabled={$enabled || $selected}
