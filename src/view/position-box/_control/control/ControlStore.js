@@ -7,6 +7,7 @@ export class ControlStore
    #component;
 
    #data = writable({
+      isPrimary: false,
       resizing: false,
       selected: false
    });
@@ -15,19 +16,15 @@ export class ControlStore
 
    #stores;
 
-   #selected = new Map();
-
    constructor(component)
    {
       this.#component = component;
-
-      const position = component.position.duplicate();
-      position.subscribe((data) => component.position.set({ ...data, immediateElementUpdate: true }));
 
       // To accomplish bidirectional updates Must ignore updates from the control position when set from the
       // target component position.
       let ignoreRoundRobin = false;
 
+      // TODO duplicate to take additional options or perhaps a copy constructor is better.
       this.#position = component.position.duplicate();
 
       /**
@@ -52,6 +49,7 @@ export class ControlStore
       });
 
       this.#stores = {
+         isPrimary: propertyStore(this.#data, 'isPrimary'),
          resizing: propertyStore(this.#data, 'resizing'),
          selected: propertyStore(this.#data, 'selected')
       };
@@ -59,18 +57,32 @@ export class ControlStore
       Object.freeze(this.#stores);
    }
 
-   get stores() { return this.#stores; }
-
    get component() { return this.#component; }
+
+   get isPrimary() { return this.#component.id; }
 
    get id() { return this.#component.id; }
 
    get position() { return this.#position; }
 
+   get resizing() { return this.#data.resizing; }
+
    /**
     * @returns {boolean} Component selected.
     */
    get selected() { return this.#data.selected; }
+
+   get stores() { return this.#stores; }
+
+   set isPrimary(isPrimary)
+   {
+      this.#stores.resizing.set(isPrimary);
+   }
+
+   set resizing(resizing)
+   {
+      this.#stores.resizing.set(resizing);
+   }
 
    set selected(selected)
    {

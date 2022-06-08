@@ -8,6 +8,7 @@
    import { draggable }       from './draggable.js';
 
    import ResizeControl       from './resize/ResizeControl.svelte';
+   import SelectedBorder      from './SelectedBorder.svelte';
 
    export let control;
 
@@ -58,7 +59,7 @@
 >
     {#if $selected}
        <ResizeControl />
-       <div class=border />
+       <SelectedBorder />
     {/if}
 </div>
 
@@ -78,15 +79,6 @@
    }
 
    .enabled {
-      /*cursor: grab;*/
       pointer-events: auto;
-   }
-
-   div.border {
-      position: absolute;
-      border: dotted lightblue 2px;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
    }
 </style>
