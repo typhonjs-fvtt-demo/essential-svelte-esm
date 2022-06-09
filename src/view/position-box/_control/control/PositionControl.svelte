@@ -41,10 +41,10 @@
       }
    }
 
-   function onPointerDown()
+   function onPointerDown(event)
    {
       // If already selected set as primary control.
-      if ($selected) { controls.selected.setPrimary(control); }
+      if ($selected && !event.ctrlKey) { controls.selected.setPrimary(control); }
    }
 </script>
 <div use:applyPosition={position}
