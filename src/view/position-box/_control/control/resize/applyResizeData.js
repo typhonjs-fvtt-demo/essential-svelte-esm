@@ -12,15 +12,15 @@ export function applyResizeData(id, dX, dY, control)
 
          if (heightAdjust < 0) { dY += heightAdjust; }
 
-         data.top = `${dY >= 0 ? '+' : ''}${dY}`;
-         data.height = `${-dY >= 0 ? '+' : ''}${-dY}`;
+         data.top = `+=${dY}`;
+         data.height = `+=${-dY}`;
 
          const widthAdjust = control.position.width - dX;
 
          if (widthAdjust < 0) { dX += widthAdjust; }
 
-         data.left = `${dX >= 0 ? '+' : '' }${dX}`;
-         data.width = `${-dX >= 0 ? '+' : '' }${-dX}`;
+         data.left = `+=${dX}`;
+         data.width = `+=${-dX}`;
          break;
       }
 
@@ -30,17 +30,16 @@ export function applyResizeData(id, dX, dY, control)
 
          if (heightAdjust < 0) { dY += heightAdjust; }
 
-         data.top = `${dY >= 0 ? '+' : ''}${dY}`;
-         data.height = `${-dY >= 0 ? '+' : ''}${-dY}`;
-
-         data.width = `${dX >= 0 ? '+' : '' }${dX}`;
+         data.top = `+=${dY}`;
+         data.height = `+=${-dY}`;
+         data.width = `+=${dX}`;
          break;
       }
 
       case 2:
       {
-         data.width = `${dX >= 0 ? '+' : ''}${dX}`;
-         data.height = `${dY >= 0 ? '+' : ''}${dY}`;
+         data.width = `+=${dX}`;
+         data.height = `+=${dY}`;
          break;
       }
 
@@ -50,10 +49,9 @@ export function applyResizeData(id, dX, dY, control)
 
          if (widthAdjust < 0) { dX += widthAdjust; }
 
-         data.left = `${dX >= 0 ? '+' : '' }${dX}`;
-         data.width = `${-dX >= 0 ? '+' : '' }${-dX}`;
-
-         data.height = `${dY >= 0 ? '+' : '' }${dY}`;
+         data.left = `+=${dX}`;
+         data.width = `+=${-dX}`;
+         data.height = `+=${dY}`;
          break;
       }
 
@@ -63,20 +61,20 @@ export function applyResizeData(id, dX, dY, control)
 
          if (heightAdjust < 0) { dY += heightAdjust; }
 
-         data.top = `${dY >= 0 ? '+' : ''}${dY}`;
-         data.height = `${-dY >= 0 ? '+' : ''}${-dY}`;
+         data.top = `+=${dY}`;
+         data.height = `+=${-dY}`;
          break;
       }
 
       case 5:
       {
-         data.width = `${dX >= 0 ? '+' : ''}${dX}`;
+         data.width = `+=${dX}`;
          break;
       }
 
       case 6:
       {
-         data.height = `${dY >= 0 ? '+' : ''}${dY}`;
+         data.height = `+=${dY}`;
          break;
       }
 
@@ -86,8 +84,8 @@ export function applyResizeData(id, dX, dY, control)
 
          if (widthAdjust < 0) { dX += widthAdjust; }
 
-         data.left = `${dX >= 0 ? '+' : ''}${dX}`;
-         data.width = `${-dX >= 0 ? '+' : ''}${-dX}`;
+         data.left = `+=${dX}`;
+         data.width = `+=${-dX}`;
          break;
       }
    }
