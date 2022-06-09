@@ -22,6 +22,8 @@ let animateScaleRot, animateTo;
 
 let gsapTimeline;
 
+let quickTo;
+
 const validator = new Position.Validators.TransformBounds({ constrain: false });
 
 function getRandomInt(min, max)
@@ -113,6 +115,10 @@ boxStore.animateToLocation = () =>
 
    // animateTo = Position.Animate.fromTo(data, createPositionData, createPositionData,
    //  stagger ? createOptionsData : { duration, ease });
+
+   // if (!quickTo) { quickTo = Position.Animate.quickTo(data, ['top', 'left']); }
+   //
+   // quickTo.options({ duration, ease })(createPositionData);
 
    // animateTo.finished.then(() => console.log(`!! Animation Location Finished`));
 
