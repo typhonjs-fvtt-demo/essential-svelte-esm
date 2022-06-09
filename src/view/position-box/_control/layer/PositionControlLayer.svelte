@@ -4,13 +4,13 @@
    import PositionControl     from '../control/PositionControl.svelte';
    import { ControlsStore }   from './ControlsStore.js';
 
+   export let controls = new ControlsStore();
+
    export let components;
 
    export let active = true;
    export let boundingRect = void 0;
    export let validate = true;
-
-   const controls = new ControlsStore();
 
    setContext('pclControls', controls);
 
