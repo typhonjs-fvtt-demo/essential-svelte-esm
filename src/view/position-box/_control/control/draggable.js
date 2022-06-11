@@ -6,20 +6,18 @@
  *
  * @param {object}            params - Required parameters.
  *
- * @param {Function}          params.onDrag - A callback for dragging events.
- *
  * @param {boolean}           [params.active=true] - A boolean value; attached to a readable store.
  *
  * @returns {{update: Function, destroy: Function}} The action lifecycle methods.
  */
-export function draggable(node, { onDrag, active = true })
+export function draggable(node, { active = true })
 {
    /**
     * Stores the initial X / Y on drag down.
     *
     * @type {object}
     */
-   const lastDragPoint = { x: 0, y: 0 };
+   const initialDragPoint = { x: 0, y: 0 };
 
    /**
     * Remember event handlers associated with this action so they may be later unregistered.
@@ -28,7 +26,7 @@ export function draggable(node, { onDrag, active = true })
     */
    const handlers = {
       dragDown: ['pointerdown', (e) => onDragPointerDown(e), false],
-      dragMove: ['pointermove', (e) => onDragPointerMove(e), false],
+      dragMove: ['pointermove', (e) => onDragPointerChange(e), false],
       dragUp: ['pointerup', (e) => onDragPointerUp(e), false]
    };
 
@@ -39,8 +37,6 @@ export function draggable(node, { onDrag, active = true })
    {
       // Drag handlers
       node.addEventListener(...handlers.dragDown);
-
-      // node.style.cursor = 'grab';
    }
 
    /**
@@ -71,8 +67,8 @@ export function draggable(node, { onDrag, active = true })
       event.preventDefault();
 
       // Record initial position.
-      lastDragPoint.x = event.clientX;
-      lastDragPoint.y = event.clientY;
+      initialDragPoint.x = event.clientX;
+      initialDragPoint.y = event.clientY;
 
       // Add move and pointer up handlers.
       node.addEventListener(...handlers.dragMove);
@@ -81,6 +77,8 @@ export function draggable(node, { onDrag, active = true })
       node.setPointerCapture(event.pointerId);
 
       node.style.cursor = 'grabbing';
+
+      node.dispatchEvent(new CustomEvent('draggable:start', { bubbles: false }));
    }
 
    /**
@@ -88,19 +86,14 @@ export function draggable(node, { onDrag, active = true })
     *
     * @param {PointerEvent} event - The pointer move event.
     */
-   function onDragPointerMove(event)
+   function onDragPointerChange(event)
    {
       event.preventDefault();
 
-      /** @type {number} */
-      const dX = event.clientX - lastDragPoint.x;
-      const dY = event.clientY - lastDragPoint.y;
+      const tX = event.clientX - initialDragPoint.x;
+      const tY = event.clientY - initialDragPoint.y;
 
-      // Update last drag point.
-      lastDragPoint.x = event.clientX;
-      lastDragPoint.y = event.clientY;
-
-      onDrag(dX, dY);
+      node.dispatchEvent(new CustomEvent('draggable:drag', { detail: { tX, tY }, bubbles: false }));
    }
 
    /**
@@ -117,6 +110,8 @@ export function draggable(node, { onDrag, active = true })
 
       node.style.cursor = null;
       // node.style.cursor = 'grab';
+
+      node.dispatchEvent(new CustomEvent('draggable:end', { bubbles: false }));
    }
 
    return {

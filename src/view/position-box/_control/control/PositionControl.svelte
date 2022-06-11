@@ -48,9 +48,11 @@
    }
 </script>
 <div use:applyPosition={position}
-     use:draggable={{ onDrag, active: $selected && !$enabled }}
+     use:draggable={{ active: $selected && !$enabled }}
      on:click={onClick}
      on:pointerdown={onPointerDown}
+     on:draggable:start={(event) => controls.selected.onDragStart(event)}
+     on:draggable:drag={(event) => controls.selected.onDrag(event)}
      class:enabled={$enabled || $selected}
      class:cursor-default={$enabled && !$resizing}
      class:cursor-grab={$selected && !$enabled}

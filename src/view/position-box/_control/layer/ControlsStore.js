@@ -182,16 +182,9 @@ class SelectedAPI
    /**
     * Data to send selected control position instances.
     *
-    * @type {{top: string, left: string}}
+    * @type {{top: number, left: number}}
     */
-   #dragUpdate = { left: '', top: '' };
-
-   /**
-    * Stores the bound onDrag event handler.
-    *
-    * @type {(dX: number, dY: number) => void}
-    */
-   #onDragBound;
+   #dragUpdate = { top: 0, left: 0 };
 
    /**
     * @type {ControlStore}
@@ -213,7 +206,17 @@ class SelectedAPI
     */
    #unsubscribeMap = new Map();
 
-   #boundingRect = new DOMRect();
+   /**
+    * Initial bounding rect when drag starts.
+    *
+    * @type {DOMRect}
+    */
+   #boundingRectInitial = new DOMRect();
+
+   /**
+    * @type {Map<*, Function>}
+    */
+   #quickToMap = new Map();
 
    /**
     * @param {ControlsData} data - The main ControlStore data object.
@@ -221,24 +224,7 @@ class SelectedAPI
    constructor(data)
    {
       this.#data = data;
-
-      this.#onDragBound = this.#onDrag.bind(this);
    }
-
-   /**
-    * @returns {DOMRect} The combined selected controls bounding rect.
-    */
-   get boundingRect()
-   {
-      return this.#boundingRect;
-   }
-
-   /**
-    * Returns the bound on drag event handler. The callback expects a delta X / Y value.
-    *
-    * @returns {(dX: number, dY: number) => void} onDrag event handler
-    */
-   get onDrag() { return this.#onDragBound; }
 
    /**
     * @param {ControlStore}   control - A control store.
@@ -248,6 +234,7 @@ class SelectedAPI
       const controlId = control.id;
 
       this.#selectedMap.set(controlId, control);
+      this.#quickToMap.set(controlId, control.position.animate.quickTo(['top', 'left'], { duration: 0.1 }));
 
       if (this.#primaryControl)
       {
@@ -259,12 +246,8 @@ class SelectedAPI
       control.isPrimary = true;
       control.selected = true;
 
-      // TODO: FIGURE OUT OPTIMIZATION TO AVOID SUBSCRIBING IF NO BOUNDS ARE SET.
-      const unsubscribe = control.position.stores.transform.subscribe((data) =>
-      {
-         this.#transformDataMap.set(controlId, data);
-         this.#updateBounds();
-      });
+      const unsubscribe = control.position.stores.transform.subscribe(
+       (data) => this.#transformDataMap.set(controlId, data));
 
       this.#unsubscribeMap.set(controlId, unsubscribe);
    }
@@ -287,6 +270,7 @@ class SelectedAPI
 
       this.#transformDataMap.clear();
       this.#unsubscribeMap.clear();
+      this.#quickToMap.clear();
       this.#selectedMap.clear();
    }
 
@@ -314,8 +298,22 @@ class SelectedAPI
       return this.#selectedMap.keys();
    }
 
-   #onDrag(dX, dY)
+   onDragStart()
    {
+      for (const controlId of this.keys())
+      {
+         const control = this.#selectedMap.get(controlId);
+         const quickTo = this.#quickToMap.get(controlId);
+         quickTo.initialPosition = control.position.get();
+      }
+
+      this.getBoundingRect(this.#boundingRectInitial);
+   }
+
+   onDrag(event)
+   {
+      let { tX, tY } = event.detail;
+
       const dragUpdate = this.#dragUpdate;
 
       const validationRect = this.#data.boundingRect;
@@ -323,44 +321,34 @@ class SelectedAPI
 
       if (validate && validationRect)
       {
-         const boundingRect = this.#boundingRect;
+         const boundingRect = this.#boundingRectInitial;
 
-         boundingRect.x += dX;
-         boundingRect.y += dY;
+         let x = boundingRect.x + tX;
+         let y = boundingRect.y + tY;
+         const left = boundingRect.left + tX;
+         const right = boundingRect.right + tX;
+         const bottom = boundingRect.bottom + tY;
+         const top = boundingRect.top + tY;
 
-         const initialX = boundingRect.x;
-         const initialY = boundingRect.y;
+         const initialX = x;
+         const initialY = y;
 
-         if (boundingRect.bottom > validationRect.bottom)
-         {
-            boundingRect.y += validationRect.bottom - boundingRect.bottom;
-         }
+         if (bottom > validationRect.bottom) { y += validationRect.bottom - bottom; }
+         if (right > validationRect.right) { x += validationRect.right - right; }
+         if (top < 0) { y += Math.abs(top); }
+         if (left < 0) { x += Math.abs(left); }
 
-         if (boundingRect.right > validationRect.right)
-         {
-            boundingRect.x += validationRect.right - boundingRect.right;
-         }
-
-         if (boundingRect.top < 0)
-         {
-            boundingRect.y += Math.abs(boundingRect.top);
-         }
-
-         if (boundingRect.left < 0)
-         {
-            boundingRect.x += Math.abs(boundingRect.left);
-         }
-
-         dX -= initialX - boundingRect.x;
-         dY -= initialY - boundingRect.y;
+         tX -= initialX - x;
+         tY -= initialY - y;
       }
 
-      for (const control of this.values())
+      // Add adjusted total X / Y added to initial positions for each control position.
+      for (const quickTo of this.#quickToMap.values())
       {
-         dragUpdate.left = `${dX >= 0 ? '+' : '' }${dX}`;
-         dragUpdate.top = `${dY >= 0 ? '+' : '' }${dY}`;
+         dragUpdate.left = quickTo.initialPosition.left + tX;
+         dragUpdate.top = quickTo.initialPosition.top + tY;
 
-         control.position.set(dragUpdate);
+         quickTo(dragUpdate);
       }
    }
 
@@ -385,6 +373,7 @@ class SelectedAPI
          if (typeof unsubscribe === 'function') { unsubscribe(); }
 
          this.#transformDataMap.delete(controlId);
+         this.#quickToMap.delete(controlId);
 
          control.selected = false;
       }
@@ -411,6 +400,7 @@ class SelectedAPI
          if (typeof unsubscribe === 'function') { unsubscribe(); }
 
          this.#transformDataMap.delete(controlId);
+         this.#quickToMap.delete(controlId);
          this.#selectedMap.delete(controlId);
 
          control.selected = false;
@@ -431,8 +421,12 @@ class SelectedAPI
 
    /**
     * Processes all selected controls transformed bounds to create a single combined bounding rect.
+    *
+    * @param {DOMRect} [boundingRect] - A DOMRect to store calculations or one will be created.
+    *
+    * @returns {DOMRect} Bounding rect.
     */
-   #updateBounds()
+   getBoundingRect(boundingRect = new DOMRect())
    {
       let maxX = Number.MIN_SAFE_INTEGER;
       let maxY = Number.MIN_SAFE_INTEGER;
@@ -449,11 +443,12 @@ class SelectedAPI
          if (controlRect.top < minY) { minY = controlRect.top; }
       }
 
-      const boundingRect = this.#boundingRect;
       boundingRect.x = minX;
       boundingRect.y = minY;
       boundingRect.width = maxX - minX;
       boundingRect.height = maxY - minY;
+
+      return boundingRect;
    }
 
    /**
