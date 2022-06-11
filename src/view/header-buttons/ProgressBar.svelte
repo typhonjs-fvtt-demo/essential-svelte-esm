@@ -1,7 +1,6 @@
-<!-- Add null mousedown / dblclick event handler to capture before header drag / minimize takes -->
+<!-- Add null dblclick event handler to capture before header minimize takes -->
 <progress class=keep-minimized max=100
-          on:mousedown|capture|preventDefault|stopPropagation={() => null}
-          on:dblclick|capture|preventDefault|stopPropagation={() => null} />
+          on:pointerdown|capture|preventDefault|stopPropagation={() => null} />
 
 <style>
    progress {

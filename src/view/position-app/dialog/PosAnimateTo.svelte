@@ -71,7 +71,7 @@
       padding: 0.25em;
 
       input { margin: 0.5em; }
-      input[type=text] { max-width: 2.5em; }
+      input[type=text] { max-width: 2.5em; pointer-events: none; }
 
       select { margin: 0.5em; width: fit-content; }
 

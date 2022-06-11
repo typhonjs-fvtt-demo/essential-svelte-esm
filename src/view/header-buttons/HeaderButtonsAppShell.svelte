@@ -1,4 +1,5 @@
 <script>
+   import { alwaysBlur }         from '@typhonjs-fvtt/runtime/svelte/action';
    import { getContext }         from 'svelte';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
@@ -20,9 +21,9 @@
       <br>
       <div class=container>
          Options:
-         <label><input type=checkbox bind:checked={$headerButtonNoClose}> No Close Button</label>
-         <label><input type=checkbox bind:checked={$headerButtonNoLabel}> No Button Labels</label>
-         <label><input type=checkbox bind:checked={$headerNoTitleMinimized}> No Title (Minimized)</label>
+         <label><input use:alwaysBlur type=checkbox bind:checked={$headerButtonNoClose}> No Close Button</label>
+         <label><input use:alwaysBlur type=checkbox bind:checked={$headerButtonNoLabel}> No Button Labels</label>
+         <label><input use:alwaysBlur type=checkbox bind:checked={$headerNoTitleMinimized}> No Title (Minimized)</label>
       </div>
    </main>
 </ApplicationShell>

@@ -1,5 +1,9 @@
 <script>
    import {
+      alwaysBlur,
+      autoBlur }        from '@typhonjs-fvtt/runtime/svelte/action';
+
+   import {
       easingFunc,
       easingList }      from '@typhonjs-fvtt/runtime/svelte/gsap';
 
@@ -22,24 +26,24 @@
    <div class="container flex-vert flex-end">
       <label for=cells>
          Cells:
-         <input class=cells-range type=range min=3 max=16 id=cells bind:value={cellCount} />
+         <input use:alwaysBlur class=cells-range type=range min=3 max=16 id=cells bind:value={cellCount} />
          <input type=text bind:value={$carouselStore.length} readonly>
       </label>
       <label for=persective>
          Perspective:
-         <input type=range min=10 max=1200 id=persective bind:value={$storePerspective}>
+         <input use:alwaysBlur type=range min=10 max=1200 id=persective bind:value={$storePerspective}>
          <input type=text bind:value={$storePerspective} readonly>
       </label>
    </div>
    <div class="container flex-vert">
       <label for=duration>
          Duration:
-         <input type=range min=0 max=3 step=0.1 id=duration bind:value={$storeDuration}>
+         <input use:alwaysBlur type=range min=0 max=3 step=0.1 id=duration bind:value={$storeDuration}>
          <input type=text bind:value={$storeDuration} readonly>
       </label>
       <label for=easing>
          Easing:
-         <select id=easing bind:value={$storeEase}>
+         <select use:autoBlur id=easing bind:value={$storeEase}>
             {#each easingList as entry}
                <option value={easingFunc[entry]}>{entry}</option>
             {/each}

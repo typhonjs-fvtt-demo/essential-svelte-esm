@@ -1,5 +1,9 @@
 <script>
    import {
+      alwaysBlur,
+      autoBlur }        from '@typhonjs-fvtt/runtime/svelte/action';
+
+   import {
       easingFunc,
       easingList }      from '@typhonjs-fvtt/runtime/svelte/gsap';
 
@@ -20,45 +24,45 @@
 <div class="header flex">
    <div class="container flex-vert">
       <div class=group>
-         <button on:click={() => boxStore.add(5)}>Add 5</button>
-         <button on:click={() => boxStore.add(50)}>Add 50</button>
-         <button on:click={() => boxStore.removeRandom(50)}>Remove 50</button>
-         <button on:click={() => boxStore.removeAll()}>Remove All</button>
+         <button use:alwaysBlur on:click={() => boxStore.add(5)}>Add 5</button>
+         <button use:alwaysBlur on:click={() => boxStore.add(50)}>Add 50</button>
+         <button use:alwaysBlur on:click={() => boxStore.removeRandom(50)}>Remove 50</button>
+         <button use:alwaysBlur on:click={() => boxStore.removeAll()}>Remove All</button>
       </div>
       <div class=group>
-         <button on:click={() => boxStore.animateToLocation()}>AnimateTo Location</button>
-         <button on:click={() => boxStore.animateToScaleRot()}>Scale / Rotation</button>
-         <button on:click={() => boxStore.animateToCancel()}><i class="fas fa-stop"></i></button>
+         <button use:alwaysBlur on:click={() => boxStore.animateToLocation()}>AnimateTo Location</button>
+         <button use:alwaysBlur on:click={() => boxStore.animateToScaleRot()}>Scale / Rotation</button>
+         <button use:alwaysBlur on:click={() => boxStore.animateToCancel()}><i class="fas fa-stop"></i></button>
       </div>
       <div class=group>
-         <button on:click={() => boxStore.gsapTimelineCreate()}>New Timeline</button>
-         <button on:click={() => boxStore.gsapTimelinePlay()}><i class="fas fa-play"></i></button>
-         <button on:click={() => boxStore.gsapTimelineReverse()}><i class="fas fa-backward"></i></button>
-         <button on:click={() => boxStore.gsapTimelinePause()}><i class="fas fa-pause"></i></button>
-         <button on:click={() => boxStore.gsapTimelineRestart()}><i class="fas fa-arrow-left"></i></button>
-         <span style="transform: scale(0.75)"><label><input type=checkbox bind:checked={$storeStagger}>Stagger</label></span>
+         <button use:alwaysBlur on:click={() => boxStore.gsapTimelineCreate()}>New Timeline</button>
+         <button use:alwaysBlur on:click={() => boxStore.gsapTimelinePlay()}><i class="fas fa-play"></i></button>
+         <button use:alwaysBlur on:click={() => boxStore.gsapTimelineReverse()}><i class="fas fa-backward"></i></button>
+         <button use:alwaysBlur on:click={() => boxStore.gsapTimelinePause()}><i class="fas fa-pause"></i></button>
+         <button use:alwaysBlur on:click={() => boxStore.gsapTimelineRestart()}><i class="fas fa-arrow-left"></i></button>
+         <span style="transform: scale(0.75)"><label><input use:alwaysBlur type=checkbox bind:checked={$storeStagger}>Stagger</label></span>
       </div>
    </div>
    <div class="container flex-vert">
       <div class=flex>
          <span>Set width / height to `auto`:</span>
-         <input type=checkbox bind:checked={$storeAuto}>
+         <input use:alwaysBlur type=checkbox bind:checked={$storeAuto}>
       </div>
       <div class=flex>
          <span>Debug:</span>
-         <label><input type=checkbox bind:checked={$storeDebug}>Enable</label>
-         <label><input type=checkbox bind:checked={$storeLabels}>Labels</label>
+         <label><input use:alwaysBlur type=checkbox bind:checked={$storeDebug}>Enable</label>
+         <label><input use:alwaysBlur type=checkbox bind:checked={$storeLabels}>Labels</label>
       </div>
    </div>
    <div class="container flex-vert">
       <div class=flex>
          <label class=duration for=duration>Duration (seconds):</label>
-         <input type=range min=0 max=3 step=0.1 id=duration bind:value={$storeDuration}>
+         <input use:alwaysBlur type=range min=0 max=3 step=0.1 id=duration bind:value={$storeDuration}>
          <input type=text bind:value={$storeDuration} readonly>
       </div>
       <div class=flex>
          <label for=easing>Easing:</label>
-         <select id=easing bind:value={$storeEase}>
+         <select use:autoBlur id=easing bind:value={$storeEase}>
             {#each easingList as entry}
                <option value={easingFunc[entry]}>{entry}</option>
             {/each}
@@ -69,7 +73,7 @@
       <span style="width: 6.5em">Count: {$boxStore.length}</span>
       <div class=flex>
          <span>Validation:</span>
-         <input type=checkbox bind:checked={$storeValidator}/>
+         <input use:alwaysBlur type=checkbox bind:checked={$storeValidator}/>
       </div>
    </div>
 </div>
@@ -105,7 +109,7 @@
 
    input { color: white; margin: 3px 3px }
    input[type=range] { max-width: 3.75em }
-   input[type=text] { max-width: 2em }
+   input[type=text] { max-width: 2em; pointer-events: none; }
 
    select {
       color: white;

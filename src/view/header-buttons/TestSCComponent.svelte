@@ -1,5 +1,5 @@
-<!-- Add null mousedown / dblclick event handler to capture before header drag / minimize takes -->
-<span on:mousedown|capture|preventDefault|stopPropagation={() => null}
+<!-- Add null pointerdown / dblclick event handler to capture before header drag / minimize takes -->
+<span on:pointerdown|capture|preventDefault|stopPropagation={() => null}
       on:dblclick|capture|preventDefault|stopPropagation={() => null}>
    SC
 </span>
