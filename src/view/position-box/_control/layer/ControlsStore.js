@@ -22,7 +22,9 @@ export class ControlsStore
       validate: true
    };
 
-   #selectedAPI = new SelectedAPI(this.#data);
+   #selectedAPI;
+
+   #selectedDragAPI;
 
    #stores;
 
@@ -37,6 +39,8 @@ export class ControlsStore
    {
       const dataStore = writable(this.#data);
 
+      [this.#selectedAPI, this.#selectedDragAPI] = new SelectedAPI(this.#data);
+
       this.#stores = {
          boundingRect: propertyStore(dataStore, 'boundingRect'),
          enabled: propertyStore(dataStore, 'enabled'),
@@ -44,6 +48,8 @@ export class ControlsStore
       };
 
       Object.freeze(this.#stores);
+
+      return [this, this.#selectedDragAPI];
    }
 
    /**
@@ -180,6 +186,13 @@ class SelectedAPI
    #data;
 
    /**
+    * Initial bounding rect when drag starts.
+    *
+    * @type {DOMRect}
+    */
+   #dragBoundingRect = new DOMRect();
+
+   /**
     * Data to send selected control position instances.
     *
     * @type {{top: number, left: number}}
@@ -207,13 +220,6 @@ class SelectedAPI
    #unsubscribeMap = new Map();
 
    /**
-    * Initial bounding rect when drag starts.
-    *
-    * @type {DOMRect}
-    */
-   #boundingRectInitial = new DOMRect();
-
-   /**
     * @type {Map<*, Function>}
     */
    #quickToMap = new Map();
@@ -224,6 +230,13 @@ class SelectedAPI
    constructor(data)
    {
       this.#data = data;
+
+      const selectedDragAPI = {
+         onStart: this.#onDragStart.bind(this),
+         onMove: this.#onDragMove.bind(this)
+      };
+
+      return [this, selectedDragAPI];
    }
 
    /**
@@ -298,19 +311,7 @@ class SelectedAPI
       return this.#selectedMap.keys();
    }
 
-   onDragStart()
-   {
-      for (const controlId of this.keys())
-      {
-         const control = this.#selectedMap.get(controlId);
-         const quickTo = this.#quickToMap.get(controlId);
-         quickTo.initialPosition = control.position.get();
-      }
-
-      this.getBoundingRect(this.#boundingRectInitial);
-   }
-
-   onDrag(event)
+   #onDragMove(event)
    {
       let { tX, tY } = event.detail;
 
@@ -321,7 +322,7 @@ class SelectedAPI
 
       if (validate && validationRect)
       {
-         const boundingRect = this.#boundingRectInitial;
+         const boundingRect = this.#dragBoundingRect;
 
          let x = boundingRect.x + tX;
          let y = boundingRect.y + tY;
@@ -350,6 +351,18 @@ class SelectedAPI
 
          quickTo(dragUpdate);
       }
+   }
+
+   #onDragStart()
+   {
+      for (const controlId of this.keys())
+      {
+         const control = this.#selectedMap.get(controlId);
+         const quickTo = this.#quickToMap.get(controlId);
+         quickTo.initialPosition = control.position.get();
+      }
+
+      this.getBoundingRect(this.#dragBoundingRect);
    }
 
    /**

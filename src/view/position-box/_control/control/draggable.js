@@ -26,7 +26,7 @@ export function draggable(node, { active = true })
     */
    const handlers = {
       dragDown: ['pointerdown', (e) => onDragPointerDown(e), false],
-      dragMove: ['pointermove', (e) => onDragPointerChange(e), false],
+      dragChange: ['pointermove', (e) => onDragPointerChange(e), false],
       dragUp: ['pointerup', (e) => onDragPointerUp(e), false]
    };
 
@@ -46,7 +46,7 @@ export function draggable(node, { active = true })
    {
       // Drag handlers
       node.removeEventListener(...handlers.dragDown);
-      node.removeEventListener(...handlers.dragMove);
+      node.removeEventListener(...handlers.dragChange);
       node.removeEventListener(...handlers.dragUp);
 
       node.style.cursor = null;
@@ -71,7 +71,7 @@ export function draggable(node, { active = true })
       initialDragPoint.y = event.clientY;
 
       // Add move and pointer up handlers.
-      node.addEventListener(...handlers.dragMove);
+      node.addEventListener(...handlers.dragChange);
       node.addEventListener(...handlers.dragUp);
 
       node.setPointerCapture(event.pointerId);
@@ -93,7 +93,7 @@ export function draggable(node, { active = true })
       const tX = event.clientX - initialDragPoint.x;
       const tY = event.clientY - initialDragPoint.y;
 
-      node.dispatchEvent(new CustomEvent('draggable:drag', { detail: { tX, tY }, bubbles: false }));
+      node.dispatchEvent(new CustomEvent('draggable:move', { detail: { tX, tY }, bubbles: false }));
    }
 
    /**
@@ -105,7 +105,7 @@ export function draggable(node, { active = true })
    {
       event.preventDefault();
 
-      node.removeEventListener(...handlers.dragMove);
+      node.removeEventListener(...handlers.dragChange);
       node.removeEventListener(...handlers.dragUp);
 
       node.style.cursor = null;

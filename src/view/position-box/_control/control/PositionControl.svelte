@@ -15,6 +15,7 @@
    setContext('pcControl', control)
 
    const controls = getContext('pclControls');
+   const selectedDragAPI = getContext('pclSelectedDragAPI');
 
    const { enabled } = controls.stores;
 
@@ -51,8 +52,8 @@
      use:draggable={{ active: $selected && !$enabled }}
      on:click={onClick}
      on:pointerdown={onPointerDown}
-     on:draggable:start={(event) => controls.selected.onDragStart(event)}
-     on:draggable:drag={(event) => controls.selected.onDrag(event)}
+     on:draggable:start={selectedDragAPI.onStart}
+     on:draggable:move={selectedDragAPI.onMove}
      class:enabled={$enabled || $selected}
      class:cursor-default={$enabled && !$resizing}
      class:cursor-grab={$selected && !$enabled}

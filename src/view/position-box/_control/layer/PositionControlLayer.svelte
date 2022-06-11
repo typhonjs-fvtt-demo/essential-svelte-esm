@@ -4,7 +4,9 @@
    import PositionControl     from '../control/PositionControl.svelte';
    import { ControlsStore }   from './ControlsStore.js';
 
-   export let controls = new ControlsStore();
+   const [controlsStore, selectedDragAPI] = new ControlsStore();
+
+   export let controls = controlsStore;
 
    export let components;
 
@@ -13,6 +15,7 @@
    export let validate = true;
 
    setContext('pclControls', controls);
+   setContext('pclSelectedDragAPI', selectedDragAPI);
 
    $: controls.boundingRect = boundingRect;
    $: controls.validate = validate
