@@ -64,6 +64,8 @@ export function draggable(node, { active = true })
     */
    function onDragPointerDown(event)
    {
+      if (event.button !== 0 || !event.isPrimary) { return; }
+
       event.preventDefault();
 
       // Record initial position.
@@ -88,6 +90,14 @@ export function draggable(node, { active = true })
     */
    function onDragPointerChange(event)
    {
+      // See chorded button presses for pointer events:
+      // https://www.w3.org/TR/pointerevents3/#chorded-button-interactions
+      if ((event.buttons & 1) === 0)
+      {
+         onDragPointerUp(event);
+         return;
+      }
+
       event.preventDefault();
 
       const tX = event.clientX - initialDragPoint.x;
@@ -109,7 +119,6 @@ export function draggable(node, { active = true })
       node.removeEventListener(...handlers.dragUp);
 
       node.style.cursor = null;
-      // node.style.cursor = 'grab';
 
       node.dispatchEvent(new CustomEvent('draggable:end', { bubbles: false }));
    }

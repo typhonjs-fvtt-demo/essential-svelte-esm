@@ -30,7 +30,7 @@ export function resize(node, { id, resizeCallback, active = true })
     */
    const handlers = {
       dragDown: ['pointerdown', (e) => onDragPointerDown(e), false],
-      dragMove: ['pointermove', (e) => onDragPointerMove(e), false],
+      dragMove: ['pointermove', (e) => onDragPointerChange(e), false],
       dragUp: ['pointerup', (e) => onDragPointerUp(e), false]
    };
 
@@ -66,6 +66,8 @@ export function resize(node, { id, resizeCallback, active = true })
     */
    function onDragPointerDown(event)
    {
+      if (event.button !== 0 || !event.isPrimary) { return; }
+
       event.preventDefault();
 
       // Record initial position.
@@ -84,8 +86,16 @@ export function resize(node, { id, resizeCallback, active = true })
     *
     * @param {PointerEvent} event - The pointer move event.
     */
-   function onDragPointerMove(event)
+   function onDragPointerChange(event)
    {
+      // See chorded button presses for pointer events:
+      // https://www.w3.org/TR/pointerevents3/#chorded-button-interactions
+      if ((event.buttons & 1) === 0)
+      {
+         onDragPointerUp(event);
+         return;
+      }
+
       event.preventDefault();
 
       /** @type {number} */
