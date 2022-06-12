@@ -241,8 +241,10 @@ class SelectedAPI
 
    /**
     * @param {ControlStore}   control - A control store.
+    *
+    * @param {boolean}        setPrimary - Make added control the primary control.
     */
-   add(control)
+   add(control, setPrimary = true)
    {
       const controlId = control.id;
 
@@ -251,14 +253,18 @@ class SelectedAPI
       this.#selectedMap.set(controlId, control);
       this.#quickToMap.set(controlId, control.position.animate.quickTo(['top', 'left'], { duration: 0.1 }));
 
-      if (this.#primaryControl)
+      if (setPrimary && this.#primaryControl)
       {
          this.#primaryControl.isPrimary = false;
          this.#primaryControl = void 0;
       }
 
-      this.#primaryControl = control;
-      control.isPrimary = true;
+      if (setPrimary)
+      {
+         control.isPrimary = true;
+         this.#primaryControl = control;
+      }
+
       control.selected = true;
 
       const unsubscribe = control.position.stores.transform.subscribe(

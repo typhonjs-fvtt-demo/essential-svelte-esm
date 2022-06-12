@@ -8,11 +8,11 @@ export class ControlStore
 {
    #component;
 
-   #data = writable({
+   #data = {
       isPrimary: false,
       resizing: false,
       selected: false
-   });
+   };
 
    #position;
 
@@ -54,10 +54,12 @@ export class ControlStore
          ignoreRoundRobin = false;
       }));
 
+      const dataStore = writable(this.#data);
+
       this.#stores = {
-         isPrimary: propertyStore(this.#data, 'isPrimary'),
-         resizing: propertyStore(this.#data, 'resizing'),
-         selected: propertyStore(this.#data, 'selected')
+         isPrimary: propertyStore(dataStore, 'isPrimary'),
+         resizing: propertyStore(dataStore, 'resizing'),
+         selected: propertyStore(dataStore, 'selected')
       };
 
       Object.freeze(this.#stores);
@@ -67,7 +69,13 @@ export class ControlStore
 
    get id() { return this.#component.id; }
 
+   get isPrimary() { return this.#data.isPrimary; }
+
    get position() { return this.#position; }
+
+   get resizing() { return this.#data.resizing; }
+
+   get selected() { return this.#data.selected; }
 
    get stores() { return this.#stores; }
 
