@@ -246,6 +246,8 @@ class SelectedAPI
    {
       const controlId = control.id;
 
+      if (this.#selectedMap.has(controlId)) { return; }
+
       this.#selectedMap.set(controlId, control);
       this.#quickToMap.set(controlId, control.position.animate.quickTo(['top', 'left'], { duration: 0.1 }));
 
