@@ -21,9 +21,12 @@
    const storeDuration = carouselStore.duration;
    const storeEase = carouselStore.ease;
 
+   // We can use quickTo as the animation options do not change.
+   const quickTranslateZ = position.animate.quickTo(['translateZ'], { duration: 0.5, ease: easingFunc['power3.out'] });
+
    let currentLength = $carouselStore.length;
 
-   let animateRotateY, animateTranslateZ;
+   let animateRotateY;
 
    // This reactive block triggers when the cell array length or selected index changes.
    $:
@@ -45,12 +48,9 @@
 
          const resetAngle = -carouselStore.theta * cappedIndex;
 
-         if (animateTranslateZ) { animateTranslateZ.cancel(); }
-
          position.set({ rotateY: resetAngle });
 
-         animateTranslateZ = position.animate.to({ translateZ: -carouselStore.radius },
-          { duration: 0.5, ease: easingFunc['power3.out'] });
+         quickTranslateZ(-carouselStore.radius);
 
          $selectedIndex = cappedIndex;
       }
@@ -58,6 +58,8 @@
       {
          const angle = -carouselStore.theta * $selectedIndex;
 
+         // Cancel existing animation and start a new one. This is done instead of quickTo because animation options may
+         // change from user input.
          if (animateRotateY) { animateRotateY.cancel(); }
 
          animateRotateY = position.animate.to({ rotateY: angle }, { duration: $storeDuration, ease: $storeEase });
