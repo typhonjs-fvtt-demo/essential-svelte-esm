@@ -1,5 +1,6 @@
 import { writable }        from 'svelte/store';
 
+import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
 import { propertyStore }   from '@typhonjs-fvtt/runtime/svelte/store';
 
 import { ControlStore }    from '../control/ControlStore.js';
@@ -93,6 +94,83 @@ export class ControlsStore
    set validate(validate) { this.#stores.validate.set(validate); }
 
    /**
+    * Exports all or selected component data w/ Position converted to JSON object. An option to compact the position
+    * data will transform the minimum top / left of all components as the origin.
+    *
+    * @param {object}   [opts] - Optional parameters.
+    *
+    * @param {boolean}  [opts.compact=false] - Transform / compact position data.
+    *
+    * @param {boolean}  [opts.selected=false] - When true export selected components.
+    *
+    * @returns {{width: number|void, height: number|void, components: object[]}} Width / height max extents & serialized
+    *                                                                  component data.
+    */
+   export({ compact = false, selected = false } = {})
+   {
+      const components = [];
+
+      let maxWidth = Number.MIN_SAFE_INTEGER;
+      let maxHeight = Number.MIN_SAFE_INTEGER;
+
+      if (!compact)
+      {
+         for (const control of selected ? this.selected.values() : this.values())
+         {
+            const position = control.component.position.toJSON();
+
+            const right = position.left + position.width;
+            const bottom = position.top + position.height;
+
+            if (right > maxWidth) { maxWidth = right; }
+            if (bottom > maxHeight) { maxHeight = bottom; }
+
+            components.push(Object.assign({}, control.component, { position }));
+         }
+      }
+      else
+      {
+         // TODO: Currently compacting only handles positions greater than 0, 0 origin.
+         let minTop = Number.MAX_SAFE_INTEGER;
+         let minLeft = Number.MAX_SAFE_INTEGER;
+
+         // Find minimum left and top;
+         for (const control of selected ? this.selected.values() : this.values())
+         {
+            const position = control.component.position;
+            const left = position.left;
+            const top = position.top;
+
+            if (left < minLeft) { minLeft = left; }
+            if (top < minTop) { minTop = top; }
+         }
+
+         for (const control of selected ? this.selected.values() : this.values())
+         {
+            const position = control.component.position.toJSON();
+
+            // Adjust for minLeft / minTop.
+            position.left -= minLeft;
+            position.top -= minTop;
+
+            const right = position.left + position.width;
+            const bottom = position.top + position.height;
+
+            if (right > maxWidth) { maxWidth = right; }
+            if (bottom > maxHeight) { maxHeight = bottom; }
+
+            components.push(Object.assign({}, control.component, { position }));
+         }
+      }
+
+      return {
+         width: maxWidth === Number.MIN_SAFE_INTEGER ? 0 : maxWidth,
+         height: maxHeight === Number.MIN_SAFE_INTEGER ? 0 : maxHeight,
+         components
+      };
+   }
+
+   /**
     * @returns {IterableIterator<any>} Keys for all controls.
     */
    keys()
@@ -100,6 +178,12 @@ export class ControlsStore
       return this.#controlMap.keys();
    }
 
+   /**
+    * Updates the tracked component data. Each entry must be an object containing a unique `id` property and an
+    * instance of Position as the `position` property.
+    *
+    * @param {Iterable<object>} components - Iterable list of component data objects.
+    */
    updateComponents(components)
    {
       const controlMap = this.#controlMap;
@@ -109,6 +193,18 @@ export class ControlsStore
 
       for (const component of components)
       {
+         const componentId = component.id;
+
+         if (componentId === void 0 || componentId === null)
+         {
+            throw new Error(`updateComponents error: component data does not have a defined 'id' property.`);
+         }
+
+         if (!(component.position instanceof Position))
+         {
+            throw new Error(`updateComponents error: component data does not have a valid 'position' property.`);
+         }
+
          if (controlMap.has(component.id))
          {
             removeIDs.delete(component.id);
@@ -156,7 +252,6 @@ export class ControlsStore
    }
 
    /**
-    *
     * @param {function(ControlStore[]): void} handler - Callback function that is invoked on update / changes.
     *
     * @returns {(function(): void)} Unsubscribe function.
