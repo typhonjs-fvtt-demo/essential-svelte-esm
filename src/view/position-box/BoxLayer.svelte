@@ -1,18 +1,17 @@
 <script>
-   import { getContext }            from 'svelte';
+   import { getContext }               from 'svelte';
 
-   import { resizeObserver }        from '@typhonjs-fvtt/runtime/svelte/action';
-   import { TJSApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { resizeObserver }           from '@typhonjs-fvtt/runtime/svelte/action';
+   import { TJSApplicationShell }      from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { TJSPositionControlLayer }  from '@typhonjs-fvtt/svelte-standard/component'
 
-   import { boxStore, validator }   from './boxStore.js';
+   import { boxStore, validator }      from './boxStore.js';
 
-   import AutoBox                   from './boxes/AutoBox.svelte';
-   import AutoBoxDebug              from './boxes/AutoBoxDebug.svelte';
-   import Box                       from './boxes/Box.svelte';
-   import BoxDebug                  from './boxes/BoxDebug.svelte';
-   import BoxHeader                 from './BoxHeader.svelte';
-
-   import PositionControlLayer      from './_control/layer/PositionControlLayer.svelte';
+   import AutoBox                      from './boxes/AutoBox.svelte';
+   import AutoBoxDebug                 from './boxes/AutoBoxDebug.svelte';
+   import Box                          from './boxes/Box.svelte';
+   import BoxDebug                     from './boxes/BoxDebug.svelte';
+   import BoxHeader                    from './BoxHeader.svelte';
 
    export let elementRoot;
 
@@ -54,13 +53,13 @@
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
    <BoxHeader {controls} />
    <main use:resizeObserver={setDimension}>
-      <PositionControlLayer active={$storePCL} {boundingRect} bind:controls
+      <TJSPositionControlLayer active={$storePCL} {boundingRect} bind:controls
                             components={$boxStore}
                             validate={$storeValidator}>
       {#each $boxStore as box (box.id)}
          <svelte:component this={component} {box} />
       {/each}
-      </PositionControlLayer>
+      </TJSPositionControlLayer>
    </main>
 </TJSApplicationShell>
 
