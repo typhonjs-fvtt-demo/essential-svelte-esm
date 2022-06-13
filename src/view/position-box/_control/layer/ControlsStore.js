@@ -205,13 +205,29 @@ export class ControlsStore
             throw new Error(`updateComponents error: component data does not have a valid 'position' property.`);
          }
 
-         if (controlMap.has(component.id))
+         if (controlMap.has(componentId))
          {
-            removeIDs.delete(component.id);
-            continue;
-         }
+            const control = controlMap.get(componentId);
 
-         controlMap.set(component.id, new ControlStore(component));
+            // Evaluate if the components Position instance has changed.
+            if (control.component.position !== component.position)
+            {
+               // Remove old control
+               selected.removeById(componentId);
+               controlMap.delete(componentId);
+               control.destroy();
+
+               controlMap.set(component.id, new ControlStore(component));
+            }
+            else
+            {
+               removeIDs.delete(componentId);
+            }
+         }
+         else
+         {
+            controlMap.set(component.id, new ControlStore(component));
+         }
       }
 
       for (const id of removeIDs)

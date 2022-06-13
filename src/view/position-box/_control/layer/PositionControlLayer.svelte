@@ -80,6 +80,8 @@
    {/each}
    <slot />
 </div>
+{:else}
+   <slot />
 {/if}
 
 <style>
