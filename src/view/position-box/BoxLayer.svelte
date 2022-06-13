@@ -23,6 +23,7 @@
    const storeValidator = boxStore.validator;
 
    let component;
+   let controls;
 
    const boundingRect = new DOMRect(0, 0, 0, 0);
 
@@ -33,16 +34,7 @@
         $storeDebug ? BoxDebug : Box;
    }
 
-   $:
-   {
-      validator.enabled = $storeValidator;
-
-      // When the validator is turned on and there is box data then force a set on each box position to update validation.
-      if ($storeValidator && $boxStore.length > 0)
-      {
-         for (const box of $boxStore) { box.position.set(); }
-      }
-   }
+   $: boxStore.setValidatorEnabled($storeValidator);
 
    function setDimension(offsetWidth, offsetHeight)
    {
@@ -61,7 +53,7 @@
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
    <BoxHeader />
    <main use:resizeObserver={setDimension}>
-      <PositionControlLayer components={$boxStore} {boundingRect} validate={$storeValidator}>
+      <PositionControlLayer components={$boxStore} {boundingRect} validate={$storeValidator} bind:controls>
       {#each $boxStore as box (box.id)}
          <svelte:component this={component} {box} />
       {/each}

@@ -224,6 +224,17 @@ boxStore.gsapTimelineReverse = () =>
    if (gsapTimeline !== void 0) { gsapTimeline.reverse(); }
 };
 
+boxStore.setValidatorEnabled = (enabled) =>
+{
+   validator.enabled = enabled;
+
+   // When the validator is turned on and there is box data then force a set on each box position to update validation.
+   if (enabled && data.length > 0)
+   {
+      for (const box of data) { box.position.set(); }
+   }
+};
+
 boxStore.remove = (id) =>
 {
    boxStore.update((array) =>
