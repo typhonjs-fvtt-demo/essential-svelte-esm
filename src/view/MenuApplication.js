@@ -11,7 +11,8 @@ import PositionApplication       from './position-app/PositionApplication.js';
 import PositionBasicOverlayApp   from './position-basic-overlay/PositionBasicOverlayApp.js';
 import PositionBoxApplication    from './position-box/PositionBoxApplication.js';
 import PositionCarouselApp       from './position-carousel/PositionCarouselApp.js';
-import PositionSessionApp         from './position-storage-session/PositionSessionApp.js';
+import PositionClientSettingApp  from './position-client-setting/PositionClientSettingApp.js';
+import PositionSessionApp        from './position-storage-session/PositionSessionApp.js';
 
 export default class MenuApplication extends SvelteApplication
 {
@@ -59,6 +60,7 @@ export default class MenuApplication extends SvelteApplication
                   { title: 'Position (App)', class: PositionApplication },
                   { title: 'Position (Box)', class: PositionBoxApplication },
                   { title: 'Position (Carousel)', class: PositionCarouselApp },
+                  { title: 'Position (Client Setting)', class: PositionClientSettingApp },
                   { title: 'Position (Session Storage)', class: PositionSessionApp }
                ]
             }
