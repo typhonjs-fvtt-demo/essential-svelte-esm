@@ -7,12 +7,12 @@ import MenuAppShell              from './MenuAppShell.svelte';
 import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
 import HeaderButtonsApplication  from './header-buttons/HeaderButtonsApplication.js';
 import HelloFoundryApplication   from './hello/HelloFoundryApplication.js';
-import PositionApplication       from './position-app/PositionApplication.js';
-import PositionBasicOverlayApp   from './position-basic-overlay/PositionBasicOverlayApp.js';
-import PositionBoxApplication    from './position-box/PositionBoxApplication.js';
-import PositionCarouselApp       from './position-carousel/PositionCarouselApp.js';
-import PositionClientSettingApp  from './position-client-setting/PositionClientSettingApp.js';
-import PositionSessionApp        from './position-storage-session/PositionSessionApp.js';
+import PositionApplication       from './position/app-control/PositionApplication.js';
+import PositionBasicOverlayApp   from './position/basic-overlay/PositionBasicOverlayApp.js';
+import PositionBoxApplication    from './position/box/PositionBoxApplication.js';
+import PositionCarouselApp       from './position/carousel/PositionCarouselApp.js';
+import PositionClientSettingApp  from './position/client-setting/PositionClientSettingApp.js';
+import PositionSessionApp        from './position/session-storage/PositionSessionApp.js';
 
 export default class MenuApplication extends SvelteApplication
 {
