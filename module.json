@@ -13,7 +13,7 @@
   "readme": "https://github.com/typhonjs-fvtt-demo/essential-svelte-esm/blob/master/README.md",
   "bugs": "https://github.com/typhonjs-fvtt-demo/essential-svelte-esm/issues",
   "changelog": "https://github.com/typhonjs-fvtt-demo/essential-svelte-esm/releases/latest/",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "9",
   "esmodules": [
@@ -33,7 +33,7 @@
   "dependencies": [],
   "socket": false,
   "manifest": "https://github.com/typhonjs-fvtt-demo/essential-svelte-esm/releases/latest/download/module.json",
-  "download": "https://github.com/typhonjs-fvtt-demo/essential-svelte-esm/releases/download/0.0.4/module.zip",
+  "download": "https://github.com/typhonjs-fvtt-demo/essential-svelte-esm/releases/download/0.0.5/module.zip",
   "protected": false,
   "coreTranslation": false,
   "library": false
