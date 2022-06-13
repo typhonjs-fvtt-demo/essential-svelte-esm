@@ -59,7 +59,7 @@
       <div class=flex>
          <span title="Position Control Layer">PCL:</span>
          <label><input use:alwaysBlur type=checkbox bind:checked={$storePCL}>Enable</label>
-         <button use:alwaysBlur on:click={() => boxStore.save(controls.export({ compact: true }))} style="margin-left: 0.25em">Save</button>
+         <button use:alwaysBlur on:click={() => boxStore.save(controls.export())} style="margin-left: 0.25em">Save</button>
          <button use:alwaysBlur on:click={() => boxStore.restore()}>Restore</button>
       </div>
    </div>
