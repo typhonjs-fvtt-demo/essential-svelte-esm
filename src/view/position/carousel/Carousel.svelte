@@ -1,7 +1,8 @@
 <script>
    import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
    import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
-   import { GsapCompose }    from '@typhonjs-fvtt/runtime/svelte/gsap';
+
+   import { easingFunc }      from '@typhonjs-fvtt/runtime/svelte/gsap';
 
    import { carouselStore }   from './carouselStore.js';
 
@@ -20,10 +21,12 @@
    const storeDuration = carouselStore.duration;
    const storeEase = carouselStore.ease;
 
+   // We can use quickTo as the animation options do not change.
+   const quickTranslateZ = position.animate.quickTo(['translateZ'], { duration: 0.5, ease: easingFunc['power3.out'] });
+
    let currentLength = $carouselStore.length;
 
-   // Stores the GSAP tween / timeline to be able to kill them.
-   let gsapRotateY, gsapTranslateZ;
+   let animateRotateY;
 
    // This reactive block triggers when the cell array length or selected index changes.
    $:
@@ -45,12 +48,9 @@
 
          const resetAngle = -carouselStore.theta * cappedIndex;
 
-         if (gsapTranslateZ) { gsapTranslateZ.kill(); }
+         position.set({ rotateY: resetAngle });
 
-         gsapTranslateZ = GsapCompose.timeline(position, [
-            { type: 'set', vars: { rotateY: resetAngle } },
-            { type: 'to', vars: { translateZ: -carouselStore.radius, duration: 0.5, ease: 'power3.out' } }
-         ]);
+         quickTranslateZ(-carouselStore.radius);
 
          $selectedIndex = cappedIndex;
       }
@@ -58,9 +58,11 @@
       {
          const angle = -carouselStore.theta * $selectedIndex;
 
-         if (gsapRotateY) { gsapRotateY.kill(); }
+         // Cancel existing animation and start a new one. This is done instead of quickTo because animation options may
+         // change from user input.
+         if (animateRotateY) { animateRotateY.cancel(); }
 
-         gsapRotateY = GsapCompose.to(position, { rotateY: angle, duration: $storeDuration, ease: $storeEase });
+         animateRotateY = position.animate.to({ rotateY: angle }, { duration: $storeDuration, ease: $storeEase });
       }
    }
 </script>

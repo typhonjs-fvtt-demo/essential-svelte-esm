@@ -1,5 +1,6 @@
 import { writable }     from 'svelte/store';
-import * as easingFuncs from 'svelte/easing';
+
+import { easingFunc }   from '@typhonjs-fvtt/runtime/svelte/gsap';
 
 import { Position }     from '@typhonjs-fvtt/runtime/svelte/application';
 
@@ -36,7 +37,7 @@ const carouselStore = writable(data);
 
 carouselStore.selectedIndex = writable(1);
 carouselStore.duration = writable(0.5);
-carouselStore.ease = writable('svelte-linear');
+carouselStore.ease = writable(easingFunc.linear);
 carouselStore.perspective = writable(1000);
 
 carouselStore.theta = 0;

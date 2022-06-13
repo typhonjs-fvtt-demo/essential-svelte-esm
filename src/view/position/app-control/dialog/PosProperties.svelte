@@ -116,7 +116,7 @@
       padding: 0.25em;
 
       input { margin: 0.5em; }
-      input[type=text] { max-width: 3.5em; }
+      input[type=text] { max-width: 3.5em; pointer-events: none; }
 
       input[type=text].small { max-width: 2.5em; }
 

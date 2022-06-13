@@ -9,7 +9,29 @@
 
    let ease = easingFunc.linear;
 
+   /** {TJSBasicAnimation} - pending TS declaration */
+   let flipping;
+
+   /** @type {boolean} */
+   let restoring;
+
    let duration = 1;
+
+   function animateY()
+   {
+      if (flipping?.isActive) { return; }
+
+      flipping = position.animate.to({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, ease });
+   }
+
+   function restore()
+   {
+      if (restoring) { return; }
+
+      restoring = true;
+      application.state.restore({ name: 'save-1', animateTo: true, async: true, ease, duration }).then(
+       () => restoring = false);
+   }
 </script>
 
 <section>
@@ -29,10 +51,10 @@
    </div>
 
    <div>
-      <button on:click={() => position.animateTo({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, ease })}>Flip</button>
+      <button on:click={animateY}>Flip</button>
       <button on:click={() => application.state.save({ name: 'save-1' })}>Save</button>
-      <button on:click={() => application.state.restore({ name: 'save-1', animateTo: true, ease, duration })}>Restore</button>
-      <button on:click={() => position.reset()}>Reset</button>
+      <button on:click={restore}>Restore</button>
+      <button on:click={() => position.state.reset()}>Reset</button>
    </div>
 </section>
 
@@ -49,7 +71,7 @@
       padding: 0.25em;
 
       input { margin: 0.5em; }
-      input[type=text] { max-width: 2.5em; }
+      input[type=text] { max-width: 2.5em; pointer-events: none; }
 
       select { margin: 0.5em; width: fit-content; }
 

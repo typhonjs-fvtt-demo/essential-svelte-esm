@@ -15,7 +15,7 @@ const s_SOURCEMAPS = true; // Generate sourcemaps for the bundle (recommended).
 // Set to true to enable linking against the TyphonJS Runtime Library module.
 // You must add a Foundry module dependency on the `typhonjs` Foundry package or manually install it in Foundry from:
 // https://github.com/typhonjs-fvtt-lib/typhonjs/releases/latest/download/module.json
-const s_TYPHONJS_MODULE_LIB = false;
+const s_TYPHONJS_MODULE_LIB = true;
 
 // Creates a standard configuration for PostCSS with autoprefixer & postcss-preset-env.
 const postcssMain = postcssConfig({
@@ -26,7 +26,7 @@ const postcssMain = postcssConfig({
 
 const s_RESOLVE_CONFIG = {
    browser: true,
-   dedupe: ['svelte', '@typhonjs-fvtt/runtime', '@typhonjs-fvtt/svelte-standard']
+   dedupe: ['svelte']
 }
 
 export default () =>

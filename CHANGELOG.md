@@ -1,4 +1,15 @@
 # Changelog
+## Release 0.0.5
+- Updated @typhonjs-fvtt/runtime to ['0.0.14'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0014).
+- Stage #2 of the massive core animation engine updates.
+  - position.animate.<xxx> & Position.Animate.<xxx> for grouped animations.
+  - support for to, from, fromTo tweens
+  - quickTo function creation for fast repeatable to tweens.
+
+- Demos
+  - Added position/client-setting and session-storage to show serializing Position to game setting and session storage.
+  - Added TJSPositionControlLayer to box demo.
+
 ## Release 0.0.4
 - Updated @typhonjs-fvtt/runtime to ['0.0.12'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0012).
 - Stage #1 of the massive core animation engine updates.

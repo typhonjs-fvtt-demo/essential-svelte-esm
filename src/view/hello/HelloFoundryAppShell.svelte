@@ -1,6 +1,10 @@
 <script>
    import { getContext }         from 'svelte';
    import { fade, scale }        from 'svelte/transition';
+
+   import {
+      alwaysBlur,
+      autoBlur }                 from '@typhonjs-fvtt/runtime/svelte/action';
    import { TJSDialog }          from '@typhonjs-fvtt/runtime/svelte/application';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
@@ -40,18 +44,18 @@
    <main in:fade={{duration: 5000}}>
       <h1>Hello {message}!</h1>
       <label>
-         Message:&nbsp;<input bind:value={message}>
+         Message:&nbsp;<input use:autoBlur bind:value={message}>
       </label>
       <br>
       <label>
-         Change title:&nbsp;<input bind:value={$storeTitle}>
+         Change title:&nbsp;<input use:autoBlur bind:value={$storeTitle}>
       </label>
       <button on:click={onClick}>Launch a modal dialog</button>
       <div class=container>
          Make application:
-         <label><input type=checkbox bind:checked={draggable}> Draggable</label>
-         <label><input type=checkbox bind:checked={$storeMinimizable}> Minimizable</label>
-         <label><input type=checkbox bind:checked={$storeResizable}> Resizable</label>
+         <label><input use:alwaysBlur type=checkbox bind:checked={draggable}> Draggable</label>
+         <label><input use:alwaysBlur type=checkbox bind:checked={$storeMinimizable}> Minimizable</label>
+         <label><input use:alwaysBlur type=checkbox bind:checked={$storeResizable}> Resizable</label>
       </div>
       <div class=bottom>
          <a href="https://svelte.dev/tutorial">Interactive Svelte tutorial (highly recommended)</a>

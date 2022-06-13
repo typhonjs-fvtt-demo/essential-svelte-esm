@@ -18,7 +18,13 @@ const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${c
 
 let idCntr = 0;
 
+let animateScaleRot, animateTo;
+
 let gsapTimeline;
+
+let savedComponentData;
+
+let quickTo;
 
 const validator = new Position.Validators.TransformBounds({ constrain: false });
 
@@ -52,17 +58,22 @@ function getPosition(width, height, auto)
    return position;
 }
 
+/** @type {{id: number, position: Position, color: string}[]} */
 let data = [];
 
 const boxStore = writable(data);
 
 boxStore.stagger = writable(false);
+
 boxStore.auto = writable(false);
-boxStore.ease = writable(easingFunc.linear);
-boxStore.duration = writable(1);
-boxStore.validator = writable(true);
 boxStore.debug = writable(false);
 boxStore.labels = writable(false);
+boxStore.pclEnabled = writable(false);
+
+boxStore.ease = writable(easingFunc.linear);
+boxStore.duration = writable(1);
+
+boxStore.validator = writable(true);
 
 boxStore.add = (count = 1) =>
 {
@@ -84,7 +95,8 @@ boxStore.add = (count = 1) =>
 
 boxStore.animateToCancel = () =>
 {
-   Position.Animation.cancelAll();
+   Position.Animate.cancelAll();
+   animateTo = animateScaleRot = void 0;
 };
 
 boxStore.animateToLocation = () =>
@@ -95,10 +107,31 @@ boxStore.animateToLocation = () =>
    const duration = get(boxStore.duration);
    const ease = get(boxStore.ease);
 
-   for (const entry of data)
-   {
-      entry.position.animateTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) }, { duration, ease });
-   }
+   // Stagger enabled state and cumulative time.
+   const stagger = get(boxStore.stagger);
+
+   const createPositionData = () => ({ top: getRandomInt(0, height), left: getRandomInt(0, width) });
+   const createOptionsData = ({ index }) => ({ delay: index * 0.1, duration, ease });
+
+   if (animateTo) { animateTo.cancel(); }
+
+   animateTo = Position.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+
+   // animateTo = Position.Animate.from(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+
+   // animateTo = Position.Animate.fromTo(data, createPositionData, createPositionData,
+   //  stagger ? createOptionsData : { duration, ease });
+
+   // if (!quickTo) { quickTo = Position.Animate.quickTo(data, ['top', 'left']); }
+   //
+   // quickTo.options({ duration, ease })(createPositionData);
+
+   // animateTo.finished.then(() => console.log(`!! Animation Location Finished`));
+
+   // for (const entry of data)
+   // {
+   //    entry.position.animate.fromTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) }, { top: getRandomInt(0, height), left: getRandomInt(0, width) }, { duration, ease });
+   // }
 };
 
 boxStore.animateToScaleRot = () =>
@@ -106,11 +139,17 @@ boxStore.animateToScaleRot = () =>
    const duration = get(boxStore.duration);
    const ease = get(boxStore.ease);
 
-   for (const entry of data)
-   {
-      const scale = getRandomInt(50, 200) / 100;
-      entry.position.animateTo({ scale, rotateZ: getRandomInt(0, 360) }, { duration, ease });
-   }
+   // Stagger enabled state and cumulative time.
+   const stagger = get(boxStore.stagger);
+
+   const createPositionData = () => ({ scale: getRandomInt(50, 200) / 100, rotateZ: getRandomInt(0, 360) });
+   const createOptionsData = ({ index }) => ({ delay: index * 0.1, duration, ease });
+
+   if (animateScaleRot) { animateScaleRot.cancel(); }
+
+   animateScaleRot = Position.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+
+   animateScaleRot.finished.then(() => console.log(`!! Animation Scale / Rotate Finished`));
 };
 
 boxStore.gsapTimelineCreate = () =>
@@ -153,36 +192,6 @@ boxStore.gsapTimelineCreate = () =>
    // Create new GSAP timeline; in paused state.
    gsapTimeline = GsapCompose.timeline({ paused: true });
 
-   const allPositions = [];
-   for (const entry of data)
-   {
-      allPositions.push(entry.position);
-   }
-
-   // GsapCompose.to(data, {
-   //    left: getRandomInt(0, width),
-   //    top: getRandomInt(0, height),
-   //    duration,
-   //    ease
-   // });
-
-   // gsapTimeline.add(GsapCompose.to(data, {
-   //    left: getRandomInt(0, width),
-   //    top: getRandomInt(0, height),
-   //    duration,
-   //    ease
-   // }));
-
-   // gsapTimeline.add(GsapCompose.fromTo(data, {
-   //    left: getRandomInt(0, width),
-   //    top: getRandomInt(0, height),
-   // }, {
-   //    left: getRandomInt(0, width),
-   //    top: getRandomInt(0, height),
-   //    duration,
-   //    ease
-   // }));
-
    // // Note: the `rotation` alias is used instead of rotateZ as this timeline includes use of CustomWiggle &
    // // MotionPathPlugin that output data to `rotation`.
    const createTimelineData = () => [
@@ -199,9 +208,6 @@ boxStore.gsapTimelineCreate = () =>
    const staggerFunc = (time = 0.1) => ({ index }) => index * time;
 
    gsapTimeline.add(GsapCompose.timeline(data, createTimelineData, { position: stagger ? staggerFunc() : '<' }));
-
-   // gsapTimeline.add(GsapCompose.timeline(allPositions, createTimelineData, { position: stagger ? staggerFunc() : '<' }));
-   // gsapTimeline.add(GsapCompose.timeline([data[0], data[1]], createTimelineData));
 };
 
 boxStore.gsapTimelinePause = () =>
@@ -254,12 +260,40 @@ boxStore.removeAll = () =>
    boxStore.set(data);
 };
 
-boxStore.setDimension = (offsetWidth, offsetHeight) =>
+boxStore.save = (componentData) =>
 {
-   validator.setDimension(offsetWidth, offsetHeight);
-
-   // Force validation for all Position instances.
-   for (const entry of data) { entry.position.set(); }
+   savedComponentData = componentData;
 };
+
+boxStore.restore = () =>
+{
+   if (typeof savedComponentData === 'object')
+   {
+      const newData = [];
+
+      for (const component of savedComponentData.components)
+      {
+         // Must add a new Position and a new unique ID.
+         const position = new Position({ ...component.position, validator });
+         newData.push({ ...component, id: idCntr++, position });
+      }
+
+      boxStore.set(newData);
+      data = newData;
+   }
+};
+
+
+boxStore.setValidatorEnabled = (enabled) =>
+{
+   validator.enabled = enabled;
+
+   // When the validator is turned on and there is box data then force a set on each box position to update validation.
+   if (enabled && data.length > 0)
+   {
+      for (const box of data) { box.position.set(); }
+   }
+};
+
 
 export { boxStore, validator };

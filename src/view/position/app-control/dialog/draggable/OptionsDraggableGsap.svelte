@@ -86,7 +86,7 @@
 
       a { margin-left: 0.5em; }
 
-      input[type=text] { max-width: 3.5em; }
+      input[type=text] { max-width: 3.5em; pointer-events: none; }
 
       .flex {
          display: flex;

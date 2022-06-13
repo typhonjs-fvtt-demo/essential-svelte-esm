@@ -51,25 +51,27 @@
    <main>
       <h1>Reactive `position`</h1>
 
-      <label>
-         top: <input type=text bind:value={$top} readonly>
-         left: <input type=text bind:value={$left} readonly>
-         width: <input type=text bind:value={$width} readonly>
-         height: <input type=text bind:value={$height} readonly>
-      </label>
+      <section>
+         <label>
+            top: <input type=text bind:value={$top} readonly>
+            left: <input type=text bind:value={$left} readonly>
+            width: <input type=text bind:value={$width} readonly>
+            height: <input type=text bind:value={$height} readonly>
+         </label>
 
-      <label>
-         rotateX: <input type=text bind:value={nullishRotateX} readonly>
-         rotateY: <input type=text bind:value={nullishRotateY} readonly>
-         rotateZ: <input type=text bind:value={nullishRotateZ} readonly>
-      </label>
+         <label>
+            rotateX: <input type=text bind:value={nullishRotateX} readonly>
+            rotateY: <input type=text bind:value={nullishRotateY} readonly>
+            rotateZ: <input type=text bind:value={nullishRotateZ} readonly>
+         </label>
 
-      <label>
-         scale: <input type=text bind:value={nullishScale} readonly>
-         zIndex: <input type=text bind:value={$zIndex} readonly>
-         dragging: <input type=text bind:value={$dragging} readonly>
-         resizing: <input type=text bind:value={$resizing} readonly>
-      </label>
+         <label>
+            scale: <input type=text bind:value={nullishScale} readonly>
+            zIndex: <input type=text bind:value={$zIndex} readonly>
+            dragging: <input type=text bind:value={$dragging} readonly>
+            resizing: <input type=text bind:value={$resizing} readonly>
+         </label>
+      </section>
 
       <div class=bottom>
          <a href="https://svelte.dev/tutorial">Interactive Svelte tutorial (highly recommended)</a>
@@ -88,6 +90,11 @@
       display: flex;
       flex-direction: column;
 
+      // Prevents clicks on readable inputs.
+      section {
+         pointer-events:none;
+      }
+
       div.bottom {
          margin-top: auto;
       }
@@ -99,7 +106,7 @@
          font-weight: 100;
       }
 
-      input { margin: 6px }
+      input { margin: 6px; }
       input[type=text] { max-width: 5em }
 
       label {
