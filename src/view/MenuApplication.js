@@ -11,6 +11,9 @@ import PositionApplication       from './position-app/PositionApplication.js';
 import PositionBoxApplication    from './position-box/PositionBoxApplication.js';
 import PositionCarouselApp       from './position-carousel/PositionCarouselApp.js';
 
+import { MyItemApp } from "./_test/MyItemApp.js";
+import { TestBoxApp } from './_test/TestBoxApp.js';
+
 export default class MenuApplication extends SvelteApplication
 {
    /**
@@ -55,7 +58,9 @@ export default class MenuApplication extends SvelteApplication
                   },
                   { title: 'Position (App)', class: PositionApplication },
                   { title: 'Position (Box)', class: PositionBoxApplication },
-                  { title: 'Position (Carousel)', class: PositionCarouselApp }
+                  { title: 'Position (Carousel)', class: PositionCarouselApp },
+                  { title: 'TestDoc', class: MyItemApp },
+                  { title: 'TestBoxApp', class: TestBoxApp }
                ]
             }
          }
