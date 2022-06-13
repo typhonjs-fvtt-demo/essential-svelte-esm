@@ -8,9 +8,10 @@ import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
 import HeaderButtonsApplication  from './header-buttons/HeaderButtonsApplication.js';
 import HelloFoundryApplication   from './hello/HelloFoundryApplication.js';
 import PositionApplication       from './position-app/PositionApplication.js';
-import PositionBoxApplication    from './position-box/PositionBoxApplication.js';
 import PositionBasicOverlayApp   from './position-basic-overlay/PositionBasicOverlayApp.js';
+import PositionBoxApplication    from './position-box/PositionBoxApplication.js';
 import PositionCarouselApp       from './position-carousel/PositionCarouselApp.js';
+import PositionSessionApp         from './position-storage-session/PositionSessionApp.js';
 
 export default class MenuApplication extends SvelteApplication
 {
@@ -57,7 +58,8 @@ export default class MenuApplication extends SvelteApplication
                   { title: 'Position (Basic Overlay)', class: PositionBasicOverlayApp },
                   { title: 'Position (App)', class: PositionApplication },
                   { title: 'Position (Box)', class: PositionBoxApplication },
-                  { title: 'Position (Carousel)', class: PositionCarouselApp }
+                  { title: 'Position (Carousel)', class: PositionCarouselApp },
+                  { title: 'Position (Session Storage)', class: PositionSessionApp }
                ]
             }
          }
