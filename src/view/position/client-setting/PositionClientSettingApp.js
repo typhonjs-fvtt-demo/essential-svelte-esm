@@ -40,6 +40,7 @@ export default class PositionClientSettingApp extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
+         id: 'position-client-setting',
          title: 'Position (Reload / Client Setting)',
          width: 'auto',
          height: 'auto',

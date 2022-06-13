@@ -25,6 +25,7 @@ export default class PositionSessionApp extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
+         id: 'position-session-storage',
          title: 'Position (Reload / Session Storage)',
          width: 'auto',
          height: 'auto',

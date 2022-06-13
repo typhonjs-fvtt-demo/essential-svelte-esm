@@ -13,6 +13,7 @@ export default class PositionBasicOverlayApp extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
+         id: 'position-basic-overlay',
          width: 300,
          height: 300,
 
