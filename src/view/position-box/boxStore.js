@@ -22,6 +22,8 @@ let animateScaleRot, animateTo;
 
 let gsapTimeline;
 
+let savedComponentData;
+
 let quickTo;
 
 const validator = new Position.Validators.TransformBounds({ constrain: false });
@@ -62,12 +64,16 @@ let data = [];
 const boxStore = writable(data);
 
 boxStore.stagger = writable(false);
+
 boxStore.auto = writable(false);
-boxStore.ease = writable(easingFunc.linear);
-boxStore.duration = writable(1);
-boxStore.validator = writable(true);
 boxStore.debug = writable(false);
 boxStore.labels = writable(false);
+boxStore.pclEnabled = writable(false);
+
+boxStore.ease = writable(easingFunc.linear);
+boxStore.duration = writable(1);
+
+boxStore.validator = writable(true);
 
 boxStore.add = (count = 1) =>
 {
@@ -224,17 +230,6 @@ boxStore.gsapTimelineReverse = () =>
    if (gsapTimeline !== void 0) { gsapTimeline.reverse(); }
 };
 
-boxStore.setValidatorEnabled = (enabled) =>
-{
-   validator.enabled = enabled;
-
-   // When the validator is turned on and there is box data then force a set on each box position to update validation.
-   if (enabled && data.length > 0)
-   {
-      for (const box of data) { box.position.set(); }
-   }
-};
-
 boxStore.remove = (id) =>
 {
    boxStore.update((array) =>
@@ -264,5 +259,41 @@ boxStore.removeAll = () =>
    data = [];
    boxStore.set(data);
 };
+
+boxStore.save = (componentData) =>
+{
+   savedComponentData = componentData;
+};
+
+boxStore.restore = () =>
+{
+   if (typeof savedComponentData === 'object')
+   {
+      const newData = [];
+
+      for (const component of savedComponentData.components)
+      {
+         // Must add a new Position and a new unique ID.
+         const position = new Position({ ...component.position, validator });
+         newData.push({ ...component, id: idCntr++, position });
+      }
+
+      boxStore.set(newData);
+      data = newData;
+   }
+};
+
+
+boxStore.setValidatorEnabled = (enabled) =>
+{
+   validator.enabled = enabled;
+
+   // When the validator is turned on and there is box data then force a set on each box position to update validation.
+   if (enabled && data.length > 0)
+   {
+      for (const box of data) { box.position.set(); }
+   }
+};
+
 
 export { boxStore, validator };

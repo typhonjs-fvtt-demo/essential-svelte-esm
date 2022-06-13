@@ -9,11 +9,14 @@
 
    import { boxStore }  from './boxStore.js';
 
+   export let controls;
+
    const storeStagger = boxStore.stagger;
 
    const storeAuto = boxStore.auto;
    const storeDebug = boxStore.debug;
    const storeLabels = boxStore.labels;
+   const storePCL = boxStore.pclEnabled;
 
    const storeDuration = boxStore.duration;
    const storeEase = boxStore.ease;
@@ -52,6 +55,12 @@
          <span>Debug:</span>
          <label><input use:alwaysBlur type=checkbox bind:checked={$storeDebug}>Enable</label>
          <label><input use:alwaysBlur type=checkbox bind:checked={$storeLabels}>Labels</label>
+      </div>
+      <div class=flex>
+         <span title="Position Control Layer">PCL:</span>
+         <label><input use:alwaysBlur type=checkbox bind:checked={$storePCL}>Enable</label>
+         <button use:alwaysBlur on:click={() => boxStore.save(controls.export({ compact: true }))} style="margin-left: 0.25em">Save</button>
+         <button use:alwaysBlur on:click={() => boxStore.restore()}>Restore</button>
       </div>
    </div>
    <div class="container flex-vert">

@@ -21,6 +21,7 @@
    const storeAuto = boxStore.auto;
    const storeDebug = boxStore.debug;
    const storeValidator = boxStore.validator;
+   const storePCL = boxStore.pclEnabled;
 
    let component;
    let controls;
@@ -51,9 +52,11 @@
 <svelte:options accessors={true}/>
 
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
-   <BoxHeader />
+   <BoxHeader {controls} />
    <main use:resizeObserver={setDimension}>
-      <PositionControlLayer components={$boxStore} {boundingRect} validate={$storeValidator} bind:controls>
+      <PositionControlLayer active={$storePCL} {boundingRect} bind:controls
+                            components={$boxStore}
+                            validate={$storeValidator}>
       {#each $boxStore as box (box.id)}
          <svelte:component this={component} {box} />
       {/each}
