@@ -4,6 +4,8 @@ import {
 
 import MenuAppShell              from './MenuAppShell.svelte';
 
+import AppStateClientSettingApp  from './app-state/client-setting/AppStateClientSettingApp.js';
+import AppStateSessionApp        from './app-state/session-storage/AppStateSessionApp.js';
 import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
 import HeaderButtonsApplication  from './header-buttons/HeaderButtonsApplication.js';
 import HelloFoundryApplication   from './hello/HelloFoundryApplication.js';
@@ -11,8 +13,6 @@ import PositionApplication       from './position/app-control/PositionApplicatio
 import PositionBasicOverlayApp   from './position/basic-overlay/PositionBasicOverlayApp.js';
 import PositionBoxApplication    from './position/box/PositionBoxApplication.js';
 import PositionCarouselApp       from './position/carousel/PositionCarouselApp.js';
-import PositionClientSettingApp  from './position/client-setting/PositionClientSettingApp.js';
-import PositionSessionApp        from './position/session-storage/PositionSessionApp.js';
 
 export default class MenuApplication extends SvelteApplication
 {
@@ -60,8 +60,8 @@ export default class MenuApplication extends SvelteApplication
                   { title: 'Position (App)', class: PositionApplication },
                   { title: 'Position (Box)', class: PositionBoxApplication },
                   { title: 'Position (Carousel)', class: PositionCarouselApp },
-                  { title: 'Position (Client Setting)', class: PositionClientSettingApp },
-                  { title: 'Position (Session Storage)', class: PositionSessionApp }
+                  { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
+                  { title: 'App State (Session Storage)', class: AppStateSessionApp }
                ]
             }
          }
