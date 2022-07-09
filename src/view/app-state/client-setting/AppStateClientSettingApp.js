@@ -17,7 +17,7 @@ export default class AppStateClientSettingApp extends SvelteApplication
 
       // Register a client game setting.
       this.#gameSettings.register({
-         moduleId: constants.moduleName,
+         namespace: constants.moduleName,
          key: 'app-state',
          options: {
             scope: 'client',
@@ -44,9 +44,11 @@ export default class AppStateClientSettingApp extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
-         id: 'position-client-setting',
-         title: 'Position (Reload / Client Setting)',
+         id: 'app-state-client-setting',
+         title: 'App State (Reload / Client Setting)',
          resizable: true,
+         width: 500,
+         height: 175,
 
          svelte: {
             class: ClientSettingAppShell,
