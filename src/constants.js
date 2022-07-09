@@ -1,18 +1,18 @@
 /**
  * Defines the main constants for module name and label.
  *
- * @type {{moduleName: string, moduleLabel: string}}
+ * @type {{moduleId: string, moduleLabel: string}}
  */
 const constants = {
-   moduleLabel: `Essential Svelte (ESM)`,
-   moduleName: 'essential-svelte-esm'
+   moduleId: 'essential-svelte-esm',
+   moduleLabel: `Essential Svelte (ESM)`
 };
 
 /**
  * @type {ESSessionConstants} Defines all the module session storage static constants.
  */
 const sessionConstants = {
-   themeDarkMode: `${constants.moduleName}.theme.dark`
+   themeDarkMode: `${constants.moduleId}.theme.dark`
 };
 
 export { constants, sessionConstants };

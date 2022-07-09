@@ -17,7 +17,7 @@ export default class AppStateClientSettingApp extends SvelteApplication
 
       // Register a client game setting.
       this.#gameSettings.register({
-         namespace: constants.moduleName,
+         namespace: constants.moduleId,
          key: 'app-state',
          options: {
             scope: 'client',
