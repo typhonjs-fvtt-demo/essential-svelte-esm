@@ -52,20 +52,20 @@ export default class HeaderButtonsApplication extends SvelteApplication
    {
       const buttons = super._getHeaderButtons();
 
-      const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode);
+      const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode, true);
 
       buttons.unshift({
          class: 'theme-dark',
          icon: 'fas fa-moon',
-         title: themeDarkMode ? 'Dark Mode enable' : 'Dark Node disable',
-         styles: themeDarkMode ? { color: 'white' } : { color: 'lightblue' },
+         title: themeDarkMode ? 'Dark Node disable' : 'Dark Mode enable',
+         styles: themeDarkMode ? { color: 'lightblue' } : { color: 'white' },
 
          onclick: function()
          {
             const newThemeDarkMode = storage.swapItemBoolean(sessionConstants.themeDarkMode);
 
-            this.title = newThemeDarkMode ? 'Dark Mode enable' : 'Dark Node disable';
-            this.styles = newThemeDarkMode ? { color: 'white' } : { color: 'lightblue' };
+            this.title = newThemeDarkMode ? 'Dark Node disable' : 'Dark Mode enable';
+            this.styles = newThemeDarkMode ? { color: 'lightblue' } : { color: 'white' };
          }
       });
 
