@@ -1,4 +1,8 @@
 # Changelog
+## Release 0.0.6
+- Updated @typhonjs-fvtt/runtime to ['0.0.15'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0015).
+- Reworked session storage and game settings serialization of app state.
+
 ## Release 0.0.5
 - Updated @typhonjs-fvtt/runtime to ['0.0.14'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0014).
 - Stage #2 of the massive core animation engine updates.
