@@ -38,6 +38,10 @@
 
    function setDimension(offsetWidth, offsetHeight)
    {
+      // Avoid any changes when the application state is not rendered as setting `boundingRect` while the application is
+      // closing can cause a loop in the Svelte runtime. This can happen occasionally, so just avoid it entirely.
+      if (!application.rendered) { return; }
+
       validator.setDimension(offsetWidth, offsetHeight);
 
       boundingRect.width = offsetWidth;

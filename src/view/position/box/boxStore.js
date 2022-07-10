@@ -149,7 +149,8 @@ boxStore.animateToScaleRot = () =>
 
    animateScaleRot = Position.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
 
-   animateScaleRot.finished.then(() => console.log(`!! Animation Scale / Rotate Finished`));
+   // Example of using finished promise.
+   // animateScaleRot.finished.then(() => console.log(`!! Animation Scale / Rotate Finished`));
 };
 
 boxStore.gsapTimelineCreate = () =>
