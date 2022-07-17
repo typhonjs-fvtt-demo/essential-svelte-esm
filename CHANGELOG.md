@@ -1,4 +1,8 @@
 # Changelog
+## Release 0.0.7
+- Updated @typhonjs-fvtt/runtime to ['0.0.16'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0016).
+- Updated @typhonjs-fvtt/svelte-standard to ['0.0.5'](https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/CHANGELOG.md#release-005).
+
 ## Release 0.0.6
 - Updated @typhonjs-fvtt/runtime to ['0.0.15'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0015).
 - Reworked session storage and game settings serialization of app state.
