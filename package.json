@@ -1,6 +1,6 @@
 {
   "name": "essential-svelte-esm",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Provides essential TRL demos for reactivity and beyond.",
   "license": "MIT",
   "private": true,
@@ -10,8 +10,8 @@
     "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)"
   ],
   "dependencies": {
-    "@typhonjs-fvtt/runtime": "^0.0.15",
-    "@typhonjs-fvtt/svelte-standard": "^0.0.2",
+    "@typhonjs-fvtt/runtime": "^0.0.16",
+    "@typhonjs-fvtt/svelte-standard": "^0.0.5",
     "svelte": "^3.49.0"
   },
   "devDependencies": {
