@@ -24,10 +24,17 @@ let gsapTimeline;
 
 let savedComponentData;
 
-let quickTo;
-
 const validator = new Position.Validators.TransformBounds({ constrain: false });
 
+/**
+ * Create a random integer between min & max.
+ *
+ * @param {number} min - Minimum lower bound.
+ *
+ * @param {number} max - Maximum upper bound.
+ *
+ * @returns {number} Random integer.
+ */
 function getRandomInt(min, max)
 {
    min = Math.ceil(min);
@@ -35,11 +42,28 @@ function getRandomInt(min, max)
    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * Return a random rgba color.
+ *
+ * @returns {string} Random color.
+ */
 function getRandomColor()
 {
    return `rgba(${getRandomInt(100, 255)}, ${getRandomInt(100, 255)}, ${getRandomInt(100, 255)}, 0.5)`;
 }
 
+/**
+ * Creates a Position instance with random top / left defined by width & height. When `auto` is true width & height of
+ * the Position instance is set to auto.
+ *
+ * @param {number} width - Max width bounds.
+ *
+ * @param {number} height - Max height bounds.
+ *
+ * @param {boolean} auto - When true width & height are set to auto.
+ *
+ * @returns {Position} New Position instance.
+ */
 function getPosition(width, height, auto)
 {
    const bounds = getRandomInt(90, 140);
