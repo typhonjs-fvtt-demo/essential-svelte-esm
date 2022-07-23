@@ -3,13 +3,8 @@
 
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
-   import Test from './Test.svelte';
-
    export let elementRoot = void 0;
    export let storageStore = void 0;
-
-   const component = Test;
-   const props = { boo: true };
 
    const { application } = getContext('external');
 
@@ -26,7 +21,6 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
-   <svelte:component this={component} {...props} />
    This is a basic demo app that serializes app state to session storage.
    <p>
    When the app is moved the app state is serialized after 500 milliseconds.
