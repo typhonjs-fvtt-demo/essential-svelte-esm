@@ -21,7 +21,7 @@ const s_RESOLVE_CONFIG = {
 };
 
 // ATTENTION!
-// You must change `base` and the `proxy` strings replacing `/modules/template-svelte-esm/` with your
+// You must change `base` and the `proxy` strings replacing `/modules/essential-svelte-esm/` with your
 // module or system ID.
 
 export default () =>
@@ -29,7 +29,7 @@ export default () =>
    /** @type {import('vite').UserConfig} */
    return {
       root: 'src/',                             // Source location / esbuild root.
-      base: '/modules/essential-svelte-esm/',    // Base module path that 30001 / served dev directory.
+      base: '/modules/essential-svelte-esm/',   // Base module path that 30001 / served dev directory.
       publicDir: false,                         // No public resources to copy.
       cacheDir: '../.vite-cache',               // Relative from root directory.
 
