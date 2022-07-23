@@ -1,4 +1,7 @@
 # Changelog
+## Release 0.0.9 (minor update)
+- Fixed Vite teething issues.
+
 ## Release 0.0.8 (major update)
 - Updated @typhonjs-fvtt/runtime to ['0.0.17'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0017).
 - Switched to Vite for build and dev mode.
