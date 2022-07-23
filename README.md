@@ -22,8 +22,8 @@ module.
 2. Use WebStorm or VSCode to clone this repo into the Foundry VTT data / modules directory (make sure to keep the name 
 `essential-svelte-esm` as the folder installed in your module directory as this is the `name` used in `module.json`).
 3. Open in your IDE and proceed to run `npm install` 
-4. Run the NPM script `build` or for constant development `build-watch` (this builds and bundles the module to 
-`./dist`.)
+4. Run the NPM script `build` to create the production bundle or `dev` to run in developer mode which uses `esbuild` &
+HMR (hot module replacement) to dynamically update your running module in real time for all Svelte related components.
 5. Restart Foundry VTT. This is necessary for Foundry to load the new module.
 6. You should now have a new module installed `Essential Svelte (ESM)` visible in your modules list.
 7. Launch a game / world of your choice. 
