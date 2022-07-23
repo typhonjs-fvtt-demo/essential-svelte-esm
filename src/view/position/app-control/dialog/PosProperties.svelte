@@ -1,5 +1,5 @@
 <script>
-   export let position;
+   export let position = void 0;
 
    let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex;
 

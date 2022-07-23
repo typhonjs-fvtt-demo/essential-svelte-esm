@@ -8,8 +8,8 @@
    import { TJSDialog }          from '@typhonjs-fvtt/runtime/svelte/application';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
-   export let elementRoot;
-   export let message;
+   export let elementRoot = void 0;
+   export let message = void 0;
 
    const application = getContext('external').application;
 

@@ -5,7 +5,7 @@
    // Imports the loading / automatic GSAP plugin registration.
    import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
 
-   export let options;
+   export let options = void 0;
 
    const tweenEnd = ({ top, left }) => ({ top: Math.round(top / 100) * 100, left: Math.round(left / 100) * 100 });
 

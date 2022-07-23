@@ -2,7 +2,7 @@
    import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
    import { draggableGsap }   from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-   export let box;
+   export let box = void 0;
 
    // This is run once when the component is created. It sets the position width / height back to initial bounds.
    const bounds = box.position._initialBounds;

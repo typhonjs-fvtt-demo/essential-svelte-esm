@@ -4,7 +4,7 @@
 
    import { carouselStore }   from './carouselStore.js';
 
-   export let cell;
+   export let cell = void 0;
 
    const selectedIndex = carouselStore.selectedIndex;
 

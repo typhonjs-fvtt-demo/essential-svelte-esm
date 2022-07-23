@@ -5,7 +5,7 @@
       applyPosition,
       draggable } from '@typhonjs-fvtt/runtime/svelte/action';
 
-   export let elementRoot;
+   export let elementRoot = void 0;
 
    const context = getContext('external');
 

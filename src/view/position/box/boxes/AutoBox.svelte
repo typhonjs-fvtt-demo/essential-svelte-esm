@@ -5,7 +5,7 @@
 
    import { draggableGsap }   from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-   export let box;
+   export let box = void 0;
 
    // This is run once when the component is created. It sets the position width / height to 'auto'.
    box.position.set({ width: 'auto', height: 'auto' });

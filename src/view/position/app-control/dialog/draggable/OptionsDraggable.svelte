@@ -6,7 +6,7 @@
 
    import { slideFade }    from '@typhonjs-fvtt/runtime/svelte/transition';
 
-   export let options;
+   export let options = void 0;
 </script>
 
 <section transition:slideFade={{duration: 150}}>

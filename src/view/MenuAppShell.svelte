@@ -4,8 +4,8 @@
    import { alwaysBlur }            from '@typhonjs-fvtt/runtime/svelte/action';
    import { TJSApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
-   export let elementRoot;
-   export let buttons;
+   export let elementRoot = void 0;
+   export let buttons = void 0;
 
    const apps = new Map();
 

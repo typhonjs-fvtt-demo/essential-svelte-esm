@@ -9,7 +9,7 @@
 
    import { boxStore }  from './boxStore.js';
 
-   export let controls;
+   export let controls = void 0;
 
    const storeStagger = boxStore.stagger;
 
