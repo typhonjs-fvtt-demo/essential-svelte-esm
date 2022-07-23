@@ -6,7 +6,7 @@
    import Cell                      from './Cell.svelte';
    import CarouselHeader            from './CarouselHeader.svelte';
 
-   export let elementRoot;
+   export let elementRoot = void 0;
 
    const storePerspective = carouselStore.perspective;
 

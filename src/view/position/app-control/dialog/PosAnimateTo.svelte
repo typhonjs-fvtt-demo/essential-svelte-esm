@@ -3,7 +3,7 @@
       easingFunc,
       easingList }   from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-   export let application;
+   export let application = void 0;
 
    const position = application.position;
 

@@ -10,8 +10,8 @@
     "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)"
   ],
   "dependencies": {
-    "@typhonjs-fvtt/runtime": "^0.0.17",
-    "@typhonjs-fvtt/svelte-standard": "^0.0.5",
+    "@typhonjs-fvtt/runtime": "github:typhonjs-fvtt-lib/typhonjs",
+    "@typhonjs-fvtt/svelte-standard": "github:typhonjs-fvtt-lib/svelte-standard",
     "svelte": "^3.49.0"
   },
   "devDependencies": {

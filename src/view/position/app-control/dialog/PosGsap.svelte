@@ -9,7 +9,7 @@
    import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/MotionPathPlugin';
    import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/CustomWiggle';
 
-   export let position;
+   export let position = void 0;
 
    // Defines a custom ease w/ the CustomWiggle plugin. This is used below to set a variable amount of wiggle count
    // depending on the duration of the animation; more wiggles the lower the duration.

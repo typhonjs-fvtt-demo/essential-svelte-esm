@@ -13,7 +13,7 @@
    import BoxDebug                     from './boxes/BoxDebug.svelte';
    import BoxHeader                    from './BoxHeader.svelte';
 
-   export let elementRoot;
+   export let elementRoot = void 0;
 
    const application = getContext('external').application;
 

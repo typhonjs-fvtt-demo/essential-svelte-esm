@@ -3,7 +3,7 @@
    import { getContext }         from 'svelte';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
-   export let elementRoot;
+   export let elementRoot = void 0;
 
    const application = getContext('external').application;
 

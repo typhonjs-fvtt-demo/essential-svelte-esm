@@ -8,7 +8,7 @@
       optionStores,
       storeDraggable }           from './dialog/draggable/index.js';
 
-   export let elementRoot;
+   export let elementRoot = void 0;
 
    const application = getContext('external').application;
 

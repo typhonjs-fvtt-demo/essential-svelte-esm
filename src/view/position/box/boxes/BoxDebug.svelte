@@ -7,7 +7,7 @@
 
    import { boxStore }        from '../boxStore.js';
 
-   export let box;
+   export let box = void 0;
 
    const labels = boxStore.labels;
    const transform = box.position.stores.transform;
