@@ -54,7 +54,7 @@ export default () =>
       // served.
       server: {
          port: 30001,
-         open: '/game',
+         open: false, //'/game',
          proxy: {
             '^(/modules/essential-svelte-esm/lang)': 'http://localhost:30000',
             '^(?!/modules/essential-svelte-esm/)': 'http://localhost:30000',

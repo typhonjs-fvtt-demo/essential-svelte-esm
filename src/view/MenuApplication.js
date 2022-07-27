@@ -14,6 +14,8 @@ import PositionBasicOverlayApp   from './position/basic-overlay/PositionBasicOve
 import PositionBoxApplication    from './position/box/PositionBoxApplication.js';
 import PositionCarouselApp       from './position/carousel/PositionCarouselApp.js';
 
+import EmbeddedDocApplication    from "./_doc/EmbeddedDocApplication.js";
+
 export default class MenuApplication extends SvelteApplication
 {
    /**
@@ -61,7 +63,8 @@ export default class MenuApplication extends SvelteApplication
                   { title: 'Position (Box)', class: PositionBoxApplication },
                   { title: 'Position (Carousel)', class: PositionCarouselApp },
                   { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
-                  { title: 'App State (Session Storage)', class: AppStateSessionApp }
+                  { title: 'App State (Session Storage)', class: AppStateSessionApp },
+                  { title: 'Embedded Doc', class: EmbeddedDocApplication }
                ]
             }
          }
