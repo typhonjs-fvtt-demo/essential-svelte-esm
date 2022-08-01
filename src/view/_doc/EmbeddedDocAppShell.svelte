@@ -25,16 +25,16 @@
 
    const doc = new TJSDocument(game.actors.get('yEkk9vsgMEtxx3XZ'), { delete: () => application.close() })
 
-   /** @type {DynMapReducer<Item>} */
-   const spells = doc.createEmbeddedStore('Item', 'spells', {
-      filters: [(entry) => entry.type === 'spell'],
-      sort: (a, b) => a.name.localeCompare(b.name)
-   });
-
-   const weapons = doc.createEmbeddedStore('Item', 'weapons', {
-      filters: [(entry) => entry.type === 'weapon'],
-      sort: (a, b) => a.name.localeCompare(b.name)
-   });
+   // /** @type {DynMapReducer<Item>} */
+   // const spells = doc.createEmbeddedStore('Item', 'spells', {
+   //    filters: [(entry) => entry.type === 'spell'],
+   //    sort: (a, b) => a.name.localeCompare(b.name)
+   // });
+   //
+   // const weapons = doc.createEmbeddedStore('Item', 'weapons', {
+   //    filters: [(entry) => entry.type === 'weapon'],
+   //    sort: (a, b) => a.name.localeCompare(b.name)
+   // });
 
    const wildcard = doc.createEmbeddedStore('Item', 'wildcard', {
       filters: [filterSearch],
@@ -49,25 +49,25 @@
       <h1>Embedded Doc Test</h1>
       <br>
       <div class=container>
-         <div class=column>
-            Number of spells: {$spells.index.size}
-            <br>
-            <ol>
-               {#each [...$spells] as spell (spell.id)}
-                  <li animate:flip={{duration: 200}}>{spell.name}</li>
-               {/each}
-            </ol>
-         </div>
+<!--         <div class=column>-->
+<!--            Number of spells: {$spells.index.size}-->
+<!--            <br>-->
+<!--            <ol>-->
+<!--               {#each [...$spells] as spell (spell.id)}-->
+<!--                  <li animate:flip={{duration: 200}}>{spell.name}</li>-->
+<!--               {/each}-->
+<!--            </ol>-->
+<!--         </div>-->
 
-         <div class=column>
-            Number of weapons: {$weapons.index.size}
-            <br>
-            <ol>
-               {#each [...$weapons] as weapon (weapon.id)}
-                  <li animate:flip={{duration: 200}}>{weapon.name}</li>
-               {/each}
-            </ol>
-         </div>
+<!--         <div class=column>-->
+<!--            Number of weapons: {$weapons.index.size}-->
+<!--            <br>-->
+<!--            <ol>-->
+<!--               {#each [...$weapons] as weapon (weapon.id)}-->
+<!--                  <li animate:flip={{duration: 200}}>{weapon.name}</li>-->
+<!--               {/each}-->
+<!--            </ol>-->
+<!--         </div>-->
 
          <div class=column>
             <div style="display: flex; align-items: center;">Number of &nbsp;<TJSInput {input}/>&nbsp;: {$wildcard.index.size}</div>
