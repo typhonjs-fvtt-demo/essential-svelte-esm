@@ -26,9 +26,11 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
-   Drop a document below:
+   Drop a document below (change the doc name to see reactivity):
    <section on:drop|preventDefault|stopPropagation={onDrop}>
-      Document name: {$doc?.name}
+      {#if $doc}
+         Document name: {$doc?.name}
+      {/if}
    </section>
 </ApplicationShell>
 
@@ -40,5 +42,6 @@
       border-radius: 0.25em;
       border: 2px solid rgba(0, 0, 0, 0.2);
       padding: 0.25em;
+      min-height: 2em;
    }
 </style>
