@@ -1,6 +1,7 @@
 import { DynMapReducer } from '@typhonjs-utils/dynamic-reducer';
 
 /**
+ * @template {foundry.abstract.Document} D
  */
 export class EmbeddedStoreManager
 {
@@ -8,6 +9,19 @@ export class EmbeddedStoreManager
    #name = new Map();
 
    #contextMap = new Map();
+
+   /**
+    * @type {D[]}
+    */
+   #document;
+
+   /**
+    * @param {D[]} document - The associated document holder.
+    */
+   constructor(document)
+   {
+      this.#document = document;
+   }
 
    /**
     *
@@ -36,16 +50,23 @@ export class EmbeddedStoreManager
    /**
     * @template T
     *
-    * @param {Map<string, T>}  collection -
-    *
     * @param {string} embeddedName -
     *
     * @param {import('@typhonjs-utils/dynamic-reducer').OptionsDynMapCreate<string, T>} options -
     *
-    * @returns {DynMapReducer<string, T>} DynMapReducer instance
+    * @returns {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>} DynMapReducer instance
     */
-   create(collection, embeddedName, options)
+   create(embeddedName, options)
    {
+      /** @type {foundry.abstract.Document} */
+      const doc = this.#document[0];
+
+      if (!doc) { throw new Error(`EmbeddedStoreManager.create error: No valid document.`); }
+
+      const collection = doc.getEmbeddedCollection(embeddedName);
+
+      if (!collection) { throw new Error(`EmbeddedStoreManager.create error: No valid embedded collection.`); }
+
       let embeddedData;
 
       if (!this.#name.has(embeddedName))
@@ -117,7 +138,7 @@ export class EmbeddedStoreManager
     *
     * @param {string} storeName -
     *
-    * @returns {DynMapReducer<string, T>} DynMapReducer instance.
+    * @returns {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>} DynMapReducer instance.
     */
    get(embeddedName, storeName)
    {
@@ -142,15 +163,5 @@ export class EmbeddedStoreManager
  *
  * @property {foundry.abstract.Collection} collection -
  *
- * @property {Map<string, DynMapReducer>} stores -
- */
-
-/**
- * @template T
- *
- * @typedef {object} EmbeddedDynData
- *
- * @property {Iterable<FilterFn<T>|FilterData<T>>} [filters] -
- *
- * @property {CompareFn<T>}                        [sort] -
+ * @property {Map<string, import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>>} stores -
  */

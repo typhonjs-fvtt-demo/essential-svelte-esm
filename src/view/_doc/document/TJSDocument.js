@@ -11,11 +11,23 @@ import { EmbeddedStoreManager } from './EmbeddedStoreManager.js';
  * This makes documents reactive in a Svelte component, but otherwise provides subscriber functionality external to
  * Svelte.
  *
- * @template {foundry.abstract.Document} T
+ * @template {foundry.abstract.Document} D
  */
 export class TJSDocument
 {
-   #document;
+   /**
+    * @type {D[]}
+    */
+   #document = [void 0];
+
+   /**
+    * @type {EmbeddedStoreManager}
+    */
+   #embeddedStoreManager;
+
+   /**
+    * @type {string}
+    */
    #uuidv4;
 
    /**
@@ -27,9 +39,9 @@ export class TJSDocument
    #updateOptions;
 
    /**
-    * @param {T|TJSDocumentOptions} [document] - Document to wrap or TJSDocumentOptions.
+    * @param {D | TJSDocumentOptions}  [document] - Document to wrap or TJSDocumentOptions.
     *
-    * @param {TJSDocumentOptions}   [options] - TJSDocument options.
+    * @param {TJSDocumentOptions}      [options] - TJSDocument options.
     */
    constructor(document, options = {})
    {
@@ -47,6 +59,16 @@ export class TJSDocument
    }
 
    /**
+    * @returns {EmbeddedStoreManager} Embedded store manager.
+    */
+   get embedded()
+   {
+      if (!this.#embeddedStoreManager) { this.#embeddedStoreManager = new EmbeddedStoreManager(this.#document); }
+
+      return this.#embeddedStoreManager;
+   }
+
+   /**
     * Returns the options passed on last update.
     *
     * @returns {object} Last update options.
@@ -56,7 +78,7 @@ export class TJSDocument
    /**
     * Returns the UUID assigned to this store.
     *
-    * @returns {*} UUID
+    * @returns {string} UUID
     */
    get uuidv4() { return this.#uuidv4; }
 
@@ -67,13 +89,13 @@ export class TJSDocument
     */
    async #deleted()
    {
-      const doc = this.#document;
+      const doc = this.#document[0];
 
       // Check to see if the document is still in the associated collection to determine if actually deleted.
       if (doc instanceof foundry.abstract.Document && !doc?.collection?.has(doc.id))
       {
          delete doc?.apps[this.#uuidv4];
-         this.#document = void 0;
+         this.#document[0] = void 0;
 
          this.#notify(false, { action: 'delete', data: void 0 });
 
@@ -89,12 +111,12 @@ export class TJSDocument
     */
    destroy()
    {
-      const doc = this.#document;
+      const doc = this.#document[0];
 
       if (doc instanceof foundry.abstract.Document)
       {
          delete doc?.apps[this.#uuidv4];
-         this.#document = void 0;
+         this.#document[0] = void 0;
       }
 
       this.#options.delete = void 0;
@@ -113,68 +135,38 @@ export class TJSDocument
       // Subscriptions are stored locally as on the browser Babel is still used for private class fields / Babel
       // support until 2023. IE not doing this will require several extra method calls otherwise.
       const subscriptions = this.#subscriptions;
-      const document = this.#document;
+      const doc = this.#document[0];
 
-      for (let cntr = 0; cntr < subscriptions.length; cntr++) { subscriptions[cntr](document, options); }
-console.log(`! options.renderContext: `, options.renderContext);
-      switch (options.renderContext)
+      for (let cntr = 0; cntr < subscriptions.length; cntr++) { subscriptions[cntr](doc, options); }
+
+      if (this.#embeddedStoreManager)
       {
-         case 'createItem':
-         case 'deleteItem':
-            this.#embeddedStoreManager.update('Item');
-            break;
+         console.log(`! options.renderContext: `, options.renderContext);
+         switch (options.renderContext)
+         {
+            case 'createItem':
+            case 'deleteItem':
+               this.#embeddedStoreManager.update('Item');
+               break;
+         }
       }
    }
 
    /**
-    * @returns {T | undefined} Current document
+    * @returns {D | undefined} Current document
     */
-   get() { return this.#document; }
-
-   #embeddedStoreManager = new EmbeddedStoreManager();
+   get() { return this.#document[0]; }
 
    /**
-    * @template T
-    *
-    * @param {string} embeddedName -
-    *
-    * @param {import('@typhonjs-utils/dynamic-reducer').OptionsDynMapCreate<string, T>} options -
-    *
-    * @returns {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>} DynMapReducer instance.
-    */
-   createEmbeddedStore(embeddedName, options)
-   {
-      if (!this.#document) { throw new Error(`TJSDocument createEmbeddedStore error: No valid document.`); }
-
-      const collection = this.#document.getEmbeddedCollection(embeddedName);
-
-      if (!collection) { throw new Error(`TJSDocument createEmbeddedStore error: No valid embedded collection.`); }
-
-      return this.#embeddedStoreManager.create(collection, embeddedName, options);
-   }
-
-   /**
-    * @param {string} embeddedName -
-    *
-    * @param {string} storeName -
-    *
-    * @returns {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>} DynMapReducer instance.
-    */
-   getEmbeddedStore(embeddedName, storeName)
-   {
-      return this.#embeddedStoreManager.get(embeddedName, storeName);
-   }
-
-   /**
-    * @param {T | undefined}  document - New document to set.
+    * @param {D | undefined}  document - New document to set.
     *
     * @param {object}         [options] - New document update options to set.
     */
    set(document, options = {})
    {
-      if (this.#document)
+      if (this.#document[0])
       {
-         delete this.#document.apps[this.#uuidv4];
+         delete this.#document[0].apps[this.#uuidv4];
       }
 
       if (document !== void 0 && !(document instanceof foundry.abstract.Document))
@@ -195,7 +187,7 @@ console.log(`! options.renderContext: `, options.renderContext);
          };
       }
 
-      this.#document = document;
+      this.#document[0] = document;
       this.#updateOptions = options;
       this.#notify();
    }
@@ -266,7 +258,7 @@ console.log(`! options.renderContext: `, options.renderContext);
    }
 
    /**
-    * @param {function(T, object): void} handler - Callback function that is invoked on update / changes.
+    * @param {function(D, object): void} handler - Callback function that is invoked on update / changes.
     *
     * @returns {(function(): void)} Unsubscribe function.
     */
@@ -276,7 +268,7 @@ console.log(`! options.renderContext: `, options.renderContext);
 
       const updateOptions = { action: 'subscribe', data: void 0 };
 
-      handler(this.#document, updateOptions);      // Call handler with current value and update options.
+      handler(this.#document[0], updateOptions);      // Call handler with current value and update options.
 
       // Return unsubscribe function.
       return () =>

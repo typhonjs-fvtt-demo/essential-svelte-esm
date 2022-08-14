@@ -10,8 +10,6 @@
 
    import { TJSDocument }        from './document/TJSDocument.js';
 
-   import { DynMapReducer } from "@typhonjs-utils/dynamic-reducer";
-
    export let elementRoot;
 
    const application = getContext('external').application;
@@ -27,31 +25,20 @@
 
    const doc = new TJSDocument(game.actors.get('yEkk9vsgMEtxx3XZ'), { delete: () => application.close() })
 
-   // /** @type {DynMapReducer<Item>} */
-   // const spells = doc.createEmbeddedStore('Item', 'spells', {
-   //    filters: [(entry) => entry.type === 'spell'],
-   //    sort: (a, b) => a.name.localeCompare(b.name)
-   // });
-   //
-   // const weapons = doc.createEmbeddedStore('Item', 'weapons', {
-   //    filters: [(entry) => entry.type === 'weapon'],
-   //    sort: (a, b) => a.name.localeCompare(b.name)
-   // });
-
    /** @type {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, Item>} */
-   const wildcard = doc.createEmbeddedStore('Item', {
+   const wildcard = doc.embedded.create('Item', {
       name: 'wildcard',
       filters: [filterSearch],
       sort: (a, b) => a.name.localeCompare(b.name)
    });
 
    // /** @type {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, Item>} */
-   // const wildcard = doc.createEmbeddedStore('Item', 'wildcard');
+   // const wildcard = doc.embedded.create('Item', 'wildcard');
    // wildcard.filters.add(filterSearch);
    // wildcard.sort.set((a, b) => a.name.localeCompare(b.name));
 
    // import { CustomReducer } from './CustomReducer.js';
-   // const wildcard = doc.createEmbeddedStore('Item', CustomReducer);
+   // const wildcard = doc.embedded.create('Item', CustomReducer);
    // wildcard.filters.add(filterSearch);
 </script>
 
