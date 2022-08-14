@@ -10,6 +10,8 @@
 
    import { TJSDocument }        from './document/TJSDocument.js';
 
+   import { DynMapReducer } from "@typhonjs-utils/dynamic-reducer";
+
    export let elementRoot;
 
    const application = getContext('external').application;
@@ -36,10 +38,21 @@
    //    sort: (a, b) => a.name.localeCompare(b.name)
    // });
 
-   const wildcard = doc.createEmbeddedStore('Item', 'wildcard', {
+   /** @type {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, Item>} */
+   const wildcard = doc.createEmbeddedStore('Item', {
+      name: 'wildcard',
       filters: [filterSearch],
       sort: (a, b) => a.name.localeCompare(b.name)
    });
+
+   // /** @type {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, Item>} */
+   // const wildcard = doc.createEmbeddedStore('Item', 'wildcard');
+   // wildcard.filters.add(filterSearch);
+   // wildcard.sort.set((a, b) => a.name.localeCompare(b.name));
+
+   // import { CustomReducer } from './CustomReducer.js';
+   // const wildcard = doc.createEmbeddedStore('Item', CustomReducer);
+   // wildcard.filters.add(filterSearch);
 </script>
 
 <svelte:options accessors={true}/>
@@ -49,28 +62,8 @@
       <h1>Embedded Doc Test</h1>
       <br>
       <div class=container>
-<!--         <div class=column>-->
-<!--            Number of spells: {$spells.index.size}-->
-<!--            <br>-->
-<!--            <ol>-->
-<!--               {#each [...$spells] as spell (spell.id)}-->
-<!--                  <li animate:flip={{duration: 200}}>{spell.name}</li>-->
-<!--               {/each}-->
-<!--            </ol>-->
-<!--         </div>-->
-
-<!--         <div class=column>-->
-<!--            Number of weapons: {$weapons.index.size}-->
-<!--            <br>-->
-<!--            <ol>-->
-<!--               {#each [...$weapons] as weapon (weapon.id)}-->
-<!--                  <li animate:flip={{duration: 200}}>{weapon.name}</li>-->
-<!--               {/each}-->
-<!--            </ol>-->
-<!--         </div>-->
-
          <div class=column>
-            <div style="display: flex; align-items: center;">Number of &nbsp;<TJSInput {input}/>&nbsp;: {$wildcard.index.size}</div>
+            <div style="display: flex; align-items: center;">Number of &nbsp;<TJSInput {input}/>&nbsp;: {$wildcard.index.length}</div>
             <br>
             <ol>
                {#each [...$wildcard] as item (item.id)}

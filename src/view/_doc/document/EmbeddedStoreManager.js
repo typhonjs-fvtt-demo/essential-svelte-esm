@@ -1,4 +1,4 @@
-import { DynMapReducer } from '../dyn-map-reducer/DynMapReducer.js';
+import { DynMapReducer } from '@typhonjs-utils/dynamic-reducer';
 
 /**
  */
@@ -10,19 +10,41 @@ export class EmbeddedStoreManager
    #contextMap = new Map();
 
    /**
+    *
+    * @param {*}  target - Any target to test.
+    *
+    * @param {Function} Prototype -
+    *
+    * @returns {boolean} Target matches prototype.
+    */
+   hasPrototype(target, Prototype)
+   {
+      /* c8 ignore next */
+      if (typeof target !== 'function') { return false; }
+
+      if (target === Prototype) { return true; }
+
+      // Walk parent prototype chain. Check for descriptor at each prototype level.
+      for (let proto = Object.getPrototypeOf(target); proto; proto = Object.getPrototypeOf(proto))
+      {
+         if (proto === Prototype) { return true; }
+      }
+
+      return false;
+   }
+
+   /**
     * @template T
     *
-    * @param {foundry.abstract.Collection<T>}  collection -
+    * @param {Map<string, T>}  collection -
     *
     * @param {string} embeddedName -
     *
-    * @param {string} storeName -
+    * @param {import('@typhonjs-utils/dynamic-reducer').OptionsDynMapCreate<string, T>} options -
     *
-    * @param {EmbeddedDynData<T>} dynData -
-    *
-    * @returns {DynMapReducer<T>} DynMapReducer instance
+    * @returns {DynMapReducer<string, T>} DynMapReducer instance
     */
-   create(collection, embeddedName, storeName, dynData)
+   create(collection, embeddedName, options)
    {
       let embeddedData;
 
@@ -40,24 +62,62 @@ export class EmbeddedStoreManager
          embeddedData = this.#name.get(embeddedName);
       }
 
-      if (embeddedData.stores.has(storeName))
+      /** @type {string} */
+      let name;
+
+      /** @type {import('@typhonjs-utils/dynamic-reducer').DataOptions<T>} */
+      let rest = {};
+
+      /** @type {import('@typhonjs-utils/dynamic-reducer').IDynMapReducerCtor<string, T>} */
+      let ctor;
+
+      if (typeof options === 'string')
       {
-         return embeddedData.stores.get(storeName);
+         name = options;
+         ctor = DynMapReducer;
+      }
+      else if (typeof options === 'function' && this.hasPrototype(options, DynMapReducer))
+      {
+         ctor = options;
+      }
+      else if (typeof options === 'object' && options !== null)
+      {
+         ({ name, ctor = DynMapReducer, ...rest } = options);
       }
       else
       {
-         const store = new DynMapReducer({ data: collection, ...dynData });
-         embeddedData.stores.set(storeName, store);
+         throw new TypeError(`EmbeddedStoreManager.create error: 'options' does not conform to allowed parameters.`);
+      }
+
+      if (!this.hasPrototype(ctor, DynMapReducer))
+      {
+         throw new TypeError(`EmbeddedStoreManager.create error: 'ctor' is not a 'DynMapReducer'.`);
+      }
+
+      name = name ?? ctor?.name;
+
+      if (typeof name !== 'string') { throw new TypeError(`EmbeddedStoreManager.create error: 'name' is not a string.`); }
+
+      if (embeddedData.stores.has(name))
+      {
+         return embeddedData.stores.get(name);
+      }
+      else
+      {
+         const store = new ctor({ data: collection, ...rest });
+         embeddedData.stores.set(name, store);
          return store;
       }
    }
 
    /**
+    * @template T
+    *
     * @param {string} embeddedName -
     *
     * @param {string} storeName -
     *
-    * @returns {DynMapReducer|void} DynMapReducer instance.
+    * @returns {DynMapReducer<string, T>} DynMapReducer instance.
     */
    get(embeddedName, storeName)
    {

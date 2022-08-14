@@ -138,13 +138,11 @@ console.log(`! options.renderContext: `, options.renderContext);
     *
     * @param {string} embeddedName -
     *
-    * @param {string} storeName -
+    * @param {import('@typhonjs-utils/dynamic-reducer').OptionsDynMapCreate<string, T>} options -
     *
-    * @param {EmbeddedDynData<T>} dynData -
-    *
-    * @returns {DynMapReducer<T>} DynMapReducer instance.
+    * @returns {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>} DynMapReducer instance.
     */
-   createEmbeddedStore(embeddedName, storeName, dynData)
+   createEmbeddedStore(embeddedName, options)
    {
       if (!this.#document) { throw new Error(`TJSDocument createEmbeddedStore error: No valid document.`); }
 
@@ -152,7 +150,7 @@ console.log(`! options.renderContext: `, options.renderContext);
 
       if (!collection) { throw new Error(`TJSDocument createEmbeddedStore error: No valid embedded collection.`); }
 
-      return this.#embeddedStoreManager.create(collection, embeddedName, storeName, dynData);
+      return this.#embeddedStoreManager.create(collection, embeddedName, options);
    }
 
    /**
@@ -160,7 +158,7 @@ console.log(`! options.renderContext: `, options.renderContext);
     *
     * @param {string} storeName -
     *
-    * @returns {DynMapReducer} DynMapReducer instance.
+    * @returns {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>} DynMapReducer instance.
     */
    getEmbeddedStore(embeddedName, storeName)
    {
