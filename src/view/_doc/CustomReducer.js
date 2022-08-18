@@ -3,7 +3,7 @@ import { DynMapReducer } from "@typhonjs-utils/dynamic-reducer";
 /**
  * @template {Item} T
  *
- * @augments {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>}
+ * @augments {import('@typhonjs-fvtt/runtime/svelte/store').DynMapReducer<string, T>}
  */
 export class CustomReducer extends DynMapReducer
 {

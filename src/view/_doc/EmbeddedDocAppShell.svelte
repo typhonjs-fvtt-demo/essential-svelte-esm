@@ -25,14 +25,14 @@
 
    const doc = new TJSDocument(game.actors.get('yEkk9vsgMEtxx3XZ'), { delete: () => application.close() })
 
-   /** @type {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, Item>} */
+   /** @type {import('@typhonjs-fvtt/runtime/svelte/store').DynMapReducer<string, Item>} */
    const wildcard = doc.embedded.create('Item', {
       name: 'wildcard',
       filters: [filterSearch],
       sort: (a, b) => a.name.localeCompare(b.name)
    });
 
-   // /** @type {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, Item>} */
+   // /** @type {import('@typhonjs-fvtt/runtime/svelte/store').DynMapReducer<string, Item>} */
    // const wildcard = doc.embedded.create('Item', 'wildcard');
    // wildcard.filters.add(filterSearch);
    // wildcard.sort.set((a, b) => a.name.localeCompare(b.name));

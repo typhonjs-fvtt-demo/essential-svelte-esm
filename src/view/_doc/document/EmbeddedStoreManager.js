@@ -1,50 +1,26 @@
-import { DynMapReducer } from '@typhonjs-utils/dynamic-reducer';
+import { DynMapReducer }   from '@typhonjs-fvtt/runtime/svelte/store';
+import { hasPrototype }    from '@typhonjs-fvtt/runtime/svelte/util';
 
 /**
- * @template {foundry.abstract.Document} D
  */
 export class EmbeddedStoreManager
 {
    /** @type {Map<string, EmbeddedCollectionData>} */
    #name = new Map();
 
-   #contextMap = new Map();
-
    /**
-    * @type {D[]}
+    * @type {foundry.abstract.Document[]}
     */
    #document;
 
    /**
-    * @param {D[]} document - The associated document holder.
+    * @param {foundry.abstract.Document[]} document - The associated document holder.
     */
    constructor(document)
    {
       this.#document = document;
-   }
 
-   /**
-    *
-    * @param {*}  target - Any target to test.
-    *
-    * @param {Function} Prototype -
-    *
-    * @returns {boolean} Target matches prototype.
-    */
-   hasPrototype(target, Prototype)
-   {
-      /* c8 ignore next */
-      if (typeof target !== 'function') { return false; }
-
-      if (target === Prototype) { return true; }
-
-      // Walk parent prototype chain. Check for descriptor at each prototype level.
-      for (let proto = Object.getPrototypeOf(target); proto; proto = Object.getPrototypeOf(proto))
-      {
-         if (proto === Prototype) { return true; }
-      }
-
-      return false;
+      this.handleDocChange();
    }
 
    /**
@@ -52,9 +28,9 @@ export class EmbeddedStoreManager
     *
     * @param {string} embeddedName -
     *
-    * @param {import('@typhonjs-utils/dynamic-reducer').OptionsDynMapCreate<string, T>} options -
+    * @param {import('@typhonjs-fvtt/runtime/svelte/store').OptionsDynMapCreate<string, T>} options -
     *
-    * @returns {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>} DynMapReducer instance
+    * @returns {import('@typhonjs-fvtt/runtime/svelte/store').DynMapReducer<string, T>} DynMapReducer instance
     */
    create(embeddedName, options)
    {
@@ -86,10 +62,10 @@ export class EmbeddedStoreManager
       /** @type {string} */
       let name;
 
-      /** @type {import('@typhonjs-utils/dynamic-reducer').DataOptions<T>} */
+      /** @type {import('@typhonjs-fvtt/runtime/svelte/store').DataOptions<T>} */
       let rest = {};
 
-      /** @type {import('@typhonjs-utils/dynamic-reducer').IDynMapReducerCtor<string, T>} */
+      /** @type {import('@typhonjs-fvtt/runtime/svelte/store').IDynMapReducerCtor<string, T>} */
       let ctor;
 
       if (typeof options === 'string')
@@ -110,7 +86,7 @@ export class EmbeddedStoreManager
          throw new TypeError(`EmbeddedStoreManager.create error: 'options' does not conform to allowed parameters.`);
       }
 
-      if (!this.hasPrototype(ctor, DynMapReducer))
+      if (!hasPrototype(ctor, DynMapReducer))
       {
          throw new TypeError(`EmbeddedStoreManager.create error: 'ctor' is not a 'DynMapReducer'.`);
       }
@@ -138,13 +114,29 @@ export class EmbeddedStoreManager
     *
     * @param {string} storeName -
     *
-    * @returns {import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>} DynMapReducer instance.
+    * @returns {import('@typhonjs-fvtt/runtime/svelte/store').DynMapReducer<string, T>} DynMapReducer instance.
     */
    get(embeddedName, storeName)
    {
       if (!this.#name.has(embeddedName)) { return void 0; }
 
       return this.#name.get(embeddedName).stores.get(storeName);
+   }
+
+   handleDocChange()
+   {
+      const doc = this.#document[0];
+
+      if (doc instanceof foundry.abstract.Document)
+      {
+         const embeddedKeys = new Set(Object.keys(doc.constructor.metadata.embedded) ?? []);
+
+         console.log(`! ESM - handleDocChange - 0 - embeddedKeys:`, embeddedKeys);
+      }
+      else // Reset all embedded reducer stores to null data.
+      {
+
+      }
    }
 
    update(embeddedName)
@@ -163,5 +155,5 @@ export class EmbeddedStoreManager
  *
  * @property {foundry.abstract.Collection} collection -
  *
- * @property {Map<string, import('@typhonjs-utils/dynamic-reducer').DynMapReducer<string, T>>} stores -
+ * @property {Map<string, import('@typhonjs-fvtt/runtime/svelte/store').DynMapReducer<string, T>>} stores -
  */
