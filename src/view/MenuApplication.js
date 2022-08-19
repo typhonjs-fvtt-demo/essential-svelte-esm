@@ -37,7 +37,7 @@ export default class MenuApplication extends SvelteApplication
          resizable: false,
          minimizable: true,
          popOut: false,
-         width: 200,
+         width: 225,
          height: 'auto',
          positionOrtho: false,
          transformOrigin: null,
@@ -65,7 +65,7 @@ export default class MenuApplication extends SvelteApplication
                   { title: 'Position (Carousel)', class: PositionCarouselApp },
                   { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
                   { title: 'App State (Session Storage)', class: AppStateSessionApp },
-                  { title: 'Embedded Doc', class: EmbeddedDocApplication }
+                  { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication }
                ]
             }
          }

@@ -50,10 +50,10 @@
 
 <ApplicationShell bind:elementRoot>
    <main>
-      <h1>Embedded Doc Test</h1>
+      <h1>Reactive Embedded Collections</h1>
       <div class=drop
-           on:drop|preventDefault|stopPropagation={onDrop}>
-           Drop Document Here<br>
+           on:drop={onDrop}>
+           Drop Actor Document Here<br>
            Name: {$doc?.name}
       </div>
       <div class=container>
@@ -106,7 +106,7 @@
       h1 {
          color: #ff3e00;
          text-transform: uppercase;
-         font-size: 2em;
+         font-size: 1.5em;
          font-weight: 100;
       }
 

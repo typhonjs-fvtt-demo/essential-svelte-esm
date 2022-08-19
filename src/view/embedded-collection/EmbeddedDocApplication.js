@@ -5,11 +5,6 @@ import EmbeddedDocAppShell    from './EmbeddedDocAppShell.svelte';
 export default class EmbeddedDocApplication extends SvelteApplication
 {
    /**
-    * @inheritDoc
-    */
-   constructor(options = {}) { super(options); }
-
-   /**
     * Default Application options
     *
     * @returns {object} options - Application options.
@@ -18,12 +13,12 @@ export default class EmbeddedDocApplication extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
-         id: 'trl-embedded-doc-test',
+         id: 'trl-reactive-embedded-collection',
          resizable: false,
          minimizable: true,
          width: 'auto',
          height: 'auto',
-         title: 'Embedded Doc - Test',
+         title: 'Reactive Embedded Collections',
 
          svelte: {
             class: EmbeddedDocAppShell,

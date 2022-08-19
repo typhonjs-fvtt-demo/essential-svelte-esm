@@ -8,5 +8,5 @@ import './chatmessage.js';    // Loads the hooks specific to the chat message de
 Hooks.once('ready', () =>
 {
    const sidebarRect = document.querySelector('#sidebar').getBoundingClientRect();
-   new MenuApplication({ left: sidebarRect.x - 210, top: sidebarRect.y }).render(true, { focus: true });
+   new MenuApplication({ left: sidebarRect.x - 235, top: sidebarRect.y }).render(true, { focus: true });
 });
