@@ -8,7 +8,7 @@ import AppStateClientSettingApp  from './app-state/client-setting/AppStateClient
 import AppStateSessionApp        from './app-state/session-storage/AppStateSessionApp.js';
 import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
 import BasicDocumentApp          from './document/basic/BasicDocumentApp.js';
-import EmbeddedDocApplication    from "./embedded-collection/EmbeddedDocApplication.js";
+import EmbeddedDocApplication    from "./document/embedded-collection/EmbeddedDocApplication.js";
 import HeaderButtonsApplication  from './header-buttons/HeaderButtonsApplication.js';
 import HelloFoundryApplication   from './hello/HelloFoundryApplication.js';
 import PositionApplication       from './position/app-control/PositionApplication.js';
@@ -52,7 +52,8 @@ export default class MenuApplication extends SvelteApplication
                buttons: [
                   { title: 'Hello Foundry', class: HelloFoundryApplication },
                   { title: 'Header Buttons', class: HeaderButtonsApplication },
-                  { title: 'Document (Basic)', class: BasicDocumentApp },
+                  { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
+                  { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication },
                   { title: 'Chat Message', onclick: () => new TJSDialog(
                      {
                         title: 'Essential Svelte (ESM) - Chat Message',
@@ -64,8 +65,7 @@ export default class MenuApplication extends SvelteApplication
                   { title: 'Position (Box)', class: PositionBoxApplication },
                   { title: 'Position (Carousel)', class: PositionCarouselApp },
                   { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
-                  { title: 'App State (Session Storage)', class: AppStateSessionApp },
-                  { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication }
+                  { title: 'App State (Session Storage)', class: AppStateSessionApp }
                ]
             }
          }

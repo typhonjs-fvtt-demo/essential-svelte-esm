@@ -53,8 +53,10 @@
       <h1>Reactive Embedded Collections</h1>
       <div class=drop
            on:drop={onDrop}>
-           Drop Actor Document Here<br>
-           Name: {$doc?.name}
+         Drop Actor Document Here<br>
+         {#if $doc}
+            Name: {$doc?.name}
+         {/if}
       </div>
       <div class=container>
          <div class=column>
