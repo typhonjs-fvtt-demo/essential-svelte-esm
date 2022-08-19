@@ -1,12 +1,21 @@
 <!--
 Dialog content presenting a button to add a custom chat message that is enhanced in the `renderChatMessage` found
-in `./src/init.js`
+in `./src/chatmessage.js`. Please refer to `./src/chatmessage.js` for all the hooks required and more information.
 -->
 <script>
-   async function onClick()
+   function onClick()
    {
-      const message = await ChatMessage.create({ user: game.user.id });
-      await message.setFlag('essential-svelte-esm', 'data', { something: 'useful' });
+      // Add flags data scoped to your module ID in initial message creation. This allows the associated Svelte
+      // component to be mounted in a single callback in `renderChatMessage` hook found in `./src/chatmessage.js` and
+      // the chat log to properly scroll down with the full size of the chat message + Svelte component size.
+      ChatMessage.create({
+         user: game.user.id,
+         flags: {
+            'essential-svelte-esm': {        // Use your module ID instead of `essential-svelte-esm`.
+               data: { something: 'useful' }
+            }
+         }
+      });
    }
 </script>
 

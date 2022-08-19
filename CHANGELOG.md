@@ -1,5 +1,11 @@
 # Changelog
+## Release 0.0.10 (medium update)
+- Updated @typhonjs-fvtt/runtime to ['0.0.19'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0019).
+- Added reactive embedded collection demo.
+- Verified v10 compatibility.
+
 ## Release 0.0.9 (minor update)
+- Updated @typhonjs-fvtt/runtime to ['0.0.18'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0018).
 - Fixed Vite teething issues.
 
 ## Release 0.0.8 (major update)
