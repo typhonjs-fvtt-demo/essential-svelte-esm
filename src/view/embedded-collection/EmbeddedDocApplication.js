@@ -31,9 +31,4 @@ export default class EmbeddedDocApplication extends SvelteApplication
          }
       });
    }
-
-   onSvelteMount({element, elementContent, elementTarget} = {})
-   {
-      console.log(`! this.options.svelte: `, this.options.svelte)
-   }
 }

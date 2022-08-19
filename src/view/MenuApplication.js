@@ -8,14 +8,13 @@ import AppStateClientSettingApp  from './app-state/client-setting/AppStateClient
 import AppStateSessionApp        from './app-state/session-storage/AppStateSessionApp.js';
 import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
 import BasicDocumentApp          from './document/basic/BasicDocumentApp.js';
+import EmbeddedDocApplication    from "./embedded-collection/EmbeddedDocApplication.js";
 import HeaderButtonsApplication  from './header-buttons/HeaderButtonsApplication.js';
 import HelloFoundryApplication   from './hello/HelloFoundryApplication.js';
 import PositionApplication       from './position/app-control/PositionApplication.js';
 import PositionBasicOverlayApp   from './position/basic-overlay/PositionBasicOverlayApp.js';
 import PositionBoxApplication    from './position/box/PositionBoxApplication.js';
 import PositionCarouselApp       from './position/carousel/PositionCarouselApp.js';
-
-import EmbeddedDocApplication    from "./_doc/EmbeddedDocApplication.js";
 
 export default class MenuApplication extends SvelteApplication
 {

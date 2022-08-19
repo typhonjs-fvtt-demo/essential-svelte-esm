@@ -3,12 +3,11 @@
    import { flip }               from 'svelte/animate';
 
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { TJSDocument }        from '@typhonjs-fvtt/runtime/svelte/store';
 
    import { rippleFocus }        from '@typhonjs-fvtt/svelte-standard/action';
    import { TJSInput }           from '@typhonjs-fvtt/svelte-standard/component';
    import { createFilterQuery }  from '@typhonjs-fvtt/svelte-standard/store';
-
-   import { TJSDocument }        from './document/TJSDocument.js';
 
    export let elementRoot;
 
@@ -23,7 +22,7 @@
       type: 'search'
    }
 
-   const doc = new TJSDocument(game.actors.get('yEkk9vsgMEtxx3XZ'), { delete: () => application.close() })
+   const doc = new TJSDocument();
 
    /** @type {import('@typhonjs-fvtt/runtime/svelte/store').DynMapReducer<string, Item>} */
    const wildcard = doc.embedded.create('Item', {
@@ -32,14 +31,19 @@
       sort: (a, b) => a.name.localeCompare(b.name)
    });
 
-   // /** @type {import('@typhonjs-fvtt/runtime/svelte/store').DynMapReducer<string, Item>} */
-   // const wildcard = doc.embedded.create('Item', 'wildcard');
-   // wildcard.filters.add(filterSearch);
-   // wildcard.sort.set((a, b) => a.name.localeCompare(b.name));
-
-   // import { CustomReducer } from './CustomReducer.js';
-   // const wildcard = doc.embedded.create('Item', CustomReducer);
-   // wildcard.filters.add(filterSearch);
+   /**
+    * Handles parsing the drop event and sets new document source.
+    *
+    * @param {DragEvent}   event -
+    */
+   function onDrop(event)
+   {
+      try
+      {
+         doc.setFromDataTransfer(JSON.parse(event.dataTransfer.getData('text/plain')));
+      }
+      catch (err) { /**/ }
+   }
 </script>
 
 <svelte:options accessors={true}/>
@@ -47,10 +51,14 @@
 <ApplicationShell bind:elementRoot>
    <main>
       <h1>Embedded Doc Test</h1>
-      <br>
+      <div class=drop
+           on:drop|preventDefault|stopPropagation={onDrop}>
+           Drop Document Here<br>
+           Name: {$doc?.name}
+      </div>
       <div class=container>
          <div class=column>
-            <div style="display: flex; align-items: center;">Number of &nbsp;<TJSInput {input}/>&nbsp;: {$wildcard.index.length}</div>
+            <div style="display: flex; align-items: center;">Items by type ->&nbsp;<TJSInput {input}/>&nbsp;: {$wildcard.index.length}</div>
             <br>
             <ol>
                {#each [...$wildcard] as item (item.id)}
@@ -73,7 +81,6 @@
       div.container {
          display: flex;
          justify-content: flex-start;
-         padding: 10px;
       }
 
       div.column {
@@ -81,10 +88,19 @@
          flex-direction: column;
          align-items: flex-start;
          justify-content: flex-start;
+         width: 100%;
          border-radius: 10px;
          border: 2px solid rgba(0, 0, 0, 0.2);
          padding: 10px;
-         margin-bottom: 10px;
+         //margin-bottom: 10px;
+      }
+
+      div.drop {
+         background: rgba(0, 0, 0, 0.2);
+         border-radius: 10px;
+         border: 2px solid rgba(0, 0, 0, 0.2);
+         padding: 0.25em;
+         margin-bottom: 0.25em;
       }
 
       h1 {
@@ -97,11 +113,5 @@
       li {
          text-align: start
       }
-
-      //label {
-      //   display: flex;
-      //   align-items: center;
-      //   justify-content: center;
-      //}
    }
 </style>
