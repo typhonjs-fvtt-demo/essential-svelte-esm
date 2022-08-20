@@ -1,5 +1,4 @@
 <script>
-   import { getContext }         from 'svelte';
    import { flip }               from 'svelte/animate';
 
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
@@ -11,14 +10,12 @@
 
    export let elementRoot;
 
-   const application = getContext('external').application;
-
    const filterSearch = createFilterQuery('type');
 
    const input = {
       store: filterSearch,
       efx: rippleFocus(),
-      placeholder: "wildcard",
+      placeholder: 'wildcard',
       type: 'search'
    }
 
