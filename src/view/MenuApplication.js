@@ -15,6 +15,7 @@ import PositionApplication       from './position/app-control/PositionApplicatio
 import PositionBasicOverlayApp   from './position/basic-overlay/PositionBasicOverlayApp.js';
 import PositionBoxApplication    from './position/box/PositionBoxApplication.js';
 import PositionCarouselApp       from './position/carousel/PositionCarouselApp.js';
+import ProseMirrorApp            from './prosemirror/ProseMirrorApp.js';
 
 export default class MenuApplication extends SvelteApplication
 {
@@ -31,6 +32,32 @@ export default class MenuApplication extends SvelteApplication
     */
    static get defaultOptions()
    {
+      const buttons = [
+         { title: 'Hello Foundry', class: HelloFoundryApplication },
+         { title: 'Header Buttons', class: HeaderButtonsApplication },
+         { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
+         { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication },
+         { title: 'Chat Message', onclick: () => new TJSDialog(
+             {
+                title: 'Essential Svelte (ESM) - Chat Message',
+                content: ChatDialogContent
+             }, { id: 'essential-esm-chat-dialog' })
+         },
+         { title: 'Position (Basic Overlay)', class: PositionBasicOverlayApp },
+         { title: 'Position (App)', class: PositionApplication },
+         { title: 'Position (Box)', class: PositionBoxApplication },
+         { title: 'Position (Carousel)', class: PositionCarouselApp },
+         { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
+         { title: 'App State (Session Storage)', class: AppStateSessionApp }
+      ];
+
+      const isV10 = !foundry.utils.isNewerVersion(10, game.version ?? game?.data?.version);
+
+      if (isV10)
+      {
+         buttons.push({ title: 'ProseMirror', class: ProseMirrorApp });
+      }
+
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'essential-svelte-esm',
          headerButtonNoClose: true,
@@ -49,24 +76,7 @@ export default class MenuApplication extends SvelteApplication
             target: document.body,
             intro: true,
             props: {
-               buttons: [
-                  { title: 'Hello Foundry', class: HelloFoundryApplication },
-                  { title: 'Header Buttons', class: HeaderButtonsApplication },
-                  { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
-                  { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication },
-                  { title: 'Chat Message', onclick: () => new TJSDialog(
-                     {
-                        title: 'Essential Svelte (ESM) - Chat Message',
-                        content: ChatDialogContent
-                     }, { id: 'essential-esm-chat-dialog' })
-                  },
-                  { title: 'Position (Basic Overlay)', class: PositionBasicOverlayApp },
-                  { title: 'Position (App)', class: PositionApplication },
-                  { title: 'Position (Box)', class: PositionBoxApplication },
-                  { title: 'Position (Carousel)', class: PositionCarouselApp },
-                  { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
-                  { title: 'App State (Session Storage)', class: AppStateSessionApp }
-               ]
+               buttons
             }
          }
       });
