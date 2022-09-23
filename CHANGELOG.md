@@ -1,4 +1,8 @@
 # Changelog
+## Release 0.0.11 (medium update)
+- Updated @typhonjs-fvtt/svelte-standard to ['0.0.10'](https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/CHANGELOG.md#release-0010).
+- Added ProseMirror demo for `Foundry v10+`.
+ 
 ## Release 0.0.10 (medium update)
 - Updated @typhonjs-fvtt/runtime to ['0.0.19'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0019).
 - Added reactive embedded collection demo.
