@@ -1,4 +1,8 @@
 # Changelog
+## Release 0.0.12 (medium update)
+- Updated @typhonjs-fvtt/svelte-standard to ['0.0.14'](https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/CHANGELOG.md#release-0014).
+- Refined TJSProseMirror / added developer tools version of TJSProseMirror.
+
 ## Release 0.0.11 (medium update)
 - Updated @typhonjs-fvtt/svelte-standard to ['0.0.10'](https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/CHANGELOG.md#release-0010).
 - Added ProseMirror demo for `Foundry v10+`.
