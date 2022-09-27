@@ -3,6 +3,9 @@
 
    import { TJSProseMirror }     from '@typhonjs-fvtt/svelte-standard/component';
 
+   // If you are developing ProseMirror plugins import from this path to enable PM debugging tooling.
+   // import { TJSProseMirror }     from '@typhonjs-fvtt/svelte-standard/component/dev';
+
    export let elementRoot = void 0;
 
    /**
@@ -16,17 +19,24 @@
     * The following options data is commented out as it is set to a specific document for the DnD5e system.
     */
    const options = {
-      // document: game.items.get('cUZEGVZdhr6G9QcM'),  // A dummy test item to edit description.
-      // fieldName: 'system.description.value',
-      // collaborate: true
+      // document: game.items.get('cUZEGVZdhr6G9QcM'),   // A dummy test item to edit description.
+      // fieldName: 'system.description.value',          // Path to data in `a.b.c`
+      // collaborate: false,                             // Enables collaboration; requires document.
+
+      // button: true      // Show edit button to launch editor when hovered.
+      // editable: true,   // Enable / disable editing
+      // DOMPurify         // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
+                           // essential client side sanitation; IE stripping `<script>` tags, etc.
    };
 
    /**
-    * Just an example that you can also bind the content.
+    * Just an example that you can also bind the content / enrichedContent.
     */
    let content = 'Hello from ProseMirror!';
+   let enrichedContent;
 
-   $: if (content) { console.log(`! bound content saved: ${content}`) }
+   $: if (content) { console.log(`! bound content changed: ${content}`) }
+   $: if (enrichedContent) { console.log(`! bound enrichedContent changed: ${enrichedContent}`) }
 </script>
 
 <svelte:options accessors={true}/>
@@ -34,8 +44,10 @@
 <ApplicationShell bind:elementRoot>
    <TJSProseMirror {options}
                    bind:content
-                   on:editor:cancel={() => console.log('! editor:cancel')}
-                   on:editor:save={(event) => console.log(`! editor:save - ${event.detail.content}}`)}
-                   on:editor:start={() => console.log('! editor:start')} />
+                   bind:enrichedContent
+                   on:editor:cancel={() => console.log('! event - editor:cancel')}
+                   on:editor:enrichedContent={(event) => console.log(`! event - editor:enrichedContent - ${event.detail.enrichedContent}`)}
+                   on:editor:save={(event) => console.log(`! event - editor:save - ${event.detail.content}`)}
+                   on:editor:start={() => console.log('! event - editor:start')} />
                    <!-- You can subscribe to the above events if desired -->
 </ApplicationShell>
