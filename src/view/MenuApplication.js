@@ -15,7 +15,8 @@ import PositionApplication       from './position/app-control/PositionApplicatio
 import PositionBasicOverlayApp   from './position/basic-overlay/PositionBasicOverlayApp.js';
 import PositionBoxApplication    from './position/box/PositionBoxApplication.js';
 import PositionCarouselApp       from './position/carousel/PositionCarouselApp.js';
-import ProseMirrorApp            from './prosemirror/ProseMirrorApp.js';
+import ProseMirrorApp            from './editor/prosemirror/ProseMirrorApp.js';
+import TinyMCEApp                from './editor/tinymce/TinyMCEApp.js';
 
 export default class MenuApplication extends SvelteApplication
 {
@@ -32,6 +33,7 @@ export default class MenuApplication extends SvelteApplication
     */
    static get defaultOptions()
    {
+      /** @type {{}[]} */
       const buttons = [
          { title: 'Hello Foundry', class: HelloFoundryApplication },
          { title: 'Header Buttons', class: HeaderButtonsApplication },
@@ -57,6 +59,8 @@ export default class MenuApplication extends SvelteApplication
       {
          buttons.push({ title: 'ProseMirror', class: ProseMirrorApp });
       }
+
+      buttons.push({ title: 'TinyMCE', class: TinyMCEApp });
 
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'essential-svelte-esm',
