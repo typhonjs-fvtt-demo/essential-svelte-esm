@@ -6,6 +6,9 @@
    // If you are developing ProseMirror plugins import from this path to enable PM debugging tooling.
    // import { TJSProseMirror }     from '@typhonjs-fvtt/svelte-standard/component/dev';
 
+   // Not always necessary, but you can use DOMPurify to sanitize user input client side.
+   // import { DOMPurify }          from '@typhonjs-fvtt/runtime/dompurify';
+
    export let elementRoot = void 0;
 
    /**
@@ -19,18 +22,20 @@
     * The following options data is commented out as it is set to a specific document for the DnD5e system.
     */
    const options = {
-      // document: game.items.get('cUZEGVZdhr6G9QcM'),   // A dummy test item to edit description.
-      // fieldName: 'system.description.value',          // Path to data in `a.b.c`
+      // document: game.items.get('cUZEGVZdhr6G9QcM'),   // An item to edit description; note: replace w/ valid doc.
+      // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
       // collaborate: false,                             // Enables collaboration; requires document.
 
       // button: true      // Show edit button to launch editor when hovered.
       // editable: true,   // Enable / disable editing
       // DOMPurify         // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
+
+      // styles: { '--tjs-editor-toolbar-background': 'red' } // Apply any inline styles / CSS variables
    };
 
    /**
-    * Just an example that you can also bind the content / enrichedContent.
+    * Just an example that you can also bind the content / enrichedContent. You can also bind Svelte stores.
     */
    let content = 'Hello from ProseMirror!';
    let enrichedContent;
