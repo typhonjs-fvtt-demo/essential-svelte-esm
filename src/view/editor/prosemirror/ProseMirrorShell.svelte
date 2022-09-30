@@ -28,7 +28,7 @@
 
       // button: true      // Show edit button to launch editor when hovered.
       // editable: true,   // Enable / disable editing
-      // DOMPurify         // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
+      // DOMPurify,        // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
 
       // styles: { '--tjs-editor-toolbar-background': 'red' } // Apply any inline styles / CSS variables

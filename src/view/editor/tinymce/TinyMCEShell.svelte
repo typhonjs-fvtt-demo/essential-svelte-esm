@@ -3,6 +3,8 @@
 
    import { TJSTinyMCE }         from '@typhonjs-fvtt/svelte-standard/component';
 
+   import { TinyMCEHelper }      from '@typhonjs-fvtt/svelte-standard/component';
+
    // Not always necessary, but you can use DOMPurify to sanitize user input client side.
    // import { DOMPurify }          from '@typhonjs-fvtt/runtime/dompurify';
 
@@ -28,7 +30,8 @@
       // DOMPurify         // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
 
-      // styles: { '--tjs-editor-toolbar-background': 'red' } // Apply any inline styles / CSS variables
+      // styles: { '--tjs-editor-toolbar-background': 'red' }, // Apply any inline styles / CSS variables
+      // mceConfig: TinyMCEHelper.configTJS()
    };
 
    /**
