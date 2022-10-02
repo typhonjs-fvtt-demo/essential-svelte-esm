@@ -3,6 +3,7 @@
 
    import { TJSTinyMCE }         from '@typhonjs-fvtt/svelte-standard/component';
 
+   // Provides several helper functions to provide various TinyMCE configuration.
    import { TinyMCEHelper }      from '@typhonjs-fvtt/svelte-standard/component';
 
    // Not always necessary, but you can use DOMPurify to sanitize user input client side.
@@ -23,15 +24,26 @@
    const options = {
       // document: game.items.get('cUZEGVZdhr6G9QcM'),   // An item to edit description; note: replace w/ valid doc.
       // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
-      // collaborate: false,                             // Enables collaboration; requires document.
 
-      // button: true      // Show edit button to launch editor when hovered.
+      // button: true      // Show edit button to launch editor when hovered; when false editor is open by default.
       // editable: true,   // Enable / disable editing
       // DOMPurify         // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
 
       // styles: { '--tjs-editor-toolbar-background': 'red' }, // Apply any inline styles / CSS variables
-      // mceConfig: TinyMCEHelper.configTJS()
+
+      // `mceConfig` is for
+      // mceConfig: TinyMCEHelper.configBasic(),
+      // mceConfig: TinyMCEHelper.configStandard()
+      // mceConfig: TinyMCEHelper.configTJS(),
+
+      // preventPaste: false,    // Prevents pasting.
+      // preventEnterKey: false, // Prevents <enter> key / new lines.
+      // saveOnEnter: false,     // Saves editor on <enter> key.
+      // saveOnBlur: true,       // Saves editor when it blurs / loses focus; useful for inline editing w/ no toolbar.
+
+      ...TinyMCEHelper.configSingleLine({ contentStyleBody: { 'font-size': '22pt' } }),
+      styles: { '--tjs-editor-content-font-size': '22pt' }
    };
 
    /**
