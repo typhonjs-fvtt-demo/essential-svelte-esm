@@ -39,10 +39,17 @@
 
       // preventPaste: false,    // Prevents pasting.
       // preventEnterKey: false, // Prevents <enter> key / new lines.
-      // saveOnEnter: false,     // Saves editor on <enter> key.
-      // saveOnBlur: true,       // Saves editor when it blurs / loses focus; useful for inline editing w/ no toolbar.
+      // saveOnEnterKey: false,  // Saves editor on <enter> key.
+      // saveOnBlur: false,      // Saves editor when it blurs / loses focus; useful for inline editing w/ no toolbar.
 
-      ...TinyMCEHelper.configSingleLine({ contentStyleBody: { 'font-size': '22pt' } }),
+      // button: true,
+      // clickToEdit: false,     // Clicking editor content initializes the editor.
+
+      // maxCharacterLength: 25, // Limits content / input to 25 characters; pasting is text only / any HTML stripped.
+      // maxCharacterLength: 4, // Limits content / input to 25 characters; pasting is text only / any HTML stripped.
+
+      ...TinyMCEHelper.optionsSingleLine({ contentStyleBody: { 'font-size': '22pt' } }),
+
       styles: { '--tjs-editor-content-font-size': '22pt' }
    };
 
