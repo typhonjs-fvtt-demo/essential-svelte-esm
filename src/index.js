@@ -1,5 +1,8 @@
 import MenuApplication from './view/MenuApplication.js';
 
+// You only need to include this if you would like to use the TRL TinyMCE oEmbed plugin for video embeds.
+import '@typhonjs-fvtt/runtime/tinymce';
+
 import './chatmessage.js';    // Loads the hooks specific to the chat message demo.
 
 /**
