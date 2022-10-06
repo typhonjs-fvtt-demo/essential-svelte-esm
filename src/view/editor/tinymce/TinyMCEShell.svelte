@@ -46,6 +46,12 @@
        * @see https://foundryvtt.com/api/interfaces/client.FontFamilyDefinition.html
        */
       fonts: {
+         Almendra: {
+            editor: true,
+            fonts: [
+               { urls: ['modules/forien-quest-log/assets/fonts/almendra-v15-latin-regular.woff2'] }
+            ]
+         },
          Audiowide: {
             editor: true,
             fonts: [
@@ -77,12 +83,16 @@
        * `configTJS` is _my / TyphonJS'_ preferred configuration. It further groups various actions on the toolbar
        * creating a compact, but even more powerful view especially for font options in sub menus.
        *
-       * Alas, at the moment there isn't documentation for all the parameters available to pass to these config helpers,
-       * but do directly check the source code documentation here:
+       * You can check out the documentation for the config options in most IDEs:
+       * {@link TinyMCEHelper.configBasic}
+       * {@link TinyMCEHelper.configStandard}
+       * {@link TinyMCEHelper.configTJS}
+       *
+       * At the moment there isn't API documentation, but do directly check the source code documentation here:
        * @see https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/src/component/standard/editor/tinymce/TinyMCEHelper.js
        */
       // mceConfig: TinyMCEHelper.configBasic(),
-      // mceConfig: TinyMCEHelper.configStandard(),
+      // mceConfig: TinyMCEHelper.configStandard(),   // This is the default config.
       // mceConfig: TinyMCEHelper.configTJS(),
 
       // preventEnterKey: false, // Prevents <enter> key / new lines.
@@ -99,19 +109,19 @@
       /**
        * `TinyMCEHelper.optionsSingleLine` is a special helper that defines not only `mceConfig`, but several other
        * options such as `saveOnEnter`,  `saveOnBlur`, to solve a single line entry use case. Take note that you must
-       * use `...` / rest syntax to include it in options. Depending on the content modified you need to specify the
-       * font size and other CSS that used in the TinyMCE editor via `contentStyleBody` that matches whatever styles
-       * you may have outside the editor.
+       * use `...` / rest syntax to include it in options.
        */
-      // ...TinyMCEHelper.optionsSingleLine({ contentStyleBody: { 'font-size': '22pt' } }),
-      // styles: { '--tjs-editor-content-font-size': '22pt' }  // Not necessary, but provides a quick demo.
+      // ...TinyMCEHelper.optionsSingleLine(),
    };
 
    /**
     * Just an example that you can also bind the content / enrichedContent. You can also bind Svelte stores.
     */
-   // let content = 'Hello from TinyMCE!';
-   let content = '<p style="text-align: center;"><span style="font-family: Audiowide; font-size: 28pt;">Hello from TinyMCE!</span></p>';
+   let content = 'Hello from TinyMCE!';
+
+   // TODO REMOVE
+   // let content = '<p style="text-align: center;"><span style="font-family: Audiowide; font-size: 28pt;">Hello from TinyMCE!</span></p>';
+
    let enrichedContent;
 
    $: if (content) { console.log(`! bound content changed: ${content}`) }
@@ -121,6 +131,7 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
+<!--TODO REMOVE-->
 <!--   <button on:click={() => options.editable = !options.editable}>Test</button>-->
    <TJSTinyMCE {options}
                    bind:content
