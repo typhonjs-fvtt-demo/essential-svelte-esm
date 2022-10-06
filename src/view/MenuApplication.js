@@ -7,6 +7,7 @@ import MenuAppShell              from './MenuAppShell.svelte';
 import AppStateClientSettingApp  from './app-state/client-setting/AppStateClientSettingApp.js';
 import AppStateSessionApp        from './app-state/session-storage/AppStateSessionApp.js';
 import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
+import ContentEditableApp        from './editor/content-editable/ContentEditableApp.js';
 import BasicDocumentApp          from './document/basic/BasicDocumentApp.js';
 import EmbeddedDocApplication    from "./document/embedded-collection/EmbeddedDocApplication.js";
 import HeaderButtonsApplication  from './header-buttons/HeaderButtonsApplication.js';
@@ -50,7 +51,9 @@ export default class MenuApplication extends SvelteApplication
          { title: 'Position (Box)', class: PositionBoxApplication },
          { title: 'Position (Carousel)', class: PositionCarouselApp },
          { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
-         { title: 'App State (Session Storage)', class: AppStateSessionApp }
+         { title: 'App State (Session Storage)', class: AppStateSessionApp },
+         { title: 'Content Editable', class: ContentEditableApp },
+         { title: 'TinyMCE', class: TinyMCEApp }
       ];
 
       const isV10 = !foundry.utils.isNewerVersion(10, game.version ?? game?.data?.version);
@@ -59,8 +62,6 @@ export default class MenuApplication extends SvelteApplication
       {
          buttons.push({ title: 'ProseMirror', class: ProseMirrorApp });
       }
-
-      buttons.push({ title: 'TinyMCE', class: TinyMCEApp });
 
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'essential-svelte-esm',
