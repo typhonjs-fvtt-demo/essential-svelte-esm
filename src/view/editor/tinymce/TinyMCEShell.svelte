@@ -30,6 +30,7 @@
       // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
 
       // button: true         // Show edit button to initialize editor; when false editor is open by default.
+      // classes: ['foo', 'bar'],   // Adds additional classes to `.editor` element.
       // clickToEdit: false,  // Clicking editor content initializes the editor; hides the edit button.
       // editable: true,      // Enable / disable editing
       // DOMPurify            // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though TinyMCE does

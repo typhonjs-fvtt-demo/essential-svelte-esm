@@ -23,6 +23,7 @@
       // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
 
       // button: true      // Show edit button to launch editor when hovered; when false editor is open by default.
+      // classes: ['foo', 'bar'],   // Adds additional classes to `.tjs-contenteditable` element.
       // editable: true,   // Enable / disable editing
       // DOMPurify,        // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
@@ -35,13 +36,13 @@
       // saveOnEnterKey: true,  // Saves editor on <enter> key.
       // saveOnBlur: false,
 
-      // styles: { '--tjs-editor-toolbar-background': 'red' } // Apply any inline styles / CSS variables
+      // styles: { '--tjs-editor-toolbar-background': 'red' }, // Apply any inline styles / CSS variables
    };
 
    /**
     * Just an example that you can also bind the content / enrichedContent. You can also bind Svelte stores.
     */
-   let content = 'Hello from content editable!<br><br>more text';
+   let content = 'Hello from content editable!';
    let enrichedContent;
 
    $: if (content) { console.log(`! bound content changed: ${content}`) }
