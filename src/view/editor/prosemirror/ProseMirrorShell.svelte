@@ -32,13 +32,16 @@
       // DOMPurify,        // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
 
+      // initialSelection: 'start', // The initial selection / cursor position: 'all', 'end', or 'start'.
+
       // styles: { '--tjs-editor-toolbar-background': 'red' } // Apply any inline styles / CSS variables
    };
 
    /**
     * Just an example that you can also bind the content / enrichedContent. You can also bind Svelte stores.
     */
-   let content = 'Hello from ProseMirror!';
+   // let content = 'Hello from ProseMirror!';
+   let content = '<p>Hello from ProseMirror!</p><p>Another sentence.</p>';
    let enrichedContent;
 
    $: if (content) { console.log(`! bound content changed: ${content}`) }

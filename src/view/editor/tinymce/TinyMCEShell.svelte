@@ -67,6 +67,8 @@
          }
       },
 
+      // initialSelection: 'start', // The initial selection / cursor position: 'all', 'end', or 'start'.
+
       // maxCharacterLength: 25, // Limits content / input to 25 characters; pasting is text only / any HTML stripped.
 
       /**

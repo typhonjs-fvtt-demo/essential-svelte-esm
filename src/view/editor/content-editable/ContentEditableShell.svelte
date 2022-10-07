@@ -28,6 +28,8 @@
       // DOMPurify,        // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
 
+      // initialSelection: 'start', // The initial selection / cursor position: 'all', 'end', or 'start'.
+
       // preventEnterKey: false, // Prevents <enter> key / new lines.
       // preventPaste: false,    // Prevents pasting.
       // saveOnBlur: false,      // Saves editor when it blurs / loses focus; useful for inline editing w/ no toolbar.
