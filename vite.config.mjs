@@ -17,7 +17,7 @@ const s_TYPHONJS_MODULE_LIB = false;
 // Used in bundling.
 const s_RESOLVE_CONFIG = {
    browser: true,
-   dedupe: ['svelte']
+   dedupe: ['svelte', '@typhonjs-fvtt/runtime', '@typhonjs-fvtt/svelte-standard']
 };
 
 // ATTENTION!
@@ -59,9 +59,9 @@ export default () =>
             '^(/modules/essential-svelte-esm/lang)': 'http://localhost:30000',
             '^(?!/modules/essential-svelte-esm/)': 'http://localhost:30000',
             '/socket.io': { target: 'ws://localhost:30000', ws: true }
-         }
+         },
+         fs: { strict: false }
       },
-
       build: {
          outDir: __dirname,
          emptyOutDir: false,
@@ -74,8 +74,15 @@ export default () =>
             entry: './index.js',
             formats: ['es'],
             fileName: 'index'
-         }
+         },
+         // rollupOptions: {
+         //    treeshake: 'smallest',
+         // }
       },
+
+      // optimizeDeps: {
+      //    disabled: false
+      // },
 
       plugins: [
          svelte({

@@ -26,15 +26,17 @@
        * To set up automatic serialization to a document you must provide a valid Foundry document _and_ a field name
        * to reference for content. This will automatically pull from and save content to that field name.
        */
-      // document: game.items.get('cUZEGVZdhr6G9QcM'),   // An item to edit description; note: replace w/ valid doc.
+      // document: game.items.get('oVstf1vCnw6s7j5e'),   // An item to edit description; note: replace w/ valid doc.
       // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
 
       // button: true         // Show edit button to initialize editor; when false editor is open by default.
       // classes: ['foo', 'bar'],   // Adds additional classes to `.editor` element.
       // clickToEdit: false,  // Clicking editor content initializes the editor; hides the edit button.
-      // editable: true,      // Enable / disable editing
       // DOMPurify            // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though TinyMCE does
                               // essential client side sanitation; IE stripping `<script>` tags, etc.
+
+      // editable: true,      // Enable / disable editing
+      // enrichContent: true  // The default is true, but if you set it to false content is not enriched.
 
       /**
        * You can add specific fonts just for this editor by providing a {@link FontFamilyDefinition} object.
@@ -122,20 +124,19 @@
     */
    let content = 'Hello from TinyMCE!';
 
-   // TODO REMOVE
-   // let content = '<p style="text-align: center;"><span style="font-family: Audiowide; font-size: 28pt;">Hello from TinyMCE!</span></p>';
-
    let enrichedContent;
 
    $: if (content) { console.log(`! bound content changed: ${content}`) }
    $: if (enrichedContent) { console.log(`! bound enrichedContent changed: ${enrichedContent}`) }
+
+   // function getDoc() { return game.items.get('GBwqEOVPdLPhI1MH'); }
 </script>
 
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
 <!--TODO REMOVE-->
-<!--   <button on:click={() => options.editable = !options.editable}>Test</button>-->
+<!--   <button on:click={() => options.document = getDoc()}>Test</button>-->
    <TJSTinyMCE {options}
                    bind:content
                    bind:enrichedContent

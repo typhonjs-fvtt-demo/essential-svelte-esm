@@ -28,9 +28,11 @@
 
       // button: true      // Show edit button to launch editor when hovered; when false editor is open by default.
       // classes: ['foo', 'bar'],   // Adds additional classes to `.editor` element.
-      // editable: true,   // Enable / disable editing
       // DOMPurify,        // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
+      // editable: true,   // Enable / disable editing
+
+      // enrichContent: true  // The default is true, but if you set it to false content is not enriched.
 
       // initialSelection: 'start', // The initial selection / cursor position: 'all', 'end', or 'start'.
 
@@ -40,8 +42,7 @@
    /**
     * Just an example that you can also bind the content / enrichedContent. You can also bind Svelte stores.
     */
-   // let content = 'Hello from ProseMirror!';
-   let content = '<p>Hello from ProseMirror!</p><p>Another sentence.</p>';
+   let content = 'Hello from ProseMirror!';
    let enrichedContent;
 
    $: if (content) { console.log(`! bound content changed: ${content}`) }

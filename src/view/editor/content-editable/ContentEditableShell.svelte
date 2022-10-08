@@ -28,6 +28,9 @@
       // DOMPurify,        // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
 
+      // editable: true,   // Enable / disable editing
+      // enrichContent: true  // The default is true, but if you set it to false content is not enriched.
+
       // initialSelection: 'start', // The initial selection / cursor position: 'all', 'end', or 'start'.
 
       // preventEnterKey: false, // Prevents <enter> key / new lines.
