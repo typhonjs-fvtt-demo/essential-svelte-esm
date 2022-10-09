@@ -28,6 +28,7 @@
 
       // button: true      // Show edit button to launch editor when hovered; when false editor is open by default.
       // classes: ['foo', 'bar'],   // Adds additional classes to `.editor` element.
+      // clickToEdit: false,  // Clicking editor content initializes the editor; hides the edit button.
       // DOMPurify,        // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
       // editable: true,   // Enable / disable editing
