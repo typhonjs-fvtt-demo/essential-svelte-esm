@@ -14,7 +14,7 @@
 </script>
 
 <main>
-   <h3>Adjust `Position` of <a on:click={() => application.bringToTop()}><u>parent application</u></a>:</h3>
+   <h3>Adjust `Position` of <a role=presentation on:click={() => application.bringToTop()}><u>parent application</u></a>:</h3>
 
    <hr>
 

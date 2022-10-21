@@ -15,7 +15,7 @@
    <div class=flex>
       <input type=checkbox bind:checked={options.ease}/>
       <span>Easing:</span>
-      <a on:click={() => options.resetEase()} title="Reset Easing"><i class="fas fa-trash"></i></a>
+      <a on:click={() => options.resetEase()} title="Reset Easing" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
    <div class=flex>

@@ -50,10 +50,10 @@
          </select>
       </label>
    </div>
-   <a on:click={() => $selectedIndex--}>
+   <a on:click={() => $selectedIndex--} role=presentation>
       <i class="fas fa-arrow-left"></i>
    </a>
-   <a on:click={() => $selectedIndex++}>
+   <a on:click={() => $selectedIndex++} role=presentation>
       <i class="fas fa-arrow-right"></i>
    </a>
 </div>

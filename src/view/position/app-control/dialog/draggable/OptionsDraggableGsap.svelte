@@ -26,7 +26,7 @@
    <div class=flex>
       <input type=checkbox bind:checked={options.ease}/>
       <span>Easing:</span>
-      <a on:click={() => options.resetEase()} title="Reset Easing"><i class="fas fa-trash"></i></a>
+      <a on:click={() => options.resetEase()} title="Reset Easing" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
    <div class=flex>
@@ -45,7 +45,7 @@
    <div class=flex>
       <input type=checkbox bind:checked={options.inertia}/>
       <span>Inertia:</span>
-      <a on:click={() => resetInertia()} title="Reset Inertia"><i class="fas fa-trash"></i></a>
+      <a on:click={() => resetInertia()} title="Reset Inertia" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
    <div class=flex>
