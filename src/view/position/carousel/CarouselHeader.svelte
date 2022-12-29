@@ -50,9 +50,11 @@
          </select>
       </label>
    </div>
+   <!-- svelte-ignore a11y-missing-attribute -->
    <a on:click={() => $selectedIndex--} role=presentation>
       <i class="fas fa-arrow-left"></i>
    </a>
+   <!-- svelte-ignore a11y-missing-attribute -->
    <a on:click={() => $selectedIndex++} role=presentation>
       <i class="fas fa-arrow-right"></i>
    </a>

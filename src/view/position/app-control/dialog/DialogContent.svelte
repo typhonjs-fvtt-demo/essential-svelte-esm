@@ -14,6 +14,7 @@
 </script>
 
 <main>
+   <!-- svelte-ignore a11y-missing-attribute -->
    <h3>Adjust `Position` of <a role=presentation on:click={() => application.bringToTop()}><u>parent application</u></a>:</h3>
 
    <hr>

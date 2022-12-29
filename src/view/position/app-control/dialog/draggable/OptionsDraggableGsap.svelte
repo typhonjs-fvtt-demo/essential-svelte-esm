@@ -26,6 +26,7 @@
    <div class=flex>
       <input type=checkbox bind:checked={options.ease}/>
       <span>Easing:</span>
+      <!-- svelte-ignore a11y-missing-attribute -->
       <a on:click={() => options.resetEase()} title="Reset Easing" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
@@ -45,6 +46,7 @@
    <div class=flex>
       <input type=checkbox bind:checked={options.inertia}/>
       <span>Inertia:</span>
+      <!-- svelte-ignore a11y-missing-attribute -->
       <a on:click={() => resetInertia()} title="Reset Inertia" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
