@@ -40,7 +40,7 @@
 
 <svelte:options accessors={true}/>
 
-<ApplicationShell bind:elementRoot>
+<ApplicationShell bind:elementRoot transition={scale} transitionOptions={{duration: 1000}}>
    <main in:fade={{duration: 5000}}>
       <h1>Hello {message}!</h1>
       <label>
