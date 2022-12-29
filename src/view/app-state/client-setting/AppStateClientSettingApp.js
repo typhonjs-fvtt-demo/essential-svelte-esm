@@ -9,7 +9,7 @@ export default class AppStateClientSettingApp extends SvelteApplication
 {
    // Note: In this trivial example we create a TJSGameSettings instance here, but normally you want to create a single
    // instance that is shared across your module / package.
-   #gameSettings = new TJSGameSettings();
+   #gameSettings = new TJSGameSettings(constants.moduleId);
 
    constructor(options)
    {
