@@ -1,13 +1,10 @@
-<!-- Add null pointerdown / dblclick event handler to capture before header drag / minimize takes -->
-<span on:pointerdown|capture|preventDefault|stopPropagation={() => null}
-      on:dblclick|capture|preventDefault|stopPropagation={() => null}>
-   SC
-</span>
+<!-- A simple text element / demo -->
+<span>SC</span>
 
 <style>
    span {
       flex: none;
-      margin: 0 0 0 8px;
-      cursor: default;
+      padding: 0 3px;
+      cursor: crosshair;
    }
 </style>

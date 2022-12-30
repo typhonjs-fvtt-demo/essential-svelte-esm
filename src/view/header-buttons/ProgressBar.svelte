@@ -1,11 +1,11 @@
-<!-- Add null dblclick event handler to capture before header minimize takes -->
-<progress class=keep-minimized max=100
-          on:pointerdown|capture|preventDefault|stopPropagation={() => null} />
+<!-- Add 'keep-minimized' to maintain the component when app is minimized -->
+<!-- This also allows this element to be double clicked to minimize / maximize the app -->
+<progress class=keep-minimized max=100 />
 
 <style>
    progress {
       height: 30px;
-      margin: 0 0 0 8px;
+      padding: 0 3px;
       cursor: default;
    }
 </style>
