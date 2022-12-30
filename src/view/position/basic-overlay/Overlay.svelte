@@ -1,32 +1,32 @@
 <script>
-   import { getContext } from 'svelte';
+   import { getContext }            from 'svelte';
 
-   import {
-      applyPosition,
-      draggable } from '@typhonjs-fvtt/runtime/svelte/action';
+   import { EmptyApplicationShell } from '@typhonjs-fvtt/runtime/svelte/component/core';
+
+   import { draggable }             from '@typhonjs-fvtt/runtime/svelte/action';
 
    export let elementRoot = void 0;
 
    const context = getContext('external');
 
-   // Store Application reference.
+   // Store position reference.
    const position = context.application.position;
 </script>
 
 <svelte:options accessors={true}/>
 
-<!-- width & height will be what you set in app options -->
-<div bind:this={elementRoot}
-     use:applyPosition={position}
-     use:draggable={{position}}
-     on:pointerdown={(event) => { if (event.button === 0) { context.application.bringToTop(); } }}
-     on:contextmenu={() => context.application.close()}>
-   Context click to close
-</div>
+<EmptyApplicationShell bind:elementRoot>
+   <!-- width & height will be what you set in app options -->
+   <div use:draggable={{position}}
+        on:contextmenu={() => context.application.close()}>
+      Context click to close
+   </div>
+</EmptyApplicationShell>
 
 <style>
    div {
-      position: absolute;
+      height: 100%;
+      width: 100%;
       background: rgba(255, 100, 100, 0.5);
       font-size: 2em;
    }
