@@ -1,5 +1,5 @@
 import { SvelteApplication }  from '@typhonjs-fvtt/runtime/svelte/application';
-import { SessionStorage }     from '@typhonjs-fvtt/runtime/svelte/store';
+import { TJSSessionStorage }     from '@typhonjs-fvtt/runtime/svelte/store';
 
 import HeaderButtonsAppShell  from './HeaderButtonsAppShell.svelte';
 import TestSCComponent        from './TestSCComponent.svelte';
@@ -7,7 +7,7 @@ import ProgressBar            from './ProgressBar.svelte';
 
 import { sessionConstants }   from '../../constants.js';
 
-const storage = new SessionStorage();
+const storage = new TJSSessionStorage();
 
 export default class HeaderButtonsApplication extends SvelteApplication
 {
