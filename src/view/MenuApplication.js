@@ -40,7 +40,7 @@ export default class MenuApplication extends SvelteApplication
          { title: 'Header Buttons', class: HeaderButtonsApplication },
          { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
          { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication },
-         { title: 'Chat Message', onclick: () => new TJSDialog(
+         { title: 'Chat Message', onPress: () => new TJSDialog(
              {
                 title: 'Essential Svelte (ESM) - Chat Message',
                 content: ChatDialogContent

@@ -13,10 +13,10 @@
    {
       let app;
 
-      // If `onclick` defined execute the function.
-      if (typeof button.onclick === 'function')
+      // If `onPress` defined execute the function.
+      if (typeof button.onPress === 'function')
       {
-         app = button.onclick();
+         app = button.onPress();
 
          // If an Application is returned then attempt to select an existing app by ID / render it.
          if (app instanceof Application)

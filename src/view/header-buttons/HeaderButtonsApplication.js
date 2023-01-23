@@ -23,10 +23,10 @@ export default class HeaderButtonsApplication extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'header-buttons-esm',
-         resizable: false,
+         resizable: true,
          minimizable: true,
          width: 500,
-         height: 'auto',
+         // height: 'auto',
          title: 'Essential Svelte (ESM) - Header Buttons',
          headerIcon: 'icons/magic/air/air-burst-spiral-blue-gray.webp',
 
@@ -59,8 +59,15 @@ export default class HeaderButtonsApplication extends SvelteApplication
          icon: 'fas fa-moon',
          title: themeDarkMode ? 'Dark Node disable' : 'Dark Mode enable',
          styles: themeDarkMode ? { color: 'lightblue' } : { color: 'white' },
+         // keyCode: 'Space', // You can provide an alternate key code for button key press.
 
-         onclick: function()
+         // You can define `onContextMenu` for right click / contextmenu key press.
+         // onContextMenu: function()
+         // {
+         //    console.log(`HeaderButtons - onContextMenu`);
+         // },
+
+         onPress: function()
          {
             const newThemeDarkMode = storage.swapItemBoolean(sessionConstants.themeDarkMode);
 
