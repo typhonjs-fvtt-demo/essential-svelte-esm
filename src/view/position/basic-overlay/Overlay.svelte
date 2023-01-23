@@ -7,7 +7,7 @@
 
    export let elementRoot = void 0;
 
-   const context = getContext('external');
+   const context = getContext('#external');
 
    // Store position reference.
    const position = context.application.position;

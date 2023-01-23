@@ -11,7 +11,7 @@
    export let elementRoot = void 0;
    export let message = void 0;
 
-   const application = getContext('external').application;
+   const application = getContext('#external').application;
 
    // Provides one-way bindings to application options. If changed externally updates will not be received here.
    // Below in the `input element` for draggable you could also just set it to `{application.reactive.draggable}` and

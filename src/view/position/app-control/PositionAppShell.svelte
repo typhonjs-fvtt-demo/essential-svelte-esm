@@ -10,7 +10,7 @@
 
    export let elementRoot = void 0;
 
-   const application = getContext('external').application;
+   const application = getContext('#external').application;
 
    const { top, left, width, height, rotateX, rotateY, rotateZ, scale, zIndex } = application.position.stores;
 

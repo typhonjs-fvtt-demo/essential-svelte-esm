@@ -15,7 +15,7 @@
 
    export let elementRoot = void 0;
 
-   const application = getContext('external').application;
+   const application = getContext('#external').application;
 
    const storeAuto = boxStore.auto;
    const storeDebug = boxStore.debug;

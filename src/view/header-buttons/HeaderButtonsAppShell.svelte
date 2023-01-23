@@ -5,7 +5,7 @@
 
    export let elementRoot = void 0;
 
-   const application = getContext('external').application;
+   const application = getContext('#external').application;
 
    // Provides two-way bindings to application options. By using the stores external updates will be received here.
    const headerButtonNoClose = application.reactive.storeAppOptions.headerButtonNoClose;

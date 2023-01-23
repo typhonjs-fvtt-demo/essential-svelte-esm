@@ -7,7 +7,7 @@
 
    export let elementRoot = void 0;
 
-   const { application } = getContext('external');
+   const { application } = getContext('#external');
 
    const storageStore = application.reactive.sessionStorage.getStore(sessionConstants.appState);
 
