@@ -26,15 +26,23 @@
    const storeResizable = application.reactive.storeAppOptions.resizable;
    const storeTitle = application.reactive.storeAppOptions.title;
 
-   function onClick()
+   async function onClick()
    {
-      TJSDialog.prompt({
+      /**
+       * TJSDialog.prompt returns true when the button is selected or null if the dialog is closed without user
+       * selection.
+       *
+       * @type {boolean|null}
+       */
+      const result = await TJSDialog.prompt({
          title: 'A modal dialog!',
          draggable: false,
          modal: true,
-         content: 'A cool modal dialog!',  // You can set content with a Svelte component!
+         content: 'A cool modal dialog!',  // You can set content with a Svelte component configuration object too!
          label: 'Ok'
       });
+
+      console.log(`Modal dialog result: `, result);
    }
 </script>
 
