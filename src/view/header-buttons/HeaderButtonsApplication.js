@@ -1,13 +1,10 @@
 import { SvelteApplication }  from '@typhonjs-fvtt/runtime/svelte/application';
-import { SessionStorage }     from '@typhonjs-fvtt/runtime/svelte/store';
 
 import HeaderButtonsAppShell  from './HeaderButtonsAppShell.svelte';
 import TestSCComponent        from './TestSCComponent.svelte';
 import ProgressBar            from './ProgressBar.svelte';
 
 import { sessionConstants }   from '../../constants.js';
-
-const storage = new SessionStorage();
 
 export default class HeaderButtonsApplication extends SvelteApplication
 {
@@ -31,6 +28,7 @@ export default class HeaderButtonsApplication extends SvelteApplication
          width: 500,
          height: 'auto',
          title: 'Essential Svelte (ESM) - Header Buttons',
+         headerIcon: 'icons/magic/air/air-burst-spiral-blue-gray.webp',
 
          svelte: {
             class: HeaderButtonsAppShell,
@@ -51,6 +49,8 @@ export default class HeaderButtonsApplication extends SvelteApplication
    _getHeaderButtons()
    {
       const buttons = super._getHeaderButtons();
+
+      const storage = this.reactive.sessionStorage;
 
       const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode, true);
 
