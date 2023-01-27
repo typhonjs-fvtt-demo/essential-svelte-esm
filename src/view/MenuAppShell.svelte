@@ -86,6 +86,10 @@
          margin-bottom: 8px;
       }
 
+      a:focus-visible, button:focus-visible {
+         outline: 4px dotted orange;
+      }
+
       h1 {
          color: #ff3e00;
          text-transform: uppercase;
