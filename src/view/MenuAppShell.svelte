@@ -1,7 +1,6 @@
 <script>
    import { scale }                 from 'svelte/transition';
 
-   import { alwaysBlur }            from '@typhonjs-fvtt/runtime/svelte/action';
    import { TJSApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
    export let elementRoot = void 0;
@@ -60,7 +59,7 @@
       <h1>Launch demo apps below:</h1>
       <section>
       {#each buttons as button}
-         <button use:alwaysBlur on:click={() => onClick(button)}>{button.title}</button>
+         <button on:click={() => onClick(button)}>{button.title}</button>
       {/each}
       </section>
       <div class=bottom>
