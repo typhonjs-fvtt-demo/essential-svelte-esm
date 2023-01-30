@@ -3,8 +3,7 @@
    import { fade, scale }        from 'svelte/transition';
 
    import {
-      alwaysBlur,
-      autoBlur }                 from '@typhonjs-fvtt/runtime/svelte/action';
+      alwaysBlur }               from '@typhonjs-fvtt/runtime/svelte/action';
    import { TJSDialog }          from '@typhonjs-fvtt/runtime/svelte/application';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
@@ -52,11 +51,11 @@
    <main in:fade={{duration: 5000}}>
       <h1>Hello {message}!</h1>
       <label>
-         Message:&nbsp;<input use:autoBlur bind:value={message}>
+         Message:&nbsp;<input bind:value={message}>
       </label>
       <br>
       <label>
-         Change title:&nbsp;<input use:autoBlur bind:value={$storeTitle}>
+         Change title:&nbsp;<input bind:value={$storeTitle}>
       </label>
       <button on:click={onClick}>Launch a modal dialog</button>
       <div class=container>

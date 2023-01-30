@@ -1,7 +1,6 @@
 <script>
    import {
-      alwaysBlur,
-      autoBlur }        from '@typhonjs-fvtt/runtime/svelte/action';
+      alwaysBlur }        from '@typhonjs-fvtt/runtime/svelte/action';
 
    import {
       easingFunc,
@@ -71,7 +70,7 @@
       </div>
       <div class=flex>
          <label for=easing>Easing:</label>
-         <select use:autoBlur id=easing bind:value={$storeEase}>
+         <select id=easing bind:value={$storeEase}>
             {#each easingList as entry}
                <option value={easingFunc[entry]}>{entry}</option>
             {/each}
