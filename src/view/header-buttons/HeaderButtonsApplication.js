@@ -68,15 +68,9 @@ export default class HeaderButtonsApplication extends SvelteApplication
       buttons.unshift({
          class: 'theme-dark',
          icon: 'fas fa-moon',
-         title: themeDarkMode ? 'Dark Node disable' : 'Dark Mode enable',
-         styles: themeDarkMode ? { color: 'lightblue' } : { color: 'white' },
-         // keyCode: 'Space', // You can provide an alternate key code for button key press.
-
-         // You can define `onContextMenu` for right click / contextmenu key press.
-         // onContextMenu: function()
-         // {
-         //    console.log(`HeaderButtons - onContextMenu`);
-         // },
+         title: themeDarkMode ? 'Dark Node disable' : 'Dark Mode enable',     // Additional TRL option; sets hover title.
+         styles: themeDarkMode ? { color: 'lightblue' } : { color: 'white' }, // Additional TRL option; inline styles.
+         // keepMinimized: true,                         // When true the header button remains when app is minimized.
 
          // When using a normal function `this` is the button data and it can be modified.
          onPress: function()
@@ -86,9 +80,18 @@ export default class HeaderButtonsApplication extends SvelteApplication
             this.title = newThemeDarkMode ? 'Dark Node disable' : 'Dark Mode enable';
             this.styles = newThemeDarkMode ? { color: 'lightblue' } : { color: 'white' };
          }
+
+         /**
+          * There are several additional button data options available in TRL.
+          */
+         // keyCode: 'Space',          // You can provide an alternate key code for button key press.
+         // onContextMenu: function()  // You can define `onContextMenu` for right click / contextmenu key press.
+         // {
+         //    console.log(`HeaderButtons - onContextMenu`);
+         // },
       });
 
-      buttons.unshift(TestSCComponent);
+      buttons.unshift(TestSCComponent);   // You can set a direct Svelte class / constructor function.
 
       buttons.unshift(ProgressBar);
 
