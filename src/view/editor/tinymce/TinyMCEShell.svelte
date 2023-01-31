@@ -19,7 +19,8 @@
     *
     * <TJSTinyMCE options={{document: <doc>, fieldName: 'some.data.path'}} />
     *
-    * The following options data is commented out as it is set to a specific document for the DnD5e system.
+    * The following options data is mostly commented out. For the most part though the values shown for configuration
+    * show the default values _or_ in some cases the type of data that you need to set.
     */
    const options = {
       /**
@@ -41,7 +42,7 @@
       /**
        * You can add specific fonts just for this editor by providing a {@link FontFamilyDefinition} object.
        * The object key is the name of the font to be displayed in the editor with the `FontFamilyDefinition` as the
-       * value. For keys with spaces use 'quotes'. The URLS should point to a `woff2` file from your module.
+       * value. For keys with spaces use 'quotes'. The URLS should point to a `woff2` file from your package.
        *
        * Note the `urls` are {@link FontFaceDescriptors} and can contain additional information like `weight`, etc.
        * @see https://developer.mozilla.org/en-US/docs/Web/API/FontFace
@@ -52,26 +53,20 @@
          Almendra: {
             editor: true,
             fonts: [
-               { urls: ['modules/forien-quest-log/assets/fonts/almendra-v15-latin-regular.woff2'] }
+               { urls: ['modules/essential-svelte-esm/assets/fonts/almendra-v15-latin-regular.woff2'] }
             ]
          },
          Audiowide: {
             editor: true,
             fonts: [
-               { urls: ['modules/forien-quest-log/assets/fonts/audiowide-v9-latin-regular.woff2'] }
-            ]
-         },
-         'Bilbo Swash Caps': {
-            editor: true,
-            fonts: [
-               { urls: ['modules/forien-quest-log/assets/fonts/bilbo-swash-caps-v15-latin-regular.woff2'] }
+               { urls: ['modules/essential-svelte-esm/assets/fonts/audiowide-v9-latin-regular.woff2'] }
             ]
          }
       },
 
       // initialSelection: 'start', // The initial selection / cursor position: 'all', 'end', or 'start'.
 
-      // maxCharacterLength: 25, // Limits content / input to 25 characters; pasting is text only / any HTML stripped.
+      // maxCharacterLength: 25, // Limits input to the number of characters; pasting is text only / any HTML stripped.
 
       /**
        * `mceConfig` is for the specific TinyMCE config. There are several helper presets available that customize these
@@ -112,9 +107,9 @@
       // styles: { '--tjs-editor-toolbar-background': 'red' }, // Apply any inline styles / CSS variables
 
       /**
-       * `TinyMCEHelper.optionsSingleLine` is a special helper that defines not only `mceConfig`, but several other
-       * options such as `saveOnEnter`,  `saveOnBlur`, to solve a single line entry use case. Take note that you must
-       * use `...` / rest syntax to include it in options.
+       * {@link TinyMCEHelper.optionsSingleLine} is a special helper that defines not only `mceConfig`, but several
+       * other options such as `saveOnEnter`,  `saveOnBlur`, to solve a single line entry use case. Take note that you
+       * must use `...` / rest syntax to include it in options.
        */
       // ...TinyMCEHelper.optionsSingleLine(),
    };
