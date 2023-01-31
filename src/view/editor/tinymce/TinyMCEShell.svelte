@@ -31,7 +31,7 @@
       // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
 
       // button: true         // Show edit button to initialize editor; when false editor is open by default.
-      // classes: ['foo', 'bar'],   // Adds additional classes to `.editor` element.
+      // classes: ['foo', 'bar'],   // Adds additional classes to `.tjs-editor` element.
       // clickToEdit: false,  // Clicking editor content initializes the editor; hides the edit button.
       // DOMPurify            // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though TinyMCE does
                               // essential client side sanitation; IE stripping `<script>` tags, etc.
@@ -109,7 +109,8 @@
       /**
        * {@link TinyMCEHelper.optionsSingleLine} is a special helper that defines not only `mceConfig`, but several
        * other options such as `saveOnEnter`,  `saveOnBlur`, to solve a single line entry use case. Take note that you
-       * must use `...` / rest syntax to include it in options.
+       * must use `...` / rest syntax to include it in options. Please see `TJSContentEdit` component as an
+       * alternative inline editing component.
        */
       // ...TinyMCEHelper.optionsSingleLine(),
    };
@@ -139,5 +140,5 @@
                    on:editor:enrichedContent={(event) => console.log(`! event - editor:enrichedContent - ${event.detail.enrichedContent}`)}
                    on:editor:save={(event) => console.log(`! event - editor:save - ${event.detail.content}`)}
                    on:editor:start={() => console.log('! event - editor:start')} />
-                   <!-- You can subscribe to the above events if desired -->
+                   <!-- Optionally, you can subscribe to the above events if desired -->
 </ApplicationShell>
