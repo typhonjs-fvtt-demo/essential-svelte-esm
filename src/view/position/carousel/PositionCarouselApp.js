@@ -5,11 +5,6 @@ import CarouselAppShell       from './CarouselAppShell.svelte';
 export default class PositionBoxApplication extends SvelteApplication
 {
    /**
-    * @inheritDoc
-    */
-   constructor(options = {}) { super(options); }
-
-   /**
     * Default Application options
     *
     * @returns {object} options - Application options.

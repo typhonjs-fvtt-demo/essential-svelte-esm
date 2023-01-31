@@ -22,11 +22,6 @@ import TinyMCEApp                from './editor/tinymce/TinyMCEApp.js';
 export default class MenuApplication extends SvelteApplication
 {
    /**
-    * @inheritDoc
-    */
-   constructor(options = {}) { super(options); }
-
-   /**
     * Default Application options
     *
     * @returns {object} options - Application options.

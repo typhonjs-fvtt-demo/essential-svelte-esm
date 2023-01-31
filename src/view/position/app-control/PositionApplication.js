@@ -20,11 +20,6 @@ export default class PositionApplication extends SvelteApplication
    #storeDebug = writable(false);
 
    /**
-    * @inheritDoc
-    */
-   constructor(options = {}) { super(options); }
-
-   /**
     * Default Application options
     *
     * @returns {object} options - Application options.

@@ -5,11 +5,6 @@ import HelloFoundryAppShell   from './HelloFoundryAppShell.svelte';
 export default class HelloFoundryApplication extends SvelteApplication
 {
    /**
-    * @inheritDoc
-    */
-   constructor(options = {}) { super(options); }
-
-   /**
     * Default Application options
     *
     * @returns {object} options - Application options.

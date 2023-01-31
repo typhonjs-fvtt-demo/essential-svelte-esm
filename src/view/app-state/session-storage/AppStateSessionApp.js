@@ -2,7 +2,7 @@ import { SvelteApplication }  from '@typhonjs-fvtt/runtime/svelte/application';
 
 import SessionAppShell        from './SessionAppShell.svelte';
 
-import { sessionConstants}    from '../../../constants.js';
+import { sessionConstants }   from '../../../constants.js';
 
 export default class AppStateSessionApp extends SvelteApplication
 {

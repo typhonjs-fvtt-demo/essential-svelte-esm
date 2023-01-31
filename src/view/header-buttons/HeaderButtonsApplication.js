@@ -9,11 +9,6 @@ import { sessionConstants }   from '../../constants.js';
 export default class HeaderButtonsApplication extends SvelteApplication
 {
    /**
-    * @inheritDoc
-    */
-   constructor(options = {}) { super(options); }
-
-   /**
     * Default Application options
     *
     * @returns {object} options - Application options.
