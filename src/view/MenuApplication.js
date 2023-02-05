@@ -39,7 +39,10 @@ export default class MenuApplication extends SvelteApplication
              {
                 title: 'Essential Svelte (ESM) - Chat Message',
                 content: ChatDialogContent
-             }, { id: 'essential-esm-chat-dialog' })
+             }, {
+                id: 'essential-esm-chat-dialog',
+                classes: ['tjs-essential-svelte-esm']
+             })
          },
          { title: 'Position (Basic Overlay)', class: PositionBasicOverlayApp },
          { title: 'Position (App)', class: PositionApplication },
@@ -60,6 +63,7 @@ export default class MenuApplication extends SvelteApplication
 
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'essential-svelte-esm',
+         classes: ['tjs-essential-svelte-esm'],
          headerButtonNoClose: true,
          resizable: false,
          minimizable: true,

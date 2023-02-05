@@ -14,6 +14,7 @@ export default class EmbeddedDocApplication extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'trl-reactive-embedded-collection',
+         classes: ['tjs-essential-svelte-esm'],
          resizable: false,
          minimizable: true,
          width: 'auto',

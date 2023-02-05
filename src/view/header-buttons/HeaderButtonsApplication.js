@@ -18,6 +18,7 @@ export default class HeaderButtonsApplication extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'header-buttons-esm',
+         classes: ['tjs-essential-svelte-esm'],
          resizable: true,
          minimizable: true,
          title: 'Essential Svelte (ESM) - Header Buttons',

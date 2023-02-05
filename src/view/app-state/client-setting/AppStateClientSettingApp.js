@@ -45,6 +45,7 @@ export default class AppStateClientSettingApp extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'app-state-client-setting',
+         classes: ['tjs-essential-svelte-esm'],
          title: 'App State (Reload / Client Setting)',
          resizable: true,
          width: 500,

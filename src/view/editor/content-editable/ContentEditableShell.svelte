@@ -20,8 +20,8 @@
     * show the default values _or_ in some cases the type of data that you need to set.
     */
    const options = {
-      // document: game.items.get('cUZEGVZdhr6G9QcM'),   // An item to edit description; note: replace w/ valid doc.
-      // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
+      document: game.items.get('1yVXx5t6YnISfeGJ'),   // An item to edit description; note: replace w/ valid doc.
+      fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
 
       // button: true      // Show edit button to launch editor when hovered; when false editor is open by default.
       // classes: ['foo', 'bar'],   // Adds additional classes to `.tjs-editor` element.

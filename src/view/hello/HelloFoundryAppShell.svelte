@@ -37,7 +37,7 @@
          modal: true,
          content: 'A cool modal dialog!',  // You can set content with a Svelte component configuration object too!
          label: 'Ok'
-      });
+      }, { classes: ['tjs-essential-svelte-esm'] });
 
       console.log(`Modal dialog result: `, result);
    }

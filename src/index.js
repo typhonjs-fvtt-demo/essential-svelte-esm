@@ -5,6 +5,8 @@ import '@typhonjs-fvtt/runtime/tinymce';
 
 import './chatmessage.js';    // Loads the hooks specific to the chat message demo.
 
+import '../styles/init.scss'; // Import any styles as this includes them in the build.
+
 /**
  * Launches and positions the main `essential-svelte-esm` menu app to the left of the sidebar.
  */

@@ -28,6 +28,7 @@ export default class AppStateSessionApp extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'app-state-session-storage',
+         classes: ['tjs-essential-svelte-esm'],
          title: 'App State (Reload / Session Storage)',
          resizable: true,
          width: 500,

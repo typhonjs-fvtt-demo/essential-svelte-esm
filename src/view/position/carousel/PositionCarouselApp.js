@@ -14,6 +14,7 @@ export default class PositionBoxApplication extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'position-carousel',
+         classes: ['tjs-essential-svelte-esm'],
          title: 'Position (Carousel)',
          width: 775,
          height: 420,
