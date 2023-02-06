@@ -3,7 +3,7 @@
 
    import { TJSProseMirror }     from '@typhonjs-fvtt/svelte-standard/component';
 
-   // If you are developing ProseMirror plugins import from this path to enable PM debugging tooling.
+   // If you are developing ProseMirror plugins import from this path to enable PM inspector / debug tooling.
    // import { TJSProseMirror }     from '@typhonjs-fvtt/svelte-standard/component/dev';
 
    // Not always necessary, but you can use DOMPurify to sanitize user input client side.
@@ -23,7 +23,7 @@
     * show the default values _or_ in some cases the type of data that you need to set.
     */
    const options = {
-      // document: game.items.get('cUZEGVZdhr6G9QcM'),   // An item to edit description; note: replace w/ valid doc.
+      // document: game.items.get('OYHnejmJO2fSlQDi'),   // An item to edit description; note: replace w/ valid doc.
       // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
       // collaborate: false,                             // Enables collaboration; requires document.
 
@@ -58,6 +58,7 @@
                    bind:content
                    bind:enrichedContent
                    on:editor:cancel={() => console.log('! event - editor:cancel')}
+                   on:editor:document:deleted={() => console.log('! event - editor:document:deleted')}
                    on:editor:enrichedContent={(event) => console.log(`! event - editor:enrichedContent - ${event.detail.enrichedContent}`)}
                    on:editor:save={(event) => console.log(`! event - editor:save - ${event.detail.content}`)}
                    on:editor:start={() => console.log('! event - editor:start')} />

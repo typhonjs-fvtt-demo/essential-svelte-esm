@@ -20,8 +20,8 @@
     * show the default values _or_ in some cases the type of data that you need to set.
     */
    const options = {
-      document: game.items.get('1yVXx5t6YnISfeGJ'),   // An item to edit description; note: replace w/ valid doc.
-      fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
+      // document: game.items.get('OYHnejmJO2fSlQDi'),   // An item to edit description; note: replace w/ valid doc.
+      // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
 
       // button: true      // Show edit button to launch editor when hovered; when false editor is open by default.
       // classes: ['foo', 'bar'],   // Adds additional classes to `.tjs-editor` element.
@@ -64,6 +64,7 @@
                    bind:content
                    bind:enrichedContent
                    on:editor:cancel={() => console.log('! event - editor:cancel')}
+                   on:editor:document:deleted={() => console.log('! event - editor:document:deleted')}
                    on:editor:enrichedContent={(event) => console.log(`! event - editor:enrichedContent - ${event.detail.enrichedContent}`)}
                    on:editor:save={(event) => console.log(`! event - editor:save - ${event.detail.content}`)}
                    on:editor:start={() => console.log('! event - editor:start')} />
