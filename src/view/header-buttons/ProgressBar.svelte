@@ -5,6 +5,7 @@
 <style>
    progress {
       height: 30px;
+      max-width: 150px;
       padding: 0 3px;
       cursor: default;
    }

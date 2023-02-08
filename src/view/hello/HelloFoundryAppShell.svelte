@@ -2,16 +2,13 @@
    import { getContext }         from 'svelte';
    import { fade, scale }        from 'svelte/transition';
 
-   import {
-      alwaysBlur,
-      autoBlur }                 from '@typhonjs-fvtt/runtime/svelte/action';
    import { TJSDialog }          from '@typhonjs-fvtt/runtime/svelte/application';
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
    export let elementRoot = void 0;
    export let message = void 0;
 
-   const application = getContext('external').application;
+   const application = getContext('#external').application;
 
    // Provides one-way bindings to application options. If changed externally updates will not be received here.
    // Below in the `input element` for draggable you could also just set it to `{application.reactive.draggable}` and
@@ -40,7 +37,7 @@
          modal: true,
          content: 'A cool modal dialog!',  // You can set content with a Svelte component configuration object too!
          label: 'Ok'
-      });
+      }, { classes: ['tjs-essential-svelte-esm'] });
 
       console.log(`Modal dialog result: `, result);
    }
@@ -52,18 +49,18 @@
    <main in:fade={{duration: 5000}}>
       <h1>Hello {message}!</h1>
       <label>
-         Message:&nbsp;<input use:autoBlur bind:value={message}>
+         Message:&nbsp;<input bind:value={message}>
       </label>
       <br>
       <label>
-         Change title:&nbsp;<input use:autoBlur bind:value={$storeTitle}>
+         Change title:&nbsp;<input bind:value={$storeTitle}>
       </label>
       <button on:click={onClick}>Launch a modal dialog</button>
       <div class=container>
          Make application:
-         <label><input use:alwaysBlur type=checkbox bind:checked={draggable}> Draggable</label>
-         <label><input use:alwaysBlur type=checkbox bind:checked={$storeMinimizable}> Minimizable</label>
-         <label><input use:alwaysBlur type=checkbox bind:checked={$storeResizable}> Resizable</label>
+         <label><input type=checkbox bind:checked={draggable}> Draggable</label>
+         <label><input type=checkbox bind:checked={$storeMinimizable}> Minimizable</label>
+         <label><input type=checkbox bind:checked={$storeResizable}> Resizable</label>
       </div>
       <div class=bottom>
          <a href="https://svelte.dev/tutorial">Interactive Svelte tutorial (highly recommended)</a>

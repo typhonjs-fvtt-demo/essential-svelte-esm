@@ -20,11 +20,6 @@ export default class PositionApplication extends SvelteApplication
    #storeDebug = writable(false);
 
    /**
-    * @inheritDoc
-    */
-   constructor(options = {}) { super(options); }
-
-   /**
     * Default Application options
     *
     * @returns {object} options - Application options.
@@ -34,6 +29,7 @@ export default class PositionApplication extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'position-esm',
+         classes: ['tjs-essential-svelte-esm'],
          resizable: true,
          minimizable: true,
          width: 450,
@@ -65,6 +61,10 @@ export default class PositionApplication extends SvelteApplication
             class: DialogContent,
             props: { application: this }
          }
-      }, { headerButtonNoClose: true, width: 500 }).render(true, { focus: true });
+      }, {
+         classes: ['tjs-essential-svelte-esm'],
+         headerButtonNoClose: true,
+         width: 500
+      }).render(true, { focus: true });
    }
 }

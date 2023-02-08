@@ -15,7 +15,7 @@ provides the essentials with working with Svelte and various aspects that are pr
 Library. Please stop by the [![TyphonJS Discord](https://img.shields.io/discord/737953117999726592?label=TyphonJS)](https://discord.gg/mnbgN8f) 
 Discord server to ask any questions.
 
-## Installation:
+## Installation (Requires Foundry VTT version 10):
 1. Fork this repo or better yet directly clone this repo following step two below. This repo is a demo repo, so use 
 [template-svelte-esm](https://github.com/typhonjs-fvtt-demo/template-svelte-esm) to create your own new TRL based 
 module.  
@@ -72,4 +72,4 @@ like context menus and a new backward compatible and API compliant Dialog compon
 TRL is innovative as it delivers a runtime library module for Foundry that packages up the runtime in a way that
 can be shared across any number of modules / game systems utilizing it thereby saving a lot of space in any given
 module or game system. Optionally, it is possible to also bundle TRL directly into your module or game system. The TRL
-is both a Foundry library module and an NPM package providing the development dependency utilized for code 
+is both a Foundry library module and an NPM package providing the development dependency utilized for code. 

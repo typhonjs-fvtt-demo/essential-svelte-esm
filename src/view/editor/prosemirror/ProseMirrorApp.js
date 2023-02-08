@@ -14,6 +14,7 @@ export default class ProseMirrorApp extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'tjs-prose-mirror',
+         classes: ['tjs-essential-svelte-esm'],
          title: 'TJSProseMirror',
          resizable: true,
          width: 550,

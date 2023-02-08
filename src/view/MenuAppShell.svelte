@@ -1,7 +1,6 @@
 <script>
    import { scale }                 from 'svelte/transition';
 
-   import { alwaysBlur }            from '@typhonjs-fvtt/runtime/svelte/action';
    import { TJSApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
    export let elementRoot = void 0;
@@ -13,10 +12,10 @@
    {
       let app;
 
-      // If `onclick` defined execute the function.
-      if (typeof button.onclick === 'function')
+      // If `onPress` defined execute the function.
+      if (typeof button.onPress === 'function')
       {
-         app = button.onclick();
+         app = button.onPress();
 
          // If an Application is returned then attempt to select an existing app by ID / render it.
          if (app instanceof Application)
@@ -60,7 +59,7 @@
       <h1>Launch demo apps below:</h1>
       <section>
       {#each buttons as button}
-         <button use:alwaysBlur on:click={() => onClick(button)}>{button.title}</button>
+         <button on:click={() => onClick(button)}>{button.title}</button>
       {/each}
       </section>
       <div class=bottom>
@@ -84,6 +83,10 @@
 
       button:not(:last-child) {
          margin-bottom: 8px;
+      }
+
+      a:focus-visible, button:focus-visible {
+         outline: 4px dotted orange;
       }
 
       h1 {

@@ -14,6 +14,7 @@ export default class BasicDocumentApp extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'tjs-document-basic',
+         classes: ['tjs-essential-svelte-esm'],
          title: 'Reactive Document (basic)',
          resizable: true,
          width: 500,

@@ -19,18 +19,19 @@
     *
     * <TJSTinyMCE options={{document: <doc>, fieldName: 'some.data.path'}} />
     *
-    * The following options data is commented out as it is set to a specific document for the DnD5e system.
+    * The following options data is mostly commented out. For the most part though the values shown for configuration
+    * show the default values _or_ in some cases the type of data that you need to set.
     */
    const options = {
       /**
        * To set up automatic serialization to a document you must provide a valid Foundry document _and_ a field name
        * to reference for content. This will automatically pull from and save content to that field name.
        */
-      // document: game.items.get('oVstf1vCnw6s7j5e'),   // An item to edit description; note: replace w/ valid doc.
+      // document: game.items.get('OYHnejmJO2fSlQDi'),   // An item to edit description; note: replace w/ valid doc.
       // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
 
       // button: true         // Show edit button to initialize editor; when false editor is open by default.
-      // classes: ['foo', 'bar'],   // Adds additional classes to `.editor` element.
+      // classes: ['foo', 'bar'],   // Adds additional classes to `.tjs-editor` element.
       // clickToEdit: false,  // Clicking editor content initializes the editor; hides the edit button.
       // DOMPurify            // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though TinyMCE does
                               // essential client side sanitation; IE stripping `<script>` tags, etc.
@@ -41,7 +42,7 @@
       /**
        * You can add specific fonts just for this editor by providing a {@link FontFamilyDefinition} object.
        * The object key is the name of the font to be displayed in the editor with the `FontFamilyDefinition` as the
-       * value. For keys with spaces use 'quotes'. The URLS should point to a `woff2` file from your module.
+       * value. For keys with spaces use 'quotes'. The URLS should point to a `woff2` file from your package.
        *
        * Note the `urls` are {@link FontFaceDescriptors} and can contain additional information like `weight`, etc.
        * @see https://developer.mozilla.org/en-US/docs/Web/API/FontFace
@@ -52,26 +53,20 @@
          Almendra: {
             editor: true,
             fonts: [
-               { urls: ['modules/forien-quest-log/assets/fonts/almendra-v15-latin-regular.woff2'] }
+               { urls: ['modules/essential-svelte-esm/assets/fonts/almendra-v15-latin-regular.woff2'] }
             ]
          },
          Audiowide: {
             editor: true,
             fonts: [
-               { urls: ['modules/forien-quest-log/assets/fonts/audiowide-v9-latin-regular.woff2'] }
-            ]
-         },
-         'Bilbo Swash Caps': {
-            editor: true,
-            fonts: [
-               { urls: ['modules/forien-quest-log/assets/fonts/bilbo-swash-caps-v15-latin-regular.woff2'] }
+               { urls: ['modules/essential-svelte-esm/assets/fonts/audiowide-v9-latin-regular.woff2'] }
             ]
          }
       },
 
       // initialSelection: 'start', // The initial selection / cursor position: 'all', 'end', or 'start'.
 
-      // maxCharacterLength: 25, // Limits content / input to 25 characters; pasting is text only / any HTML stripped.
+      // maxCharacterLength: 25, // Limits input to the number of characters; pasting is text only / any HTML stripped.
 
       /**
        * `mceConfig` is for the specific TinyMCE config. There are several helper presets available that customize these
@@ -112,9 +107,10 @@
       // styles: { '--tjs-editor-toolbar-background': 'red' }, // Apply any inline styles / CSS variables
 
       /**
-       * `TinyMCEHelper.optionsSingleLine` is a special helper that defines not only `mceConfig`, but several other
-       * options such as `saveOnEnter`,  `saveOnBlur`, to solve a single line entry use case. Take note that you must
-       * use `...` / rest syntax to include it in options.
+       * {@link TinyMCEHelper.optionsSingleLine} is a special helper that defines not only `mceConfig`, but several
+       * other options such as `saveOnEnter`,  `saveOnBlur`, to solve a single line entry use case. Take note that you
+       * must use `...` / rest syntax to include it in options. Please see `TJSContentEdit` component as an
+       * alternative inline editing component.
        */
       // ...TinyMCEHelper.optionsSingleLine(),
    };
@@ -128,21 +124,18 @@
 
    $: if (content) { console.log(`! bound content changed: ${content}`) }
    $: if (enrichedContent) { console.log(`! bound enrichedContent changed: ${enrichedContent}`) }
-
-   // function getDoc() { return game.items.get('GBwqEOVPdLPhI1MH'); }
 </script>
 
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
-<!--TODO REMOVE-->
-<!--   <button on:click={() => options.document = getDoc()}>Test</button>-->
    <TJSTinyMCE {options}
                    bind:content
                    bind:enrichedContent
                    on:editor:cancel={() => console.log('! event - editor:cancel')}
+                   on:editor:document:deleted={() => console.log('! event - editor:document:deleted')}
                    on:editor:enrichedContent={(event) => console.log(`! event - editor:enrichedContent - ${event.detail.enrichedContent}`)}
                    on:editor:save={(event) => console.log(`! event - editor:save - ${event.detail.content}`)}
                    on:editor:start={() => console.log('! event - editor:start')} />
-                   <!-- You can subscribe to the above events if desired -->
+                   <!-- Optionally, you can subscribe to the above events if desired -->
 </ApplicationShell>

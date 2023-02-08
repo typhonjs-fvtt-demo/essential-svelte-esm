@@ -5,11 +5,6 @@ import HelloFoundryAppShell   from './HelloFoundryAppShell.svelte';
 export default class HelloFoundryApplication extends SvelteApplication
 {
    /**
-    * @inheritDoc
-    */
-   constructor(options = {}) { super(options); }
-
-   /**
     * Default Application options
     *
     * @returns {object} options - Application options.
@@ -19,6 +14,7 @@ export default class HelloFoundryApplication extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'hello-foundry-esm',
+         classes: ['tjs-essential-svelte-esm'],
          resizable: true,
          minimizable: true,
          width: 500,

@@ -59,8 +59,8 @@
      class:highlight={highlight}
      style:background={cell.color}
      on:click={() => onClick(cell.id)}
-     on:mouseenter={() => highlight = true}
-     on:mouseleave={() => highlight = false}
+     on:pointerenter={() => highlight = true}
+     on:pointerleave={() => highlight = false}
      role=presentation>
    {cell.id}
 </div>

@@ -22,11 +22,6 @@ import TinyMCEApp                from './editor/tinymce/TinyMCEApp.js';
 export default class MenuApplication extends SvelteApplication
 {
    /**
-    * @inheritDoc
-    */
-   constructor(options = {}) { super(options); }
-
-   /**
     * Default Application options
     *
     * @returns {object} options - Application options.
@@ -40,11 +35,14 @@ export default class MenuApplication extends SvelteApplication
          { title: 'Header Buttons', class: HeaderButtonsApplication },
          { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
          { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication },
-         { title: 'Chat Message', onclick: () => new TJSDialog(
+         { title: 'Chat Message', onPress: () => new TJSDialog(
              {
                 title: 'Essential Svelte (ESM) - Chat Message',
                 content: ChatDialogContent
-             }, { id: 'essential-esm-chat-dialog' })
+             }, {
+                id: 'essential-esm-chat-dialog',
+                classes: ['tjs-essential-svelte-esm']
+             })
          },
          { title: 'Position (Basic Overlay)', class: PositionBasicOverlayApp },
          { title: 'Position (App)', class: PositionApplication },
@@ -65,6 +63,7 @@ export default class MenuApplication extends SvelteApplication
 
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'essential-svelte-esm',
+         classes: ['tjs-essential-svelte-esm'],
          headerButtonNoClose: true,
          resizable: false,
          minimizable: true,

@@ -1,14 +1,11 @@
 import { SvelteApplication }  from '@typhonjs-fvtt/runtime/svelte/application';
-import { SessionStorage }     from '@typhonjs-fvtt/runtime/svelte/store';
 
 import SessionAppShell        from './SessionAppShell.svelte';
 
+import { sessionConstants }   from '../../../constants.js';
+
 export default class AppStateSessionApp extends SvelteApplication
 {
-   // Note: In this trivial example we create a SessionStorage instance here, but normally you want to create a
-   // single instance that is shared across your module / package.
-   #sessionStorage = new SessionStorage();
-
    constructor(options)
    {
       super(options);
@@ -16,7 +13,7 @@ export default class AppStateSessionApp extends SvelteApplication
       try
       {
          // Attempt to parse session storage item and set to application state.
-         this.state.set(JSON.parse(sessionStorage.getItem('essential-svelte-esm.app-state')));
+         this.state.set(JSON.parse(sessionStorage.getItem(sessionConstants.appState)));
       }
       catch (err) { /**/ }
    }
@@ -31,6 +28,7 @@ export default class AppStateSessionApp extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'app-state-session-storage',
+         classes: ['tjs-essential-svelte-esm'],
          title: 'App State (Reload / Session Storage)',
          resizable: true,
          width: 500,
@@ -38,14 +36,7 @@ export default class AppStateSessionApp extends SvelteApplication
 
          svelte: {
             class: SessionAppShell,
-            target: document.body,
-
-            // You can provide a function and this context is the application when invoked.
-            props: function()
-            {
-               // Creates a store from SessionStorage.
-               return { storageStore: this.#sessionStorage.getStore('essential-svelte-esm.app-state') };
-            }
+            target: document.body
          }
       });
    }

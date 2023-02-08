@@ -14,6 +14,7 @@ export default class ContentEditableApp extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'tjs-content-edit',
+         classes: ['tjs-essential-svelte-esm'],
          title: 'TJSContentEdit',
          resizable: true,
          width: 550,

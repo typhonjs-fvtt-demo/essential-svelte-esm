@@ -3,10 +3,13 @@
 
    import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
 
-   export let elementRoot = void 0;
-   export let storageStore = void 0;
+   import { sessionConstants }   from '../../../constants.js';
 
-   const { application } = getContext('external');
+   export let elementRoot = void 0;
+
+   const { application } = getContext('#external');
+
+   const storageStore = application.reactive.sessionStorage.getStore(sessionConstants.appState);
 
    // Application position store reference. Stores need to be a top level variable to be accessible for reactivity.
    const position = application.position;

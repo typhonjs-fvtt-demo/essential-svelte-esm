@@ -14,6 +14,7 @@ export default class TinyMCEApp extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'tjs-tiny-mce',
+         classes: ['tjs-essential-svelte-esm'],
          title: 'TJSTinyMCE',
          resizable: true,
          width: 550,
