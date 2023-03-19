@@ -1,11 +1,14 @@
 # Changelog
-## Release 0.0.18 (small update)
+## Release 0.0.18 (minor update)
+- Updated @typhonjs-fvtt/svelte-standard to ['0.0.22'](https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/CHANGELOG.md#release-0022).
+
+## Release 0.0.18 (minor update)
 - Updated @typhonjs-fvtt/svelte-standard to ['0.0.21'](https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/CHANGELOG.md#release-0021).
-- 
-## Release 0.0.17 (small update)
+
+## Release 0.0.17 (minor update)
 - Updated @typhonjs-fvtt/svelte-standard to ['0.0.20'](https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/CHANGELOG.md#release-0020).
 
-## Release 0.0.16 (small update)
+## Release 0.0.16 (minor update)
 - Updated @typhonjs-fvtt/svelte-standard to ['0.0.19'](https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/CHANGELOG.md#release-0019).
 
 ## Release 0.0.15 (major update)
