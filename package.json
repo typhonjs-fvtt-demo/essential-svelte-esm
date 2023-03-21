@@ -21,10 +21,6 @@
     "svelte-preprocess": "^5",
     "vite": "^4"
   },
-  "peerDependencies" : {
-    "@sveltejs/vite-plugin-svelte": "^2",
-    "@rollup/plugin-node-resolve": "^15"
-  },
   "browserslist": [">5%", "not IE 11"],
   "scripts": {
     "build": "vite build",
