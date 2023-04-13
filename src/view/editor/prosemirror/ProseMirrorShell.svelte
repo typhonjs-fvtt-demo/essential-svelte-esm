@@ -3,9 +3,6 @@
 
    import { TJSProseMirror }     from '@typhonjs-fvtt/svelte-standard/component';
 
-   // If you are developing ProseMirror plugins import from this path to enable PM inspector / debug tooling.
-   // import { TJSProseMirror }     from '@typhonjs-fvtt/svelte-standard/component/dev';
-
    // Not always necessary, but you can use DOMPurify to sanitize user input client side.
    // import { DOMPurify }          from '@typhonjs-fvtt/runtime/dompurify';
 
