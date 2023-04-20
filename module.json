@@ -11,7 +11,7 @@
   "version": "0.0.20",
   "compatibility": {
     "minimum": "10",
-    "verified": "10"
+    "verified": "11"
   },
   "esmodules": [
     "index.js"
@@ -19,6 +19,12 @@
   "styles": [
     "style.css"
   ],
+  "flags": {
+    "hotReload": {
+      "extensions": ["json"],
+      "paths": ["lang"]
+    }
+  },
   "languages": [
     {
       "lang": "en",
