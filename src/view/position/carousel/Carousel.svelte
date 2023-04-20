@@ -1,15 +1,15 @@
 <script>
    import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
-   import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
+   import { TJSPosition }     from '@typhonjs-fvtt/runtime/svelte/store/position';
 
    import { easingFunc }      from '@typhonjs-fvtt/runtime/svelte/gsap';
 
    import { carouselStore }   from './carouselStore.js';
 
-   // We can use Position to control the outer carousel rotational changes to keep the current selected index visible.
-   // Using Position allows us to solve several issues from resetting the rotation / selected index when cell length
+   // We can use TJSPosition to control the outer carousel rotational changes to keep the current selected index visible.
+   // Using TJSPosition allows us to solve several issues from resetting the rotation / selected index when cell length
    // changes and animating when just selected index changes.
-   const position = new Position(void 0, {
+   const position = new TJSPosition(void 0, {
       top: 0,
       left: 0,
       width: 'auto',

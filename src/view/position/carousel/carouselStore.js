@@ -2,7 +2,7 @@ import { writable }     from 'svelte/store';
 
 import { easingFunc }   from '@typhonjs-fvtt/runtime/svelte/gsap';
 
-import { Position }     from '@typhonjs-fvtt/runtime/svelte/application';
+import { TJSPosition }  from '@typhonjs-fvtt/runtime/svelte/store/position';
 
 const s_CELL_WIDTH = 190;
 const s_CELL_HEIGHT = 120;
@@ -37,11 +37,11 @@ function getRandomColor()
 /**
  * Creates a new position instance.
  *
- * @returns {Position} Position instance.
+ * @returns {TJSPosition} TJSPosition instance.
  */
 function getPosition()
 {
-   return new Position(void 0, {
+   return new TJSPosition(void 0, {
       top: 10,
       left: 10,
       width: s_CELL_WIDTH,
