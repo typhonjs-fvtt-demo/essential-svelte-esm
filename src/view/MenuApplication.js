@@ -2,12 +2,14 @@ import {
    SvelteApplication,
    TJSDialog }                   from '@typhonjs-fvtt/runtime/svelte/application';
 
+import { BrowserSupports }       from '@typhonjs-fvtt/runtime/svelte/util';
+
 import MenuAppShell              from './MenuAppShell.svelte';
 
 import AppStateClientSettingApp  from './app-state/client-setting/AppStateClientSettingApp.js';
 import AppStateSessionApp        from './app-state/session-storage/AppStateSessionApp.js';
 import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
-// import ColorPickerApp            from './components/color/ColorPickerApp.js';
+import ColorPickerApp            from './components/color/ColorPickerApp.js';
 import ContentEditableApp        from './editor/content-editable/ContentEditableApp.js';
 import BasicDocumentApp          from './document/basic/BasicDocumentApp.js';
 import EmbeddedDocApplication    from "./document/embedded-collection/EmbeddedDocApplication.js";
@@ -32,7 +34,6 @@ export default class MenuApplication extends SvelteApplication
    {
       /** @type {{}[]} */
       const buttons = [
-         // { title: 'Color Picker', class: ColorPickerApp },
          { title: 'Hello Foundry', class: HelloFoundryApplication },
          { title: 'Header Buttons', class: HeaderButtonsApplication },
          { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
@@ -58,9 +59,16 @@ export default class MenuApplication extends SvelteApplication
 
       const isV10 = !foundry.utils.isNewerVersion(10, game.version ?? game?.data?.version);
 
+      // Add ProseMirror editor demo if v10+
       if (isV10)
       {
          buttons.push({ title: 'ProseMirror', class: ProseMirrorApp });
+      }
+
+      // Add TJSColordPicker component demo if browser supports container queries.
+      if (BrowserSupports.containerQueries)
+      {
+         buttons.push({ title: 'Color Picker', class: ColorPickerApp });
       }
 
       return foundry.utils.mergeObject(super.defaultOptions, {
