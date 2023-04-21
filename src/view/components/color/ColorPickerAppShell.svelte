@@ -1,9 +1,9 @@
 <script>
-   import { ApplicationShell }      from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { ApplicationShell }      from '#runtime/svelte/component/core';
 
    import {
       TJSColordPicker,
-      TJSColordPickerSavedColors }  from '@typhonjs-fvtt/svelte-standard/component';
+      TJSColordPickerSavedColors }  from '#standard/component';
 
    export let elementRoot = void 0;
 

@@ -1,8 +1,8 @@
 import {
    SvelteApplication,
-   TJSDialog }                   from '@typhonjs-fvtt/runtime/svelte/application';
+   TJSDialog }                   from '#runtime/svelte/application';
 
-import { BrowserSupports }       from '@typhonjs-fvtt/runtime/svelte/util';
+import { BrowserSupports }       from '#runtime/svelte/util';
 
 import MenuAppShell              from './MenuAppShell.svelte';
 

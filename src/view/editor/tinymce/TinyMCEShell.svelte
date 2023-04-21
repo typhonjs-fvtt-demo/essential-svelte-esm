@@ -1,13 +1,13 @@
 <script>
-   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
 
-   import { TJSTinyMCE }         from '@typhonjs-fvtt/svelte-standard/component';
+   import { TJSTinyMCE }         from '#standard/component';
 
    // Provides several helper functions to provide various TinyMCE configuration.
-   import { TinyMCEHelper }      from '@typhonjs-fvtt/svelte-standard/component';
+   import { TinyMCEHelper }      from '#standard/component';
 
    // Not always necessary, but you can use DOMPurify to sanitize user input client side.
-   // import { DOMPurify }          from '@typhonjs-fvtt/runtime/dompurify';
+   // import { DOMPurify }          from '#runtime/dompurify';
 
    export let elementRoot = void 0;
 
@@ -33,7 +33,7 @@
       // button: true         // Show edit button to initialize editor; when false editor is open by default.
       // classes: ['foo', 'bar'],   // Adds additional classes to `.tjs-editor` element.
       // clickToEdit: false,  // Clicking editor content initializes the editor; hides the edit button.
-      // DOMPurify            // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though TinyMCE does
+      // DOMPurify            // You can pass DOMPurify from `#runtime/dompurify though TinyMCE does
                               // essential client side sanitation; IE stripping `<script>` tags, etc.
 
       // editable: true,      // Enable / disable editing

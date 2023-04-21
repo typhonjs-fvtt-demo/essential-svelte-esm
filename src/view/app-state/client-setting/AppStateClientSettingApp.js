@@ -1,5 +1,5 @@
-import { SvelteApplication }  from '@typhonjs-fvtt/runtime/svelte/application';
-import { TJSGameSettings }    from '@typhonjs-fvtt/svelte-standard/store';
+import { SvelteApplication }  from '#runtime/svelte/application';
+import { TJSGameSettings }    from '#standard/store';
 
 import ClientSettingAppShell  from './ClientSettingAppShell.svelte';
 

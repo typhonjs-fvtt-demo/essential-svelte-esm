@@ -1,5 +1,5 @@
 <script>
-   import { TJSSvgFolder } from '@typhonjs-fvtt/svelte-standard/component';
+   import { TJSSvgFolder } from '#standard/component';
 
    import PosAnimateTo     from './PosAnimateTo.svelte';
    import PosDraggable     from './draggable/PosDraggable.svelte';

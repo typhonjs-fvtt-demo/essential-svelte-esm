@@ -1,16 +1,16 @@
 import { get, writable }   from 'svelte/store';
 
-import { TJSPosition }     from '@typhonjs-fvtt/runtime/svelte/store/position';
+import { TJSPosition }     from '#runtime/svelte/store/position';
 
 import {
    easingFunc,
-   GsapCompose }           from '@typhonjs-fvtt/runtime/svelte/gsap';
+   GsapCompose }           from '#runtime/svelte/gsap';
 
 // Imports the loading code / automatic GSAP plugin registration.
-import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/CustomEase';
-import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/MotionPathPlugin';
-import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/CustomWiggle';
-import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
+import '#runtime/svelte/gsap/plugin/CustomEase';
+import '#runtime/svelte/gsap/plugin/MotionPathPlugin';
+import '#runtime/svelte/gsap/plugin/bonus/CustomWiggle';
+import '#runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
 
 // Defines a custom ease w/ the CustomWiggle plugin. This is used below to set a variable amount of wiggle count
 // depending on the duration of the animation; more wiggles the lower the duration.

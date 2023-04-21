@@ -1,9 +1,9 @@
 <script>
    import { getContext }            from 'svelte';
 
-   import { EmptyApplicationShell } from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { EmptyApplicationShell } from '#runtime/svelte/component/core';
 
-   import { draggable }             from '@typhonjs-fvtt/runtime/svelte/action';
+   import { draggable }             from '#runtime/svelte/action';
 
    export let elementRoot = void 0;
 

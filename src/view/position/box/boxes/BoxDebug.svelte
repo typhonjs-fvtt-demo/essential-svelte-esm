@@ -1,9 +1,9 @@
 <script>
    import {
       applyPosition,
-      applyStyles }           from '@typhonjs-fvtt/runtime/svelte/action';
+      applyStyles }           from '#runtime/svelte/action';
 
-   import { draggableGsap }   from '@typhonjs-fvtt/runtime/svelte/gsap';
+   import { draggableGsap }   from '#runtime/svelte/gsap';
 
    import { boxStore }        from '../boxStore.js';
 

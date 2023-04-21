@@ -1,9 +1,9 @@
 <script>
    import {
       applyPosition,
-      resizeObserver }        from '@typhonjs-fvtt/runtime/svelte/action';
+      resizeObserver }        from '#runtime/svelte/action';
 
-   import { draggableGsap }   from '@typhonjs-fvtt/runtime/svelte/gsap';
+   import { draggableGsap }   from '#runtime/svelte/gsap';
 
    export let box = void 0;
 

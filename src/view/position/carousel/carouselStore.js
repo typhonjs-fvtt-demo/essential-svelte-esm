@@ -1,8 +1,8 @@
 import { writable }     from 'svelte/store';
 
-import { easingFunc }   from '@typhonjs-fvtt/runtime/svelte/gsap';
+import { easingFunc }   from '#runtime/svelte/gsap';
 
-import { TJSPosition }  from '@typhonjs-fvtt/runtime/svelte/store/position';
+import { TJSPosition }  from '#runtime/svelte/store/position';
 
 const s_CELL_WIDTH = 190;
 const s_CELL_HEIGHT = 120;

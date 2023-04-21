@@ -1,5 +1,5 @@
 <script>
-   import { TJSApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { TJSApplicationShell }   from '#runtime/svelte/component/core';
 
    import { carouselStore }         from './carouselStore.js';
    import Carousel                  from './Carousel.svelte';

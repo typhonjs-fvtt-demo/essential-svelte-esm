@@ -1,7 +1,7 @@
 <script>
    import {
       easingFunc,
-      easingList }   from '@typhonjs-fvtt/runtime/svelte/gsap';
+      easingList }   from '#runtime/svelte/gsap';
 
    export let application = void 0;
 

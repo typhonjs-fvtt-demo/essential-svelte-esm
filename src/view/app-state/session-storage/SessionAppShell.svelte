@@ -1,7 +1,7 @@
 <script>
    import { getContext }         from 'svelte';
 
-   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
 
    import { sessionConstants }   from '../../../constants.js';
 

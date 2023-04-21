@@ -2,8 +2,8 @@
    import { getContext }         from 'svelte';
    import { fade, scale }        from 'svelte/transition';
 
-   import { TJSDialog }          from '@typhonjs-fvtt/runtime/svelte/application';
-   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { TJSDialog }          from '#runtime/svelte/application';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
 
    export let elementRoot = void 0;
    export let message = void 0;

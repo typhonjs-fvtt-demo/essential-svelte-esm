@@ -1,9 +1,9 @@
 <script>
    import { getContext }               from 'svelte';
 
-   import { resizeObserver }           from '@typhonjs-fvtt/runtime/svelte/action';
-   import { TJSApplicationShell }      from '@typhonjs-fvtt/runtime/svelte/component/core';
-   import { TJSPositionControlLayer }  from '@typhonjs-fvtt/svelte-standard/component'
+   import { resizeObserver }           from '#runtime/svelte/action';
+   import { TJSApplicationShell }      from '#runtime/svelte/component/core';
+   import { TJSPositionControlLayer }  from '#standard/component'
 
    import { boxStore, validator }      from './boxStore.js';
 

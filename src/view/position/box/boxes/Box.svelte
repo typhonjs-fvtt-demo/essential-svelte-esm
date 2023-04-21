@@ -1,6 +1,6 @@
 <script>
-   import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
-   import { draggableGsap }   from '@typhonjs-fvtt/runtime/svelte/gsap';
+   import { applyPosition }   from '#runtime/svelte/action';
+   import { draggableGsap }   from '#runtime/svelte/gsap';
 
    export let box = void 0;
 

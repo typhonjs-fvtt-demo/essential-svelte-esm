@@ -1,6 +1,6 @@
 <script>
    import { fade }            from 'svelte/transition';
-   import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
+   import { applyPosition }   from '#runtime/svelte/action';
 
    import { carouselStore }   from './carouselStore.js';
 

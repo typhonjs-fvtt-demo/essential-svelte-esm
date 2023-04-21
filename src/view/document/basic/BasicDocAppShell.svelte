@@ -1,7 +1,7 @@
 <script>
-   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
 
-   import { TJSDocument }        from '@typhonjs-fvtt/runtime/svelte/store';
+   import { TJSDocument }        from '#runtime/svelte/store';
 
    export let elementRoot = void 0;
 

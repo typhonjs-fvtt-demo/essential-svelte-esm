@@ -1,12 +1,12 @@
 <script>
    import { flip }               from 'svelte/animate';
 
-   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
-   import { TJSDocument }        from '@typhonjs-fvtt/runtime/svelte/store';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
+   import { TJSDocument }        from '#runtime/svelte/store';
 
-   import { rippleFocus }        from '@typhonjs-fvtt/svelte-standard/action';
-   import { TJSInput }           from '@typhonjs-fvtt/svelte-standard/component';
-   import { createFilterQuery }  from '@typhonjs-fvtt/svelte-standard/store';
+   import { rippleFocus }        from '#standard/action';
+   import { TJSInput }           from '#standard/component';
+   import { createFilterQuery }  from '#standard/store';
 
    export let elementRoot;
 
@@ -21,7 +21,7 @@
 
    const doc = new TJSDocument();
 
-   /** @type {import('@typhonjs-fvtt/runtime/svelte/store').DynMapReducer<string, Item>} */
+   /** @type {import('#runtime/svelte/store').DynMapReducer<string, Item>} */
    const wildcard = doc.embedded.create('Item', {
       name: 'wildcard',
       filters: [filterSearch],

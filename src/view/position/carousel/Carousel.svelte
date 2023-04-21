@@ -1,8 +1,8 @@
 <script>
-   import { applyPosition }   from '@typhonjs-fvtt/runtime/svelte/action';
-   import { TJSPosition }     from '@typhonjs-fvtt/runtime/svelte/store/position';
+   import { applyPosition }   from '#runtime/svelte/action';
+   import { TJSPosition }     from '#runtime/svelte/store/position';
 
-   import { easingFunc }      from '@typhonjs-fvtt/runtime/svelte/gsap';
+   import { easingFunc }      from '#runtime/svelte/gsap';
 
    import { carouselStore }   from './carouselStore.js';
 
