@@ -1,16 +1,19 @@
 <script>
    import { flip }               from 'svelte/animate';
 
-   import { ApplicationShell }   from '#runtime/svelte/component/core';
-   import { TJSDocument }        from '#runtime/svelte/store';
+   import { rippleFocus }        from '#runtime/svelte/animate/action';
 
-   import { rippleFocus }        from '#standard/action';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
+
+   import { TJSDocument }        from '#runtime/svelte/store/document';
+
+   import { DynReducerHelper }   from '#runtime/svelte/store/reducer';
+
    import { TJSInput }           from '#standard/component';
-   import { createFilterQuery }  from '#standard/store';
 
    export let elementRoot;
 
-   const filterSearch = createFilterQuery('type');
+   const filterSearch = DynReducerHelper.filters.regexObjectQuery('type');
 
    const input = {
       store: filterSearch,
@@ -21,7 +24,7 @@
 
    const doc = new TJSDocument();
 
-   /** @type {import('#runtime/svelte/store').DynMapReducer<string, Item>} */
+   /** @type {import('#runtime/svelte/store/reducer').DynMapReducer<string, Item>} */
    const wildcard = doc.embedded.create('Item', {
       name: 'wildcard',
       filters: [filterSearch],

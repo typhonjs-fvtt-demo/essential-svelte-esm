@@ -1,7 +1,7 @@
 <script>
    import { ApplicationShell }   from '#runtime/svelte/component/core';
 
-   import { TJSDocument }        from '#runtime/svelte/store';
+   import { TJSDocument }        from '#runtime/svelte/store/document';
 
    export let elementRoot = void 0;
 
