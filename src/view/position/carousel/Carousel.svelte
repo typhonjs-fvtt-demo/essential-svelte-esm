@@ -1,6 +1,7 @@
 <script>
-   import { applyPosition }   from '#runtime/svelte/action';
-   import { TJSPosition }     from '#runtime/svelte/store/position';
+   import {
+      applyPosition,
+      TJSPosition }     from '#runtime/svelte/store/position';
 
    import { easingFunc }      from '#runtime/svelte/gsap';
 

@@ -1,6 +1,6 @@
 import { writable }           from 'svelte/store';
 
-import { draggable }          from '#runtime/svelte/action';
+import { draggable }          from '#runtime/svelte/store/position';
 import { draggableGsap }      from '#runtime/svelte/gsap';
 
 import OptionsDraggable       from './OptionsDraggable.svelte';

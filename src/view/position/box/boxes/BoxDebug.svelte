@@ -1,9 +1,9 @@
 <script>
-   import {
-      applyPosition,
-      applyStyles }           from '#runtime/svelte/action';
+   import { applyStyles }     from '#runtime/svelte/action';
 
    import { draggableGsap }   from '#runtime/svelte/gsap';
+
+   import { applyPosition }   from '#runtime/svelte/store/position';
 
    import { boxStore }        from '../boxStore.js';
 

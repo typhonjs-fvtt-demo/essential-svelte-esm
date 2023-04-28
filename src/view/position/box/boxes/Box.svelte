@@ -1,6 +1,6 @@
 <script>
-   import { applyPosition }   from '#runtime/svelte/action';
    import { draggableGsap }   from '#runtime/svelte/gsap';
+   import { applyPosition }   from '#runtime/svelte/store/position';
 
    export let box = void 0;
 
