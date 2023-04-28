@@ -40,21 +40,19 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
-   <section class=tjs-settings-entry>
-      <main>
-         <label>Text Input:<input type=checkbox bind:checked={options.hasTextInput}></label>
-         <label>Button Bar:<input type=checkbox bind:checked={options.hasButtonBar}></label>
-         <label>Addons:<input type=checkbox bind:checked={options.hasAddons}></label>
+   <div>
+      <section class=styled>
+         <label class=centered>Text Input:<input type=checkbox bind:checked={options.hasTextInput}></label>
+         <label class=centered>Button Bar:<input type=checkbox bind:checked={options.hasButtonBar}></label>
+         <label class=centered>Addons:<input type=checkbox bind:checked={options.hasAddons}></label>
 
-         <label>Chrome Layout:<input type=checkbox on:change={(e) => options.layout = e.target.checked ? 'chrome' : void 0}></label>
-         <label>Enable Alpha:<input type=checkbox bind:checked={options.hasAlpha}></label>
-         <label>Lock Text Format:<input type=checkbox bind:checked={options.lockTextFormat}></label>
-         <label>Popup:<input type=checkbox bind:checked={options.isPopup}></label>
-      </main>
-   </section>
+         <label class=centered>Chrome Layout:<input type=checkbox on:change={(e) => options.layout = e.target.checked ? 'chrome' : void 0}></label>
+         <label class=centered>Enable Alpha:<input type=checkbox bind:checked={options.hasAlpha}></label>
+         <label class=centered>Lock Text Format:<input type=checkbox bind:checked={options.lockTextFormat}></label>
+         <label class=centered>Popup:<input type=checkbox bind:checked={options.isPopup}></label>
+      </section>
 
-   <section class=tjs-settings-entry>
-      <main>
+      <section class=styled>
          <label>Format:
             <select bind:value={options.format}>
                <option value=hex>HEX</option>
@@ -71,20 +69,36 @@
          </label>
          <label>Precision: <input type=range min=0 max=10 bind:value={options.precision} style="width: 100px"></label>
          <label>Width: <input type=range min=50 max=400 bind:value={options.width} style="width: 100px"> ({options.width})</label>
-      </main>
-   </section>
+      </section>
 
-   <section class=tjs-settings-entry>
-      <span>{typeof color === 'object' ? JSON.stringify(color) : color}</span>
-   </section>
+      <section>
+         <span>Value of the main `color` prop: {typeof color === 'object' ? JSON.stringify(color) : color}</span>
+      </section>
 
-   <main>
-      <TJSColordPicker bind:color options={options} />
-      <TJSColordPicker bind:color options={options} />
-   </main>
+      <section>
+         <TJSColordPicker bind:color options={options} />
+         <!--      <TJSColordPicker bind:color options={options} />-->
+      </section>
+   </div>
 </ApplicationShell>
 
 <style>
+   /* Remove bad foundry universal style */
+   div > * {
+      flex: none;
+   }
+
+   div {
+      --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
+   }
+
+   label.centered {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
+
    input {
       margin: 0 8px;
       vertical-align: bottom;
@@ -96,21 +110,8 @@
       vertical-align: center;
    }
 
-   /* For testing select elements */
-   select {
-      color: #b5b3a4
-   }
-
    span {
-      /*color: var(--tjs-settings-entry-label-color, inherit);*/
-      /*font-size: var(--tjs-settings-entry-label-font-size, inherit);*/
-      /*line-height: var(--tjs-settings-entry-label-line-height, var(--form-field-height));*/
       flex: 2;
-   }
-
-   main {
-      display: flex;
-      justify-content: space-between;
    }
 
    section {
@@ -119,6 +120,13 @@
       flex-direction: row;
       flex-wrap: wrap;
       align-items: center;
+      gap: 12px;
+   }
+
+   section.styled {
+      background: rgba(0, 0, 0, 0.1);
+      padding: 8px;
+      border-radius: 8px;
    }
 
    section:not(:last-child) {

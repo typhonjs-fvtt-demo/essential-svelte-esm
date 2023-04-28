@@ -14,9 +14,12 @@ export default class ColorPickerApp extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          title: 'TJSColordPicker',
+         classes: ['tjs-essential-svelte-esm'],
          resizable: true,
-         width: 500,
-         height: 300,
+         width: 660,
+         height: 800,
+         minWidth: 660,
+         minHeight: 800,
 
          svelte: {
             class: ColorPickerAppShell,
