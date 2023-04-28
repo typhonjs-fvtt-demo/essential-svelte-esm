@@ -1,7 +1,7 @@
 <script>
    import {
       applyStyles,
-      resizeObserver }        from '#runtime/svelte/action';
+      resizeObserver }        from '#runtime/svelte/action/dom';
 
    import { draggableGsap }   from '#runtime/svelte/gsap';
 
