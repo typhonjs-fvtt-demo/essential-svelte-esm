@@ -55,7 +55,13 @@ export default class AppStateClientSettingApp extends SvelteApplication
             class: ClientSettingAppShell,
             target: document.body,
 
-            // You can provide a function and this context is the application when invoked.
+            /**
+             * You can provide a function and the `this` context is the application when invoked.
+             *
+             * @this {AppStateClientSettingApp}
+             *
+             * @returns {object} Props for Svelte component.
+             */
             props: function()
             {
                // Creates a store
