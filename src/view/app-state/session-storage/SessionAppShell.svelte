@@ -2,6 +2,7 @@
    import { getContext }         from 'svelte';
 
    import { ApplicationShell }   from '#runtime/svelte/component/core';
+   import { Timing }             from '#runtime/util';
 
    import { sessionConstants }   from '../../../constants.js';
 
@@ -15,7 +16,7 @@
    const position = application.position;
 
    // A debounced callback that serializes application state after 500-millisecond delay.
-   const storeAppState = foundry.utils.debounce(() => $storageStore = application.state.get(), 500);
+   const storeAppState = Timing.debounce(() => $storageStore = application.state.get(), 500);
 
    // Reactive statement to invoke debounce callback on TJSPosition changes.
    $: storeAppState($position);
