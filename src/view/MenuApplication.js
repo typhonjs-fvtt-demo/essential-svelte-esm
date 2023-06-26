@@ -2,7 +2,7 @@ import {
    SvelteApplication,
    TJSDialog }                   from '#runtime/svelte/application';
 
-import { BrowserSupports }       from '#runtime/svelte/util';
+import { BrowserSupports }       from '#runtime/util/browser';
 
 import MenuAppShell              from './MenuAppShell.svelte';
 
