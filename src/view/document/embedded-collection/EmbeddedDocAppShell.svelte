@@ -2,11 +2,8 @@
    import { flip }               from 'svelte/animate';
 
    import { rippleFocus }        from '#runtime/svelte/animate/action';
-
    import { ApplicationShell }   from '#runtime/svelte/component/core';
-
-   import { TJSDocument }        from '#runtime/svelte/store/document';
-
+   import { TJSDocument }        from '#runtime/svelte/store/fvtt';
    import { DynReducerHelper }   from '#runtime/svelte/store/reducer';
 
    import { TJSInput }           from '#standard/component';
