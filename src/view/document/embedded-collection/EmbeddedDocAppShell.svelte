@@ -1,10 +1,10 @@
 <script>
    import { flip }               from 'svelte/animate';
 
+   import { DynReducerHelper }   from '#runtime/data/struct/store/reducer';
    import { rippleFocus }        from '#runtime/svelte/animate/action';
    import { ApplicationShell }   from '#runtime/svelte/component/core';
    import { TJSDocument }        from '#runtime/svelte/store/fvtt';
-   import { DynReducerHelper }   from '#runtime/svelte/store/reducer';
 
    import { TJSInput }           from '#standard/component';
 
@@ -21,8 +21,7 @@
 
    const doc = new TJSDocument();
 
-   /** @type {import('#runtime/svelte/store/reducer').DynMapReducer<string, Item>} */
-   const wildcard = doc.embedded.create('Item', {
+   const wildcard = doc.embedded.create(Item, {
       name: 'wildcard',
       filters: [filterSearch],
       sort: (a, b) => a.name.localeCompare(b.name)
