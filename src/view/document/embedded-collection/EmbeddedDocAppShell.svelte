@@ -48,7 +48,10 @@
    <main>
       <h1>Reactive Embedded Collections</h1>
       <div class=drop
-           on:drop={onDrop}>
+           on:drop={onDrop}
+           role=region
+           aria-dropeffect=none
+           aria-label="Document drop target">
          Drop Actor Document Here<br>
          {#if $doc}
             Name: {$doc?.name}

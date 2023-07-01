@@ -26,7 +26,7 @@
 
 <ApplicationShell bind:elementRoot>
    Drop a document below (change the doc name to see reactivity):
-   <section on:drop|preventDefault|stopPropagation={onDrop}>
+   <section on:drop|preventDefault|stopPropagation={onDrop} aria-dropeffect=none aria-label="Document drop target">
       {#if $doc}
          Document name: {$doc?.name}
       {/if}
