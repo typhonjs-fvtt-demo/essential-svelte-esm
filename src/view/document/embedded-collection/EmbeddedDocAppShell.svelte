@@ -2,7 +2,7 @@
    import { flip }               from 'svelte/animate';
 
    import { DynReducerHelper }   from '#runtime/data/struct/store/reducer';
-   import { rippleFocus }        from '#runtime/svelte/animate/action';
+   import { rippleFocus }        from '#runtime/svelte/action/animate';
    import { ApplicationShell }   from '#runtime/svelte/component/core';
    import { TJSDocument }        from '#runtime/svelte/store/fvtt';
 
