@@ -21,7 +21,7 @@ export { constants, sessionConstants };
 /**
  * @typedef {object} ESSessionConstants
  *
- * @property {string} appState - Stores the current app state in /src/view/app-state demo
+ * @property {string} appState Stores the current app state in /src/view/app-state demo
  *
- * @property {string} themeDarkMode - Indicates whether dark mode is enabled.
+ * @property {string} themeDarkMode Indicates whether dark mode is enabled.
  */
