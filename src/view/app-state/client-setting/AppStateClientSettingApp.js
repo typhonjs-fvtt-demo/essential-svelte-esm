@@ -1,5 +1,5 @@
 import { SvelteApplication }  from '#runtime/svelte/application';
-import { TJSGameSettings }    from '#standard/store';
+import { TJSGameSettings }    from '#runtime/svelte/store/fvtt';
 
 import ClientSettingAppShell  from './ClientSettingAppShell.svelte';
 
