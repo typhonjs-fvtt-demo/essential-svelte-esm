@@ -3,7 +3,7 @@
 
    import { rippleFocus }        from '#runtime/svelte/action/animate';
    import { ApplicationShell }   from '#runtime/svelte/component/core';
-   import { TJSDocument }        from '#runtime/svelte/store/fvtt';
+   import { TJSDocument }        from '#runtime/svelte/store/fvtt/document';
    import { DynReducerHelper }   from '#runtime/svelte/store/reducer';
 
    import { TJSInput }           from '#standard/component';
