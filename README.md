@@ -68,8 +68,3 @@ core Foundry UI / Application framework make it easy to create declarative Svelt
 Foundry VTT developers. The core UI component framework contains reactive "application shells" that provide an enhanced
 ability to control your UI / window experience including intro and outro transitions along with support key UI elements
 like context menus and a new backward compatible and API compliant Dialog component that features a modal dialog option.
-
-TRL is innovative as it delivers a runtime library module for Foundry that packages up the runtime in a way that
-can be shared across any number of modules / game systems utilizing it thereby saving a lot of space in any given
-module or game system. Optionally, it is possible to also bundle TRL directly into your module or game system. The TRL
-is both a Foundry library module and an NPM package providing the development dependency utilized for code. 
