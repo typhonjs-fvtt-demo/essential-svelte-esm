@@ -1,10 +1,10 @@
 <script>
-   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
 
-   import { TJSProseMirror }     from '@typhonjs-fvtt/svelte-standard/component';
+   import { TJSProseMirror }     from '#standard/component';
 
    // Not always necessary, but you can use DOMPurify to sanitize user input client side.
-   // import { DOMPurify }          from '@typhonjs-fvtt/runtime/dompurify';
+   // import { DOMPurify }          from '#runtime/dompurify';
 
    export let elementRoot = void 0;
 
@@ -27,7 +27,7 @@
       // button: true      // Show edit button to launch editor when hovered; when false editor is open by default.
       // classes: ['foo', 'bar'],   // Adds additional classes to `.tjs-editor` element.
       // clickToEdit: false,  // Clicking editor content initializes the editor; hides the edit button.
-      // DOMPurify,        // You can pass DOMPurify from `@typhonjs-fvtt/runtime/dompurify though ProseMirror does
+      // DOMPurify,        // You can pass DOMPurify from `#runtime/dompurify though ProseMirror does
                            // essential client side sanitation; IE stripping `<script>` tags, etc.
       // editable: true,   // Enable / disable editing
 

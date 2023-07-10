@@ -2,12 +2,12 @@
    import {
       easingFunc,
       easingList,
-      GsapCompose }   from '@typhonjs-fvtt/runtime/svelte/gsap';
+      GsapCompose }   from '#runtime/svelte/gsap';
 
    // Imports the loading code / automatic GSAP plugin registration.
-   import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/CustomEase';
-   import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/MotionPathPlugin';
-   import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/CustomWiggle';
+   import '#runtime/svelte/gsap/plugin/CustomEase';
+   import '#runtime/svelte/gsap/plugin/MotionPathPlugin';
+   import '#runtime/svelte/gsap/plugin/bonus/CustomWiggle';
 
    export let position = void 0;
 

@@ -1,7 +1,9 @@
 <script>
    import {
       easingFunc,
-      easingList }      from '@typhonjs-fvtt/runtime/svelte/gsap';
+      easingList }            from '#runtime/svelte/gsap';
+
+   import { Timing }          from '#runtime/util';
 
    import { carouselStore }   from './carouselStore.js';
 
@@ -13,7 +15,7 @@
 
    let cellCount = $carouselStore.length;
 
-   const setCells = foundry.utils.debounce(() => carouselStore.setCells(cellCount), 80);
+   const setCells = Timing.debounce(() => carouselStore.setCells(cellCount), 80);
 
    $: setCells(cellCount);
 </script>

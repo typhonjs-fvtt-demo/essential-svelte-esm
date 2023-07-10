@@ -1,7 +1,6 @@
 <script>
-   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
-
-   import { TJSDocument }        from '@typhonjs-fvtt/runtime/svelte/store';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
+   import { TJSDocument }        from '#runtime/svelte/store/fvtt/document';
 
    export let elementRoot = void 0;
 
@@ -27,7 +26,7 @@
 
 <ApplicationShell bind:elementRoot>
    Drop a document below (change the doc name to see reactivity):
-   <section on:drop|preventDefault|stopPropagation={onDrop}>
+   <section on:drop|preventDefault|stopPropagation={onDrop} aria-dropeffect=none aria-label="Document drop target">
       {#if $doc}
          Document name: {$doc?.name}
       {/if}

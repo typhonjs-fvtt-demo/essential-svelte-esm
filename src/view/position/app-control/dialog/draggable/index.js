@@ -1,7 +1,7 @@
 import { writable }           from 'svelte/store';
 
-import { draggable }          from '@typhonjs-fvtt/runtime/svelte/action';
-import { draggableGsap }      from '@typhonjs-fvtt/runtime/svelte/gsap';
+import { draggable }          from '#runtime/svelte/store/position';
+import { draggableGsap }      from '#runtime/svelte/gsap';
 
 import OptionsDraggable       from './OptionsDraggable.svelte';
 import OptionsDraggableGsap   from './OptionsDraggableGsap.svelte';

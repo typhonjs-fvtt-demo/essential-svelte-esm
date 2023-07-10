@@ -2,9 +2,9 @@
    // TODO TEMPORARY
    import {
       easingFunc,
-      easingList }      from '@typhonjs-fvtt/runtime/svelte/gsap';
+      easingList }      from '#runtime/svelte/gsap';
 
-   import { slideFade }    from '@typhonjs-fvtt/runtime/svelte/transition';
+   import { slideFade }    from '#runtime/svelte/transition';
 
    export let options = void 0;
 </script>

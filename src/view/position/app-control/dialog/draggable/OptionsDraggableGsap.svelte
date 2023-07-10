@@ -1,9 +1,9 @@
 <script>
-   import { easingList }   from '@typhonjs-fvtt/runtime/svelte/gsap';
-   import { slideFade }    from '@typhonjs-fvtt/runtime/svelte/transition';
+   import { easingList }   from '#runtime/svelte/gsap';
+   import { slideFade }    from '#runtime/svelte/transition';
 
    // Imports the loading / automatic GSAP plugin registration.
-   import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
+   import '#runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
 
    export let options = void 0;
 

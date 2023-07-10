@@ -1,9 +1,9 @@
 <script>
    import { getContext }               from 'svelte';
 
-   import { resizeObserver }           from '@typhonjs-fvtt/runtime/svelte/action';
-   import { TJSApplicationShell }      from '@typhonjs-fvtt/runtime/svelte/component/core';
-   import { TJSPositionControlLayer }  from '@typhonjs-fvtt/svelte-standard/component'
+   import { resizeObserver }           from '#runtime/svelte/action/dom';
+   import { TJSApplicationShell }      from '#runtime/svelte/component/core';
+   import { TJSPositionControlLayer }  from '#standard/component'
 
    import { boxStore, validator }      from './boxStore.js';
 
@@ -47,7 +47,7 @@
       boundingRect.width = offsetWidth;
       boundingRect.height = offsetHeight;
 
-      // Force validation for all Position instances.
+      // Force validation for all TJSPosition instances.
       for (const box of $boxStore) { box.position.set(); }
    }
 </script>

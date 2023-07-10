@@ -1,16 +1,16 @@
 import { get, writable }   from 'svelte/store';
 
-import { Position }        from '@typhonjs-fvtt/runtime/svelte/application';
+import { TJSPosition }     from '#runtime/svelte/store/position';
 
 import {
    easingFunc,
-   GsapCompose }           from '@typhonjs-fvtt/runtime/svelte/gsap';
+   GsapCompose }           from '#runtime/svelte/gsap';
 
 // Imports the loading code / automatic GSAP plugin registration.
-import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/CustomEase';
-import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/MotionPathPlugin';
-import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/CustomWiggle';
-import '@typhonjs-fvtt/runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
+import '#runtime/svelte/gsap/plugin/CustomEase';
+import '#runtime/svelte/gsap/plugin/MotionPathPlugin';
+import '#runtime/svelte/gsap/plugin/bonus/CustomWiggle';
+import '#runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
 
 // Defines a custom ease w/ the CustomWiggle plugin. This is used below to set a variable amount of wiggle count
 // depending on the duration of the animation; more wiggles the lower the duration.
@@ -24,7 +24,7 @@ let gsapTimeline;
 
 let savedComponentData;
 
-const validator = new Position.Validators.TransformBounds({ constrain: false });
+const validator = new TJSPosition.Validators.TransformBounds({ constrain: false });
 
 /**
  * Create a random integer between min & max.
@@ -53,8 +53,8 @@ function getRandomColor()
 }
 
 /**
- * Creates a Position instance with random top / left defined by width & height. When `auto` is true width & height of
- * the Position instance is set to auto.
+ * Creates a TJSPosition instance with random top / left defined by width & height. When `auto` is true width & height of
+ * the TJSPosition instance is set to auto.
  *
  * @param {number} width - Max width bounds.
  *
@@ -62,13 +62,13 @@ function getRandomColor()
  *
  * @param {boolean} auto - When true width & height are set to auto.
  *
- * @returns {Position} New Position instance.
+ * @returns {TJSPosition} New TJSPosition instance.
  */
 function getPosition(width, height, auto)
 {
    const bounds = getRandomInt(90, 140);
 
-   const position = new Position({
+   const position = new TJSPosition({
       top: getRandomInt(0, height),
       left: getRandomInt(0, width),
       width: auto ? 'auto' : bounds,
@@ -82,7 +82,7 @@ function getPosition(width, height, auto)
    return position;
 }
 
-/** @type {{id: number, position: Position, color: string}[]} */
+/** @type {{id: number, position: TJSPosition, color: string}[]} */
 let data = [];
 
 const boxStore = writable(data);
@@ -119,7 +119,7 @@ boxStore.add = (count = 1) =>
 
 boxStore.animateToCancel = () =>
 {
-   Position.Animate.cancelAll();
+   TJSPosition.Animate.cancelAll();
    animateTo = animateScaleRot = void 0;
 };
 
@@ -139,14 +139,14 @@ boxStore.animateToLocation = () =>
 
    if (animateTo) { animateTo.cancel(); }
 
-   animateTo = Position.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+   animateTo = TJSPosition.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
 
-   // animateTo = Position.Animate.from(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+   // animateTo = TJSPosition.Animate.from(data, createPositionData, stagger ? createOptionsData : { duration, ease });
 
-   // animateTo = Position.Animate.fromTo(data, createPositionData, createPositionData,
+   // animateTo = TJSPosition.Animate.fromTo(data, createPositionData, createPositionData,
    //  stagger ? createOptionsData : { duration, ease });
 
-   // if (!quickTo) { quickTo = Position.Animate.quickTo(data, ['top', 'left']); }
+   // if (!quickTo) { quickTo = TJSPosition.Animate.quickTo(data, ['top', 'left']); }
    //
    // quickTo.options({ duration, ease })(createPositionData);
 
@@ -171,7 +171,7 @@ boxStore.animateToScaleRot = () =>
 
    if (animateScaleRot) { animateScaleRot.cancel(); }
 
-   animateScaleRot = Position.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+   animateScaleRot = TJSPosition.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
 
    // Example of using finished promise.
    // animateScaleRot.finished.then(() => console.log(`!! Animation Scale / Rotate Finished`));
@@ -298,8 +298,8 @@ boxStore.restore = () =>
 
       for (const component of savedComponentData.components)
       {
-         // Must add a new Position and a new unique ID.
-         const position = new Position({ ...component.position, validator });
+         // Must add a new TJSPosition and a new unique ID.
+         const position = new TJSPosition({ ...component.position, validator });
          newData.push({ ...component, id: idCntr++, position });
       }
 

@@ -57,7 +57,7 @@ export default () =>
       // static resources / project.
       server: {
          port: 30001,
-         open: '/game',
+         open: false, //'/game',
          proxy: {
             // Serves static files from main Foundry server.
             [`^(/${s_PACKAGE_ID}/(assets|lang|packs|style.css))`]: 'http://localhost:30000',

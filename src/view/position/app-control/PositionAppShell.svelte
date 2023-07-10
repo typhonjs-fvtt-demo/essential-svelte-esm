@@ -1,8 +1,8 @@
 <script>
    import { getContext }         from 'svelte';
 
-   import { applyStyles }        from '@typhonjs-fvtt/runtime/svelte/action';
-   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { applyStyles }        from '#runtime/svelte/action/dom';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
 
    import {
       optionStores,

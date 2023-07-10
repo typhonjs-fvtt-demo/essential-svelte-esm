@@ -1,10 +1,11 @@
 <script>
    import {
-      applyPosition,
       applyStyles,
-      resizeObserver }        from '@typhonjs-fvtt/runtime/svelte/action';
+      resizeObserver }        from '#runtime/svelte/action/dom';
 
-   import { draggableGsap }   from '@typhonjs-fvtt/runtime/svelte/gsap';
+   import { draggableGsap }   from '#runtime/svelte/gsap';
+
+   import { applyPosition }   from '#runtime/svelte/store/position';
 
    import { boxStore }        from '../boxStore.js';
 

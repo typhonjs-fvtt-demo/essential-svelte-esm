@@ -2,7 +2,7 @@ import { writable }        from 'svelte/store';
 
 import {
    SvelteApplication,
-   TJSDialog }             from '@typhonjs-fvtt/runtime/svelte/application';
+   TJSDialog }             from '#runtime/svelte/application';
 
 import PositionAppShell    from './PositionAppShell.svelte';
 import DialogContent       from './dialog/DialogContent.svelte';

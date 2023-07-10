@@ -1,127 +1,135 @@
-<!--<script>-->
-<!--   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';-->
+<script>
+   import { ApplicationShell }      from '#runtime/svelte/component/core';
 
-<!--   import {-->
-<!--      TJSColordPicker,-->
-<!--      TJSColordPickerSavedColors }  from '@typhonjs-fvtt/svelte-standard/component';-->
+   import {
+      TJSColordPicker,
+      TJSColordPickerSavedColors }  from '#standard/component';
 
-<!--   export let elementRoot = void 0;-->
+   export let elementRoot = void 0;
 
-<!--   const options = {-->
-<!--      addons: [TJSColordPickerSavedColors],-->
-<!--      format: 'hsl',-->
-<!--      formatType: 'string',-->
-<!--      hasAddons: true,-->
-<!--      hasAlpha: true,-->
-<!--      hasButtonBar: true,-->
-<!--      hasTextInput: true,-->
-<!--      isPopup: false,-->
-<!--      lockTextFormat: false,-->
-<!--      precision: 0,-->
-<!--      width: 80-->
-<!--   };-->
+   const options = {
+      addons: [TJSColordPickerSavedColors],
+      format: 'hsl',
+      formatType: 'string',
+      hasAddons: true,
+      hasAlpha: true,
+      hasButtonBar: true,
+      hasTextInput: true,
+      isPopup: false,
+      lockTextFormat: false,
+      precision: 0,
+      width: 80
+   };
 
-<!--   // let color = '#ff0000';-->
-<!--   // let color = 'rgba(255, 50, 50, 0.5)';-->
-<!--   // let color = 'hsla(240, 50%, 100%, 0.5)';-->
-<!--   // let color = { h: 180, s: 100, v: 100, a: 0.35 };-->
+   // let color = '#ff0000';
+   // let color = 'rgba(255, 50, 50, 0.5)';
+   // let color = 'hsla(240, 50%, 100%, 0.5)';
+   // let color = { h: 180, s: 100, v: 100, a: 0.35 };
 
-<!--   // let color = 'hsla(-0.25turn 50% 100% / 0.5)';-->
-<!--   // let color = 'hsla(-0.25456565656turn 99.456546456456% 50% / 0.5)';-->
+   // let color = 'hsla(-0.25turn 50% 100% / 0.5)';
+   // let color = 'hsla(-0.25456565656turn 99.456546456456% 50% / 0.5)';
 
-<!--   // let color = 'hsl(240, 100%, 50%, 0.5)';-->
-<!--   // let color = 'hsla(240, 50%, 99%, 0.5)';-->
+   // let color = 'hsl(240, 100%, 50%, 0.5)';
+   // let color = 'hsla(240, 50%, 99%, 0.5)';
 
-<!--   // let color = void 0;-->
+   // let color = void 0;
 
-<!--   let color = 'hsl(240 100% 50% / 0.5)';-->
-<!--</script>-->
+   let color = 'hsl(240 100% 50% / 0.5)';
+</script>
 
-<!--<svelte:options accessors={true}/>-->
+<svelte:options accessors={true}/>
 
-<!--<ApplicationShell bind:elementRoot>-->
-<!--   <section class=tjs-settings-entry>-->
-<!--      <main>-->
-<!--         <label>Text Input:<input type=checkbox bind:checked={options.hasTextInput}></label>-->
-<!--         <label>Button Bar:<input type=checkbox bind:checked={options.hasButtonBar}></label>-->
-<!--         <label>Addons:<input type=checkbox bind:checked={options.hasAddons}></label>-->
+<ApplicationShell bind:elementRoot>
+   <div>
+      <section class=styled>
+         <label class=centered>Text Input:<input type=checkbox bind:checked={options.hasTextInput}></label>
+         <label class=centered>Button Bar:<input type=checkbox bind:checked={options.hasButtonBar}></label>
+         <label class=centered>Addons:<input type=checkbox bind:checked={options.hasAddons}></label>
 
-<!--         <label>Chrome Layout:<input type=checkbox on:change={(e) => options.layout = e.target.checked ? 'chrome' : void 0}></label>-->
-<!--         <label>Enable Alpha:<input type=checkbox bind:checked={options.hasAlpha}></label>-->
-<!--         <label>Lock Text Format:<input type=checkbox bind:checked={options.lockTextFormat}></label>-->
-<!--         <label>Popup:<input type=checkbox bind:checked={options.isPopup}></label>-->
-<!--      </main>-->
-<!--   </section>-->
+         <label class=centered>Chrome Layout:<input type=checkbox on:change={(e) => options.layout = e.target.checked ? 'chrome' : void 0}></label>
+         <label class=centered>Enable Alpha:<input type=checkbox bind:checked={options.hasAlpha}></label>
+         <label class=centered>Lock Text Format:<input type=checkbox bind:checked={options.lockTextFormat}></label>
+         <label class=centered>Popup:<input type=checkbox bind:checked={options.isPopup}></label>
+      </section>
 
-<!--   <section class=tjs-settings-entry>-->
-<!--      <main>-->
-<!--         <label>Format:-->
-<!--            <select bind:value={options.format}>-->
-<!--               <option value=hex>HEX</option>-->
-<!--               <option value=hsl>HSL</option>-->
-<!--               <option value=hsv>HSV</option>-->
-<!--               <option value=rgb>RGB</option>-->
-<!--            </select>-->
-<!--         </label>-->
-<!--         <label>Type:-->
-<!--            <select bind:value={options.formatType}>-->
-<!--               <option value=string>String</option>-->
-<!--               <option value=object>Object</option>-->
-<!--            </select>-->
-<!--         </label>-->
-<!--         <label>Precision: <input type=range min=0 max=10 bind:value={options.precision} style="width: 100px"></label>-->
-<!--         <label>Width: <input type=range min=50 max=400 bind:value={options.width} style="width: 100px"> ({options.width})</label>-->
-<!--      </main>-->
-<!--   </section>-->
+      <section class=styled>
+         <label>Format:
+            <select bind:value={options.format}>
+               <option value=hex>HEX</option>
+               <option value=hsl>HSL</option>
+               <option value=hsv>HSV</option>
+               <option value=rgb>RGB</option>
+            </select>
+         </label>
+         <label>Type:
+            <select bind:value={options.formatType}>
+               <option value=string>String</option>
+               <option value=object>Object</option>
+            </select>
+         </label>
+         <label>Precision: <input type=range min=0 max=10 bind:value={options.precision} style="width: 100px"></label>
+         <label>Width: <input type=range min=50 max=400 bind:value={options.width} style="width: 100px"> ({options.width})</label>
+      </section>
 
-<!--   <section class=tjs-settings-entry>-->
-<!--      <span>{typeof color === 'object' ? JSON.stringify(color) : color}</span>-->
-<!--   </section>-->
+      <section>
+         <span>Value of the main `color` prop: {typeof color === 'object' ? JSON.stringify(color) : color}</span>
+      </section>
 
-<!--   <main>-->
-<!--      <TJSColordPicker bind:color options={options} />-->
-<!--      <TJSColordPicker bind:color options={options} />-->
-<!--   </main>-->
-<!--</ApplicationShell>-->
+      <section>
+         <TJSColordPicker bind:color options={options} />
+         <!--      <TJSColordPicker bind:color options={options} />-->
+      </section>
+   </div>
+</ApplicationShell>
 
-<!--<style>-->
-<!--   input {-->
-<!--      margin: 0 8px;-->
-<!--      vertical-align: bottom;-->
-<!--      position: relative;-->
-<!--      top: 1px;-->
-<!--   }-->
+<style>
+   /* Remove bad foundry universal style */
+   div > * {
+      flex: none;
+   }
 
-<!--   input[type=range] {-->
-<!--      vertical-align: center;-->
-<!--   }-->
+   div {
+      --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
+   }
 
-<!--   /* For testing select elements */-->
-<!--   select {-->
-<!--      color: #b5b3a4-->
-<!--   }-->
+   label.centered {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
 
-<!--   span {-->
-<!--      /*color: var(&#45;&#45;tjs-settings-entry-label-color, inherit);*/-->
-<!--      /*font-size: var(&#45;&#45;tjs-settings-entry-label-font-size, inherit);*/-->
-<!--      /*line-height: var(&#45;&#45;tjs-settings-entry-label-line-height, var(&#45;&#45;form-field-height));*/-->
-<!--      flex: 2;-->
-<!--   }-->
+   input {
+      margin: 0 8px;
+      vertical-align: bottom;
+      position: relative;
+      top: 1px;
+   }
 
-<!--   main {-->
-<!--      display: flex;-->
-<!--      justify-content: space-between;-->
-<!--   }-->
+   input[type=range] {
+      vertical-align: center;
+   }
 
-<!--   section {-->
-<!--      clear: both;-->
-<!--      display: flex;-->
-<!--      flex-direction: row;-->
-<!--      flex-wrap: wrap;-->
-<!--      align-items: center;-->
-<!--   }-->
+   span {
+      flex: 2;
+   }
 
-<!--   section:not(:last-child) {-->
-<!--      margin: 0 0 1rem 0;-->
-<!--   }-->
-<!--</style>-->
+   section {
+      clear: both;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+   }
+
+   section.styled {
+      background: rgba(0, 0, 0, 0.1);
+      padding: 8px;
+      border-radius: 8px;
+   }
+
+   section:not(:last-child) {
+      margin: 0 0 1rem 0;
+   }
+</style>

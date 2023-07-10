@@ -1,16 +1,16 @@
 <script>
    import { flip }               from 'svelte/animate';
 
-   import { ApplicationShell }   from '@typhonjs-fvtt/runtime/svelte/component/core';
-   import { TJSDocument }        from '@typhonjs-fvtt/runtime/svelte/store';
+   import { rippleFocus }        from '#runtime/svelte/action/animate';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
+   import { TJSDocument }        from '#runtime/svelte/store/fvtt/document';
+   import { DynReducerHelper }   from '#runtime/svelte/store/reducer';
 
-   import { rippleFocus }        from '@typhonjs-fvtt/svelte-standard/action';
-   import { TJSInput }           from '@typhonjs-fvtt/svelte-standard/component';
-   import { createFilterQuery }  from '@typhonjs-fvtt/svelte-standard/store';
+   import { TJSInput }           from '#standard/component';
 
    export let elementRoot;
 
-   const filterSearch = createFilterQuery('type');
+   const filterSearch = DynReducerHelper.filters.regexObjectQuery('type');
 
    const input = {
       store: filterSearch,
@@ -21,8 +21,7 @@
 
    const doc = new TJSDocument();
 
-   /** @type {import('@typhonjs-fvtt/runtime/svelte/store').DynMapReducer<string, Item>} */
-   const wildcard = doc.embedded.create('Item', {
+   const wildcard = doc.embedded.create(Item, {
       name: 'wildcard',
       filters: [filterSearch],
       sort: (a, b) => a.name.localeCompare(b.name)
@@ -49,7 +48,10 @@
    <main>
       <h1>Reactive Embedded Collections</h1>
       <div class=drop
-           on:drop={onDrop}>
+           on:drop={onDrop}
+           role=region
+           aria-dropeffect=none
+           aria-label="Document drop target">
          Drop Actor Document Here<br>
          {#if $doc}
             Name: {$doc?.name}

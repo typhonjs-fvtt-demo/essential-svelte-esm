@@ -1,9 +1,9 @@
 <script>
    import { getContext }            from 'svelte';
 
-   import { EmptyApplicationShell } from '@typhonjs-fvtt/runtime/svelte/component/core';
+   import { EmptyApplicationShell } from '#runtime/svelte/component/core';
 
-   import { draggable }             from '@typhonjs-fvtt/runtime/svelte/action';
+   import { draggable }             from '#runtime/svelte/store/position';
 
    export let elementRoot = void 0;
 
@@ -27,7 +27,8 @@
     * draggable action to that without the need for `hasTargetClassList`.
    -->
    <div class=drag-target use:draggable={{ position, hasTargetClassList: ['drag-target'] }}
-        on:contextmenu={() => context.application.close()}>
+        on:contextmenu={() => context.application.close()}
+        role=application>
       <h2 class=drag-target>Context click to close</h2>
       <input type=text placeholder="An input showing focus control" />
    </div>
