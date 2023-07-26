@@ -1,4 +1,7 @@
 # Changelog
+## Release 0.1.1 (minor update)
+- Updated @typhonjs-fvtt/runtime to ['0.1.0'](https://github.com/typhonjs-fvtt-lib/typhonjs/releases/tag/0.1.1).
+
 ## Release 0.1.0 (major update)
 - Updated @typhonjs-fvtt/runtime to ['0.1.0'](https://github.com/typhonjs-fvtt-lib/typhonjs/releases/tag/0.1.0).
 - Updated @typhonjs-fvtt/svelte-standard to ['0.1.0'](https://github.com/typhonjs-fvtt-lib/svelte-standard/releases/tag/0.1.0).
