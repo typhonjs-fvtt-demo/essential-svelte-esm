@@ -7,10 +7,10 @@
 
    export let elementRoot = void 0;
 
-   const context = getContext('#external');
+   const { application } = getContext('#external');
 
    // Store position reference.
-   const position = context.application.position;
+   const position = application.position;
 </script>
 
 <svelte:options accessors={true}/>
@@ -27,7 +27,7 @@
     * draggable action to that without the need for `hasTargetClassList`.
    -->
    <div class=drag-target use:draggable={{ position, hasTargetClassList: ['drag-target'] }}
-        on:contextmenu={() => context.application.close()}
+        on:contextmenu={() => application.close()}
         role=application>
       <h2 class=drag-target>Context click to close</h2>
       <input type=text placeholder="An input showing focus control" />

@@ -17,6 +17,7 @@ export default class PositionBasicOverlayApp extends SvelteApplication
          classes: ['tjs-essential-svelte-esm'],
          width: 300,
          height: 300,
+         // resizable: true, // Set to true for a resizable empty app shell.
 
          svelte: {
             class: Overlay,
