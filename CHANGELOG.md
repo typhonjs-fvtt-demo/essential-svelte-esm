@@ -1,4 +1,7 @@
 # Changelog
+## Release 0.1.2 (minor update)
+- Updated @typhonjs-fvtt/runtime to ['0.1.2'](https://github.com/typhonjs-fvtt-lib/typhonjs/releases/tag/0.1.2).
+
 ## Release 0.1.1 (minor update)
 - Updated @typhonjs-fvtt/runtime to ['0.1.1'](https://github.com/typhonjs-fvtt-lib/typhonjs/releases/tag/0.1.1).
 
