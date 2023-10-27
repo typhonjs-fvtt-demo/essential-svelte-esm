@@ -38,6 +38,9 @@
 
    function setDimension(offsetWidth, offsetHeight)
    {
+      // When the PopOut module is enabled and this app is popped out 0 / 0 is received; ignore this.
+      if (offsetWidth === 0 && offsetHeight === 0) { return; }
+
       // Avoid any changes when the application state is not rendered as setting `boundingRect` while the application is
       // closing can cause a loop in the Svelte runtime. This can happen occasionally, so just avoid it entirely.
       if (!application.rendered) { return; }
