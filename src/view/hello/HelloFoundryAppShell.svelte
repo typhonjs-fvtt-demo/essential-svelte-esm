@@ -34,6 +34,7 @@
       const result = await TJSDialog.prompt({
          title: 'A modal dialog!',
          draggable: false,
+         minimizable: false,
          modal: true,
          content: 'A cool modal dialog!',  // You can set content with a Svelte component configuration object too!
          label: 'Ok'
