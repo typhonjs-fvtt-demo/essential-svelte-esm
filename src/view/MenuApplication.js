@@ -12,7 +12,8 @@ import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
 import ColorPickerApp            from './components/color/ColorPickerApp.js';
 import ContentEditableApp        from './editor/content-editable/ContentEditableApp.js';
 import BasicDocumentApp          from './document/basic/BasicDocumentApp.js';
-import EmbeddedDocApplication    from "./document/embedded-collection/EmbeddedDocApplication.js";
+import EmbeddedDocApplication    from './document/embedded-collection/EmbeddedDocApplication.js';
+import FilePickerApp             from './components/filepicker/FilePickerApp.js';
 import HeaderButtonsApplication  from './header-buttons/HeaderButtonsApplication.js';
 import HelloFoundryApplication   from './hello/HelloFoundryApplication.js';
 import PositionApplication       from './position/app-control/PositionApplication.js';
@@ -54,16 +55,10 @@ export default class MenuApplication extends SvelteApplication
          { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
          { title: 'App State (Session Storage)', class: AppStateSessionApp },
          { title: 'Content Editable', class: ContentEditableApp },
-         { title: 'TinyMCE', class: TinyMCEApp }
+         { title: 'TinyMCE', class: TinyMCEApp },
+         { title: 'ProseMirror', class: ProseMirrorApp },
+         { title: 'File Picker', class: FilePickerApp }
       ];
-
-      const isV10 = !foundry.utils.isNewerVersion(10, game.version ?? game?.data?.version);
-
-      // Add ProseMirror editor demo if v10+
-      if (isV10)
-      {
-         buttons.push({ title: 'ProseMirror', class: ProseMirrorApp });
-      }
 
       // Add TJSColordPicker component demo if browser supports container queries.
       if (BrowserSupports.containerQueries)
