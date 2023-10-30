@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import FilePickerAppShell    from './FilePickerAppShell.svelte';
 
-export default class ColorPickerApp extends SvelteApplication
+export default class FilePickerApp extends SvelteApplication
 {
    /**
     * Default Application options
@@ -13,7 +13,7 @@ export default class ColorPickerApp extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
-         title: 'TJSFilePicker components',
+         title: 'FilePicker components',
          classes: ['tjs-essential-svelte-esm'],
          resizable: false,
          width: 500,
