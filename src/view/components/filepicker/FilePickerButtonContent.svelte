@@ -3,7 +3,7 @@
    import { writable }           from 'svelte/store';
 
    import {
-      FVTTFilePicker,
+      FVTTFilePickerControl,
       TJSContextMenu }           from '#standard/application';
 
    import { TJSFileButton }      from '#standard/component/fvtt';
@@ -51,9 +51,9 @@
    ];
 
    // It is always a good idea to close any open file pickers when your app that depends on them closes.
-   // By invoking `FVTTFilePicker.close` with a list of all app ID names used for file pickers you can close any
+   // By invoking `FVTTFilePickerControl.close` with a list of all app ID names used for file pickers you can close any
    // associated file picker app easily.
-   onDestroy(() => FVTTFilePicker.close(buttons.map((button) => button?.pickerOptions?.id)));
+   onDestroy(() => FVTTFilePickerControl.close(buttons.map((button) => button?.pickerOptions?.id)));
 </script>
 
 <section>
