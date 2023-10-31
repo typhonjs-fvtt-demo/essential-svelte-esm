@@ -13,6 +13,9 @@
          draggable: false,
          minimizable: false,
          modal: true,
+         // modalOptions: {   // You can set the dialog to close on clicks to the modal / glasspane.
+         //   closeOnInput: true
+         // },
          content: {
             class: FilePickerButtonContent,
             props: {
