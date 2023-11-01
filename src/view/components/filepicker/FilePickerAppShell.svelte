@@ -23,7 +23,7 @@
             }
          },
          label: 'Ok'
-      }, { classes: ['tjs-essential-svelte-esm'] });
+      }, { classes: ['tjs-essential-svelte-esm'], width: 500 });
    }
 </script>
 
@@ -32,6 +32,6 @@
 <ApplicationShell bind:elementRoot>
    <FilePickerButtonContent />
 
-   <h3>Components invoked from a modal app / dialog:</h3>
-   <button on:click={onClick}>Launch Dialog</button>
+   <h3>Same components invoked from a modal app / dialog:</h3>
+   <button on:click={onClick}>Launch modal dialog!</button>
 </ApplicationShell>

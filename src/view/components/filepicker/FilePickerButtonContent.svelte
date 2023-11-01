@@ -1,54 +1,31 @@
 <script>
-   import { onDestroy }          from 'svelte';
-   import { writable }           from 'svelte/store';
+   import { onDestroy }             from 'svelte';
+
+   import { FVTTFilePickerControl } from '#standard/application';
 
    import {
-      FVTTFilePickerControl,
-      TJSContextMenu }           from '#standard/application';
+      TJSFileButton,
+      TJSFileIconButton,
+      TJSFileSlotButton }           from '#standard/component/fvtt';
 
-   import { TJSFileButton }      from '#standard/component/fvtt';
+   import { createButtonData }      from './createButtonData.js';
+
+   import ImageContent              from './ImageContent.svelte';
 
    export let idPrepend = '';
+
+   const buttons = createButtonData(idPrepend);
 
    let filepath = '';
    let filepath2 = '';
    let filepath3 = '';
+   let filepath4 = '';
+   let filepath5 = '';
+   let filepath6 = '';
 
    // Demo of writable store for button configuration data. Uncomment `store` in the first `button` options.
-   let storeFilepath = writable('');
+   const storeFilepath = buttons[0].pickerOptions.store;
    $: if ($storeFilepath !== '') { console.log(`FilePickerButtonContent - storeFilepath set: `, $storeFilepath); }
-
-   const buttons = [
-      {
-         pickerOptions: {
-            id: `${idPrepend}test-fp`,
-            // store: storeFilepath, // You may assign a writable store to receive result changes.
-            top: 100
-         }
-      },
-
-      {
-         pickerOptions: {
-            id: `${idPrepend}test-fp2`,
-            modal: true,
-            modalOptions: {
-               // background: 'red',
-               closeOnInput: true
-            },
-            top: 100
-         }
-      },
-
-      {
-         label: 'Pick File',
-         icon: 'fas fa-wrench',
-         title: 'A custom title',
-         pickerOptions: {
-            id: `${idPrepend}test-fp3`,
-            top: 100
-         }
-      }
-   ];
 
    // It is always a good idea to close any open file pickers when your app that depends on them closes.
    // By invoking `FVTTFilePickerControl.close` with a list of all app ID names used for file pickers you can close any
@@ -57,7 +34,7 @@
 </script>
 
 <section>
-   <h3>Basic Button:</h3>
+   <h3>TJSFileButton:</h3>
    <label>
       <span>Standard:</span>
       <input type=text bind:value={filepath} readonly />
@@ -72,14 +49,38 @@
 </section>
 
 <section>
-   <h3>Basic Button w/ customization & context menu:</h3>
+   <h3>TJSFileButton w/ customization & context menu:</h3>
    <label>
       <span>Standard:</span>
       <input type=text bind:value={filepath3} readonly />
    </label>
-   <TJSFileButton bind:filepath={filepath3}
-                  button={buttons[2]}
-                  on:contextmenu={(event) => TJSContextMenu.create({ event, items: [{ label: 'A demo menu item'}]})} />
+   <TJSFileButton bind:filepath={filepath3} button={buttons[2]} />
+</section>
+
+<section>
+   <h3>TJSFileIconButton:</h3>
+   <label>
+      <span>Standard:</span>
+      <input type=text bind:value={filepath4} readonly />
+   </label>
+   <TJSFileIconButton bind:filepath={filepath4} button={buttons[3]} />
+
+   <label>
+      <span>Modal:</span>
+      <input type=text bind:value={filepath5} readonly />
+   </label>
+   <TJSFileIconButton bind:filepath={filepath5} button={buttons[4]} />
+</section>
+
+<section>
+   <h3>TJSFileSlotButton w/ efx:</h3>
+   <label>
+      <span>Standard:</span>
+      <input type=text bind:value={filepath6} readonly />
+   </label>
+   <TJSFileSlotButton bind:filepath={filepath6} button={buttons[5]}>
+      <ImageContent />
+   </TJSFileSlotButton>
 </section>
 
 <style>
