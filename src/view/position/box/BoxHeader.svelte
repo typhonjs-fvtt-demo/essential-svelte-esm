@@ -61,17 +61,21 @@
    </div>
    <div class="container flex-vert">
       <div class=flex>
-         <label class=duration for=duration>Duration (seconds):</label>
-         <input type=range min=0 max=3 step=0.1 id=duration bind:value={$storeDuration}>
-         <input type=text bind:value={$storeDuration} readonly>
+         <label class=duration>
+            Duration (seconds):
+            <input type=range min=0 max=3 step=0.1 bind:value={$storeDuration}>
+            <input type=text bind:value={$storeDuration} readonly>
+         </label>
       </div>
       <div class=flex>
-         <label for=easing>Easing:</label>
-         <select id=easing bind:value={$storeEase}>
-            {#each easingList as entry}
-               <option value={easingFunc[entry]}>{entry}</option>
-            {/each}
-         </select>
+         <label>
+            Easing:
+            <select bind:value={$storeEase}>
+               {#each easingList as entry}
+                  <option value={easingFunc[entry]}>{entry}</option>
+               {/each}
+            </select>
+         </label>
       </div>
    </div>
    <div class="container flex-vert">

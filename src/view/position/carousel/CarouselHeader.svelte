@@ -22,26 +22,26 @@
 
 <div class="header flex">
    <div class="container flex-vert flex-end">
-      <label for=cells>
+      <label>
          Cells:
-         <input class=cells-range type=range min=3 max=16 id=cells bind:value={cellCount} />
+         <input class=cells-range type=range min=3 max=16 bind:value={cellCount} />
          <input type=text bind:value={$carouselStore.length} readonly>
       </label>
-      <label for=persective>
+      <label>
          Perspective:
-         <input type=range min=10 max=1200 id=persective bind:value={$storePerspective}>
+         <input type=range min=10 max=1200 bind:value={$storePerspective}>
          <input type=text bind:value={$storePerspective} readonly>
       </label>
    </div>
    <div class="container flex-vert">
-      <label for=duration>
+      <label>
          Duration:
-         <input type=range min=0 max=3 step=0.1 id=duration bind:value={$storeDuration}>
+         <input type=range min=0 max=3 step=0.1 bind:value={$storeDuration}>
          <input type=text bind:value={$storeDuration} readonly>
       </label>
-      <label for=easing>
+      <label>
          Easing:
-         <select id=easing bind:value={$storeEase}>
+         <select bind:value={$storeEase}>
             {#each easingList as entry}
                <option value={easingFunc[entry]}>{entry}</option>
             {/each}
