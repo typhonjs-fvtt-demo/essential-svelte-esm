@@ -1,12 +1,15 @@
 <script>
-   import { TJSDialog }          from '#runtime/svelte/application';
-   import { ApplicationShell }   from '#runtime/svelte/component/core';
+   import { ripple }                from '#runtime/svelte/action/animate';
+   import { TJSDialog }             from '#runtime/svelte/application';
+   import { ApplicationShell }      from '#runtime/svelte/component/core';
+
+   import { TJSButton }             from '#standard/component';
 
    import FilePickerButtonContent   from './FilePickerButtonContent.svelte';
 
    export let elementRoot = void 0;
 
-   function onClick()
+   function onPress()
    {
       TJSDialog.prompt({
          title: 'A modal dialog!',
@@ -19,7 +22,7 @@
          content: {
             class: FilePickerButtonContent,
             props: {
-               idPrepend: 'dialog-'
+               idPrepend: 'dialog-' // Provides unique IDs for all file picker from the dialog.
             }
          },
          label: 'Ok'
@@ -33,5 +36,5 @@
    <FilePickerButtonContent />
 
    <h3>Same components invoked from a modal app / dialog:</h3>
-   <button on:click={onClick}>Launch modal dialog!</button>
+   <TJSButton on:press={onPress} efx={ripple()}>Launch modal dialog!</TJSButton>
 </ApplicationShell>

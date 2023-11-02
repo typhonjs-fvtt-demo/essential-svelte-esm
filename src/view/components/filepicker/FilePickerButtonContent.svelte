@@ -34,7 +34,7 @@
 </script>
 
 <section>
-   <h3>TJSFileButton:</h3>
+   <h3>TJSFileButton (modal does not close on glasspane input):</h3>
    <label>
       <span>Standard:</span>
       <input type=text bind:value={filepath} readonly />
@@ -58,7 +58,7 @@
 </section>
 
 <section>
-   <h3>TJSFileIconButton:</h3>
+   <h3>TJSFileIconButton (modal does close on glasspane input):</h3>
    <label>
       <span>Standard:</span>
       <input type=text bind:value={filepath4} readonly />

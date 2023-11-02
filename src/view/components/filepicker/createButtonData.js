@@ -17,22 +17,40 @@ export function createButtonData(idPrepend)
    return [
       // TJSFileButton (standard)
       {
+         efx: ripple(),
+         title: 'Pick File',
          pickerOptions: {
             id: `${idPrepend}test-fp`,
             store: writable(''), // You may assign a writable store to receive result changes.
-            top: 100
+            top: 100,
+
+            /**
+             * You can set a callback to receive filepath changes.
+             *
+             * @param {{ filepath: string }} filepath - Newly selected filepath.
+             */
+            // onFilepath: ({ filepath }) => { console.log(`!! filepath: ${filepath}`); },
+
+            /**
+             * You may provide a validation function to test the selected result. Return false to
+             * reject the filepath selection. Post a Foundry UI notification, etc.
+             * Note: the example below is always true.
+             *
+             * @param {{ filepath: string }} filepath - Filepath to validate.
+             *
+             * @returns {boolean} Is validated?
+             */
+            // onValidate: ({ filepath }) => typeof filepath === 'string'
          }
       },
 
       // TJSFileButton (modal)
       {
+         efx: ripple(),
+         title: 'Pick File',
          pickerOptions: {
             id: `${idPrepend}test-fp2`,
             modal: true,
-            modalOptions: {
-               // background: 'red',
-               closeOnInput: true
-            },
             top: 100
          }
       },
@@ -41,7 +59,7 @@ export function createButtonData(idPrepend)
       {
          label: 'Pick File',
          icon: 'fas fa-wrench',
-         title: 'A custom title',
+         efx: ripple(),
          onContextMenu: ({ event }) => TJSContextMenu.create({ event, items: [{ label: 'A demo menu item' }] }),
          pickerOptions: {
             id: `${idPrepend}test-fp3`,
@@ -51,7 +69,6 @@ export function createButtonData(idPrepend)
 
       // TJSFileIconButton (standard)
       {
-         icon: 'fas fa-file',
          efx: ripple(),
          pickerOptions: {
             id: `${idPrepend}test-fp4`,
@@ -61,13 +78,12 @@ export function createButtonData(idPrepend)
 
       // TJSFileIconButton (modal)
       {
-         icon: 'fas fa-file',
          efx: ripple(),
          pickerOptions: {
             id: `${idPrepend}test-fp5`,
             modal: true,
             modalOptions: {
-               closeOnInput: true
+               closeOnInput: true   // closes on glasspane click when launched from a modal app / dialog.
             },
             top: 100
          }
@@ -75,14 +91,11 @@ export function createButtonData(idPrepend)
 
       // TJSFileSlotButton (standard)
       {
-         efx: ripple({ duration: 200 }),
+         efx: ripple({ duration: 300 }),
          pickerOptions: {
             id: `${idPrepend}test-fp6`,
-            modalOptions: {
-               closeOnInput: true   // closes on glasspane click when launched from a modal app / dialog.
-            },
             top: 100
          }
-      },
+      }
    ];
 }
