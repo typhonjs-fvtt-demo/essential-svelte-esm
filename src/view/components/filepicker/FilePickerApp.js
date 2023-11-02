@@ -13,6 +13,7 @@ export default class FilePickerApp extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
+         id: 'file-picker-esm',
          title: 'FilePicker components',
          classes: ['tjs-essential-svelte-esm'],
          resizable: false,
