@@ -55,6 +55,9 @@ export default class PositionApplication extends SvelteApplication
 
    onSvelteMount()
    {
+      // Offset dialog from current position.
+      const top = this.position.top + this.position.height + 10;
+
       this.#dialog = new TJSDialog({
          title: 'Adjust Position',
          content: {
@@ -64,7 +67,8 @@ export default class PositionApplication extends SvelteApplication
       }, {
          classes: ['tjs-essential-svelte-esm'],
          headerButtonNoClose: true,
-         width: 500
+         width: 500,
+         top
       }).render(true, { focus: true });
    }
 }

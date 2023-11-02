@@ -15,7 +15,7 @@
 
 <main>
    <!-- svelte-ignore a11y-missing-attribute -->
-   <h3>Adjust `Position` of <a role=presentation on:click={() => application.bringToTop()}><u>parent application</u></a>:</h3>
+   <h3>Adjust `Position` of <a role=presentation on:click={() => application.bringToTop({ focus: false })}><u>parent application</u></a>:</h3>
 
    <hr>
 
@@ -38,7 +38,7 @@
    <hr>
 
    <div style="justify-content: flex-start">
-      <input type=checkbox id=debug bind:checked={$storeDebug}>
+      <input type=checkbox bind:checked={$storeDebug}>
       Debug: Show transform bounding rectangle.
    </div>
 </main>

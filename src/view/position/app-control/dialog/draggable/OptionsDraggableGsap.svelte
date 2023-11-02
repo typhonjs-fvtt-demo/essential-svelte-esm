@@ -23,56 +23,62 @@
 <section transition:slideFade={{duration: 150}}>
    <hr>
 
-   <div class=flex>
+   <div>
       <input type=checkbox bind:checked={options.ease}/>
       <span>Easing:</span>
       <!-- svelte-ignore a11y-missing-attribute -->
       <a on:click={() => options.resetEase()} title="Reset Easing" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
-   <div class=flex>
-      <label for=duration>Duration:</label>
-      <input type=range min=0 max=3 step=0.1 id=duration bind:value={options.easeDuration}>
-      <input type=text bind:value={options.easeDuration} readonly>
+   <div>
+      <label>Duration:
+         <input type=range min=0 max=3 step=0.1 bind:value={options.easeDuration}>
+         <input type=text bind:value={options.easeDuration} readonly>
+      </label>
 
-      <label for=easing>Function:</label>
-      <select id=easing bind:value={options.easeValue}>
-         {#each easingList as entry}
-            <option value={entry}>{entry}</option>
-         {/each}
-      </select>
+      <label>Function:
+         <select bind:value={options.easeValue}>
+            {#each easingList as entry}
+               <option value={entry}>{entry}</option>
+            {/each}
+         </select>
+      </label>
    </div>
 
-   <div class=flex>
+   <div>
       <input type=checkbox bind:checked={options.inertia}/>
       <span>Inertia:</span>
       <!-- svelte-ignore a11y-missing-attribute -->
       <a on:click={() => resetInertia()} title="Reset Inertia" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
-   <div class=flex>
+   <div>
       <span>Duration:</span>
 
-      <label for=inertiaDurationMin>(min):</label>
-      <input type=range min=0 max=5 step=0.1 id=inertiaDurationMin bind:value={options.inertiaDurationMin}>
-      <input type=text bind:value={options.inertiaDurationMin} readonly>
+      <label>(min):
+         <input type=range min=0 max=5 step=0.1 bind:value={options.inertiaDurationMin}>
+         <input type=text bind:value={options.inertiaDurationMin} readonly>
+      </label>
 
-      <label for=inertiaDurationMax>(max):</label>
-      <input type=range min=0 max=5 step=0.1 id=inertiaDurationMax bind:value={options.inertiaDurationMax}>
-      <input type=text bind:value={options.inertiaDurationMax} readonly>
+      <label>(max):
+         <input type=range min=0 max=5 step=0.1 bind:value={options.inertiaDurationMax}>
+         <input type=text bind:value={options.inertiaDurationMax} readonly>
+      </label>
    </div>
 
-   <div class=flex>
-      <label for=inertiaResistance>Resistance:</label>
-      <input type=range min=0 max=10000 id=inertiaResistance bind:value={options.inertiaResistance}>
-      <input type=text bind:value={options.inertiaResistance} readonly>
+   <div>
+      <label>Resistance:
+         <input type=range min=0 max=10000 bind:value={options.inertiaResistance}>
+         <input type=text bind:value={options.inertiaResistance} readonly>
+      </label>
 
-      <label for=inertiaVelocityScale>Velocity Scale:</label>
-      <input type=range min=0 max=3 step=0.1 id=inertiaVelocityScale bind:value={options.inertiaVelocityScale}>
-      <input type=text bind:value={options.inertiaVelocityScale} readonly>
+      <label>Velocity Scale:
+         <input type=range min=0 max=3 step=0.1 bind:value={options.inertiaVelocityScale}>
+         <input type=text bind:value={options.inertiaVelocityScale} readonly>
+      </label>
    </div>
 
-   <div class=flex>
+   <div>
       <span>End on 100 x 100 grid:</span>
       <input type=checkbox bind:checked={endOnGrid} />
    </div>
@@ -83,21 +89,26 @@
       text-align: center;
       display: flex;
       flex-direction: column;
+      gap: 0.5em;
 
-      div:not(:last-child) { margin-bottom: 0.25em; }
+      input[type=text] {
+         max-width: 3.5em;
+         pointer-events: none;
+         text-align: center;
+      }
 
-      a { margin-left: 0.5em; }
-
-      input[type=text] { max-width: 3.5em; pointer-events: none; }
-
-      .flex {
+      div {
          display: flex;
-         height: fit-content;
          align-items: center;
+         gap: 0.75em;
+      }
 
-         *:not(:last-child) { margin-right: 0.25em; }
-
-         span:not(:first-child), label:not(:first-child) { margin-left: 0.5em; }
+      label {
+         display: flex;
+         align-items: center;
+         flex: 1;
+         gap: 0.5em;
+         text-align: right;
       }
 
       hr { width: 96% }

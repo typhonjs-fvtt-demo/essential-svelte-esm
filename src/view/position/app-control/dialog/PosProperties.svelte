@@ -29,77 +29,91 @@
 <svelte:window bind:innerWidth bind:innerHeight/>
 
 <section>
-   <div class=flex>
-      <label for=top>top:</label>
-      <input type=range min=0 max={innerHeight} id=top bind:value={$top}>
-      <input type=text bind:value={$top} readonly>
+   <div>
+      <label>top:
+         <input type=range min=0 max={innerHeight} bind:value={$top}>
+         <input type=text bind:value={$top} readonly>
+      </label>
 
-      <label for=left>left:</label>
-      <input type=range min=0 max={innerWidth} id=left bind:value={$left}>
-      <input type=text bind:value={$left} readonly>
+      <label>left:
+         <input type=range min=0 max={innerWidth} bind:value={$left}>
+         <input type=text bind:value={$left} readonly>
+      </label>
    </div>
 
-   <div class=flex>
-      <label for=width>width:</label>
-      <input type=range min=395 max={innerWidth} id=width bind:value={$width}>
-      <input type=text bind:value={$width} readonly>
+   <div>
+      <label>width:
+         <input type=range min=395 max={innerWidth} bind:value={$width}>
+         <input type=text bind:value={$width} readonly>
+      </label>
 
-      <label for=height>height:</label>
-      <input type=range min=240 max={innerHeight} id=height bind:value={$height}>
-      <input type=text bind:value={$height} readonly>
+      <label>height:
+         <input type=range min=240 max={innerHeight} bind:value={$height}>
+         <input type=text bind:value={$height} readonly>
+      </label>
    </div>
 
-   <div class=flex>
-      <label for=rotateX>rotateX:</label>
-      <input type=range min=0 max=360 id=rotateX bind:value={$rotateX}>
-      <input type=text bind:value={nullishRotateX} readonly>
+   <div>
+      <label>rotateX:
+         <input type=range min=0 max=360 bind:value={$rotateX}>
+         <input type=text bind:value={nullishRotateX} readonly>
+      </label>
 
-      <label for=rotateY>Y:</label>
-      <input type=range min=0 max=360 id=rotateY bind:value={$rotateY}>
-      <input type=text bind:value={nullishRotateY} readonly>
+      <label>Y:
+         <input type=range min=0 max=360 bind:value={$rotateY}>
+         <input type=text bind:value={nullishRotateY} readonly>
+      </label>
 
-      <label for=rotateZ>Z:</label>
-      <input type=range min=0 max=360 id=rotateZ bind:value={$rotateZ}>
-      <input type=text bind:value={nullishRotateZ} readonly>
+      <label>Z:
+         <input type=range min=0 max=360 bind:value={$rotateZ}>
+         <input type=text bind:value={nullishRotateZ} readonly>
+      </label>
    </div>
 
-   <div class=flex>
-      <label for=minWidth>minWidth:</label>
-      <input type=range min=0 max=450 id=minWidth bind:value={$minWidth}>
-      <input type=text bind:value={nullishMinWidth} readonly>
+   <div>
+      <label>minWidth:
+         <input type=range min=0 max=450 bind:value={$minWidth}>
+         <input type=text bind:value={nullishMinWidth} readonly>
+      </label>
 
-      <label for=minHeight>minHeight:</label>
-      <input type=range min=0 max=450 id=minHeight bind:value={$minHeight}>
-      <input type=text bind:value={nullishMinHeight} readonly>
+      <label>minHeight:
+         <input type=range min=0 max=450 bind:value={$minHeight}>
+         <input type=text bind:value={nullishMinHeight} readonly>
+      </label>
    </div>
 
-   <div class=flex>
-      <label for=maxWidth>maxWidth:</label>
-      <input type=range min=0 max={innerWidth} id=maxWidth bind:value={$maxWidth}>
-      <input type=text bind:value={nullishMaxWidth} readonly>
+   <div>
+      <label>maxWidth:
+         <input type=range min=0 max={innerWidth} bind:value={$maxWidth}>
+         <input type=text bind:value={nullishMaxWidth} readonly>
+      </label>
 
-      <label for=maxHeight>maxHeight:</label>
-      <input type=range min=0 max={innerHeight} id=maxHeight bind:value={$maxHeight}>
-      <input type=text bind:value={nullishMaxHeight} readonly>
+      <label>maxHeight:
+         <input type=range min=0 max={innerHeight} bind:value={$maxHeight}>
+         <input type=text bind:value={nullishMaxHeight} readonly>
+      </label>
    </div>
 
-   <div class=flex>
-      <label for=scale>scale:</label>
-      <input type=range min=0 max=5 step=0.01 id=scale bind:value={$scale}>
-      <input type=text class=small bind:value={nullishScale} readonly>
+   <div>
+      <label>scale:
+         <input type=range min=0 max=5 step=0.01 bind:value={$scale}>
+         <input type=text class=small bind:value={nullishScale} readonly>
+      </label>
 
-      <label for=zIndex>zIndex:</label>
-      <input type=range min=0 max=500 id=zIndex bind:value={$zIndex}>
-      <input type=text class=small bind:value={$zIndex} readonly>
+      <label>zIndex:
+         <input type=range min=0 max=500 bind:value={$zIndex}>
+         <input type=text class=small bind:value={$zIndex} readonly>
+      </label>
 
-      <label for=transformOrigin>Transform Origin:</label>
-      <select id=transformOrigin bind:value={$transformOrigin}>
-         {#each transformOrigin.values as transform}
-            <option value={transform}>
-               {transform}
-            </option>
-         {/each}
-      </select>
+      <label>Transform Origin:
+         <select bind:value={$transformOrigin}>
+            {#each transformOrigin.values as transform}
+               <option value={transform}>
+                  {transform}
+               </option>
+            {/each}
+         </select>
+      </label>
    </div>
 </section>
 
@@ -108,41 +122,41 @@
       text-align: center;
       display: flex;
       flex-direction: column;
+      gap: 0.5em;
 
       border: 0.1em solid rgba(0, 0, 0, 0.2);
       border-radius: 1em;
       background: rgba(0, 0, 0, 0.1);
 
-      padding: 0.25em;
+      padding: 0.5em;
 
-      input { margin: 0.5em; }
-      input[type=text] { max-width: 3.5em; pointer-events: none; }
+      input[type=text] {
+         max-width: 3.5em;
+         pointer-events: none;
+         text-align: center;
+      }
 
-      input[type=text].small { max-width: 2.5em; }
+      input[type=text].small {
+         max-width: 2.5em;
+      }
 
-      select { margin: 0.5em; width: fit-content; }
+      select {
+         width: fit-content;
+      }
 
       div {
          display: flex;
          align-items: center;
          justify-content: center;
-
-         .flex {
-            height: fit-content;
-
-            *:not(:last-child) {
-               margin-right: 0.25em;
-            }
-
-            label:not(:first-child) {
-               margin-left: 0.5em;
-            }
-         }
+         gap: 0.75em;
       }
 
       label {
+         display: flex;
+         align-items: center;
+         flex: 1;
+         gap: 0.5em;
          text-align: right;
-         width: 6em;
       }
    }
 </style>

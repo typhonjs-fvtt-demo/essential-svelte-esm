@@ -15,12 +15,13 @@
 
 <section>
    <div>
-      <label for=draggableSelect>Draggable Implementation:</label>
-      <select id=draggableSelect bind:value={$storeDraggable}>
-         {#each Object.entries(optionValues) as [key, value]}
-            <option value={value}>{key}</option>
-         {/each}
-      </select>
+      <label>Draggable Implementation:
+         <select bind:value={$storeDraggable}>
+            {#each Object.entries(optionValues) as [key, value]}
+               <option value={value}>{key}</option>
+            {/each}
+         </select>
+      </label>
    </div>
 
    <svelte:component this={draggableOptionComp} options={$draggableOptions} />
@@ -36,13 +37,26 @@
       border-radius: 1em;
       background: rgba(0, 0, 0, 0.1);
 
-      padding: 0.25em;
+      padding: 0.5em;
 
-      select { margin: 0.5em; width: fit-content; }
+      select {
+         width: fit-content;
+      }
+
+      div {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: 0.75em;
+      }
 
       label {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         flex: 1;
+         gap: 0.5em;
          text-align: right;
-         width: 6em;
       }
    }
 </style>

@@ -74,10 +74,7 @@
 
    function gsapTimelinePause()
    {
-      if (gsapTimeline !== void 0)
-      {
-         gsapTimeline.pause();
-      }
+      if (gsapTimeline !== void 0) { gsapTimeline.pause(); }
    }
 
    function gsapTimelinePlay()
@@ -114,19 +111,21 @@
 <svelte:window bind:innerWidth bind:innerHeight/>
 
 <section>
-   <div class=flex>
-      <label for=duration>Duration:</label>
-      <input type=range min=0 max=3 step=0.1 id=duration bind:value={duration}>
-      <input type=text bind:value={duration} readonly>
+   <div>
+      <label>Duration:
+         <input type=range min=0 max=3 step=0.1 bind:value={duration}>
+         <input type=text bind:value={duration} readonly>
+      </label>
 
-      <label for=easing>Easing:</label>
-      <select id=easing bind:value={ease}>
-         {#each easingList as prop}
-            <option value={easingFunc[prop]}>
-               {prop}
-            </option>
-         {/each}
-      </select>
+      <label>Easing:
+         <select bind:value={ease}>
+            {#each easingList as prop}
+               <option value={easingFunc[prop]}>
+                  {prop}
+               </option>
+            {/each}
+         </select>
+      </label>
    </div>
 
    <div>
@@ -144,44 +143,41 @@
       text-align: center;
       display: flex;
       flex-direction: column;
+      gap: 0.5em;
 
       border: 0.1em solid rgba(0, 0, 0, 0.2);
       border-radius: 1em;
       background: rgba(0, 0, 0, 0.1);
 
-      padding: 0.25em;
+      padding: 0.5em;
 
-      input { margin: 0.5em; }
-      input[type=text] { max-width: 2.5em; pointer-events: none; }
+      input[type=text] {
+         max-width: 2.5em;
+         pointer-events: none;
+         text-align: center;
+      }
 
-      select { margin: 0.5em; width: fit-content; }
+      select {
+         width: fit-content;
+      }
 
       button {
          white-space: nowrap;
-         margin: 0.25em;
       }
 
       div {
          display: flex;
          align-items: center;
          justify-content: center;
-
-         .flex {
-            height: fit-content;
-
-            *:not(:last-child) {
-               margin-right: 0.25em;
-            }
-
-            label:not(:first-child) {
-               margin-left: 0.5em;
-            }
-         }
+         gap: 0.75em;
       }
 
       label {
+         display: flex;
+         align-items: center;
+         flex: 1;
+         gap: 0.5em;
          text-align: right;
-         width: 6em;
       }
    }
 </style>
