@@ -64,7 +64,7 @@
       </section>
       <div class=bottom>
          <hr>
-         <a href="https://svelte.dev/tutorial">Interactive Svelte tutorial</a>
+         <a href="https://learn.svelte.dev/tutorial/welcome-to-svelte">Interactive Svelte tutorial</a>
          <br>
          <a href="https://www.youtube.com/playlist?list=PLoKaNN3BjQX3mxDEVG3oGJx2ByXnue_gR">Svelte tutorial videos</a>
       </div>
