@@ -50,6 +50,9 @@ export default class HeaderButtonsApplication extends SvelteApplication
     * - {Record<string, string>} styles - Inline styles to apply to the button.
     * - {string}     title - A tooltip to display when hovered.
     *
+    * You may also pass an object containing a 'svelte' property which is a TJSSvelteConfig / Svelte configuration
+    * object to load a Svelte component in the app header.
+    *
     * @returns {ApplicationHeaderButton[]} The app header buttons.
     * @override
     */
@@ -69,27 +72,41 @@ export default class HeaderButtonsApplication extends SvelteApplication
          // keepMinimized: true,                         // When true the header button remains when app is minimized.
 
          // When using a normal function `this` is the button data and it can be modified.
-         onPress: function()
+         onPress: ({ button }) =>
          {
             const newThemeDarkMode = storage.swapItemBoolean(sessionConstants.themeDarkMode);
 
-            this.title = newThemeDarkMode ? 'Dark Node disable' : 'Dark Mode enable';
-            this.styles = newThemeDarkMode ? { color: 'lightblue' } : { color: 'white' };
+            button.title = newThemeDarkMode ? 'Dark Node disable' : 'Dark Mode enable';
+            button.styles = newThemeDarkMode ? { color: 'lightblue' } : { color: 'white' };
          }
 
          /**
           * There are several additional button data options available in TRL.
           */
-         // keyCode: 'Space',          // You can provide an alternate key code for button key press.
-         // onContextMenu: function()  // You can define `onContextMenu` for right click / contextmenu key press.
+         // keyCode: 'Space',                   // You can provide an alternate key code for button key press.
+         // onContextMenu: ({ button, event })  // You can define `onContextMenu` for right click / contextmenu key press.
          // {
          //    console.log(`HeaderButtons - onContextMenu`);
          // },
       });
 
-      buttons.unshift(TestSCComponent);   // You can set a direct Svelte class / constructor function.
+      // You can set the `svelte` attribute to a TJSSvelteConfig object to load a Svelte component.
+      buttons.unshift({
+         svelte: {
+            class: TestSCComponent,
+            props: {
+               // Changes the label text in TestSCComponent demonstrating passing in props.
+               // If you comment it out 'Demo' or the default label is shown.
+               label: 'SC'
+            }
+         }
+      });
 
-      buttons.unshift(ProgressBar);
+      buttons.unshift({
+         svelte: {
+            class: ProgressBar
+         }
+      });
 
       // You can left-align a header buttons after the window title by setting `alignLeft` to true.
       buttons.unshift({

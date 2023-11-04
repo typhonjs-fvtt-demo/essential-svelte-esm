@@ -1,5 +1,9 @@
+<script>
+   export let label = 'Demo'; // This prop is set in `HeaderButtonApplication` to 'SC'.
+</script>
+
 <!-- A simple text element / demo -->
-<span>SC</span>
+<span>{label}</span>
 
 <style>
    span {
