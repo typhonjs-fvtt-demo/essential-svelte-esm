@@ -14,10 +14,13 @@ import { TJSContextMenu }  from '#standard/application';
  */
 export function createButtonData(idPrepend)
 {
+   // Can create a single instance of the default ripple effect action.
+   const rippleInstance = ripple();
+
    return [
       // TJSFileButton (standard)
       {
-         efx: ripple(),
+         efx: rippleInstance,
          title: 'Pick File',
          pickerOptions: {
             id: `${idPrepend}test-fp`,
@@ -46,7 +49,7 @@ export function createButtonData(idPrepend)
 
       // TJSFileButton (modal)
       {
-         efx: ripple(),
+         efx: rippleInstance,
          title: 'Pick File',
          pickerOptions: {
             id: `${idPrepend}test-fp2`,
@@ -59,7 +62,7 @@ export function createButtonData(idPrepend)
       {
          label: 'Pick File',
          icon: 'fas fa-wrench',
-         efx: ripple(),
+         efx: ripple({ contextmenu: true }),
          onContextMenu: ({ event }) => TJSContextMenu.create({ event, items: [{ label: 'A demo menu item' }] }),
          pickerOptions: {
             id: `${idPrepend}test-fp3`,
@@ -69,7 +72,7 @@ export function createButtonData(idPrepend)
 
       // TJSFileIconButton (standard)
       {
-         efx: ripple(),
+         efx: rippleInstance,
          pickerOptions: {
             id: `${idPrepend}test-fp4`,
             top: 100
@@ -78,7 +81,7 @@ export function createButtonData(idPrepend)
 
       // TJSFileIconButton (modal)
       {
-         efx: ripple(),
+         efx: rippleInstance,
          pickerOptions: {
             id: `${idPrepend}test-fp5`,
             modal: true,
