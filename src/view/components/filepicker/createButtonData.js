@@ -5,10 +5,13 @@ import { ripple }          from '#runtime/svelte/action/animate';
 import { TJSContextMenu }  from '#standard/application';
 
 /**
- * Provides a convenience function to create the button data for the FilePickerButtonContent component to make the
+ * Provides a convenience function to create the button data for the file picker button components to make the
  * example easier to read. This also gives an example of defining your UI / component data separately.
  *
- * @param {string}   idPrepend - A unique string to prepend to picker CSS IDs.
+ * In `pickerOptions` may include any Foundry {@link ApplicationOptions} options and {@link FilePickerOptions}.
+ *
+ * @param {string}   idPrepend - A unique string to prepend to picker CSS IDs. Creates unique IDs between normal app
+ *        version and modal demo.
  *
  * @returns {[{}]} Button data.
  */
@@ -23,9 +26,11 @@ export function createButtonData(idPrepend)
          efx: rippleInstance,
          title: 'Pick File',
          pickerOptions: {
-            id: `${idPrepend}test-fp`,
+            id: `${idPrepend}tjs-file-picker-demo-0`,
             store: writable(''), // You may assign a writable store to receive result changes.
-            top: 100,
+
+            // You may pass application options and any other Foundry ApplicationOptions / FilePickerOptions.
+            // top: 100, // Example: display file picker at Y = 100.
 
             /**
              * You can set a callback to receive filepath changes.
@@ -41,7 +46,7 @@ export function createButtonData(idPrepend)
              *
              * @param {{ filepath: string }} filepath - Filepath to validate.
              *
-             * @returns {boolean} Is validated?
+             * @returns {Promise<boolean>} Is validated?
              */
             // onValidate: ({ filepath }) => typeof filepath === 'string'
          }
@@ -52,9 +57,9 @@ export function createButtonData(idPrepend)
          efx: rippleInstance,
          title: 'Pick File',
          pickerOptions: {
-            id: `${idPrepend}test-fp2`,
-            modal: true,
-            top: 100
+            id: `${idPrepend}tjs-file-picker-demo-1`,
+            store: writable(''),
+            modal: true
          }
       },
 
@@ -65,8 +70,8 @@ export function createButtonData(idPrepend)
          efx: ripple({ contextmenu: true }),
          onContextMenu: ({ event }) => TJSContextMenu.create({ event, items: [{ label: 'A demo menu item' }] }),
          pickerOptions: {
-            id: `${idPrepend}test-fp3`,
-            top: 100
+            id: `${idPrepend}tjs-file-picker-demo-2`,
+            store: writable('')
          }
       },
 
@@ -74,8 +79,8 @@ export function createButtonData(idPrepend)
       {
          efx: rippleInstance,
          pickerOptions: {
-            id: `${idPrepend}test-fp4`,
-            top: 100
+            id: `${idPrepend}tjs-file-picker-demo-3`,
+            store: writable('')
          }
       },
 
@@ -83,12 +88,12 @@ export function createButtonData(idPrepend)
       {
          efx: rippleInstance,
          pickerOptions: {
-            id: `${idPrepend}test-fp5`,
+            id: `${idPrepend}tjs-file-picker-demo-4`,
+            store: writable(''),
             modal: true,
             modalOptions: {
                closeOnInput: true   // closes on glasspane click when launched from a modal app / dialog.
-            },
-            top: 100
+            }
          }
       },
 
@@ -96,8 +101,9 @@ export function createButtonData(idPrepend)
       {
          efx: ripple({ duration: 300 }),
          pickerOptions: {
-            id: `${idPrepend}test-fp6`,
-            top: 100
+            id: `${idPrepend}tjs-file-picker-demo-5`,
+            store: writable(''),
+            type: 'imagevideo'        // This button is slotted and only displays graphics.
          }
       }
    ];
