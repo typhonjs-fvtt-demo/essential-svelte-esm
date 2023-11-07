@@ -10,11 +10,12 @@
    import {
       TJSFileButton,
       TJSFileIconButton,
-      TJSFileSlotButton }           from '#standard/component/fvtt';
+      TJSFileSlotButton,
+      TJSMediaContent }             from '#standard/component/fvtt';
+
+   import MediaControls             from './MediaControls.svelte';
 
    import { createButtonData }      from './createButtonData.js';
-
-   import ImageContent              from './ImageContent.svelte';
 
    // Defines a string to prepend to all file picker app instances to make unique IDs between the normal and
    // modal dialog version.
@@ -31,9 +32,14 @@
    // Provides default options shared by all TJSInput components.
    const input = {
       efx: rippleFocus(),  // This adds the material design ripple focus effect.
-      readonly: false      // Input is read only.
+      readonly: true       // Input is read only.
    }
+
+   // Variables bound to TJSMediaContent and local MediaControls components.
+   let videoPlayOnHover = false;
+   let videoPlaybackRate = 1;
 </script>
+
 <main>
    <section>
       <h3>TJSFileButton (modal does not close on glasspane input):</h3>
@@ -63,25 +69,34 @@
       <h3>TJSFileSlotButton w/ efx:</h3>
       <TJSInput {input} label={'Standard:'} store={buttons[5].pickerOptions.store} />
       <TJSFileSlotButton button={buttons[5]}>
-         <ImageContent playbackRate={0.1}/> <!-- Uses the 'filepath' context from TJSFileSlotButton to display an image -->
+         <!-- Uses the 'filepath' context / store from TJSFileSlotButton to display an image -->
+         <TJSMediaContent bind:videoPlaybackRate bind:videoPlayOnHover />
       </TJSFileSlotButton>
+
+      <MediaControls bind:videoPlaybackRate bind:videoPlayOnHover filepath={buttons[5].pickerOptions.store} />
    </section>
 </main>
 
 <style>
+   main {
+      --tjs-media-content-background: var(--tjs-input-background);
+      --tjs-media-content-diameter: 75px;
+
+      /* Uncomment to see what the ripple effect looks like w/ a color gradient. */
+      /*--tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );*/
+   }
+
    h3 {
       grid-column: span 3;  /* Span across all columns. */
       text-align: left;
    }
 
-   /* Uncomment to see what the ripple effect looks like w/ a color gradient. */
-   /*main {*/
-   /*   --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );*/
-   /*}*/
-
-   /* Sets up a three-column grid layout:
-      - The first and third columns are sized based on their content (label span / file buttons).
-      - The middle column occupies the remaining space (TJSInput). */
+   /** Sets up a three-column grid layout:
+    * - The first and third columns are sized based on their content (label span / file buttons).
+    * - The middle column occupies the remaining space (TJSInput).
+    *
+    * The label defined by TJSInput uses `display: contents`
+    */
    section {
       display: grid;
       grid-template-columns: auto 1fr auto;
