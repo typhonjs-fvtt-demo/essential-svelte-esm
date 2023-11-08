@@ -21,6 +21,7 @@ import PositionBasicOverlayApp   from './position/basic-overlay/PositionBasicOve
 import PositionBoxApplication    from './position/box/PositionBoxApplication.js';
 import PositionCarouselApp       from './position/carousel/PositionCarouselApp.js';
 import ProseMirrorApp            from './editor/prosemirror/ProseMirrorApp.js';
+import SideSlideApp              from './components/side-slide-layer/SideSlideApp.js';
 import TinyMCEApp                from './editor/tinymce/TinyMCEApp.js';
 
 export default class MenuApplication extends SvelteApplication
@@ -57,6 +58,7 @@ export default class MenuApplication extends SvelteApplication
          { title: 'Content Editable', class: ContentEditableApp },
          { title: 'TinyMCE', class: TinyMCEApp },
          { title: 'ProseMirror', class: ProseMirrorApp },
+         { title: 'Side Slide Layer', class: SideSlideApp },
          { title: 'File Picker', class: FilePickerApp }
       ];
 
