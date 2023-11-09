@@ -1,6 +1,9 @@
 <script>
    import { onMount }         from 'svelte';
 
+   import { ripple }          from '#runtime/svelte/action/animate';
+
+   import { TJSSlotButton }   from '#standard/component';
    import { TJSMediaContent } from '#standard/component/fvtt';
 
    onMount(() =>
@@ -15,7 +18,44 @@
       return () => Hooks.off('targetToken', targetToken)
    });
 
+   // Stores a single instance of the ripple action to apply to all buttons.
+   const rippleInstance = ripple({ contextmenu: true });
+
    let targets = [];
+
+   /**
+    * Opens any associated actor sheet on context menu click
+    *
+    * @param {object}   media - Contains stored token UUID.
+    */
+   async function onContextMenu(media)
+   {
+      if (media?.uuid)
+      {
+         const tokenDoc = await globalThis.fromUuid(media.uuid);
+         if (tokenDoc) { tokenDoc?.actor?.sheet?.render?.(true); }
+      }
+   }
+
+   /**
+    * Basic example to pan to and control the target token.
+    *
+    * @param {object}   media - Contains stored token UUID.
+    */
+   async function onPress(media)
+   {
+      if (media?.uuid)
+      {
+         const tokenDoc = await globalThis.fromUuid(media.uuid);
+
+         // Control and pan to token object.
+         if (tokenDoc?.object)
+         {
+            tokenDoc.object?.control({ releaseOthers: true });
+            canvas.animatePan(tokenDoc.object.center);
+         }
+      }
+   }
 
    /**
     * Gets the current targets for `game.user`.
@@ -33,8 +73,9 @@
       for (const target of game.user.targets)
       {
          newTargets.push({
+            uuid: target?.document?.uuid,
             filepath: target?.texture?.baseTexture?.resource?.src,
-            title: target?.document?.name
+            title: target?.document?.name,
          });
       }
 
@@ -45,7 +86,11 @@
 <section>
    {#if targets.length > 0}
       {#each targets as media}
-         <TJSMediaContent {media} />
+         <TJSSlotButton onPress={() => onPress(media)}
+                        onContextMenu={() => onContextMenu(media)}
+                        efx={rippleInstance}>
+            <TJSMediaContent {media} />
+         </TJSSlotButton>
       {/each}
    {:else}
       No targets
@@ -56,9 +101,9 @@
    section {
       display: flex;
       flex-wrap: wrap;
-      max-width: 140px;
-      width: 140px;
-      gap: 5px;
+      max-width: 150px;
+      width: 150px;
+      gap: 8px;
 
       /* Set the TJSMediaContent diameter */
       --tjs-media-content-diameter: 30px;
