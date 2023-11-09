@@ -20,7 +20,7 @@ export function createLayerProps()
 
          /* Make the item icons / font larger */
          // '--tjs-side-slide-layer-item-diameter': '50px',
-         // '--tjs-side-slide-panel-item-font-size': '20px'
+         // '--tjs-side-slide-layer-item-font-size': '20px'
       },
 
       items: [
@@ -36,5 +36,5 @@ export function createLayerProps()
             title: 'Dummy Panel'
          }
       ]
-   }
+   };
 }
