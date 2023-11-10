@@ -1,9 +1,6 @@
 <script>
    import { onMount }               from 'svelte';
 
-   import { writable }              from 'svelte/store';
-   import * as easings              from 'svelte/easing';
-
    import { ApplicationShell }      from '#runtime/svelte/component/core';
 
    import {
@@ -12,52 +9,12 @@
 
    import { createLayerProps }      from './createLayerProps.js';
 
+   import { stores, inputs }        from './demoUIData.js';
+
    export let elementRoot = void 0;
 
-   const storeDuration = writable(200);
-
-   const inputDuration = {
-      type: 'range',
-      label: 'Duration:',
-      min: 200,
-      max: 2000,
-      store: storeDuration
-   }
-
-   const storeEasingIn = writable(easings.linear);
-
-   const inputEasingIn = {
-      type: 'select',
-      label: 'Easing In:',
-      options: Object.keys(easings).map((key) => ({ value: easings[key], label: key })),
-      store: storeEasingIn
-   }
-
-   const storeEasingOut = writable(easings.linear);
-
-   const inputEasingOut = {
-      type: 'select',
-      label: 'Easing Out:',
-      options: Object.keys(easings).map((key) => ({ value: easings[key], label: key })),
-      store: storeEasingOut
-   }
-
-   const storeSide = writable('right');
-
-   const inputSide = {
-      type: 'select',
-      label: 'Side:',
-      options: [{ value: 'left', label: 'Left' }, { value: 'right', label: 'Right' }],
-      store: storeSide
-   }
-
-   const storeStayOpen = writable(false);
-
-   const inputStayOpen = {
-      type: 'checkbox',
-      label: 'Stay open:',
-      store: storeStayOpen
-   }
+   // Bound stores must be defined at the top level.
+   const { clickToOpen, duration, easingIn, easingOut, side } = stores;
 
    let sidebarSlideLayer;
 
@@ -71,6 +28,13 @@
       return () => sidebarSlideLayer?.$destroy();
    });
 
+   // Update mounted component on the Foundry sidebar directly except `side`.
+   $: sidebarSlideLayer?.$set({
+      clickToOpen: $clickToOpen,
+      duration: $duration,
+      easingIn: $easingIn,
+      easingOut: $easingOut
+   });
 </script>
 
 <svelte:options accessors={true}/>
@@ -78,21 +42,20 @@
 <ApplicationShell bind:elementRoot>
    <main>
       <TJSSideSlideLayer {...createLayerProps()}
-                         bind:duration={$storeDuration}
-                         bind:inEasing={$storeEasingIn}
-                         bind:outEasing={$storeEasingOut}
-                         bind:side={$storeSide}
-                         bind:stayOpen={$storeStayOpen} />
+                         bind:clickToOpen={$clickToOpen}
+                         bind:duration={$duration}
+                         bind:easingIn={$easingIn}
+                         bind:easingOut={$easingOut}
+                         bind:side={$side} />
 
       <div>
-         <TJSInput input={inputSide} />
-         <TJSInput input={inputEasingIn} />
-         <TJSInput input={inputEasingOut} />
+         <TJSInput input={inputs.side} />
+         <TJSInput input={inputs.easingIn} />
+         <TJSInput input={inputs.easingOut} />
       </div>
       <div>
-         <TJSInput input={inputDuration} />
-         <TJSInput input={inputStayOpen} />
-         <TJSInput type={'button'} label={'Reset'} on:press={() => console.log(`!!! Pressed`)} />
+         <TJSInput input={inputs.duration} />
+         <TJSInput input={inputs.clickToOpen} />
       </div>
    </main>
 </ApplicationShell>
@@ -118,8 +81,7 @@
       /* Provide a margin for the side slide layer */
       --tjs-side-slide-layer-margin: 0 8px 0 8px;
 
-      --tjs-side-slide-layer-item-diameter: 50px;
-      --tjs-side-slide-layer-item-font-size: 20px;
+      /*--tjs-side-slide-layer-item-diameter: 50px;*/
    }
 
    div {
