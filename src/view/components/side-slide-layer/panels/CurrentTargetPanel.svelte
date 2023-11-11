@@ -101,8 +101,8 @@
    section {
       display: flex;
       flex-wrap: wrap;
-      max-width: 150px;
-      width: 150px;
+      max-width: 152px;
+      width: 152px;
       gap: 8px;
 
       /* Set the TJSMediaContent diameter */
