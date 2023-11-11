@@ -15,7 +15,12 @@
 </div>
 
 <style>
+   /* Make div full size of the inner size of the item button */
    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       width: 100%;
       height: 100%;
    }
