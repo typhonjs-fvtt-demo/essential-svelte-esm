@@ -1,5 +1,5 @@
 <script>
-   import { onMount }               from 'svelte';
+   import { getContext }            from 'svelte';
 
    import { ApplicationShell }      from '#runtime/svelte/component/core';
 
@@ -16,21 +16,12 @@
    // Bound stores must be defined at the top level.
    const { allowLocking, clickToOpen, duration, easingIn, easingOut, side, top } = stores;
 
-   let sidebarSlideLayer;
+   const { application } = getContext('#external');
 
-   // Mounts an instance of TJSSideSlideLayer to the `#ui-middle` div of the Foundry UI to "dock" it next to the
-   // Foundry sidebar. Destroys the component when this demo app is closed.
-   onMount(() =>
-   {
-      sidebarSlideLayer = new TJSSideSlideLayer({
-         target: document.querySelector('#ui-middle'),
-         props: createLayerProps()
-      });
+   // Retrieve the instance of TJSSideSlideLayer that is mounted in `#ui-middle`.
+   const sidebarSlideLayer = application.sidebarSlideLayer;
 
-      return () => sidebarSlideLayer?.$destroy();
-   });
-
-   // Update mounted component on the Foundry sidebar directly except `side`.
+   // Update component mounted to the Foundry sidebar directly except `side`.
    $: sidebarSlideLayer?.$set({
       allowLocking: $allowLocking,
       clickToOpen: $clickToOpen,
