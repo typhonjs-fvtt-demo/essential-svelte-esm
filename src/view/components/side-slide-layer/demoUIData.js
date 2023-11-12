@@ -8,11 +8,13 @@ import * as easings from 'svelte/easing';
  * @type {object}
  */
 export const stores = {
+   allowLocking: writable(true),
    clickToOpen: writable(false),
    duration: writable(200),
    easingIn: writable(easings.linear),
    easingOut: writable(easings.linear),
-   side: writable('right')
+   side: writable('right'),
+   top: writable(40)
 };
 
 /**
@@ -21,6 +23,12 @@ export const stores = {
  * @type {object}
  */
 export const inputs = {
+   allowLocking: {
+      type: 'checkbox',
+      label: 'Allow locking:',
+      store: stores.allowLocking
+   },
+
    clickToOpen: {
       type: 'checkbox',
       label: 'Click to open:',
@@ -31,7 +39,7 @@ export const inputs = {
       type: 'range',
       label: 'Duration:',
       min: 200,
-      max: 2000,
+      max: 1000,
       store: stores.duration
    },
 
@@ -54,5 +62,13 @@ export const inputs = {
       label: 'Side:',
       options: [{ value: 'left', label: 'Left' }, { value: 'right', label: 'Right' }],
       store: stores.side
-   }
+   },
+
+   top: {
+      type: 'range',
+      label: 'Top (vertical position):',
+      min: 40,
+      max: 250,
+      store: stores.top
+   },
 };

@@ -14,10 +14,12 @@
    export let elementRoot = void 0;
 
    // Bound stores must be defined at the top level.
-   const { clickToOpen, duration, easingIn, easingOut, side } = stores;
+   const { allowLocking, clickToOpen, duration, easingIn, easingOut, side, top } = stores;
 
    let sidebarSlideLayer;
 
+   // Mounts an instance of TJSSideSlideLayer to the `#ui-middle` div of the Foundry UI to "dock" it next to the
+   // Foundry sidebar. Destroys the component when this demo app is closed.
    onMount(() =>
    {
       sidebarSlideLayer = new TJSSideSlideLayer({
@@ -30,10 +32,12 @@
 
    // Update mounted component on the Foundry sidebar directly except `side`.
    $: sidebarSlideLayer?.$set({
+      allowLocking: $allowLocking,
       clickToOpen: $clickToOpen,
       duration: $duration,
       easingIn: $easingIn,
-      easingOut: $easingOut
+      easingOut: $easingOut,
+      top: $top
    });
 </script>
 
@@ -42,11 +46,13 @@
 <ApplicationShell bind:elementRoot>
    <main>
       <TJSSideSlideLayer {...createLayerProps()}
+                         bind:allowLocking={$allowLocking}
                          bind:clickToOpen={$clickToOpen}
                          bind:duration={$duration}
                          bind:easingIn={$easingIn}
                          bind:easingOut={$easingOut}
-                         bind:side={$side} />
+                         bind:side={$side}
+                         bind:top={$top} />
 
       <div>
          <TJSInput input={inputs.side} />
@@ -55,6 +61,10 @@
       </div>
       <div>
          <TJSInput input={inputs.duration} />
+         <TJSInput input={inputs.allowLocking} />
+      </div>
+      <div>
+         <TJSInput input={inputs.top} />
          <TJSInput input={inputs.clickToOpen} />
       </div>
    </main>

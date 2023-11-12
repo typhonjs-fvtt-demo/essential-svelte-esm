@@ -15,6 +15,7 @@ export function createLayerProps()
       zIndex: 10,       // z-index to display the layer. This is above the canvas and below the app UI layer.
       classes: ['tjs-essential-svelte-esm'], // Adds a class to target additional styles / CSS variables to main layer element.
 
+      // allowLocking: false,
       // clickToOpen: true,
       // duration: 1000,
       // easingIn: linear, // A Svelte easing function.
@@ -40,12 +41,6 @@ export function createLayerProps()
             icon: { class: DynamicIcon },          // Loads a Svelte component as item icon.
             svelte: { class: DummyPanel },
             title: 'Dummy Panel'
-         },
-         {
-            condition: () => game.user.isGM,
-            icon: 'fas fa-wrench',
-            svelte: { class: CurrentTargetPanel },
-            title: 'Current Targets'
          }
       ]
    };
