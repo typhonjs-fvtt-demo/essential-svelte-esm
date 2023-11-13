@@ -11,8 +11,8 @@ export const stores = {
    allowLocking: writable(true),
    clickToOpen: writable(false),
    duration: writable(200),
-   easingIn: writable(easings.linear),
-   easingOut: writable(easings.linear),
+   easingIn: writable('linear'),
+   easingOut: writable('linear'),
    side: writable('right'),
    top: writable(40)
 };
@@ -46,14 +46,14 @@ export const inputs = {
    easingIn: {
       type: 'select',
       label: 'Easing In:',
-      options: Object.keys(easings).map((key) => ({ value: easings[key], label: key })),
+      options: Object.keys(easings).map((key) => ({ value: key, label: key })),
       store: stores.easingIn
    },
 
    easingOut: {
       type: 'select',
       label: 'Easing Out:',
-      options: Object.keys(easings).map((key) => ({ value: easings[key], label: key })),
+      options: Object.keys(easings).map((key) => ({ value: key, label: key })),
       store: stores.easingOut
    },
 
