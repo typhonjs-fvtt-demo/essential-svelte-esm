@@ -9,19 +9,36 @@ const constants = {
 };
 
 /**
+ * @type {ESSettingConstants} Defines the Foundry game setting keys.
+ */
+const settings = {
+   appStateClient: 'appStateClient',
+   sideSlideLayer: 'sideSlideLayer'
+};
+
+/**
  * @type {ESSessionConstants} Defines all the module session storage static constants.
  */
 const sessionConstants = {
-   appState: `${constants.moduleId}.app-state`,
+   appStateClient: `${constants.moduleId}.${settings.appStateClient}`,
    themeDarkMode: `${constants.moduleId}.theme.dark`
 };
 
-export { constants, sessionConstants };
+
+export { constants, sessionConstants, settings };
 
 /**
  * @typedef {object} ESSessionConstants
  *
- * @property {string} appState Stores the current app state in /src/view/app-state demo
+ * @property {string} appStateClient Stores the current app state in /src/view/app-state demo.
  *
  * @property {string} themeDarkMode Indicates whether dark mode is enabled.
+ */
+
+/**
+ * @typedef {object} ESSettingConstants
+ *
+ * @property {string} appStateClient Stores the current app state in /src/view/app-state demo.
+ *
+ * @property {string} sideSlideLayer Stores the props persisted to Foundry settings as an object.
  */

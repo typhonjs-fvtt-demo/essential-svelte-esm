@@ -1,24 +1,26 @@
 import { SvelteApplication }  from '#runtime/svelte/application';
-import { TJSGameSettings }    from '#runtime/svelte/store/fvtt/settings';
 
 import ClientSettingAppShell  from './ClientSettingAppShell.svelte';
 
-import { constants }          from '../../../constants.js';
+import {
+   constants,
+   settings }                 from '#constants';
+
+import { gameSettings }       from '#gameSettings';
 
 export default class AppStateClientSettingApp extends SvelteApplication
 {
-   // Note: In this trivial example we create a TJSGameSettings instance here, but normally you want to create a single
-   // instance that is shared across your module / package.
-   #gameSettings = new TJSGameSettings(constants.moduleId);
-
    constructor(options)
    {
       super(options);
 
-      // Register a client game setting.
-      this.#gameSettings.register({
+      /**
+       * Register a world game setting w/ TJSGameSettings. This makes a client setting / localstorage store available
+       * to serialize the app state.
+       */
+      gameSettings.register({
          namespace: constants.moduleId,
-         key: 'app-state',
+         key: settings.appStateClient,
          options: {
             scope: 'client',
             config: false,
@@ -30,7 +32,7 @@ export default class AppStateClientSettingApp extends SvelteApplication
       try
       {
          // Attempt to parse client game setting and set application state.
-         this.state.set(game.settings.get('essential-svelte-esm', 'app-state'));
+         this.state.set(game.settings.get(constants.moduleId, settings.appStateClient));
       }
       catch (err) { /**/ }
    }
@@ -65,7 +67,7 @@ export default class AppStateClientSettingApp extends SvelteApplication
             props: function()
             {
                // Creates a store
-               return { settingStore: this.#gameSettings.getStore('app-state') };
+               return { settingStore: gameSettings.getStore(settings.appStateClient) };
             }
          }
       });
