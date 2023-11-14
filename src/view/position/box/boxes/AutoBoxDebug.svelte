@@ -58,7 +58,9 @@
       padding: 10px;
       min-width: 50px;
       min-height: 50px;
+      touch-action: none;
    }
+
    div.debug {
       position: absolute;
       background: rgba(100, 200, 255, 0.2);

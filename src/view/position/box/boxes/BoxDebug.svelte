@@ -53,7 +53,9 @@
       border-radius: 0.25em;
       border: solid brown 2px;
       font-size: 12px;
+      touch-action: none;
    }
+
    div.debug {
       position: absolute;
       background: rgba(100, 200, 255, 0.2);

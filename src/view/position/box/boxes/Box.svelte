@@ -19,5 +19,6 @@
       position: absolute;
       border-radius: 0.25em;
       border: solid brown 2px;
+      touch-action: none;
    }
 </style>

@@ -23,5 +23,6 @@
       border: solid brown 2px;
       min-width: 100px;
       min-height: 100px;
+      touch-action: none;
    }
 </style>

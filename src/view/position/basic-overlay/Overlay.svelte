@@ -43,6 +43,7 @@
       width: 100%;
       background: rgba(255, 100, 100, 0.5);
       padding: 8px;
+      touch-action: none;
    }
 
    input {
