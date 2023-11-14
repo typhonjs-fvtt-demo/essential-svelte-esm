@@ -8,28 +8,22 @@
       TJSSideSlideLayer }           from '#standard/component';
 
    import { createLayerProps }      from './createLayerProps.js';
-
-   import { stores, inputs }        from './demoUIData.js';
+   import { createUIData }          from './createUIData.js';
 
    export let elementRoot = void 0;
 
-   // Bound stores must be defined at the top level.
-   const { allowLocking, clickToOpen, duration, easingIn, easingOut, side, top } = stores;
+   const { stores, inputs } = createUIData();
+
+   // Bound stores must be defined at the top level, so destructure them.
+   const { allowLocking, clickToOpen, duration, easingIn, easingOut, side, top, worldObject } = stores;
 
    const { application } = getContext('#external');
 
    // Retrieve the instance of TJSSideSlideLayer that is mounted in `#ui-middle`.
    const sidebarSlideLayer = application.sidebarSlideLayer;
 
-   // Update component mounted to the Foundry sidebar directly except `side`.
-   $: sidebarSlideLayer?.$set({
-      allowLocking: $allowLocking,
-      clickToOpen: $clickToOpen,
-      duration: $duration,
-      easingIn: $easingIn,
-      easingOut: $easingOut,
-      top: $top
-   });
+   // Update component mounted to the Foundry sidebar directly w/ the entire world object storing all serialized props.
+   $: sidebarSlideLayer?.$set($worldObject);
 </script>
 
 <svelte:options accessors={true}/>
