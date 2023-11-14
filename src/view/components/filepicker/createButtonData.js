@@ -2,7 +2,9 @@ import { writable }        from 'svelte/store';
 
 import { ripple }          from '#runtime/svelte/action/animate';
 
-import { TJSContextMenu }  from '#standard/application';
+import {
+   FVTTFilePickerControl,
+   TJSContextMenu }        from '#standard/application';
 
 /**
  * Provides a convenience function to create the button data for the file picker button components to make the
@@ -23,6 +25,7 @@ export function createButtonData(idPrepend)
    return [
       // TJSFileButton (standard)
       {
+         disabled: !FVTTFilePickerControl.canBrowse,
          efx: rippleInstance,
          title: 'Pick File',
          pickerOptions: {
@@ -54,6 +57,7 @@ export function createButtonData(idPrepend)
 
       // TJSFileButton (modal)
       {
+         disabled: !FVTTFilePickerControl.canBrowse,
          efx: rippleInstance,
          title: 'Pick File',
          pickerOptions: {
@@ -67,6 +71,7 @@ export function createButtonData(idPrepend)
       {
          label: 'Pick File',
          icon: 'fas fa-wrench',
+         disabled: !FVTTFilePickerControl.canBrowse,
          efx: ripple({ contextmenu: true }),
          onContextMenu: ({ event }) => TJSContextMenu.create({ event, items: [{ label: 'A demo menu item' }] }),
          pickerOptions: {
@@ -77,6 +82,7 @@ export function createButtonData(idPrepend)
 
       // TJSFileIconButton (standard)
       {
+         disabled: !FVTTFilePickerControl.canBrowse,
          efx: rippleInstance,
          pickerOptions: {
             id: `${idPrepend}tjs-file-picker-demo-3`,
@@ -86,6 +92,7 @@ export function createButtonData(idPrepend)
 
       // TJSFileIconButton (modal)
       {
+         disabled: !FVTTFilePickerControl.canBrowse,
          efx: rippleInstance,
          pickerOptions: {
             id: `${idPrepend}tjs-file-picker-demo-4`,
@@ -99,7 +106,11 @@ export function createButtonData(idPrepend)
 
       // TJSFileSlotButton (standard)
       {
+         // Note that the inline `styles` removes the disabled filter when a user can't browse.
+         // This is an example of how an actor / profile image can be constructed.
+         disabled: !FVTTFilePickerControl.canBrowse,
          efx: ripple({ duration: 300 }),
+         styles: !FVTTFilePickerControl.canBrowse ? { '--tjs-slot-button-filter-disabled': 'none' } : void 0,
          pickerOptions: {
             id: `${idPrepend}tjs-file-picker-demo-5`,
             store: writable(''),
