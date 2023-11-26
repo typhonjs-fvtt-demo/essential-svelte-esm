@@ -17,8 +17,6 @@
    <!-- svelte-ignore a11y-missing-attribute -->
    <h3>Adjust `Position` of <a role=presentation on:click={() => application.bringToTop({ focus: false })}><u>parent application</u></a>:</h3>
 
-   <hr>
-
    <TJSSvgFolder label={'Properties:'}>
       <PosProperties {position} />
    </TJSSvgFolder>
