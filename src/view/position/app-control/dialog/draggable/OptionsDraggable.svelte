@@ -21,7 +21,7 @@
 
    <div>
       <label>Duration:
-         <input type=range min=0 max=3 step=0.1 bind:value={options.easeDuration}>
+         <input type=range min=0 max=3 step=0.01 bind:value={options.easeDuration}>
          <input type=text bind:value={options.easeDuration} readonly>
       </label>
 
