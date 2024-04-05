@@ -6,6 +6,8 @@ import {
    easingFunc,
    GsapCompose }           from '#runtime/svelte/gsap';
 
+import { isObject }        from '#runtime/util/object';
+
 // Imports the loading code / automatic GSAP plugin registration.
 import '#runtime/svelte/gsap/plugin/CustomEase';
 import '#runtime/svelte/gsap/plugin/MotionPathPlugin';
@@ -18,6 +20,7 @@ const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${c
 
 let idCntr = 0;
 
+/** @type {import('#runtime/util/animate').TJSBasicAnimation} */
 let animateScaleRot, animateTo;
 
 let gsapTimeline;
@@ -292,7 +295,7 @@ boxStore.save = (componentData) =>
 
 boxStore.restore = () =>
 {
-   if (typeof savedComponentData === 'object')
+   if (isObject(savedComponentData))
    {
       const newData = [];
 
