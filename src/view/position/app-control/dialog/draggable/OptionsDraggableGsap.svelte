@@ -5,6 +5,9 @@
    // Imports the loading / automatic GSAP plugin registration.
    import '#runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
 
+   /**
+    * @type {import('#runtime/svelte/gsap').IDraggableGsapOptions}
+    */
    export let options = void 0;
 
    const tweenEnd = ({ top, left }) => ({ top: Math.round(top / 100) * 100, left: Math.round(left / 100) * 100 });
@@ -15,7 +18,7 @@
 
    function resetInertia()
    {
-      options.resetInertia();
+      options.resetInertiaOptions();
       endOnGrid = false;
    }
 </script>
@@ -24,20 +27,20 @@
    <hr>
 
    <div>
-      <input type=checkbox bind:checked={options.ease}/>
-      <span>Easing:</span>
+      <input type=checkbox bind:checked={options.tween}/>
+      <span>Tween:</span>
       <!-- svelte-ignore a11y-missing-attribute -->
-      <a on:click={() => options.resetEase()} title="Reset Easing" role=presentation><i class="fas fa-trash"></i></a>
+      <a on:click={() => options.resetTweenOptions()} title="Reset Tween Options" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
    <div>
       <label>Duration:
-         <input type=range min=0 max=3 step=0.01 bind:value={options.easeDuration}>
-         <input type=text bind:value={options.easeDuration} readonly>
+         <input type=range min=0 max=3 step=0.01 bind:value={options.tweenDuration}>
+         <input type=text bind:value={options.tweenDuration} readonly>
       </label>
 
       <label>Function:
-         <select bind:value={options.easeValue}>
+         <select bind:value={options.tweenEase}>
             {#each easingList as entry}
                <option value={entry}>{entry}</option>
             {/each}

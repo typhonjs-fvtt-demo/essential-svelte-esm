@@ -4,8 +4,11 @@
       easingFunc,
       easingList }      from '#runtime/svelte/gsap';
 
-   import { slideFade }    from '#runtime/svelte/transition';
+   import { slideFade } from '#runtime/svelte/transition';
 
+   /**
+    * @type {import('#runtime/svelte/store/position').IDraggableOptions}
+    */
    export let options = void 0;
 </script>
 
@@ -13,20 +16,20 @@
    <hr>
 
    <div>
-      <input type=checkbox bind:checked={options.ease}/>
-      <span>Easing:</span>
+      <input type=checkbox bind:checked={options.tween}/>
+      <span>Tween:</span>
       <!-- svelte-ignore a11y-missing-attribute -->
-      <a on:click={() => options.resetEase()} title="Reset Easing" role=presentation><i class="fas fa-trash"></i></a>
+      <a on:click={() => options.resetTweenOptions()} title="Reset Tween Options" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
    <div>
       <label>Duration:
-         <input type=range min=0 max=3 step=0.01 bind:value={options.easeDuration}>
-         <input type=text bind:value={options.easeDuration} readonly>
+         <input type=range min=0 max=3 step=0.01 bind:value={options.tweenDuration}>
+         <input type=text bind:value={options.tweenDuration} readonly>
       </label>
 
-      <label>Function:
-         <select bind:value={options.easeValue}>
+      <label>Ease:
+         <select bind:value={options.tweenEase}>
             {#each easingList as entry}
                <option value={easingFunc[entry]}>{entry}</option>
             {/each}

@@ -6,16 +6,31 @@ import { draggableGsap }      from '#runtime/svelte/gsap';
 import OptionsDraggable       from './OptionsDraggable.svelte';
 import OptionsDraggableGsap   from './OptionsDraggableGsap.svelte';
 
+/**
+ * Stores the associated Svelte components for manipulating respective draggable options.
+ */
 export const optionComponents = {
   [draggable]: OptionsDraggable,
   [draggableGsap]: OptionsDraggableGsap,
 };
 
+/**
+ * Stores respective draggable options stores for easy UI manipulation. The default values match the SvelteApplication
+ * defaults.
+ *
+ * @type {({
+ *    draggable: import('#runtime/svelte/store/position').IDraggableOptions
+ *    draggableGsap: import('#runtime/svelte/gsap').IDraggableGsapOptions
+ * })}
+ */
 export const optionStores = {
-   [draggable]: draggable.options({ ease: true }),
-   [draggableGsap]: draggableGsap.options({ ease: true }),
+   [draggable]: draggable.options({ tween: true, tweenOptions: { duration: 0.06 } }),
+   [draggableGsap]: draggableGsap.options({ tween: true, tweenOptions: { duration: 0.06 } }),
 };
 
+/**
+ * Stores the draggable and draggableGsap options for selection.
+ */
 export const optionValues = {
    draggable,
    draggableGsap
