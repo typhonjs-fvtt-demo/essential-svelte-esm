@@ -20,7 +20,7 @@ const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${c
 
 let idCntr = 0;
 
-/** @type {import('#runtime/util/animate').TJSBasicAnimation} */
+/** @type {import('#runtime/util/animate').IBasicAnimation} */
 let animateScaleRot, animateTo;
 
 let gsapTimeline;
@@ -176,8 +176,12 @@ boxStore.animateToScaleRot = () =>
 
    animateScaleRot = TJSPosition.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
 
-   // Example of using finished promise.
-   // animateScaleRot.finished.then(() => console.log(`!! Animation Scale / Rotate Finished`));
+   // Example of cancelling animation after 500ms; the result for the Promise below will show `cancelled` state.
+   // setTimeout(() => animateScaleRot.cancel(), 500);
+
+   // Example of using finished Promise.
+   // animateScaleRot.finished.then((result) =>
+   //  console.log(`!! Animation Scale / Rotate Finished: ${JSON.stringify(result)}`));
 };
 
 boxStore.gsapTimelineCreate = () =>

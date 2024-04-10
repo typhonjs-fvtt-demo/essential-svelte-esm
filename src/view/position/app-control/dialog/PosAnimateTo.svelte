@@ -3,13 +3,14 @@
       easingFunc,
       easingList }   from '#runtime/svelte/gsap';
 
+   /** @type {import('#runtime/svelte/application').SvelteApplication} */
    export let application = void 0;
 
    const position = application.position;
 
    let ease = easingFunc.linear;
 
-   /** {TJSBasicAnimation} - pending TS declaration */
+   /** @type {import('#runtime/util/animate').IBasicAnimation} */
    let flipping;
 
    /** @type {boolean} */
