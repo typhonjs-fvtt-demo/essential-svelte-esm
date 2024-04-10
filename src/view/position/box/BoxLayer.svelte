@@ -17,6 +17,8 @@
 
    const application = getContext('#external').application;
 
+   const storeMinimized = application.reactive.storeUIState.minimized;
+
    const storeAuto = boxStore.auto;
    const storeDebug = boxStore.debug;
    const storeValidator = boxStore.validator;
@@ -38,6 +40,9 @@
 
    function setDimension(offsetWidth, offsetHeight)
    {
+      // When the application is minimized do not update the validator / app constraints.
+      if ($storeMinimized) { return; }
+
       // When the PopOut module is enabled and this app is popped out 0 / 0 is received; ignore this.
       if (offsetWidth === 0 && offsetHeight === 0) { return; }
 
