@@ -65,7 +65,7 @@
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
    <BoxHeader {controls} />
    <main use:resizeObserver={setDimension}>
-      <TJSPositionControlLayer active={$storePCL} {boundingRect} bind:controls
+      <TJSPositionControlLayer enabled={$storePCL} {boundingRect} bind:controls
                             components={$boxStore}
                             validate={$storeValidator}>
       {#each $boxStore as box (box.id)}
