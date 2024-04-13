@@ -1,5 +1,4 @@
 <script>
-   // TODO TEMPORARY
    import {
       easingFunc,
       easingList }      from '#runtime/svelte/gsap';
