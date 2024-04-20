@@ -10,7 +10,7 @@
 
    let ease = easingFunc.linear;
 
-   /** @type {import('#runtime/util/animate').IBasicAnimation} */
+   /** @type {import('#runtime/util/animate').BasicAnimation} */
    let flipping;
 
    /** @type {boolean} */

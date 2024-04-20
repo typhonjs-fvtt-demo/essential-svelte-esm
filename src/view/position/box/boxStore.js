@@ -20,7 +20,7 @@ const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${c
 
 let idCntr = 0;
 
-/** @type {import('#runtime/util/animate').IBasicAnimation} */
+/** @type {import('#runtime/util/animate').BasicAnimation} */
 let animateScaleRot, animateTo;
 
 let gsapTimeline;
