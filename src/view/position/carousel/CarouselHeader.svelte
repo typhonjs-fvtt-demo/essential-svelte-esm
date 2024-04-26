@@ -1,7 +1,7 @@
 <script>
    import {
-      easingFunc,
-      easingList }            from '#runtime/svelte/gsap';
+      gsapEasingFunc,
+      gsapEasingList }            from '#runtime/svelte/gsap';
 
    import { Timing }          from '#runtime/util';
 
@@ -42,8 +42,8 @@
       <label>
          Easing:
          <select bind:value={$storeEase}>
-            {#each easingList as entry}
-               <option value={easingFunc[entry]}>{entry}</option>
+            {#each gsapEasingList as entry}
+               <option value={gsapEasingFunc[entry]}>{entry}</option>
             {/each}
          </select>
       </label>

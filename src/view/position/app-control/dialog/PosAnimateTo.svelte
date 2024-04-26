@@ -1,14 +1,14 @@
 <script>
    import {
-      easingFunc,
-      easingList }   from '#runtime/svelte/gsap';
+      gsapEasingFunc,
+      gsapEasingList }   from '#runtime/svelte/gsap';
 
    /** @type {import('#runtime/svelte/application').SvelteApplication} */
    export let application = void 0;
 
    const position = application.position;
 
-   let ease = easingFunc.linear;
+   let ease = gsapEasingFunc.linear;
 
    /** @type {import('#runtime/util/animate').BasicAnimation} */
    let flipping;
@@ -44,8 +44,8 @@
 
       <label>Easing:
          <select bind:value={ease}>
-            {#each easingList as prop}
-               <option value={easingFunc[prop]}>
+            {#each gsapEasingList as prop}
+               <option value={gsapEasingFunc[prop]}>
                   {prop}
                </option>
             {/each}

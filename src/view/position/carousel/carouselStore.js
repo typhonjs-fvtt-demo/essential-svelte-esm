@@ -1,6 +1,6 @@
 import { writable }     from 'svelte/store';
 
-import { easingFunc }   from '#runtime/svelte/gsap';
+import { gsapEasingFunc }   from '#runtime/svelte/gsap';
 
 import { TJSPosition }  from '#runtime/svelte/store/position';
 
@@ -56,7 +56,7 @@ const carouselStore = writable(data);
 
 carouselStore.selectedIndex = writable(1);
 carouselStore.duration = writable(0.5);
-carouselStore.ease = writable(easingFunc.linear);
+carouselStore.ease = writable(gsapEasingFunc.linear);
 carouselStore.perspective = writable(1000);
 
 carouselStore.theta = 0;

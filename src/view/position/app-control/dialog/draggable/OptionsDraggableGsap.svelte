@@ -1,5 +1,5 @@
 <script>
-   import { easingList }   from '#runtime/svelte/gsap';
+   import { gsapEasingList }   from '#runtime/svelte/gsap';
    import { slideFade }    from '#runtime/svelte/transition';
 
    // Imports the loading / automatic GSAP plugin registration.
@@ -41,7 +41,7 @@
 
       <label>Function:
          <select bind:value={options.tweenEase}>
-            {#each easingList as entry}
+            {#each gsapEasingList as entry}
                <option value={entry}>{entry}</option>
             {/each}
          </select>

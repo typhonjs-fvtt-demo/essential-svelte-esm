@@ -3,7 +3,7 @@
       applyPosition,
       TJSPosition }     from '#runtime/svelte/store/position';
 
-   import { easingFunc }      from '#runtime/svelte/gsap';
+   import { gsapEasingFunc }      from '#runtime/svelte/gsap';
 
    import { carouselStore }   from './carouselStore.js';
 
@@ -23,7 +23,7 @@
    const storeEase = carouselStore.ease;
 
    // We can use quickTo as the animation options do not change.
-   const quickTranslateZ = position.animate.quickTo(['translateZ'], { duration: 0.5, ease: easingFunc['power3.out'] });
+   const quickTranslateZ = position.animate.quickTo(['translateZ'], { duration: 0.5, ease: gsapEasingFunc['power3.out'] });
 
    let currentLength = $carouselStore.length;
 

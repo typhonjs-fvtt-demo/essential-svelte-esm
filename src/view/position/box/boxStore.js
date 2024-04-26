@@ -3,7 +3,7 @@ import { get, writable }   from 'svelte/store';
 import { TJSPosition }     from '#runtime/svelte/store/position';
 
 import {
-   easingFunc,
+   gsapEasingFunc,
    GsapCompose }           from '#runtime/svelte/gsap';
 
 import { isObject }        from '#runtime/util/object';
@@ -97,7 +97,7 @@ boxStore.debug = writable(false);
 boxStore.labels = writable(false);
 boxStore.pclEnabled = writable(false);
 
-boxStore.ease = writable(easingFunc.linear);
+boxStore.ease = writable(gsapEasingFunc.linear);
 boxStore.duration = writable(1);
 
 boxStore.validator = writable(true);

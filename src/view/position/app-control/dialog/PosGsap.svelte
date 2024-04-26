@@ -1,7 +1,7 @@
 <script>
    import {
-      easingFunc,
-      easingList,
+      gsapEasingFunc,
+      gsapEasingList,
       GsapCompose }   from '#runtime/svelte/gsap';
 
    // Imports the loading code / automatic GSAP plugin registration.
@@ -15,7 +15,7 @@
    // depending on the duration of the animation; more wiggles the lower the duration.
    const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${count}, type: ${type} })`;
 
-   let ease = easingFunc.linear;
+   let ease = gsapEasingFunc.linear;
    let duration = 1;
    let gsapTimeline, gsapTween;
    let innerHeight, innerWidth;
@@ -119,8 +119,8 @@
 
       <label>Easing:
          <select bind:value={ease}>
-            {#each easingList as prop}
-               <option value={easingFunc[prop]}>
+            {#each gsapEasingList as prop}
+               <option value={gsapEasingFunc[prop]}>
                   {prop}
                </option>
             {/each}
