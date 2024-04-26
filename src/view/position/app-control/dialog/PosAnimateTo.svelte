@@ -53,6 +53,7 @@
 
    <div>
       <button on:click={animateY}>Flip</button>
+      <button on:click={() => application.position.animate.to({ left: '12.5%', width: '75%' }, { duration, ease })}>Width 75%</button>
       <button on:click={() => application.state.save({ name: 'save-1' })}>Save</button>
       <button on:click={restore}>Restore</button>
       <button on:click={() => position.state.reset()}>Reset</button>
