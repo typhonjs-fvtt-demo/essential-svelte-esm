@@ -1,6 +1,6 @@
 <script>
    import {
-      gsapEasingFunc,
+      getGsapEasingFunc,
       gsapEasingList,
       GsapCompose }   from '#runtime/svelte/gsap';
 
@@ -15,10 +15,12 @@
    // depending on the duration of the animation; more wiggles the lower the duration.
    const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${count}, type: ${type} })`;
 
-   let ease = gsapEasingFunc.linear;
+   let easeName = 'linear';
    let duration = 1;
    let gsapTimeline, gsapTween;
    let innerHeight, innerWidth;
+
+   $: ease = getGsapEasingFunc(easeName);
 
    function getRandomInt(min, max)
    {
@@ -118,10 +120,10 @@
       </label>
 
       <label>Easing:
-         <select bind:value={ease}>
-            {#each gsapEasingList as prop}
-               <option value={gsapEasingFunc[prop]}>
-                  {prop}
+         <select bind:value={easeName}>
+            {#each gsapEasingList as easeFnName}
+               <option value={easeFnName}>
+                  {easeFnName}
                </option>
             {/each}
          </select>

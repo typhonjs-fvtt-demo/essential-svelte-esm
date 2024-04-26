@@ -3,7 +3,7 @@ import { get, writable }   from 'svelte/store';
 import { TJSPosition }     from '#runtime/svelte/store/position';
 
 import {
-   gsapEasingFunc,
+   getGsapEasingFunc,
    GsapCompose }           from '#runtime/svelte/gsap';
 
 import { isObject }        from '#runtime/util/object';
@@ -97,7 +97,7 @@ boxStore.debug = writable(false);
 boxStore.labels = writable(false);
 boxStore.pclEnabled = writable(false);
 
-boxStore.ease = writable(gsapEasingFunc.linear);
+boxStore.ease = writable('linear');
 boxStore.duration = writable(1);
 
 boxStore.validator = writable(true);
@@ -132,7 +132,7 @@ boxStore.animateToLocation = () =>
    const height = validator.height;
 
    const duration = get(boxStore.duration);
-   const ease = get(boxStore.ease);
+   const ease = getGsapEasingFunc(get(boxStore.ease));
 
    // Stagger enabled state and cumulative time.
    const stagger = get(boxStore.stagger);
@@ -164,7 +164,7 @@ boxStore.animateToLocation = () =>
 boxStore.animateToScaleRot = () =>
 {
    const duration = get(boxStore.duration);
-   const ease = get(boxStore.ease);
+   const ease = getGsapEasingFunc(get(boxStore.ease));
 
    // Stagger enabled state and cumulative time.
    const stagger = get(boxStore.stagger);
@@ -200,7 +200,7 @@ boxStore.gsapTimelineCreate = () =>
    const stagger = get(boxStore.stagger);
 
    // GSAP is loaded w/ the Svelte easing functions and are accessible by prepending `svelte-` and the function name.
-   const ease = get(boxStore.ease);
+   const ease = getGsapEasingFunc(get(boxStore.ease));
 
    // Defines the Bézier curve to animate along which will vary from the starting position of each box. This curve
    // is based on current width / height. This data is for the MotionPathPlugin.

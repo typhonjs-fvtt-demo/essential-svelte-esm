@@ -1,9 +1,6 @@
 <script>
-   import {
-      gsapEasingFunc,
-      gsapEasingList }      from '#runtime/svelte/gsap';
-
-   import { slideFade } from '#runtime/svelte/transition';
+   import { easingList }   from '#runtime/svelte/easing';
+   import { slideFade }    from '#runtime/svelte/transition';
 
    /**
     * @type {import('#runtime/svelte/store/position').IDraggableOptions}
@@ -27,10 +24,10 @@
          <input type=text bind:value={options.tweenDuration} readonly>
       </label>
 
-      <label>Ease:
+      <label>Easing:
          <select bind:value={options.tweenEase}>
-            {#each gsapEasingList as entry}
-               <option value={gsapEasingFunc[entry]}>{entry}</option>
+            {#each easingList as entry}
+               <option value={entry}>{entry}</option>
             {/each}
          </select>
       </label>

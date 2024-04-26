@@ -1,9 +1,7 @@
 <script>
-   import {
-      gsapEasingFunc,
-      gsapEasingList }      from '#runtime/svelte/gsap';
+   import { gsapEasingList }  from '#runtime/svelte/gsap';
 
-   import { boxStore }  from './boxStore.js';
+   import { boxStore }        from './boxStore.js';
 
    export let controls = void 0;
 
@@ -72,7 +70,7 @@
             Easing:
             <select bind:value={$storeEase}>
                {#each gsapEasingList as entry}
-                  <option value={gsapEasingFunc[entry]}>{entry}</option>
+                  <option value={entry}>{entry}</option>
                {/each}
             </select>
          </label>

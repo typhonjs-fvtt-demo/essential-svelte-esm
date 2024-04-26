@@ -39,7 +39,7 @@
          <input type=text bind:value={options.tweenDuration} readonly>
       </label>
 
-      <label>Function:
+      <label>Easing:
          <select bind:value={options.tweenEase}>
             {#each gsapEasingList as entry}
                <option value={entry}>{entry}</option>
