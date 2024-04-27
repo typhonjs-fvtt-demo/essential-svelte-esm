@@ -6,6 +6,7 @@
 
    const position = application.position;
 
+   /** @type {import('#runtime/svelte/easing').EasingFunctionName} */
    let ease = 'linear';
 
    /** @type {import('#runtime/util/animate').BasicAnimation} */
