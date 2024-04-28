@@ -1,4 +1,7 @@
 <script>
+   /**
+    * @type {import('#runtime/svelte/store/position').TJSPosition}
+    */
    export let position = void 0;
 
    let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex;
@@ -9,7 +12,7 @@
 
    ({minWidth, minHeight, maxWidth, maxHeight} = position.stores);
 
-   let innerWidth, innerHeight
+   let innerWidth, innerHeight;
    let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale;
 
    $: if (rotateX) { nullishRotateX = Number.isFinite($rotateX) ? $rotateX : 'null'; }
