@@ -36,7 +36,7 @@
         $storeDebug ? BoxDebug : Box;
    }
 
-   $: boxStore.setValidatorEnabled($storeValidator);
+   $: validator.enabled = $storeValidator;
 
    function setDimension(offsetWidth, offsetHeight)
    {
@@ -54,9 +54,6 @@
 
       boundingRect.width = offsetWidth;
       boundingRect.height = offsetHeight;
-
-      // Force validation for all TJSPosition instances.
-      for (const box of $boxStore) { box.position.set(); }
    }
 </script>
 

@@ -315,17 +315,4 @@ boxStore.restore = () =>
    }
 };
 
-
-boxStore.setValidatorEnabled = (enabled) =>
-{
-   validator.enabled = enabled;
-
-   // When the validator is turned on and there is box data then force a set on each box position to update validation.
-   if (enabled && data.length > 0)
-   {
-      for (const box of data) { box.position.set(); }
-   }
-};
-
-
 export { boxStore, validator };
