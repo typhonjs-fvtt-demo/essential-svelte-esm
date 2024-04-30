@@ -9,6 +9,7 @@
 
    import { boxStore }        from '../boxStore.js';
 
+   /** @type {import('../boxStore').BoxData} */
    export let box = void 0;
 
    const labels = boxStore.labels;

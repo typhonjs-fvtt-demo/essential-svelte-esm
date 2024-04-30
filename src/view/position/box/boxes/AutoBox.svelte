@@ -5,6 +5,7 @@
 
    import { applyPosition }   from '#runtime/svelte/store/position';
 
+   /** @type {import('../boxStore').BoxData} */
    export let box = void 0;
 
    // This is run once when the component is created. It sets the position width / height to 'auto'.
@@ -21,8 +22,8 @@
       position: absolute;
       border-radius: 0.25em;
       border: solid brown 2px;
-      min-width: 100px;
-      min-height: 100px;
+      min-width: 50px;
+      min-height: 50px;
       touch-action: none;
    }
 </style>

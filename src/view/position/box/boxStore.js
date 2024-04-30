@@ -56,36 +56,18 @@ function getRandomColor()
 }
 
 /**
- * Creates a TJSPosition instance with random top / left defined by width & height. When `auto` is true width & height of
- * the TJSPosition instance is set to auto.
+ * @typedef {object} BoxData Defines the data stored in `boxStore`.
  *
- * @param {number} width - Max width bounds.
+ * @property {number} id - A unique ID for each box required by TJSPositionControlLayer.
  *
- * @param {number} height - Max height bounds.
+ * @property {import('#runtime/svelte/store/position').TJSPosition} position - The associated position store.
  *
- * @param {boolean} auto - When true width & height are set to auto.
+ * @property {string} color - The CSS color string for the box.
  *
- * @returns {TJSPosition} New TJSPosition instance.
+ * @property {{ width: number, height: number }} initialBounds - The initial bounds of the box.
  */
-function getPosition(width, height, auto)
-{
-   const bounds = getRandomInt(90, 140);
 
-   const position = new TJSPosition({
-      top: getRandomInt(0, height),
-      left: getRandomInt(0, width),
-      width: auto ? 'auto' : bounds,
-      height: auto ? 'auto' : bounds,
-      validator
-   });
-
-   // Store initial bounds to swap between `auto` and `bounds`.
-   position._initialBounds = bounds;
-
-   return position;
-}
-
-/** @type {{id: number, position: TJSPosition, color: string}[]} */
+/** @type {BoxData[]} */
 let data = [];
 
 const boxStore = writable(data);
@@ -107,13 +89,26 @@ boxStore.add = (count = 1) =>
    const width = validator.width;
    const height = validator.height;
 
-   const auto = get(boxStore.auto);
-
    boxStore.update((array) =>
    {
       for (let cntr = count; --cntr >= 0;)
       {
-         array.push({ id: idCntr++, position: getPosition(width, height, auto), color: getRandomColor() });
+         const bounds = getRandomInt(90, 140);
+
+         const position = new TJSPosition({
+            top: getRandomInt(0, height),
+            left: getRandomInt(0, width),
+            width: bounds,
+            height: bounds,
+            validator
+         });
+
+         array.push({
+            id: idCntr++,
+            position,
+            color: getRandomColor(),
+            initialBounds: { width: bounds, height: bounds }
+         });
       }
 
       return array;

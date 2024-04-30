@@ -7,14 +7,14 @@
 
    import { boxStore }        from '../boxStore.js';
 
+   /** @type {import('../boxStore').BoxData} */
    export let box = void 0;
 
    const labels = boxStore.labels;
    const transform = box.position.stores.transform;
 
    // This is run once when the component is created. It sets the position width / height back to initial bounds.
-   const bounds = box.position._initialBounds;
-   box.position.set({ width: bounds, height: bounds });
+   box.position.set(box.initialBounds);
 
    let cornersText = '';
 
