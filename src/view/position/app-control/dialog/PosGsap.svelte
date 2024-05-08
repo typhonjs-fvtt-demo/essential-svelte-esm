@@ -96,10 +96,10 @@
 
    function gsapWiggle()
    {
-      position.set({ transformOrigin: 'center' });
-
       // Finish existing tween first!
       if (gsapTween !== void 0 && gsapTween.isActive()) { return; }
+
+      position.set({ transformOrigin: 'center' });
 
       gsapTween = GsapCompose.to(position, {
          rotation: '+=20',
