@@ -1,5 +1,7 @@
 import { get, writable }   from 'svelte/store';
 
+import { MathRandom }      from '#runtime/math/util';
+
 import { TJSPosition }     from '#runtime/svelte/store/position';
 
 import {
@@ -30,29 +32,13 @@ let savedComponentData;
 const validator = new TJSPosition.Validators.TransformBounds({ constrain: false });
 
 /**
- * Create a random integer between min & max.
- *
- * @param {number} min - Minimum lower bound.
- *
- * @param {number} max - Maximum upper bound.
- *
- * @returns {number} Random integer.
- */
-function getRandomInt(min, max)
-{
-   min = Math.ceil(min);
-   max = Math.floor(max);
-   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-/**
  * Return a random rgba color.
  *
  * @returns {string} Random color.
  */
 function getRandomColor()
 {
-   return `rgba(${getRandomInt(100, 255)}, ${getRandomInt(100, 255)}, ${getRandomInt(100, 255)}, 0.5)`;
+   return `rgba(${MathRandom.getInt(100, 255)}, ${MathRandom.getInt(100, 255)}, ${MathRandom.getInt(100, 255)}, 0.5)`;
 }
 
 /**
@@ -93,11 +79,11 @@ boxStore.add = (count = 1) =>
    {
       for (let cntr = count; --cntr >= 0;)
       {
-         const bounds = getRandomInt(90, 140);
+         const bounds = MathRandom.getInt(90, 140);
 
          const position = new TJSPosition({
-            top: getRandomInt(0, height),
-            left: getRandomInt(0, width),
+            top: MathRandom.getInt(0, height),
+            left: MathRandom.getInt(0, width),
             width: bounds,
             height: bounds,
             validator
@@ -132,7 +118,7 @@ boxStore.animateToLocation = () =>
    // Stagger enabled state and cumulative time.
    const stagger = get(boxStore.stagger);
 
-   const createPositionData = () => ({ top: getRandomInt(0, height), left: getRandomInt(0, width) });
+   const createPositionData = () => ({ top: MathRandom.getInt(0, height), left: MathRandom.getInt(0, width) });
    const createOptionsData = ({ index }) => ({ delay: index * 0.1, duration, ease });
 
    if (animateTo) { animateTo.cancel(); }
@@ -152,7 +138,7 @@ boxStore.animateToLocation = () =>
 
    // for (const entry of data)
    // {
-   //    entry.position.animate.fromTo({ top: getRandomInt(0, height), left: getRandomInt(0, width) }, { top: getRandomInt(0, height), left: getRandomInt(0, width) }, { duration, ease });
+   //    entry.position.animate.fromTo({ top: MathRandom.getInt(0, height), left: MathRandom.getInt(0, width) }, { top: MathRandom.getInt(0, height), left: MathRandom.getInt(0, width) }, { duration, ease });
    // }
 };
 
@@ -164,7 +150,7 @@ boxStore.animateToScaleRot = () =>
    // Stagger enabled state and cumulative time.
    const stagger = get(boxStore.stagger);
 
-   const createPositionData = () => ({ scale: getRandomInt(50, 200) / 100, rotateZ: getRandomInt(0, 360) });
+   const createPositionData = () => ({ scale: MathRandom.getInt(50, 200) / 100, rotateZ: MathRandom.getInt(0, 360) });
    const createOptionsData = ({ index }) => ({ delay: index * 0.1, duration, ease });
 
    if (animateScaleRot) { animateScaleRot.cancel(); }
@@ -175,8 +161,8 @@ boxStore.animateToScaleRot = () =>
    // setTimeout(() => animateScaleRot.cancel(), 500);
 
    // Example of using finished Promise.
-   // animateScaleRot.finished.then((result) =>
-   //  console.log(`!! Animation Scale / Rotate Finished: ${JSON.stringify(result)}`));
+   animateScaleRot.finished.then((result) =>
+    console.log(`!! Animation Scale / Rotate Finished: ${JSON.stringify(result)}`));
 };
 
 boxStore.gsapTimelineCreate = () =>
@@ -222,14 +208,14 @@ boxStore.gsapTimelineCreate = () =>
    // // Note: the `rotation` alias is used instead of rotateZ as this timeline includes use of CustomWiggle &
    // // MotionPathPlugin that output data to `rotation`.
    const createTimelineData = () => [
-      { type: 'to', vars: { left: getRandomInt(0, width), duration, ease }, position: '<' },
-      { type: 'to', vars: { rotation: getRandomInt(0, 360), duration, ease }, position: '<' },
+      { type: 'to', vars: { left: MathRandom.getInt(0, width), duration, ease }, position: '<' },
+      { type: 'to', vars: { rotation: MathRandom.getInt(0, 360), duration, ease }, position: '<' },
       { type: 'to', target: 'element', vars: { opacity: 0.4, duration, ease }, position: duration / 2 },
-      { type: 'to', vars: { top: getRandomInt(0, height), duration, ease } },
+      { type: 'to', vars: { top: MathRandom.getInt(0, height), duration, ease } },
       { type: 'to', vars: { rotation: '+=20', duration: doubleDuration, ease: customWiggle() }, position: '<+=50%' },
       { type: 'to', vars: motionVars },
       { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: `-=${duration}` },
-      { type: 'to', vars: { rotation: getRandomInt(540, 720), duration, ease }, position: '<' }
+      { type: 'to', vars: { rotation: MathRandom.getInt(540, 720), duration, ease }, position: '<' }
    ];
 
    const staggerFunc = (time = 0.1) => ({ index }) => index * time;
@@ -273,7 +259,7 @@ boxStore.removeRandom = (count = 1) =>
    {
       for (; --count >= 0;)
       {
-         const index = getRandomInt(0, array.length - 1);
+         const index = MathRandom.getInt(0, array.length - 1);
          array.splice(index, 1);
       }
 

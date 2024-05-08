@@ -1,8 +1,10 @@
 <script>
+   import { MathRandom }   from '#runtime/math/util';
+
    import {
       getGsapEasingFunc,
       gsapEasingList,
-      GsapCompose }   from '#runtime/svelte/gsap';
+      GsapCompose }        from '#runtime/svelte/gsap';
 
    // Imports the loading code / automatic GSAP plugin registration.
    import '#runtime/svelte/gsap/plugin/CustomEase';
@@ -21,13 +23,6 @@
    let innerHeight, innerWidth;
 
    $: ease = getGsapEasingFunc(easeName);
-
-   function getRandomInt(min, max)
-   {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-   }
 
    function gsapTimelineCreate()
    {
@@ -63,35 +58,15 @@
       gsapTimeline = GsapCompose.timeline({ paused: true });
 
       gsapTimeline.add(GsapCompose.timeline(position, [
-         { type: 'to', vars: { left: getRandomInt(width6 * 2, width6 * 4), duration, ease }, position: '<' },
-         { type: 'to', vars: { rotation: getRandomInt(0, 360), duration, ease }, position: '<' },
+         { type: 'to', vars: { left: MathRandom.getInt(width6 * 2, width6 * 4), duration, ease }, position: '<' },
+         { type: 'to', vars: { rotation: MathRandom.getInt(0, 360), duration, ease }, position: '<' },
          { type: 'to', target: 'element', vars: { opacity: 0.4, duration, ease }, position: duration / 2 },
-         { type: 'to', vars: { top: getRandomInt(height6 * 2, height6 * 4), duration, ease } },
+         { type: 'to', vars: { top: MathRandom.getInt(height6 * 2, height6 * 4), duration, ease } },
          { type: 'to', vars: { rotation: '+=20', duration: doubleDuration, ease: customWiggle() }, position: '<+=50%' },
          { type: 'to', vars: motionVars },
          { type: 'to', target: 'element', vars: { opacity: 1, duration, ease }, position: `-=${duration}` },
          { type: 'to', vars: { rotation: 720, duration, ease }, position: '<' },
       ]));
-   }
-
-   function gsapTimelinePause()
-   {
-      if (gsapTimeline !== void 0) { gsapTimeline.pause(); }
-   }
-
-   function gsapTimelinePlay()
-   {
-      if (gsapTimeline !== void 0) { gsapTimeline.play(); }
-   }
-
-   function gsapTimelineRestart()
-   {
-      if (gsapTimeline !== void 0) { gsapTimeline.restart(); }
-   }
-
-   function gsapTimelineReverse()
-   {
-      if (gsapTimeline !== void 0) { gsapTimeline.reverse(); }
    }
 
    function gsapWiggle()
@@ -132,10 +107,10 @@
 
    <div>
       <button class=fit-content on:click={gsapTimelineCreate}>New Timeline</button>
-      <button on:click={gsapTimelinePlay}><i class="fas fa-play"></i></button>
-      <button on:click={gsapTimelineReverse}><i class="fas fa-backward"></i></button>
-      <button on:click={gsapTimelinePause}><i class="fas fa-pause"></i></button>
-      <button on:click={gsapTimelineRestart}><i class="fas fa-arrow-left"></i></button>
+      <button on:click={() => gsapTimeline?.play()}><i class="fas fa-play"></i></button>
+      <button on:click={() => gsapTimeline?.reverse()}><i class="fas fa-backward"></i></button>
+      <button on:click={() => gsapTimeline?.pause()}><i class="fas fa-pause"></i></button>
+      <button on:click={() => gsapTimeline?.restart()}><i class="fas fa-arrow-left"></i></button>
       <button class=fit-content on:click={gsapWiggle}>Wiggle</button>
    </div>
 </section>

@@ -1,25 +1,11 @@
 import { writable }        from 'svelte/store';
 
+import { MathRandom }      from '#runtime/math/util';
+
 import { TJSPosition }     from '#runtime/svelte/store/position';
 
 const s_CELL_WIDTH = 190;
 const s_CELL_HEIGHT = 120;
-
-/**
- * Create a random integer between min & max.
- *
- * @param {number} min - Minimum lower bound.
- *
- * @param {number} max - Maximum upper bound.
- *
- * @returns {number} Random integer.
- */
-function getRandomInt(min, max)
-{
-   min = Math.ceil(min);
-   max = Math.floor(max);
-   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 /**
  * Return a random linear gradient.
@@ -28,8 +14,8 @@ function getRandomInt(min, max)
  */
 function getRandomColor()
 {
-   return `linear-gradient(337deg, rgba(2,0,36,0.75) 0%, rgba(${getRandomInt(100, 255)}, ${getRandomInt(100, 255)}, ${
-    getRandomInt(100, 255)}, 0.5) 50%, rgba(149,171,176,0.75) 100%)`;
+   return `linear-gradient(337deg, rgba(2,0,36,0.75) 0%, rgba(${MathRandom.getInt(100, 255)}, ${
+    MathRandom.getInt(100, 255)}, ${MathRandom.getInt(100, 255)}, 0.5) 50%, rgba(149,171,176,0.75) 100%)`;
 }
 
 /**
