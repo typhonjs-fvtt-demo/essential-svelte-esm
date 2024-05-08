@@ -17,11 +17,12 @@
 
    let duration = 1;
 
-   function animateY()
+   function animateZ()
    {
       if (flipping?.isActive) { return; }
 
-      flipping = position.animate.to({ rotateY: position.rotateY < 360 ? 360 : 0 }, { duration, ease });
+      flipping = position.animate.to({ rotateZ: position.rotateZ < 360 ? 360 : 0 },
+       { duration, ease, transformOrigin: 'center' });
    }
 
    function restore()
@@ -35,7 +36,7 @@
 </script>
 
 <section>
-   <div class=flex>
+   <div>
       <label>Duration:
          <input type=range min=0 max=3 step=0.1 bind:value={duration}>
          <input type=text bind:value={duration} readonly>
@@ -52,9 +53,14 @@
       </label>
    </div>
 
-   <div>
-      <button on:click={animateY}>Flip</button>
-      <button on:click={() => application.position.animate.to({ left: '12.5%', width: '75%' }, { duration, ease })}>Width 75%</button>
+   <div class=height>
+      <span>Width:
+         <button on:click={() => application.position.animate.to({ left: '12.5%', width: '75%' }, { duration, ease })}>75%</button>
+         <button on:click={() => application.position.animate.to({ width: '150%~' }, { duration, ease })}>150%~</button>
+      </span>
+      <div class=separator></div>
+      <button on:click={animateZ}>Flip</button>
+      <div class=separator></div>
       <button on:click={() => application.state.save({ name: 'save-1' })}>Save</button>
       <button on:click={restore}>Restore</button>
       <button on:click={() => position.state.reset()}>Reset</button>
@@ -91,7 +97,18 @@
          gap: 0.75em;
       }
 
-      label {
+      div.height {
+         height: 32px;
+      }
+
+      div.separator {
+         display: block;
+         width: 1px;
+         height: 75%;
+         background-color: black;
+      }
+
+      span, label {
          display: flex;
          align-items: center;
          flex: 1;
