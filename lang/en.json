@@ -1,5 +1,13 @@
 {
   "EssentialESM": {
-    "title": "Essential Svelte (ESM)"
+    "apps": {
+      "menu": {
+        "title": "Essential Svelte (ESM)"
+      },
+
+      "side-slide-layer": {
+        "title": "Side Slide Layer"
+      }
+    }
   }
 }
