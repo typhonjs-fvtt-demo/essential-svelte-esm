@@ -1,6 +1,5 @@
 <script>
    import { getContext }         from 'svelte';
-   import { fade, scale }        from 'svelte/transition';
 
    import { TJSDialog }          from '#runtime/svelte/application';
    import { ApplicationShell }   from '#runtime/svelte/component/core';
@@ -46,8 +45,8 @@
 
 <svelte:options accessors={true}/>
 
-<ApplicationShell bind:elementRoot transition={scale} transitionOptions={{duration: 1000}}>
-   <main in:fade={{duration: 5000}}>
+<ApplicationShell bind:elementRoot>
+   <main>
       <h1>Hello {message}!</h1>
       <label>
          Message:&nbsp;<input bind:value={message}>
