@@ -22,9 +22,6 @@ const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${c
 
 let idCntr = 0;
 
-/** @type {import('#runtime/util/animate').BasicAnimation} */
-let animateScaleRot, animateTo;
-
 let gsapTimeline;
 
 let savedComponentData;
@@ -104,7 +101,6 @@ boxStore.add = (count = 1) =>
 boxStore.animateToCancel = () =>
 {
    TJSPosition.Animate.cancelAll();
-   animateTo = animateScaleRot = void 0;
 };
 
 boxStore.animateToLocation = () =>
@@ -121,24 +117,22 @@ boxStore.animateToLocation = () =>
    const createPositionData = () => ({ top: MathRandom.getInt(0, height), left: MathRandom.getInt(0, width) });
    const createOptionsData = ({ index }) => ({ delay: index * 0.1, duration, ease });
 
-   if (animateTo) { animateTo.cancel(); }
+   TJSPosition.Animate.to(data, createPositionData, stagger ? createOptionsData :
+    { duration, ease, strategy: 'cancel' });
 
-   animateTo = TJSPosition.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+   // TJSPosition.Animate.from(data, createPositionData, stagger ? createOptionsData :
+   //  { duration, ease, strategy: 'cancel' });
 
-   // animateTo = TJSPosition.Animate.from(data, createPositionData, stagger ? createOptionsData : { duration, ease });
-
-   // animateTo = TJSPosition.Animate.fromTo(data, createPositionData, createPositionData,
-   //  stagger ? createOptionsData : { duration, ease });
+   // TJSPosition.Animate.fromTo(data, createPositionData, createPositionData,
+   //  stagger ? createOptionsData : { duration, ease, strategy: 'cancel' });
 
    // if (!quickTo) { quickTo = TJSPosition.Animate.quickTo(data, ['top', 'left']); }
    //
    // quickTo.options({ duration, ease })(createPositionData);
 
-   // animateTo.finished.then(() => console.log(`!! Animation Location Finished`));
-
    // for (const entry of data)
    // {
-   //    entry.position.animate.fromTo({ top: MathRandom.getInt(0, height), left: MathRandom.getInt(0, width) }, { top: MathRandom.getInt(0, height), left: MathRandom.getInt(0, width) }, { duration, ease });
+   //    entry.position.animate.fromTo({ top: MathRandom.getInt(0, height), left: MathRandom.getInt(0, width) }, { top: MathRandom.getInt(0, height), left: MathRandom.getInt(0, width) }, { duration, ease, strategy: 'cancel' });
    // }
 };
 
@@ -153,9 +147,9 @@ boxStore.animateToScaleRot = () =>
    const createPositionData = () => ({ scale: MathRandom.getInt(50, 200) / 100, rotateZ: MathRandom.getInt(0, 360) });
    const createOptionsData = ({ index }) => ({ delay: index * 0.1, duration, ease });
 
-   if (animateScaleRot) { animateScaleRot.cancel(); }
-
-   animateScaleRot = TJSPosition.Animate.to(data, createPositionData, stagger ? createOptionsData : { duration, ease });
+   /** @type {import('#runtime/util/animate').BasicAnimation} */
+   const animateScaleRot = TJSPosition.Animate.to(data, createPositionData, stagger ? createOptionsData :
+    { duration, ease, strategy: 'cancel' });
 
    // Example of cancelling animation after 500ms; the result for the Promise below will show `cancelled` state.
    // setTimeout(() => animateScaleRot.cancel(), 500);
