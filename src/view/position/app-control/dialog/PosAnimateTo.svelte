@@ -84,9 +84,14 @@
          <!--
             The following animations use the `cancel` strategy and will interrupt other scheduled animations.
             Note though that they are not triggered when the application is minimized.
+
+            1. Animates width to 75% of the browser window and left to 12.5% to center the app.
+            2. Animates the width to 150% of the current value. The `~` after `%` indicates a relative percentage.
+            3. You can adjust relative values using `+=`, `-=`, and `*=`. This example adds 50px to the current width.
          -->
          <button on:click={() => !application.reactive.minimized ? application.position.animate.to({ left: '12.5%', width: '75%' }, { duration, ease, strategy: 'cancel' }) : void 0}>75%</button>
          <button on:click={() => !application.reactive.minimized ? application.position.animate.to({ width: '150%~' }, { duration, ease, strategy: 'cancel' }) : void 0}>150%~</button>
+         <button on:click={() => !application.reactive.minimized ? application.position.animate.to({ width: '+=50px' }, { duration, ease, strategy: 'cancel' }) : void 0}>+=50px</button>
       </span>
       <div class=separator></div>
       <!--
