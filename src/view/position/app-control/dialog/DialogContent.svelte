@@ -21,7 +21,7 @@
       <PosProperties {position} />
    </TJSSvgFolder>
 
-   <TJSSvgFolder label={'AnimateTo / Save / Restore:'}>
+   <TJSSvgFolder label={'AnimateTo / Save / Restore / Reset:'}>
       <PosAnimateTo {application}/>
    </TJSSvgFolder>
 
