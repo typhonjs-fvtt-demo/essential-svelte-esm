@@ -1,38 +1,31 @@
 <script>
    import { easingList }  from '#runtime/svelte/easing';
 
-   /** @type {import('#runtime/svelte/application').SvelteApplication} */
+   /**
+    * The target Svelte application being animated.
+    *
+    * @type {import('#runtime/svelte/application').SvelteApplication}
+    */
    export let application = void 0;
 
-   const position = application.position;
-
-   /** @type {import('#runtime/svelte/easing').EasingFunctionName} */
+   /**
+    * Svelte easing function name to apply to animation.
+    *
+    * @type {import('#runtime/svelte/easing').EasingFunctionName}
+    */
    let ease = 'linear';
 
-   /** @type {import('#runtime/util/animate').BasicAnimation} */
-   let flipping;
+   /**
+    * Animations are exclusive. This is passed in as a tween option to prevent multiple overlapping animations.
+    *
+    * @type {boolean}
+    */
+   const exclusive = true;
 
-   /** @type {boolean} */
-   let restoring;
-
+   /**
+    * The animation duration in seconds.
+    */
    let duration = 1;
-
-   function animateZ()
-   {
-      if (flipping?.isActive) { return; }
-
-      flipping = position.animate.to({ rotateZ: position.rotateZ < 360 ? 360 : 0 },
-       { duration, ease, transformOrigin: 'center' });
-   }
-
-   function restore()
-   {
-      if (restoring) { return; }
-
-      restoring = true;
-      application.state.restore({ name: 'save-1', animateTo: true, async: true, ease, duration }).then(
-       () => restoring = false);
-   }
 </script>
 
 <section>
@@ -55,15 +48,31 @@
 
    <div class=height>
       <span>Width:
-         <button on:click={() => application.position.animate.to({ left: '12.5%', width: '75%' }, { duration, ease })}>75%</button>
-         <button on:click={() => application.position.animate.to({ width: '150%~' }, { duration, ease })}>150%~</button>
+         <button on:click={() => !application.reactive.minimized ? application.position.animate.to({ left: '12.5%', width: '75%' }, { duration, ease, exclusive }) : void 0}>75%</button>
+         <button on:click={() => !application.reactive.minimized ? application.position.animate.to({ width: '150%~' }, { duration, ease, exclusive }) : void 0}>150%~</button>
       </span>
       <div class=separator></div>
-      <button on:click={animateZ}>Flip</button>
+      <button on:click={() => application.position.animate.to({ rotateZ: application.position.rotateZ < 360 ? 360 : 0 }, { duration, ease, exclusive, transformOrigin: 'center' })}>Flip</button>
       <div class=separator></div>
-      <button on:click={() => application.state.save({ name: 'save-1' })}>Save</button>
-      <button on:click={restore}>Restore</button>
-      <button on:click={() => position.state.reset()}>Reset</button>
+      <button on:click={() => application.position.state.reset({ keepZIndex: true })}>Reset</button>
+   </div>
+
+   <div class=height>
+      <span>Save:
+         <button on:click={() => application.state.save({ name: 'save-1' })}>1</button>
+         <button on:click={() => application.state.save({ name: 'save-2' })}>2</button>
+         <button on:click={() => application.state.save({ name: 'save-3' })}>3</button>
+         <button on:click={() => application.state.save({ name: 'save-4' })}>4</button>
+         <button on:click={() => application.state.save({ name: 'save-5' })}>5</button>
+      </span>
+      <div class=separator></div>
+      <span>Restore:
+         <button on:click={() => application.state.restore({ name: 'save-1', animateTo: true, async: true, ease, duration })}>1</button>
+         <button on:click={() => application.state.restore({ name: 'save-2', animateTo: true, async: true, ease, duration })}>2</button>
+         <button on:click={() => application.state.restore({ name: 'save-3', animateTo: true, async: true, ease, duration })}>3</button>
+         <button on:click={() => application.state.restore({ name: 'save-4', animateTo: true, async: true, ease, duration })}>4</button>
+         <button on:click={() => application.state.restore({ name: 'save-5', animateTo: true, async: true, ease, duration })}>5</button>
+      </span>
    </div>
 </section>
 
