@@ -25,12 +25,12 @@ function getRandomColor()
  */
 function getPosition()
 {
-   return new TJSPosition(void 0, {
+   return new TJSPosition({
       top: 10,
       left: 10,
       width: s_CELL_WIDTH,
       height: s_CELL_HEIGHT,
-      ortho: false
+      ortho: false // left / top is not included in any transform / matrix3d value.
    });
 }
 

@@ -15,6 +15,9 @@
     */
    let highlight = false;
 
+   // Resets any highlight when selected index changes.
+   $: { highlight = false; $selectedIndex; }
+
    /**
     * The trick with the onClick handler is that we want continuous rotation across the base / 0 point. If we simply
     * set the selected index to the given ID this doesn't respect that the selected index is not bounded by the
