@@ -1,7 +1,7 @@
-import * as easings        from 'svelte/easing';
 import { writable }        from 'svelte/store';
 
 import { rippleFocus }     from '#runtime/svelte/action/animate';
+import { easingList }      from '#runtime/svelte/easing';
 import { propertyStore }   from '#runtime/svelte/store/writable-derived';
 
 import { settings }        from '#constants';
@@ -84,7 +84,7 @@ function createInputs(stores)
       easingIn: {
          type: 'select',
          label: 'Easing In:',
-         options: Object.keys(easings).map((key) => ({ value: key, label: key })),
+         options: easingList.map((key) => ({ value: key, label: key })),
          store: stores.easingIn,
          disabled
       },
@@ -93,7 +93,7 @@ function createInputs(stores)
          efx: rippleFocus(),
          type: 'select',
          label: 'Easing Out:',
-         options: Object.keys(easings).map((key) => ({ value: key, label: key })),
+         options: easingList.map((key) => ({ value: key, label: key })),
          store: stores.easingOut,
          disabled
       },
