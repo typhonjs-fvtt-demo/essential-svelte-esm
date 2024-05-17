@@ -31,7 +31,7 @@
 <style lang="scss">
    .scene {
       position: relative;
-      width: 210px;
+      width: 190px;
       height: 140px;
       margin: 80px auto;
    }

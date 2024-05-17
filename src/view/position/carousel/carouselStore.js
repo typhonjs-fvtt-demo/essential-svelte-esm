@@ -26,11 +26,9 @@ function getRandomColor()
 function getPosition()
 {
    return new TJSPosition({
-      top: 10,
-      left: 10,
       width: s_CELL_WIDTH,
       height: s_CELL_HEIGHT,
-      ortho: false // left / top is not included in any transform / matrix3d value.
+      ortho: false // Ortho mode post-applies translate w/ the matrix3d transform; not suitable for 3D representation.
    });
 }
 
@@ -62,13 +60,15 @@ carouselStore.setCells = (count) =>
          array.splice(count, array.length);
       }
 
-      // Update cell data
+      // Update cell data.
       carouselStore.theta = array.length ? 360 / array.length : 0;
       carouselStore.radius = array.length ? Math.round((s_CELL_WIDTH / 2) / Math.tan(Math.PI / array.length)) : 0;
 
       for (let cntr = 0; cntr < array.length; cntr++)
       {
          const cellAngle = carouselStore.theta * cntr;
+
+         // Order matters; rotation before translation.
          array[cntr].position.set({ rotateY: cellAngle, translateZ: carouselStore.radius });
       }
 
