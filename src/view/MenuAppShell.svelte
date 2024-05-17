@@ -1,4 +1,6 @@
 <script>
+   import { scale }                 from 'svelte/transition';
+
    import { TJSApplicationShell }   from '#runtime/svelte/component/core';
 
    export let elementRoot = void 0;
@@ -52,7 +54,7 @@
 
 <svelte:options accessors={true}/>
 
-<TJSApplicationShell bind:elementRoot>
+<TJSApplicationShell bind:elementRoot transition={scale} transitionOptions={{duration: 1000}}>
    <main>
       <h1>Launch demo apps below:</h1>
       <section>
