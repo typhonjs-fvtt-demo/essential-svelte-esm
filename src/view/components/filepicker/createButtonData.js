@@ -15,7 +15,7 @@ import {
  * @param {string}   idPrepend - A unique string to prepend to picker CSS IDs. Creates unique IDs between normal app
  *        version and modal demo.
  *
- * @returns {[{}]} Button data.
+ * @returns {import('#standard/component/fvtt').TJSFileButton.Props[]} Button data.
  */
 export function createButtonData(idPrepend)
 {
