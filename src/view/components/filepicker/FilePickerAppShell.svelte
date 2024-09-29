@@ -5,7 +5,7 @@
    import { TJSDialog }             from '#runtime/svelte/application';
    import { ApplicationShell }      from '#runtime/svelte/component/core';
 
-   import { TJSButton }             from '#standard/component';
+   import { TJSButton }             from '#standard/component/form';
 
    import FilePickerButtonContent   from './FilePickerButtonContent.svelte';
 

@@ -1,10 +1,9 @@
-import { writable }        from 'svelte/store';
+import { writable }              from 'svelte/store';
 
-import { ripple }          from '#runtime/svelte/action/animate';
+import { ripple }                from '#runtime/svelte/action/animate';
 
-import {
-   FVTTFilePickerControl,
-   TJSContextMenu }        from '#standard/application';
+import { FVTTFilePickerControl } from '#standard/application/filepicker';
+import { TJSContextMenu }        from '#standard/application/menu';
 
 /**
  * Provides a convenience function to create the button data for the file picker button components to make the
@@ -15,7 +14,7 @@ import {
  * @param {string}   idPrepend - A unique string to prepend to picker CSS IDs. Creates unique IDs between normal app
  *        version and modal demo.
  *
- * @returns {import('#standard/component/fvtt').TJSFileButton.Props[]} Button data.
+ * @returns {import('#standard/component/fvtt/filepicker/button').TJSFileButton.Props[]} Button data.
  */
 export function createButtonData(idPrepend)
 {
@@ -35,23 +34,23 @@ export function createButtonData(idPrepend)
             // You may pass application options and any other Foundry ApplicationOptions / FilePickerOptions.
             // top: 100, // Example: display file picker at Y = 100.
 
-            /**
-             * You can set a callback to receive filepath changes.
-             *
-             * @param {{ filepath: string }} filepath - Newly selected filepath.
-             */
-            // onFilepath: ({ filepath }) => { console.log(`!! filepath: ${filepath}`); },
+            // /**
+            //  * You can set a callback to receive URL string changes.
+            //  *
+            //  * @param {{ urlString: string }} filepath - Newly selected url string.
+            //  */
+            // onURLString: ({ urlString }) => { console.log(`!! urlString: ${urlString}`); },
 
-            /**
-             * You may provide a validation function to test the selected result. Return false to
-             * reject the filepath selection. Post a Foundry UI notification, etc.
-             * Note: the example below is always true.
-             *
-             * @param {{ filepath: string }} filepath - Filepath to validate.
-             *
-             * @returns {Promise<boolean>} Is validated?
-             */
-            // onValidate: ({ filepath }) => typeof filepath === 'string'
+            // /**
+            //  * You may provide a validation function to test the selected result. Return false to
+            //  * reject the URL selection. Post a Foundry UI notification, etc.
+            //  * Note: the example below is always true.
+            //  *
+            //  * @param {{ urlString: string }} urlString - URL string to validate.
+            //  *
+            //  * @returns {Promise<boolean>} Is validated?
+            //  */
+            // onValidateURLString: async ({ urlString }) => typeof urlString === 'string'
          }
       },
 

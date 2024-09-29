@@ -3,7 +3,8 @@
 
    import { resizeObserver }           from '#runtime/svelte/action/dom';
    import { TJSApplicationShell }      from '#runtime/svelte/component/core';
-   import { TJSPositionControlLayer }  from '#standard/component'
+
+   import { TJSPositionControlLayer }  from '#standard/component/layer'
 
    import { boxStore, validator }      from './boxStore.js';
 

@@ -6,7 +6,7 @@
    import { TJSDocument }        from '#runtime/svelte/store/fvtt/document';
    import { DynReducerHelper }   from '#runtime/svelte/store/reducer';
 
-   import { TJSInput }           from '#standard/component';
+   import { TJSInput }           from '#standard/component/form';
 
    export let elementRoot;
 

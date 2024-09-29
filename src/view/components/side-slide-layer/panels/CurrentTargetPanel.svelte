@@ -3,9 +3,8 @@
 
    import { ripple }          from '#runtime/svelte/action/animate';
 
-   import {
-      TJSMediaContent,
-      TJSSlotButton }         from '#standard/component';
+   import { TJSSlotButton }   from '#standard/component/button';
+   import { TJSMediaContent } from '#standard/component/media';
 
    onMount(() =>
    {

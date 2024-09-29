@@ -1,5 +1,5 @@
 <script>
-   import { TJSSvgFolder } from '#standard/component';
+   import { TJSSvgFolder } from '#standard/component/folder';
 
    import PosAnimateTo     from './PosAnimateTo.svelte';
    import PosDraggable     from './draggable/PosDraggable.svelte';

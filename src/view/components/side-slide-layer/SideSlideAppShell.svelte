@@ -1,14 +1,13 @@
 <script>
-   import { getContext }            from 'svelte';
+   import { getContext }         from 'svelte';
 
-   import { ApplicationShell }      from '#runtime/svelte/component/core';
+   import { ApplicationShell }   from '#runtime/svelte/component/core';
 
-   import {
-      TJSInput,
-      TJSSideSlideLayer }           from '#standard/component';
+   import { TJSInput }           from '#standard/component/form';
+   import { TJSSideSlideLayer }  from '#standard/component/layer';
 
-   import { createLayerProps }      from './createLayerProps.js';
-   import { createUIData }          from './createUIData.js';
+   import { createLayerProps }   from './createLayerProps.js';
+   import { createUIData }       from './createUIData.js';
 
    export let elementRoot = void 0;
 

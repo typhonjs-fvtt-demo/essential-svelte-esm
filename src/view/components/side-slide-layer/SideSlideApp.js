@@ -1,6 +1,6 @@
 import { SvelteApplication }  from '#runtime/svelte/application';
 
-import { TJSSideSlideLayer }  from '#standard/component';
+import { TJSSideSlideLayer }  from '#standard/component/layer';
 
 import SideSlideAppShell      from './SideSlideAppShell.svelte';
 
