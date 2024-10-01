@@ -1,7 +1,7 @@
 <script>
    import { getContext }         from 'svelte';
 
-   import { ApplicationShell }   from '#runtime/svelte/component/core';
+   import { ApplicationShell }   from '#runtime/svelte/component/application';
 
    import { TJSInput }           from '#standard/component/form';
    import { TJSSideSlideLayer }  from '#standard/component/layer';

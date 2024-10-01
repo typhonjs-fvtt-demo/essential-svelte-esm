@@ -1,5 +1,5 @@
 <script>
-   import { TJSApplicationShell }   from '#runtime/svelte/component/core';
+   import { TJSApplicationShell }   from '#runtime/svelte/component/application';
 
    import { carouselStore }         from './carouselStore.js';
    import Carousel                  from './Carousel.svelte';

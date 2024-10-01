@@ -1,8 +1,7 @@
 <script>
    import { getContext }            from 'svelte';
 
-   import { EmptyApplicationShell } from '#runtime/svelte/component/core';
-
+   import { EmptyApplicationShell } from '#runtime/svelte/component/application';
    import { draggable }             from '#runtime/svelte/store/position';
 
    export let elementRoot = void 0;

@@ -3,7 +3,7 @@
 
    import { ripple }                from '#runtime/svelte/action/animate';
    import { TJSDialog }             from '#runtime/svelte/application';
-   import { ApplicationShell }      from '#runtime/svelte/component/core';
+   import { ApplicationShell }      from '#runtime/svelte/component/application';
 
    import { TJSButton }             from '#standard/component/form';
 

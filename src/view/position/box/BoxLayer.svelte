@@ -2,7 +2,7 @@
    import { getContext }               from 'svelte';
 
    import { resizeObserver }           from '#runtime/svelte/action/dom';
-   import { TJSApplicationShell }      from '#runtime/svelte/component/core';
+   import { TJSApplicationShell }      from '#runtime/svelte/component/application';
 
    import { TJSPositionControlLayer }  from '#standard/component/layer'
 

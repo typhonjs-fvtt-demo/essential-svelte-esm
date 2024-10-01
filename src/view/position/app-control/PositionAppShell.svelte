@@ -2,7 +2,7 @@
    import { getContext }         from 'svelte';
 
    import { applyStyles }        from '#runtime/svelte/action/dom';
-   import { ApplicationShell }   from '#runtime/svelte/component/core';
+   import { ApplicationShell }   from '#runtime/svelte/component/application';
 
    import {
       optionStores,

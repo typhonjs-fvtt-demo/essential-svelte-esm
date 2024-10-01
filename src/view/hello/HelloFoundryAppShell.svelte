@@ -2,7 +2,7 @@
    import { getContext }         from 'svelte';
 
    import { TJSDialog }          from '#runtime/svelte/application';
-   import { ApplicationShell }   from '#runtime/svelte/component/core';
+   import { ApplicationShell }   from '#runtime/svelte/component/application';
 
    export let elementRoot = void 0;
    export let message = void 0;
