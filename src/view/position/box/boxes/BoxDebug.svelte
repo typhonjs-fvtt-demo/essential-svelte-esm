@@ -1,5 +1,5 @@
 <script>
-   import { applyStyles }     from '#runtime/svelte/action/dom';
+   import { applyStyles }     from '#runtime/svelte/action/dom/style';
 
    import { draggableGsap }   from '#runtime/svelte/gsap';
 

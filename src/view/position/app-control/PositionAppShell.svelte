@@ -1,7 +1,7 @@
 <script>
    import { getContext }         from 'svelte';
 
-   import { applyStyles }        from '#runtime/svelte/action/dom';
+   import { applyStyles }        from '#runtime/svelte/action/dom/style';
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
    import {
