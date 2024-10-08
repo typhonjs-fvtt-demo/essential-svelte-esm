@@ -1,8 +1,7 @@
 <script>
    import { onMount }         from 'svelte';
 
-   import { ripple }          from '#runtime/svelte/action/animate';
-
+   import { ripple }          from '#standard/action/animate/ripple';
    import { TJSSlotButton }   from '#standard/component/button';
    import { TJSMediaContent } from '#standard/component/media';
 

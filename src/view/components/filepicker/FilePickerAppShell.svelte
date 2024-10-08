@@ -1,10 +1,10 @@
 <script>
    import { getContext }            from 'svelte';
 
-   import { ripple }                from '#runtime/svelte/action/animate';
    import { TJSDialog }             from '#runtime/svelte/application';
    import { ApplicationShell }      from '#runtime/svelte/component/application';
 
+   import { ripple }                from '#standard/action/animate/ripple';
    import { TJSButton }             from '#standard/component/form';
 
    import FilePickerButtonContent   from './FilePickerButtonContent.svelte';
