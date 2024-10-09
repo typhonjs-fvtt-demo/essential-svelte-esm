@@ -1,5 +1,5 @@
 <script>
-   import { gsapEasingList }  from '#runtime/svelte/gsap';
+   import { gsapEasingList }  from '#runtime/svelte/animate/gsap';
 
    import { boxStore }        from './boxStore.js';
 

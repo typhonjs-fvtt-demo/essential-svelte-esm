@@ -1,7 +1,7 @@
 import { writable }           from 'svelte/store';
 
 import { draggable }          from '#runtime/svelte/store/position';
-import { draggableGsap }      from '#runtime/svelte/gsap';
+import { draggableGsap }      from '#runtime/svelte/animate/gsap';
 
 import OptionsDraggable       from './OptionsDraggable.svelte';
 import OptionsDraggableGsap   from './OptionsDraggableGsap.svelte';
@@ -20,7 +20,7 @@ export const optionComponents = {
  *
  * @type {({
  *    draggable: import('#runtime/svelte/store/position').IDraggableOptions
- *    draggableGsap: import('#runtime/svelte/gsap').IDraggableGsapOptions
+ *    draggableGsap: import('#runtime/svelte/animate/gsap').IDraggableGsapOptions
  * })}
  */
 export const optionStores = {

@@ -1,7 +1,7 @@
 <script>
    import { applyStyles }     from '#runtime/svelte/action/dom/style';
 
-   import { draggableGsap }   from '#runtime/svelte/gsap';
+   import { draggableGsap }   from '#runtime/svelte/animate/gsap';
 
    import { applyPosition }   from '#runtime/svelte/store/position';
 

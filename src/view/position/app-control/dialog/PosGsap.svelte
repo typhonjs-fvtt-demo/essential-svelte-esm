@@ -4,12 +4,12 @@
    import {
       getGsapEasingFunc,
       gsapEasingList,
-      GsapCompose }        from '#runtime/svelte/gsap';
+      GsapCompose }        from '#runtime/svelte/animate/gsap';
 
    // Imports the loading code / automatic GSAP plugin registration.
-   import '#runtime/svelte/gsap/plugin/CustomEase';
-   import '#runtime/svelte/gsap/plugin/MotionPathPlugin';
-   import '#runtime/svelte/gsap/plugin/bonus/CustomWiggle';
+   import '#runtime/svelte/animate/gsap/plugin/CustomEase';
+   import '#runtime/svelte/animate/gsap/plugin/MotionPathPlugin';
+   import '#runtime/svelte/animate/gsap/plugin/bonus/CustomWiggle';
 
    export let position = void 0;
 

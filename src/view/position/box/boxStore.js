@@ -6,15 +6,15 @@ import { TJSPosition }     from '#runtime/svelte/store/position';
 
 import {
    getGsapEasingFunc,
-   GsapCompose }           from '#runtime/svelte/gsap';
+   GsapCompose }           from '#runtime/svelte/animate/gsap';
 
 import { isObject }        from '#runtime/util/object';
 
 // Imports the loading code / automatic GSAP plugin registration.
-import '#runtime/svelte/gsap/plugin/CustomEase';
-import '#runtime/svelte/gsap/plugin/MotionPathPlugin';
-import '#runtime/svelte/gsap/plugin/bonus/CustomWiggle';
-import '#runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
+import '#runtime/svelte/animate/gsap/plugin/CustomEase';
+import '#runtime/svelte/animate/gsap/plugin/MotionPathPlugin';
+import '#runtime/svelte/animate/gsap/plugin/bonus/CustomWiggle';
+import '#runtime/svelte/animate/gsap/plugin/bonus/InertiaPlugin';
 
 // Defines a custom ease w/ the CustomWiggle plugin. This is used below to set a variable amount of wiggle count
 // depending on the duration of the animation; more wiggles the lower the duration.

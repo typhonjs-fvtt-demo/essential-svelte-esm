@@ -1,12 +1,12 @@
 <script>
-   import { gsapEasingList }   from '#runtime/svelte/gsap';
+   import { gsapEasingList }   from '#runtime/svelte/animate/gsap';
    import { slideFade }    from '#runtime/svelte/transition';
 
    // Imports the loading / automatic GSAP plugin registration.
-   import '#runtime/svelte/gsap/plugin/bonus/InertiaPlugin';
+   import '#runtime/svelte/animate/gsap/plugin/bonus/InertiaPlugin';
 
    /**
-    * @type {import('#runtime/svelte/gsap').IDraggableGsapOptions}
+    * @type {import('#runtime/svelte/animate/gsap').IDraggableGsapOptions}
     */
    export let options = void 0;
 
