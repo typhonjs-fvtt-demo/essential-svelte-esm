@@ -1,6 +1,6 @@
 import { writable }              from 'svelte/store';
 
-import { ripple }                from '#standard/action/animate/ripple';
+import { ripple }                from '#standard/action/animate/composable/ripple';
 import { FVTTFilePickerControl } from '#standard/application/filepicker';
 import { TJSContextMenu }        from '#standard/application/menu';
 
