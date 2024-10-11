@@ -3,7 +3,7 @@
 
    import {
       TJSColordPicker,
-      TJSColordPickerSavedColors }  from '#standard/component/color/picker';
+      TJSColordPickerSavedColors }  from '#standard/component/color/picker-colord';
 
    export let elementRoot = void 0;
 
