@@ -10,7 +10,7 @@
 
    const { application } = getContext('#external');
 
-   const storageStore = application.reactive.sessionStorage.getStore(sessionConstants.appState);
+   const storageStore = application.reactive.sessionStorage.getStore(sessionConstants.appStateClient);
 
    // Application position store reference. Stores need to be a top level variable to be accessible for reactivity.
    const position = application.position;
