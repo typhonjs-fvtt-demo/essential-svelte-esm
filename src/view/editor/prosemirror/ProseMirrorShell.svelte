@@ -1,10 +1,7 @@
 <script>
-   import { ApplicationShell }   from '#runtime/svelte/component/core';
+   import { ApplicationShell }   from '#runtime/svelte/component/application';
 
-   import { TJSProseMirror }     from '#standard/component';
-
-   // Not always necessary, but you can use DOMPurify to sanitize user input client side.
-   // import { DOMPurify }          from '#runtime/dompurify';
+   import { TJSProseMirror }     from '#standard/component/fvtt/editor';
 
    export let elementRoot = void 0;
 
@@ -42,8 +39,6 @@
       // button: true      // Show edit button to launch editor when hovered; when false editor is open by default.
       // classes: ['foo', 'bar'],   // Adds additional classes to `.tjs-editor` element.
       // clickToEdit: false,  // Clicking editor content initializes the editor; hides the edit button.
-      // DOMPurify,        // You can pass DOMPurify from `#runtime/dompurify though ProseMirror does
-                           // essential client side sanitation; IE stripping `<script>` tags, etc.
       // editable: true,   // Explicitly enable / disable editing; default: user is GM or when a document is
                            // assigned the user has ownership.
       // enrichContent: true  // The default is true, but if you set it to false content is not enriched.
@@ -51,6 +46,8 @@
 
       // initialSelection: 'start', // The initial selection / cursor position: 'all', 'end', or 'start'.
       // keyCode: 'Enter',    // Defines the key event code to activate the editor when focused.
+
+      // menuCompact: false,  // Initialize the ProseMirror editor w/ a compact menu (sans font selection).
 
       // styles: { '--tjs-editor-toolbar-background': 'red' } // Apply any inline styles / CSS variables
    };
