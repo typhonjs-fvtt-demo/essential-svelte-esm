@@ -73,7 +73,7 @@
       {
          newTargets.push({
             uuid: target?.document?.uuid,
-            filepath: target?.texture?.baseTexture?.resource?.src,
+            url: target?.texture?.baseTexture?.resource?.src,
             title: target?.document?.name,
          });
       }
