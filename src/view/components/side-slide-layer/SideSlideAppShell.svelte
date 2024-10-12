@@ -4,7 +4,7 @@
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
    import { TJSInput }           from '#standard/component/form';
-   import { TJSSideSlideLayer }  from '#standard/component/layer';
+   import { TJSSideSlideLayer }  from '#standard/component/layer/side-slide';
 
    import { createLayerProps }   from './createLayerProps.js';
    import { createUIData }       from './createUIData.js';
