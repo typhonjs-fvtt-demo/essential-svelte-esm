@@ -68,7 +68,7 @@
 
    <!-- Note: `on:keydown|stopPropagation={() => null}` stops key event propagation from `main`. -->
 
-   <!-- THIS IS A DEMO / DESIGN BETTER A11Y SUPPORT IN YOUR COMPONENTS -->
+   <!-- THIS IS A DEMO / DESIGN BETTER A11Y SUPPORT IN YOUR COMPONENTS / NOT MOBILE FRIENDLY -->
    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
    <!-- svelte-ignore a11y-click-events-have-key-events -->
