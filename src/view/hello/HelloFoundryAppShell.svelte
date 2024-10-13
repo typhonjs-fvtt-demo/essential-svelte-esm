@@ -51,7 +51,6 @@
       <label>
          Message:&nbsp;<input bind:value={message}>
       </label>
-      <br>
       <label>
          Change title:&nbsp;<input bind:value={$storeTitle}>
       </label>
@@ -75,6 +74,7 @@
       text-align: center;
       display: flex;
       flex-direction: column;
+      gap: 0.5rem;
 
       button, div.bottom {
          margin-top: auto;
