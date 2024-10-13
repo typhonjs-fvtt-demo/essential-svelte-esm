@@ -9,14 +9,13 @@ export default class TinykeysApp extends SvelteApplication
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'trl-actions-tinykeys',
          classes: ['tjs-essential-svelte-esm'],
-         title: 'Tinykeys Demo',
-         resizable: true,
+         title: 'EssentialESM.apps.use-tinykeys.title',
          height: '200px',
-         width: '300px',
+         width: '400px',
 
          svelte: {
             class: TinykeysAppShell,
-            target: document.body,
+            target: document.body
          }
       });
    }
