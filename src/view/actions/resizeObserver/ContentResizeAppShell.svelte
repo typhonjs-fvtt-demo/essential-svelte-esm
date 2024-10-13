@@ -1,4 +1,18 @@
 <script>
+   /**
+    * An advanced use case for the `resizeObserver` action which can be added to an element to monitor size changes.
+    *
+    * `resizeObserver` is added to the `main` element to control the SvelteApplication position state / minimum width
+    * such that the app window can not be reduced to below width of the content contained in the main app element. Use
+    * the `add` / `remove` / `removeAll` buttons to add demo elements to the main content element increasing / reducing
+    * the size and notice that you can't resize the app to less than the content width.
+    *
+    * Besides `resizeObserver` an example of `propertyStore` shows how to create a store for an individual property from
+    * a store containing an object.
+    *
+    * @componentDescription
+    */
+
    import { getContext}          from 'svelte';
    import { writable }           from 'svelte/store';
 
@@ -7,9 +21,11 @@
 
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
+   // ApplicationShell contract.
    export let elementRoot = void 0;
 
    // Creates a store with object properties set by `resizeObserver` action.
+   // In this case we only care about `offsetWidth`.
    const storeResizeObserved = writable({ offsetWidth: 0 });
 
    // A property store which only updates with `offsetWidth` of `storeResizeObserved` changes.
@@ -42,6 +58,10 @@
          <button on:click={items.add}>Add</button>
          <button on:click={items.remove}>Remove</button>
          <button on:click={items.removeAll}>Remove All</button>
+      </section>
+
+      <section>
+         Main element width: {`${Math.round($storeMainWidth)}px`}
       </section>
 
       <!-- Show items when available extending `main` element width. -->

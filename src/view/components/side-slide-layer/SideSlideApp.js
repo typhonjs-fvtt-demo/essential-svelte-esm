@@ -75,7 +75,7 @@ export default class SideSlideApp extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'trl-side-slide-layer-esm',
-         title: 'EssentialESM.apps.side-slide-layer.title',
+         title: 'EssentialESM.apps.components.side-slide-layer.title',
          classes: ['tjs-essential-svelte-esm'],
          resizable: false,
          width: 500,
