@@ -6,12 +6,12 @@
 
    import { applyPosition }   from '#runtime/svelte/store/position';
 
-   import { boxStore }        from '../boxStore.js';
+   import { boxStore }        from '../store/boxStore.js';
 
-   /** @type {import('../boxStore').BoxData} */
+   /** @type {import('../store/boxStore').BoxData} */
    export let box = void 0;
 
-   const labels = boxStore.labels;
+   const labels = boxStore.stores.labels;
    const transform = box.position.stores.transform;
 
    // This is run once when the component is created. It sets the position width / height to 'auto'.

@@ -1,21 +1,19 @@
 <script>
    import { gsapEasingList }  from '#runtime/svelte/animate/gsap';
 
-   import { boxStore }        from './boxStore.js';
+   import { boxStore }        from './store/boxStore.js';
 
    export let controls = void 0;
 
-   const storeStagger = boxStore.stagger;
+   const storeStagger = boxStore.animate.stores.stagger;
+   const storeDuration = boxStore.animate.stores.duration;
+   const storeEase = boxStore.animate.stores.ease;
 
-   const storeAuto = boxStore.auto;
-   const storeDebug = boxStore.debug;
-   const storeLabels = boxStore.labels;
-   const storePCL = boxStore.pclEnabled;
-
-   const storeDuration = boxStore.duration;
-   const storeEase = boxStore.ease;
-
-   const storeValidator = boxStore.validator;
+   const storeAuto = boxStore.stores.auto;
+   const storeDebug = boxStore.stores.debug;
+   const storeLabels = boxStore.stores.labels;
+   const storePCL = boxStore.stores.pclEnabled;
+   const storeValidator = boxStore.stores.validatorEnabled;
 </script>
 
 <div class="header flex">
@@ -27,16 +25,16 @@
          <button on:click={() => boxStore.removeAll()}>Remove All</button>
       </div>
       <div class=group>
-         <button on:click={() => boxStore.animateToLocation()}>AnimateTo Location</button>
-         <button on:click={() => boxStore.animateToScaleRot()}>Scale / Rotation</button>
-         <button on:click={() => boxStore.animateToCancel()}><i class="fas fa-stop"></i></button>
+         <button on:click={() => boxStore.animate.position.toLocation()}>AnimateTo Location</button>
+         <button on:click={() => boxStore.animate.position.toScaleRot()}>Scale / Rotation</button>
+         <button on:click={() => boxStore.animate.position.cancel()}><i class="fas fa-stop"></i></button>
       </div>
       <div class=group>
-         <button on:click={() => boxStore.gsapTimelineCreate()}>New Timeline</button>
-         <button on:click={() => boxStore.gsapTimelinePlay()}><i class="fas fa-play"></i></button>
-         <button on:click={() => boxStore.gsapTimelineReverse()}><i class="fas fa-backward"></i></button>
-         <button on:click={() => boxStore.gsapTimelinePause()}><i class="fas fa-pause"></i></button>
-         <button on:click={() => boxStore.gsapTimelineRestart()}><i class="fas fa-arrow-left"></i></button>
+         <button on:click={() => boxStore.animate.gsap.timelineCreate()}>New Timeline</button>
+         <button on:click={() => boxStore.animate.gsap.timelinePlay()}><i class="fas fa-play"></i></button>
+         <button on:click={() => boxStore.animate.gsap.timelineReverse()}><i class="fas fa-backward"></i></button>
+         <button on:click={() => boxStore.animate.gsap.timelinePause()}><i class="fas fa-pause"></i></button>
+         <button on:click={() => boxStore.animate.gsap.timelineRestart()}><i class="fas fa-arrow-left"></i></button>
          <span style="transform: scale(0.75)"><label><input type=checkbox bind:checked={$storeStagger}>Stagger</label></span>
       </div>
    </div>

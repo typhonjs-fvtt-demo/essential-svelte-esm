@@ -6,7 +6,7 @@
 
    import { TJSPositionControlLayer }  from '#standard/component/layer/position';
 
-   import { boxStore, validator }      from './boxStore.js';
+   import { boxStore }                 from './store/boxStore.js';
 
    import AutoBox                      from './boxes/AutoBox.svelte';
    import AutoBoxDebug                 from './boxes/AutoBoxDebug.svelte';
@@ -20,10 +20,10 @@
 
    const storeMinimized = application.reactive.storeUIState.minimized;
 
-   const storeAuto = boxStore.auto;
-   const storeDebug = boxStore.debug;
-   const storeValidator = boxStore.validator;
-   const storePCL = boxStore.pclEnabled;
+   const storeAuto = boxStore.stores.auto;
+   const storeDebug = boxStore.stores.debug;
+   const storePCL = boxStore.stores.pclEnabled;
+   const storeValidator = boxStore.stores.validatorEnabled;
 
    let component;
    let controls;
@@ -37,7 +37,7 @@
         $storeDebug ? BoxDebug : Box;
    }
 
-   $: validator.enabled = $storeValidator;
+   $: boxStore.validator.enabled = $storeValidator;
 
    function setDimension(offsetWidth, offsetHeight)
    {
@@ -51,7 +51,7 @@
       // closing can cause a loop in the Svelte runtime. This can happen occasionally, so just avoid it entirely.
       if (!application.rendered) { return; }
 
-      validator.setDimension(offsetWidth, offsetHeight);
+      boxStore.validator.setDimension(offsetWidth, offsetHeight);
 
       boundingRect.width = offsetWidth;
       boundingRect.height = offsetHeight;
