@@ -1,6 +1,8 @@
 <script>
-   import { slideFade } from '#runtime/svelte/transition';
+   import { slideFade }    from '#runtime/svelte/transition';
 
+   import { rippleFocus }  from '#standard/action/animate/composable/ripple';
+   import { TJSInput }     from '#standard/component/form';
 
    export let filepath = void 0;
 
@@ -22,17 +24,22 @@
    $: visible = typeof $filepath === 'string' && $filepath.toLowerCase().endsWith('webm');
 </script>
 
-{#if visible}
+ {#if visible}
    <div transition:slideFade={{ duration: 100 }}>
-      <input type=range step="0.01" min=0 max=4 bind:value={videoPlaybackRate} />
-      <input type=checkbox bind:checked={videoPlayOnHover} />
+      <TJSInput type={'range'} label={'Playback rate:'} store={videoPlaybackRate} min={0.1} max={4} step={0.01} efx={rippleFocus()} />
+      <TJSInput type={'number'} store={videoPlaybackRate} step={0.01} efx={rippleFocus()} />
+      <TJSInput type={'checkbox'} label={'Play on hover:'} store={videoPlayOnHover} />
    </div>
-{/if}
+ {/if}
 
 <style>
    div {
       display: flex;
       align-items: center;
+      gap: 0.5em;
+
+      --tjs-input-number-width: fit-content;
+      --tjs-input-number-text-align: center;
 
       background: var(--tjs-input-background);
       border: var(--tjs-input-border);

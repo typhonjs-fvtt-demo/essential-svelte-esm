@@ -1,17 +1,17 @@
 <script>
    import { onDestroy }             from 'svelte';
+   import { writable }              from 'svelte/store';
 
-   import { rippleFocus }           from '#runtime/svelte/action/animate';
-
-   import { FVTTFilePickerControl } from '#standard/application';
-
-   import { TJSInput }              from '#standard/component';
+   import { rippleFocus }           from '#standard/action/animate/composable/ripple';
+   import { FVTTFilePickerControl } from '#standard/application/control/filepicker';
+   import { TJSInput }              from '#standard/component/form';
 
    import {
       TJSFileButton,
       TJSFileIconButton,
-      TJSFileSlotButton,
-      TJSMediaContent }             from '#standard/component/fvtt';
+      TJSFileSlotButton }           from '#standard/component/fvtt/filepicker/button';
+
+   import { TJSMediaContent }       from '#standard/component/media';
 
    import MediaControls             from './MediaControls.svelte';
 
@@ -31,13 +31,14 @@
 
    // Provides default options shared by all TJSInput components.
    const input = {
+      disabled: !FVTTFilePickerControl.canBrowse,
       efx: rippleFocus(),  // This adds the material design ripple focus effect.
       readonly: true       // Input is read only.
    }
 
    // Variables bound to TJSMediaContent and local MediaControls components.
-   let videoPlayOnHover = false;
-   let videoPlaybackRate = 1;
+   let videoPlayOnHover = writable(false);
+   let videoPlaybackRate = writable(1);
 </script>
 
 <main>
@@ -70,7 +71,10 @@
       <TJSInput {input} label={'Standard:'} store={buttons[5].pickerOptions.store} />
       <TJSFileSlotButton button={buttons[5]}>
          <!-- Uses the 'filepath' context / store from TJSFileSlotButton to display an image -->
-         <TJSMediaContent bind:videoPlaybackRate bind:videoPlayOnHover />
+         <TJSMediaContent
+            bind:videoPlaybackRate={$videoPlaybackRate}
+            bind:videoPlayOnHover={$videoPlayOnHover}
+            urlDefault={'icons/svg/mystery-man.svg'} />
       </TJSFileSlotButton>
 
       <MediaControls bind:videoPlaybackRate bind:videoPlayOnHover filepath={buttons[5].pickerOptions.store} />
@@ -83,7 +87,7 @@
       --tjs-media-content-diameter: 75px;
 
       /* Uncomment to see what the ripple effect looks like w/ a color gradient. */
-      /*--tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );*/
+      --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
    }
 
    h3 {
