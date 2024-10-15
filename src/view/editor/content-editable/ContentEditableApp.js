@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import ContentEditableShell   from './ContentEditableShell.svelte';
 
-export default class ContentEditableApp extends SvelteApplication
+export class ContentEditableApp extends SvelteApplication
 {
    /**
     * Default Application options

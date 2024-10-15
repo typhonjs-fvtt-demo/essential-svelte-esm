@@ -1,7 +1,7 @@
 <script>
    import { scale }                 from 'svelte/transition';
 
-   import { TJSApplicationShell }   from '#runtime/svelte/component/core';
+   import { TJSApplicationShell }   from '#runtime/svelte/component/application';
 
    export let elementRoot = void 0;
    export let buttons = void 0;

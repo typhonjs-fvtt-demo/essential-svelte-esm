@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import HelloFoundryAppShell   from './HelloFoundryAppShell.svelte';
 
-export default class HelloFoundryApplication extends SvelteApplication
+export class HelloFoundryApplication extends SvelteApplication
 {
    /**
     * Default Application options

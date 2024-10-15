@@ -6,7 +6,7 @@ import ProgressBar            from './ProgressBar.svelte';
 
 import { sessionConstants }   from '../../constants.js';
 
-export default class HeaderButtonsApplication extends SvelteApplication
+export class HeaderButtonsApplication extends SvelteApplication
 {
    /**
     * Default Application options

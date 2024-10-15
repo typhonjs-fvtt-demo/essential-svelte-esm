@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import BoxLayer               from './BoxLayer.svelte';
 
-export default class PositionBoxApplication extends SvelteApplication
+export class PositionBoxApplication extends SvelteApplication
 {
    /**
     * Default Application options

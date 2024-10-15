@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import ColorPickerAppShell    from './ColorPickerAppShell.svelte';
 
-export default class ColorPickerApp extends SvelteApplication
+export class ColorPickerApp extends SvelteApplication
 {
    /**
     * Default Application options

@@ -1,30 +1,33 @@
 import {
    SvelteApplication,
-   TJSDialog }                   from '#runtime/svelte/application';
+   TJSDialog }                      from '#runtime/svelte/application';
 
-import { BrowserSupports }       from '#runtime/util/browser';
+import { BrowserSupports }          from '#runtime/util/browser';
 
-import MenuAppShell              from './MenuAppShell.svelte';
+import MenuAppShell                 from './MenuAppShell.svelte';
 
-import AppStateClientSettingApp  from './app-state/client-setting/AppStateClientSettingApp.js';
-import AppStateSessionApp        from './app-state/session-storage/AppStateSessionApp.js';
-import ChatDialogContent         from './chatmessage/ChatDialogContent.svelte';
-import ColorPickerApp            from './components/color/ColorPickerApp.js';
-import ContentEditableApp        from './editor/content-editable/ContentEditableApp.js';
-import BasicDocumentApp          from './document/basic/BasicDocumentApp.js';
-import EmbeddedDocApplication    from './document/embedded-collection/EmbeddedDocApplication.js';
-import FilePickerApp             from './components/filepicker/FilePickerApp.js';
-import HeaderButtonsApplication  from './header-buttons/HeaderButtonsApplication.js';
-import HelloFoundryApplication   from './hello/HelloFoundryApplication.js';
-import PositionApplication       from './position/app-control/PositionApplication.js';
-import PositionBasicOverlayApp   from './position/basic-overlay/PositionBasicOverlayApp.js';
-import PositionBoxApplication    from './position/box/PositionBoxApplication.js';
-import PositionCarouselApp       from './position/carousel/PositionCarouselApp.js';
-import ProseMirrorApp            from './editor/prosemirror/ProseMirrorApp.js';
-import SideSlideApp              from './components/side-slide-layer/SideSlideApp.js';
-import TinyMCEApp                from './editor/tinymce/TinyMCEApp.js';
+import ChatDialogContent            from './chatmessage/ChatDialogContent.svelte';
 
-export default class MenuApplication extends SvelteApplication
+import { TinykeysApp }              from './actions/useTinykeys/TinykeysApp.js';
+import { ContentResizeApp }         from './actions/resizeObserver/ContentResizeApp.js';
+import { AppStateClientSettingApp } from './app-state/client-setting/AppStateClientSettingApp.js';
+import { AppStateSessionApp }       from './app-state/session-storage/AppStateSessionApp.js';
+import { ColorPickerApp }           from './components/color/ColorPickerApp.js';
+import { ContentEditableApp }       from './editor/content-editable/ContentEditableApp.js';
+import { BasicDocumentApp }         from './document/basic/BasicDocumentApp.js';
+import { EmbeddedDocApplication }   from './document/embedded-collection/EmbeddedDocApplication.js';
+import { FilePickerApp }            from './components/filepicker/FilePickerApp.js';
+import { HeaderButtonsApplication } from './header-buttons/HeaderButtonsApplication.js';
+import { HelloFoundryApplication }  from './hello/HelloFoundryApplication.js';
+import { PositionApplication }      from './position/app-control/PositionApplication.js';
+import { PositionBasicOverlayApp }  from './position/basic-overlay/PositionBasicOverlayApp.js';
+import { PositionBoxApplication }   from './position/box/PositionBoxApplication.js';
+import { PositionCarouselApp }      from './position/carousel/PositionCarouselApp.js';
+import { ProseMirrorApp }           from './editor/prosemirror/ProseMirrorApp.js';
+import { SideSlideApp }             from './components/side-slide-layer/SideSlideApp.js';
+import { TinyMCEApp }               from './editor/tinymce/TinyMCEApp.js';
+
+export class MenuApplication extends SvelteApplication
 {
    /**
     * Default Application options
@@ -59,7 +62,9 @@ export default class MenuApplication extends SvelteApplication
          { title: 'TinyMCE', class: TinyMCEApp },
          { title: 'ProseMirror', class: ProseMirrorApp },
          { title: 'Side Slide Layer', class: SideSlideApp },
-         { title: 'File Picker', class: FilePickerApp }
+         { title: 'File Picker', class: FilePickerApp },
+         { title: 'Tinykeys Demo', class: TinykeysApp },
+         { title: 'Content Resize Demo', class: ContentResizeApp }
       ];
 
       // Add TJSColordPicker component demo if browser supports container queries.

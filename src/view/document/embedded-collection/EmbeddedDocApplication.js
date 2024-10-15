@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import EmbeddedDocAppShell    from './EmbeddedDocAppShell.svelte';
 
-export default class EmbeddedDocApplication extends SvelteApplication
+export class EmbeddedDocApplication extends SvelteApplication
 {
    /**
     * Default Application options

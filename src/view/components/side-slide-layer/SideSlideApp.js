@@ -12,7 +12,7 @@ import {
 
 import { gameSettings }       from '#gameSettings';
 
-export default class SideSlideApp extends SvelteApplication
+export class SideSlideApp extends SvelteApplication
 {
    /**
     * Stores the TJSSideSlideLayer instance that is mounted to `#ui-middle`.

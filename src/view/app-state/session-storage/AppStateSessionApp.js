@@ -4,7 +4,7 @@ import SessionAppShell        from './SessionAppShell.svelte';
 
 import { sessionConstants }   from '../../../constants.js';
 
-export default class AppStateSessionApp extends SvelteApplication
+export class AppStateSessionApp extends SvelteApplication
 {
    constructor(options)
    {

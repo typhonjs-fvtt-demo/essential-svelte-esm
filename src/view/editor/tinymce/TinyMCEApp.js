@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import TinyMCEShell           from './TinyMCEShell.svelte';
 
-export default class TinyMCEApp extends SvelteApplication
+export class TinyMCEApp extends SvelteApplication
 {
    /**
     * Default Application options

@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import ProseMirrorShell       from './ProseMirrorShell.svelte';
 
-export default class ProseMirrorApp extends SvelteApplication
+export class ProseMirrorApp extends SvelteApplication
 {
    /**
     * Default Application options

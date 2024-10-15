@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import CarouselAppShell       from './CarouselAppShell.svelte';
 
-export default class PositionBoxApplication extends SvelteApplication
+export class PositionCarouselApp extends SvelteApplication
 {
    /**
     * Default Application options

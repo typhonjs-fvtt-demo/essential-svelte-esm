@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import BasicDocAppShell       from './BasicDocAppShell.svelte';
 
-export default class BasicDocumentApp extends SvelteApplication
+export class BasicDocumentApp extends SvelteApplication
 {
    /**
     * Default Application options

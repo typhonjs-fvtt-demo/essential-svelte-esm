@@ -8,7 +8,7 @@ import {
 
 import { gameSettings }       from '#gameSettings';
 
-export default class AppStateClientSettingApp extends SvelteApplication
+export class AppStateClientSettingApp extends SvelteApplication
 {
    constructor(options)
    {

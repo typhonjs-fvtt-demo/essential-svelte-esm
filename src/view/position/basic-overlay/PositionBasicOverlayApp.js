@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import Overlay                from './Overlay.svelte';
 
-export default class PositionBasicOverlayApp extends SvelteApplication
+export class PositionBasicOverlayApp extends SvelteApplication
 {
    /**
     * Default Application options

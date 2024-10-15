@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import FilePickerAppShell    from './FilePickerAppShell.svelte';
 
-export default class FilePickerApp extends SvelteApplication
+export class FilePickerApp extends SvelteApplication
 {
    /**
     * Default Application options

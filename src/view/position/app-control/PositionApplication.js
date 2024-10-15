@@ -7,7 +7,7 @@ import {
 import PositionAppShell    from './PositionAppShell.svelte';
 import DialogContent       from './dialog/DialogContent.svelte';
 
-export default class PositionApplication extends SvelteApplication
+export class PositionApplication extends SvelteApplication
 {
    /** @type {Application} */
    #dialog;
