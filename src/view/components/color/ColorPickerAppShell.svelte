@@ -9,6 +9,7 @@
 
    const options = {
       addons: [TJSColordPickerSavedColors],
+      disabled: false,
       format: 'hsl',
       formatType: 'string',
       hasAddons: true,
@@ -20,19 +21,6 @@
       precision: 0,
       width: 80
    };
-
-   // let color = '#ff0000';
-   // let color = 'rgba(255, 50, 50, 0.5)';
-   // let color = 'hsla(240, 50%, 100%, 0.5)';
-   // let color = { h: 180, s: 100, v: 100, a: 0.35 };
-
-   // let color = 'hsla(-0.25turn 50% 100% / 0.5)';
-   // let color = 'hsla(-0.25456565656turn 99.456546456456% 50% / 0.5)';
-
-   // let color = 'hsl(240, 100%, 50%, 0.5)';
-   // let color = 'hsla(240, 50%, 99%, 0.5)';
-
-   // let color = void 0;
 
    let color = 'hsl(240 100% 50% / 0.5)';
 </script>
@@ -50,6 +38,7 @@
          <label class=centered>Enable Alpha:<input type=checkbox bind:checked={options.hasAlpha}></label>
          <label class=centered>Lock Text Format:<input type=checkbox bind:checked={options.lockTextFormat}></label>
          <label class=centered>Popup:<input type=checkbox bind:checked={options.isPopup}></label>
+         <label class=centered>Disabled:<input type=checkbox bind:checked={options.disabled}></label>
       </section>
 
       <section class=styled>
@@ -77,7 +66,6 @@
 
       <section>
          <TJSColordPicker bind:color options={options} />
-         <!--      <TJSColordPicker bind:color options={options} />-->
       </section>
    </div>
 </ApplicationShell>
