@@ -2,7 +2,7 @@ import { SvelteApplication }  from '#runtime/svelte/application';
 
 import SessionAppShell        from './SessionAppShell.svelte';
 
-import { sessionConstants }   from '../../../constants.js';
+import { sessionConstants }   from '#constants';
 
 export class AppStateSessionApp extends SvelteApplication
 {

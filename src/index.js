@@ -1,9 +1,4 @@
-import MenuApplication from './view/MenuApplication.js';
-
-// You only need to include this if you would like to use the TRL TinyMCE oEmbed plugin for video embeds.
-import '#runtime/tinymce';
-
-import './chatmessage.js';    // Loads the hooks specific to the chat message demo.
+import { MenuApplication } from './view/MenuApplication.js';
 
 import '../styles/init.scss'; // Import any styles as this includes them in the build.
 
@@ -13,5 +8,5 @@ import '../styles/init.scss'; // Import any styles as this includes them in the 
 Hooks.once('ready', () =>
 {
    const sidebarRect = document.querySelector('#sidebar').getBoundingClientRect();
-   new MenuApplication({ left: sidebarRect.x - 235, top: sidebarRect.y }).render(true, { focus: true });
+   new MenuApplication({ left: sidebarRect.x - 285, top: sidebarRect.y }).render(true, { focus: true });
 });

@@ -1,31 +1,40 @@
 import {
    SvelteApplication,
-   TJSDialog }                      from '#runtime/svelte/application';
+   TJSDialog }                from '#runtime/svelte/application';
 
-import { BrowserSupports }          from '#runtime/util/browser';
+import MenuAppShell           from './MenuAppShell.svelte';
 
-import MenuAppShell                 from './MenuAppShell.svelte';
+import { ChatDialogContent }  from './foundry/sidebar';
 
-import ChatDialogContent            from './chatmessage/ChatDialogContent.svelte';
+import {
+   ColorPickerApp,
+   FilePickerApp,
+   SideSlideApp }             from './standard-components';
 
-import { TinykeysApp }              from './actions/useTinykeys/TinykeysApp.js';
-import { ContentResizeApp }         from './actions/resizeObserver/ContentResizeApp.js';
-import { AppStateClientSettingApp } from './app-state/client-setting/AppStateClientSettingApp.js';
-import { AppStateSessionApp }       from './app-state/session-storage/AppStateSessionApp.js';
-import { ColorPickerApp }           from './components/color/ColorPickerApp.js';
-import { ContentEditableApp }       from './editor/content-editable/ContentEditableApp.js';
-import { BasicDocumentApp }         from './document/basic/BasicDocumentApp.js';
-import { EmbeddedDocApplication }   from './document/embedded-collection/EmbeddedDocApplication.js';
-import { FilePickerApp }            from './components/filepicker/FilePickerApp.js';
-import { HeaderButtonsApplication } from './header-buttons/HeaderButtonsApplication.js';
-import { HelloFoundryApplication }  from './hello/HelloFoundryApplication.js';
-import { PositionApplication }      from './position/app-control/PositionApplication.js';
-import { PositionBasicOverlayApp }  from './position/basic-overlay/PositionBasicOverlayApp.js';
-import { PositionBoxApplication }   from './position/box/PositionBoxApplication.js';
-import { PositionCarouselApp }      from './position/carousel/PositionCarouselApp.js';
-import { ProseMirrorApp }           from './editor/prosemirror/ProseMirrorApp.js';
-import { SideSlideApp }             from './components/side-slide-layer/SideSlideApp.js';
-import { TinyMCEApp }               from './editor/tinymce/TinyMCEApp.js';
+import {
+   ContentEditableApp,
+   ProseMirrorApp,
+   TinyMCEApp }               from './standard-components/editor';
+
+import {
+   ContentResizeApp,
+   TinykeysApp }              from './svelte-actions';
+
+import {
+   AppStateClientSettingApp,
+   AppStateSessionApp,
+   HeaderButtonsApplication,
+   HelloFoundryApplication }  from './svelte-application';
+
+import {
+   BasicDocumentApp,
+   EmbeddedDocApplication }   from './tjsdocument';
+
+import {
+   PositionApplication,
+   PositionBasicOverlayApp,
+   PositionBoxApplication,
+   PositionCarouselApp }      from './tjsposition';
 
 export class MenuApplication extends SvelteApplication
 {
@@ -37,50 +46,13 @@ export class MenuApplication extends SvelteApplication
     */
    static get defaultOptions()
    {
-      /** @type {{}[]} */
-      const buttons = [
-         { title: 'Hello Foundry', class: HelloFoundryApplication },
-         { title: 'Header Buttons', class: HeaderButtonsApplication },
-         { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
-         { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication },
-         { title: 'Chat Message', onPress: () => new TJSDialog(
-             {
-                title: 'Essential Svelte (ESM) - Chat Message',
-                content: ChatDialogContent
-             }, {
-                id: 'essential-esm-chat-dialog',
-                classes: ['tjs-essential-svelte-esm']
-             })
-         },
-         { title: 'Position (Basic Overlay)', class: PositionBasicOverlayApp },
-         { title: 'Position (App)', class: PositionApplication },
-         { title: 'Position (Box)', class: PositionBoxApplication },
-         { title: 'Position (Carousel)', class: PositionCarouselApp },
-         { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
-         { title: 'App State (Session Storage)', class: AppStateSessionApp },
-         { title: 'Content Editable', class: ContentEditableApp },
-         { title: 'TinyMCE', class: TinyMCEApp },
-         { title: 'ProseMirror', class: ProseMirrorApp },
-         { title: 'Side Slide Layer', class: SideSlideApp },
-         { title: 'File Picker', class: FilePickerApp },
-         { title: 'Tinykeys Demo', class: TinykeysApp },
-         { title: 'Content Resize Demo', class: ContentResizeApp }
-      ];
-
-      // Add TJSColordPicker component demo if browser supports container queries.
-      if (BrowserSupports.containerQueries)
-      {
-         buttons.push({ title: 'Color Picker', class: ColorPickerApp });
-      }
-
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: 'essential-svelte-esm',
          classes: ['tjs-essential-svelte-esm'],
          headerButtonNoClose: true,
          resizable: false,
-         minimizable: true,
          popOut: false,
-         width: 225,
+         width: 275,
          height: 'auto',
          positionOrtho: false,
          transformOrigin: null,
@@ -92,9 +64,82 @@ export class MenuApplication extends SvelteApplication
             target: document.body,
             intro: true,
             props: {
-               buttons
+               sections: this.#createSections()
             }
          }
       });
+   }
+
+   /**
+    * @returns {{}[]} Section / entry data for demo menu display.
+    */
+   static #createSections()
+   {
+      const sections = [
+         {
+            title: 'SvelteApplication',
+            entries: [
+               { title: 'Hello Foundry', class: HelloFoundryApplication },
+               { title: 'Header Buttons', class: HeaderButtonsApplication },
+               { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
+               { title: 'App State (Session Storage)', class: AppStateSessionApp },
+            ]
+         },
+         {
+            title: 'TJSDocument',
+            entries: [
+               { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
+               { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication },
+            ]
+         },
+         {
+            title: 'TJSPosition',
+            entries: [
+               { title: 'Empty App / Basic Overlay', class: PositionBasicOverlayApp },
+               { title: 'App Control / Animation', class: PositionApplication },
+               { title: 'Box Demo / Element Control', class: PositionBoxApplication },
+               { title: '3D Carousel', class: PositionCarouselApp }
+            ]
+         },
+         {
+            title: 'Standard Components',
+            entries: [
+               { title: 'Color Picker', class: ColorPickerApp },
+               { title: 'File Picker Buttons', class: FilePickerApp },
+               { title: 'Side Slide Layer', class: SideSlideApp },
+            ]
+         },
+         {
+            title: 'Standard Components (Editor)',
+            entries: [
+               { title: 'Content Editable', class: ContentEditableApp },
+               { title: 'TinyMCE', class: TinyMCEApp },
+               { title: 'ProseMirror', class: ProseMirrorApp },
+            ]
+         },
+         {
+            title: 'Svelte Actions',
+            entries: [
+               { title: '`useTinykeys` / Tinykeys', class: TinykeysApp },
+               { title: '`resizeObserver` / Content Min Resize', class: ContentResizeApp }
+            ]
+         },
+         {
+            title: 'Foundry (Sidebar)',
+            entries: [
+               { title: 'Chat Message', onPress: () => new TJSDialog(
+                   {
+                      title: 'Essential Svelte (ESM) - Chat Message',
+                      content: ChatDialogContent
+                   }, {
+                      id: 'essential-esm-chat-dialog',
+                      classes: ['tjs-essential-svelte-esm']
+                   })
+               }
+            ]
+         }
+      ];
+
+      return sections;
    }
 }

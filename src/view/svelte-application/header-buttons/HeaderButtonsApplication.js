@@ -4,7 +4,7 @@ import HeaderButtonsAppShell  from './HeaderButtonsAppShell.svelte';
 import TestSCComponent        from './TestSCComponent.svelte';
 import ProgressBar            from './ProgressBar.svelte';
 
-import { sessionConstants }   from '../../constants.js';
+import { sessionConstants }   from '#constants';
 
 export class HeaderButtonsApplication extends SvelteApplication
 {

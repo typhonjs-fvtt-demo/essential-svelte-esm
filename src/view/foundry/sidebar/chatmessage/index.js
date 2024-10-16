@@ -1,4 +1,6 @@
-import MyChatMessage   from './view/chatmessage/MyChatMessage.svelte';
+import MyChatMessage                      from './MyChatMessage.svelte';
+
+export { default as ChatDialogContent }   from './ChatDialogContent.svelte';
 
 /**
  * The following hooks & code support the chat message / Svelte component mounting demo found in
