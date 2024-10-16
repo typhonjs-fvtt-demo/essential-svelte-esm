@@ -5,8 +5,20 @@
         "title": "Essential Svelte (ESM)"
       },
 
-      "side-slide-layer": {
-        "title": "Side Slide Layer"
+      "actions": {
+        "content-resize-observer": {
+          "title": "Content Resize Observer"
+        },
+
+        "use-tinykeys": {
+          "title": "Tinykeys / `useTinykeys` action"
+        }
+      },
+
+      "components": {
+        "side-slide-layer": {
+          "title": "Side Slide Layer"
+        }
       }
     }
   }
