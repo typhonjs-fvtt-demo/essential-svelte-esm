@@ -7,8 +7,8 @@ import { constants }       from '#constants';
  * synchronized with Foundry game settings.
  *
  * Demos that use this `gameSettings`:
- * - src/app-state/client-setting
- * - src/components/side-slide-layer
+ * - src/view/svelte/application/app-state/client-setting
+ * - src/view/standard-components/side-slide-layer
  *
  * @type {TJSGameSettings}
  */
