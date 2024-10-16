@@ -58,6 +58,8 @@ function createInputs(stores)
    // disabled for non-GM users.
    const disabled = !game.user.isGM;
 
+   const efx = rippleFocus();
+
    return {
       allowLocking: {
          type: 'checkbox',
@@ -74,6 +76,7 @@ function createInputs(stores)
       },
 
       duration: {
+         efx,
          type: 'range',
          label: 'Duration:',
          min: 200,
@@ -83,6 +86,7 @@ function createInputs(stores)
       },
 
       easingIn: {
+         efx,
          type: 'select',
          label: 'Easing In:',
          options: easingList.map((key) => ({ value: key, label: key })),
@@ -91,7 +95,7 @@ function createInputs(stores)
       },
 
       easingOut: {
-         efx: rippleFocus(),
+         efx,
          type: 'select',
          label: 'Easing Out:',
          options: easingList.map((key) => ({ value: key, label: key })),
@@ -100,6 +104,7 @@ function createInputs(stores)
       },
 
       side: {
+         efx,
          type: 'select',
          label: 'Side:',
          options: [{ value: 'left', label: 'Left' }, { value: 'right', label: 'Right' }],
@@ -108,6 +113,7 @@ function createInputs(stores)
       },
 
       top: {
+         efx,
          type: 'range',
          label: 'Top (vertical position):',
          min: 40,
