@@ -24,3 +24,8 @@
   // You can opt to use box shadow for manually focused / navigated components. In this case remove the outline above.
   // --tjs-default-box-shadow-focus-visible: undefined
 }
+
+// App content background for main demo menu.
+#essential-svelte-esm {
+  --tjs-app-content-background: linear-gradient(135deg, rgba(52, 51, 52, 0.9) 10%, rgba(15, 14, 28, 0.9) 90%);
+}
