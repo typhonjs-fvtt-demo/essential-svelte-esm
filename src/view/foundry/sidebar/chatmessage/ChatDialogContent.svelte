@@ -1,13 +1,15 @@
 <!--
 Dialog content presenting a button to add a custom chat message that is enhanced in the `renderChatMessage` found
-in `./src/chatmessage.js`. Please refer to `./src/chatmessage.js` for all the hooks required and more information.
+in `./src/view/foundry/sidebar/chatmessage/index.js`. Please refer to this source file for all the hooks required and
+more information.
 -->
 <script>
    function onClick()
    {
       // Add flags data scoped to your module ID in initial message creation. This allows the associated Svelte
-      // component to be mounted in a single callback in `renderChatMessage` hook found in `./src/chatmessage.js` and
-      // the chat log to properly scroll down with the full size of the chat message + Svelte component size.
+      // component to be mounted in a single callback in `renderChatMessage` hook found in
+      // `./src/view/foundry/sidebar/chatmessage/index.js` and the chat log to properly scroll down with the full size
+      // of the chat message + Svelte component size.
       ChatMessage.create({
          user: game.user.id,
          flags: {
