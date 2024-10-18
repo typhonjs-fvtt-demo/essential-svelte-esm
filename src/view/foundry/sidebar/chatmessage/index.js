@@ -1,3 +1,5 @@
+import { FVTTVersion }                    from '#standard/fvtt';
+
 import MyChatMessage                      from './MyChatMessage.svelte';
 
 export { default as ChatDialogContent }   from './ChatDialogContent.svelte';
@@ -47,22 +49,43 @@ Hooks.once('ready', () =>
 /**
  * Used by chat message demo to manually attach a Svelte component, MyChatMessage, to a chat message.
  *
+ * Note: Foundry v13 changes the hook name to `renderChatMessageHTML` instead of `renderChatMessage`.
+ * All AppV2 / new render hooks will pass back an HTML element and not a JQuery instance.
+ *
  * Note: You must manually destroy this Svelte component in an associated `preDeleteChatMessage` like the one provided
  * below. The reason being is that you are manually / conditionally creating a Svelte component that is not monitored /
  * controlled by TRL itself, so you must also manually destroy this component when the chat message is deleted.
  */
-Hooks.on('renderChatMessage', (message, html) =>
+if (FVTTVersion.isAtLeast(13))
 {
-   // Find associated flag data scoped to your module ID. This is the easiest way to determine that this message is
-   // associated with your module and has a Svelte component attached to the message content.
-   const flagData = message.getFlag('essential-svelte-esm', 'data');
-
-   if (typeof flagData === 'object')
+   Hooks.on('renderChatMessageHTML', (message, html) =>
    {
-      // Add the svelte component to the message instance loaded in client side memory.
-      message._svelteComponent = new MyChatMessage({ target: html[0], props: flagData });
-   }
-});
+      // Find associated flag data scoped to your module ID. This is the easiest way to determine that this message is
+      // associated with your module and has a Svelte component attached to the message content.
+      const flagData = message.getFlag('essential-svelte-esm', 'data');
+
+      if (typeof flagData === 'object')
+      {
+         // Add the svelte component to the message instance loaded in client side memory.
+         message._svelteComponent = new MyChatMessage({ target: html, props: flagData });
+      }
+   });
+}
+else
+{
+   Hooks.on('renderChatMessage', (message, html) =>
+   {
+      // Find associated flag data scoped to your module ID. This is the easiest way to determine that this message is
+      // associated with your module and has a Svelte component attached to the message content.
+      const flagData = message.getFlag('essential-svelte-esm', 'data');
+
+      if (typeof flagData === 'object')
+      {
+         // Add the svelte component to the message instance loaded in client side memory.
+         message._svelteComponent = new MyChatMessage({ target: html[0], props: flagData });
+      }
+   });
+}
 
 /**
  * Used by chat message demo to clean up / destroy the mounted Svelte component to the message instance when the chat
