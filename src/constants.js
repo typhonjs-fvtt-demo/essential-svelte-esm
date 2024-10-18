@@ -21,7 +21,8 @@ const settings = {
  */
 const sessionConstants = {
    appStateClient: `${constants.moduleId}.${settings.appStateClient}`,
-   themeDarkMode: `${constants.moduleId}.theme.dark`
+   themeDarkMode: `${constants.moduleId}.theme.dark`,
+   sidebarCustomTab: `${constants.moduleId}.sidebar.custom-tab`
 };
 
 
@@ -33,6 +34,8 @@ export { constants, sessionConstants, settings };
  * @property {string} appStateClient Stores the current app state in /src/view/app-state demo.
  *
  * @property {string} themeDarkMode Indicates whether dark mode is enabled.
+ *
+ * @property {string} sidebarCustomTab Indicates whether to load a custom Svelte sidebar tab.
  */
 
 /**

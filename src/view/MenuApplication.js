@@ -4,7 +4,9 @@ import {
 
 import MenuAppShell           from './MenuAppShell.svelte';
 
-import { ChatDialogContent }  from './foundry/sidebar';
+import {
+   ChatDialogContent,
+   SidebarCustomTabApp }      from './foundry/sidebar';
 
 import {
    ColorPickerApp,
@@ -135,7 +137,8 @@ export class MenuApplication extends SvelteApplication
                       id: 'essential-esm-chat-dialog',
                       classes: ['tjs-essential-svelte-esm']
                    })
-               }
+               },
+               { title: 'Custom Sidebar Tab', class: SidebarCustomTabApp }
             ]
          }
       ];
