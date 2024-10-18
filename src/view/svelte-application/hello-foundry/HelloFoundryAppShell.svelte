@@ -62,9 +62,9 @@
          <label><input type=checkbox bind:checked={$storeResizable}> Resizable</label>
       </div>
       <div class=bottom>
-         <a href="https://learn.svelte.dev/tutorial/welcome-to-svelte">Interactive Svelte tutorial (highly recommended)</a>
+         <a href="https://learn.svelte.dev/tutorial/welcome-to-svelte" target=_blank>Interactive Svelte tutorial (highly recommended)</a>
          <br>
-         <a href="https://www.youtube.com/playlist?list=PLoKaNN3BjQX3mxDEVG3oGJx2ByXnue_gR">Svelte tutorial videos</a>
+         <a href="https://typhonjs.io/discord/" target=_blank>TyphonJS Discord (Support)</a>
       </div>
    </main>
 </ApplicationShell>
