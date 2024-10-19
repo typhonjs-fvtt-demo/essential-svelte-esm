@@ -9,7 +9,9 @@
 
    const { application } = getContext('#external');
 
-   const storeChecked = application.reactive.sessionStorage.getStore(sessionConstants.sidebarCustomTab, false)
+   const storeChecked = application.reactive.sessionStorage.getStore(sessionConstants.sidebarCustomTab, false);
+
+   const initialChecked = $storeChecked;
 </script>
 
 <svelte:options accessors={true}/>
@@ -22,6 +24,9 @@
       <label>
          <span>Enable / disable custom tab:</span>
          <input type=checkbox bind:checked={$storeChecked}>
+         {#if initialChecked !== $storeChecked}
+            <span class=reload>Reload Required</span>
+         {/if}
       </label>
    </main>
 </ApplicationShell>
@@ -36,5 +41,11 @@
    label {
       display: flex;
       align-items: center;
+      gap: 0.25rem;
+   }
+
+   .reload {
+      color: red;
+      font-weight: bold;
    }
 </style>
