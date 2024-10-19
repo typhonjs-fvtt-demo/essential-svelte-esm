@@ -9,13 +9,13 @@ import DialogContent       from './dialog/DialogContent.svelte';
 
 export class PositionApplication extends SvelteApplication
 {
-   /** @type {Application} */
+   /** @type {TJSDialog} */
    #dialog;
 
    /**
     * Provides a store to enable / disable debug mode which overlays the transform bounding box.
     *
-    * @type {Writable<boolean>}
+    * @type {import('svelte/store').Writable<boolean>}
     */
    #storeDebug = writable(false);
 
