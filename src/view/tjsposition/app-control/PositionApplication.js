@@ -28,13 +28,13 @@ export class PositionApplication extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
-         id: 'position-esm',
+         id: 'trl-app-position-esm',
          classes: ['tjs-essential-svelte-esm'],
+         title: 'App Position / Animation',
          resizable: true,
          minimizable: true,
          width: 450,
-         height: 250,
-         title: 'Essential Svelte (ESM) - Position',
+         height: 225,
 
          svelte: {
             class: PositionAppShell,

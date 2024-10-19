@@ -72,12 +72,6 @@
             resizing: <input type=text bind:value={$resizing} readonly>
          </label>
       </section>
-
-      <div class=bottom>
-         <a href="https://learn.svelte.dev/tutorial/welcome-to-svelte">Interactive Svelte tutorial (highly recommended)</a>
-         <br>
-         <a href="https://www.youtube.com/playlist?list=PLoKaNN3BjQX3mxDEVG3oGJx2ByXnue_gR">Svelte tutorial videos</a>
-      </div>
    </main>
 </ApplicationShell>
 {#if $storeDebug}
@@ -93,10 +87,6 @@
       // Prevents clicks on readable inputs.
       section {
          pointer-events:none;
-      }
-
-      div.bottom {
-         margin-top: auto;
       }
 
       h1 {
