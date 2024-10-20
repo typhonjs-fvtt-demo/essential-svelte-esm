@@ -28,6 +28,22 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
+   <section>
+      <p>
+         `TJSSideSlideLayer` provides an absolutely position layer taking up the entire space of the current stacking
+         context. When used inside of an `ApplicationShell` this is the entire app window. Notice the tabs to the right
+         side. Hover over them to reveal the tab. Right click on a tab to lock it. Below are several of the reactive
+         controls available to control the side slide layer.
+      </p>
+      <p>
+         You can mount Svelte components as panels that slide out. You can also mount custom components as the tab icon
+         content versus just using an icon. The "target" panel will show tokens that are currently targeted.
+      </p>
+      <p>
+         When opened this app also mounts `TJSSideSlideLayer` in the main Foundry / browser window to an element that
+         allows the side slide layer to be positioned in a way that works smoothly with the main Foundry sidebar.
+      </p>
+   </section>
    <main>
       <TJSSideSlideLayer {...createLayerProps()}
                          bind:allowLocking={$allowLocking}
@@ -60,6 +76,12 @@
       flex: none;
    }
 
+   div {
+      display: flex;
+      gap: 0.5em;
+      align-items: center;
+   }
+
    main {
       display: flex;
       flex-direction: column;
@@ -78,9 +100,7 @@
       /*--tjs-side-slide-layer-item-diameter: 50px;*/
    }
 
-   div {
-      display: flex;
-      gap: 0.5em;
-      align-items: center;
+   section {
+      padding: 0 40px;
    }
 </style>
