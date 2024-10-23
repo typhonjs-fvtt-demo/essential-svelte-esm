@@ -1,4 +1,9 @@
 # Changelog
+## Release 0.2.0 (major update)
+- Updated @typhonjs-fvtt/runtime to ['0.2.0'](https://github.com/typhonjs-fvtt-lib/runtime/releases/tag/0.2.0).
+- Updated @typhonjs-fvtt/standard to ['0.2.0'](https://github.com/typhonjs-fvtt-lib/standard/releases/tag/0.2.0).
+- Refined demos and source code layout to locate demos of interest easier.
+
 ## Release 0.1.2 (minor update)
 - Updated @typhonjs-fvtt/runtime to ['0.1.2'](https://github.com/typhonjs-fvtt-lib/typhonjs/releases/tag/0.1.2).
 
@@ -41,7 +46,7 @@
 ## Release 0.0.11 (medium update)
 - Updated @typhonjs-fvtt/svelte-standard to ['0.0.10'](https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/CHANGELOG.md#release-0010).
 - Added ProseMirror demo for `Foundry v10+`.
- 
+
 ## Release 0.0.10 (medium update)
 - Updated @typhonjs-fvtt/runtime to ['0.0.19'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0019).
 - Added reactive embedded collection demo.
@@ -82,7 +87,7 @@
 
 ## Release 0.0.3
 - Updated @typhonjs-fvtt/runtime to ['0.0.11'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-0011).
-- Native animation upgrades.  
+- Native animation upgrades.
 
 ## Release 0.0.2
 - Updated @typhonjs-fvtt/runtime to ['0.0.9'](https://github.com/typhonjs-fvtt-lib/typhonjs/blob/main/CHANGELOG.md#release-008).
