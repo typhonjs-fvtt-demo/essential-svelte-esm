@@ -8,10 +8,10 @@
       "url": "https://www.typhonjs.io"
     }
   ],
-  "version": "0.1.2",
+  "version": "0.2.0-next.1",
   "compatibility": {
     "minimum": "10",
-    "verified": "11"
+    "verified": "12"
   },
   "esmodules": [
     "index.js"
