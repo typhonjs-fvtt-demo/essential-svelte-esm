@@ -1,9 +1,12 @@
-import { svelte }          from '@sveltejs/vite-plugin-svelte';
-import resolve             from '@rollup/plugin-node-resolve'; // This resolves NPM modules from node_modules.
-import preprocess          from 'svelte-preprocess';
+import resolve                from '@rollup/plugin-node-resolve'; // This resolves NPM modules from node_modules.
+
+import { svelte }             from '@sveltejs/vite-plugin-svelte';
+
 import {
    postcssConfig,
-   terserConfig }          from '@typhonjs-fvtt/runtime/rollup';
+   terserConfig }             from '#runtime/rollup';
+
+import { sveltePreprocess }   from 'svelte-preprocess';
 
 // ATTENTION!
 // Please modify the below variables: s_PACKAGE_ID and s_SVELTE_HASH_ID appropriately.
@@ -70,7 +73,7 @@ export default () =>
          }
       },
       build: {
-         outDir: __dirname,
+         outDir: __dirname, // eslint-disable-line no-undef
          emptyOutDir: false,
          sourcemap: s_SOURCEMAPS,
          brotliSize: true,
@@ -98,7 +101,7 @@ export default () =>
                // TRL components and makes it easier to review styles in the browser debugger.
                cssHash: ({ hash, css }) => `svelte-${s_SVELTE_HASH_ID}-${hash(css)}`
             },
-            preprocess: preprocess()
+            preprocess: sveltePreprocess()
          }),
 
          resolve(s_RESOLVE_CONFIG),    // Necessary when bundling npm-linked packages.
