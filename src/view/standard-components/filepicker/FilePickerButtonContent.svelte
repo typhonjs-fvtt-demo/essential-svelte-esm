@@ -2,7 +2,7 @@
    import { onDestroy }             from 'svelte';
    import { writable }              from 'svelte/store';
 
-   import { rippleFocus }           from '#standard/action/animate/composable/ripple';
+   import { rippleFocus }           from '#standard/action/animate/composable';
    import { FVTTFilePickerControl } from '#standard/application/control/filepicker';
    import { TJSInput }              from '#standard/component/form';
 

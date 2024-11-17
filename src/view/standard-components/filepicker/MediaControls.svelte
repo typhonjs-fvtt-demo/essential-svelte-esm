@@ -1,7 +1,7 @@
 <script>
    import { slideFade }    from '#runtime/svelte/transition';
 
-   import { rippleFocus }  from '#standard/action/animate/composable/ripple';
+   import { rippleFocus }  from '#standard/action/animate/composable';
    import { TJSInput }     from '#standard/component/form';
 
    export let filepath = void 0;

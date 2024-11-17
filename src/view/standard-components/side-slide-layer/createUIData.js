@@ -3,7 +3,7 @@ import { writable }        from 'svelte/store';
 import { easingList }      from '#runtime/svelte/easing';
 import { propertyStore }   from '#runtime/svelte/store/writable-derived';
 
-import { rippleFocus }     from '#standard/action/animate/composable/ripple';
+import { rippleFocus }     from '#standard/action/animate/composable';
 
 import { settings }        from '#constants';
 import { gameSettings }    from '#gameSettings';

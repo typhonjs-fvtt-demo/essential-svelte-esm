@@ -4,7 +4,7 @@
    import { TJSDialog }             from '#runtime/svelte/application';
    import { ApplicationShell }      from '#runtime/svelte/component/application';
 
-   import { ripple }                from '#standard/action/animate/composable/ripple';
+   import { ripple }                from '#standard/action/animate/composable';
    import { TJSButton }             from '#standard/component/form';
 
    import FilePickerButtonContent   from './FilePickerButtonContent.svelte';

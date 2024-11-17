@@ -5,7 +5,7 @@
    import { TJSDocument }        from '#runtime/svelte/store/fvtt/document';
    import { DynReducerHelper }   from '#runtime/svelte/store/reducer';
 
-   import { rippleFocus }        from '#standard/action/animate/composable/ripple';
+   import { rippleFocus }        from '#standard/action/animate/composable';
    import { TJSInput }           from '#standard/component/form';
 
    export let elementRoot;
