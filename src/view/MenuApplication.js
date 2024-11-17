@@ -19,6 +19,7 @@ import {
    TinyMCEApp }               from './standard-components/editor';
 
 import {
+   AnimateWAAPIApp,
    ContentResizeApp,
    TinykeysApp }              from './svelte-actions';
 
@@ -122,6 +123,7 @@ export class MenuApplication extends SvelteApplication
          {
             title: 'Svelte Actions',
             entries: [
+               { title: '`animateWAAPI` / WAAPI Animation', class: AnimateWAAPIApp },
                { title: '`useTinykeys` / Tinykeys', class: TinykeysApp },
                { title: '`resizeObserver` / Content Min Resize', class: ContentResizeApp }
             ]
