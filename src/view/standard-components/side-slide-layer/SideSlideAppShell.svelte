@@ -94,6 +94,9 @@
       border-radius: var(--tjs-input-border-radius);
       padding: 0.5em;
 
+      --tjs-input-number-width: 5rem;
+      --tjs-input-number-text-align: center;
+
       /* Provide a margin for the side slide layer */
       --tjs-side-slide-layer-margin: 0 8px 0 8px;
 
