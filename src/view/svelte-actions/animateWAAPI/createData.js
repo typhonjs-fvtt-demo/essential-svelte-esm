@@ -15,7 +15,13 @@ const inputData = {
       max: 1000,
       step: 1,
       label: 'Duration (ms):',
-      readonly: true,
+      readonly: true,   // For `range-number` this applies to the number input making it read only.
+
+      // Most input form components have additional options.
+      options: {
+         blurOnEscKey: true,  // Blur on `Escape` key pressed.
+         cancelOnEscKey: true // Cancel changes on `Escape` key / set initial value before modification.
+      },
       store: writable(600)
    },
 
