@@ -56,7 +56,7 @@ function createInputs(stores)
 {
    // The stores are persisted to a world game setting which is only accessible to GM level users. All UI inputs will be
    // disabled for non-GM users.
-   const disabled = !game.user.isGM;
+   const enabled = game.user.isGM;
 
    const efx = rippleFocus();
 
@@ -65,14 +65,14 @@ function createInputs(stores)
          type: 'checkbox',
          label: 'Allow locking:',
          store: stores.allowLocking,
-         disabled
+         enabled
       },
 
       clickToOpen: {
          type: 'checkbox',
          label: 'Click to open:',
          store: stores.clickToOpen,
-         disabled
+         enabled
       },
 
       duration: {
@@ -83,7 +83,7 @@ function createInputs(stores)
          max: 1000,
          readonly: true,
          store: stores.duration,
-         disabled
+         enabled
       },
 
       easingIn: {
@@ -92,7 +92,7 @@ function createInputs(stores)
          label: 'Easing In:',
          options: easingList.map((key) => ({ value: key, label: key })),
          store: stores.easingIn,
-         disabled
+         enabled
       },
 
       easingOut: {
@@ -101,7 +101,7 @@ function createInputs(stores)
          label: 'Easing Out:',
          options: easingList.map((key) => ({ value: key, label: key })),
          store: stores.easingOut,
-         disabled
+         enabled
       },
 
       side: {
@@ -110,7 +110,7 @@ function createInputs(stores)
          label: 'Side:',
          options: [{ value: 'left', label: 'Left' }, { value: 'right', label: 'Right' }],
          store: stores.side,
-         disabled
+         enabled
       },
 
       top: {
@@ -121,7 +121,7 @@ function createInputs(stores)
          max: 250,
          readonly: true,
          store: stores.top,
-         disabled
+         enabled
       }
    };
 }

@@ -31,7 +31,7 @@
 
    // Provides default options shared by all TJSInput components.
    const input = {
-      disabled: !FVTTFilePickerControl.canBrowse,
+      enabled: FVTTFilePickerControl.canBrowse,
       efx: rippleFocus(),  // This adds the material design ripple focus effect.
       readonly: true       // Input is read only.
    }

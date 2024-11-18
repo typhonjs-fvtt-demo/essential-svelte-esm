@@ -9,7 +9,7 @@
 
    const options = {
       addons: [TJSColordPickerSavedColors],
-      disabled: false,
+      enabled: true,
       format: 'hsl',
       formatType: 'string',
       hasAddons: true,
@@ -38,7 +38,7 @@
          <label class=centered>Enable Alpha:<input type=checkbox bind:checked={options.hasAlpha}></label>
          <label class=centered>Lock Text Format:<input type=checkbox bind:checked={options.lockTextFormat}></label>
          <label class=centered>Popup:<input type=checkbox bind:checked={options.isPopup}></label>
-         <label class=centered>Disabled:<input type=checkbox bind:checked={options.disabled}></label>
+         <label class=centered>Enabled:<input type=checkbox bind:checked={options.enabled}></label>
       </section>
 
       <section class=styled>
