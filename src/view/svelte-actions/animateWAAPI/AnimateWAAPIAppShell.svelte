@@ -1,11 +1,7 @@
 <script>
    /**
-    * This demo shows how the `useTinykeys` Svelte action works. `tinykeys` is a handy way to configure advanced key
-    * bindings in components and available in TRL directly at `#runtime/util/dom/input/tinykeys`, but it is recommended
-    * to use the pre-made Svelte action `useTinykeys` for simplicity.
-    *
-    * For more in-depth documentation on `tinykeys` please see:
-    * @see https://www.npmjs.com/package/tinykeys
+    * This demo shows how the `animateWAAPI` Svelte action works. This composable action provides a reactive mechanism
+    * to defined reactive WAAPI animations.
     *
     * @componentDescription
     */
