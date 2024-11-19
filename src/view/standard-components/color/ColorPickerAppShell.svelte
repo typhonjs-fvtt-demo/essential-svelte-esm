@@ -28,7 +28,7 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
-   <div>
+   <main>
       <section class=styled>
          <label class=centered>Text Input:<input type=checkbox bind:checked={options.hasTextInput}></label>
          <label class=centered>Button Bar:<input type=checkbox bind:checked={options.hasButtonBar}></label>
@@ -67,16 +67,20 @@
       <section>
          <TJSColordPicker bind:color options={options} />
       </section>
-   </div>
+   </main>
 </ApplicationShell>
 
 <style>
    /* Remove bad foundry universal style */
-   div > * {
+   main > * {
       flex: none;
    }
 
-   div {
+   main {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
       --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
    }
 
@@ -115,9 +119,5 @@
       background: rgba(0, 0, 0, 0.1);
       padding: 8px;
       border-radius: 8px;
-   }
-
-   section:not(:last-child) {
-      margin: 0 0 1rem 0;
    }
 </style>
