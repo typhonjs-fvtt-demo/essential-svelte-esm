@@ -48,12 +48,16 @@
 <ApplicationShell bind:elementRoot>
    <main>
       <h1>Hello {message}!</h1>
-      <label>
-         Message:&nbsp;<input bind:value={message}>
-      </label>
-      <label>
-         Change title:&nbsp;<input bind:value={$storeTitle}>
-      </label>
+      <section>
+         <label>
+            <span>Message:</span>
+            <input type=text bind:value={message}>
+         </label>
+         <label>
+            <span>Change title:</span>
+            <input type=text bind:value={$storeTitle}>
+         </label>
+      </section>
       <button on:click={onClick}>Launch a modal dialog</button>
       <div class=container>
          Make application:
@@ -76,10 +80,6 @@
       flex-direction: column;
       gap: 0.5rem;
 
-      button, div.bottom {
-         margin-top: auto;
-      }
-
       div.container {
          display: flex;
          align-items: center;
@@ -98,9 +98,18 @@
       }
 
       label {
-         display: flex;
+         display: contents;
+
+         span {
+            text-align: right;
+         }
+      }
+
+      section {
+         display: grid;
+         grid-template-columns: auto 1fr;
          align-items: center;
-         justify-content: center;
+         gap: 0.5rem;
       }
    }
 </style>
