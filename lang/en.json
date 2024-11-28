@@ -6,12 +6,16 @@
       },
 
       "actions": {
+        "animate-waapi": {
+          "title": "WAAPI Animation / `animateWAAPI`"
+        },
+
         "content-resize-observer": {
           "title": "Content Resize Observer"
         },
 
         "use-tinykeys": {
-          "title": "Tinykeys / `useTinykeys` action"
+          "title": "Tinykeys / `useTinykeys` Action"
         }
       },
 
