@@ -47,8 +47,10 @@
 <ApplicationShell bind:elementRoot>
    <main>
       <h1>Reactive Embedded Collections</h1>
+      <!-- `preventDefault` on `dragover` is necessary for cross browser window drag & drop -->
       <div class=drop
            on:drop={onDrop}
+           on:dragover|preventDefault
            role=region
            aria-dropeffect=none
            aria-label="Document drop target">
