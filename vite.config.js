@@ -39,7 +39,6 @@ export default ({ mode }) =>
       cacheDir: '../.vite-cache',   // Relative from root directory.
 
       resolve: {
-         dedupe: ['svelte', '@typhonjs-fvtt/runtime', '@typhonjs-fvtt/standard'],
          conditions: ['browser', 'import']
       },
 
