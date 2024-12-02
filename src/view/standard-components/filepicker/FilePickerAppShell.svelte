@@ -34,7 +34,13 @@
             }
          },
          label: 'Ok'
-      }, { classes: ['tjs-essential-svelte-esm'], width: 500 });
+      }, {
+         classes: ['tjs-essential-svelte-esm'],
+         // For modal dialogs / apps. You can pass elements or query strings that should receive focus when the dialog
+         // closes. This will return focus to the invoking app.
+         focusSource: { focusEl: [elementRoot] },
+         width: 500
+      });
    }
 </script>
 
