@@ -20,7 +20,7 @@ export class SideSlideApp extends SvelteApplication
    #sidebarSlideLayer;
 
    /**
-    * @param {import('#runtime/svelte/application').SvelteApplicationOptions} options - App options.
+    * @param {import('#runtime/svelte/application').SvelteApp.Options} options - App options.
     */
    constructor(options)
    {
@@ -68,23 +68,25 @@ export class SideSlideApp extends SvelteApplication
    /**
     * Default Application options
     *
-    * @returns {object} options - Application options.
+    * @returns {import('#runtime/svelte/application').SvelteApp.Options} options - Application options.
     * @see https://foundryvtt.com/api/interfaces/client.ApplicationOptions.html
     */
    static get defaultOptions()
    {
-      return foundry.utils.mergeObject(super.defaultOptions, {
-         id: 'trl-side-slide-layer-esm',
-         title: 'EssentialESM.apps.components.side-slide-layer.title',
-         classes: ['tjs-essential-svelte-esm'],
-         resizable: false,
-         width: 500,
-         height: 450,
+      return /** @type {import('#runtime/svelte/application').SvelteApp.Options} */ foundry.utils.mergeObject(
+         super.defaultOptions,
+         {
+            id: 'trl-side-slide-layer-esm',
+            title: 'EssentialESM.apps.components.side-slide-layer.title',
+            classes: ['tjs-essential-svelte-esm'],
+            resizable: false,
+            width: 500,
+            height: 450,
 
-         svelte: {
-            class: SideSlideAppShell,
-            target: document.body,
-         }
+            svelte: {
+               class: SideSlideAppShell,
+               target: document.body,
+            }
       });
    }
 }
