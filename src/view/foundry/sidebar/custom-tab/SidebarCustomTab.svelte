@@ -10,5 +10,6 @@
 <style>
    main {
       padding: 8px;
+      overflow-y: auto;
    }
 </style>
