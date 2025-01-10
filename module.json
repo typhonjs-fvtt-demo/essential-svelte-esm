@@ -8,16 +8,16 @@
       "url": "https://www.typhonjs.io"
     }
   ],
-  "version": "0.2.0-next.5",
+  "version": "0.2.0-next.7",
   "compatibility": {
     "minimum": "10",
     "verified": "12"
   },
   "esmodules": [
-    "index.js"
+    "dist/essential-svelte-esm.js"
   ],
   "styles": [
-    "style.css"
+    "dist/essential-svelte-esm.css"
   ],
   "flags": {
     "hotReload": {
