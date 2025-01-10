@@ -15,7 +15,7 @@ export const optionComponents = {
 };
 
 /**
- * Stores respective draggable options stores for easy UI manipulation. The default values match the SvelteApplication
+ * Stores respective draggable options stores for easy UI manipulation. The default values match the SvelteApp
  * defaults.
  *
  * @type {({

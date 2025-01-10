@@ -2,7 +2,7 @@
    /**
     * An advanced use case for the `resizeObserver` action which can be added to an element to monitor size changes.
     *
-    * `resizeObserver` is added to the `main` element to control the SvelteApplication position state / minimum width
+    * `resizeObserver` is added to the `main` element to control the SvelteApp position state / minimum width
     * such that the app window can not be reduced to below width of the content contained in the main app element. Use
     * the `add` / `remove` / `removeAll` buttons to add demo elements to the main content element increasing / reducing
     * the size and notice that you can't resize the app to less than the content width.
@@ -40,10 +40,10 @@
       removeAll: () => items.update((array) => { array.length = 0; return array; })
    };
 
-   // Retrieves the external `SvelteApplication` reference.
+   // Retrieves the external `SvelteApp` reference.
    const { application } = getContext('#external');
 
-   // Reactively updates the `SvelteApplication` `position` minimum width with the `main` element offset width.
+   // Reactively updates the `SvelteApp` `position` minimum width with the `main` element offset width.
    // An additional `16` pixels is added for the default Foundry left / right padding of `.window-content`.
    $: application.position.set({ minWidth: $storeMainWidth + 16 });
 </script>

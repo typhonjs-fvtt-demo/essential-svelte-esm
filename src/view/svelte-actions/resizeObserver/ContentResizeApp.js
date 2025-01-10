@@ -1,8 +1,8 @@
-import { SvelteApplication }  from '#runtime/svelte/application';
+import { SvelteApp }          from '#runtime/svelte/application';
 
 import ContentResizeAppShell  from './ContentResizeAppShell.svelte';
 
-export class ContentResizeApp extends SvelteApplication
+export class ContentResizeApp extends SvelteApp
 {
    static get defaultOptions()
    {

@@ -1,4 +1,4 @@
-import { SvelteApplication }  from '#runtime/svelte/application';
+import { SvelteApp }          from '#runtime/svelte/application';
 
 import HeaderButtonsAppShell  from './HeaderButtonsAppShell.svelte';
 import TestSCComponent        from './TestSCComponent.svelte';
@@ -6,13 +6,13 @@ import ProgressBar            from './ProgressBar.svelte';
 
 import { sessionConstants }   from '#constants';
 
-export class HeaderButtonsApplication extends SvelteApplication
+export class HeaderButtonsApplication extends SvelteApp
 {
    /**
     * Default Application options
     *
     * @returns {object} options - Application options.
-    * @see https://foundryvtt.com/api/interfaces/client.ApplicationOptions.html
+    * @see https://typhonjs-fvtt-lib.github.io/api-docs/interfaces/_runtime_svelte_application.SvelteApp.Options.html
     */
    static get defaultOptions()
    {

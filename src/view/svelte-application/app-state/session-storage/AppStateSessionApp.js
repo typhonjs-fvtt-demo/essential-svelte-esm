@@ -1,10 +1,10 @@
-import { SvelteApplication }  from '#runtime/svelte/application';
+import { SvelteApp }          from '#runtime/svelte/application';
 
 import SessionAppShell        from './SessionAppShell.svelte';
 
 import { sessionConstants }   from '#constants';
 
-export class AppStateSessionApp extends SvelteApplication
+export class AppStateSessionApp extends SvelteApp
 {
    constructor(options)
    {
@@ -22,7 +22,7 @@ export class AppStateSessionApp extends SvelteApplication
     * Default Application options
     *
     * @returns {object} options - Application options.
-    * @see https://foundryvtt.com/api/interfaces/client.ApplicationOptions.html
+    * @see https://typhonjs-fvtt-lib.github.io/api-docs/interfaces/_runtime_svelte_application.SvelteApp.Options.html
     */
    static get defaultOptions()
    {

@@ -1,5 +1,5 @@
 import {
-   SvelteApplication,
+   SvelteApp,
    TJSDialog }                from '#runtime/svelte/application';
 
 import MenuAppShell           from './MenuAppShell.svelte';
@@ -39,13 +39,13 @@ import {
    PositionBoxApplication,
    PositionCarouselApp }      from './tjsposition';
 
-export class MenuApplication extends SvelteApplication
+export class MenuApplication extends SvelteApp
 {
    /**
     * Default Application options
     *
     * @returns {object} options - Application options.
-    * @see https://foundryvtt.com/api/interfaces/client.ApplicationOptions.html
+    * @see https://typhonjs-fvtt-lib.github.io/api-docs/interfaces/_runtime_svelte_application.SvelteApp.Options.html
     */
    static get defaultOptions()
    {
@@ -80,7 +80,7 @@ export class MenuApplication extends SvelteApplication
    {
       const sections = [
          {
-            title: 'SvelteApplication',
+            title: 'SvelteApp',
             entries: [
                { title: 'Hello Foundry', class: HelloFoundryApplication },
                { title: 'Header Buttons', class: HeaderButtonsApplication },

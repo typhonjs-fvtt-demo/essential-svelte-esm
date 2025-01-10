@@ -1,8 +1,8 @@
-import { SvelteApplication }  from '#runtime/svelte/application';
+import { SvelteApp }          from '#runtime/svelte/application';
 
 import AnimateWAAPIAppShell   from './AnimateWAAPIAppShell.svelte';
 
-export class AnimateWAAPIApp extends SvelteApplication
+export class AnimateWAAPIApp extends SvelteApp
 {
    static get defaultOptions()
    {

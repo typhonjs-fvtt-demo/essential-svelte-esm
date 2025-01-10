@@ -1,8 +1,8 @@
-import { SvelteApplication }  from '#runtime/svelte/application';
+import { SvelteApp }    from '#runtime/svelte/application';
 
-import TinykeysAppShell       from './TinykeysAppShell.svelte';
+import TinykeysAppShell from './TinykeysAppShell.svelte';
 
-export class TinykeysApp extends SvelteApplication
+export class TinykeysApp extends SvelteApp
 {
    static get defaultOptions()
    {

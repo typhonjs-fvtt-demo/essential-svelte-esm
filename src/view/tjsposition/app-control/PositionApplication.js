@@ -1,13 +1,13 @@
 import { writable }        from 'svelte/store';
 
 import {
-   SvelteApplication,
+   SvelteApp,
    TJSDialog }             from '#runtime/svelte/application';
 
 import PositionAppShell    from './PositionAppShell.svelte';
 import DialogContent       from './dialog/DialogContent.svelte';
 
-export class PositionApplication extends SvelteApplication
+export class PositionApplication extends SvelteApp
 {
    /** @type {TJSDialog} */
    #dialog;
@@ -23,7 +23,7 @@ export class PositionApplication extends SvelteApplication
     * Default Application options
     *
     * @returns {object} options - Application options.
-    * @see https://foundryvtt.com/api/interfaces/client.ApplicationOptions.html
+    * @see https://typhonjs-fvtt-lib.github.io/api-docs/interfaces/_runtime_svelte_application.SvelteApp.Options.html
     */
    static get defaultOptions()
    {

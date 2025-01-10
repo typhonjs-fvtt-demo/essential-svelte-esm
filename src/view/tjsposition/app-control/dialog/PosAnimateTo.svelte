@@ -27,9 +27,9 @@
     *
     * ---
     *
-    * Additionally, this demo shows the `SvelteApplication` state API allowing app state to be saved and restored
-    * with animation. Both `TJSPosition` and `SvelteApplication` have state mechanisms to save / restore state. The
-    * SvelteApplication state API knows how to save / restore position _and_ minimized state whereas the TJSPosition
+    * Additionally, this demo shows the `SvelteApp` state API allowing app state to be saved and restored
+    * with animation. Both `TJSPosition` and `SvelteApp` have state mechanisms to save / restore state. The
+    * SvelteApp state API knows how to save / restore position _and_ minimized state whereas the TJSPosition
     * state API only saves / restores positional state.
     */
 
@@ -38,7 +38,7 @@
    /**
     * The target Svelte application being animated.
     *
-    * @type {import('#runtime/svelte/application').SvelteApplication}
+    * @type {import('#runtime/svelte/application').SvelteApp}
     */
    export let application = void 0;
 

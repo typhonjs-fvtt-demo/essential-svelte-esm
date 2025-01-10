@@ -1,14 +1,14 @@
-import { SvelteApplication }  from '#runtime/svelte/application';
+import { SvelteApp }          from '#runtime/svelte/application';
 
 import HelloFoundryAppShell   from './HelloFoundryAppShell.svelte';
 
-export class HelloFoundryApplication extends SvelteApplication
+export class HelloFoundryApplication extends SvelteApp
 {
    /**
     * Default Application options
     *
     * @returns {object} options - Application options.
-    * @see https://foundryvtt.com/api/interfaces/client.ApplicationOptions.html
+    * @see https://typhonjs-fvtt-lib.github.io/api-docs/interfaces/_runtime_svelte_application.SvelteApp.Options.html
     */
    static get defaultOptions()
    {

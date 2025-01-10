@@ -1,4 +1,4 @@
-import { SvelteApplication }  from '#runtime/svelte/application';
+import { SvelteApp }          from '#runtime/svelte/application';
 
 import ClientSettingAppShell  from './ClientSettingAppShell.svelte';
 
@@ -8,7 +8,7 @@ import {
 
 import { gameSettings }       from '#gameSettings';
 
-export class AppStateClientSettingApp extends SvelteApplication
+export class AppStateClientSettingApp extends SvelteApp
 {
    constructor(options)
    {
@@ -41,7 +41,7 @@ export class AppStateClientSettingApp extends SvelteApplication
     * Default Application options
     *
     * @returns {object} options - Application options.
-    * @see https://foundryvtt.com/api/interfaces/client.ApplicationOptions.html
+    * @see https://typhonjs-fvtt-lib.github.io/api-docs/interfaces/_runtime_svelte_application.SvelteApp.Options.html
     */
    static get defaultOptions()
    {

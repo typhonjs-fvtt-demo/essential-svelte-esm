@@ -1,4 +1,4 @@
-import { SvelteApplication }  from '#runtime/svelte/application';
+import { SvelteApp }          from '#runtime/svelte/application';
 
 import { TJSSideSlideLayer }  from '#standard/component/layer/side-slide';
 
@@ -12,7 +12,7 @@ import {
 
 import { gameSettings }       from '#gameSettings';
 
-export class SideSlideApp extends SvelteApplication
+export class SideSlideApp extends SvelteApp
 {
    /**
     * Stores the TJSSideSlideLayer instance that is mounted to `#ui-middle`.
@@ -20,7 +20,7 @@ export class SideSlideApp extends SvelteApplication
    #sidebarSlideLayer;
 
    /**
-    * @param {import('#runtime/svelte/application').SvelteApp.Options} options - App options.
+    * @param {Partial<import('#runtime/svelte/application').SvelteApp.Options>} options - App options.
     */
    constructor(options)
    {
@@ -69,7 +69,7 @@ export class SideSlideApp extends SvelteApplication
     * Default Application options
     *
     * @returns {import('#runtime/svelte/application').SvelteApp.Options} options - Application options.
-    * @see https://foundryvtt.com/api/interfaces/client.ApplicationOptions.html
+    * @see https://typhonjs-fvtt-lib.github.io/api-docs/interfaces/_runtime_svelte_application.SvelteApp.Options.html
     */
    static get defaultOptions()
    {
