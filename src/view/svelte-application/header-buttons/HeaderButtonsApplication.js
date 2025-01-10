@@ -50,10 +50,10 @@ export class HeaderButtonsApplication extends SvelteApplication
     * - {Record<string, string>} styles - Inline styles to apply to the button.
     * - {string}     title - A tooltip to display when hovered.
     *
-    * You may also pass an object containing a 'svelte' property which is a TJSSvelteConfig / Svelte configuration
-    * object to load a Svelte component in the app header.
+    * You may also pass an object containing a 'svelte' property which is a TJSSvelte.Config.Embed / Svelte
+    * configuration object to load a Svelte component in the app header.
     *
-    * @returns {ApplicationHeaderButton[]} The app header buttons.
+    * @returns {SvelteApp.HeaderButton[]} The app header buttons.
     * @override
     */
    _getHeaderButtons()
@@ -71,7 +71,7 @@ export class HeaderButtonsApplication extends SvelteApplication
          styles: themeDarkMode ? { color: 'lightblue' } : { color: 'white' }, // Additional TRL option; inline styles.
          // keepMinimized: true,                         // When true the header button remains when app is minimized.
 
-         // When using a normal function `this` is the button data and it can be modified.
+         // The button data can be modified and reactive updates occur after the function completes.
          onPress: ({ button }) =>
          {
             const newThemeDarkMode = storage.swapItemBoolean(sessionConstants.themeDarkMode);
@@ -90,7 +90,7 @@ export class HeaderButtonsApplication extends SvelteApplication
          // },
       });
 
-      // You can set the `svelte` attribute to a TJSSvelteConfig object to load a Svelte component.
+      // You can set the `svelte` attribute to a TJSSvelte.Config.Embed object to load a Svelte component.
       buttons.unshift({
          svelte: {
             class: TestSCComponent,
