@@ -132,13 +132,13 @@ export class MenuApplication extends SvelteApp
             title: 'Foundry (Sidebar)',
             entries: [
                { title: 'Chat Message', onPress: () => new TJSDialog(
-                   {
-                      title: 'Essential Svelte (ESM) - Chat Message',
-                      content: ChatDialogContent
-                   }, {
-                      id: 'essential-esm-chat-dialog',
-                      classes: ['tjs-essential-svelte-esm']
-                   })
+                  {
+                     title: 'Essential Svelte (ESM) - Chat Message',
+                     content: { class: ChatDialogContent }
+                  }, {
+                     id: 'essential-esm-chat-dialog',
+                     classes: ['tjs-essential-svelte-esm']
+                  })
                },
                { title: 'Custom Sidebar Tab', class: SidebarCustomTabApp }
             ]
