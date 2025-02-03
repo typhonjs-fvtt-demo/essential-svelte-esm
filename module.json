@@ -1,5 +1,6 @@
 {
   "id": "essential-svelte-esm",
+  "version": "0.2.0-next.9",
   "title": "Essential Svelte Demos (ESM)",
   "description": "Provides essential TRL demos for reactivity and beyond.",
   "authors": [
@@ -8,7 +9,6 @@
       "url": "https://www.typhonjs.io"
     }
   ],
-  "version": "0.2.0-next.8",
   "compatibility": {
     "minimum": "10",
     "verified": "12"
