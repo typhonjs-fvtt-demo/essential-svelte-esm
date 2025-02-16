@@ -1,4 +1,5 @@
 import { SvelteApp }          from '#runtime/svelte/application';
+import { deepMerge }          from '#runtime/util/object';
 
 import { TJSSideSlideLayer }  from '#standard/component/layer/side-slide';
 
@@ -20,11 +21,10 @@ export class SideSlideApp extends SvelteApp
    #sidebarSlideLayer;
 
    /**
-    * @param {Partial<import('#runtime/svelte/application').SvelteApp.Options>} options - App options.
     */
-   constructor(options)
+   constructor()
    {
-      super(options);
+      super();
 
       /**
        * Register a world game setting w/ TJSGameSettings. This makes a world object store available to store
@@ -68,25 +68,23 @@ export class SideSlideApp extends SvelteApp
    /**
     * Default Application options
     *
-    * @returns {import('#runtime/svelte/application').SvelteApp.Options} options - Application options.
+    * @returns {SvelteApp.Options} options - SvelteApp options.
     * @see https://typhonjs-fvtt-lib.github.io/api-docs/interfaces/_runtime_svelte_application.SvelteApp.Options.html
     */
    static get defaultOptions()
    {
-      return /** @type {import('#runtime/svelte/application').SvelteApp.Options} */ foundry.utils.mergeObject(
-         super.defaultOptions,
-         {
-            id: 'trl-side-slide-layer-esm',
-            title: 'EssentialESM.apps.components.side-slide-layer.title',
-            classes: ['tjs-essential-svelte-esm'],
-            resizable: false,
-            width: 500,
-            height: 450,
+      return deepMerge(super.defaultOptions, {
+         id: 'trl-side-slide-layer-esm',
+         title: 'EssentialESM.apps.components.side-slide-layer.title',
+         classes: ['tjs-essential-svelte-esm'],
+         resizable: false,
+         width: 500,
+         height: 450,
 
-            svelte: {
-               class: SideSlideAppShell,
-               target: document.body,
-            }
+         svelte: {
+            class: SideSlideAppShell,
+            target: document.body
+         }
       });
    }
 }
