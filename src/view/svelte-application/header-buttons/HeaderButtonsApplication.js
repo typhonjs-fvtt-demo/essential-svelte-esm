@@ -68,7 +68,7 @@ export class HeaderButtonsApplication extends SvelteApp
       buttons.unshift({
          class: 'theme-dark',
          icon: 'fas fa-moon',
-         title: themeDarkMode ? 'Dark Node disable' : 'Dark Mode enable',     // Additional TRL option; sets hover title.
+         label: themeDarkMode ? 'Dark Mode disable' : 'Dark Mode enable',     // Additional TRL option; sets hover title.
          styles: themeDarkMode ? { color: 'lightblue' } : { color: 'white' }, // Additional TRL option; inline styles.
          // keepMinimized: true,                         // When true the header button remains when app is minimized.
 
@@ -77,7 +77,7 @@ export class HeaderButtonsApplication extends SvelteApp
          {
             const newThemeDarkMode = storage.swapItemBoolean(sessionConstants.themeDarkMode);
 
-            button.title = newThemeDarkMode ? 'Dark Node disable' : 'Dark Mode enable';
+            button.label = newThemeDarkMode ? 'Dark Mode disable' : 'Dark Mode enable';
             button.styles = newThemeDarkMode ? { color: 'lightblue' } : { color: 'white' };
          }
 
@@ -113,7 +113,7 @@ export class HeaderButtonsApplication extends SvelteApp
       buttons.unshift({
          class: 'test-left',
          icon: 'fas fa-check',
-         title: 'Test',
+         label: 'Test',
          alignLeft: true,
       });
 
