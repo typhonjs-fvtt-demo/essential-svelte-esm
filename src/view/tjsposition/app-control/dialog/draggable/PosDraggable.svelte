@@ -33,9 +33,9 @@
       display: flex;
       flex-direction: column;
 
-      border: 0.1em solid rgba(0, 0, 0, 0.2);
+      border: 0.1em solid var(--content-link-border-color);
       border-radius: 1em;
-      background: rgba(0, 0, 0, 0.1);
+      background: var(--section-background-color);
 
       padding: 0.5em;
 

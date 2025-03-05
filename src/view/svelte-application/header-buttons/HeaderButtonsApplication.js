@@ -26,9 +26,9 @@ export class HeaderButtonsApplication extends SvelteApp
          headerIcon: 'icons/magic/air/air-burst-spiral-blue-gray.webp',
          // headerIcon: 'fas fa-cogs',    // You may also use a Font Awesome icon.
          width: 600,
-         height: 180,
-         maxHeight: 180,
-         minHeight: 180,
+         height: 190,
+         maxHeight: 190,
+         minHeight: 190,
          minWidth: 385,
 
          svelte: {

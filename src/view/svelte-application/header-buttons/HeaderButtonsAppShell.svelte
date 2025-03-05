@@ -15,7 +15,7 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
-   <main>
+   <main class=scrollable>
       <h1>Reactive Header Buttons</h1>
       <br>
       <div class=container>
@@ -38,7 +38,7 @@
          align-items: center;
          justify-content: center;
          border-radius: 10px;
-         border: 2px solid rgba(0, 0, 0, 0.2);
+         border: 1px solid var(--content-link-border-color);
          padding: 10px;
          margin-top: auto;
          margin-bottom: 10px;

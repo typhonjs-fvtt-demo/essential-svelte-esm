@@ -87,9 +87,16 @@
          align-items: center;
          justify-content: center;
          border-radius: 10px;
-         border: 2px solid rgba(0, 0, 0, 0.2);
          padding: 10px;
          margin-top: auto;
+
+         /* You can use an existing core CSS variable that has dark / light theme changes. Try `--color-border` too. */
+         border: 1px solid var(--content-link-border-color);
+
+         /* For Sass you can alternatively use the `@at-root` directive to apply nested alternates */
+         //@at-root body.theme-dark & {
+         //   border: 2px solid red;
+         //}
       }
 
       h1 {

@@ -93,15 +93,19 @@
          justify-content: flex-start;
          width: 100%;
          border-radius: 10px;
-         border: 2px solid rgba(0, 0, 0, 0.2);
+         border: 1px solid var(--content-link-border-color);
          padding: 10px;
-         //margin-bottom: 10px;
       }
 
       div.drop {
-         background: rgba(0, 0, 0, 0.2);
+         background: rgba(0, 0, 0, 0.1);
+
+         @at-root :global(body.theme-dark) & {
+            background: rgba(208, 184, 163, 0.1);
+         }
+
          border-radius: 10px;
-         border: 2px solid rgba(0, 0, 0, 0.2);
+         border: 1px solid var(--content-link-border-color);
          padding: 0.25em;
          margin-bottom: 0.25em;
       }
