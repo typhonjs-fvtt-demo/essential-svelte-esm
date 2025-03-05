@@ -82,6 +82,10 @@
       flex-direction: column;
       gap: 0.5rem;
 
+      div.bottom {
+         margin-bottom: 3px; // For keyboard nav / link outline.
+      }
+
       div.container {
          display: flex;
          align-items: center;
