@@ -52,7 +52,7 @@ export class AppStateClientSettingApp extends SvelteApp
          title: 'App State (Reload / Client Setting)',
          resizable: true,
          width: 500,
-         height: 175,
+         height: 185,
 
          svelte: {
             class: ClientSettingAppShell,
