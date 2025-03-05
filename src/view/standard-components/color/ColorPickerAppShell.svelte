@@ -30,15 +30,15 @@
 <ApplicationShell bind:elementRoot>
    <main>
       <section class=styled>
-         <label class=centered>Text Input:<input type=checkbox bind:checked={options.hasTextInput}></label>
-         <label class=centered>Button Bar:<input type=checkbox bind:checked={options.hasButtonBar}></label>
-         <label class=centered>Addons:<input type=checkbox bind:checked={options.hasAddons}></label>
+         <label class=column>Text Input:<input type=checkbox bind:checked={options.hasTextInput}></label>
+         <label class=column>Button Bar:<input type=checkbox bind:checked={options.hasButtonBar}></label>
+         <label class=column>Addons:<input type=checkbox bind:checked={options.hasAddons}></label>
 
-         <label class=centered>Chrome Layout:<input type=checkbox on:change={(e) => options.layout = e.target.checked ? 'chrome' : void 0}></label>
-         <label class=centered>Enable Alpha:<input type=checkbox bind:checked={options.hasAlpha}></label>
-         <label class=centered>Lock Text Format:<input type=checkbox bind:checked={options.lockTextFormat}></label>
-         <label class=centered>Popup:<input type=checkbox bind:checked={options.isPopup}></label>
-         <label class=centered>Enabled:<input type=checkbox bind:checked={options.enabled}></label>
+         <label class=column>Chrome Layout:<input type=checkbox on:change={(e) => options.layout = e.target.checked ? 'chrome' : void 0}></label>
+         <label class=column>Enable Alpha:<input type=checkbox bind:checked={options.hasAlpha}></label>
+         <label class=column>Lock Text Format:<input type=checkbox bind:checked={options.lockTextFormat}></label>
+         <label class=column>Popup:<input type=checkbox bind:checked={options.isPopup}></label>
+         <label class=column>Enabled:<input type=checkbox bind:checked={options.enabled}></label>
       </section>
 
       <section class=styled>
@@ -70,12 +70,7 @@
    </main>
 </ApplicationShell>
 
-<style>
-   /* Remove bad foundry universal style */
-   main > * {
-      flex: none;
-   }
-
+<style lang=scss>
    main {
       display: flex;
       flex-direction: column;
@@ -84,11 +79,15 @@
       --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
    }
 
-   label.centered {
+   label {
       display: flex;
+      align-items: center;
+      gap: 0.5em;
+   }
+
+   label.column {
       flex-direction: column;
       justify-content: center;
-      align-items: center;
    }
 
    input {
@@ -119,5 +118,10 @@
       background: rgba(0, 0, 0, 0.1);
       padding: 8px;
       border-radius: 8px;
+      border: 1px solid var(--content-link-border-color);
+
+      @at-root :global(body.theme-dark) & {
+         background: rgba(208, 184, 163, 0.1);
+      }
    }
 </style>
