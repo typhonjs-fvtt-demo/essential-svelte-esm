@@ -51,7 +51,7 @@
 
    <!-- Do not show when popped out -->
    {#if $activeWindow === globalThis}
-      <h3>Same components invoked from a modal app / dialog:</h3>
+      <h4>Same components invoked from a modal app / dialog:</h4>
       <TJSButton on:press={onPress} efx={ripple()}>Launch modal dialog!</TJSButton>
    {/if}
 </ApplicationShell>
