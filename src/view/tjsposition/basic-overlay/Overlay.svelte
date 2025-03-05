@@ -10,6 +10,8 @@
 
    // Store position reference.
    const position = application.position;
+
+   const storeResizable = application.reactive.storeAppOptions.resizable;
 </script>
 
 <svelte:options accessors={true}/>
@@ -24,12 +26,15 @@
     *
     * You may choose to have a specific drag handle element that is smaller than the content area and can apply the
     * draggable action to that without the need for `hasTargetClassList`.
+    *
+    * Also note the use of the core style `scrollable`.
    -->
-   <div class=drag-target use:draggable={{ position, hasTargetClassList: ['drag-target'] }}
+   <div class="drag-target scrollable" use:draggable={{ position, hasTargetClassList: ['drag-target'] }}
         on:contextmenu={() => application.close()}
         role=application>
-      <h2 class=drag-target>Context click to close</h2>
+      <h3 class=drag-target>Context click to close</h3>
       <input type=text placeholder="An input showing focus control" />
+      <label>Resizable: <input type=checkbox bind:checked={$storeResizable}></label>
    </div>
 </EmptyApplicationShell>
 
@@ -40,17 +45,25 @@
       gap: 10px;
       height: 100%;
       width: 100%;
-      background: rgba(255, 100, 100, 0.5);
       padding: 8px;
       touch-action: none;
    }
 
-   input {
-      background: rgba(255, 0, 0, 0.5);
-      color: white;
+   /* Change background color based on core theme - `light` */
+   :global(body.theme-light) div {
+      background: rgba(200, 200, 200, 0.9);
    }
 
-   input::placeholder {
-      color: lightgray;
+   /* Change background color based on core theme - `dark` */
+   :global(body.theme-dark) div {
+      background: rgba(50, 50, 50, 0.9);
+   }
+
+   label {
+      /* This can be removed once Foundry core updates styles for themed labels */
+      color: var(--color-text-primary);
+
+      flex: 0 1 auto;
+      width: max-content;
    }
 </style>
