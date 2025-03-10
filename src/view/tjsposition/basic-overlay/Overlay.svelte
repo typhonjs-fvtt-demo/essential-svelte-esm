@@ -38,7 +38,7 @@
    </div>
 </EmptyApplicationShell>
 
-<style>
+<style lang=scss>
    div {
       display: flex;
       flex-direction: column;
@@ -49,20 +49,27 @@
       touch-action: none;
    }
 
-   /* Change background color based on core theme - `light` */
-   :global(body.theme-light) div {
-      background: rgba(200, 200, 200, 0.9);
-   }
-
-   /* Change background color based on core theme - `dark` */
-   :global(body.theme-dark) div {
+   /* Background when not themed */
+   :global(:not(.themed)) div {
       background: rgba(50, 50, 50, 0.9);
    }
 
-   label {
+   :global(.themed) label {
       /* This can be removed once Foundry core updates styles for themed labels */
       color: var(--color-text-primary);
+   }
 
+   /* Change background color based on core theme - `dark` */
+   :global(.themed.theme-dark) div {
+      background: rgba(50, 50, 50, 0.9);
+   }
+
+   /* Change background color based on core theme - `light` */
+   :global(.themed.theme-light) div {
+      background: rgba(200, 200, 200, 0.9);
+   }
+
+   label {
       flex: 0 1 auto;
       width: max-content;
    }
