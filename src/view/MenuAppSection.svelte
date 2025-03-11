@@ -72,7 +72,7 @@
    </TJSSvgFolder>
 </section>
 
-<style lang="scss">
+<style lang=scss>
    div {
       display: flex;
       flex-direction: column;
@@ -92,13 +92,16 @@
       --tjs-folder-summary-font-size: 1.05rem;
       --tjs-folder-summary-width: 100%;
 
-      color: #f0f0e0;
-      background: rgba(255, 255, 255, 0.15);
+      // See `./styles/init.scss` for `themed` alterations.
+      // See `./src/view/MenuApplication.js` default options `classes`; uncomment / add `themed` to classes for the
+      // dark & light themes to be applied to `TJSApplicationShell`.
+      background: var(--menu-section-background, rgba(255, 255, 255, 0.15));
+
       border-radius: 0.25rem;
       padding: 0.25rem;
 
       button:focus-visible {
-         outline: 4px dotted orange;
+         outline: var(--tjs-default-outline-focus-visible);
       }
    }
 </style>

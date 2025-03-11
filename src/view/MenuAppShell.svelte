@@ -1,4 +1,12 @@
 <script>
+   /**
+    * Provides the statically themed main menu to launch demo apps.
+    *
+    * Note the use of `TJSApplicationShell` which allows static customized theming through CSS variables defined in the
+    * component. See `./styles/init.scss` for static and themed app background styling defined. Also see
+    * `./src/MenuApplication.js` default options to enabled dark / light core theming support by adding `themed` to the
+    * class list for `TJSApplicationShell`.
+    */
    import { scale }                 from 'svelte/transition';
 
    import { TJSApplicationShell }   from '#runtime/svelte/component/application';
