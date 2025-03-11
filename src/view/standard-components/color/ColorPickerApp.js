@@ -18,9 +18,9 @@ export class ColorPickerApp extends SvelteApp
          title: 'TJSColordPicker',
          classes: ['tjs-essential-svelte-esm'],
          resizable: true,
-         width: 700,
+         width: 725,
          height: 815,
-         minWidth: 700,
+         minWidth: 725,
          minHeight: 815,
 
          svelte: {
