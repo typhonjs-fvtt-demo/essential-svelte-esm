@@ -23,21 +23,13 @@
    const message = writable('');
 
    /**
-    * `KeyBindingMap` for when the app frame / `elementRoot` is focused.
-    *
-    * When the key sequence of "f" "o" "o" is pressed in order the `message` store is updated.
-    */
-   const keyBindingMapAppWindow = {
-      'f o o': () => $message = 'App frame "FOO"'
-   };
-
-   /**
     * `KeyBindingMap` for when the `main` element is focused.
     *
-    * When the key sequence of "b" "a" "r" is pressed in order the `message` store is updated.
+    * When the key sequence of `f o o` or `b a r` is pressed in order the `message` store is updated.
     */
    const keyBindingMapMain = {
-      'b a r': () => $message = 'Main element "BAR"'
+      'f o o': () => $message = '"FOO" sequence pressed.',
+      'b a r': () => $message = '"BAR" sequence pressed.'
    };
 
    // Stores the timeout ID to cancel any previous `setTimeout` invocation.
@@ -50,15 +42,6 @@
 
       timeoutId = setTimeout(() => $message = '', 3000);
    }
-
-   // Shows how to activate `useTinykeys` on the app frame.
-   // You can apply actions directly to an HTML element.
-   // Not saying you should ever do this, but this is how to do it.
-   onMount(() =>
-   {
-      const actionReturn = useTinykeys(elementRoot, { keyBindingMap: keyBindingMapAppWindow });
-      return () => actionReturn.destroy();
-   });
 </script>
 
 <svelte:options accessors={true}/>
@@ -84,7 +67,7 @@
          (light red background) and the application frame.
          </p>
          <p>
-            - Type "f" "o" "o" when app frame is dragged / focused.<br>
+            - Type "f" "o" "o" when main element is focused.<br>
             - Type "b" "a" "r" when main element is focused.
          </p>
       </section>
@@ -99,6 +82,7 @@
    main {
       display: flex;
       flex-direction: column;
+      flex: 1;
 
       background: rgba(255, 0, 0, 0.1);
       gap: 1rem;

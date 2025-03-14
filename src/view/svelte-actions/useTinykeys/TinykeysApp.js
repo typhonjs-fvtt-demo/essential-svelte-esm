@@ -17,7 +17,7 @@ export class TinykeysApp extends SvelteApp
          id: 'trl-actions-tinykeys',
          classes: ['tjs-essential-svelte-esm'],
          title: 'EssentialESM.apps.actions.use-tinykeys.title',
-         height: '200px',
+         height: '230px',
          width: '400px',
 
          svelte: {
