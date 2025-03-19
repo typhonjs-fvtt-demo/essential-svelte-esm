@@ -21,7 +21,7 @@
        * To set up automatic serialization to a document you must provide a valid Foundry document _and_ a field name
        * to reference for content. This will automatically pull from and save content to that field name.
        */
-      // document: game.items.get('g1duUdZZ2kUVFXc8'),   // An item to edit description; note: replace w/ valid doc.
+      // document: game.items.get('oLODiCTIEblM1QrZ'),   // An item to edit description; note: replace w/ valid doc.
       // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
 
       // button: true      // Show edit button to launch editor when hovered; when false editor is open by default.
