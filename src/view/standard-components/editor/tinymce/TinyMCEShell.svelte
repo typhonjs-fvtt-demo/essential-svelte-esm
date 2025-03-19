@@ -84,7 +84,7 @@
        * {@link TinyMCEHelper.configTJS}
        *
        * At the moment there isn't API documentation, but do directly check the source code documentation here:
-       * @see https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/src/component/standard/editor/tinymce/TinyMCEHelper.js
+       * @see https://github.com/typhonjs-fvtt-lib/standard/blob/main/src/component/fvtt/editor/tinymce/TinyMCEHelper.js
        */
       // mceConfig: TinyMCEHelper.configBasic(),
       // mceConfig: TinyMCEHelper.configStandard(),   // This is the default config.
@@ -97,7 +97,7 @@
 
       /**
        * For a full listing of CSS variables available please refer to TJSTinyMCE source documentation:
-       * @see https://github.com/typhonjs-fvtt-lib/svelte-standard/blob/main/src/component/standard/editor/tinymce/TJSTinyMCE.svelte
+       * @see https://github.com/typhonjs-fvtt-lib/standard/blob/main/src/component/fvtt/editor/tinymce/TJSTinyMCE.svelte
        */
       // styles: { '--tjs-editor-toolbar-background': 'red' }, // Apply any inline styles / CSS variables
 
