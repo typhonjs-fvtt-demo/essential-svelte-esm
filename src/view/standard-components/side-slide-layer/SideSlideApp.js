@@ -41,7 +41,7 @@ export class SideSlideApp extends SvelteApp
             scope: 'world',
             config: false,
             default: {
-               top: 40,             // Numbers are treated as pixels unless `topUnit` defined / otherwise valid `top` CSS string.
+               top: 10,             // Numbers are treated as pixels unless `topUnit` defined / otherwise valid `top` CSS string.
                easingIn: 'linear',  // The name of a Svelte easing function.
                easingOut: 'linear', // The name of a Svelte easing function.
             },
@@ -52,8 +52,8 @@ export class SideSlideApp extends SvelteApp
       // Mounts an instance of TJSSideSlideLayer to the `#ui-middle` div of the Foundry UI to "dock" it next to the
       // Foundry sidebar. This component will stay active after this app has been closed.
       this.#sidebarSlideLayer = new TJSSideSlideLayer({
-         target: document.querySelector('#ui-middle'),
-         props: createLayerProps()
+         target: document.querySelector('#ui-right #sidebar menu'),
+         props: createLayerProps({ relative: true, sideAbs: false })
       });
    }
 

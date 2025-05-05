@@ -117,7 +117,7 @@ function createInputs(stores)
          efx,
          type: 'range-number',
          label: 'Top (vertical position):',
-         min: 40,
+         min: 10,
          max: 250,
          readonly: true,
          store: stores.top,
