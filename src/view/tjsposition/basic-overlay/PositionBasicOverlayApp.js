@@ -15,11 +15,10 @@ export class PositionBasicOverlayApp extends SvelteApp
    {
       return deepMerge(super.defaultOptions, {
          id: 'position-basic-overlay',
-         classes: ['tjs-essential-svelte-esm', 'themed'],
+         classes: ['tjs-essential-svelte-esm', 'themed'], // Include `themed` for global dark / light theming.
          // classes: ['tjs-essential-svelte-esm'], // No theme applied.
          width: 300,
          height: 300,
-         // resizable: true, // Set to true for a resizable empty app shell.
 
          svelte: {
             class: Overlay,
