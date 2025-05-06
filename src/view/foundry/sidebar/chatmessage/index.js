@@ -1,5 +1,3 @@
-import { FVTTVersion }                    from '#standard/fvtt';
-
 import MyChatMessage                      from './MyChatMessage.svelte';
 
 export { default as ChatDialogContent }   from './ChatDialogContent.svelte';
