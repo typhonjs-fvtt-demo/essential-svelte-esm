@@ -22,7 +22,9 @@ const settings = {
 const sessionConstants = {
    appStateClient: `${constants.moduleId}.${settings.appStateClient}`,
    themeDarkMode: `${constants.moduleId}.theme.dark`,
-   sidebarCustomTab: `${constants.moduleId}.sidebar.custom-tab`
+   sidebarCustomTab: `${constants.moduleId}.sidebar.custom-tab`,
+   sidebarReplaceTab: `${constants.moduleId}.sidebar.replace-tab`,
+   sidebarRemoveTab: `${constants.moduleId}.sidebar.remove-tab`
 };
 
 
@@ -36,6 +38,10 @@ export { constants, sessionConstants, settings };
  * @property {string} themeDarkMode Indicates whether dark mode is enabled.
  *
  * @property {string} sidebarCustomTab Indicates whether to load a custom Svelte sidebar tab.
+ *
+ * @property {string} sidebarReplaceTab Indicates whether to replace combat tracker with Svelte sidebar tab.
+ *
+ * @property {string} sidebarRemoveTab Indicates whether to remove the chat sidebar tab.
  */
 
 /**
