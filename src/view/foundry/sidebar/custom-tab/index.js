@@ -51,7 +51,8 @@ Hooks.on('init', () =>
             class: SidebarCustomTab,
             props: {
                message: '<p>This is a basic demo of mounting a Svelte component as a custom replacement sidebar tab / popout.</p>' +
-                '<p>FVTTSidebarControl also allows you to add or remove existing tabs.</p>'
+                '<p>FVTTSidebarControl also allows you to add or remove existing tabs.</p>' +
+                 '<p>Additionally, a custom Svelte icon that flashes red is used for the sidebar showing dynamic state</p>'
             }
          },
 
