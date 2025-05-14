@@ -25,7 +25,26 @@
   // --tjs-default-box-shadow-focus-visible: undefined
 }
 
-// App content background for main demo menu.
+// App content background for main demo menu. The CSS below handles when the `themed` class is included or omitted from
+// `./src/view/MenuApplication`. `TJSApplicationShell` allows you to mostly remove the app shell from core / game system
+// theme modifications when a static presentation / theme is desired. You may opt to add the `themed` class and provide
+// light / dark variations.
 #essential-svelte-esm {
-  --tjs-app-content-background: linear-gradient(135deg, rgba(52, 51, 52, 0.9) 10%, rgba(15, 14, 28, 0.9) 90%);
+  --tjs-app-content-padding: 8px;
+
+  // When the `themed` class is omitted:
+  &:not(.themed) {
+    --tjs-app-content-background: linear-gradient(135deg, rgba(52, 51, 52, 0.9) 10%, rgba(15, 14, 28, 0.9) 90%);
+  }
+
+  // When the `themed` class is included:
+  &.themed.theme-dark {
+    --menu-section-background: rgba(255, 255, 255, 0.2);
+    --tjs-app-background: darkred;
+  }
+
+  &.themed.theme-light {
+    --menu-section-background: rgba(0, 0, 0, 0.2);
+    --tjs-app-background: lightgreen;
+  }
 }
