@@ -15,7 +15,7 @@ provides the essentials with working with Svelte and various aspects that are pr
 Library. Please stop by the [![TyphonJS Discord](https://img.shields.io/discord/737953117999726592?label=TyphonJS)](https://discord.gg/mnbgN8f)
 Discord server to ask any questions.
 
-## Installation (Requires Foundry VTT version 10):
+## Installation (Requires Foundry VTT version 13):
 1. Fork this repo or better yet directly clone this repo following step two below. This repo is a demo repo, so use
 [template-svelte-esm](https://github.com/typhonjs-fvtt-demo/template-svelte-esm) to create your own new TRL based
 module.
