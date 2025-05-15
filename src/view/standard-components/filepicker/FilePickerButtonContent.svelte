@@ -43,7 +43,7 @@
 
 <main>
    <section>
-      <h3>TJSFileButton (modal does not close on glasspane input):</h3>
+      <h4>TJSFileButton (modal does not close on glasspane input):</h4>
       <TJSInput {input} label={'Standard:'} store={buttons[0].pickerOptions.store} />
       <TJSFileButton button={buttons[0]} />
 
@@ -52,13 +52,13 @@
    </section>
 
    <section>
-      <h3>TJSFileButton w/ customization & context menu:</h3>
+      <h4>TJSFileButton w/ customization & context menu:</h4>
       <TJSInput {input} label={'Standard:'} store={buttons[2].pickerOptions.store} />
       <TJSFileButton button={buttons[2]} />
    </section>
 
    <section>
-      <h3>TJSFileIconButton (modal does close on glasspane input):</h3>
+      <h4>TJSFileIconButton (modal does close on glasspane input):</h4>
       <TJSInput {input} label={'Standard:'} store={buttons[3].pickerOptions.store} />
       <TJSFileIconButton button={buttons[3]} />
 
@@ -67,7 +67,7 @@
    </section>
 
    <section>
-      <h3>TJSFileSlotButton w/ efx:</h3>
+      <h4>TJSFileSlotButton w/ efx:</h4>
       <TJSInput {input} label={'Standard:'} store={buttons[5].pickerOptions.store} />
       <TJSFileSlotButton button={buttons[5]}>
          <!-- Uses the 'filepath' context / store from TJSFileSlotButton to display an image -->
@@ -90,7 +90,7 @@
       --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
    }
 
-   h3 {
+   h4 {
       grid-column: span 3;  /* Span across all columns. */
       text-align: left;
    }

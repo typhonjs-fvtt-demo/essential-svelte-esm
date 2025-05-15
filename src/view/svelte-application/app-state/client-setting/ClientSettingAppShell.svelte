@@ -22,12 +22,14 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
-   This is a basic demo app that serializes position to client setting / local storage.
-   <p>
-   When the app is moved the app state is serialized after 500 milliseconds.
-   </p>
-   <p>
-   Note: If minimized on initial render the position state before being minimized is restored. Foundry doesn't support
-   initially rendering an app in the minimized state.
-   </p>
+   <main class=scrollable>
+      This is a basic demo app that serializes position to client setting / local storage.
+      <p>
+         When the app is moved the app state is serialized after 500 milliseconds.
+      </p>
+      <p>
+         Note: If minimized on initial render the position state before being minimized is restored. Foundry doesn't support
+         initially rendering an app in the minimized state.
+      </p>
+   </main>
 </ApplicationShell>

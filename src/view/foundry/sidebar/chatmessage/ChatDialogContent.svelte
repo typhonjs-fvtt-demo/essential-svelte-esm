@@ -21,5 +21,15 @@ more information.
    }
 </script>
 
-Creates a custom chat message with flag data that is used to mount `MyChatMessage` Svelte component.
-<button on:click={onClick}>Post Custom Chat Message</button>
+<main>
+   Creates a custom chat message with flag data that is used to mount `MyChatMessage` Svelte component.
+   <button on:click={onClick}>Post Custom Chat Message</button>
+</main>
+
+<style>
+   main {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+   }
+</style>

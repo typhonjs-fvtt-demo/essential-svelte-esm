@@ -15,7 +15,7 @@
 
 <main>
    <!-- svelte-ignore a11y-missing-attribute -->
-   <h3>Adjust `Position` of <a role=presentation on:click={() => application.bringToTop({ focus: false })}><u>parent application</u></a>:</h3>
+   <h4>Adjust `Position` of <a role=presentation on:click={() => application.bringToTop({ focus: false })}><u>parent application</u></a>:</h4>
 
    <TJSSvgFolder label={'Properties:'}>
       <PosProperties {position} />
@@ -43,9 +43,16 @@
 
 <style lang=scss>
    main {
+      --section-background-color: rgba(0, 0, 0, 0.1);
+
+      @at-root :global(body.theme-dark) & {
+         --section-background-color: rgba(208, 184, 163, 0.1);
+      }
+
       text-align: center;
       display: flex;
       flex-direction: column;
+      gap: 1rem;
 
       div {
          display: flex;

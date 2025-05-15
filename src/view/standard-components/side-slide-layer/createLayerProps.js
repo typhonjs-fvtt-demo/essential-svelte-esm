@@ -12,15 +12,23 @@ import {
  * Creates the constant props assigned to TJSSideSlideLayer. Note the three values assigned as `default` for the
  * world object store defined in {@link SideSlideApp}.
  *
+ * @param {object} [opts] - Options.
+ *
+ * @param {boolean} [opts.relative] - Add custom CSS positioning as `relative` instead of `absolute`.
+ *
+ * @param {boolean} [opts.sideAbs] - Apply absolute positioning for side alignment.
+ *
  * @returns {object} The props for TJSSideSlideLayer. The persisted prop data from game settings is also applied.
  */
-export function createLayerProps()
+export function createLayerProps({ relative = false, sideAbs = true } = {})
 {
    // Existing state stored as an object that is spread at the beginning of the returned object below.
    const existingState = game.settings.get(constants.moduleId, settings.sideSlideLayer) ?? {};
 
    return {
       side: 'right',       // 'right' or 'left'
+
+      sideAbs,
 
       // allowLocking: false,
       // clickToOpen: true,
@@ -39,6 +47,8 @@ export function createLayerProps()
 
       // Useful to set any inline styles / CSS variables.
       styles: {
+         position: relative ? 'relative' : 'absolute',
+
          /* Applies the color used for the sidebar */
          '--tjs-side-slide-layer-item-border-color-hover': 'var(--color-border-highlight-alt)',
 

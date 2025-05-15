@@ -48,7 +48,7 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot draggable={$storeDraggable} draggableOptions={$draggableOptionsStore}>
-   <main>
+   <main class=scrollable>
       <h1>Reactive `position`</h1>
 
       <section>

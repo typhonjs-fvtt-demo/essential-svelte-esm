@@ -33,7 +33,7 @@ export class AppStateSessionApp extends SvelteApp
          title: 'App State (Reload / Session Storage)',
          resizable: true,
          width: 500,
-         height: 175,
+         height: 185,
 
          svelte: {
             class: SessionAppShell,

@@ -35,8 +35,8 @@ export class PositionApplication extends SvelteApp
          title: 'App Position / Animation',
          resizable: true,
          minimizable: true,
-         width: 450,
-         height: 225,
+         width: 475,
+         height: 250,
 
          svelte: {
             class: PositionAppShell,
@@ -69,7 +69,7 @@ export class PositionApplication extends SvelteApp
       }, {
          classes: ['tjs-essential-svelte-esm'],
          headerButtonNoClose: true,
-         width: 500,
+         width: 550,
          top
       }).render(true, { focus: true });
    }

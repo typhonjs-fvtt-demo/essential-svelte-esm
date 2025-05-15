@@ -46,7 +46,9 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
-   <main>
+   <!-- You may use the core style `scrollable` to make the main content scrollable. Another option is
+        `TJSScrollContainer`. -->
+   <main class=scrollable>
       <h1>Hello {message}!</h1>
       <section>
          <label>
@@ -80,14 +82,25 @@
       flex-direction: column;
       gap: 0.5rem;
 
+      div.bottom {
+         margin-bottom: 3px; // For keyboard nav / link outline.
+      }
+
       div.container {
          display: flex;
          align-items: center;
          justify-content: center;
          border-radius: 10px;
-         border: 2px solid rgba(0, 0, 0, 0.2);
          padding: 10px;
          margin-top: auto;
+
+         /* You can use an existing core CSS variable that has dark / light theme changes. Try `--color-border` too. */
+         border: 1px solid var(--content-link-border-color);
+
+         /* For Sass you can alternatively use the `@at-root` directive to apply nested alternates */
+         //@at-root body.theme-dark & {
+         //   border: 2px solid red;
+         //}
       }
 
       h1 {

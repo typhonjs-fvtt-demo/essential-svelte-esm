@@ -72,7 +72,26 @@
    </TJSSvgFolder>
 </section>
 
-<style lang="scss">
+<style lang=scss>
+   // Due to how the theming system works one must explicitly provide a static theme for elements like `button` that
+   // are affected by global theming changes. The styles below hard lock `button` to the default dark theme.
+   button {
+      background-color: var(--color-cool-5-50);
+      border-color: var(--color-light-5);
+      color: var(--color-light-3);
+   }
+
+   button:hover {
+      background: var(--color-warm-2);
+      color: var(--color-light-1);
+      border-color: var(--color-light-3);
+   }
+
+   button:focus {
+      outline: 1px solid var(--color-warm-2);
+      box-shadow: 0 0 4px var(--color-warm-2);
+   }
+
    div {
       display: flex;
       flex-direction: column;
@@ -92,13 +111,16 @@
       --tjs-folder-summary-font-size: 1.05rem;
       --tjs-folder-summary-width: 100%;
 
-      color: #f0f0e0;
-      background: rgba(255, 255, 255, 0.15);
+      // See `./styles/init.scss` for `themed` alterations.
+      // See `./src/view/MenuApplication.js` default options `classes`; uncomment / add `themed` to classes for the
+      // dark & light themes to be applied to `TJSApplicationShell`.
+      background: var(--menu-section-background, rgba(255, 255, 255, 0.15));
+
       border-radius: 0.25rem;
       padding: 0.25rem;
 
       button:focus-visible {
-         outline: 4px dotted orange;
+         outline: var(--tjs-default-outline-focus-visible);
       }
    }
 </style>

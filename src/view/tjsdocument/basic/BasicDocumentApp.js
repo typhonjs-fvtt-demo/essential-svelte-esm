@@ -17,7 +17,7 @@ export class BasicDocumentApp extends SvelteApp
          id: 'tjs-document-basic',
          classes: ['tjs-essential-svelte-esm'],
          title: 'Reactive Document (basic)',
-         resizable: true,
+         resizable: false,
          width: 500,
          height: 'auto',
 

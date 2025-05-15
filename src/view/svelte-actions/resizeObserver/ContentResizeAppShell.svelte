@@ -44,8 +44,8 @@
    const { application } = getContext('#external');
 
    // Reactively updates the `SvelteApp` `position` minimum width with the `main` element offset width.
-   // An additional `16` pixels is added for the default Foundry left / right padding of `.window-content`.
-   $: application.position.set({ minWidth: $storeMainWidth + 16 });
+   // An additional `32` pixels is added for the default Foundry left / right padding of `.window-content`.
+   $: application.position.set({ minWidth: $storeMainWidth + 32 });
 </script>
 
 <svelte:options accessors={true}/>

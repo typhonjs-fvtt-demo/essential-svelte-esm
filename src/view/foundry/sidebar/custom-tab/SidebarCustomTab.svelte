@@ -1,10 +1,10 @@
 <script>
-
+   export let message = '';
 </script>
 
 <main>
-   <p>This is a basic demo of mounting a Svelte component as a custom sidebar tab / popout.</p>
-   <p>FVTTSidebarControl also allows you to replace or remove existing tabs.</p>
+   <!-- Note this is demo code and you should not allow arbitrary user generated content to be inserted as HTML -->
+   {@html message}
 </main>
 
 <style>

@@ -1,5 +1,3 @@
-import { FVTTVersion }                    from '#standard/fvtt';
-
 import MyChatMessage                      from './MyChatMessage.svelte';
 
 export { default as ChatDialogContent }   from './ChatDialogContent.svelte';
@@ -59,46 +57,23 @@ Hooks.once('ready', () =>
 
 Hooks.once('init', () =>
 {
-   if (FVTTVersion.isAtLeast(13))
+   Hooks.on('renderChatMessageHTML', (message, html) =>
    {
-      Hooks.on('renderChatMessageHTML', (message, html) =>
+      // Find associated flag data scoped to your module ID. This is the easiest way to determine that this message is
+      // associated with your module and has a Svelte component attached to the message content.
+      const flagData = message.getFlag('essential-svelte-esm', 'data');
+
+      if (typeof flagData === 'object')
       {
-         // Find associated flag data scoped to your module ID. This is the easiest way to determine that this message is
-         // associated with your module and has a Svelte component attached to the message content.
-         const flagData = message.getFlag('essential-svelte-esm', 'data');
+         const messageContentEl = html.querySelector(`.message-content`);
 
-         if (typeof flagData === 'object')
+         if (messageContentEl)
          {
-            const messageContentEl = html[0].querySelector(`.message-content`);
-
-            if (messageContentEl)
-            {
-               // Add the svelte component to the message instance loaded in client side memory.
-               message._svelteComponent = new MyChatMessage({ target: messageContentEl, props: flagData });
-            }
+            // Add the svelte component to the message instance loaded in client side memory.
+            message._svelteComponent = new MyChatMessage({ target: messageContentEl, props: flagData });
          }
-      });
-   }
-   else
-   {
-      Hooks.on('renderChatMessage', (message, html) =>
-      {
-         // Find associated flag data scoped to your module ID. This is the easiest way to determine that this message is
-         // associated with your module and has a Svelte component attached to the message content.
-         const flagData = message.getFlag('essential-svelte-esm', 'data');
-
-         if (typeof flagData === 'object')
-         {
-            const messageContentEl = html[0].querySelector(`.message-content`);
-
-            if (messageContentEl)
-            {
-               // Add the svelte component to the message instance loaded in client side memory.
-               message._svelteComponent = new MyChatMessage({ target: messageContentEl, props: flagData });
-            }
-         }
-      });
-   }
+      }
+   });
 });
 
 

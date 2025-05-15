@@ -71,11 +71,6 @@
 </ApplicationShell>
 
 <style>
-   /* Remove bad foundry universal style */
-   main, main > * {
-      flex: none;
-   }
-
    div {
       display: flex;
       gap: 0.5em;

@@ -17,8 +17,7 @@ import {
 
 import {
    ContentEditableApp,
-   ProseMirrorApp,
-   TinyMCEApp }               from './standard-components/editor';
+   ProseMirrorApp }           from './standard-components/editor';
 
 import {
    AnimateWAAPIApp,
@@ -53,7 +52,8 @@ export class MenuApplication extends SvelteApp
    {
       return deepMerge(super.defaultOptions, {
          id: 'essential-svelte-esm',
-         classes: ['tjs-essential-svelte-esm'],
+         classes: ['tjs-essential-svelte-esm'], // Without `themed` there is no dark / light selectors.
+         // classes: ['tjs-essential-svelte-esm', 'themed'], // Adding `themed` will enable core dark / light theming.
          headerButtonNoClose: true,
          resizable: false,
          popOut: false,
@@ -118,8 +118,7 @@ export class MenuApplication extends SvelteApp
             title: 'Standard Components (Editor)',
             entries: [
                { title: 'Content Editable', class: ContentEditableApp },
-               { title: 'TinyMCE', class: TinyMCEApp },
-               { title: 'ProseMirror', class: ProseMirrorApp },
+               { title: 'ProseMirror', class: ProseMirrorApp }
             ]
          },
          {
