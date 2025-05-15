@@ -2,7 +2,7 @@
    /**
     * This is a basic demo to show that you can load a Svelte component as the side slide layer item icon.
     *
-    * This is potentially useful to provide a stateful icon. Perhaps you need to draw the users attention to the panel
+    * This is potentially useful to provide a stateful icon. Perhaps you need to draw the user's attention to the panel
     * by changing the display of the icon or overlaying an additional element.
     *
     * In this basic example, a div element takes the entire icon space and there is CSS to change the icon color on a
