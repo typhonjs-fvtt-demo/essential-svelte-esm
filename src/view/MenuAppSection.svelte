@@ -5,6 +5,7 @@
 
    export let section = void 0;
 
+   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
    /**
