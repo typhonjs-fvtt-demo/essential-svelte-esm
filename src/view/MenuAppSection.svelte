@@ -13,7 +13,7 @@
    const folder = {
       label: section.title,
       options: { focusChevron: true },
-      store: application.reactive.sessionStorage.getStore(`trl-essential-esm-folder-${section.title}`)
+      store: application.reactive.sessionStorage.getStore(`trl-essential-esm-folder-${section.title}`, false)
    }
 
    const apps = new Map();
