@@ -36,7 +36,7 @@ export class PositionApplication extends SvelteApp
          resizable: true,
          minimizable: true,
          width: 475,
-         height: 250,
+         height: 260,
 
          svelte: {
             class: PositionAppShell,

@@ -26,9 +26,11 @@ export class HeaderButtonsApplication extends SvelteApp
          headerIcon: 'icons/magic/air/air-burst-spiral-blue-gray.webp',
          // headerIcon: 'fas fa-cogs',    // You may also use a Font Awesome icon.
          width: 600,
-         height: 190,
-         maxHeight: 190,
-         minHeight: 190,
+         height: 200,
+
+         // TRL supports programmatic setting of max / min height & width.
+         maxHeight: 200,
+         minHeight: 200,
          minWidth: 385,
 
          svelte: {
