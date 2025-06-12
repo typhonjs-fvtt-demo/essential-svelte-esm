@@ -10,7 +10,7 @@ const efxRipple = rippleFocus();
 const inputData = {
    duration: {
       type: 'range-number',
-      efx: efxRipple,
+      efxNumber: efxRipple,
       min: 100,
       max: 1000,
       step: 1,
