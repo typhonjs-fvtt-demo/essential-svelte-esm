@@ -79,7 +79,7 @@ export class SideSlideApp extends SvelteApp
          classes: ['tjs-essential-svelte-esm'],
          resizable: false,
          width: 500,
-         height: 450,
+         height: 'auto',
 
          svelte: {
             class: SideSlideAppShell,
