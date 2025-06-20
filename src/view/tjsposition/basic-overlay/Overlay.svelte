@@ -8,10 +8,10 @@
 
    const { application } = getContext('#external');
 
-   // Store position reference.
+   // TJSPosition reference / Svelte store.
    const position = application.position;
 
-   const storeResizable = application.reactive.storeAppOptions.resizable;
+   const { alwaysOnTop, resizable } = application.reactive.storeAppOptions;
 </script>
 
 <svelte:options accessors={true}/>
@@ -34,7 +34,8 @@
         role=application>
       <h3 class=drag-target>Context click to close</h3>
       <input type=text placeholder="An input showing focus control" />
-      <label>Resizable: <input type=checkbox bind:checked={$storeResizable}></label>
+      <label>Always on top: <input type=checkbox bind:checked={$alwaysOnTop}></label>
+      <label>Resizable: <input type=checkbox bind:checked={$resizable}></label>
    </div>
 </EmptyApplicationShell>
 
