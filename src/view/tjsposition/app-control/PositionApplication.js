@@ -68,6 +68,7 @@ export class PositionApplication extends SvelteApp
       setTimeout(() =>
       {
          this.#dialog = new TJSDialog({
+            alwaysOnTop: true,
             title: 'Adjust Position',
             content: {
                class: DialogContent,
