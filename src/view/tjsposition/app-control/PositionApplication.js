@@ -51,7 +51,7 @@ export class PositionApplication extends SvelteApp
    /** @inheritDoc */
    async close(options)
    {
-      this.#dialog.close();
+      this.#dialog?.close();
       return super.close(options);
    }
 
@@ -60,17 +60,26 @@ export class PositionApplication extends SvelteApp
       // Offset dialog from current position.
       const top = this.position.top + this.position.height + 10;
 
-      this.#dialog = new TJSDialog({
-         title: 'Adjust Position',
-         content: {
-            class: DialogContent,
-            props: { application: this }
-         }
-      }, {
-         classes: ['tjs-essential-svelte-esm'],
-         headerButtonNoClose: true,
-         width: 550,
-         top
-      }).render(true, { focus: true });
+      /**
+       * Note: With Svelte 4.2.20 it appears to mount another app / Svelte component from here must be scheduled on the
+       * next macrotask otherwise _sometimes_ the dialog component is mounted / visual just prior to when final
+       * positioning is updated. This is a special case.
+       */
+      setTimeout(() =>
+      {
+         this.#dialog = new TJSDialog({
+            alwaysOnTop: true,
+            title: 'Adjust Position',
+            content: {
+               class: DialogContent,
+               props: { application: this }
+            }
+         }, {
+            classes: ['tjs-essential-svelte-esm'],
+            headerButtonNoClose: true,
+            width: 550,
+            top
+         }).render(true, { focus: true });
+      }, 0);
    }
 }
