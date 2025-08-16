@@ -65,7 +65,8 @@
 
 <section>
    <TJSSvgFolder {folder}>
-      <div>
+      <!-- Note the trick of applying `themed theme-dark` to the div to force buttons to core dark theme -->
+      <div class="themed theme-dark">
          {#each section.entries as entry}
             <button on:click={() => onClick(entry)}>{entry.title}</button>
          {/each}
@@ -74,25 +75,6 @@
 </section>
 
 <style lang=scss>
-   // Due to how the theming system works one must explicitly provide a static theme for elements like `button` that
-   // are affected by global theming changes. The styles below hard lock `button` to the default dark theme.
-   button {
-      background-color: var(--color-cool-5-50);
-      border-color: var(--color-light-5);
-      color: var(--color-light-3);
-   }
-
-   button:hover {
-      background: var(--color-warm-2);
-      color: var(--color-light-1);
-      border-color: var(--color-light-3);
-   }
-
-   button:focus {
-      outline: 1px solid var(--color-warm-2);
-      box-shadow: 0 0 4px var(--color-warm-2);
-   }
-
    div {
       display: flex;
       flex-direction: column;
