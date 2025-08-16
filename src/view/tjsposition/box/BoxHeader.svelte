@@ -110,6 +110,7 @@
    div.group {
       display: flex;
       padding-top: 0.25em;
+      gap: 0.25em;
    }
 
    input { color: white; margin: 3px 3px }
@@ -130,6 +131,7 @@
       display: flex;
       height: fit-content;
       align-items: center;
+      gap: 0.25em;
    }
 
    .flex-vert {
@@ -145,6 +147,7 @@
       align-items: center;
       justify-content: center;
       color: white;
+      gap: 0.25em;
    }
 
    span {

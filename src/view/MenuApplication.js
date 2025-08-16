@@ -52,8 +52,21 @@ export class MenuApplication extends SvelteApp
    {
       return deepMerge(super.defaultOptions, {
          id: 'essential-svelte-esm',
-         classes: ['tjs-essential-svelte-esm'], // Without `themed` there is no dark / light selectors.
-         // classes: ['tjs-essential-svelte-esm', 'themed'], // Adding `themed` will enable core dark / light theming.
+
+         // In this demo `TJSApplicationShell` is used which provides a way to exclude your app from overt game system
+         // styles, but alas some of the v13 core styles are hard to opt out / escape from as things go.
+
+         // Without `themed` there are no theme selectors on the app `div`. However, see `MenuAppSection.svelte` where
+         // `themed theme-dark` is applied around the buttons div to lock the buttons to the dark theme.
+         classes: ['tjs-essential-svelte-esm'],
+
+         // Adding `theme-dark` locks to the core dark theme. There are explicit theme overrides in `styles/init.scss`.
+         // classes: ['tjs-essential-svelte-esm', 'theme-dark'],
+
+         // Adding `themed` enables core dark / light theming. You'll notice the red / green colors. `styles/init.scss`
+         // gives an example of explicit theming.
+         // classes: ['tjs-essential-svelte-esm', 'themed'],
+
          headerButtonNoClose: true,
          resizable: false,
          popOut: false,

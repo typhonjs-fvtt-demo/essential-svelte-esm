@@ -28,23 +28,8 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
-   <section>
-      <p>
-         `TJSSideSlideLayer` provides an absolutely position layer taking up the entire space of the current stacking
-         context. When used inside of an `ApplicationShell` this is the entire app window. Notice the tabs to the right
-         side. Hover over them to reveal the tab. Right click on a tab to lock it. Below are several of the reactive
-         controls available to control the side slide layer.
-      </p>
-      <p>
-         You can mount Svelte components as panels that slide out. You can also mount custom components as the tab icon
-         content versus just using an icon. The "target" panel will show tokens that are currently targeted.
-      </p>
-      <p>
-         When opened this app also mounts `TJSSideSlideLayer` in the main Foundry / browser window to an element that
-         allows the side slide layer to be positioned in a way that works smoothly with the main Foundry sidebar.
-      </p>
-   </section>
    <main>
+      <!-- The layer is absolutely positioned / inside `<main>` to target layer CSS var -->
       <TJSSideSlideLayer {...createLayerProps()}
                          bind:allowLocking={$allowLocking}
                          bind:clickToOpen={$clickToOpen}
@@ -54,51 +39,87 @@
                          bind:side={$side}
                          bind:top={$top} />
 
-      <div>
-         <TJSInput input={inputs.side} />
-         <TJSInput input={inputs.easingIn} />
-         <TJSInput input={inputs.easingOut} />
-      </div>
-      <div>
-         <TJSInput input={inputs.duration} />
-         <TJSInput input={inputs.allowLocking} />
-      </div>
-      <div>
-         <TJSInput input={inputs.top} />
-         <TJSInput input={inputs.clickToOpen} />
-      </div>
+      <section class=text>
+         <p>
+            `TJSSideSlideLayer` provides an absolutely position layer taking up the entire space of the current stacking
+            context. To accomplish a consistent stacking context across core dark / light themes one is created for the
+            content area of this app. Notice the tabs to the right side. Hover over them to reveal the tab. Right
+            click on a tab to lock it. Below are several of the reactive controls available to control the side slide
+            layer.
+         </p>
+         <p>
+            You can mount Svelte components as panels that slide out. You can also mount custom components as the tab
+            icon content versus just using an icon. The "target" panel will show tokens that are currently targeted.
+         </p>
+         <p>
+            When opened this app also mounts `TJSSideSlideLayer` in the main Foundry / browser window to an element that
+            allows the side slide layer to be positioned in a way that works smoothly with the main Foundry sidebar.
+         </p>
+      </section>
+
+      <!-- Use `standard-form` class from Foundry / core styles -->
+      <section class=standard-form>
+         <fieldset>
+            <legend>Side Slide Controls</legend>
+
+            <div class=row>
+               <TJSInput input={inputs.side} />
+               <TJSInput input={inputs.easingIn} />
+               <TJSInput input={inputs.easingOut} />
+            </div>
+
+            <div class=grid>
+               <TJSInput input={inputs.duration} />
+               <TJSInput input={inputs.allowLocking} />
+
+               <TJSInput input={inputs.top} />
+               <TJSInput input={inputs.clickToOpen} />
+            </div>
+         </fieldset>
+      </section>
    </main>
 </ApplicationShell>
 
-<style>
+<style lang=scss>
    div {
-      display: flex;
-      gap: 0.5em;
-      align-items: center;
+      &.row {
+         display: flex;
+         gap: 0.5em;
+         align-items: center;
+      }
+
+      &.grid {
+         display: grid;
+         grid-template-columns: auto 1fr auto auto auto;
+         align-items: center;
+         gap: 0.5em;
+      }
    }
 
    main {
+      // Create forced stacking context; this is necessary as the `blur` on `window-content` for dark mode for core
+      // forces a stacking context. This ensures that light mode also has the same stacking context for the side slide
+      // layer.
+      position: relative;
+      z-index: 0;
+
       display: flex;
       flex-direction: column;
       gap: 0.5em;
-      margin-top: auto;
       height: fit-content;
 
-      background: var(--tjs-input-background);
-      border: var(--tjs-input-border);
-      border-radius: var(--tjs-input-border-radius);
-      padding: 0.5em;
-
-      --tjs-input-number-width: 5rem;
+      // Alignment number inputs / TJSInputRangeNumber.
       --tjs-input-number-text-align: center;
 
-      /* Provide a margin for the side slide layer */
-      --tjs-side-slide-layer-margin: 0 8px 0 8px;
+      // Provide a margin for the side slide layer offsetting it further right / up.
+      --tjs-side-slide-layer-margin: 0 -8px 0 -8px;
 
-      /*--tjs-side-slide-layer-item-diameter: 50px;*/
+      // An example of changing the side slide layer tab size
+      //--tjs-side-slide-layer-item-diameter: 50px;
    }
 
-   section {
+   section.text {
+      // Indent text to leave room for side slide layer.
       padding: 0 40px;
    }
 </style>

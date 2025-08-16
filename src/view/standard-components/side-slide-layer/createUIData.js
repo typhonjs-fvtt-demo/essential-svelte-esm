@@ -76,7 +76,7 @@ function createInputs(stores)
       },
 
       duration: {
-         efx,
+         efxNumber: efx,
          type: 'range-number',
          label: 'Duration (ms):',
          min: 200,
@@ -114,11 +114,11 @@ function createInputs(stores)
       },
 
       top: {
-         efx,
+         efxNumber: efx,
          type: 'range-number',
          label: 'Top (vertical position):',
-         min: 10,
-         max: 250,
+         min: 0,
+         max: 215,
          readonly: true,
          store: stores.top,
          enabled
