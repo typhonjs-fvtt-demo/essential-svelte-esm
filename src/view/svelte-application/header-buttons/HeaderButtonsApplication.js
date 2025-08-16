@@ -25,6 +25,7 @@ export class HeaderButtonsApplication extends SvelteApp
          title: 'Essential Svelte (ESM) - Header Buttons',
          headerIcon: 'icons/magic/air/air-burst-spiral-blue-gray.webp', // Supports common image formats and SVG.
          // headerIcon: 'fas fa-cogs',    // You may also use a Font Awesome icon.
+         // headerIcon: 'modules/essential-svelte-esm/assets/svg/alien-icon.svg',   // You may also use SVG.
          width: 600,
          height: 200,
 
