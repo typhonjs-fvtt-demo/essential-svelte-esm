@@ -32,19 +32,8 @@
 #essential-svelte-esm {
   --tjs-app-content-padding: 8px;
 
-  // When the `themed` class is omitted:
-  &:not(.themed) {
-    --tjs-app-content-background: linear-gradient(135deg, rgba(52, 51, 52, 0.9) 10%, rgba(15, 14, 28, 0.9) 90%);
-  }
-
-  // When the `themed` class is included:
+  // When the SvelteApp `theme` option is `dark. To target the `light` theme use `&.themed.theme-light {}`.
   &.themed.theme-dark {
-    --menu-section-background: rgba(255, 255, 255, 0.2);
-    --tjs-app-background: darkred;
-  }
-
-  &.themed.theme-light {
-    --menu-section-background: rgba(0, 0, 0, 0.2);
-    --tjs-app-background: lightgreen;
+    --tjs-app-content-background: linear-gradient(135deg, rgba(52, 51, 52, 0.9) 10%, rgba(15, 14, 28, 0.9) 90%);
   }
 }
