@@ -62,7 +62,6 @@
       <div class=container>
          <div class=column>
             <div style="display: flex; align-items: center;">Items by type ->&nbsp;<TJSInput {input}/>&nbsp;: {$wildcard.index.length}</div>
-            <br>
             <ol>
                {#each [...$wildcard] as item (item.id)}
                   <li animate:flip={{duration: 200}}>{item.name}</li>
@@ -78,6 +77,7 @@
       text-align: center;
       display: flex;
       flex-direction: column;
+      max-height: 90vh;
 
       --tjs-input-text-width: 100px;
 
@@ -119,6 +119,11 @@
 
       li {
          text-align: start
+      }
+
+      ol {
+         overflow-y: auto;
+         max-height: 75vh;
       }
    }
 </style>
