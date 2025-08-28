@@ -50,7 +50,11 @@
       touch-action: none;
    }
 
-   :global(.themed) label {
+   label {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+
       /* This can be removed once Foundry core updates styles for themed labels */
       color: var(--color-text-primary);
    }
