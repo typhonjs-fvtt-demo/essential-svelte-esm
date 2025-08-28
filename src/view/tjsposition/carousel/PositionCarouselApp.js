@@ -15,12 +15,13 @@ export class PositionCarouselApp extends SvelteApp
    {
       return deepMerge(super.defaultOptions, {
          id: 'position-carousel',
-         classes: ['tjs-essential-svelte-esm', 'theme-dark'],  // You may explicitly include a theme.
+         classes: ['tjs-essential-svelte-esm'],  // You may explicitly include a theme.
          title: 'Position (Carousel)',
          width: 775,
          height: 420,
          resizable: false,
          minimizable: true,
+         theme: 'dark',
 
          svelte: {
             class: CarouselAppShell,

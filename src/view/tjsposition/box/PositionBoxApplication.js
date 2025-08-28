@@ -15,12 +15,13 @@ export class PositionBoxApplication extends SvelteApp
    {
       return deepMerge(super.defaultOptions, {
          id: 'position-box',
-         classes: ['tjs-essential-svelte-esm', 'theme-dark'],  // You may explicitly include a theme.
+         classes: ['tjs-essential-svelte-esm'],
          title: 'Position (Box)',
          width: 860,
          height: 800,
          resizable: true,
          minimizable: true,
+         theme: 'dark',
 
          svelte: {
             class: BoxLayer,

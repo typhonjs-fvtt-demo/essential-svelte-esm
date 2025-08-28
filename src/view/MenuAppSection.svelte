@@ -65,8 +65,7 @@
 
 <section>
    <TJSSvgFolder {folder}>
-      <!-- Note the trick of applying `themed theme-dark` to the div to force buttons to core dark theme -->
-      <div class="themed theme-dark">
+      <div>
          {#each section.entries as entry}
             <button on:click={() => onClick(entry)}>{entry.title}</button>
          {/each}

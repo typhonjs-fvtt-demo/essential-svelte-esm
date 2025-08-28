@@ -70,7 +70,7 @@ export class HeaderButtonsApplication extends SvelteApp
       const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode, true);
 
       buttons.unshift({
-         class: 'theme-dark',
+         class: 'theme-dark', // You can add a class
          icon: 'fas fa-moon',
          label: themeDarkMode ? 'Dark Mode disable' : 'Dark Mode enable',     // Additional TRL option; sets hover title.
          styles: themeDarkMode ? { color: 'lightblue' } : { color: 'white' }, // Additional TRL option; inline styles.
