@@ -74,7 +74,7 @@
          newTargets.push({
             uuid: target?.document?.uuid,
             url: target?.texture?.baseTexture?.resource?.src,
-            title: target?.document?.name,
+            tooltip: target?.document?.name,
          });
       }
 

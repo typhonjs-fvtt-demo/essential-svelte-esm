@@ -60,13 +60,13 @@ export function createLayerProps({ relative = false, sideAbs = true } = {})
          {
             icon: 'fas fa-crosshairs-simple',      // Font awesome icon _or_ a Svelte configuration object.
             svelte: { class: CurrentTargetPanel }, // A Svelte configuration object for the panel.
-            title: 'Current Targets'               // Optional title / tooltip.
+            tooltip: 'Current Targets'               // Optional title / tooltip.
          },
          {
             condition: () => game.user.isGM,       // You may provide a function whether to display the item.
             icon: { class: DynamicIcon },          // Loads a Svelte component as item icon.
             svelte: { class: DummyPanel },
-            title: 'Dummy Panel'
+            tooltip: 'Dummy Panel'
          }
       ]
    };
