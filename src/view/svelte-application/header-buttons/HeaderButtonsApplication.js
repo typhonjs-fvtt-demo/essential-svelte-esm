@@ -53,7 +53,7 @@ export class HeaderButtonsApplication extends SvelteApp
     * - {Function}   onContextMenu - Callback for right click / contextmenu keyboard event.
     * - {Function}   onPress - Callback for left click / 'Enter' key.
     * - {Record<string, string>} styles - Inline styles to apply to the button.
-    * - {string}     title - A tooltip to display when hovered.
+    * - {string}     label - A tooltip to display when hovered.
     *
     * You may also pass an object containing a 'svelte' property which is a TJSSvelte.Config.Embed / Svelte
     * configuration object to load a Svelte component in the app header.
@@ -72,7 +72,7 @@ export class HeaderButtonsApplication extends SvelteApp
       buttons.unshift({
          class: 'theme-dark', // You can add a class
          icon: 'fas fa-moon',
-         label: themeDarkMode ? 'Dark Mode disable' : 'Dark Mode enable',     // Additional TRL option; sets hover title.
+         label: themeDarkMode ? 'Dark Mode disable' : 'Dark Mode enable',     // Additional TRL option; sets tooltip.
          styles: themeDarkMode ? { color: 'lightblue' } : { color: 'white' }, // Additional TRL option; inline styles.
          // keepMinimized: true,                         // When true the header button remains when app is minimized.
 
