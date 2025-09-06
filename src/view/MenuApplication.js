@@ -66,7 +66,7 @@ export class MenuApplication extends SvelteApp
          transformOrigin: null,
          title: 'EssentialESM.apps.menu.title',
          zIndex: 95,
-         theme: 'dark',
+         themeName: 'dark',
 
          svelte: {
             class: MenuAppShell,

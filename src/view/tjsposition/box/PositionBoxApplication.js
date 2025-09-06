@@ -21,7 +21,7 @@ export class PositionBoxApplication extends SvelteApp
          height: 800,
          resizable: true,
          minimizable: true,
-         theme: 'dark',
+         themeName: 'dark',
 
          svelte: {
             class: BoxLayer,

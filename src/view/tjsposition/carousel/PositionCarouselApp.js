@@ -21,7 +21,7 @@ export class PositionCarouselApp extends SvelteApp
          height: 420,
          resizable: false,
          minimizable: true,
-         theme: 'dark',
+         themeName: 'dark',
 
          svelte: {
             class: CarouselAppShell,
