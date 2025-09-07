@@ -1,4 +1,5 @@
 import { SvelteApp }          from '#runtime/svelte/application';
+import { ThemeObserver }      from '#runtime/util/dom/theme';
 import { deepMerge }          from '#runtime/util/object';
 
 import HeaderButtonsAppShell  from './HeaderButtonsAppShell.svelte';
@@ -67,12 +68,14 @@ export class HeaderButtonsApplication extends SvelteApp
 
       const storage = this.reactive.sessionStorage;
 
-      const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode, true);
+      // Initialize the session storage state to the current platform theme dark state.
+      const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode, ThemeObserver.isTheme('dark'));
+      this.reactive.themeName = themeDarkMode ? 'dark' : 'light';
 
       buttons.unshift({
          class: 'theme-dark', // You can add a class
          icon: 'fas fa-moon',
-         label: themeDarkMode ? 'Dark Mode disable' : 'Dark Mode enable',     // Additional TRL option; sets tooltip.
+         label: themeDarkMode ? 'Light Theme' : 'Dark Theme',     // Additional TRL option; sets tooltip.
          styles: themeDarkMode ? { color: 'lightblue' } : { color: 'white' }, // Additional TRL option; inline styles.
          // keepMinimized: true,                         // When true the header button remains when app is minimized.
 
@@ -81,7 +84,10 @@ export class HeaderButtonsApplication extends SvelteApp
          {
             const newThemeDarkMode = storage.swapItemBoolean(sessionConstants.themeDarkMode);
 
-            button.label = newThemeDarkMode ? 'Dark Mode disable' : 'Dark Mode enable';
+            // Reactive control over local app theme by theme name.
+            this.reactive.themeName = newThemeDarkMode ? 'dark' : 'light';
+
+            button.label = newThemeDarkMode ? 'Light Theme' : 'Dark Theme';
             button.styles = newThemeDarkMode ? { color: 'lightblue' } : { color: 'white' };
          }
 
@@ -107,6 +113,18 @@ export class HeaderButtonsApplication extends SvelteApp
          }
       });
 
+      // You can use an image for the icon.
+      buttons.unshift({
+         icon: 'icons/vtt.png',
+         label: 'Image icon',
+      });
+
+      // You can use SVG for the icon.
+      buttons.unshift({
+         icon: 'modules/essential-svelte-esm/assets/svg/alien-icon.svg',
+         label: 'SVG icon',
+      });
+
       buttons.unshift({
          svelte: {
             class: ProgressBar
@@ -117,7 +135,7 @@ export class HeaderButtonsApplication extends SvelteApp
       buttons.unshift({
          class: 'test-left',
          icon: 'fas fa-check',
-         label: 'Test',
+         label: 'Left aligned',
          alignLeft: true,
       });
 
