@@ -7,11 +7,11 @@
 
    // Manual tracking of `headerButtonNoLabel` option to apply to custom component.
    const { application } = getContext('#external');
-   const headerButtonNoLabel = application.reactive.storeAppOptions.headerButtonNoLabel;
+   const { headerButtonNoLabel } = application.reactive.storeAppOptions;
 </script>
 
 <!-- A simple text element / demo -->
-<span use:popoverTooltip={$headerButtonNoLabel ? null : 'Svelte Component'}>{label}</span>
+<span use:popoverTooltip={{ tooltip: $headerButtonNoLabel ? void 0 : 'Svelte Component' }}>{label}</span>
 
 <style>
    span {

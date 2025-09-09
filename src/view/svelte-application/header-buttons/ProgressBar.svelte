@@ -5,13 +5,13 @@
 
    // Manual tracking of `headerButtonNoLabel` option to apply to custom component.
    const { application } = getContext('#external');
-   const headerButtonNoLabel = application.reactive.storeAppOptions.headerButtonNoLabel;
+   const { headerButtonNoLabel } = application.reactive.storeAppOptions;
 </script>
 
 <!-- Add 'keep-minimized' to maintain the component when app is minimized -->
 <!-- This also allows this element to be double clicked to minimize / maximize the app -->
 <progress class=keep-minimized max=100
-   use:popoverTooltip={$headerButtonNoLabel ? null : 'Kept when minimized'}></progress>
+   use:popoverTooltip={{ tooltip: $headerButtonNoLabel ? void 0 : 'Kept when minimized' }}></progress>
 
 <style>
    progress {
