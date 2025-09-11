@@ -34,7 +34,7 @@
 
    $: draggableOptionsStore = optionStores[$storeDraggable];
 
-   $:
+   $: if ($storeDebug)
    {
       const boundingRect = $transform.boundingRect;
 
