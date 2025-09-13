@@ -4,12 +4,13 @@
 
    export let elementRoot = void 0;
 
-   const application = getContext('#external').application;
+   const { application } = getContext('#external');
 
    // Provides two-way bindings to application options. By using the stores external updates will be received here.
-   const headerButtonNoClose = application.reactive.storeAppOptions.headerButtonNoClose;
-   const headerButtonNoLabel = application.reactive.storeAppOptions.headerButtonNoLabel;
-   const headerNoTitleMinimized = application.reactive.storeAppOptions.headerNoTitleMinimized;
+   const {
+      headerButtonNoClose,
+      headerButtonNoLabel,
+      headerNoTitleMinimized } = application.reactive.storeAppOptions;
 </script>
 
 <svelte:options accessors={true}/>

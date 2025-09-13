@@ -10,6 +10,18 @@ import { sessionConstants }   from '#constants';
 
 export class HeaderButtonsApplication extends SvelteApp
 {
+   constructor(options)
+   {
+      super(options);
+
+      // Initialize the session storage state to the current platform theme dark state if not already set.
+      const themeDarkMode = this.reactive.sessionStorage.getItem(sessionConstants.themeDarkMode,
+       ThemeObserver.isTheme('dark'));
+
+      // Set explicit app theme based on current session storage state.
+      this.reactive.themeName = themeDarkMode ? 'dark' : 'light';
+   }
+
    /**
     * Default Application options
     *
@@ -67,10 +79,7 @@ export class HeaderButtonsApplication extends SvelteApp
       const buttons = super._getHeaderButtons();
 
       const storage = this.reactive.sessionStorage;
-
-      // Initialize the session storage state to the current platform theme dark state.
-      const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode, ThemeObserver.isTheme('dark'));
-      this.reactive.themeName = themeDarkMode ? 'dark' : 'light';
+      const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode);
 
       buttons.unshift({
          class: 'theme-dark', // You can add a class
