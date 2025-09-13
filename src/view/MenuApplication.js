@@ -27,6 +27,7 @@ import {
 import {
    AppStateClientSettingApp,
    AppStateSessionApp,
+   ContainerQueryApp,
    HeaderButtonsApplication,
    HelloFoundryApplication }  from './svelte-application';
 
@@ -90,6 +91,7 @@ export class MenuApplication extends SvelteApp
             entries: [
                { title: 'Hello Foundry', class: HelloFoundryApplication },
                { title: 'Header Buttons', class: HeaderButtonsApplication },
+               { title: 'Container Queries', class: ContainerQueryApp },
                { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
                { title: 'App State (Session Storage)', class: AppStateSessionApp },
             ]
