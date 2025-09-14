@@ -1,16 +1,4 @@
 <script>
-   /**
-    * All app shells support container queries (CQ) out of the box with the following container names:
-    * - `tjs-app-window` (For the entire app window size including header bar)
-    * - `tjs-app-window-content` (For the app window content size)
-    *
-    * This is a basic demo as CQ are a nuanced topic. They are like media queries, but allow
-    * significantly more control over dynamic app window layout.
-    *
-    * Of note is that you can not have the app `width` as `auto` and also use CQ at the same time. TRL will disable
-    * CQ when the app position width is 'auto'. You may however set `height` as `auto`.
-    */
-
    import { getContext }         from 'svelte';
 
    import { ApplicationShell }   from '#runtime/svelte/component/application';
