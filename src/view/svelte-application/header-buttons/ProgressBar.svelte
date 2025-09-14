@@ -16,8 +16,9 @@
 <style>
    progress {
       height: 30px;
+      width: 100%;
       max-width: 150px;
       padding: 0 3px;
-      cursor: default;
+      cursor: var(--tjs-cursor-default, default);
    }
 </style>
