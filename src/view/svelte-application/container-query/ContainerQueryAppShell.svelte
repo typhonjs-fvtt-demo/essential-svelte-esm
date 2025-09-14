@@ -19,14 +19,15 @@
 
    export let elementRoot = void 0;
 
+   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
    const { width, height } = application.position.stores;
 
    // What is all this below? Well CQ works by the inner width of an element so that is the width of the element minus
-   // the left / right border width. Most Foundry apps have a border width constraint of 2px. The width / height
-   // display shows the app inner constraints that makes it easier to reason about what the container queries are
-   // doing.
+   // the left / right border width. Most Foundry apps have a total border width constraint of 2px. The width / height
+   // display shows the app inner constraints and that makes it easier to reason about what the container queries are
+   // doing with whole numbers.
 
    let innerWidth = 0;
    let innerHeight = 0;
