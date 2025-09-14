@@ -21,6 +21,9 @@ export class ExplicitThemeApp extends SvelteApp
          width: 800,
          height: 'auto',
 
+         // You may provide an explicit app theme override as an app option; `dark` or `light`.
+         // themeName: 'light',
+
          title: 'EssentialESM.apps.svelte-app.explicit-theme.title',
 
          svelte: {
