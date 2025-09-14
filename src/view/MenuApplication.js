@@ -25,6 +25,7 @@ import {
    TinykeysApp }              from './svelte-actions';
 
 import {
+   ActiveClassesApp,
    AppStateClientSettingApp,
    AppStateSessionApp,
    ContainerQueryApp,
@@ -94,6 +95,7 @@ export class MenuApplication extends SvelteApp
                { title: 'Explicit App Theme', class: ExplicitThemeApp },
                { title: 'Header Buttons', class: HeaderButtonsApplication },
                { title: 'Container Queries', class: ContainerQueryApp },
+               { title: 'Reactive App Classes', class: ActiveClassesApp },
                { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
                { title: 'App State (Session Storage)', class: AppStateSessionApp },
             ]
