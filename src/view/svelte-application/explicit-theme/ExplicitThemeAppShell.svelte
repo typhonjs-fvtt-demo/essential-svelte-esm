@@ -9,8 +9,10 @@
    /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
+   // Readable store for global Foundry theme name.
    const globalThemeName = ThemeObserver.stores.themeName;
 
+   // Writable store for explicit app theme override.
    const appThemeName = application.reactive.storeAppOptions.themeName;
 </script>
 

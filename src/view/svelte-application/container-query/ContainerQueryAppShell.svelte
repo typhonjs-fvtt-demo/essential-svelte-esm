@@ -22,31 +22,25 @@
    /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
-   const { width, height } = application.position.stores;
+   const { width } = application.position.stores;
 
    // What is all this below? Well CQ works by the inner width of an element so that is the width of the element minus
    // the left / right border width. Most Foundry apps have a total border width constraint of 2px. The width / height
    // display shows the app inner constraints and that makes it easier to reason about what the container queries are
-   // doing with whole numbers.
+   // doing with round numbers rather than offset by 2.
 
    let innerWidth = 0;
-   let innerHeight = 0;
    let borderConstraintW = 0;
-   let borderConstraintH = 0;
 
    onMount(() =>
    {
       const styles = getComputedStyle(elementRoot);
       borderConstraintW = Math.ceil(parseFloat(styles.borderLeftWidth) + parseFloat(styles.borderRightWidth));
-      borderConstraintH = Math.ceil(parseFloat(styles.borderTopWidth) + parseFloat(styles.borderBottomWidth));
 
-      application.position.minWidth = 300 + borderConstraintH;
-      application.position.minHeight = 300 + borderConstraintH;
-      application.position.maxHeight = 300 + borderConstraintH;
+      application.position.minWidth = 300 + borderConstraintW;
    });
 
    $: innerWidth = $width - borderConstraintW;
-   $: innerHeight = $height - borderConstraintH;
 </script>
 
 <svelte:options accessors={true}/>
@@ -59,7 +53,7 @@
          </p>
       </section>
 
-      <!-- Horizontal color bars that depending on app width column 2 & 3 will be set to `display: none` -->
+      <!-- Horizontal color bars that depending on app width column 2 & 3 will be set to `display: none` via CQ. -->
       <section class=colors>
          <div class=color-bar></div>
          <div class="color-bar column2"></div>
@@ -74,10 +68,6 @@
                <label>
                   <span>Width:</span>
                   <input type=text bind:value={innerWidth} readonly />
-               </label>
-               <label>
-                  <span>Height:</span>
-                  <input type=text bind:value={innerHeight} readonly />
                </label>
             </div>
          </fieldset>
@@ -128,8 +118,8 @@
       }
    }
 
-   // Width >= 500px set color to green.
-   @container tjs-app-window (width >= 500px) {
+   // Width >= 600px set color to green.
+   @container tjs-app-window (width >= 600px) {
       main {
          --color: green;
       }

@@ -28,7 +28,7 @@
    <main>
       <section class=text>
          <p>
-            SvelteApp allows easy reactive control of classes added / deleted from the main app window through the
+            SvelteApp allows easy reactive control of CSS classes added / deleted from the main app window through the
             `activeClasses` Set available from `application.reactive.activeClasses`. It is a Readable reactive store
             that provides subscriber notifications when entries change. The `classes` SvelteApp option provides the
             base entries in the `activeClasses` Set. Other runtime classes like the current theme are not included in
@@ -36,7 +36,8 @@
             `classes` option is _not_ modified reactively, so any changes at runtime are only applied to the app window.
          </p>
          <p>
-            This example is visually busy, but you can use this feature to change modes for your entire app.
+            This example is visually busy, but you can use this feature to change modes or other CSS / style
+            modifications for your entire app.
          </p>
       </section>
 

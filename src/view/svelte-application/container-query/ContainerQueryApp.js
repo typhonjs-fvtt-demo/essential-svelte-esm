@@ -20,8 +20,8 @@ export class ContainerQueryApp extends SvelteApp
          minimizable: true,
          width: 527,
          height: 300,
-         minWidth: 300,
          maxHeight: 300,
+         minHeight: 300,
 
          title: 'EssentialESM.apps.svelte-app.container-query.title',
 
