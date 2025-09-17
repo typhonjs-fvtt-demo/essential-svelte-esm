@@ -1,8 +1,7 @@
 <script>
    /**
     * All app shells support container queries (CQ) out of the box with the following container names:
-    * - `tjs-app-window` (For the entire app window size including header bar)
-    * - `tjs-app-window-content` (For the app window content size)
+    * - `tjs-app-window-content` (For the app window content inline-size)
     *
     * This is a basic demo as CQ are a nuanced topic. They are like media queries, but allow
     * significantly more control over dynamic app window layout.
@@ -11,41 +10,21 @@
     * CQ when the app position width is 'auto'. You may however set `height` as `auto`.
     */
 
-   import {
-      getContext,
-      onMount }                  from 'svelte';
-
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
    export let elementRoot = void 0;
 
-   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
-   const { application } = getContext('#external');
+   // CQ works by the inner width of an element so that is the offset width of the element minus the left / right
+   // border & padding constraints. Most Foundry apps have a window content padding of 16px on both left / right sides
+   // in addition to 1px left / right app border. TRL can automatically monitor the width of the window content by
+   // binding to `contentWidth` and setting an initial truthy value.
 
-   const { width } = application.position.stores;
-
-   // What is all this below? Well CQ works by the inner width of an element so that is the width of the element minus
-   // the left / right border width. Most Foundry apps have a total border width constraint of 2px. The width / height
-   // display shows the app inner constraints and that makes it easier to reason about what the container queries are
-   // doing with round numbers rather than offset by 2.
-
-   let innerWidth = 0;
-   let borderConstraintW = 0;
-
-   onMount(() =>
-   {
-      const styles = getComputedStyle(elementRoot);
-      borderConstraintW = Math.ceil(parseFloat(styles.borderLeftWidth) + parseFloat(styles.borderRightWidth));
-
-      application.position.minWidth = 300 + borderConstraintW;
-   });
-
-   $: innerWidth = $width - borderConstraintW;
+   let contentWidth = true;
 </script>
 
 <svelte:options accessors={true}/>
 
-<ApplicationShell bind:elementRoot>
+<ApplicationShell bind:elementRoot bind:contentWidth>
    <main>
       <section class=text>
          <p>
@@ -63,11 +42,11 @@
       <!-- Use `standard-form` class from Foundry / core styles -->
       <section class=standard-form>
          <fieldset>
-            <legend>App Inner Constraints</legend>
+            <legend>App Window Content Constraints</legend>
             <div class=row>
                <label>
                   <span>Width:</span>
-                  <input type=text bind:value={innerWidth} readonly />
+                  <input type=text value={Math.floor(contentWidth)} readonly />
                </label>
             </div>
          </fieldset>
@@ -77,49 +56,49 @@
 
 <style lang=scss>
    // Adjusts font size based on min of 2em or 0.28em + 2 percent of app width (cqi).
-   @container tjs-app-window (min-width: 0) {
+   @container tjs-app-window-content (min-width: 0) {
       section.text {
          font-size: min(2em, 0.28em + 2cqi);
       }
    }
 
    // Below width of 450px the left color box is removed.
-   @container tjs-app-window (width < 450px) {
+   @container tjs-app-window-content (width < 450px) {
       div.column2 {
          display: none;
       }
    }
 
    // Below width of 400px the left color box is removed.
-   @container tjs-app-window (width < 600px) {
+   @container tjs-app-window-content (width < 600px) {
       div.column3 {
          display: none;
       }
    }
 
    // Width >= 300px set color to red.
-   @container tjs-app-window (width >= 300px) {
+   @container tjs-app-window-content (width >= 300px) {
       main {
          --color: red;
       }
    }
 
    // Width >= 400px set color to orange.
-   @container tjs-app-window (width >= 400px) {
+   @container tjs-app-window-content (width >= 400px) {
       main {
          --color: orange;
       }
    }
 
    // Width >= 500px set color to yellow.
-   @container tjs-app-window (width >= 500px) {
+   @container tjs-app-window-content (width >= 500px) {
       main {
          --color: yellow;
       }
    }
 
    // Width >= 600px set color to green.
-   @container tjs-app-window (width >= 600px) {
+   @container tjs-app-window-content (width >= 600px) {
       main {
          --color: green;
       }

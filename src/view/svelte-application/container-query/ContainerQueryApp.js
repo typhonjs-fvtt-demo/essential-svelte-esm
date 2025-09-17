@@ -18,10 +18,11 @@ export class ContainerQueryApp extends SvelteApp
          classes: ['tjs-essential-svelte-esm'],
          resizable: true,
          minimizable: true,
-         width: 527,
+         width: 534,
          height: 300,
          maxHeight: 300,
          minHeight: 300,
+         minWidth: 334,
 
          title: 'EssentialESM.apps.svelte-app.container-query.title',
 
