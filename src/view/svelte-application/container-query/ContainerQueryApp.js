@@ -20,7 +20,6 @@ export class ContainerQueryApp extends SvelteApp
          minimizable: true,
          width: 534,
          height: 300,
-         maxHeight: 300,
          minHeight: 300,
          minWidth: 334,
 
