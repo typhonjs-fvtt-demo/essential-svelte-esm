@@ -3,16 +3,19 @@
     * All app shells support container queries (CQ) out of the box with the following container names:
     * - `tjs-app-content` (For the app window content inline-size)
     *
-    * This is a basic demo as CQ are a nuanced topic. They are like media queries, but allow
-    * significantly more control over dynamic app window layout.
+    * This is a complete demo that shows the reactive control TRL provides over CQ. They are like media queries, but
+    * allow significantly more control over dynamic app window content layout and styles.
     *
-    * Of note is that you can not have the app `width` as `auto` and also use CQ at the same time. TRL will disable
-    * CQ when the app position width is 'auto'. You may however set `height` as `auto`.
+    * `inline-size` CQ provides size queries for `width` and `height` can be `auto.
+    *
+    * `size` CQ provides size queries for `width` and `height` and neither `width` / `height` may be auto.
+    *
+    * TRL will disable CQ when the app position width / height causes invalid / indeterminate CQ states.
     */
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
-   import CQDemoContent          from './CQDemoContent.svelte';
-   import CQDemoControls         from './CQDemoControls.svelte';
+   import CQDemoContent          from './content/CQDemoContent.svelte';
+   import CQDemoControls         from './controls/CQDemoControls.svelte';
 
    export let elementRoot = void 0;
 
@@ -27,6 +30,8 @@
 <!--
    You may enable window content resize observation by passing `contentWidth` as `true`.
    You may also bind to `contentWidth` / `contentHeight`, but must pass `true` initially before values are set.
+   There are stores for `contentWidth` and such in the `#internal` context.
+   This is used in `CQDemoControls` to display the app window content width and height.
 -->
 <ApplicationShell bind:elementRoot contentWidth={true}>
    <CQDemoContent />

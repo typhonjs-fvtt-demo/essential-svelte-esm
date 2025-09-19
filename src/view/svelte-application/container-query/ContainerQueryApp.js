@@ -19,9 +19,14 @@ export class ContainerQueryApp extends SvelteApp
          resizable: true,
          minimizable: true,
          width: 534,
-         height: 300,
-         minHeight: 300,
+         height: 320,
+         minHeight: 320,
          minWidth: 334,
+
+         // You may explicitly set the CQ type. By default, the CQ type is `inline-size`. Other options are 'size' and
+         // `undefined` to disable CQ entirely.
+
+         // containerQueryType: 'size',
 
          title: 'EssentialESM.apps.svelte-app.container-query.title',
 

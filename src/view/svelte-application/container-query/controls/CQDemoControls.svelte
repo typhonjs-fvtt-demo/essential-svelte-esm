@@ -1,7 +1,5 @@
 <script>
-   import { getContext }         from 'svelte';
-
-   // ----------------------------------------------------------------------------------------------------------------
+   import { getContext }   from 'svelte';
 
    // The following is to support this demo showcasing the dynamic application of CQ and protection the app shells
    // have to enable / disable CQ when positional `width` or `height` changes to `auto`. `inline-size` CQ is
@@ -19,6 +17,8 @@
    const {
       resizeObservableHeight,
       resizeObservableWidth } = application.position.stores;
+
+   const { containerQueryType } = application.reactive.storeAppOptions;
 
    let heightAuto = $resizeObservableHeight;
    let widthAuto = $resizeObservableWidth;
@@ -54,6 +54,16 @@
             <input type=checkbox bind:checked={heightAuto} />
          </label>
       </div>
+      <div class=row>
+         <label>
+            <span>Container Query Type:</span>
+            <select bind:value={$containerQueryType}>
+               <option value={void 0}>None</option>
+               <option value={'inline-size'}>inline-size</option>
+               <option value={'size'}>size</option>
+            </select>
+         </label>
+      </div>
    </fieldset>
 </section>
 
@@ -74,15 +84,23 @@
       input[type=text] {
          width: 5em;
       }
+
+      select {
+         width: fit-content;
+      }
    }
 
    .standard-form {
       display: flex;
-      justify-content: center;
-
       margin: auto auto 0 auto;
 
       height: fit-content;
       width: fit-content;
+
+      fieldset {
+         justify-content: center;
+         gap: 0.25rem;
+         padding: 0.5rem;
+      }
    }
 </style>
