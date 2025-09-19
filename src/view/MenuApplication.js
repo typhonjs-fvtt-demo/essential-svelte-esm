@@ -22,6 +22,7 @@ import {
 import {
    AnimateWAAPIApp,
    ContentResizeApp,
+   PopoverTooltipApp,
    TinykeysApp }              from './svelte-actions';
 
 import {
@@ -135,8 +136,9 @@ export class MenuApplication extends SvelteApp
             title: 'Svelte Actions',
             entries: [
                { title: '`animateWAAPI` / WAAPI Animation', class: AnimateWAAPIApp },
-               { title: '`useTinykeys` / Tinykeys', class: TinykeysApp },
-               { title: '`resizeObserver` / Content Min Resize', class: ContentResizeApp }
+               { title: '`popoverTooltip` / Tooltips', class: PopoverTooltipApp },
+               { title: '`resizeObserver` / Content Min Resize', class: ContentResizeApp },
+               { title: '`useTinykeys` / Tinykeys', class: TinykeysApp }
             ]
          },
          {
