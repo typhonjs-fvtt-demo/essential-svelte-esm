@@ -1,39 +1,21 @@
 <script>
    /**
     * This demo shows off the `popoverTooltip` action that allows reactive control of the Foundry popover tooltip.
+    *
+    * You can use the keyboard to navigate to options and change them while hovering the tooltip!
     */
-
-   import { writable }           from 'svelte/store';
-
    import { popoverTooltip }     from '#runtime/svelte/action/dom/tooltip';
+
    import { ApplicationShell }   from '#runtime/svelte/component/application';
-   import { propertyStore }      from '#runtime/svelte/store/writable-derived';
 
    export let elementRoot = void 0;
 
    /**
-    * Writable store of all tooltip options reactively passed to `popoverTooltip`.
+    * `TooltipOptions` associated with `popoverTooltip`.
     *
-    * @type {import('svelte/store').Writable<import('#runtime/svelte/action/dom/tooltip').TooltipOptions>}
+    * @see https://typhonjs-fvtt-lib.github.io/api-docs/types/_runtime_svelte_action_dom_tooltip.TooltipOptions.html
     */
-   const tooltipData = writable({
-      tooltip: void 0,
-      tooltipHTML: void 0,
-
-      cssClass: void 0,
-      direction: void 0,
-      locked: false
-   });
-
-   // Individual property stores that update `tooltipData` reactively.
-   const tooltip = propertyStore(tooltipData, 'tooltip');
-   const tooltipHTML = propertyStore(tooltipData, 'tooltipHTML');
-   const cssClass = propertyStore(tooltipData, 'cssClass');
-   const direction = propertyStore(tooltipData, 'direction');
-   const locked = propertyStore(tooltipData, 'locked');
-
-   // Local state for setting `tooltip` or `tooltipHTML` in the reactive statement below.
-   let isHTML = false;
+   let cssClass, direction, isHTML, locked, tooltip;
 
    // Click count used in button `on:click` callback.
    let clickCount = 0;
@@ -41,14 +23,10 @@
    // Tooltip message.
    let message = 'Hello!';
 
-   // Reactive statement that triggers whenever `message` or `isHTML` changes updating the `tooltip` / `tooltipHTML`
-   // properties of `tooltipData` which reactively updates the `popoverTooltip` action attached to the button element.
-   $: {
-      $tooltipHTML = isHTML ?
-       `<i class="fas fa-champagne-glasses"></i>&nbsp;<span style="color: green;">${message}</span>` : void 0;
-
-      $tooltip = !isHTML ? message : void 0;
-   }
+   // Reactive statement that triggers whenever `message` or `isHTML` changes updating the `tooltip`
+   // which reactively updates the `popoverTooltip` action attached to the button element.
+   $: tooltip = !isHTML ? message :
+    `<i class="fas fa-champagne-glasses"></i>&nbsp;<span style="color: green;">${message}</span>`;
 </script>
 
 <svelte:options accessors={true}/>
@@ -64,7 +42,7 @@
       </p>
 
       <!-- Reset message on `pointerenter` and update message w/ dynamic click count -->
-      <button use:popoverTooltip={$tooltipData}
+      <button use:popoverTooltip={{ cssClass, direction, isHTML, locked, tooltip }}
          on:click={() => message = `Clicked: ${clickCount++}!`}
          on:pointerenter={() => { clickCount = 0; message = 'Hello!'; }}>
             Hover Over / Click Me!
@@ -77,7 +55,7 @@
             <div class=grid>
                <label>
                   <span>Direction:</span>
-                  <select bind:value={$direction}>
+                  <select bind:value={direction}>
                      <option value={void 0}>Default (none)</option>
                      <option value={'UP'}>Up</option>
                      <option value={'DOWN'}>Down</option>
@@ -88,7 +66,7 @@
                </label>
                <label>
                   <span>Add Class:</span>
-                  <select bind:value={$cssClass}>
+                  <select bind:value={cssClass}>
                      <option value={void 0}>Default (none)</option>
                      <option value={'tjs-tooltip-blue-background'}>Blue Background</option>
                      <option value={'tjs-tooltip-red-background'}>Red Background</option>
@@ -98,7 +76,7 @@
             <div class=row>
                <label>
                   <span>Locked:</span>
-                  <input type=checkbox bind:checked={$locked} />
+                  <input type=checkbox bind:checked={locked} />
                </label>
                <label>
                   <span style="margin-left: auto">Use HTML:</span>
