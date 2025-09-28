@@ -24,6 +24,10 @@
       },
 
       "components": {
+        "menus": {
+          "title": "TJSMenu / TJSContextMenu"
+        },
+
         "side-slide-layer": {
           "title": "Side Slide Layer"
         }
