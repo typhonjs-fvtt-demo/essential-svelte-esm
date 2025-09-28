@@ -22,6 +22,7 @@ const settings = {
 const sessionConstants = {
    appStateClient: `${constants.moduleId}.${settings.appStateClient}`,
    themeDarkMode: `${constants.moduleId}.theme.dark`,
+   scrollbarState: `${constants.moduleId}.scrollbar-state`,
    sidebarCustomTab: `${constants.moduleId}.sidebar.custom-tab`,
    sidebarReplaceTab: `${constants.moduleId}.sidebar.replace-tab`,
    sidebarRemoveTab: `${constants.moduleId}.sidebar.remove-tab`
@@ -36,6 +37,8 @@ export { constants, sessionConstants, settings };
  * @property {string} appStateClient Stores the current app state in /src/view/app-state demo.
  *
  * @property {string} themeDarkMode Indicates whether dark mode is enabled.
+ *
+ * @property {string} scrollbarState Serializes scrollbar height state in `TJSMenuAppShell` demo.
  *
  * @property {string} sidebarCustomTab Indicates whether to load a custom Svelte sidebar tab.
  *
