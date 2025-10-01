@@ -36,6 +36,11 @@
       {
          TJSContextMenu.create({
             event,
+
+            /**
+             * Note: When not passing the `application` reference to `createMenuItems` the `always on top` item isn't
+             * added. Try modifying the code passing `application`.
+             */
             items: createMenuItems(),
 
             /**

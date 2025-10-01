@@ -47,7 +47,7 @@
    <span>Example Secondary Fixed Menu Bar</span>
 
    <TJSToggleIconButton button={overflowMenuButton}>
-      <TJSMenu menu={{ ...menu, items: createMenuItems() }}>
+      <TJSMenu menu={{ ...menu, items: createMenuItems(application) }}>
          <!-- Example of adding adhoc menu item in `after` slot.  -->
          <!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events -->
          <div class=range

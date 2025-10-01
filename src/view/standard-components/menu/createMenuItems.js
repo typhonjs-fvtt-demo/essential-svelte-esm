@@ -3,13 +3,20 @@ import MenuItem from './MenuItem.svelte';
 /**
  * Creates the items for the overflow menu via `TJSMenu` component.
  *
- * Pass in additional state or access it globally to provide conditional menu items.
+ * Pass in additional state or access it globally to provide conditional menu items. In this case when the `application`
+ * is passed into `createMenuItems` an extra menu item to control always on top state is added.
+ *
+ * @param {import('#runtime/svelte/application').SvelteApp} [application] - Used to add additional `always on top`
+ *        app state menu item.
  *
  * @returns {Iterable<import('#standard/component/menu').TJSMenuData.Items>} Overflow menu items.
  */
-export function createMenuItems() // eslint-disable-line no-unused-vars
+export function createMenuItems(application)
 {
-   return [
+   /**
+    * @type {import('#standard/component/menu').TJSMenuData.Items[]}
+    */
+   const items = [
       {
          label: 'Item 1 (Font)',
          icon: 'fas fa-code',
@@ -35,8 +42,6 @@ export function createMenuItems() // eslint-disable-line no-unused-vars
          onPress: () => console.log(`Item 4 pressed`)
       },
 
-      { separator: 'hr' },
-
       // You can provide a custom Svelte component as a menu item.
       {
          svelte: {
@@ -44,6 +49,28 @@ export function createMenuItems() // eslint-disable-line no-unused-vars
             props: { message: 'Item 5 (Svelte Comp)' }
          },
          onPress: () => console.log(`Item 5 pressed`)
-      },
+      }
    ];
+
+   /**
+    * Conditionally add control over the `alwaysOnTop` state only when the application reference is passed into
+    * `createMenuItems`.
+    */
+   if (application)
+   {
+      const alwaysOnTop = application.reactive.alwaysOnTop;
+
+      items.push({ separator: 'hr' });
+
+      // Change Font Awesome icon based on current state.
+      items.push({
+         label: 'Always On Top',
+         icon: `fas fa-arrow-alt-circle-${alwaysOnTop ? 'down' : 'up'}`,
+         onPress: () => application.reactive.alwaysOnTop = !alwaysOnTop
+      });
+
+      items.push({ separator: 'hr' });
+   }
+
+   return items;
 }
