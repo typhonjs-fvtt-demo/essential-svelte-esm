@@ -22,6 +22,7 @@ const settings = {
 const sessionConstants = {
    appStateClient: `${constants.moduleId}.${settings.appStateClient}`,
    appStateMenu: `${constants.moduleId}.menus-app-state`,
+   menuScale: `${constants.moduleId}.menus-font-scale`,
    themeDarkMode: `${constants.moduleId}.theme.dark`,
    scrollbarState: `${constants.moduleId}.scrollbar-state`,
    sidebarCustomTab: `${constants.moduleId}.sidebar.custom-tab`,
@@ -39,9 +40,11 @@ export { constants, sessionConstants, settings };
  *
  * @property {string} appStateMenu Stores the current app state in /src/view/standard-components/menu demo.
  *
+ * @property {string} menuScale Stores the font scale state in `/src/view/standard-components/menu` demo.
+ *
  * @property {string} themeDarkMode Indicates whether dark mode is enabled.
  *
- * @property {string} scrollbarState Serializes scrollbar height state in `TJSMenuAppShell` demo.
+ * @property {string} scrollbarState Serializes scrollbar height state in `/src/view/standard-components/menu` demo.
  *
  * @property {string} sidebarCustomTab Indicates whether to load a custom Svelte sidebar tab.
  *

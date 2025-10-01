@@ -1,5 +1,6 @@
 <script>
    import { getContext }            from 'svelte';
+   import { quadIn }                from 'svelte/easing';
 
    import { ApplicationShell }      from '#runtime/svelte/component/application';
    import { Timing }                from '#runtime/util';
@@ -62,6 +63,21 @@
       // }
    }
 
+   // Dynamic font size ----------------------------------------------------------------------------------------------
+
+   let fontSize;
+
+   const storeMenuScale = application.reactive.sessionStorage.getStore(sessionConstants.menuScale, 200);
+
+   // A very fun use of Svelte easing / `quadIn` to modify font-size reactively from 1 to 1.5em using quad in easing.
+   // This gives a very natural feeling when increasing / decreasing the elements displayed.
+   // see https://svelte.dev/repl/easing and select 'quad' & 'ease in' to see the curve applied.
+   $: {
+      const adjustedItemHeight = $storeMenuScale / 10;
+      const easing = quadIn((adjustedItemHeight - 20) / 30 );
+      fontSize = `${1 + (easing * 0.5)}em`;
+   }
+
    // Serialize app state --------------------------------------------------------------------------------------------
 
    /**
@@ -87,7 +103,8 @@
    <MenuBar />
 
    <TJSScrollContainer {container}>
-      <section class=text>
+      <section class=text
+               style:font-size={fontSize}>
          <p>
             This demo shows off `TJSMenu` and `TJSContextMenu` providing two separate menu options. Additionally,
             several other supporting components are also included such as a toggle button and an example of how to

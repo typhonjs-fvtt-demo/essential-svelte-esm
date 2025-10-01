@@ -1,9 +1,23 @@
 <script>
+   /**
+    * Example fixed secondary menubar with an overflow menu. Most menu items are configured by `createMenuItems`. This
+    * demo also shows how to use slots to embed custom menu items and prevent the click propagation. The last menu item
+    * is a slot.
+    */
+
+   import { getContext }            from 'svelte';
+
    import { ripple }                from '#standard/action/animate/composable';
    import { TJSToggleIconButton }   from '#standard/component/button';
+   import { TJSInputRange }         from '#standard/component/form';
    import { TJSMenu }               from '#standard/component/menu';
 
-   import { createMenuItems }   from './createMenuItems.js';
+   import { createMenuItems }       from './createMenuItems.js';
+
+   import { sessionConstants }      from "#constants";
+
+   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
+   const { application } = getContext('#external');
 
    const overflowMenuButton = {
       icon: 'fas fa-ellipsis-v',
@@ -20,13 +34,29 @@
       // The menu item `onPress` handlers from `createMenuItems` are simple, so auto apply focus source.
       onPressApplyFocus: true
    }
+
+   const scaleMenuItem = {
+      label: 'Scale:',
+      min: 200,
+      max: 500,
+      store: application.reactive.sessionStorage.getStore(sessionConstants.menuScale, 200)
+   }
 </script>
 
 <section class=top-bar>
    <span>Example Secondary Fixed Menu Bar</span>
 
    <TJSToggleIconButton button={overflowMenuButton}>
-      <TJSMenu menu={{ ...menu, items: createMenuItems() }} />
+      <TJSMenu menu={{ ...menu, items: createMenuItems() }}>
+         <!-- Example of adding adhoc menu item in `after` slot.  -->
+         <!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events -->
+         <div class=range
+              on:click|stopPropagation
+              slot=after>
+            <TJSInputRange input={scaleMenuItem} />
+            (Slot)
+         </div>
+      </TJSMenu>
    </TJSToggleIconButton>
 </section>
 
@@ -47,5 +77,17 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+   }
+
+   .range {
+      // Set the `TJSInputRange` height to the menu item line height.
+      --tjs-input-height: var(--tjs-menu-item-line-height);
+
+      cursor: var(--tjs-cursor-default, default);
+      display: flex;
+      width: 115px;
+      font-size: 0.8em;
+      justify-content: center;
+      align-items: center;
    }
 </style>
