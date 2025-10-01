@@ -1,10 +1,24 @@
-import { SvelteApp }    from '#runtime/svelte/application';
-import { deepMerge }    from '#runtime/util/object';
+import { SvelteApp }          from '#runtime/svelte/application';
+import { deepMerge }          from '#runtime/util/object';
 
-import TJSMenuAppShell  from './TJSMenuAppShell.svelte';
+import TJSMenuAppShell        from './TJSMenuAppShell.svelte';
+
+import { sessionConstants }   from "#constants";
 
 export class TJSMenuApp extends SvelteApp
 {
+   constructor()
+   {
+      super();
+
+      try
+      {
+         // Attempt to parse session storage item and set to application state.
+         this.state.set(JSON.parse(sessionStorage.getItem(sessionConstants.appStateMenu)));
+      }
+      catch { /**/ }
+   }
+
    /**
     * Default Application options
     *
@@ -20,6 +34,7 @@ export class TJSMenuApp extends SvelteApp
          minimizable: true,
          width: 500,
          height: 300,
+         minHeight: 225,
 
          title: 'EssentialESM.apps.components.menus.title',
 
