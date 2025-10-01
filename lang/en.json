@@ -25,7 +25,7 @@
 
       "components": {
         "menus": {
-          "title": "TJSMenu / TJSContextMenu"
+          "title": "TJSMenu / TJSContextMenu / TJSScrollContainer"
         },
 
         "side-slide-layer": {

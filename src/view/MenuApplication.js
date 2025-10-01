@@ -121,7 +121,7 @@ export class MenuApplication extends SvelteApp
          {
             title: 'Standard Components',
             entries: [
-               { title: 'TJSMenu / TJSContextMenu', class: TJSMenuApp },
+               { title: 'Menus / Scroll Container', class: TJSMenuApp },
                { title: 'Color Picker', class: ColorPickerApp },
                { title: 'File Picker Buttons', class: FilePickerApp },
                { title: 'Side Slide Layer', class: SideSlideApp },
