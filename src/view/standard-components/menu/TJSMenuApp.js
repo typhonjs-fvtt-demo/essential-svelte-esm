@@ -33,8 +33,8 @@ export class TJSMenuApp extends SvelteApp
          resizable: true,
          minimizable: true,
          width: 500,
-         height: 300,
-         minHeight: 285,
+         height: 320,
+         minHeight: 320,
 
          title: 'EssentialESM.apps.components.menus.title',
 
