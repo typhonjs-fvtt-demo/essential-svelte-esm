@@ -64,10 +64,12 @@
    // Defines the top fixed menu bar container.
    .top-bar {
       display: flex;
-      padding: 0.25rem;
+      padding: 0.25rem 0.5rem;
       gap: 0.5rem;
+
       align-items: center;
       justify-content: center;
+      background: linear-gradient(90deg, rgba(48, 48, 48, 0.25) 0%, rgba(9, 9, 121, 0.25) 35%, rgba(0, 212, 255, 0.25) 100%);
       border-bottom: solid 1px #444;
       max-height: fit-content;
    }
