@@ -20,7 +20,9 @@
 <ApplicationShell bind:elementRoot>
    <main>
       <!-- The layer is absolutely positioned / inside `<main>` to target layer CSS var -->
+      <!-- Note: The Foundry tooltip manager only handles uppercase `RIGHT` / `LEFT` so alter tooltipDirection. -->
       <TJSSideSlideLayer {...createLayerProps()}
+                         tooltipDirection={$side.toUpperCase()}
                          bind:allowLocking={$allowLocking}
                          bind:clickToOpen={$clickToOpen}
                          bind:duration={$duration}
