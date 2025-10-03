@@ -26,20 +26,22 @@ export function createLayerProps({ relative = false, sideAbs = true } = {})
    const existingState = game.settings.get(constants.moduleId, settings.sideSlideLayer) ?? {};
 
    return {
-      side: 'right',       // 'right' or 'left'
+      side: 'right',                // 'right' or 'left'
 
       sideAbs,
 
       // allowLocking: false,
       // clickToOpen: true,
       // duration: 1000,
-      // easingIn: 'linear',  // The name of a Svelte easing function.
-      // easingOut: 'linear', // The name of a Svelte easing function.
-      // top: 40,             // Numbers are treated as pixels unless `topUnit` defined / otherwise valid `top` CSS string.
-      // topUnit: '%',        // You may provide the CSS unit type for the `top` prop.
-      // zIndex: 10,          // z-index to display the layer. This is above the canvas and below the app UI layer.
+      // easingIn: 'linear',        // The name of a Svelte easing function.
+      // easingOut: 'linear',       // The name of a Svelte easing function.
+      // tooltips: false,           // You may turn off all tooltips.
+      // tooltipDirection: 'RIGHT'  // You may provide the Foundry tooltip manager direction.
+      // top: 40,                   // Numbers are treated as pixels unless `topUnit` defined / otherwise valid `top` CSS string.
+      // topUnit: '%',              // You may provide the CSS unit type for the `top` prop.
+      // zIndex: 10,                // z-index to display the layer. This is above the canvas and below the app UI layer.
 
-      ...existingState,       // Overrides any props that are serialized to a world setting object.
+      ...existingState,             // Overrides any props that are serialized to a world setting object.
 
       // The following is constant state that doesn't change.
 
@@ -68,9 +70,6 @@ export function createLayerProps({ relative = false, sideAbs = true } = {})
             svelte: { class: DummyPanel },
             tooltip: 'Dummy Panel'
          }
-      ],
-
-      // tooltips: false,              // You may turn off all tooltips.
-      // tooltipDirection: 'RIGHT'     // You may provide the Foundry tooltip manager direction.
+      ]
    };
 }
