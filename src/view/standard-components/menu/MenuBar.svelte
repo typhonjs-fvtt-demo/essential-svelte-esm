@@ -64,7 +64,7 @@
    // Defines the top fixed menu bar container.
    .top-bar {
       display: flex;
-      padding: 0.5rem;
+      padding: 0.25rem;
       gap: 0.5rem;
       align-items: center;
       justify-content: center;
