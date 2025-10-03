@@ -34,14 +34,16 @@ function createStores()
    const worldObject = gameSettings.getStore(settings.sideSlideLayer);
 
    return {
+      // These properties are serialized in the world object setting store.
       allowLocking: propertyStore(worldObject, 'allowLocking'),
       clickToOpen: propertyStore(worldObject, 'clickToOpen'),
       duration: propertyStore(worldObject, 'duration'),
       easingIn: propertyStore(worldObject, 'easingIn'),
       easingOut: propertyStore(worldObject, 'easingOut'),
-      side: writable('right'),   // Not persisted to the world object store.
       top: propertyStore(worldObject, 'top'),
-      worldObject                // Include the world object store as this is applied to the Foundry sidebar instance.
+
+      // Not persisted to the world object store. Used in `SideSlideAppShell` to swap sides in the app only.
+      side: writable('right'),
    };
 }
 

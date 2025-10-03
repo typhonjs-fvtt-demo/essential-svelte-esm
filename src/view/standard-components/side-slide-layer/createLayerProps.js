@@ -18,9 +18,11 @@ import {
  *
  * @param {boolean} [opts.sideAbs] - Apply absolute positioning for side alignment.
  *
+ * @param {boolean} [opts.tooltips] - Apply absolute positioning for side alignment.
+ *
  * @returns {object} The props for TJSSideSlideLayer. The persisted prop data from game settings is also applied.
  */
-export function createLayerProps({ relative = false, sideAbs = true } = {})
+export function createLayerProps({ relative = false, sideAbs = true, tooltips = true } = {})
 {
    // Existing state stored as an object that is spread at the beginning of the returned object below.
    const existingState = game.settings.get(constants.moduleId, settings.sideSlideLayer) ?? {};
@@ -28,14 +30,15 @@ export function createLayerProps({ relative = false, sideAbs = true } = {})
    return {
       side: 'right',                // 'right' or 'left'
 
-      sideAbs,
+      sideAbs,                      // When true, the layer uses `absolute` positioning otherwise `relative`.
 
-      // allowLocking: false,
-      // clickToOpen: true,
-      // duration: 1000,
+      tooltips,                     // When false, tooltips are disabled.
+
+      // allowLocking: false,       // When false, tabs can't be context clicked to lock panels.
+      // clickToOpen: true,         // When true, clicking on tabs opens / closes a panel and locking is disabled.
+      // duration: 1000,            // Time in milliseconds for tweening.
       // easingIn: 'linear',        // The name of a Svelte easing function.
       // easingOut: 'linear',       // The name of a Svelte easing function.
-      // tooltips: false,           // You may turn off all tooltips.
       // tooltipDirection: 'RIGHT'  // You may provide the Foundry tooltip manager direction.
       // top: 40,                   // Numbers are treated as pixels unless `topUnit` defined / otherwise valid `top` CSS string.
       // topUnit: '%',              // You may provide the CSS unit type for the `top` prop.

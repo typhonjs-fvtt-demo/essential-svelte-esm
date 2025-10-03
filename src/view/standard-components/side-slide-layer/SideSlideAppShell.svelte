@@ -1,6 +1,4 @@
 <script>
-   import { getContext }         from 'svelte';
-
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
    import { TJSInput }           from '#standard/component/form';
@@ -14,15 +12,7 @@
    const { stores, inputs } = createUIData();
 
    // Bound stores must be defined at the top level, so destructure them.
-   const { allowLocking, clickToOpen, duration, easingIn, easingOut, side, top, worldObject } = stores;
-
-   const { application } = getContext('#external');
-
-   // Retrieve the instance of TJSSideSlideLayer that is mounted in `#ui-middle`.
-   const sidebarSlideLayer = application.sidebarSlideLayer;
-
-   // Update component mounted to the Foundry sidebar directly w/ the entire world object storing all serialized props.
-   $: sidebarSlideLayer?.$set($worldObject);
+   const { allowLocking, clickToOpen, duration, easingIn, easingOut, side, top } = stores;
 </script>
 
 <svelte:options accessors={true}/>

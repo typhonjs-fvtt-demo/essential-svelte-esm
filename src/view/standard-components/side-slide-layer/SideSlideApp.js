@@ -53,8 +53,15 @@ export class SideSlideApp extends SvelteApp
       // Foundry sidebar. This component will stay active after this app has been closed.
       this.#sidebarSlideLayer = new TJSSideSlideLayer({
          target: document.querySelector('#ui-right #sidebar menu'),
-         props: createLayerProps({ relative: true, sideAbs: false })
+         props: createLayerProps({ relative: true, sideAbs: false, tooltips: false })
       });
+
+      // Associate and update the shared world object storing all TJSSideSlideLayer props to the sidebar mounted
+      // component. This is accomplished to subscribing to the world object store, but to avoid using `get` from
+      // `svelte/store` the configuration object is retrieved from the Foundry settings API on changes.
+      const worldObject = gameSettings.getStore(settings.sideSlideLayer);
+      worldObject.subscribe(() => this.#sidebarSlideLayer.$set(
+       game.settings.get(constants.moduleId, settings.sideSlideLayer)));
    }
 
    /**
