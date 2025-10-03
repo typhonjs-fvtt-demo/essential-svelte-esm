@@ -50,7 +50,7 @@ export function createLayerProps({ relative = false, sideAbs = true } = {})
          position: relative ? 'relative' : 'absolute',
 
          /* Applies the color used for the sidebar */
-         '--tjs-side-slide-layer-item-border-color-hover': 'var(--color-border-highlight-alt)',
+         // '--tjs-side-slide-layer-item-border-color-hover': 'red',
 
          /* Make the item icons / font larger */
          // '--tjs-side-slide-layer-item-diameter': '50px',
