@@ -75,8 +75,6 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-
-      --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
    }
 
    label {
