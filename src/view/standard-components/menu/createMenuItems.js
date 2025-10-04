@@ -6,12 +6,17 @@ import MenuItem from './MenuItem.svelte';
  * Pass in additional state or access it globally to provide conditional menu items. In this case when the `application`
  * is passed into `createMenuItems` an extra menu item to control always on top state is added.
  *
- * @param {import('#runtime/svelte/application').SvelteApp} [application] - Used to add additional `always on top`
- *        app state menu item.
+ * @param {object} [options] - Conditional options for extra menu items.
+ *
+ * @param {import('#runtime/svelte/application').SvelteApp} [options.application] - Used to add additional
+ *        `always on top` app state menu item.
+ *
+ * @param {boolean} [options.trailingHR] - When true and `application` defined add a trailing HR to separate demo
+ *        slotted menu item in `MenuBar.svelte`.
  *
  * @returns {Iterable<import('#standard/component/menu').TJSMenuData.Items>} Overflow menu items.
  */
-export function createMenuItems(application)
+export function createMenuItems({ application, trailingHR = false } = {})
 {
    /**
     * @type {import('#standard/component/menu').TJSMenuData.Items[]}
@@ -69,6 +74,10 @@ export function createMenuItems(application)
          onPress: () => application.reactive.alwaysOnTop = !alwaysOnTop
       });
 
+   }
+
+   if (application && trailingHR)
+   {
       items.push({ separator: 'hr' });
    }
 

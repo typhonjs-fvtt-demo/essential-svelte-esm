@@ -20,6 +20,9 @@
 
    // ----------------------------------------------------------------------------------------------------------------
 
+   const storeContainerKeyFocus = application.reactive.sessionStorage.getStore(
+    sessionConstants.menuContainerFocus, false);
+
    /**
     * Configuration object for `TJSScrollContainer` component.
     *
@@ -39,9 +42,9 @@
 
             /**
              * Note: When not passing the `application` reference to `createMenuItems` the `always on top` item isn't
-             * added. Try modifying the code passing `application`.
+             * added. Try modifying the code removing `{ application }`.
              */
-            items: createMenuItems(),
+            items: createMenuItems({ application }),
 
             /**
              * The menu item `onPress` handlers from `createMenuItems` are simple, so auto apply focus source.
@@ -63,9 +66,9 @@
        */
       // allowTabFocus: true,
 
-      // styles: {
-      //    '--tjs-scroll-container-box-shadow-focus-visible': 'inset 0 0 0 2px var(--color-shadow-primary)'
-      // }
+      styles: {
+         '--tjs-scroll-container-box-shadow-focus-visible': 'inset 0 0 0 2px var(--color-shadow-primary)'
+      }
    }
 
    // Dynamic font size ----------------------------------------------------------------------------------------------
@@ -107,20 +110,26 @@
 <ApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
    <MenuBar />
 
-   <TJSScrollContainer {container}>
+   <TJSScrollContainer {container} allowTabFocus={$storeContainerKeyFocus}>
+      <!-- Note: using local calculated `fontSize` from scaling session store to control `font-size` -->
       <section class=text
                style:font-size={fontSize}>
          <p>
-            This demo shows off `TJSMenu` and `TJSContextMenu` providing two separate menu options. Additionally,
-            several other supporting components are also included such as a toggle button and an example of how to
-            configure a fixed top menu bar and a scrolling container content area.
-         </p>
+            This advanced demo shows off `TJSMenu` and `TJSContextMenu` providing three separate menu option examples.
+            Additionally, several other supporting components are also included such as toggle buttons and an example
+            of how to configure a fixed top menu bar and a `TJSScrollContainer` providing an enhanced content area.
+            <br>
+            Menus:
+         <ul>
+            <li>`TJSContextMenu` as header button.</li>
+            <li>`TJSContextMenu` as context menu / right click in scroll area.</li>
+            <li>`TJSMenu` in fixed menu bar.</li>
+         </ul>
          <p>
-            Context / right click the main scrolling area to display `TJSContextMenu` and select the overflow icon in
-            the fixed menu bar to show the `TJSMenu` component.
-         </p>
-         <p>
-            Also make the app window smaller and notice that the scroll container position is serialized.
+            The menus include several dummy / no-op menu items, but the `always on top` item will change the app state.
+            Keyboard navigation / focus can be enabled / disabled for `TJSScrollContainer. A final slotted menu item
+            available in the `TJSMenu` menu controls the font scaling of the main content text. All state including the
+            app position is serialized to session storage.
          </p>
       </section>
    </TJSScrollContainer>

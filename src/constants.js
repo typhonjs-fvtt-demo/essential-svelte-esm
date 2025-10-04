@@ -23,6 +23,7 @@ const sessionConstants = {
    appStateClient: `${constants.moduleId}.${settings.appStateClient}`,
    appStateMenu: `${constants.moduleId}.menus-app-state`,
    menuScale: `${constants.moduleId}.menus-font-scale`,
+   menuContainerFocus: `${constants.moduleId}.menus-container-focus`,
    themeDarkMode: `${constants.moduleId}.theme.dark`,
    scrollbarState: `${constants.moduleId}.scrollbar-state`,
    sidebarCustomTab: `${constants.moduleId}.sidebar.custom-tab`,
@@ -41,6 +42,8 @@ export { constants, sessionConstants, settings };
  * @property {string} appStateMenu Stores the current app state in /src/view/standard-components/menu demo.
  *
  * @property {string} menuScale Stores the font scale state in `/src/view/standard-components/menu` demo.
+ *
+ * @property {string} menuContainerFocus Stores keyboard focus state in `/src/view/standard-components/menu` demo.
  *
  * @property {string} themeDarkMode Indicates whether dark mode is enabled.
  *

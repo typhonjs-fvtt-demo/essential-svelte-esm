@@ -1,9 +1,12 @@
 import { SvelteApp }          from '#runtime/svelte/application';
 import { deepMerge }          from '#runtime/util/object';
 
+import { TJSContextMenu }     from '#standard/application/menu';
+
 import TJSMenuAppShell        from './TJSMenuAppShell.svelte';
 
 import { sessionConstants }   from "#constants";
+import { createMenuItems } from "./createMenuItems.js";
 
 export class TJSMenuApp extends SvelteApp
 {
@@ -43,5 +46,40 @@ export class TJSMenuApp extends SvelteApp
             target: document.body
          }
       });
+   }
+
+   /**
+    * Adds a header button to launch `TJSContextMenu`.
+    *
+    * @returns {SvelteApp.HeaderButton[]} The app header buttons.
+    * @override
+    */
+   _getHeaderButtons()
+   {
+      const buttons = super._getHeaderButtons();
+
+      buttons.unshift({
+         icon: 'fas fa-ellipsis-v',
+         onPress: ({ event }) =>
+         {
+            TJSContextMenu.create({
+               event,
+
+               /**
+                * Note: When not passing the `application` reference to `createMenuItems` the `always on top` item isn't
+                * added. Try modifying the code removing `{ application }`.
+                */
+               items: createMenuItems({ application: this }),
+
+               /**
+                * The menu item `onPress` handlers from `createMenuItems` are simple, so auto apply focus source.
+                * This will focus the scroll container which is the source of the event.
+                */
+               onPressApplyFocus: true
+            });
+         }
+      });
+
+      return buttons;
    }
 }

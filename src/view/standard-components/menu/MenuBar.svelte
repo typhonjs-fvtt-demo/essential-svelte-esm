@@ -2,7 +2,7 @@
    /**
     * Example fixed secondary menubar with an overflow menu. Most menu items are configured by `createMenuItems`. This
     * demo also shows how to use slots to embed custom menu items and prevent the click propagation. The last menu item
-    * is a slot.
+    * is a slot locally defined in the template below.
     */
 
    import { getContext }            from 'svelte';
@@ -19,11 +19,28 @@
    /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
+   /**
+    * Defines the configuration object for `TJSToggleButton` enabling keyboard navigation of `TJSScrollContainer`.
+    */
+   const scrollKeyFocusButton = {
+      icon: 'fas fa-keyboard',
+      efx: ripple(),
+      store: application.reactive.sessionStorage.getStore(sessionConstants.menuContainerFocus, false),
+      tooltip: 'Enable Container Focus',
+      tooltipSelected: 'Disable Container Focus'
+   };
+
+   /**
+    * Defines the configuration object for `TJSToggleButton` to show / hide a slotted `TJSMenu`.
+    */
    const overflowMenuButton = {
       icon: 'fas fa-ellipsis-v',
       efx: ripple()
    };
 
+   /**
+    * Defines the configuration object for `TJSMenu`.
+    */
    const menu = {
       // Offset menu down 4px.
       offset: { y: 4 },
@@ -35,6 +52,9 @@
       onPressApplyFocus: true
    }
 
+   /**
+    * Defines the configuration object for `TJSInputRange` which is in the `after` slot of `TJSMenu`.
+    */
    const scaleMenuItem = {
       label: 'Scale:',
       min: 200,
@@ -46,8 +66,10 @@
 <section class=top-bar>
    <span>Example Secondary Fixed Menu Bar</span>
 
+   <TJSToggleIconButton button={scrollKeyFocusButton} />
+
    <TJSToggleIconButton button={overflowMenuButton}>
-      <TJSMenu menu={{ ...menu, items: createMenuItems(application) }}>
+      <TJSMenu menu={{ ...menu, items: createMenuItems({ application, trailingHR: true }) }}>
          <!-- Example of adding adhoc menu item in `after` slot.  -->
          <!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events -->
          <div class=range
@@ -74,6 +96,7 @@
       max-height: fit-content;
    }
 
+   // Menubar title.
    span {
       margin-right: auto;
       white-space: nowrap;
@@ -81,6 +104,7 @@
       text-overflow: ellipsis;
    }
 
+   // For slotted `after` menu item implemented inline above in the template.
    .range {
       // Set the `TJSInputRange` height to the menu item line height.
       --tjs-input-height: var(--tjs-menu-item-line-height);
