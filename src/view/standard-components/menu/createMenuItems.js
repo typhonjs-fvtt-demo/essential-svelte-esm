@@ -59,9 +59,9 @@ export function createMenuItems({ application, trailingHR = false } = {})
 
    /**
     * Conditionally add control over the `alwaysOnTop` state only when the application reference is passed into
-    * `createMenuItems`.
+    * `createMenuItems` and the app window is not detached / popped out.
     */
-   if (application)
+   if (application && !application.reactive.detached)
    {
       const alwaysOnTop = application.reactive.alwaysOnTop;
 
@@ -73,10 +73,9 @@ export function createMenuItems({ application, trailingHR = false } = {})
          icon: `fas fa-arrow-alt-circle-${alwaysOnTop ? 'down' : 'up'}`,
          onPress: () => application.reactive.alwaysOnTop = !alwaysOnTop
       });
-
    }
 
-   if (application && trailingHR)
+   if (trailingHR)
    {
       items.push({ separator: 'hr' });
    }
