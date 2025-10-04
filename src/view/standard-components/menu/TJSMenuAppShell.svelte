@@ -116,10 +116,12 @@
                style:font-size={fontSize}>
          <p>
             This advanced demo shows off `TJSMenu` and `TJSContextMenu` providing three separate menu option examples.
-            Additionally, several other supporting components are also included such as toggle buttons and an example
-            of how to configure a fixed top menu bar and a `TJSScrollContainer` providing an enhanced content area.
+            Additionally, several other supporting components are also included such as `TJSToggleButton` and an example
+            of how to configure a fixed top menu bar and `TJSScrollContainer` providing an enhanced content area.
             <br>
-            Menus:
+         </p>
+         <p>
+         Menus:
          <ul>
             <li>`TJSContextMenu` as header button.</li>
             <li>`TJSContextMenu` as context menu / right click in scroll area.</li>
@@ -144,5 +146,9 @@
          flex-direction: column;
          padding: 0 1rem;
       }
+   }
+
+   ul {
+      margin-top: 0;
    }
 </style>
