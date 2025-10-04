@@ -37,6 +37,7 @@ export class PositionApplication extends SvelteApp
          minimizable: true,
          width: 475,
          height: 260,
+         popOutModuleDisable: true,    // Disable `PopOut!` module.
 
          svelte: {
             class: PositionAppShell,
