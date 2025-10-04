@@ -20,17 +20,6 @@
    const { application } = getContext('#external');
 
    /**
-    * Defines the configuration object for `TJSToggleButton` enabling keyboard navigation of `TJSScrollContainer`.
-    */
-   const scrollKeyFocusButton = {
-      icon: 'fas fa-keyboard',
-      efx: ripple(),
-      store: application.reactive.sessionStorage.getStore(sessionConstants.menuContainerFocus, false),
-      tooltip: 'Enable Container Focus',
-      tooltipSelected: 'Disable Container Focus'
-   };
-
-   /**
     * Defines the configuration object for `TJSToggleButton` to show / hide a slotted `TJSMenu`.
     */
    const overflowMenuButton = {
@@ -61,12 +50,37 @@
       max: 500,
       store: application.reactive.sessionStorage.getStore(sessionConstants.menuScale, 200)
    }
+
+   /**
+    * Defines the configuration object for `TJSToggleButton` enabling keyboard navigation of `TJSScrollContainer`.
+    */
+   const scrollKeyFocusButton = {
+      icon: 'fas fa-keyboard',
+      efx: ripple(),
+      store: application.reactive.sessionStorage.getStore(sessionConstants.menuContainerFocus, false),
+      tooltip: 'Enable Container Key Focus',
+      tooltipSelected: 'Disable Container Key Focus'
+   };
+
+   /**
+    * Defines the configuration object for `TJSToggleButton` enabling scroll key propagation of `TJSScrollContainer`.
+    * Foundry does not respect keyboard accessibility for scrolling containers.
+    */
+   const scrollKeyPropagateButton = {
+      icon: 'fas fa-circle-play',
+      efx: ripple(),
+      store: application.reactive.sessionStorage.getStore(sessionConstants.menuKeyPropagate, false),
+      tooltip: 'Allow Container Key Propagation',
+      tooltipSelected: 'Stop Container Key Propagation'
+   };
 </script>
 
 <section class=top-bar>
    <span>Example Secondary Fixed Menu Bar</span>
 
    <TJSToggleIconButton button={scrollKeyFocusButton} />
+
+   <TJSToggleIconButton button={scrollKeyPropagateButton} />
 
    <TJSToggleIconButton button={overflowMenuButton}>
       <TJSMenu menu={{ ...menu, items: createMenuItems({ application, trailingHR: true }) }}>

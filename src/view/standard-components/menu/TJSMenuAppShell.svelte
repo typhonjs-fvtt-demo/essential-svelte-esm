@@ -20,8 +20,14 @@
 
    // ----------------------------------------------------------------------------------------------------------------
 
+   // Session storage store for `TJSScrollContainer` keyboard focus / tab navigation enabled.
    const storeContainerKeyFocus = application.reactive.sessionStorage.getStore(
     sessionConstants.menuContainerFocus, false);
+
+   // Session storage store for `TJSScrollContainer` to enable / disable scroll key event propagation. Foundry doesn't
+   // respect key events for scrolling accessibility. IE spacebar, up / down arrows, etc.
+   const storeContainerKeyPropagate = application.reactive.sessionStorage.getStore(sessionConstants.menuKeyPropagate,
+    false);
 
    /**
     * Configuration object for `TJSScrollContainer` component.
@@ -43,8 +49,13 @@
             /**
              * Note: When not passing the `application` reference to `createMenuItems` the `always on top` item isn't
              * added. Try modifying the code removing `{ application }`.
+             *
+             * Note: For `TJSContextMenu` and `TJSMenu` as of TRL `0.3.0` you can also just pass a function for `items`
+             * This function will be invoked to retrieve the list of menu items to display. Below an arrow function is
+             * used to wrap `createMenuItems` in order to pass `application` to it, but this can be any function that
+             * returns a list of menu items.
              */
-            items: createMenuItems({ application }),
+            items: () => createMenuItems({ application }),
 
             /**
              * The menu item `onPress` handlers from `createMenuItems` are simple, so auto apply focus source.
@@ -61,11 +72,8 @@
       scrollTop: application.reactive.sessionStorage.getStore(sessionConstants.scrollbarState, 0),
 
       /**
-       * The following are examples of keyboard navigation aspects of the scroll container. Uncomment to allow keyboard
-       * tab navigation with a definition for an inset box-shadow when focus is visible.
+       * The following defines the box-shadow for the scroll container when keyboard / tab navigation is enabled.
        */
-      // allowTabFocus: true,
-
       styles: {
          '--tjs-scroll-container-box-shadow-focus-visible': 'inset 0 0 0 2px var(--color-shadow-primary)'
       }
@@ -110,7 +118,7 @@
 <ApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
    <MenuBar />
 
-   <TJSScrollContainer {container} allowTabFocus={$storeContainerKeyFocus}>
+   <TJSScrollContainer {container} allowTabFocus={$storeContainerKeyFocus} keyPropagate={$storeContainerKeyPropagate}>
       <!-- Note: using local calculated `fontSize` from scaling session store to control `font-size` -->
       <section class=text
                style:font-size={fontSize}>
@@ -129,9 +137,11 @@
          </ul>
          <p>
             The menus include several dummy / no-op menu items, but the `always on top` item will change the app state.
-            Keyboard navigation / focus can be enabled / disabled for `TJSScrollContainer. A final slotted menu item
-            available in the `TJSMenu` menu controls the font scaling of the main content text. All state including the
-            app position is serialized to session storage.
+            A final slotted menu item available in the `TJSMenu` menu items controls the font scaling of the main
+            content text. All state including the app position and `always on top` is serialized to session storage.
+            Keyboard navigation / focus can be enabled / disabled for `TJSScrollContainer`. By default, the scroll
+            container supports accessibility in stopping propagation of keys related to scrolling. You may turn this
+            off with a menu bar button.
          </p>
       </section>
    </TJSScrollContainer>
