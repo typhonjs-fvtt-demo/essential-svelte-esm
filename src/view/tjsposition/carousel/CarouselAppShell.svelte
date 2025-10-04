@@ -28,7 +28,7 @@
    </div>
 </TJSApplicationShell>
 
-<style lang="scss">
+<style lang=scss>
    .scene {
       position: relative;
       width: 190px;

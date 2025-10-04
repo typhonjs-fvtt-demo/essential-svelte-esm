@@ -110,16 +110,12 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 12px;
-   }
 
-   section.styled {
-      background: rgba(0, 0, 0, 0.1);
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid var(--content-link-border-color);
-
-      @at-root :global(body.theme-dark) & {
-         background: rgba(208, 184, 163, 0.1);
+      &.styled {
+         background: var(--overlay-background-color);
+         border: var(--overlay-border);
+         border-radius: var(--overlay-border-radius);
+         padding: var(--overlay-padding);
       }
    }
 </style>

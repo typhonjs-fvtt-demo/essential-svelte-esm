@@ -72,7 +72,7 @@
    </main>
 </ApplicationShell>
 
-<style lang="scss">
+<style lang=scss>
    main {
       text-align: center;
       display: flex;
@@ -98,15 +98,11 @@
       }
 
       div.drop {
-         background: rgba(0, 0, 0, 0.1);
+         background: var(--overlay-background-color);
+         border: var(--overlay-border);
+         border-radius: var(--overlay-border-radius);
+         padding: var(--overlay-padding);
 
-         @at-root :global(body.theme-dark) & {
-            background: rgba(208, 184, 163, 0.1);
-         }
-
-         border-radius: 10px;
-         border: 1px solid var(--content-link-border-color);
-         padding: 0.25em;
          margin-bottom: 0.25em;
       }
 

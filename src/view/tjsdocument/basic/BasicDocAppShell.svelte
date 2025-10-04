@@ -48,17 +48,13 @@
    }
 
    section {
-      background: rgba(0, 0, 0, 0.1);
-
-      @at-root :global(body.theme-dark) & {
-         background: rgba(208, 184, 163, 0.1);
-      }
-
       display: flex;
       flex-direction: column;
-      border-radius: 0.25em;
-      border: 1px solid var(--content-link-border-color);
-      padding: 0.25em;
       min-height: 2em;
+
+      background: var(--overlay-background-color);
+      border: var(--overlay-border);
+      border-radius: var(--overlay-border-radius);
+      padding: var(--overlay-padding);
    }
 </style>

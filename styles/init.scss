@@ -5,6 +5,18 @@
  * Vite / Rollup includes style files by importing them; see: `./src/index.js`.
  */
 .tjs-essential-svelte-esm {
+  --overlay-border: 1px solid var(--content-link-border-color);
+  --overlay-border-radius: 0.25rem;
+  --overlay-padding: 0.5rem;
+
+  &.themed.theme-light {
+    --overlay-background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &.themed.theme-dark {
+    --overlay-background-color: rgba(208, 184, 163, 0.05);
+  }
+
   // Instead of the browser default outline for manually focused components define your own.
   // Note that this is just for TRL / svelte-standard components as there are several normal elements still used in the
   // demo code thus will have default styles of either Foundry or the browser.

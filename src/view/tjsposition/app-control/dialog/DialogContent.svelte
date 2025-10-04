@@ -43,12 +43,6 @@
 
 <style lang=scss>
    main {
-      --section-background-color: rgba(0, 0, 0, 0.1);
-
-      @at-root :global(body.theme-dark) & {
-         --section-background-color: rgba(208, 184, 163, 0.1);
-      }
-
       text-align: center;
       display: flex;
       flex-direction: column;

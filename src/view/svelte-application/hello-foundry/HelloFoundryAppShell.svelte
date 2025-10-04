@@ -75,12 +75,12 @@
    </main>
 </ApplicationShell>
 
-<style lang="scss">
+<style lang=scss>
    main {
       text-align: center;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 1rem;
 
       div.bottom {
          margin-bottom: 3px; // For keyboard nav / link outline.
@@ -90,17 +90,13 @@
          display: flex;
          align-items: center;
          justify-content: center;
-         border-radius: 10px;
-         padding: 10px;
+
+         background: var(--overlay-background-color);
+         border: var(--overlay-border);
+         border-radius: var(--overlay-border-radius);
+         padding: var(--overlay-padding);
+
          margin-top: auto;
-
-         /* You can use an existing core CSS variable that has dark / light theme changes. Try `--color-border` too. */
-         border: 1px solid var(--content-link-border-color);
-
-         /* For Sass you can alternatively use the `@at-root` directive to apply nested alternates */
-         //@at-root body.theme-dark & {
-         //   border: 2px solid red;
-         //}
       }
 
       h1 {
@@ -108,6 +104,7 @@
          text-transform: uppercase;
          font-size: 4em;
          font-weight: 100;
+         margin: 0;
       }
 
       label {

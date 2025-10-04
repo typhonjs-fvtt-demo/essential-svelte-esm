@@ -83,7 +83,7 @@
    </div>
 </div>
 
-<style lang="scss">
+<style lang=scss>
    button {
       width: fit-content;
       height: 22px;

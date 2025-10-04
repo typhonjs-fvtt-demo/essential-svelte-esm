@@ -78,7 +78,7 @@
    <div class=debug use:applyStyles={stylesDebug}></div>
 {/if}
 
-<style lang="scss">
+<style lang=scss>
    main {
       text-align: center;
       display: flex;
