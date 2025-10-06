@@ -49,6 +49,8 @@ export class PositionApplication extends SvelteApp
 
    get storeDebug() { return this.#storeDebug; }
 
+   get dialog() { return this.#dialog; }
+
    /** @inheritDoc */
    async close(options)
    {
@@ -69,8 +71,9 @@ export class PositionApplication extends SvelteApp
       setTimeout(() =>
       {
          this.#dialog = new TJSDialog({
+            // Note: set `alwaysOnTop` to `true` to make the dialog appear over other app windows.
             alwaysOnTop: true,
-            title: 'Adjust Position',
+            title: 'Adjust Position Dialog',
             content: {
                class: DialogContent,
                props: { application: this }

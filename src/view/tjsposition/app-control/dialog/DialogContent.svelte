@@ -10,6 +10,8 @@
 
    const storeDebug = application.storeDebug;
 
+   const { alwaysOnTop } = application.dialog.reactive.storeAppOptions;
+
    const position = application.position;
 </script>
 
@@ -38,6 +40,10 @@
    <div style="justify-content: flex-start">
       <input type=checkbox bind:checked={$storeDebug}>
       Debug: Show transform bounding rectangle.
+   </div>
+   <div style="justify-content: flex-start">
+      <input type=checkbox bind:checked={$alwaysOnTop}>
+      Dialog: Always on top.
    </div>
 </main>
 
