@@ -66,6 +66,12 @@ export class TJSMenuApp extends SvelteApp
                event,
 
                /**
+                * Note: A useful positioning aid to anchor the context menu to the event target element. This usually is
+                * the bottom / left of the element, but it will be adjusted when the menu opens to the left or up.
+                */
+               anchorToEventTarget: true,
+
+               /**
                 * Note: When not passing the `application` reference to `createMenuItems` the `always on top` item isn't
                 * added. Try modifying the code removing `{ application }`.
                 */
