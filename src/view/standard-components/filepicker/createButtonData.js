@@ -25,7 +25,8 @@ export function createButtonData(idPrepend)
       {
          enabled: FVTTFilePickerControl.canBrowse,
          efx: rippleInstance,
-         title: 'Pick File',
+         tooltip: 'Pick File',
+         tooltipDirection: 'RIGHT',
          pickerOptions: {
             id: `${idPrepend}tjs-file-picker-demo-0`,
             store: writable(''), // You may assign a writable store to receive result changes.
@@ -57,7 +58,8 @@ export function createButtonData(idPrepend)
       {
          enabled: FVTTFilePickerControl.canBrowse,
          efx: rippleInstance,
-         title: 'Pick File',
+         tooltip: 'Pick File',
+         tooltipDirection: 'RIGHT',
          pickerOptions: {
             id: `${idPrepend}tjs-file-picker-demo-1`,
             store: writable(''),
@@ -82,6 +84,8 @@ export function createButtonData(idPrepend)
       {
          enabled: FVTTFilePickerControl.canBrowse,
          efx: rippleInstance,
+         tooltip: 'Pick File',
+         tooltipDirection: 'RIGHT',
          pickerOptions: {
             id: `${idPrepend}tjs-file-picker-demo-3`,
             store: writable('')
@@ -92,6 +96,8 @@ export function createButtonData(idPrepend)
       {
          enabled: FVTTFilePickerControl.canBrowse,
          efx: rippleInstance,
+         tooltip: 'Pick File',
+         tooltipDirection: 'RIGHT',
          pickerOptions: {
             id: `${idPrepend}tjs-file-picker-demo-4`,
             store: writable(''),
@@ -108,6 +114,8 @@ export function createButtonData(idPrepend)
          // This is an example of how an actor / profile image can be constructed.
          enabled: FVTTFilePickerControl.canBrowse,
          efx: ripple({ duration: 300 }),
+         tooltip: 'Pick File',
+         tooltipDirection: 'RIGHT',
          styles: !FVTTFilePickerControl.canBrowse ? { '--tjs-slot-button-filter-disabled': 'none' } : void 0,
          pickerOptions: {
             id: `${idPrepend}tjs-file-picker-demo-5`,
