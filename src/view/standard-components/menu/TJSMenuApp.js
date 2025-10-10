@@ -60,6 +60,8 @@ export class TJSMenuApp extends SvelteApp
 
       buttons.unshift({
          icon: 'fas fa-ellipsis-v',
+         label: 'TJSContextMenu',
+         tooltipDirection: 'UP',
          onPress: ({ event }) =>
          {
             TJSContextMenu.create({
@@ -75,13 +77,7 @@ export class TJSMenuApp extends SvelteApp
                 * Note: When not passing the `application` reference to `createMenuItems` the `always on top` item isn't
                 * added. Try modifying the code removing `{ application }`.
                 */
-               items: createMenuItems({ application: this }),
-
-               /**
-                * The menu item `onPress` handlers from `createMenuItems` are simple, so auto apply focus source.
-                * This will focus the scroll container which is the source of the event.
-                */
-               onPressApplyFocus: true
+               items: createMenuItems({ application: this })
             });
          }
       });

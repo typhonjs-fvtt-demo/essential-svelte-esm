@@ -55,13 +55,7 @@
              * used to wrap `createMenuItems` in order to pass `application` to it, but this can be any function that
              * returns a list of menu items.
              */
-            items: () => createMenuItems({ application }),
-
-            /**
-             * The menu item `onPress` handlers from `createMenuItems` are simple, so auto apply focus source.
-             * This will focus the scroll container which is the source of the event.
-             */
-            onPressApplyFocus: true
+            items: () => createMenuItems({ application })
          });
       },
 
@@ -137,6 +131,12 @@
          </ul>
          <p>
             The menus include several dummy / no-op menu items, but the `always on top` item will change the app state.
+            All menus handle intelligent focus handling with optional focus chaining. By default the component /
+            element that triggered the menu regains focus after a menu item is selected or the menu is closed via the
+            `Escape` key. A focus chaining example is provided which shows a modal dialog. Notice the return of focus
+            after the dialog is closed.
+         </p>
+         <p>
             A final slotted menu item available in the `TJSMenu` menu items controls the font scaling of the main
             content text. All state including the app position and `always on top` is serialized to session storage.
             Keyboard navigation / focus can be enabled / disabled for `TJSScrollContainer`. By default, the scroll

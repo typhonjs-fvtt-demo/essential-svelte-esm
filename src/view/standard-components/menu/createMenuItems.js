@@ -1,7 +1,9 @@
-import MenuItem from './MenuItem.svelte';
+import { TJSDialog } from '#runtime/svelte/application';
+
+import MenuItem      from './MenuItem.svelte';
 
 /**
- * Creates the items for the overflow menu via `TJSMenu` component.
+ * Creates the items for all menus via `TJSMenu` or `TJSContextMenu` components.
  *
  * Pass in additional state or access it globally to provide conditional menu items. In this case when the `application`
  * is passed into `createMenuItems` an extra menu item to control always on top state is added.
@@ -9,12 +11,12 @@ import MenuItem from './MenuItem.svelte';
  * @param {object} [options] - Conditional options for extra menu items.
  *
  * @param {import('#runtime/svelte/application').SvelteApp} [options.application] - Used to add additional
- *        `always on top` app state menu item.
+ *        `always on top` app state menu item when `application` reference present.
  *
  * @param {boolean} [options.trailingHR] - When true and `application` defined add a trailing HR to separate demo
- *        slotted menu item in `MenuBar.svelte`.
+ *        slotted menu item in `MenuBar.svelte`. `TJSMenu` allows additional menu items to be defined by slots.
  *
- * @returns {Iterable<import('#standard/component/menu').TJSMenuData.Items>} Overflow menu items.
+ * @returns {Iterable<import('#standard/component/menu').TJSMenuData.Items>} Menu items.
  */
 export function createMenuItems({ application, trailingHR = false } = {})
 {
@@ -44,7 +46,9 @@ export function createMenuItems({ application, trailingHR = false } = {})
       {
          label: 'Item 4 (Image)',
          icon: `icons/magic/air/air-burst-spiral-blue-gray.webp`,
-         onPress: () => console.log(`Item 4 pressed`)
+
+         // An async example that doesn't defer focus resolution as `console.log` has a `void` return value.
+         onPress: async () => console.log(`Item 4 pressed`)
       },
 
       // You can provide a custom Svelte component as a menu item.
@@ -54,6 +58,37 @@ export function createMenuItems({ application, trailingHR = false } = {})
             props: { message: 'Item 5 (Svelte Comp)' }
          },
          onPress: () => console.log(`Item 5 pressed`)
+      },
+
+      /**
+       * An example of focus chaining. This menu item launches a modal dialog and after it is closed the
+       * originating component / element is focused. All TRL standard library callbacks receive the originating event
+       * and `focusSource` which is an `A11yFocusSource` data object. `SvelteApp` can receive an `A11yFocusSource`
+       * data object which will be the focus source when the app or in this case dialog closes.
+       */
+      {
+         label: 'Focus Chaining',
+         icon: `fas fa-window-restore`,
+         onPress: async ({ focusSource }) =>
+         {
+            // Pass `focusSource` as the SvelteApp option.
+            const result = await TJSDialog.prompt({
+               modal: true,
+               draggable: false,
+               minimizable: false,
+               label: 'Ok',
+               title: 'Focus Chaining Example',
+               content: 'Notice that the source button or element that created the menu ' +
+                'becomes the active element / focused when the modal dialog is closed.',
+               onOk: () => true
+            }, { focusSource });
+
+            console.log(`Modal dialog result: ${!!result}`);
+
+            // While not explicitly necessary in most cases returning `true` indicates that focus continuation
+            // resolution will be handled and the originating menu will skip applying automatic focus resolution.
+            return true;
+         }
       }
    ];
 

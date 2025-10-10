@@ -24,6 +24,8 @@
     */
    const overflowMenuButton = {
       icon: 'fas fa-ellipsis-v',
+      tooltip: 'TJSMenu',
+      tooltipDirection: 'RIGHT',
       efx: ripple()
    };
 
@@ -32,13 +34,7 @@
     */
    const menu = {
       // Offset menu down 4px.
-      offset: { y: 4 },
-
-      // Element that receives focus automatically on menu item press.
-      focusEl: '#tjs-menu-esm',
-
-      // The menu item `onPress` handlers from `createMenuItems` are simple, so auto apply focus source.
-      onPressApplyFocus: true
+      offset: { y: 4 }
    }
 
    /**
