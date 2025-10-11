@@ -28,7 +28,7 @@
       {/each}
       <div class=bottom>
          <hr>
-         <a href="https://learn.svelte.dev/tutorial/welcome-to-svelte" target=_blank>Interactive Svelte tutorial</a>
+         <a href="https://v4.svelte.dev/tutorial/basics" target=_blank>Interactive Svelte tutorial</a>
          <br>
          <a href="https://typhonjs.io/discord/" target=_blank>TyphonJS Discord (Support)</a>
       </div>
