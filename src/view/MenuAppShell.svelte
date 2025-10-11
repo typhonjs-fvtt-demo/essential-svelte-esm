@@ -3,9 +3,7 @@
     * Provides the statically themed main menu to launch demo apps.
     *
     * Note the use of `TJSApplicationShell` which allows static customized theming through CSS variables defined in the
-    * component. See `./styles/init.scss` for static and themed app background styling defined. Also see
-    * `./src/MenuApplication.js` default options to enabled dark / light core theming support by adding `themed` to the
-    * class list for `TJSApplicationShell`.
+    * component. See `./styles/init.scss` for static and themed app background styling defined.
     */
    import { scale }                 from 'svelte/transition';
 
@@ -30,14 +28,14 @@
       {/each}
       <div class=bottom>
          <hr>
-         <a href="https://learn.svelte.dev/tutorial/welcome-to-svelte" target=_blank>Interactive Svelte tutorial</a>
+         <a href="https://v4.svelte.dev/tutorial/basics" target=_blank>Interactive Svelte tutorial</a>
          <br>
          <a href="https://typhonjs.io/discord/" target=_blank>TyphonJS Discord (Support)</a>
       </div>
    </main>
 </TJSApplicationShell>
 
-<style lang="scss">
+<style lang=scss>
    main {
       text-align: center;
       display: flex;

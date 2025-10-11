@@ -26,7 +26,7 @@
 
  {#if visible}
    <div transition:slideFade={{ duration: 100 }}>
-      <TJSInput type={'range'} label={'Playback rate:'} store={videoPlaybackRate} min={0.1} max={4} step={0.01} efx={rippleFocus()} />
+      <TJSInput type={'range'} label={'Playback rate:'} store={videoPlaybackRate} min={0.1} max={4} step={0.01} />
       <TJSInput type={'number'} store={videoPlaybackRate} step={0.01} efx={rippleFocus()} />
       <TJSInput type={'checkbox'} label={'Play on hover:'} store={videoPlayOnHover} />
    </div>
@@ -37,17 +37,16 @@
       display: flex;
       align-items: center;
       gap: 0.5em;
+      grid-column: span 3;  /* Span across all columns. */
 
       --tjs-input-number-width: fit-content;
       --tjs-input-number-text-align: center;
 
-      background: var(--tjs-input-background);
-      border: var(--tjs-input-border);
-      border-radius: var(--tjs-input-border-radius);
+      background: var(--overlay-background-color);
+      border: var(--overlay-border);
+      border-radius: var(--overlay-border-radius);
+      padding: var(--overlay-padding);
 
       margin-bottom: 0.5em;
-      padding: 0.5em;
-
-      grid-column: span 3;  /* Span across all columns. */
    }
 </style>

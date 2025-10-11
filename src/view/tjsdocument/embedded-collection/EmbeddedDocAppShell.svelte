@@ -62,7 +62,6 @@
       <div class=container>
          <div class=column>
             <div style="display: flex; align-items: center;">Items by type ->&nbsp;<TJSInput {input}/>&nbsp;: {$wildcard.index.length}</div>
-            <br>
             <ol>
                {#each [...$wildcard] as item (item.id)}
                   <li animate:flip={{duration: 200}}>{item.name}</li>
@@ -73,11 +72,12 @@
    </main>
 </ApplicationShell>
 
-<style lang="scss">
+<style lang=scss>
    main {
       text-align: center;
       display: flex;
       flex-direction: column;
+      max-height: 90vh;
 
       --tjs-input-text-width: 100px;
 
@@ -98,15 +98,11 @@
       }
 
       div.drop {
-         background: rgba(0, 0, 0, 0.1);
+         background: var(--overlay-background-color);
+         border: var(--overlay-border);
+         border-radius: var(--overlay-border-radius);
+         padding: var(--overlay-padding);
 
-         @at-root :global(body.theme-dark) & {
-            background: rgba(208, 184, 163, 0.1);
-         }
-
-         border-radius: 10px;
-         border: 1px solid var(--content-link-border-color);
-         padding: 0.25em;
          margin-bottom: 0.25em;
       }
 
@@ -119,6 +115,11 @@
 
       li {
          text-align: start
+      }
+
+      ol {
+         overflow-y: auto;
+         max-height: 75vh;
       }
    }
 </style>

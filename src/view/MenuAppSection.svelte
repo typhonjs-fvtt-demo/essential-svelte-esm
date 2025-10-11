@@ -65,8 +65,7 @@
 
 <section>
    <TJSSvgFolder {folder}>
-      <!-- Note the trick of applying `themed theme-dark` to the div to force buttons to core dark theme -->
-      <div class="themed theme-dark">
+      <div>
          {#each section.entries as entry}
             <button on:click={() => onClick(entry)}>{entry.title}</button>
          {/each}
@@ -94,10 +93,7 @@
       --tjs-folder-summary-font-size: 1.05rem;
       --tjs-folder-summary-width: 100%;
 
-      // See `./styles/init.scss` for `themed` alterations.
-      // See `./src/view/MenuApplication.js` default options `classes`; uncomment / add `themed` to classes for the
-      // dark & light themes to be applied to `TJSApplicationShell`.
-      background: var(--menu-section-background, rgba(255, 255, 255, 0.15));
+      background: rgba(255, 255, 255, 0.15);
 
       border-radius: 0.25rem;
       padding: 0.25rem;

@@ -1,4 +1,5 @@
 import { SvelteApp }          from '#runtime/svelte/application';
+import { ThemeObserver }      from '#runtime/util/dom/theme';
 import { deepMerge }          from '#runtime/util/object';
 
 import HeaderButtonsAppShell  from './HeaderButtonsAppShell.svelte';
@@ -9,6 +10,18 @@ import { sessionConstants }   from '#constants';
 
 export class HeaderButtonsApplication extends SvelteApp
 {
+   constructor(options)
+   {
+      super(options);
+
+      // Initialize the session storage state to the current platform theme dark state if not already set.
+      const themeDarkMode = this.reactive.sessionStorage.getItem(sessionConstants.themeDarkMode,
+       ThemeObserver.isTheme('dark'));
+
+      // Set explicit app theme based on current session storage state.
+      this.reactive.themeName = themeDarkMode ? 'dark' : 'light';
+   }
+
    /**
     * Default Application options
     *
@@ -53,7 +66,7 @@ export class HeaderButtonsApplication extends SvelteApp
     * - {Function}   onContextMenu - Callback for right click / contextmenu keyboard event.
     * - {Function}   onPress - Callback for left click / 'Enter' key.
     * - {Record<string, string>} styles - Inline styles to apply to the button.
-    * - {string}     title - A tooltip to display when hovered.
+    * - {string}     label - A tooltip to display when hovered.
     *
     * You may also pass an object containing a 'svelte' property which is a TJSSvelte.Config.Embed / Svelte
     * configuration object to load a Svelte component in the app header.
@@ -66,13 +79,12 @@ export class HeaderButtonsApplication extends SvelteApp
       const buttons = super._getHeaderButtons();
 
       const storage = this.reactive.sessionStorage;
-
-      const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode, true);
+      const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode);
 
       buttons.unshift({
-         class: 'theme-dark',
+         class: 'theme-dark', // You can add a class
          icon: 'fas fa-moon',
-         label: themeDarkMode ? 'Dark Mode disable' : 'Dark Mode enable',     // Additional TRL option; sets hover title.
+         label: themeDarkMode ? 'Light Theme' : 'Dark Theme',     // Additional TRL option; sets tooltip.
          styles: themeDarkMode ? { color: 'lightblue' } : { color: 'white' }, // Additional TRL option; inline styles.
          // keepMinimized: true,                         // When true the header button remains when app is minimized.
 
@@ -81,7 +93,10 @@ export class HeaderButtonsApplication extends SvelteApp
          {
             const newThemeDarkMode = storage.swapItemBoolean(sessionConstants.themeDarkMode);
 
-            button.label = newThemeDarkMode ? 'Dark Mode disable' : 'Dark Mode enable';
+            // Reactive control over local app theme by theme name.
+            this.reactive.themeName = newThemeDarkMode ? 'dark' : 'light';
+
+            button.label = newThemeDarkMode ? 'Light Theme' : 'Dark Theme';
             button.styles = newThemeDarkMode ? { color: 'lightblue' } : { color: 'white' };
          }
 
@@ -107,6 +122,18 @@ export class HeaderButtonsApplication extends SvelteApp
          }
       });
 
+      // You can use an image for the icon.
+      buttons.unshift({
+         icon: 'icons/vtt.png',
+         label: 'Image icon',
+      });
+
+      // You can use SVG for the icon.
+      buttons.unshift({
+         icon: 'modules/essential-svelte-esm/assets/svg/alien-icon.svg',
+         label: 'SVG icon',
+      });
+
       buttons.unshift({
          svelte: {
             class: ProgressBar
@@ -117,7 +144,7 @@ export class HeaderButtonsApplication extends SvelteApp
       buttons.unshift({
          class: 'test-left',
          icon: 'fas fa-check',
-         label: 'Test',
+         label: 'Left aligned',
          alignLeft: true,
       });
 

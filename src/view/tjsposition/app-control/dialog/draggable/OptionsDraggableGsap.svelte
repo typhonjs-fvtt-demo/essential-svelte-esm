@@ -30,7 +30,7 @@
       <input type=checkbox bind:checked={options.tween}/>
       <span>Tween:</span>
       <!-- svelte-ignore a11y-missing-attribute -->
-      <a on:click={() => options.resetTweenOptions()} title="Reset Tween Options" role=presentation><i class="fas fa-trash"></i></a>
+      <a on:click={() => options.resetTweenOptions()} data-tooltip="Reset Tween Options" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
    <div>
@@ -52,7 +52,7 @@
       <input type=checkbox bind:checked={options.inertia}/>
       <span>Inertia:</span>
       <!-- svelte-ignore a11y-missing-attribute -->
-      <a on:click={() => resetInertia()} title="Reset Inertia" role=presentation><i class="fas fa-trash"></i></a>
+      <a on:click={() => resetInertia()} data-tooltip="Reset Inertia" role=presentation><i class="fas fa-trash"></i></a>
    </div>
 
    <div>

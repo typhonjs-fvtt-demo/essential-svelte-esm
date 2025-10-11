@@ -50,12 +50,11 @@
       touch-action: none;
    }
 
-   /* Background when not themed */
-   :global(:not(.themed)) div {
-      background: rgba(50, 50, 50, 0.9);
-   }
+   label {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
 
-   :global(.themed) label {
       /* This can be removed once Foundry core updates styles for themed labels */
       color: var(--color-text-primary);
    }

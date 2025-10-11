@@ -14,14 +14,34 @@
           "title": "Content Resize Observer"
         },
 
+        "popover-tooltip": {
+          "title": "Tooltip / `popoverTooltip` Action"
+        },
+
         "use-tinykeys": {
           "title": "Tinykeys / `useTinykeys` Action"
         }
       },
 
       "components": {
+        "menus": {
+          "title": "TJSMenu / TJSContextMenu / TJSScrollContainer"
+        },
+
         "side-slide-layer": {
           "title": "Side Slide Layer"
+        }
+      },
+
+      "svelte-app": {
+        "active-classes": {
+          "title": "Reactive App Classes"
+        },
+        "container-query": {
+          "title": "Container Queries"
+        },
+        "explicit-theme": {
+          "title": "Explicit App Theme"
         }
       }
     }

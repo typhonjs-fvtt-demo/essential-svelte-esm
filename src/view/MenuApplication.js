@@ -13,7 +13,8 @@ import {
 import {
    ColorPickerApp,
    FilePickerApp,
-   SideSlideApp }             from './standard-components';
+   SideSlideApp,
+   TJSMenuApp }               from './standard-components';
 
 import {
    ContentEditableApp,
@@ -22,11 +23,15 @@ import {
 import {
    AnimateWAAPIApp,
    ContentResizeApp,
+   PopoverTooltipApp,
    TinykeysApp }              from './svelte-actions';
 
 import {
+   ActiveClassesApp,
    AppStateClientSettingApp,
    AppStateSessionApp,
+   ContainerQueryApp,
+   ExplicitThemeApp,
    HeaderButtonsApplication,
    HelloFoundryApplication }  from './svelte-application';
 
@@ -56,17 +61,7 @@ export class MenuApplication extends SvelteApp
          // In this demo `TJSApplicationShell` is used which provides a way to exclude your app from overt game system
          // styles, but alas some of the v13 core styles are hard to opt out / escape from as things go.
 
-         // Without `themed` there are no theme selectors on the app `div`. However, see `MenuAppSection.svelte` where
-         // `themed theme-dark` is applied around the buttons div to lock the buttons to the dark theme.
          classes: ['tjs-essential-svelte-esm'],
-
-         // Adding `theme-dark` locks to the core dark theme. There are explicit theme overrides in `styles/init.scss`.
-         // classes: ['tjs-essential-svelte-esm', 'theme-dark'],
-
-         // Adding `themed` enables core dark / light theming. You'll notice the red / green colors. `styles/init.scss`
-         // gives an example of explicit theming.
-         // classes: ['tjs-essential-svelte-esm', 'themed'],
-
          headerButtonNoClose: true,
          resizable: false,
          popOut: false,
@@ -76,6 +71,7 @@ export class MenuApplication extends SvelteApp
          transformOrigin: null,
          title: 'EssentialESM.apps.menu.title',
          zIndex: 95,
+         themeName: 'dark',
 
          svelte: {
             class: MenuAppShell,
@@ -98,7 +94,10 @@ export class MenuApplication extends SvelteApp
             title: 'SvelteApp',
             entries: [
                { title: 'Hello Foundry', class: HelloFoundryApplication },
+               { title: 'Explicit App Theme', class: ExplicitThemeApp },
                { title: 'Header Buttons', class: HeaderButtonsApplication },
+               { title: 'Container Queries', class: ContainerQueryApp },
+               { title: 'Reactive App Classes', class: ActiveClassesApp },
                { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
                { title: 'App State (Session Storage)', class: AppStateSessionApp },
             ]
@@ -122,6 +121,7 @@ export class MenuApplication extends SvelteApp
          {
             title: 'Standard Components',
             entries: [
+               { title: 'Menus / Scroll Container', class: TJSMenuApp },
                { title: 'Color Picker', class: ColorPickerApp },
                { title: 'File Picker Buttons', class: FilePickerApp },
                { title: 'Side Slide Layer', class: SideSlideApp },
@@ -138,8 +138,9 @@ export class MenuApplication extends SvelteApp
             title: 'Svelte Actions',
             entries: [
                { title: '`animateWAAPI` / WAAPI Animation', class: AnimateWAAPIApp },
-               { title: '`useTinykeys` / Tinykeys', class: TinykeysApp },
-               { title: '`resizeObserver` / Content Min Resize', class: ContentResizeApp }
+               { title: '`popoverTooltip` / Tooltips', class: PopoverTooltipApp },
+               { title: '`resizeObserver` / Content Min Resize', class: ContentResizeApp },
+               { title: '`useTinykeys` / Tinykeys', class: TinykeysApp }
             ]
          },
          {

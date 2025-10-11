@@ -85,9 +85,6 @@
    main {
       --tjs-media-content-background: var(--tjs-input-background);
       --tjs-media-content-diameter: 75px;
-
-      /* Uncomment to see what the ripple effect looks like w/ a color gradient. */
-      --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
    }
 
    h4 {

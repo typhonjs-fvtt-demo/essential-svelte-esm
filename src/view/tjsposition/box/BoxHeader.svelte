@@ -49,7 +49,7 @@
          <label><input type=checkbox bind:checked={$storeLabels}>Labels</label>
       </div>
       <div class=flex>
-         <span title="Position Control Layer">PCL:</span>
+         <span data-tooltip="Position Control Layer">PCL:</span>
          <label><input type=checkbox bind:checked={$storePCL}>Enable</label>
          <button on:click={() => boxStore.save(controls.export())} style="margin-left: 0.25em">Save</button>
          <button on:click={() => boxStore.restore()}>Restore</button>
@@ -83,7 +83,7 @@
    </div>
 </div>
 
-<style lang="scss">
+<style lang=scss>
    button {
       width: fit-content;
       height: 22px;

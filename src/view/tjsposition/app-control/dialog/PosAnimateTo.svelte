@@ -141,12 +141,10 @@
       flex-direction: column;
       gap: 0.5em;
 
-
-      border: 0.1em solid var(--content-link-border-color);
-      border-radius: 1em;
-      background: var(--section-background-color);
-
-      padding: 0.5em;
+      background: var(--overlay-background-color);
+      border: var(--overlay-border);
+      border-radius: var(--overlay-border-radius);
+      padding: var(--overlay-padding);
 
       input[type=text] {
          max-width: 2.5em;

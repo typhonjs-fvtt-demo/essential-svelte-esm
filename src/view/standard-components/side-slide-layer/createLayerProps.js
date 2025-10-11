@@ -18,28 +18,33 @@ import {
  *
  * @param {boolean} [opts.sideAbs] - Apply absolute positioning for side alignment.
  *
+ * @param {boolean} [opts.tooltips] - Apply absolute positioning for side alignment.
+ *
  * @returns {object} The props for TJSSideSlideLayer. The persisted prop data from game settings is also applied.
  */
-export function createLayerProps({ relative = false, sideAbs = true } = {})
+export function createLayerProps({ relative = false, sideAbs = true, tooltips = true } = {})
 {
    // Existing state stored as an object that is spread at the beginning of the returned object below.
    const existingState = game.settings.get(constants.moduleId, settings.sideSlideLayer) ?? {};
 
    return {
-      side: 'right',       // 'right' or 'left'
+      side: 'right',                // 'right' or 'left'
 
-      sideAbs,
+      sideAbs,                      // When true, the layer uses `absolute` positioning otherwise `relative`.
 
-      // allowLocking: false,
-      // clickToOpen: true,
-      // duration: 1000,
-      // easingIn: 'linear',  // The name of a Svelte easing function.
-      // easingOut: 'linear', // The name of a Svelte easing function.
-      // top: 40,             // Numbers are treated as pixels unless `topUnit` defined / otherwise valid `top` CSS string.
-      // topUnit: '%',        // You may provide the CSS unit type for the `top` prop.
-      // zIndex: 10,          // z-index to display the layer. This is above the canvas and below the app UI layer.
+      tooltips,                     // When false, tooltips are disabled.
 
-      ...existingState,       // Overrides any props that are serialized to a world setting object.
+      // allowLocking: false,       // When false, tabs can't be context clicked to lock panels.
+      // clickToOpen: true,         // When true, clicking on tabs opens / closes a panel and locking is disabled.
+      // duration: 1000,            // Time in milliseconds for tweening.
+      // easingIn: 'linear',        // The name of a Svelte easing function.
+      // easingOut: 'linear',       // The name of a Svelte easing function.
+      // tooltipDirection: 'RIGHT'  // You may provide the Foundry tooltip manager direction.
+      // top: 40,                   // Numbers are treated as pixels unless `topUnit` defined / otherwise valid `top` CSS string.
+      // topUnit: '%',              // You may provide the CSS unit type for the `top` prop.
+      // zIndex: 10,                // z-index to display the layer. This is above the canvas and below the app UI layer.
+
+      ...existingState,             // Overrides any props that are serialized to a world setting object.
 
       // The following is constant state that doesn't change.
 
@@ -50,7 +55,7 @@ export function createLayerProps({ relative = false, sideAbs = true } = {})
          position: relative ? 'relative' : 'absolute',
 
          /* Applies the color used for the sidebar */
-         '--tjs-side-slide-layer-item-border-color-hover': 'var(--color-border-highlight-alt)',
+         // '--tjs-side-slide-layer-item-border-color-hover': 'red',
 
          /* Make the item icons / font larger */
          // '--tjs-side-slide-layer-item-diameter': '50px',
@@ -60,13 +65,13 @@ export function createLayerProps({ relative = false, sideAbs = true } = {})
          {
             icon: 'fas fa-crosshairs-simple',      // Font awesome icon _or_ a Svelte configuration object.
             svelte: { class: CurrentTargetPanel }, // A Svelte configuration object for the panel.
-            title: 'Current Targets'               // Optional title / tooltip.
+            tooltip: 'Current Targets'             // Optional title / tooltip.
          },
          {
             condition: () => game.user.isGM,       // You may provide a function whether to display the item.
             icon: { class: DynamicIcon },          // Loads a Svelte component as item icon.
             svelte: { class: DummyPanel },
-            title: 'Dummy Panel'
+            tooltip: 'Dummy Panel'
          }
       ]
    };
