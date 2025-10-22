@@ -26,7 +26,10 @@
 
 <ApplicationShell bind:elementRoot>
    <main class=scrollable>
-      This is a basic demo app that serializes app state to session storage.
+      This is a basic demo app that serializes app state to session storage. As of Foundry v13 it is
+      recommended to use a `user` setting to serialize app position as this provides more permanent serialization
+      attached to a user available in the Foundry DB. Session storage is fantastic though for all other temporary GUI
+      state that doesn't need to be serialized across Foundry server restarts.
       <p>
          When the app is moved the app state is serialized after 500 milliseconds.
       </p>

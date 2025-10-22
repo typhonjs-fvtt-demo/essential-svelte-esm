@@ -1,52 +1,84 @@
 import {
    SvelteApp,
-   TJSDialog }                from '#runtime/svelte/application';
+   TJSDialog }                   from '#runtime/svelte/application';
 
-import { deepMerge }          from '#runtime/util/object';
+import { deepMerge }             from '#runtime/util/object';
 
-import MenuAppShell           from './MenuAppShell.svelte';
+import MenuAppShell              from './MenuAppShell.svelte';
 
 import {
    ChatDialogContent,
-   SidebarCustomTabApp }      from './foundry/sidebar';
+   SidebarCustomTabApp }         from './foundry/sidebar';
 
 import {
    ColorPickerApp,
    FilePickerApp,
    SideSlideApp,
-   TJSMenuApp }               from './standard-components';
+   TJSMenuApp }                  from './standard-components';
 
 import {
    ContentEditableApp,
-   ProseMirrorApp }           from './standard-components/editor';
+   ProseMirrorApp }              from './standard-components/editor';
 
 import {
    AnimateWAAPIApp,
    ContentResizeApp,
    PopoverTooltipApp,
-   TinykeysApp }              from './svelte-actions';
+   TinykeysApp }                 from './svelte-actions';
 
 import {
    ActiveClassesApp,
    AppStateClientSettingApp,
    AppStateSessionApp,
+   AppStateUserSettingApp,
    ContainerQueryApp,
    ExplicitThemeApp,
    HeaderButtonsApplication,
-   HelloFoundryApplication }  from './svelte-application';
+   HelloFoundryApplication }     from './svelte-application';
 
 import {
    BasicDocumentApp,
-   EmbeddedDocApplication }   from './tjsdocument';
+   EmbeddedDocApplication }      from './tjsdocument';
 
 import {
    PositionApplication,
    PositionBasicOverlayApp,
    PositionBoxApplication,
-   PositionCarouselApp }      from './tjsposition';
+   PositionCarouselApp }         from './tjsposition';
+
+import { constants, settings }   from "#constants";
+import { gameSettings }          from "#gameSettings";
 
 export class MenuApplication extends SvelteApp
 {
+   constructor()
+   {
+      super();
+
+      /**
+       * Register a `user` game setting w/ TJSGameSettings; available since `v13` of Foundry. This makes a user setting
+       * stored in the Foundry DB and associated w/ the current user to serialize the app state.
+       */
+      gameSettings.register({
+         namespace: constants.moduleId,
+         key: settings.appStateMenuUser,
+         options: {
+            scope: 'user',
+            config: false,
+            default: {},
+            type: Object
+         }
+      });
+
+      try
+      {
+         // Attempt to parse user game setting and set application state.
+         const appState = game.settings.get(constants.moduleId, settings.appStateMenuUser);
+         if (appState?.position) { this.state.set(appState); }
+      }
+      catch (err) { /**/ }
+   }
+
    /**
     * Default Application options
     *
@@ -77,8 +109,21 @@ export class MenuApplication extends SvelteApp
             class: MenuAppShell,
             target: document.body,
             intro: true,
-            props: {
-               sections: this.#createSections()
+
+            /**
+             * You can provide a function and the `this` context is the application when invoked.
+             *
+             * @this {MenuApplication}
+             *
+             * @returns {object} Props for Svelte component.
+             */
+            props: function()
+            {
+               // Creates a store
+               return {
+                  sections: MenuApplication.#createSections(),
+                  settingStore: gameSettings.getStore(settings.appStateMenuUser)
+               };
             }
          }
       });
@@ -100,6 +145,7 @@ export class MenuApplication extends SvelteApp
                { title: 'Reactive App Classes', class: ActiveClassesApp },
                { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
                { title: 'App State (Session Storage)', class: AppStateSessionApp },
+               { title: 'App State (User Setting)', class: AppStateUserSettingApp },
             ]
          },
          {

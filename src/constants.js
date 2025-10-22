@@ -13,6 +13,8 @@ const constants = {
  */
 const settings = {
    appStateClient: 'appStateClient',
+   appStateUser: 'appStateUser',
+   appStateMenuUser: 'appStateMenuUser',
    sideSlideLayer: 'sideSlideLayer'
 };
 
@@ -62,7 +64,14 @@ export { constants, sessionConstants, settings };
 /**
  * @typedef {object} ESSettingConstants
  *
- * @property {string} appStateClient Stores the current app state in /src/view/app-state demo.
+ * @property {string} appStateClient Stores the current app state in /src/view/svelte-application/app-state demo to
+ * `client` setting.
+ *
+ * @property {string} appStateUser Stores the current app state in /src/view/svelte-application/app-state demo to
+ * `user` setting.
+ *
+ * @property {string} appStateMenuUser Stores the main menu app state in /src/view/MenuApplication to a `user` setting.
+ * `user` setting.
  *
  * @property {string} sideSlideLayer Stores the props persisted to Foundry settings as an object.
  */

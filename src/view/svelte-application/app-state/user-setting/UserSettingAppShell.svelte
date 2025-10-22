@@ -23,15 +23,14 @@
 
 <ApplicationShell bind:elementRoot>
    <main class=scrollable>
-      This is a basic demo app that serializes position to a client setting / local storage. As of Foundry v13 it is
-      recommended to use a `user` setting to serialize app position instead of a `client` setting as local storage is
-      a browser feature versus more permanent serialization attached to a user available in the Foundry DB.
+      This is a basic demo app that serializes position to a user setting in the Foundry DB associated with the current
+      user. This is helpful to store app positioning across Foundry server restarts.
       <p>
          When the app is moved the app state is serialized after 500 milliseconds.
       </p>
       <p>
-         Note: If minimized on initial render the position state before being minimized is restored. Foundry doesn't support
-         initially rendering an app in the minimized state.
+         Note: If minimized on initial render the position state before being minimized is restored. Foundry doesn't
+         support initially rendering an app in the minimized state.
       </p>
    </main>
 </ApplicationShell>

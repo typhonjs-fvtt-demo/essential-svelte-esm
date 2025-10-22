@@ -5,9 +5,12 @@
     * Note the use of `TJSApplicationShell` which allows static customized theming through CSS variables defined in the
     * component. See `./styles/init.scss` for static and themed app background styling defined.
     */
+   import { getContext }            from 'svelte';
+
    import { scale }                 from 'svelte/transition';
 
    import { TJSApplicationShell }   from '#runtime/svelte/component/application';
+   import { Timing }                from '#runtime/util';
 
    import MenuAppSection            from './MenuAppSection.svelte';
 
@@ -16,6 +19,20 @@
 
    // Menu section demo data.
    export let sections = void 0;
+
+   // Game setting store.
+   export let settingStore = void 0;
+
+   const { application } = getContext('#external');
+
+   // Application position store reference. Stores need to be a top level variable to be accessible for reactivity.
+   const position = application.position;
+
+   // A debounced callback that serializes application state after 500-millisecond delay.
+   const storePosition = Timing.debounce(() => $settingStore = application.state.current(), 500);
+
+   // Reactive statement to invoke debounce callback on TJSPosition changes.
+   $: storePosition($position);
 </script>
 
 <svelte:options accessors={true}/>
