@@ -12,7 +12,6 @@ const constants = {
  * @type {ESSettingConstants} Defines the Foundry game setting keys.
  */
 const settings = {
-   appStateClient: 'appStateClient',
    appStateUser: 'appStateUser',
    appStateMenuUser: 'appStateMenuUser',
    sideSlideLayer: 'sideSlideLayer'
@@ -22,7 +21,6 @@ const settings = {
  * @type {ESSessionConstants} Defines all the module session storage static constants.
  */
 const sessionConstants = {
-   appStateClient: `${constants.moduleId}.${settings.appStateClient}`,
    appStateMenu: `${constants.moduleId}.menus-app-state`,
    menuScale: `${constants.moduleId}.menus-font-scale`,
    menuContainerFocus: `${constants.moduleId}.menus-container-focus`,
@@ -39,8 +37,6 @@ export { constants, sessionConstants, settings };
 
 /**
  * @typedef {object} ESSessionConstants
- *
- * @property {string} appStateClient Stores the current app state in /src/view/app-state demo.
  *
  * @property {string} appStateMenu Stores the current app state in /src/view/standard-components/menu demo.
  *
@@ -63,9 +59,6 @@ export { constants, sessionConstants, settings };
 
 /**
  * @typedef {object} ESSettingConstants
- *
- * @property {string} appStateClient Stores the current app state in /src/view/svelte-application/app-state demo to
- * `client` setting.
  *
  * @property {string} appStateUser Stores the current app state in /src/view/svelte-application/app-state demo to
  * `user` setting.

@@ -28,7 +28,6 @@ import {
 
 import {
    ActiveClassesApp,
-   AppStateClientSettingApp,
    AppStateSessionApp,
    AppStateUserSettingApp,
    ContainerQueryApp,
@@ -143,7 +142,6 @@ export class MenuApplication extends SvelteApp
                { title: 'Header Buttons', class: HeaderButtonsApplication },
                { title: 'Container Queries', class: ContainerQueryApp },
                { title: 'Reactive App Classes', class: ActiveClassesApp },
-               { title: 'App State (Client Setting)', class: AppStateClientSettingApp },
                { title: 'App State (Session Storage)', class: AppStateSessionApp },
                { title: 'App State (User Setting)', class: AppStateUserSettingApp },
             ]
