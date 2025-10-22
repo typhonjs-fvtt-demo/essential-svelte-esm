@@ -33,6 +33,14 @@
         }
       },
 
+      "foundry": {
+        "settings": {
+          "user": {
+            "title": "UserArrayObjectStore"
+          }
+        }
+      },
+
       "svelte-app": {
         "active-classes": {
           "title": "Reactive App Classes"

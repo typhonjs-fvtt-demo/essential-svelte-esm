@@ -8,7 +8,8 @@ import MenuAppShell              from './MenuAppShell.svelte';
 
 import {
    ChatDialogContent,
-   SidebarCustomTabApp }         from './foundry/sidebar';
+   SidebarCustomTabApp,
+   UserArrayObjectApp }          from './foundry';
 
 import {
    ColorPickerApp,
@@ -188,7 +189,7 @@ export class MenuApplication extends SvelteApp
             ]
          },
          {
-            title: 'Foundry (Sidebar)',
+            title: 'Foundry Integrations',
             entries: [
                { title: 'Chat Message', onPress: () => new TJSDialog(
                   {
@@ -199,7 +200,8 @@ export class MenuApplication extends SvelteApp
                      classes: ['tjs-essential-svelte-esm']
                   })
                },
-               { title: 'Custom Sidebar Tab', class: SidebarCustomTabApp }
+               { title: 'Custom Sidebar Tab', class: SidebarCustomTabApp },
+               { title: 'UserArrayObjectStore', class: UserArrayObjectApp }
             ]
          }
       ];
