@@ -7,7 +7,9 @@ import { deepMerge }             from '#runtime/util/object';
 import MenuAppShell              from './MenuAppShell.svelte';
 
 import {
+   BasicDocumentApp,
    ChatDialogContent,
+   EmbeddedDocApplication,
    SidebarCustomTabApp,
    UserArrayObjectApp }          from './foundry';
 
@@ -35,10 +37,6 @@ import {
    ExplicitThemeApp,
    HeaderButtonsApplication,
    HelloFoundryApplication }     from './svelte-application';
-
-import {
-   BasicDocumentApp,
-   EmbeddedDocApplication }      from './tjsdocument';
 
 import {
    PositionApplication,
@@ -148,13 +146,6 @@ export class MenuApplication extends SvelteApp
             ]
          },
          {
-            title: 'TJSDocument',
-            entries: [
-               { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
-               { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication },
-            ]
-         },
-         {
             title: 'TJSPosition',
             entries: [
                { title: 'Empty App / Basic Overlay', class: PositionBasicOverlayApp },
@@ -189,19 +180,31 @@ export class MenuApplication extends SvelteApp
             ]
          },
          {
+            title: 'Foundry (TJSDocument)',
+            entries: [
+               { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
+               { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication },
+            ]
+         },
+         {
+            title: 'Foundry (Settings)',
+            entries: [
+               { title: 'UserArrayObjectStore', class: UserArrayObjectApp }
+            ]
+         },
+         {
             title: 'Foundry Integrations',
             entries: [
                { title: 'Chat Message', onPress: () => new TJSDialog(
-                  {
-                     title: 'Essential Svelte (ESM) - Chat Message',
-                     content: { class: ChatDialogContent }
-                  }, {
-                     id: 'essential-esm-chat-dialog',
-                     classes: ['tjs-essential-svelte-esm']
-                  })
+                     {
+                        title: 'Essential Svelte (ESM) - Chat Message',
+                        content: { class: ChatDialogContent }
+                     }, {
+                        id: 'essential-esm-chat-dialog',
+                        classes: ['tjs-essential-svelte-esm']
+                     })
                },
-               { title: 'Custom Sidebar Tab', class: SidebarCustomTabApp },
-               { title: 'UserArrayObjectStore', class: UserArrayObjectApp }
+               { title: 'Custom Sidebar Tab', class: SidebarCustomTabApp }
             ]
          }
       ];
