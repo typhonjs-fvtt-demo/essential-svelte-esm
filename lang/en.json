@@ -37,6 +37,9 @@
         "settings": {
           "user": {
             "title": "UserArrayObjectStore"
+          },
+          "world": {
+            "title": "WorldArrayObjectStore"
           }
         }
       },
