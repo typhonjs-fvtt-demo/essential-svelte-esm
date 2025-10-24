@@ -1,1 +1,2 @@
-export * from './user/UserArrayObjectApp.js';
+export * from './UserArrayObjectApp.js';
+export * from './WorldArrayObjectApp.js';

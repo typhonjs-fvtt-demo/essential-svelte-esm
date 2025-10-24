@@ -1,20 +1,20 @@
-import { UserArrayObjectStore }  from '#runtime/svelte/store/fvtt/settings/user';
+import { WorldArrayObjectStore }  from '#runtime/svelte/store/fvtt/settings/world';
 
-import { ItemEntryStore }        from '../common';
+import { ItemEntryStore }        from './ItemEntryStore.js';
 
 import { constants }             from '#constants';
 import { gameSettings }          from '#gameSettings';
 
 /**
- * Provides a simplified wrapper around configuring `UserArrayObjectStore`. You can of course directly
- * configure `UserArrayObjectStore`, but when setting up multiple instances of such a store for a more complex
+ * Provides a simplified wrapper around configuring `WorldArrayObjectStore`. You can of course directly
+ * configure `WorldArrayObjectStore`, but when setting up multiple instances of such a store for a more complex
  * use case it can be handy to create a simplified wrapper that associates constants and the `TJSGameSettings` instance
  * taking just the actual setting key. If you have multiple categories or multiple object arrays to manage store each
  * under a unique setting key versus attempting to combine all categories in one large data structure.
  *
- * @augments UserArrayObjectStore<ItemEntryStore>
+ * @augments WorldArrayObjectStore<ItemEntryStore>
  */
-export class UserItemArrayStore extends UserArrayObjectStore
+export class WorldItemArrayStore extends WorldArrayObjectStore
 {
    /**
     * @param {string} key - Game setting key to associate with this instance.

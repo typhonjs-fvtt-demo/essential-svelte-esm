@@ -5,7 +5,7 @@
 
    import ItemEntryRow           from './ItemEntryRow.svelte';
 
-   /** @type {UserItemArrayStore} */
+   /** @type {import('#runtime/svelte/store/reducer/array-object').CrudArrayObjectStore} */
    const itemStore = getContext('#external').itemStore;
    const dataReducer = itemStore.dataReducer;
 </script>

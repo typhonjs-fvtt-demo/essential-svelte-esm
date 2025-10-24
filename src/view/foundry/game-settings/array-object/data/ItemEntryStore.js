@@ -1,12 +1,12 @@
 import { ObjectEntryStore } from '#runtime/svelte/store/reducer/array-object';
 
 /**
- * @augments ObjectEntryStore<ItemEntryData>
+ * @augments ObjectEntryStore<import('#itemArrayStores').ItemEntryData>
  */
 export class ItemEntryStore extends ObjectEntryStore
 {
    /**
-    * @param {ItemEntryData}   data -
+    * @param {import('#itemArrayStores').ItemEntryData}   data -
     */
    set(data)
    {
@@ -31,11 +31,3 @@ export class ItemEntryStore extends ObjectEntryStore
       this._updateSubscribers();
    }
 }
-
-/**
- * @typedef {object} ItemEntryData
- * 
- * @property {string} id - Entry UUIDv4
- * 
- * @property {string} title - Item title.
- */

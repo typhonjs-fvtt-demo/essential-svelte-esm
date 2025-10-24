@@ -1,15 +1,11 @@
 <script>
-   import { getContext }         from 'svelte';
-
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
-   import { ItemEntries }        from '../common';
+   import ItemEntries            from './ItemEntries.svelte';
 
    export let elementRoot = void 0;
 
-   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
-   const { application } = getContext('#external');
-
+   export let description = '';
 </script>
 
 <svelte:options accessors={true}/>
@@ -18,7 +14,7 @@
    <main>
       <section class=text>
          <p>
-            Testing
+            {description}
          </p>
       </section>
 

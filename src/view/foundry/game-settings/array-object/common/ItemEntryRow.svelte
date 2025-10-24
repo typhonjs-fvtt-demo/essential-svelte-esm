@@ -2,7 +2,7 @@
    /** @type {number} */
    export let i = 0;
 
-   /** @type {import('../ItemEntryStore').ItemEntryData} */
+   /** @type {import('#itemArrayStores').ItemEntryData} */
    export let item = void 0;
 </script>
 
