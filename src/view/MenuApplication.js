@@ -11,7 +11,8 @@ import {
    ChatDialogContent,
    EmbeddedDocApplication,
    SidebarCustomTabApp,
-   UserArrayObjectApp }          from './foundry';
+   UserArrayObjectApp,
+   WorldArrayObjectApp }         from './foundry';
 
 import {
    ColorPickerApp,
@@ -189,7 +190,8 @@ export class MenuApplication extends SvelteApp
          {
             title: 'Foundry (Settings)',
             entries: [
-               { title: 'UserArrayObjectStore', class: UserArrayObjectApp }
+               { title: 'UserArrayObjectStore', class: UserArrayObjectApp },
+               { title: 'WorldArrayObjectStore', class: WorldArrayObjectApp }
             ]
          },
          {
