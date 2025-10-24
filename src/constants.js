@@ -16,6 +16,7 @@ const settings = {
    appStateMenuUser: 'appStateMenuUser',
    sideSlideLayer: 'sideSlideLayer',
    userItemsArray: 'userItemsArray',
+   worldItemsArray: 'worldItemsArray'
 };
 
 /**
@@ -69,5 +70,7 @@ export { constants, sessionConstants, settings };
  *
  * @property {string} sideSlideLayer Stores the props persisted to Foundry settings as an object.
  *
- * @property {string} userItemsArray Stores the items entries persisted to Foundry settings as an array.
+ * @property {string} userItemsArray Stores the item entries persisted to a Foundry `user` scope setting as an array.
+ *
+ * @property {string} worldItemsArray Stores the item entries persisted to a Foundry `world` scope setting as an array.
  */
