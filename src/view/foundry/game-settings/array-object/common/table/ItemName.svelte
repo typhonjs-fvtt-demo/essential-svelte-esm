@@ -138,9 +138,10 @@
    </td>
 {:else}
    <td bind:this={tdEl}
-       tabindex={canEdit ? 0 : null}
+       class:can-edit={canEdit}
        on:click={onStartEdit}
-       on:keyup={onKeyup}>
+       on:keyup={onKeyup}
+       tabindex={canEdit ? 0 : null}>
       <span>{item.name}</span>
    </td>
 {/if}
@@ -155,11 +156,13 @@
       outline: 2px solid transparent;
    }
 
-   td:hover span, td:focus-visible span {
-      text-decoration: underline;
-   }
+   td.can-edit {
+      &:hover {
+         cursor: var(--tjs-cursor-pointer)
+      }
 
-   td:hover {
-      cursor: var(--tjs-cursor-pointer)
+      &:hover span, &:focus-visible span {
+         text-decoration: underline;
+      }
    }
 </style>
