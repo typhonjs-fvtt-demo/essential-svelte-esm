@@ -20,7 +20,7 @@ export class UserArrayObjectApp extends SvelteApp
    {
       super(options);
 
-      this.#itemStore = new UserItemArrayStore(settings.userItemsArray);
+      this.#itemStore = new UserItemArrayStore('test_delete');
    }
 
    /**
@@ -50,7 +50,7 @@ export class UserArrayObjectApp extends SvelteApp
              *
              * @returns {object} App shell props.
              */
-            props: function()
+            context: function()
             {
                return { itemStore: this.#itemStore };
             }
