@@ -1,6 +1,10 @@
 <script>
    import { getContext }      from 'svelte';
 
+   import {
+      ClipboardAccess,
+      CrossWindow }           from '#runtime/util/browser';
+
    import { TJSContextMenu }  from '#standard/application/menu';
 
    import ItemCategory        from './ItemCategory.svelte';
@@ -26,22 +30,45 @@
     */
    function onContextMenu(event)
    {
+      const items = []
+
       if (canEdit)
+      {
+         items.push({
+            label: 'Delete',
+            onPress: () =>
+            {
+               itemStore.deleteEntry(item.id);
+
+               // Focus main app content after deletion.
+               $elementContent?.focus();
+            }
+         });
+
+         if (itemStore.length < 25)
+         {
+            items.push({
+               label: 'Duplicate',
+               onPress: () => itemStore.duplicateEntry(item.id)
+            });
+         }
+
+         items.push({ separator: 'hr' })
+      }
+
+      items.push({
+         label: 'Copy JSON',
+         onPress: ({ event }) =>
+         {
+            ClipboardAccess.writeText(JSON.stringify(item.toJSON() ?? ''), CrossWindow.getWindow(event));
+         }
+      });
+
+      if (items.length)
       {
          TJSContextMenu.create({
             event,
-            items: [
-               {
-                  label: 'Delete',
-                  onPress: () =>
-                  {
-                     itemStore.deleteEntry(item.id);
-
-                     // Focus main app content after deletion.
-                     $elementContent?.focus();
-                  }
-               }
-            ]
+            items
          });
 
          event.preventDefault();
