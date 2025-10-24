@@ -3,7 +3,7 @@
 
    import { TJSScrollContainer } from '#standard/component/container';
 
-   import ItemEntryRow           from './ItemEntryRow.svelte';
+   import ItemRow           from './ItemRow.svelte';
 
    /** @type {import('#runtime/svelte/store/reducer/array-object').CrudArrayObjectStore} */
    const itemStore = getContext('#external').itemStore;
@@ -23,7 +23,7 @@
          </thead>
          <tbody>
          {#each [...$dataReducer] as item, i (item.id)}
-            <ItemEntryRow {item} {i} />
+            <ItemRow {item} {i} />
          {/each}
          </tbody>
       </table>
@@ -35,15 +35,22 @@
    section {
       --tjs-scroll-container-max-height: 300px;
       --tjs-scroll-container-scrollbar-gutter: auto;
+
+      --input-height: 1.3rem;
    }
 
    table {
       --table-col1-width: 3rem;
       --table-cols-width: 50%;
+      --table-col-padding: 0.5rem 0.5rem;
 
       // Adjust Foundry core styles removing `margin` and `overflow` to allow sticky header.
       margin: 0;
       overflow: unset;
+
+      th {
+         padding: var(--table-col-padding);
+      }
 
       th:nth-child(1) {
          width: var(--table-col1-width);

@@ -3,6 +3,9 @@
 
    import { TJSContextMenu }  from '#standard/application/menu';
 
+   import ItemCategory        from './ItemCategory.svelte';
+   import ItemName            from './ItemName.svelte';
+
    /** @type {number} */
    export let i = 0;
 
@@ -15,8 +18,11 @@
    /** @type {boolean} */
    const canEdit = getContext('#external').canEdit;
 
+   /** @type {import('svelte/store').Readable<HTMLElement>} */
+   const elementContent = getContext('#internal').stores.elementContent;
+
    /**
-    * @param {KeyboardEvent | PointerEvent} event -
+    * @param {MouseEvent} event -
     */
    function onContextMenu(event)
    {
@@ -27,7 +33,13 @@
             items: [
                {
                   label: 'Delete',
-                  onPress: () => itemStore.deleteEntry(item.id)
+                  onPress: () =>
+                  {
+                     itemStore.deleteEntry(item.id);
+
+                     // Focus main app content after deletion.
+                     $elementContent?.focus();
+                  }
                }
             ]
          });
@@ -40,11 +52,15 @@
 
 <tr on:contextmenu={onContextMenu}>
    <td>{i + 1}</td>
-   <td>{item.name}</td>
-   <td>{item.category}</td>
+   <ItemName {item} />
+   <ItemCategory {item} />
 </tr>
 
 <style lang=scss>
+   td {
+      padding: var(--table-col-padding);
+   }
+
    td:nth-child(1) {
       width: var(--table-col1-width);
    }

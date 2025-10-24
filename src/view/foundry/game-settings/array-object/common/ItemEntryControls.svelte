@@ -1,7 +1,6 @@
 <script>
    import { getContext }         from 'svelte';
 
-   import { rippleFocus }        from '#standard/action/animate/composable';
    import { TJSInput }           from '#standard/component/form';
 
    import { getRandomItem }      from '../data/randomItem.js';
@@ -18,16 +17,31 @@
 
    const input = {
       store: searchFilter,
-      efx: rippleFocus(),
       placeholder: 'Search',
       type: 'search'
+   }
+
+   function clearEntries()
+   {
+      itemStore.clearEntries();
+
+      // Reset search filter.
+      searchFilter.set('');
+   }
+
+   function createEntry()
+   {
+      itemStore.createEntry(getRandomItem());
+
+      // Reset search filter.
+      searchFilter.set('');
    }
 </script>
 
 <section>
    {#if canEdit}
-      <button disabled={$itemStore.length >= 25} on:click={() => itemStore.createEntry(getRandomItem())}>Add Item</button>
-      <button on:click={() => itemStore.clearEntries()}>Remove All</button>
+      <button disabled={$itemStore.length >= 25} on:click={createEntry}>Add Item</button>
+      <button on:click={clearEntries}>Remove All</button>
    {/if}
    <TJSInput {input}/>
    <span>Total: {$dataReducer.length} / 25</span>
@@ -36,6 +50,7 @@
 <style lang=scss>
    section {
       --tjs-input-width: 12rem;
+      --tjs-input-text-align: center;
 
       display: flex;
       justify-content: center;

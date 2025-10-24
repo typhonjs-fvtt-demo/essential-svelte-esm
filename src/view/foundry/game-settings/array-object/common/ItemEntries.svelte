@@ -1,6 +1,6 @@
 <script>
    import ItemEntryControls   from './ItemEntryControls.svelte';
-   import ItemTable           from './ItemTable.svelte';
+   import ItemTable           from './table/ItemTable.svelte';
 </script>
 
 <section>

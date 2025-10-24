@@ -11,9 +11,7 @@ export class ItemEntryStore extends ObjectEntryStore
    set(data)
    {
       if (typeof data.name === 'string') { this._data.name = data.name; }
-      if (typeof data.category === 'string') { this._data.category = data.name; }
-
-      this._updateSubscribers();
+      if (typeof data.category === 'string') { this._data.category = data.category; }
    }
 
    /**
