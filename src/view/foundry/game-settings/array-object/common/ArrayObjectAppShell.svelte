@@ -12,30 +12,31 @@
 
 <ApplicationShell bind:elementRoot>
    <main>
-      <section class=text>
-         <p>
-            {description}
-         </p>
-      </section>
-
       <ItemEntries />
+
+      <!-- Use `standard-form` class from Foundry / core styles -->
+      <section class=standard-form>
+         <fieldset>
+            <legend>Description</legend>
+            {description}
+         </fieldset>
+      </section>
    </main>
 </ApplicationShell>
 
 <style lang=scss>
    main {
       display: flex;
-      flex-direction: column;
-      gap: 0.5em;
-      height: 100%;
+      gap: 1rem;
+      height: 344px;
    }
 
    section {
-      display: flex;
-      justify-content: center;
+      flex: 1;
 
-      &.text {
-         flex-direction: column;
+      fieldset {
+         flex: 1;
+         padding: 0.5rem;
       }
    }
 </style>
