@@ -9,6 +9,8 @@
    /** @type {import('#itemArrayStores').ItemArrayObjectStore} */
    const itemStore = getContext('#external').itemStore;
 
+   const dataReducer = itemStore.dataReducer;
+
    /** @type {boolean} */
    const canEdit = getContext('#external').canEdit;
 
@@ -28,7 +30,7 @@
       <button on:click={() => itemStore.clearEntries()}>Remove All</button>
    {/if}
    <TJSInput {input}/>
-   <span>Total: {$itemStore.length} / 25</span>
+   <span>Total: {$dataReducer.length} / 25</span>
 </section>
 
 <style lang=scss>
@@ -39,7 +41,7 @@
       justify-content: center;
       align-items: center;
       padding: 0.25rem;
-      gap: 0.5rem;
+      gap: 0.75rem;
 
       height: 40px;
 
