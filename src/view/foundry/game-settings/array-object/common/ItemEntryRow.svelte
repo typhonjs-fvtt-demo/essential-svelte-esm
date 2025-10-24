@@ -8,7 +8,8 @@
 
 <tr>
    <td>{i + 1}</td>
-   <td>{item.title}</td>
+   <td>{item.name}</td>
+   <td>{item.category}</td>
 </tr>
 
 <style lang=scss>
@@ -16,7 +17,7 @@
       width: var(--table-col1-width);
    }
 
-   td:nth-child(2) {
-      width: var(--table-col2-width);
+   td:nth-child(2), td:nth-child(3) {
+      width: var(--table-cols-width);
    }
 </style>

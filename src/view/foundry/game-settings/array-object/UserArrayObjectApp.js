@@ -20,7 +20,7 @@ export class UserArrayObjectApp extends SvelteApp
          classes: ['tjs-essential-svelte-esm'],
          resizable: false,
          minimizable: true,
-         width: 800,
+         width: 900,
          height: 'auto',
 
          title: 'EssentialESM.apps.foundry.settings.user.title',
@@ -30,7 +30,8 @@ export class UserArrayObjectApp extends SvelteApp
             target: document.body,
             context: {
                canEdit: ItemArrayStores.canEdit('user'),
-               itemStore: ItemArrayStores.get('user')
+               itemStore: ItemArrayStores.getStore('user'),
+               searchFilter: ItemArrayStores.getSearchFilter('user')
             },
             props: {
                description: 'User testing'

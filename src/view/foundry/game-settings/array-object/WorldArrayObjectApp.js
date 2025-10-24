@@ -20,7 +20,7 @@ export class WorldArrayObjectApp extends SvelteApp
          classes: ['tjs-essential-svelte-esm'],
          resizable: false,
          minimizable: true,
-         width: 800,
+         width: 900,
          height: 'auto',
 
          title: 'EssentialESM.apps.foundry.settings.world.title',
@@ -30,7 +30,8 @@ export class WorldArrayObjectApp extends SvelteApp
             target: document.body,
             context: {
                canEdit: ItemArrayStores.canEdit('world'),
-               itemStore: ItemArrayStores.get('world'),
+               itemStore: ItemArrayStores.getStore('world'),
+               searchFilter: ItemArrayStores.getSearchFilter('world')
             },
             props: {
                description: 'World testing'

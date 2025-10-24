@@ -18,6 +18,7 @@
          <tr>
             <th>#</th>
             <th>Name</th>
+            <th>Category</th>
          </tr>
          </thead>
          <tbody>
@@ -38,7 +39,7 @@
 
    table {
       --table-col1-width: 3rem;
-      --table-col2-width: fit-content(200px);
+      --table-cols-width: 50%;
 
       // Adjust Foundry core styles removing `margin` and `overflow` to allow sticky header.
       margin: 0;
@@ -48,8 +49,8 @@
          width: var(--table-col1-width);
       }
 
-      th:nth-child(2) {
-         width: var(--table-col2-width);
+      th:nth-child(2), th:nth-child(3) {
+         width: var(--table-cols-width);
       }
    }
 

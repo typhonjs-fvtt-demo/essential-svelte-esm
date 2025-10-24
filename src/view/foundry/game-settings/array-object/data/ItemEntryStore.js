@@ -6,28 +6,53 @@ import { ObjectEntryStore } from '#runtime/svelte/store/reducer/array-object';
 export class ItemEntryStore extends ObjectEntryStore
 {
    /**
-    * @param {import('#itemArrayStores').ItemEntryData}   data -
+    * @param {Partial<import('#itemArrayStores').ItemEntryData>}   data -
     */
    set(data)
    {
-      this._data.title = data?.title ?? 'Unknown';
+      if (typeof data.name === 'string') { this._data.name = data.name; }
+      if (typeof data.category === 'string') { this._data.category = data.name; }
+
       this._updateSubscribers();
    }
 
    /**
-    * @returns {string} Item title.
+    * @returns {string} Item category.
     */
-   get title()
+   get category()
    {
-      return this._data.title ?? '';
+      return this._data.category ?? '';
    }
 
    /**
-    * @param {string} title - Item title.
+    * @param {string} category - Item category.
     */
-   set title(title)
+   set category(category)
    {
-      this._data.title = title;
-      this._updateSubscribers();
+      if (typeof category === 'string')
+      {
+         this._data.category = category;
+         this._updateSubscribers();
+      }
+   }
+
+   /**
+    * @returns {string} Item name.
+    */
+   get name()
+   {
+      return this._data.name ?? '';
+   }
+
+   /**
+    * @param {string} name - Item name.
+    */
+   set name(name)
+   {
+      if (typeof name === 'string')
+      {
+         this._data.name = name;
+         this._updateSubscribers();
+      }
    }
 }
