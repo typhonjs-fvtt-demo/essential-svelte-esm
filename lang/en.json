@@ -36,10 +36,10 @@
       "foundry": {
         "settings": {
           "user": {
-            "title": "UserArrayObjectStore"
+            "title": "GameSettingArrayObject (user scope)"
           },
           "world": {
-            "title": "WorldArrayObjectStore"
+            "title": "GameSettingArrayObject (world scope)"
           }
         }
       },

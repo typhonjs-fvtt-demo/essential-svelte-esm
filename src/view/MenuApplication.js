@@ -190,8 +190,8 @@ export class MenuApplication extends SvelteApp
          {
             title: 'Foundry (Settings)',
             entries: [
-               { title: 'UserArrayObjectStore', class: UserArrayObjectApp },
-               { title: 'WorldArrayObjectStore', class: WorldArrayObjectApp }
+               { title: 'GameSettingArrayObject (user)', class: UserArrayObjectApp },
+               { title: 'GameSettingArrayObject (world)', class: WorldArrayObjectApp }
             ]
          },
          {
