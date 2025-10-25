@@ -11,8 +11,7 @@ import {
    ChatDialogContent,
    EmbeddedDocApplication,
    SidebarCustomTabApp,
-   UserArrayObjectApp,
-   WorldArrayObjectApp }         from './foundry';
+   GameSettingArrayObjectApp }   from './foundry';
 
 import {
    ColorPickerApp,
@@ -190,8 +189,24 @@ export class MenuApplication extends SvelteApp
          {
             title: 'Foundry (Settings)',
             entries: [
-               { title: 'GameSettingArrayObject (user)', class: UserArrayObjectApp },
-               { title: 'GameSettingArrayObject (world)', class: WorldArrayObjectApp }
+               {
+                  title: 'GameSettingArrayObject (user)',
+                  class: GameSettingArrayObjectApp,
+                  options: {
+                     scope: 'user',
+                     id: `tjs-items-user-setting-esm`,
+                     title: `EssentialESM.apps.foundry.settings.user.title`
+                  }
+               },
+               {
+                  title: 'GameSettingArrayObject (world)',
+                  class: GameSettingArrayObjectApp,
+                  options: {
+                     scope: 'world',
+                     id: `tjs-items-world-setting-esm`,
+                     title: `EssentialESM.apps.foundry.settings.world.title`
+                  }
+               }
             ]
          },
          {

@@ -1,15 +1,18 @@
 <script>
    import { getContext }   from 'svelte';
 
+   import { isObject }     from '#runtime/util/object';
+
    import { TJSSvgFolder } from '#standard/component/folder';
 
+   /** @type {object} */
    export let section = void 0;
 
    /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
    /**
-    * @type {import('#standard/component/folder').TJSFolderData}
+    * @type {import('#standard/component/folder').TJSFolder.Data}
     */
    const folder = {
       label: section.title,
@@ -19,6 +22,9 @@
 
    const apps = new Map();
 
+   /**
+    * @param {object}   button -
+    */
    function onClick(button)
    {
       let app;
@@ -48,7 +54,11 @@
       else if (button.class)
       {
          const NewApplication = button.class;
-         const existingApp = apps.get(NewApplication.defaultOptions.id);
+
+         const options = isObject(button.options) ? button.options : {};
+         const id = options.id ?? NewApplication.defaultOptions.id;
+
+         const existingApp = apps.get(id);
 
          if (existingApp)
          {
@@ -56,8 +66,8 @@
          }
          else
          {
-            const app = new NewApplication().render(true, { focus: true });
-            apps.set(NewApplication.defaultOptions.id, app);
+            const app = new NewApplication(options).render(true, { focus: true });
+            apps.set(id, app);
          }
       }
    }
