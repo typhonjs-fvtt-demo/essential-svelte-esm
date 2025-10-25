@@ -3,17 +3,10 @@
 
    import { TJSInput }           from '#standard/component/form';
 
-   import { getRandomItem }      from '../data/randomItem.js';
-
-   /** @type {import('#itemArrayStores').ItemArrayObjectStore} */
-   const itemStore = getContext('#external').itemStore;
+   /** @type {import('#arrayObjectData').ItemContext} */
+   const { canEdit, createRandomItem, itemStore, searchFilter } = getContext('#external').itemContext;
 
    const dataReducer = itemStore.dataReducer;
-
-   /** @type {boolean} */
-   const canEdit = getContext('#external').canEdit;
-
-   const searchFilter = getContext('#external').searchFilter;
 
    const input = {
       store: searchFilter,
@@ -31,7 +24,7 @@
 
    function createEntry()
    {
-      itemStore.createEntry(getRandomItem());
+      itemStore.createEntry(createRandomItem());
 
       // Reset search filter.
       searchFilter.set('');

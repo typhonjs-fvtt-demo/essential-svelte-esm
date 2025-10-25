@@ -1,2 +1,1 @@
-export * from './UserArrayObjectApp.js';
-export * from './WorldArrayObjectApp.js';
+export * from './GameSettingArrayObjectApp.js';

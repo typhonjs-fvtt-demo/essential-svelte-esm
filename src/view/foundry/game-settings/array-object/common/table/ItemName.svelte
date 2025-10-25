@@ -6,11 +6,11 @@
 
    import { CrossWindow }  from '#runtime/util/browser';
 
-   /** @type {import('#itemArrayStores').ItemEntryData} */
+   /** @type {import('#arrayObjectData').ItemEntryStore} */
    export let item = void 0;
 
-   /** @type {boolean} */
-   const canEdit = getContext('#external').canEdit;
+   /** @type {import('#arrayObjectData').ItemContext} */
+   const { canEdit } = getContext('#external').itemContext;
 
    let editing = false;
 
@@ -29,7 +29,7 @@
    onDestroy(() => onClose());
 
    /**
-    * @param {Event & { target: HTMLInputElement }} event -
+    * @param {Event & { currentTarget: HTMLInputElement, target: HTMLInputElement }} event -
     */
    function onChange(event)
    {

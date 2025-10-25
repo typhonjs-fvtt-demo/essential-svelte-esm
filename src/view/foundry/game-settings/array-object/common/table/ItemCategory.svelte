@@ -1,14 +1,15 @@
 <script>
    import { getContext } from 'svelte';
 
-   import { categories } from '../../data/randomItem.js';
-
-   /** @type {import('#itemArrayStores').ItemEntryData} */
+   /** @type {import('#arrayObjectData').ItemEntryStore} */
    export let item = void 0;
 
-   /** @type {boolean} */
-   const canEdit = getContext('#external').canEdit;
+   /** @type {import('#arrayObjectData').ItemContext} */
+   const { canEdit, categories } = getContext('#external').itemContext;
 
+   /**
+    * @param {Event & { currentTarget: HTMLSelectElement, target: HTMLSelectElement }} event -
+    */
    function onChange(event)
    {
       item.category = event.target.value;

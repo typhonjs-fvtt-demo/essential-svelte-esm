@@ -3,10 +3,11 @@
 
    import { TJSScrollContainer } from '#standard/component/container';
 
-   import ItemRow           from './ItemRow.svelte';
+   import ItemRow                from './ItemRow.svelte';
 
-   /** @type {import('#runtime/svelte/store/reducer/array-object').CrudArrayObjectStore} */
-   const itemStore = getContext('#external').itemStore;
+   /** @type {import('#arrayObjectData').ItemContext} */
+   const { itemStore } = getContext('#external').itemContext;
+
    const dataReducer = itemStore.dataReducer;
 </script>
 

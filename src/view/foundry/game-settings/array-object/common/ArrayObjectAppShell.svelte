@@ -5,7 +5,10 @@
 
    export let elementRoot = void 0;
 
-   export let description = '';
+   import { getContext } from 'svelte';
+
+   /** @type {import('#arrayObjectData').ItemContext} */
+   const { description } = getContext('#external').itemContext;
 </script>
 
 <svelte:options accessors={true}/>

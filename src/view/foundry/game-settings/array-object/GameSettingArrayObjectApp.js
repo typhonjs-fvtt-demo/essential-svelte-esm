@@ -3,10 +3,24 @@ import { deepMerge }       from '#runtime/util/object';
 
 import ArrayObjectAppShell from './common/ArrayObjectAppShell.svelte';
 
-import { ItemArrayStores } from "#itemArrayStores";
+import { ItemConfiguration } from '#arrayObjectData';
 
-export class UserArrayObjectApp extends SvelteApp
+export class GameSettingArrayObjectApp extends SvelteApp
 {
+   #scope;
+
+   constructor(options = {})
+   {
+      super(options);
+
+      if (options.scope !== 'user' && options.scope !== 'world')
+      {
+         throw new TypeError(`GameSettingArrayObjectApp ctor error: 'scope' must 'user' or 'world'.`);
+      }
+
+      this.#scope = options.scope;
+   }
+
    /**
     * Default Application options
     *
@@ -16,25 +30,24 @@ export class UserArrayObjectApp extends SvelteApp
    static get defaultOptions()
    {
       return deepMerge(SvelteApp.defaultOptions, {
-         id: 'tjs-items-user-setting-esm',
          classes: ['tjs-essential-svelte-esm'],
          resizable: false,
          minimizable: true,
          width: 900,
          height: 'auto',
 
-         title: 'EssentialESM.apps.foundry.settings.user.title',
-
          svelte: {
             class: ArrayObjectAppShell,
             target: document.body,
-            context: {
-               canEdit: ItemArrayStores.canEdit('user'),
-               itemStore: ItemArrayStores.getStore('user'),
-               searchFilter: ItemArrayStores.getSearchFilter('user')
-            },
-            props: {
-               description: 'User testing'
+
+            /**
+             * @this {GameSettingArrayObjectApp}
+             *
+             * @returns {{}} Item entries context.
+             */
+            context: function()
+            {
+               return ItemConfiguration.getContext(this.#scope);
             }
          }
       });

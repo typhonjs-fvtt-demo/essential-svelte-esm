@@ -13,17 +13,14 @@
    /** @type {number} */
    export let i = 0;
 
-   /** @type {import('#itemArrayStores').ItemEntryData} */
+   /** @type {import('#arrayObjectData').ItemEntryStore} */
    export let item = void 0;
 
-   /** @type {import('#itemArrayStores').ItemArrayObjectStore} */
-   const itemStore = getContext('#external').itemStore;
+   /** @type {import('#arrayObjectData').ItemContext} */
+   const { canEdit, itemStore } = getContext('#external').itemContext;
 
-   /** @type {boolean} */
-   const canEdit = getContext('#external').canEdit;
-
-   /** @type {import('svelte/store').Readable<HTMLElement>} */
-   const elementContent = getContext('#internal').stores.elementContent;
+   /** @type {import('#runtime/svelte/component/application').AppShell.Context.InternalAppStores} */
+   const { elementContent } = getContext('#internal').stores;
 
    /**
     * @param {MouseEvent} event -
