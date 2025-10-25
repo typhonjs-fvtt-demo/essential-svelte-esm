@@ -87,7 +87,7 @@ export class ItemConfiguration
    // Internal Implementation ----------------------------------------------------------------------------------------
 
    /**
-    * Can the current user edit / modify the ItemArrayObjectStore for the given scope.
+    * Can the current user edit / modify the `GameSettingArrayObject` for the given scope.
     *
     * @param {'world' | 'user'}  scope - Game setting scope.
     *
@@ -138,7 +138,8 @@ export class ItemConfiguration
     *
     * @param {'world' | 'user'}  scope - Game setting scope.
     *
-    * @returns {ItemArrayObjectStore}  The associated item array object game settings store for the given scope.
+    * @returns {GameSettingArrayObject<ItemEntryStore>}  The associated item array object game settings store for the
+    *          given scope.
     */
    static #getStore(scope)
    {
@@ -272,11 +273,6 @@ function createRandomItem()
    return { category, name };
 }
 
-
-/**
- * @typedef {GameSettingArrayObject<ItemEntryStore>} ItemArrayObjectStore Convenience type for item array object store.
- */
-
 /**
  * @typedef {object} ItemContext Defines the `itemContext` object set as external data to the Svelte components.
  *
@@ -288,7 +284,7 @@ function createRandomItem()
  *
  * @property {string} description - Description based on scope.
  *
- * @property {ItemArrayObjectStore} itemStore - The scoped item store.
+ * @property {GameSettingArrayObject<ItemEntryStore>} itemStore - The scoped item store.
  *
  * @property {string} scope - The current scope; `user` or `world`.
  *
