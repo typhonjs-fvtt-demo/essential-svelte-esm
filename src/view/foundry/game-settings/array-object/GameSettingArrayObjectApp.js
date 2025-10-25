@@ -1,9 +1,9 @@
-import { SvelteApp }       from '#runtime/svelte/application';
-import { deepMerge }       from '#runtime/util/object';
+import { SvelteApp }          from '#runtime/svelte/application';
+import { deepMerge }          from '#runtime/util/object';
 
-import ArrayObjectAppShell from './common/ArrayObjectAppShell.svelte';
+import ArrayObjectAppShell    from './ArrayObjectAppShell.svelte';
 
-import { ItemConfiguration } from '#arrayObjectData';
+import { ItemConfiguration }  from '#arrayObjectData';
 
 export class GameSettingArrayObjectApp extends SvelteApp
 {
