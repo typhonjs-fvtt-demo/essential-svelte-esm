@@ -2,6 +2,7 @@
    import { getContext }      from 'svelte';
 
    import { TJSContextMenu }  from '#standard/application/menu';
+   import { TJSIconButton }   from '#standard/component/button';
 
    import ItemCategory        from './ItemCategory.svelte';
    import ItemName            from './ItemName.svelte';
@@ -15,10 +16,15 @@
    /** @type {import('#arrayObjectData').ItemContext} */
    const itemContext = getContext('#external').itemContext;
 
-   const { menuItems } = itemContext;
+   const { canEdit, itemStore, menuItems } = itemContext;
 
    /** @type {import('#runtime/svelte/component/application').AppShell.Context.InternalAppStores} */
    const { elementContent } = getContext('#internal').stores;
+
+   const button = {
+      icon: 'fas fa-xmark',
+      onPress: () => { itemStore.deleteEntry(item.id); }
+   }
 
    /**
     * @param {MouseEvent} event -
@@ -41,6 +47,9 @@
    <td>{i + 1}</td>
    <ItemName {item} />
    <ItemCategory {item} />
+   {#if canEdit}
+      <td><TJSIconButton {button} /></td>
+   {/if}
 </tr>
 
 <style lang=scss>
@@ -48,8 +57,8 @@
       padding: var(--table-col-padding);
    }
 
-   td:nth-child(1) {
-      width: var(--table-col1-width);
+   td:nth-child(1), td:nth-child(4) {
+      width: var(--table-col-min-width);
    }
 
    td:nth-child(2), td:nth-child(3) {

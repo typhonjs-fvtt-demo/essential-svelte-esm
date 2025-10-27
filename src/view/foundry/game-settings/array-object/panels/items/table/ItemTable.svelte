@@ -6,7 +6,7 @@
    import ItemRow                from './ItemRow.svelte';
 
    /** @type {import('#arrayObjectData').ItemContext} */
-   const { itemStore } = getContext('#external').itemContext;
+   const { canEdit, itemStore } = getContext('#external').itemContext;
 
    const dataReducer = itemStore.dataReducer;
 </script>
@@ -20,6 +20,9 @@
             <th>#</th>
             <th>Name</th>
             <th>Category</th>
+            {#if canEdit}
+               <th><!-- Empty --></th>
+            {/if}
          </tr>
          </thead>
          <tbody>
@@ -34,6 +37,7 @@
 
 <style lang=scss>
    section {
+      --tjs-icon-button-diameter: 1.5rem;
       --tjs-scroll-container-max-height: 300px;
       --tjs-scroll-container-scrollbar-gutter: auto;
 
@@ -41,7 +45,7 @@
    }
 
    table {
-      --table-col1-width: 3rem;
+      --table-col-min-width: 3rem;
       --table-cols-width: 50%;
       --table-col-padding: 0.5rem 0.5rem;
 
@@ -53,8 +57,8 @@
          padding: var(--table-col-padding);
       }
 
-      th:nth-child(1) {
-         width: var(--table-col1-width);
+      th:nth-child(1), th:nth-child(4) {
+         width: var(--table-col-min-width);
       }
 
       th:nth-child(2), th:nth-child(3) {
