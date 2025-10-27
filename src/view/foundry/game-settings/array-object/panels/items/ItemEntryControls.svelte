@@ -31,14 +31,14 @@
 
    $:
    {
-      const itemLength = $itemStore.length;
       const reducerLength = $dataReducer.length;
+      const searchFilterLength = $searchFilter.length;
 
       // Set the search filter input to invalid (red) if the data reducer is active, but with no results.
-      input.storeIsValid.set(!(itemLength > 0 && itemLength !== reducerLength && reducerLength === 0));
+      input.storeIsValid.set(!(searchFilterLength > 0 && reducerLength === 0));
 
       // When the data reducer is active and length doesn't match the item store length surround the count with `()`.
-      itemCount = reducerLength !== itemLength ? `(${reducerLength})` : `${reducerLength}`;
+      itemCount = searchFilterLength > 0 ? `(${reducerLength})` : `${reducerLength}`;
    }
 </script>
 
