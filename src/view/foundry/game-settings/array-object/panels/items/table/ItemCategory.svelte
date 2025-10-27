@@ -13,7 +13,7 @@
    export let item = void 0;
 
    /** @type {import('#arrayObjectData').ItemContext} */
-   const { canEdit, categories } = getContext('#external').itemContext;
+   const { canEdit, itemGenerator } = getContext('#external').itemContext;
 
    /**
     * @param {Event & { currentTarget: HTMLSelectElement, target: HTMLSelectElement }} event -
@@ -27,7 +27,7 @@
 {#if canEdit}
    <td>
       <select on:change={onChange}>
-         {#each categories as category}
+         {#each itemGenerator.categories as category}
             <option selected={item.category === category}>{category}</option>
          {/each}
       </select>

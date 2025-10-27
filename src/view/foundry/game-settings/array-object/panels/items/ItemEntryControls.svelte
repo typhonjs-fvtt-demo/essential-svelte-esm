@@ -6,7 +6,7 @@
    /** @type {import('#arrayObjectData').ItemContext} */
    const {
       canEdit,
-      createRandomItem,
+      itemGenerator,
       itemStore,
       maxItems,
       searchFilter } = getContext('#external').itemContext;
@@ -29,19 +29,11 @@
       // Reset search filter.
       searchFilter.set('');
    }
-
-   function createEntry()
-   {
-      itemStore.createEntry(createRandomItem());
-
-      // Reset search filter.
-      searchFilter.set('');
-   }
 </script>
 
 <section>
    {#if canEdit}
-      <button disabled={$itemStore.length >= maxItems} on:click={createEntry}>Add Item</button>
+      <button disabled={$itemStore.length >= maxItems} on:click={() => itemStore.createEntry(itemGenerator.createRandom())}>Add Item</button>
       <button on:click={clearEntries}>Remove All</button>
    {/if}
    <TJSInput {input}/>
