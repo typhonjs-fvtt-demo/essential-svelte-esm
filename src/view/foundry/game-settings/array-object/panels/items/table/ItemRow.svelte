@@ -17,7 +17,7 @@
    export let item = void 0;
 
    /** @type {import('#arrayObjectData').ItemContext} */
-   const { canEdit, itemStore } = getContext('#external').itemContext;
+   const { canEdit, itemStore, maxItems } = getContext('#external').itemContext;
 
    /** @type {import('#runtime/svelte/component/application').AppShell.Context.InternalAppStores} */
    const { elementContent } = getContext('#internal').stores;
@@ -42,7 +42,7 @@
             }
          });
 
-         if (itemStore.length < 25)
+         if (itemStore.length < maxItems)
          {
             items.push({
                label: 'Duplicate',
@@ -57,6 +57,8 @@
          label: 'Copy JSON',
          onPress: ({ event }) =>
          {
+            // An example where cross-realm / window handling is important. To copy data to the clipboard when popped
+            // out you must provide the current active window which is done via `CrossWindow.getWindow(event)`.
             ClipboardAccess.writeText(JSON.stringify(item.toJSON() ?? ''), CrossWindow.getWindow(event));
          }
       });

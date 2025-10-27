@@ -4,8 +4,16 @@
    import { TJSInput }           from '#standard/component/form';
 
    /** @type {import('#arrayObjectData').ItemContext} */
-   const { canEdit, createRandomItem, itemStore, searchFilter } = getContext('#external').itemContext;
+   const {
+      canEdit,
+      createRandomItem,
+      itemStore,
+      maxItems,
+      searchFilter } = getContext('#external').itemContext;
 
+   /**
+    * Retrieve the associated `DynArrayReducer` from `GameSettingArrayObject`.
+    */
    const dataReducer = itemStore.dataReducer;
 
    const input = {
@@ -33,11 +41,11 @@
 
 <section>
    {#if canEdit}
-      <button disabled={$itemStore.length >= 25} on:click={createEntry}>Add Item</button>
+      <button disabled={$itemStore.length >= maxItems} on:click={createEntry}>Add Item</button>
       <button on:click={clearEntries}>Remove All</button>
    {/if}
    <TJSInput {input}/>
-   <span>Total: {$dataReducer.length} / 25</span>
+   <span>Total: {$dataReducer.length} / {maxItems}</span>
 </section>
 
 <style lang=scss>

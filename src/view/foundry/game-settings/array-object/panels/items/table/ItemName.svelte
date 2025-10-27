@@ -1,4 +1,15 @@
 <script>
+   /**
+    * Defines a table cell that can be edited via an `input` element. Note `item` is `ItemEntryStore` and to
+    * reactively update the data simply setting the new data to `item.name` will trigger serialization to the
+    * Foundry DB.
+    *
+    * This component is a bit more complex because it takes into account keyboard / accessibility and `<Tab>` /
+    * `<Shift-Tab>` traversal. In edit mode all events to automatically stop editing when the user navigates
+    * away are also handled.
+    *
+    * @componentDescription
+    */
    import {
       getContext,
       onDestroy,

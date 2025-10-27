@@ -5,6 +5,12 @@ import ArrayObjectAppShell    from './ArrayObjectAppShell.svelte';
 
 import { ItemConfiguration }  from '#arrayObjectData';
 
+/**
+ * This demo app show best practices in being completely data defined. The `scope` option is passed into the constructor
+ * indicating which setting mode `user` or `world` is utilized in the backing `GameSettingArrayObject` data.
+ *
+ * @see ItemConfiguration
+ */
 export class GameSettingArrayObjectApp extends SvelteApp
 {
    #scope;
@@ -43,7 +49,7 @@ export class GameSettingArrayObjectApp extends SvelteApp
             /**
              * @this {GameSettingArrayObjectApp}
              *
-             * @returns {{}} Item entries context.
+             * @returns {{ itemContext: import('#arrayObjectData').ItemContext }} Item entries context.
              */
             context: function()
             {

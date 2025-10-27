@@ -1,4 +1,12 @@
 <script>
+   /**
+    * Defines a table cell that can be edited via a `select` element. Note `item` is `ItemEntryStore` and to
+    * reactively update the data simply setting the new data to `item.category` will trigger serialization to the
+    * Foundry DB.
+    *
+    * @componentDescription
+    */
+
    import { getContext } from 'svelte';
 
    /** @type {import('#arrayObjectData').ItemEntryStore} */
