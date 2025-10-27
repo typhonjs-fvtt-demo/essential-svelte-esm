@@ -24,14 +24,6 @@
       storeIsValid: writable(true)
    }
 
-   function clearEntries()
-   {
-      itemStore.clearEntries();
-
-      // Reset search filter.
-      searchFilter.set('');
-   }
-
    /**
     * Stores the current item count from data reducer.
     */
@@ -53,7 +45,7 @@
 <section>
    {#if canEdit}
       <button disabled={$itemStore.length >= maxItems} on:click={() => itemStore.createEntry(itemGenerator.createRandom())}>Add Item</button>
-      <button on:click={clearEntries}>Remove All</button>
+      <button on:click={() => itemStore.clearEntries()}>Remove All</button>
    {/if}
    <TJSInput {input}/>
    <span>Total: {itemCount} / {maxItems}</span>
