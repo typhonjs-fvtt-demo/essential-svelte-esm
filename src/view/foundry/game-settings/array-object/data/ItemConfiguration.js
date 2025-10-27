@@ -1,7 +1,7 @@
 import { GameSettingArrayObject }   from '#runtime/svelte/store/fvtt/settings/array-object';
 import { DynReducerHelper }         from '#runtime/svelte/store/reducer';
 
-import { createRowMenuItems }       from './createRowMenuItems.js';
+import { MenuItems }                from './MenuItems.js';
 import { ItemGenerator }            from './ItemGenerator.js';
 
 import { constants, settings }      from "#constants";
@@ -97,10 +97,10 @@ export class ItemConfiguration
          itemContext: {
             scope,
             canEdit: ItemConfiguration.#canEdit(scope),
-            createRowMenuItems,
             itemGenerator: new ItemGenerator(),
             itemStore: ItemConfiguration.#getStore(scope),
             maxItems: 25,
+            menuItems: new MenuItems(),
             searchFilter: ItemConfiguration.#searchFilters[scope]
          }
       };
@@ -223,20 +223,13 @@ Hooks.once('ready', () => ItemConfiguration.initialize());
  *
  * @property {boolean} canEdit - Can the current user edit items?
  *
- * @property {string[]} categories - Item categories.
- *
- * @property {() => ItemEntryData} createRandomItem - Creates random item entry data.
- *
- * @property {(
- *    (itemContext: ItemContext, item: ItemEntryStore, elementContent: HTMLElement) =>
- *     import('#standard/component/menu').TJSMenuData.Items[]
- * )} createRowMenuItems - Creates menu items for table row context menu.
- *
  * @property {ItemGenerator} itemGenerator - Item generator instance.
  *
  * @property {GameSettingArrayObject<ItemEntryStore>} itemStore - The scoped item store.
  *
  * @property {number} maxItems - The max allowed number of items to create.
+ *
+ * @property {MenuItems} menuItems - Menu item data generator.
  *
  * @property {string} scope - The current scope; `user` or `world`.
  *

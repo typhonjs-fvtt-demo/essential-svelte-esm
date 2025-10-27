@@ -15,7 +15,7 @@
    /** @type {import('#arrayObjectData').ItemContext} */
    const itemContext = getContext('#external').itemContext;
 
-   const { createRowMenuItems } = itemContext;
+   const { menuItems } = itemContext;
 
    /** @type {import('#runtime/svelte/component/application').AppShell.Context.InternalAppStores} */
    const { elementContent } = getContext('#internal').stores;
@@ -25,7 +25,7 @@
     */
    function onContextMenu(event)
    {
-      const items = createRowMenuItems(itemContext, item, $elementContent);
+      const items = menuItems.createRow(itemContext, item, $elementContent);
 
       if (items.length)
       {
