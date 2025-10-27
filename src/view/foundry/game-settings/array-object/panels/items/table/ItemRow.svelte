@@ -1,10 +1,6 @@
 <script>
    import { getContext }      from 'svelte';
 
-   import {
-      ClipboardAccess,
-      CrossWindow }           from '#runtime/util/browser';
-
    import { TJSContextMenu }  from '#standard/application/menu';
 
    import ItemCategory        from './ItemCategory.svelte';
@@ -17,7 +13,9 @@
    export let item = void 0;
 
    /** @type {import('#arrayObjectData').ItemContext} */
-   const { canEdit, itemStore, maxItems } = getContext('#external').itemContext;
+   const itemContext = getContext('#external').itemContext;
+
+   const { createRowMenuItems } = itemContext;
 
    /** @type {import('#runtime/svelte/component/application').AppShell.Context.InternalAppStores} */
    const { elementContent } = getContext('#internal').stores;
@@ -27,48 +25,11 @@
     */
    function onContextMenu(event)
    {
-      const items = []
-
-      if (canEdit)
-      {
-         items.push({
-            label: 'Delete',
-            onPress: () =>
-            {
-               itemStore.deleteEntry(item.id);
-
-               // Focus main app content after deletion.
-               $elementContent?.focus();
-            }
-         });
-
-         if (itemStore.length < maxItems)
-         {
-            items.push({
-               label: 'Duplicate',
-               onPress: () => itemStore.duplicateEntry(item.id)
-            });
-         }
-
-         items.push({ separator: 'hr' })
-      }
-
-      items.push({
-         label: 'Copy JSON',
-         onPress: ({ event }) =>
-         {
-            // An example where cross-realm / window handling is important. To copy data to the clipboard when popped
-            // out you must provide the current active window which is done via `CrossWindow.getWindow(event)`.
-            ClipboardAccess.writeText(JSON.stringify(item.toJSON() ?? ''), CrossWindow.getWindow(event));
-         }
-      });
+      const items = createRowMenuItems(itemContext, item, $elementContent);
 
       if (items.length)
       {
-         TJSContextMenu.create({
-            event,
-            items
-         });
+         TJSContextMenu.create({ event, items });
 
          event.preventDefault();
          event.stopPropagation();

@@ -1,6 +1,8 @@
 import { GameSettingArrayObject }   from '#runtime/svelte/store/fvtt/settings/array-object';
 import { DynReducerHelper }         from '#runtime/svelte/store/reducer';
 
+import { createRowMenuItems }       from './createRowMenuItems.js';
+
 import { constants, settings }      from "#constants";
 import { gameSettings }             from '#gameSettings';
 
@@ -96,6 +98,7 @@ export class ItemConfiguration
             canEdit: ItemConfiguration.#canEdit(scope),
             categories,
             createRandomItem,
+            createRowMenuItems,
             itemStore: ItemConfiguration.#getStore(scope),
             maxItems: 25,
             searchFilter: ItemConfiguration.#getSearchFilter(scope)
@@ -294,6 +297,11 @@ function createRandomItem()
  * @property {string[]} categories - Item categories.
  *
  * @property {() => ItemEntryData} createRandomItem - Creates random item entry data.
+ *
+ * @property {(
+ *    (itemContext: ItemContext, item: ItemEntryStore, elementContent: HTMLElement) =>
+ *     import('#standard/component/menu').TJSMenuData.Items[]
+ * )} createRowMenuItems - Creates menu items for table row context menu.
  *
  * @property {GameSettingArrayObject<ItemEntryStore>} itemStore - The scoped item store.
  *
