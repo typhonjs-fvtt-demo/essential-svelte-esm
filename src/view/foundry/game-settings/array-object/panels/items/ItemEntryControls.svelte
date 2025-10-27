@@ -1,5 +1,6 @@
 <script>
    import { getContext }         from 'svelte';
+   import { writable }           from 'svelte/store';
 
    import { TJSInput }           from '#standard/component/form';
 
@@ -19,7 +20,8 @@
    const input = {
       store: searchFilter,
       placeholder: 'Search',
-      type: 'search'
+      type: 'search',
+      storeIsValid: writable(true)
    }
 
    function clearEntries()
@@ -29,6 +31,23 @@
       // Reset search filter.
       searchFilter.set('');
    }
+
+   /**
+    * Stores the current item count from data reducer.
+    */
+   let itemCount = '';
+
+   $:
+   {
+      const itemLength = $itemStore.length;
+      const reducerLength = $dataReducer.length;
+
+      // Set the search filter input to invalid (red) if the data reducer is active, but with no results.
+      input.storeIsValid.set(!(itemLength > 0 && itemLength !== reducerLength && reducerLength === 0));
+
+      // When the data reducer is active and length doesn't match the item store length surround the count with `()`.
+      itemCount = reducerLength !== itemLength ? `(${reducerLength})` : `${reducerLength}`;
+   }
 </script>
 
 <section>
@@ -37,7 +56,7 @@
       <button on:click={clearEntries}>Remove All</button>
    {/if}
    <TJSInput {input}/>
-   <span>Total: {$dataReducer.length} / {maxItems}</span>
+   <span>Total: {itemCount} / {maxItems}</span>
 </section>
 
 <style lang=scss>
@@ -57,6 +76,6 @@
    }
 
    span {
-      width: 5rem;
+      width: 6rem;
    }
 </style>
