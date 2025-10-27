@@ -25,7 +25,7 @@
       </p>
       <p>
          This demo shows a trivial example of serializing mock items that are randomly generated. A table
-         implementation shows dynamic sorting by column.
+         implementation shows dynamic sorting by column with search field filtering entries.
       </p>
    </fieldset>
 </section>
