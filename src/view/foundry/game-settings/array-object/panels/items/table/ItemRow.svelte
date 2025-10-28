@@ -49,7 +49,7 @@
 
 <style lang=scss>
    td {
-      padding: var(--table-col-padding);
+      padding: var(--table-cell-padding);
    }
 
    td:nth-child(1), td:nth-child(4) {

@@ -39,6 +39,6 @@
 
 <style lang=scss>
    td {
-      padding: var(--table-col-padding);
+      padding: var(--table-cell-padding);
    }
 </style>

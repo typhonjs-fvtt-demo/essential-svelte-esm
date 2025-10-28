@@ -40,7 +40,7 @@
       overflow: unset;
 
       th {
-         padding: var(--table-col-padding);
+         padding: var(--table-cell-padding);
       }
 
       th:nth-child(1), th:nth-child(4) {
