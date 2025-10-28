@@ -24,6 +24,8 @@ const settings = {
  */
 const sessionConstants = {
    appStateMenu: `${constants.moduleId}.menus-app-state`,
+   arrayObjectLayout: `${constants.moduleId}.arrayobject-layout-`,
+   arrayObjectScrolltop: `${constants.moduleId}.arrayobject-scrollbar-`,
    menuScale: `${constants.moduleId}.menus-font-scale`,
    menuContainerFocus: `${constants.moduleId}.menus-container-focus`,
    menuKeyForward: `${constants.moduleId}.menus-key-forward`,
@@ -41,6 +43,10 @@ export { constants, sessionConstants, settings };
  * @typedef {object} ESSessionConstants
  *
  * @property {string} appStateMenu Stores the current app state in /src/view/standard-components/menu demo.
+ *
+ * @property {string} arrayObjectLayout Stores grid/table state in /src/view/foundry/game-settings/array-object demo.
+ *
+ * @property {string} arrayObjectScrolltop Stores scroll state in /src/view/foundry/game-settings/array-object demo.
  *
  * @property {string} menuScale Stores the font scale state in `/src/view/standard-components/menu` demo.
  *
