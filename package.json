@@ -13,7 +13,8 @@
     "#runtime/*": "@typhonjs-fvtt/runtime/*",
     "#standard/*": "@typhonjs-fvtt/standard/*",
     "#constants": "./src/constants.js",
-    "#gameSettings": "./src/gameSettings.js"
+    "#gameSettings": "./src/gameSettings.js",
+    "#arrayObjectContext": "./src/view/foundry/game-settings/array-object/data/ItemContext.js"
   },
   "dependencies": {
     "@typhonjs-fvtt/runtime": "^0.3.0-next.4",
