@@ -15,6 +15,7 @@
       --table-col-min-width: 3rem;
       --table-cols-width: 50%;
       --table-col-padding: 0.5rem 0.5rem;
+      --table-header-background: var(--color-warm-2);
 
       --tjs-icon-button-diameter: 1.5rem;
       --tjs-scroll-container-max-height: 300px;

@@ -60,9 +60,7 @@
       top: -0.5px;
       border: 0;
 
-      // Sticky requires an explicit background; use Foundry CSS var.
-      background: var(--color-warm-2);
-
-      box-shadow: inset 0 -1px 0 var(--color-warm-3);
+      // Sticky requires an explicit background.
+      background: var(--table-header-background);
    }
 </style>
