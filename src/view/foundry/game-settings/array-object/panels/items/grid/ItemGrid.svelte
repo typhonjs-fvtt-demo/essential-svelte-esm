@@ -1,9 +1,16 @@
 <script>
-   import { getContext }         from 'svelte';
+   import {
+      getContext,
+      setContext }               from 'svelte';
 
    import { TJSScrollContainer } from '#standard/component/container';
 
    import ItemRow                from './ItemRow.svelte';
+
+   /**
+    * Set the table cell tag for reuse of components from `../common` across grid / table layouts.
+    */
+   setContext('tableCellTag', 'div');
 
    /** @type {import('#arrayObjectContext').ItemContext} */
    const { canEdit, itemStore } = getContext('#external').itemContext;

@@ -16,6 +16,13 @@
    const { canEdit, itemGenerator } = getContext('#external').itemContext;
 
    /**
+    * The dynamic table cell tab allowing reuse of this component across grid / table element layouts.
+    *
+    * @type {string}
+    */
+   const tag = getContext('tableCellTag');
+
+   /**
     * @param {Event & { currentTarget: HTMLSelectElement, target: HTMLSelectElement }} event -
     */
    function onChange(event)
@@ -25,13 +32,13 @@
 </script>
 
 {#if canEdit}
-   <div class=grid-cell>
+   <svelte:element this={tag} class=grid-cell>
       <select on:change={onChange}>
          {#each itemGenerator.categories as category}
             <option selected={item.category === category}>{category}</option>
          {/each}
       </select>
-   </div>
+   </svelte:element>
 {:else}
-   <div class=grid-cell>{item.category}</div>
+   <svelte:element this={tag} class=grid-cell>{item.category}</svelte:element>
 {/if}

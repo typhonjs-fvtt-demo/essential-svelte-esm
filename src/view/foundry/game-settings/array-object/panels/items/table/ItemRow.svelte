@@ -4,7 +4,7 @@
    import { TJSContextMenu }  from '#standard/application/menu';
    import { TJSIconButton }   from '#standard/component/button';
 
-   import ItemCategory        from './ItemCategory.svelte';
+   import ItemCategory        from '../common/ItemCategory.svelte';
    import ItemName            from './ItemName.svelte';
 
    /** @type {number} */
