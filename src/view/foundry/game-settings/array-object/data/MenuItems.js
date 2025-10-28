@@ -29,6 +29,7 @@ export class MenuItems
       if (this.#itemContext.canEdit)
       {
          items.push({
+            icon: 'fas fa-xmark',
             label: 'Delete',
             onPress: () =>
             {
@@ -41,6 +42,7 @@ export class MenuItems
          if (this.#itemContext.itemStore.length < this.#itemContext.maxItems)
          {
             items.push({
+               icon: 'fas fa-clone',
                label: 'Duplicate',
                onPress: () => { this.#itemContext.itemStore.duplicateEntry(item.id); }
             });
@@ -50,12 +52,28 @@ export class MenuItems
       }
 
       items.push({
+         icon: 'fas fa-copy',
          label: 'Copy JSON',
          onPress: ({ event }) =>
          {
             // An example where cross-realm / window handling is important. To copy data to the clipboard when popped
             // out you must provide the current active window which is done via `CrossWindow.getWindow(event)`.
             ClipboardAccess.writeText(JSON.stringify(item.toJSON() ?? ''), CrossWindow.getWindow(event));
+         }
+      });
+
+      items.push({ separator: 'hr' });
+
+      // Switches the main item entries layout between `ItemGrid` and `ItemTable`.
+
+      const layoutType = this.#itemContext.application.reactive.sessionStorage.getItem(this.#itemContext.layoutTypeKey);
+
+      items.push({
+         icon: layoutType === 'grid' ? 'fas fa-table' : 'fas fa-grid',
+         label: layoutType === 'grid' ? 'Table Layout' : 'Grid Layout',
+         onPress: () =>
+         {
+            this.#itemContext.layoutType.set(layoutType === 'grid' ? 'table' : 'grid');
          }
       });
 

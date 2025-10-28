@@ -8,14 +8,15 @@
    import ItemTable              from './table/ItemTable.svelte';
 
    /** @type {import('#arrayObjectContext').ItemContext} */
-   const { scope, scrollTop } = getContext('#external').itemContext;
+   const { layoutType, scrollTop } = getContext('#external').itemContext;
 </script>
 
 <section>
    <ItemEntryControls />
 
    <TJSScrollContainer {scrollTop}>
-      {#if scope === 'user'}
+      <!-- Context option to swap between `grid` and `table` layout. I suggest using grid layouts instead of tables. -->
+      {#if $layoutType === 'grid'}
          <ItemGrid />
       {:else}
          <ItemTable />

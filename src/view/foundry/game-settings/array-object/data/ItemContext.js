@@ -91,6 +91,9 @@ export class ItemContext
          canEdit: scope === 'world' ? globalThis.game.user.isGM : true,
          itemGenerator: new ItemGenerator(),
          itemStore: ItemContext.#itemStores[scope],
+         layoutType:
+          application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObjectLayout}${scope}`, 'grid'),
+         layoutTypeKey: `${sessionConstants.arrayObjectLayout}${scope}`,
          maxItems: 25,
          menuItems: new MenuItems(this),
          scope,
@@ -121,6 +124,22 @@ export class ItemContext
    get itemStore()
    {
       return this.#data.itemStore;
+   }
+
+   /**
+    * @returns {import('svelte/store').Writable<string>} Item entries layout type; 'grid' or 'table'.
+    */
+   get layoutType()
+   {
+      return this.#data.layoutType;
+   }
+
+   /**
+    * @returns {string} Session storage key for `layoutType`; used in `MenuItems`.
+    */
+   get layoutTypeKey()
+   {
+      return this.#data.layoutTypeKey;
    }
 
    /**
