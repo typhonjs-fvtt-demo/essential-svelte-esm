@@ -11,27 +11,27 @@
    const dataReducer = itemStore.dataReducer;
 </script>
 
-{#if $dataReducer.length > 0}
 <TJSScrollContainer>
-   <table>
-      <thead>
-      <tr>
-         <th>#</th>
-         <th>Name</th>
-         <th>Category</th>
-         {#if canEdit}
-            <th><!-- Empty --></th>
-         {/if}
-      </tr>
-      </thead>
-      <tbody>
-      {#each [...$dataReducer] as item, i (item.id)}
-         <ItemRow {item} {i} />
-      {/each}
-      </tbody>
-   </table>
+   {#if $dataReducer.length > 0}
+      <table>
+         <thead>
+         <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Category</th>
+            {#if canEdit}
+               <th><!-- Empty --></th>
+            {/if}
+         </tr>
+         </thead>
+         <tbody>
+         {#each [...$dataReducer] as item, i (item.id)}
+            <ItemRow {item} {i} />
+         {/each}
+         </tbody>
+      </table>
+   {/if}
 </TJSScrollContainer>
-{/if}
 
 <style lang=scss>
    table {
