@@ -193,7 +193,7 @@ export class MenuApplication extends SvelteApp
                   title: 'GameSettingArrayObject (user)',
                   class: GameSettingArrayObjectApp,
                   options: {
-                     scope: 'user',
+                     settingScope: 'user',
                      id: `tjs-items-user-setting-esm`,
                      title: `EssentialESM.apps.foundry.settings.user.title`
                   }
@@ -202,7 +202,7 @@ export class MenuApplication extends SvelteApp
                   title: 'GameSettingArrayObject (world)',
                   class: GameSettingArrayObjectApp,
                   options: {
-                     scope: 'world',
+                     settingScope: 'world',
                      id: `tjs-items-world-setting-esm`,
                      title: `EssentialESM.apps.foundry.settings.world.title`
                   }
