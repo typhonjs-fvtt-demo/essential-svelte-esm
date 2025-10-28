@@ -3,8 +3,6 @@
       getContext,
       setContext }               from 'svelte';
 
-   import { TJSScrollContainer } from '#standard/component/container';
-
    import ItemRow                from '../common/ItemRow.svelte';
 
    /**
@@ -18,23 +16,21 @@
    const dataReducer = itemStore.dataReducer;
 </script>
 
-<TJSScrollContainer>
-   {#if $dataReducer.length > 0}
-      <main class:can-edit={canEdit}>
-         <section class="grid-row header">
-            <div class=grid-cell>#</div>
-            <div class=grid-cell>Name</div>
-            <div class=grid-cell>Category</div>
-            {#if canEdit}
-               <div class=grid-cell><!-- Empty --></div>
-            {/if}
-         </section>
-          {#each [...$dataReducer] as item, i (item.id)}
-             <ItemRow {item} {i} />
-          {/each}
-      </main>
-   {/if}
-</TJSScrollContainer>
+{#if $dataReducer.length > 0}
+   <main class:can-edit={canEdit}>
+      <section class="grid-row header">
+         <div class=grid-cell>#</div>
+         <div class=grid-cell>Name</div>
+         <div class=grid-cell>Category</div>
+         {#if canEdit}
+            <div class=grid-cell><!-- Empty --></div>
+         {/if}
+      </section>
+       {#each [...$dataReducer] as item, i (item.id)}
+          <ItemRow {item} {i} />
+       {/each}
+   </main>
+{/if}
 
 <style lang=scss>
    main {

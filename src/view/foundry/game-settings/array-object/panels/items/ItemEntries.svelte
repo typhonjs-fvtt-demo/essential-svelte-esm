@@ -1,25 +1,27 @@
 <script>
-   import ItemEntryControls   from './ItemEntryControls.svelte';
-   import ItemGrid            from './grid/ItemGrid.svelte';
-   import ItemTable           from './table/ItemTable.svelte';
+   import { TJSScrollContainer } from '#standard/component/container';
 
-   // Temporary testing ----
+   import ItemEntryControls      from './ItemEntryControls.svelte';
+   import ItemGrid               from './grid/ItemGrid.svelte';
+   import ItemTable              from './table/ItemTable.svelte';
+
    import { getContext } from 'svelte';
 
    /** @type {import('#arrayObjectContext').ItemContext} */
    const { scope } = getContext('#external').itemContext;
-   // Temporary testing ----
 </script>
 
 
 <section>
    <ItemEntryControls />
 
-   {#if scope === 'user'}
-      <ItemGrid />
-   {:else}
-      <ItemTable />
-   {/if}
+   <TJSScrollContainer>
+      {#if scope === 'user'}
+         <ItemGrid />
+      {:else}
+         <ItemTable />
+      {/if}
+   </TJSScrollContainer>
 </section>
 
 <style lang=scss>
