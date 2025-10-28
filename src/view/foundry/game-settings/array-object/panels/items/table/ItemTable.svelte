@@ -39,6 +39,9 @@
       margin: 0;
       overflow: unset;
 
+      --table-col-min-width: 2rem;
+      --table-cols-width: 50%;
+
       th {
          padding: var(--table-cell-padding);
       }

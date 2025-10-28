@@ -1,0 +1,37 @@
+<script>
+   /**
+    * Defines a table cell that can be edited via a `select` element. Note `item` is `ItemEntryStore` and to
+    * reactively update the data simply setting the new data to `item.category` will trigger serialization to the
+    * Foundry DB.
+    *
+    * @componentDescription
+    */
+
+   import { getContext } from 'svelte';
+
+   /** @type {import('#arrayObjectContext').ItemEntryStore} */
+   export let item = void 0;
+
+   /** @type {import('#arrayObjectContext').ItemContext} */
+   const { canEdit, itemGenerator } = getContext('#external').itemContext;
+
+   /**
+    * @param {Event & { currentTarget: HTMLSelectElement, target: HTMLSelectElement }} event -
+    */
+   function onChange(event)
+   {
+      item.category = event.target.value;
+   }
+</script>
+
+{#if canEdit}
+   <div class=grid-cell>
+      <select on:change={onChange}>
+         {#each itemGenerator.categories as category}
+            <option selected={item.category === category}>{category}</option>
+         {/each}
+      </select>
+   </div>
+{:else}
+   <div class=grid-cell>{item.category}</div>
+{/if}
