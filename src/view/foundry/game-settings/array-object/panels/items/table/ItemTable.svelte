@@ -60,6 +60,7 @@
       th {
          padding: var(--table-cell-padding);
          color: var(--table-header-color);
+         filter: drop-shadow(2px 2px 1px black);
       }
 
       th:nth-child(1), th:nth-child(4) {
@@ -81,5 +82,7 @@
 
       // Sticky requires an explicit background.
       background: var(--table-header-background);
+
+      filter: drop-shadow(-3px 0px 3px black);
    }
 </style>

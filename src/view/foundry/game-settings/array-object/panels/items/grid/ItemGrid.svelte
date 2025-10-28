@@ -81,9 +81,11 @@
       // Sticky requires an explicit background.
       background: var(--table-header-background);
       color: var(--table-header-color);
+      filter: drop-shadow(-3px 0px 3px black);
 
       > div {
          font-weight: bold;
+         filter: drop-shadow(2px 2px 1px black);
       }
    }
 </style>
