@@ -24,8 +24,8 @@
          readable by all. All data is reactive and can be filtered and sorted interactively.
       </p>
       <p>
-         This demo shows a trivial example of serializing mock items that are randomly generated. A table
-         implementation shows dynamic sorting by column with search field filtering entries.
+         This demo shows a trivial example of serializing mock items that are randomly generated. A grid or table
+         layout implementation is available to show dynamic sorting by column with search field filtering entries.
       </p>
    </fieldset>
 </section>
@@ -41,6 +41,7 @@
 
          p {
             margin: 0;
+            font-size: 0.8rem;
          }
       }
    }
