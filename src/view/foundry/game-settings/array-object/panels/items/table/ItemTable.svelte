@@ -5,12 +5,12 @@
 
    import { TJSScrollContainer } from '#standard/component/container';
 
-   import ItemRow                from './ItemRow.svelte';
+   import ItemRow                from '../common/ItemRow.svelte';
 
    /**
     * Set the table cell tag for reuse of components from `../common` across grid / table layouts.
     */
-   setContext('tableCellTag', 'td');
+   setContext('tableTags', { cell: 'td', row: 'tr' });
 
    /** @type {import('#arrayObjectContext').ItemContext} */
    const { canEdit, itemStore } = getContext('#external').itemContext;

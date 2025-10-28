@@ -5,19 +5,18 @@
 
    import { TJSScrollContainer } from '#standard/component/container';
 
-   import ItemRow                from './ItemRow.svelte';
+   import ItemRow                from '../common/ItemRow.svelte';
 
    /**
     * Set the table cell tag for reuse of components from `../common` across grid / table layouts.
     */
-   setContext('tableCellTag', 'div');
+   setContext('tableTags', { cell: 'div', row: 'section' });
 
    /** @type {import('#arrayObjectContext').ItemContext} */
    const { canEdit, itemStore } = getContext('#external').itemContext;
 
    const dataReducer = itemStore.dataReducer;
 </script>
-
 
 <TJSScrollContainer>
    {#if $dataReducer.length > 0}

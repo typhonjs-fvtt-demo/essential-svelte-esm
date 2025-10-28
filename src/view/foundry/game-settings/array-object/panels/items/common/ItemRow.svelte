@@ -4,7 +4,7 @@
    import { TJSContextMenu }  from '#standard/application/menu';
    import { TJSIconButton }   from '#standard/component/button';
 
-   import ItemCategory        from '../common/ItemCategory.svelte';
+   import ItemCategory        from './ItemCategory.svelte';
    import ItemName            from './ItemName.svelte';
 
    /** @type {number} */
@@ -15,6 +15,13 @@
 
    /** @type {import('#arrayObjectContext').ItemContext} */
    const { canEdit, itemStore, menuItems } = getContext('#external').itemContext;
+
+   /**
+    * The dynamic table cell tags allowing reuse of this component across grid / table element layouts.
+    *
+    * @type {import('#arrayObjectContext').TableTags}
+    */
+   const { cell, row } = getContext('tableTags');
 
    const button = {
       icon: 'fas fa-xmark',
@@ -38,11 +45,11 @@
    }
 </script>
 
-<section class=grid-row role=row tabindex=-1 on:contextmenu={onContextMenu}>
-   <div class=grid-cell>{i + 1}</div>
+<svelte:element this={row} class=grid-row role=row tabindex=-1 on:contextmenu={onContextMenu}>
+   <svelte:element this={cell} class=grid-cell>{i + 1}</svelte:element>
    <ItemName {item} />
    <ItemCategory {item} />
    {#if canEdit}
-      <div class=grid-cell><TJSIconButton {button} /></div>
+      <svelte:element this={cell} class=grid-cell><TJSIconButton {button} /></svelte:element>
    {/if}
-</section>
+</svelte:element>

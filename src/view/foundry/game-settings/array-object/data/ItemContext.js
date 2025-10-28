@@ -268,3 +268,12 @@ export class ItemEntryStore extends GameSettingArrayObject.EntryStore
  *
  * @property {string} name - Item name.
  */
+
+/**
+ * @typedef {object} TableTags The item table components can dynamically use a grid or table layout. Several
+ * table content components are reused and receive their tags from a shared context.
+ *
+ * @property {string} cell - Table cell tag; `div` or `td`.
+ *
+ * @property {string} row - Table row tag; `section` or `tr`.
+ */

@@ -23,13 +23,20 @@
    /** @type {import('#arrayObjectContext').ItemContext} */
    const { canEdit } = getContext('#external').itemContext;
 
+   /**
+    * The dynamic table cell tag allowing reuse of this component across grid / table element layouts.
+    *
+    * @type {import('#arrayObjectContext').TableTags}
+    */
+   const { cell } = getContext('tableTags');
+
    let editing = false;
 
    /** @type {HTMLInputElement} */
    let inputEl;
 
-   /** @type {HTMLTableCellElement} */
-   let tdEl;
+   /** @type {HTMLDivElement} */
+   let divEl;
 
    let activeWindow;
 
@@ -62,7 +69,7 @@
 
       if (hasInitialKeyFocus)
       {
-         tick().then(() => tdEl?.focus());
+         tick().then(() => divEl?.focus());
       }
 
       editing = false;
@@ -127,7 +134,7 @@
          const activeEl = activeWindow.document.activeElement;
 
          // Track if table cell has initial key focus.
-         hasInitialKeyFocus = activeEl?.matches(':focus-visible') && activeEl === tdEl;
+         hasInitialKeyFocus = activeEl?.matches(':focus-visible') && activeEl === divEl;
 
          // To support cases when the active window may be a popped out browser unregister directly.
          activeWindow.document.body.addEventListener('pointerdown', onClose, true);
@@ -139,33 +146,32 @@
 </script>
 
 {#if editing}
-   <td>
+   <svelte:element this={cell} class=grid-cell>
       <input bind:this={inputEl}
              type=text
              on:change={onChange}
              on:keydown={onKeydownInput}
              on:keyup={onKeyupInput}
              value={item.name} />
-   </td>
+   </svelte:element>
 {:else}
-   <td bind:this={tdEl}
+   <svelte:element this={cell} class=grid-cell role=cell bind:this={divEl}
        class:can-edit={canEdit}
        on:click={onStartEdit}
        on:keyup={onKeyup}
        tabindex={canEdit ? 0 : null}>
       <span>{item.name}</span>
-   </td>
+   </svelte:element>
 {/if}
 
-
 <style lang=scss>
-   td:focus {
-      outline: 2px solid transparent;
-   }
-
-   td.can-edit {
+   .can-edit {
       &:hover {
          cursor: var(--tjs-cursor-pointer)
+      }
+
+      &:focus-visible {
+         outline: 2px solid transparent;
       }
 
       &:hover span, &:focus-visible span {
