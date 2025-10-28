@@ -35,6 +35,7 @@ export class MenuItems
             {
                this.#itemContext.itemStore.deleteEntry(item.id);
 
+               // Row / event target is being deleted, so focus the app content.
                this.#itemContext.application?.elementContent?.focus();
             }
          });
@@ -66,7 +67,8 @@ export class MenuItems
 
       // Switches the main item entries layout between `ItemGrid` and `ItemTable`.
 
-      const layoutType = this.#itemContext.application.reactive.sessionStorage.getItem(this.#itemContext.layoutTypeKey);
+      const layoutType = this.#itemContext.application?.reactive.sessionStorage.getItem(
+       this.#itemContext.layoutTypeKey);
 
       items.push({
          icon: layoutType === 'grid' ? 'fas fa-table' : 'fas fa-grid',
@@ -74,6 +76,9 @@ export class MenuItems
          onPress: () =>
          {
             this.#itemContext.layoutType.set(layoutType === 'grid' ? 'table' : 'grid');
+
+            // Entire item entries table is being swapped out, so focus the app content.
+            this.#itemContext.application?.elementContent?.focus();
          }
       });
 
