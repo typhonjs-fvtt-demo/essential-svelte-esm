@@ -12,43 +12,29 @@
 </script>
 
 {#if $dataReducer.length > 0}
-<section>
-   <TJSScrollContainer>
-      <table>
-         <thead>
-         <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Category</th>
-            {#if canEdit}
-               <th><!-- Empty --></th>
-            {/if}
-         </tr>
-         </thead>
-         <tbody>
-         {#each [...$dataReducer] as item, i (item.id)}
-            <ItemRow {item} {i} />
-         {/each}
-         </tbody>
-      </table>
-   </TJSScrollContainer>
-</section>
+<TJSScrollContainer>
+   <table>
+      <thead>
+      <tr>
+         <th>#</th>
+         <th>Name</th>
+         <th>Category</th>
+         {#if canEdit}
+            <th><!-- Empty --></th>
+         {/if}
+      </tr>
+      </thead>
+      <tbody>
+      {#each [...$dataReducer] as item, i (item.id)}
+         <ItemRow {item} {i} />
+      {/each}
+      </tbody>
+   </table>
+</TJSScrollContainer>
 {/if}
 
 <style lang=scss>
-   section {
-      --tjs-icon-button-diameter: 1.5rem;
-      --tjs-scroll-container-max-height: 300px;
-      --tjs-scroll-container-scrollbar-gutter: auto;
-
-      --input-height: 1.3rem;
-   }
-
    table {
-      --table-col-min-width: 3rem;
-      --table-cols-width: 50%;
-      --table-col-padding: 0.5rem 0.5rem;
-
       // Adjust Foundry core styles removing `margin` and `overflow` to allow sticky header.
       margin: 0;
       overflow: unset;

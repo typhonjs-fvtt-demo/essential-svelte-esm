@@ -10,6 +10,16 @@
 
 <style lang=scss>
    section {
+      --input-height: 1.3rem;
+
+      --table-col-min-width: 3rem;
+      --table-cols-width: 50%;
+      --table-col-padding: 0.5rem 0.5rem;
+
+      --tjs-icon-button-diameter: 1.5rem;
+      --tjs-scroll-container-max-height: 300px;
+      --tjs-scroll-container-scrollbar-gutter: auto;
+
       display: flex;
       flex-direction: column;
 
