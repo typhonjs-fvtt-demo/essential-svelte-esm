@@ -25,6 +25,8 @@
 
    const button = {
       icon: 'fas fa-xmark',
+      tooltip: 'Delete',
+      tooltipDirection: 'RIGHT',
       onPress: () => { itemStore.deleteEntry(item.id); }
    }
 
