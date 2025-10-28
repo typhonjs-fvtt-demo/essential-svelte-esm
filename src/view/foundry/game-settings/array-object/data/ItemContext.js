@@ -4,7 +4,7 @@ import { DynReducerHelper }         from '#runtime/svelte/store/reducer';
 import { ItemGenerator }            from './ItemGenerator.js';
 import { MenuItems }                from './MenuItems.js';
 
-import { constants, settings }      from '#constants';
+import { constants, settings, sessionConstants }      from '#constants';
 import { gameSettings }             from '#gameSettings';
 
 /**
@@ -90,6 +90,7 @@ export class ItemContext
          maxItems: 25,
          menuItems: new MenuItems(this),
          scope,
+         scrollTop: application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObjectScrolltop}${scope}`, 0),
          searchFilter: ItemContext.#searchFilters[scope]
       };
    }
@@ -140,6 +141,14 @@ export class ItemContext
    get scope()
    {
       return this.#data.scope;
+   }
+
+   /**
+    * @returns {Writable<number>} Session storage store for `TJSScrollContainer`.
+    */
+   get scrollTop()
+   {
+      return this.#data.scrollTop;
    }
 
    /**

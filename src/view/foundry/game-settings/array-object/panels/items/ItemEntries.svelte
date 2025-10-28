@@ -1,21 +1,20 @@
 <script>
+   import { getContext }         from 'svelte';
+
    import { TJSScrollContainer } from '#standard/component/container';
 
    import ItemEntryControls      from './ItemEntryControls.svelte';
    import ItemGrid               from './grid/ItemGrid.svelte';
    import ItemTable              from './table/ItemTable.svelte';
 
-   import { getContext } from 'svelte';
-
    /** @type {import('#arrayObjectContext').ItemContext} */
-   const { scope } = getContext('#external').itemContext;
+   const { scope, scrollTop } = getContext('#external').itemContext;
 </script>
-
 
 <section>
    <ItemEntryControls />
 
-   <TJSScrollContainer>
+   <TJSScrollContainer {scrollTop}>
       {#if scope === 'user'}
          <ItemGrid />
       {:else}
