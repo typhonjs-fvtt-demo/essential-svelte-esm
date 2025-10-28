@@ -167,7 +167,7 @@ export class ItemContext
    }
 
    /**
-    * @returns {Writable<number>} Session storage store for `TJSScrollContainer`.
+    * @returns {import('svelte/store').Writable<number>} Session storage store for `TJSScrollContainer`.
     */
    get scrollTop()
    {
