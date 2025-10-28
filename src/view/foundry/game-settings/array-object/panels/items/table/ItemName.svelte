@@ -159,10 +159,6 @@
 
 
 <style lang=scss>
-   td {
-      padding: var(--table-cell-padding);
-   }
-
    td:focus {
       outline: 2px solid transparent;
    }

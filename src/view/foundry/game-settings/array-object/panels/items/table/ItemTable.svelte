@@ -42,6 +42,18 @@
       --table-col-min-width: 2rem;
       --table-cols-width: 50%;
 
+      :global(td) {
+         padding: var(--table-cell-padding);
+      }
+
+      :global(td:nth-child(1)), :global(td:nth-child(4)) {
+         width: var(--table-col-min-width);
+      }
+
+      :global(td:nth-child(2)), :global(td:nth-child(3)) {
+         width: var(--table-cols-width);
+      }
+
       th {
          padding: var(--table-cell-padding);
       }

@@ -35,10 +35,3 @@
 {:else}
    <td>{item.category}</td>
 {/if}
-
-
-<style lang=scss>
-   td {
-      padding: var(--table-cell-padding);
-   }
-</style>

@@ -46,17 +46,3 @@
       <td><TJSIconButton {button} /></td>
    {/if}
 </tr>
-
-<style lang=scss>
-   td {
-      padding: var(--table-cell-padding);
-   }
-
-   td:nth-child(1), td:nth-child(4) {
-      width: var(--table-col-min-width);
-   }
-
-   td:nth-child(2), td:nth-child(3) {
-      width: var(--table-cols-width);
-   }
-</style>
