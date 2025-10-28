@@ -59,6 +59,7 @@
 
       th {
          padding: var(--table-cell-padding);
+         color: var(--table-header-color);
       }
 
       th:nth-child(1), th:nth-child(4) {

@@ -33,6 +33,8 @@
       --table-cell-padding: 0.25rem 0.25rem;
       --table-header-background: var(--color-warm-2);
 
+      --table-header-color: var(--color-light-1);
+
       // Smaller TJSIconButton diameter.
       --tjs-icon-button-diameter: 1.5rem;
 

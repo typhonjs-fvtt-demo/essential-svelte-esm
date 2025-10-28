@@ -80,6 +80,7 @@
 
       // Sticky requires an explicit background.
       background: var(--table-header-background);
+      color: var(--table-header-color);
 
       > div {
          font-weight: bold;
