@@ -4,7 +4,11 @@ import { DynReducerHelper }         from '#runtime/svelte/store/reducer';
 import { ItemGenerator }            from './ItemGenerator.js';
 import { MenuItems }                from './MenuItems.js';
 
-import { constants, settings, sessionConstants }      from '#constants';
+import {
+   constants,
+   settings,
+   sessionConstants }               from '#constants';
+
 import { gameSettings }             from '#gameSettings';
 
 /**
