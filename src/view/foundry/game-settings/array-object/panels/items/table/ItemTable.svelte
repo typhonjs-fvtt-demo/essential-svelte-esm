@@ -5,7 +5,7 @@
 
    import ItemRow                from './ItemRow.svelte';
 
-   /** @type {import('#arrayObjectData').ItemContext} */
+   /** @type {import('#arrayObjectContext').ItemContext} */
    const { canEdit, itemStore } = getContext('#external').itemContext;
 
    const dataReducer = itemStore.dataReducer;

@@ -10,16 +10,11 @@
    /** @type {number} */
    export let i = 0;
 
-   /** @type {import('#arrayObjectData').ItemEntryStore} */
+   /** @type {import('#arrayObjectContext').ItemEntryStore} */
    export let item = void 0;
 
-   /** @type {import('#arrayObjectData').ItemContext} */
-   const itemContext = getContext('#external').itemContext;
-
-   const { canEdit, itemStore, menuItems } = itemContext;
-
-   /** @type {import('#runtime/svelte/component/application').AppShell.Context.InternalAppStores} */
-   const { elementContent } = getContext('#internal').stores;
+   /** @type {import('#arrayObjectContext').ItemContext} */
+   const { canEdit, itemStore, menuItems } = getContext('#external').itemContext;
 
    const button = {
       icon: 'fas fa-xmark',
@@ -31,7 +26,7 @@
     */
    function onContextMenu(event)
    {
-      const items = menuItems.createRow(itemContext, item, $elementContent);
+      const items = menuItems.createRow(item);
 
       if (items.length)
       {

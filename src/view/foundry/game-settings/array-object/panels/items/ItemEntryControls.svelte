@@ -4,7 +4,7 @@
 
    import { TJSInput }           from '#standard/component/form';
 
-   /** @type {import('#arrayObjectData').ItemContext} */
+   /** @type {import('#arrayObjectContext').ItemContext} */
    const {
       canEdit,
       itemGenerator,

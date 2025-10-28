@@ -46,7 +46,7 @@ export class ItemGenerator
    }
 
    /**
-    * @returns {import('#arrayObjectData').ItemEntryData} Random item data.
+    * @returns {import('#arrayObjectContext').ItemEntryData} Random item data.
     */
    createRandom()
    {

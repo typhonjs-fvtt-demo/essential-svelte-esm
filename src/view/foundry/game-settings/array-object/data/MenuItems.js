@@ -4,40 +4,45 @@ import {
 
 export class MenuItems
 {
+   #itemContext;
+
+   /**
+    * @param {import('#arrayObjectContext').ItemContext} itemContext -
+    */
+   constructor(itemContext)
+   {
+      this.#itemContext = itemContext;
+   }
+
    /**
     * Creates the context menu items to display for a table row.
     *
-    * @param {import('#arrayObjectData').ItemContext} itemContext - Item entries context.
-    *
-    * @param {import('#arrayObjectData').ItemEntryStore} item - An item entry store.
-    *
-    * @param {HTMLElement} elementContent - App shell element content.
+    * @param {import('#arrayObjectContext').ItemEntryStore} item - An item entry store.
     *
     * @returns {import('#standard/component/menu').TJSMenuData.Items[]} Menu items.
     */
-   createRow(itemContext, item, elementContent)
+   createRow(item)
    {
       /** @type {import('#standard/component/menu').TJSMenuData.Items[]} */
       const items = [];
 
-      if (itemContext.canEdit)
+      if (this.#itemContext.canEdit)
       {
          items.push({
             label: 'Delete',
             onPress: () =>
             {
-               itemContext.itemStore.deleteEntry(item.id);
+               this.#itemContext.itemStore.deleteEntry(item.id);
 
-               // Focus main app content after deletion.
-               elementContent?.focus();
+               this.#itemContext.application?.elementContent?.focus();
             }
          });
 
-         if (itemContext.itemStore.length < itemContext.maxItems)
+         if (this.#itemContext.itemStore.length < this.#itemContext.maxItems)
          {
             items.push({
                label: 'Duplicate',
-               onPress: () => { itemContext.itemStore.duplicateEntry(item.id); }
+               onPress: () => { this.#itemContext.itemStore.duplicateEntry(item.id); }
             });
          }
 

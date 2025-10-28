@@ -3,30 +3,17 @@ import { deepMerge }          from '#runtime/util/object';
 
 import ArrayObjectAppShell    from './ArrayObjectAppShell.svelte';
 
-import { ItemConfiguration }  from '#arrayObjectData';
+import { ItemContext }        from '#arrayObjectContext';
 
 /**
- * This demo app show best practices in being completely data defined. The `scope` option is passed into the constructor
- * indicating which setting mode `user` or `world` is utilized in the backing `GameSettingArrayObject` data.
+ * This demo app show best practices in being completely data defined. The `settingScope` app option is passed through
+ * SvelteApp options indicating which setting mode `user` or `world` is utilized in the backing
+ * `GameSettingArrayObject` data configured in `ItemContext`.
  *
- * @see ItemConfiguration
+ * @see ItemContext
  */
 export class GameSettingArrayObjectApp extends SvelteApp
 {
-   #scope;
-
-   constructor(options = {})
-   {
-      super(options);
-
-      if (options.scope !== 'user' && options.scope !== 'world')
-      {
-         throw new TypeError(`GameSettingArrayObjectApp ctor error: 'scope' must 'user' or 'world'.`);
-      }
-
-      this.#scope = options.scope;
-   }
-
    /**
     * Default Application options
     *
@@ -49,11 +36,11 @@ export class GameSettingArrayObjectApp extends SvelteApp
             /**
              * @this {GameSettingArrayObjectApp}
              *
-             * @returns {{ itemContext: import('#arrayObjectData').ItemContext }} Item entries context.
+             * @returns {{ itemContext: import('#arrayObjectContext').ItemContext }} Item entries context.
              */
             context: function()
             {
-               return ItemConfiguration.getContext(this.#scope);
+               return { itemContext: new ItemContext(this) };
             }
          }
       });

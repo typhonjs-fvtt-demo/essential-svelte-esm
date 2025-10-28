@@ -17,10 +17,10 @@
 
    import { CrossWindow }  from '#runtime/util/browser';
 
-   /** @type {import('#arrayObjectData').ItemEntryStore} */
+   /** @type {import('#arrayObjectContext').ItemEntryStore} */
    export let item = void 0;
 
-   /** @type {import('#arrayObjectData').ItemContext} */
+   /** @type {import('#arrayObjectContext').ItemContext} */
    const { canEdit } = getContext('#external').itemContext;
 
    let editing = false;

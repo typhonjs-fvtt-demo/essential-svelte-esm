@@ -6,11 +6,12 @@
       ItemEntries }              from './panels';
 
    export let elementRoot = void 0;
+   export let elementContent = void 0;
 </script>
 
 <svelte:options accessors={true}/>
 
-<ApplicationShell bind:elementRoot>
+<ApplicationShell bind:elementRoot bind:elementContent>
    <main>
       <ItemEntries />
       <Description />

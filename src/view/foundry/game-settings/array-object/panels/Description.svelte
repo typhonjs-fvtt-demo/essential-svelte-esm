@@ -1,7 +1,7 @@
 <script>
    import { getContext } from 'svelte';
 
-   /** @type {import('#arrayObjectData').ItemContext} */
+   /** @type {import('#arrayObjectContext').ItemContext} */
    const { canEdit, scope } = getContext('#external').itemContext;
 
    const msgCanEdit = 'can read and edit the data table';

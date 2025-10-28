@@ -9,10 +9,10 @@
 
    import { getContext } from 'svelte';
 
-   /** @type {import('#arrayObjectData').ItemEntryStore} */
+   /** @type {import('#arrayObjectContext').ItemEntryStore} */
    export let item = void 0;
 
-   /** @type {import('#arrayObjectData').ItemContext} */
+   /** @type {import('#arrayObjectContext').ItemContext} */
    const { canEdit, itemGenerator } = getContext('#external').itemContext;
 
    /**
