@@ -22,7 +22,7 @@ export class GameSettingArrayObjectApp extends SvelteApp
     */
    static get defaultOptions()
    {
-      return deepMerge(SvelteApp.defaultOptions, {
+      return deepMerge(super.defaultOptions, {
          classes: ['tjs-essential-svelte-esm'],
          resizable: false,
          minimizable: true,
@@ -36,7 +36,7 @@ export class GameSettingArrayObjectApp extends SvelteApp
             /**
              * @this {GameSettingArrayObjectApp}
              *
-             * @returns {{ itemContext: import('#arrayObjectContext').ItemContext }} Item entries context.
+             * @returns {object} Item entries context.
              */
             context: function()
             {
