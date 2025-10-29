@@ -30,7 +30,8 @@ import {
  *
  * @example
  * ```js
- * const { canEdit } = getContext('#external').itemContext;
+ * /** @type {import('#arrayObjectContext').ItemContext} *\/
+ * const { itemStore } = getContext('#external').itemContext;
  * ```
  *
  * @see https://typhonjs-fvtt-lib.github.io/api-docs/classes/_runtime_svelte_store_reducer_array-object.CrudArrayObjectStore.html
