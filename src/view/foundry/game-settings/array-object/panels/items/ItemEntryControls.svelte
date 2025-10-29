@@ -8,13 +8,17 @@
    const {
       ItemGenerator,
       itemStore,
-      maxItems,
-      searchFilter } = getContext('#external').itemContext;
+      maxItems } = getContext('#external').itemContext;
 
    /**
     * Retrieve the associated `DynArrayReducer` from `GameSettingArrayObject`.
     */
    const dataReducer = itemStore.dataReducer;
+
+   /**
+    * This is a store so needs to be defined locally.
+    */
+   const { searchFilter } = itemStore.stores;
 
    /**
     * The TJSInput data configuration connecting to `searchFilter` which is associated with `itemStore` for

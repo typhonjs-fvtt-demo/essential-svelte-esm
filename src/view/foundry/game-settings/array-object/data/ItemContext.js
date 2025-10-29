@@ -1,15 +1,12 @@
-import { GameSettingArrayObject }   from '#runtime/svelte/store/fvtt/settings/array-object';
-import { DynReducerHelper }         from '#runtime/svelte/store/reducer';
-
-import { ItemGenerator }            from './ItemGenerator.js';
-import { MenuItems }                from './MenuItems.js';
+import { ItemArrayObjectStore }  from './ItemArrayObjectStore.js';
+import { ItemGenerator }         from './ItemGenerator.js';
+import { MenuItems }             from './MenuItems.js';
 
 import {
-   constants,
    settings,
-   sessionConstants }               from '#constants';
+   sessionConstants }            from '#constants';
 
-import { gameSettings }             from '#gameSettings';
+export { ItemEntryStore }        from './ItemArrayObjectStore.js';
 
 /**
  * It is best practice to configure and initialize data sources separately from your UI facing components.
@@ -50,25 +47,11 @@ export class ItemContext
     * Provides the item entry stores.
     *
     * @type {({
-    *    user?: GameSettingArrayObject<ItemEntryStore>,
-    *    world?: GameSettingArrayObject<ItemEntryStore>
+    *    user?: ItemArrayObjectStore,
+    *    world?: ItemArrayObjectStore
     * })}
     */
    static #itemStores = {};
-
-   /**
-    * Provides search filters for both `name` and `category` properties.
-    *
-    * @type {({
-    *    user: DynReducerHelper.FilterFn.regexObjectQuery,
-    *    world: DynReducerHelper.FilterFn.regexObjectQuery
-    * })}
-    */
-   static #searchFilters =
-   {
-      user: DynReducerHelper.filters.regexObjectQuery(['name', 'category']),
-      world: DynReducerHelper.filters.regexObjectQuery(['name', 'category'])
-   };
 
    /**
     * @type {WeakRef<import('#runtime/svelte/application').SvelteApp>}
@@ -97,7 +80,6 @@ export class ItemContext
          menuItems: new MenuItems(this),
          scope,
          scrollTop: application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObjectScrolltop}${scope}`, 0),
-         searchFilter: ItemContext.#searchFilters[scope]
       };
    }
 
@@ -110,7 +92,7 @@ export class ItemContext
    }
 
    /**
-    * @returns {GameSettingArrayObject<ItemEntryStore>} The scoped item store.
+    * @returns {ItemArrayObjectStore} The scoped item store.
     */
    get itemStore()
    {
@@ -165,13 +147,7 @@ export class ItemContext
       return this.#data.scrollTop;
    }
 
-   /**
-    * @returns {DynReducerHelper.FilterFn.regexObjectQuery} Search filter / store.
-    */
-   get searchFilter()
-   {
-      return this.#data.searchFilter;
-   }
+   // Package scope --------------------------------------------------------------------------------------------------
 
    /**
     * @package
@@ -189,104 +165,15 @@ export class ItemContext
    {
       if (ItemContext.#itemStores.user !== void 0) { return; }
 
-      ItemContext.#itemStores.user = new GameSettingArrayObject({
-         gameSettings,
-         namespace: constants.moduleId,
+      ItemContext.#itemStores.user = new ItemArrayObjectStore({
          key: settings.userItemsArray,
-         scope: 'user',
-         StoreClass: ItemEntryStore,
-         dataReducer: true
+         scope: 'user'
       });
 
-      // @ts-expect-error - This is OK despite type differences.
-      ItemContext.#itemStores.user.dataReducer.filters.add(ItemContext.#searchFilters.user);
-
-      ItemContext.#itemStores.world = new GameSettingArrayObject({
-         gameSettings,
-         namespace: constants.moduleId,
+      ItemContext.#itemStores.world = new ItemArrayObjectStore({
          key: settings.worldItemsArray,
-         scope: 'world',
-         StoreClass: ItemEntryStore,
-         dataReducer: true
+         scope: 'world'
       });
-
-      // @ts-expect-error - This is OK despite type differences.
-      ItemContext.#itemStores.world.dataReducer.filters.add(ItemContext.#searchFilters.world);
-   }
-}
-
-/**
- * Extends `ObjectEntryStore` which is conveniently exported as `EntryStore`. `ObjectEntryStore` provides a base
- * implementation where only the `set` method and specific data accessors need to be defined. See
- * {@link ItemEntryStore.category} and {@link ItemEntryStore.name}. Calling the protected method
- * `this._updateSubscribers()` will notify ArrayObjectStore to serialize the data to the Foundry DB.
- *
- * This provides the store implementation for serialized {@link ItemEntryData} with accessors
- * for the item properties that update the underlying subscribers.
- *
- * @see https://typhonjs-fvtt-lib.github.io/api-docs/classes/_runtime_svelte_store_reducer_array-object.ObjectEntryStore.html
- *
- * @augments GameSettingArrayObject.EntryStore<ItemEntryData>
- */
-export class ItemEntryStore extends GameSettingArrayObject.EntryStore
-{
-   /**
-    * You must define the `set` method.
-    *
-    * @param {Partial<ItemEntryData>}   data - Item data to set.
-    */
-   set(data)
-   {
-      if (typeof data.name === 'string') { this._data.name = data.name; }
-      if (typeof data.category === 'string') { this._data.category = data.category; }
-   }
-
-   /**
-    * @returns {string} Item category.
-    */
-   get category()
-   {
-      return this._data.category ?? '';
-   }
-
-   /**
-    * @param {string} category - Item category.
-    */
-   set category(category)
-   {
-      if (typeof category === 'string')
-      {
-         this._data.category = category;
-         this._updateSubscribers();
-      }
-   }
-
-   /**
-    * @returns {Readonly<string[]>} All supported item categories.
-    */
-   get categories()
-   {
-      return ItemGenerator.categories;
-   }
-
-   /**
-    * @returns {string} Item name.
-    */
-   get name()
-   {
-      return this._data.name ?? '';
-   }
-
-   /**
-    * @param {string} name - Item name.
-    */
-   set name(name)
-   {
-      if (typeof name === 'string')
-      {
-         this._data.name = name;
-         this._updateSubscribers();
-      }
    }
 }
 

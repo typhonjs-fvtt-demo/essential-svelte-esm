@@ -4,6 +4,7 @@
       setContext }               from 'svelte';
 
    import ItemRow                from '../common/ItemRow.svelte';
+   import ItemSortBy             from '../common/ItemSortBy.svelte';
 
    /**
     * Set the table cell tag for reuse of components from `../common` across grid / table layouts.
@@ -20,8 +21,8 @@
    <main class:can-edit={itemStore.canEdit}>
       <section class="grid-row header">
          <div class=grid-cell>#</div>
-         <div class=grid-cell>Name</div>
-         <div class=grid-cell>Category</div>
+         <div class=grid-cell><ItemSortBy prop={'name'} /></div>
+         <div class=grid-cell><ItemSortBy prop={'category'} /></div>
          {#if itemStore.canEdit}
             <div class=grid-cell><!-- Empty --></div>
          {/if}
