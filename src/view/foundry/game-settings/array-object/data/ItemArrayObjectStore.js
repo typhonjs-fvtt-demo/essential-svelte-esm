@@ -1,4 +1,4 @@
-import { get, writable }            from 'svelte/store';
+import { get }                      from 'svelte/store';
 
 import { GameSettingArrayObject }   from '#runtime/svelte/store/fvtt/settings/array-object';
 import { DynReducerHelper }         from '#runtime/svelte/store/reducer';
@@ -27,10 +27,7 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
     *    sortBy: import('svelte/store').Writable<{ prop: string, state: 'none' | 'asc' | 'desc' }>
     * }>}
     */
-   #stores = Object.freeze({
-      searchFilter: DynReducerHelper.filters.regexObjectQuery(['name', 'category']),
-      sortBy: writable({ prop: '', state: 'none' })
-   });
+   #stores;
 
    /**
     * @param {object} options - Setting options.
@@ -38,8 +35,11 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
     * @param {string} options.key - Game setting key.
     *
     * @param {'user' | 'world'} options.scope - Game setting scope.
+    *
+    * @param {import('svelte/store').Writable<any>} options.sortBy - Sort by property store associated w/
+    *        sessionStorage.
     */
-   constructor({ key, scope })
+   constructor({ key, scope, sortBy })
    {
       super({
          gameSettings,
@@ -49,6 +49,15 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
          StoreClass: ItemEntryStore,
          dataReducer: true
       });
+
+      this.#stores = Object.freeze({
+         searchFilter: DynReducerHelper.filters.regexObjectQuery(['name', 'category']),
+         sortBy
+      });
+
+      // The sortBy store is coming from a session storage property store, so set initial `#sortByProp` manually.
+      const currentSortBy = get(sortBy);
+      this.#sortByProp = currentSortBy?.state !== 'none' ? currentSortBy?.prop : void 0;
 
       // @ts-expect-error - This is OK despite type differences.
       this.dataReducer.filters.add(this.#stores.searchFilter);
@@ -101,7 +110,8 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
        */
       const current = currentSortBy?.prop === prop ? currentSortBy?.state : 'none';
 
-      let newState;
+      /** @type {'none' | 'asc' | 'desc'} */
+      let newState = 'none';
 
       switch (current)
       {
@@ -207,3 +217,13 @@ export class ItemEntryStore extends GameSettingArrayObject.EntryStore
       }
    }
 }
+
+/**
+ * @typedef {object} ItemEntryData
+ *
+ * @property {string} [id] - UUIDv4; automatically assigned.
+ *
+ * @property {string} category - Item category.
+ *
+ * @property {string} name - Item name.
+ */

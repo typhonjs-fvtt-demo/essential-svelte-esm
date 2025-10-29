@@ -7,8 +7,6 @@ import {
    settings,
    sessionConstants }            from '#constants';
 
-export { ItemEntryStore }        from './ItemArrayObjectStore.js';
-
 /**
  * It is best practice to configure and initialize data sources separately from your UI facing components.
  * `ItemContext` automatically configures the reactive `GameSettingArrayObject` stores associated with reactive
@@ -63,22 +61,35 @@ export class ItemContext
 
    constructor(application)
    {
-      ItemContext.#initialize();
-
       const scope = application?.options?.settingScope;
 
       if (scope !== 'user' && scope !== 'world') { throw new Error(`'settingScope' must be 'user' or 'world'.`); }
+
+      const sessionStore = application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObject}${scope}`, {
+         scrollTop: 0,
+         layoutType: 'grid',
+         sortBy: { prop: '', state: 'none' }
+      });
+
+      // Initialize backing array object store for given scope.
+      if (ItemContext.#itemStores[scope] === void 0)
+      {
+         ItemContext.#itemStores[scope] = new ItemArrayObjectStore({
+            key: scope === 'user' ? settings.userItemsArray : settings.worldItemsArray,
+            scope,
+            sortBy: propertyStore(sessionStore, 'sortBy')
+         });
+      }
 
       this.#application = new WeakRef(application);
 
       this.#data = {
          itemStore: ItemContext.#itemStores[scope],
-         layoutType:
-          application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObjectLayout}${scope}`, 'grid'),
+         layoutType: propertyStore(sessionStore, 'layoutType'),
          maxItems: 25,
          menuItems: new MenuItems(this),
          scope,
-         scrollTop: application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObjectScrolltop}${scope}`, 0),
+         scrollTop: propertyStore(sessionStore, 'scrollTop')
       };
    }
 
@@ -141,34 +152,7 @@ export class ItemContext
    {
       return this.#application.deref();
    }
-
-   // Internal Implementation ----------------------------------------------------------------------------------------
-
-   static #initialize()
-   {
-      if (ItemContext.#itemStores.user !== void 0) { return; }
-
-      ItemContext.#itemStores.user = new ItemArrayObjectStore({
-         key: settings.userItemsArray,
-         scope: 'user'
-      });
-
-      ItemContext.#itemStores.world = new ItemArrayObjectStore({
-         key: settings.worldItemsArray,
-         scope: 'world'
-      });
-   }
 }
-
-/**
- * @typedef {object} ItemEntryData
- *
- * @property {string} [id] - UUIDv4; automatically assigned.
- *
- * @property {string} category - Item category.
- *
- * @property {string} name - Item name.
- */
 
 /**
  * @typedef {object} TableTags The item table components can dynamically use a grid or table layout. Several
