@@ -14,6 +14,11 @@ import { gameSettings }             from '#gameSettings';
 export class ItemArrayObjectStore extends GameSettingArrayObject
 {
    /**
+    * @type {'name' | 'category' | undefined}
+    */
+   #sortByProp;
+
+   /**
     * @type {Readonly<{
     *    searchFilter: DynReducerHelper.FilterFn.regexObjectQuery;
     *    sortBy: import('svelte/store').Writable<{ prop: string, state: 'none' | 'asc' | 'desc' }>
@@ -44,6 +49,15 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
 
       // @ts-expect-error - This is OK despite type differences.
       this.dataReducer.filters.add(this.#stores.searchFilter);
+
+      // Add an inline sort function referencing `this.#sortByProp` which is managed by `toggleSortBy`.
+      // There are other dynamic ways to configure sorting, but since the sort by logic is encapsulated locally
+      // this is efficient.
+      this.dataReducer.sort.set((a, b) =>
+      {
+         return this.#sortByProp && a?.[this.#sortByProp] && b?.[this.#sortByProp] ?
+          a[this.#sortByProp].localeCompare(b[this.#sortByProp]) : 0;
+      });
    }
 
    /**
@@ -58,7 +72,7 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
    }
 
    /**
-    * @param {'name' | 'category'} prop - Item property to toggle.
+    * @param {'name' | 'category'} prop - Item property to toggle sort by state.
     */
    toggleSortBy(prop)
    {
@@ -94,9 +108,12 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
             break;
       }
 
+      this.#sortByProp = newState !== 'none' ? prop : void 0;
+
       // Update the current sorting mode.
       this.#stores.sortBy.set({ prop, state: newState });
 
+      // Forces an index update / sorting is triggered.
       this.dataReducer.reversed = newState === 'asc';
    }
 }
