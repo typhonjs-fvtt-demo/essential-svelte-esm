@@ -1,3 +1,5 @@
+import { propertyStore }         from '#runtime/svelte/store/writable-derived';
+
 import { ItemArrayObjectStore }  from './ItemArrayObjectStore.js';
 import { MenuItems }             from './MenuItems.js';
 
@@ -73,7 +75,6 @@ export class ItemContext
          itemStore: ItemContext.#itemStores[scope],
          layoutType:
           application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObjectLayout}${scope}`, 'grid'),
-         layoutTypeKey: `${sessionConstants.arrayObjectLayout}${scope}`,
          maxItems: 25,
          menuItems: new MenuItems(this),
          scope,
@@ -95,14 +96,6 @@ export class ItemContext
    get layoutType()
    {
       return this.#data.layoutType;
-   }
-
-   /**
-    * @returns {string} Session storage key for `layoutType`; used in `MenuItems`.
-    */
-   get layoutTypeKey()
-   {
-      return this.#data.layoutTypeKey;
    }
 
    /**

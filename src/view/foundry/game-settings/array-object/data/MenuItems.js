@@ -1,6 +1,8 @@
+import { get }       from 'svelte/store';
+
 import {
    ClipboardAccess,
-   CrossWindow } from '#runtime/util/browser';
+   CrossWindow }     from '#runtime/util/browser';
 
 export class MenuItems
 {
@@ -67,15 +69,14 @@ export class MenuItems
 
       // Switches the main item entries layout between `ItemGrid` and `ItemTable`.
 
-      const layoutType = this.#itemContext.application?.reactive.sessionStorage.getItem(
-       this.#itemContext.layoutTypeKey);
+      const currentLayoutType = get(this.#itemContext.layoutType);
 
       items.push({
-         icon: layoutType === 'grid' ? 'fas fa-table' : 'fas fa-grid',
-         label: layoutType === 'grid' ? 'Table Layout' : 'Grid Layout',
+         icon: currentLayoutType === 'grid' ? 'fas fa-table' : 'fas fa-grid',
+         label: currentLayoutType === 'grid' ? 'Table Layout' : 'Grid Layout',
          onPress: () =>
          {
-            this.#itemContext.layoutType.set(layoutType === 'grid' ? 'table' : 'grid');
+            this.#itemContext.layoutType.set(currentLayoutType === 'grid' ? 'table' : 'grid');
 
             // Entire item entries table is being swapped out, so focus the app content.
             this.#itemContext.application?.elementContent?.focus();
