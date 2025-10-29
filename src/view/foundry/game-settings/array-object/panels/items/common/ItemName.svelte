@@ -20,9 +20,6 @@
    /** @type {import('#arrayObjectContext').ItemEntryStore} */
    export let item = void 0;
 
-   /** @type {import('#arrayObjectContext').ItemContext} */
-   const { canEdit } = getContext('#external').itemContext;
-
    /**
     * The dynamic table cell tag allowing reuse of this component across grid / table element layouts.
     *
@@ -121,7 +118,7 @@
 
    function onStartEdit(event)
    {
-      if (canEdit && !editing)
+      if (item.canEdit && !editing)
       {
          initialValue = item.name;
          editing = true;
@@ -156,10 +153,10 @@
    </svelte:element>
 {:else}
    <svelte:element this={cell} class=grid-cell role=cell bind:this={divEl}
-       class:can-edit={canEdit}
+       class:can-edit={item.canEdit}
        on:click={onStartEdit}
        on:keyup={onKeyup}
-       tabindex={canEdit ? 0 : null}>
+       tabindex={item.canEdit ? 0 : null}>
       <span>{item.name}</span>
    </svelte:element>
 {/if}

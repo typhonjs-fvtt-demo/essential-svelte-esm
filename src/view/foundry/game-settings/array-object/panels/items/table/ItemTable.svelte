@@ -11,7 +11,7 @@
    setContext('tableTags', { cell: 'td', row: 'tr' });
 
    /** @type {import('#arrayObjectContext').ItemContext} */
-   const { canEdit, itemStore } = getContext('#external').itemContext;
+   const { itemStore } = getContext('#external').itemContext;
 
    const dataReducer = itemStore.dataReducer;
 </script>
@@ -23,7 +23,7 @@
          <th>#</th>
          <th>Name</th>
          <th>Category</th>
-         {#if canEdit}
+         {#if itemStore.canEdit}
             <th><!-- Empty --></th>
          {/if}
       </tr>

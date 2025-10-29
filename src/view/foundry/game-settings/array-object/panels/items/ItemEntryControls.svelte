@@ -6,7 +6,6 @@
 
    /** @type {import('#arrayObjectContext').ItemContext} */
    const {
-      canEdit,
       itemGenerator,
       itemStore,
       maxItems,
@@ -43,7 +42,7 @@
 </script>
 
 <section>
-   {#if canEdit}
+   {#if itemStore.canEdit}
       <button disabled={$itemStore.length >= maxItems} on:click={() => itemStore.createEntry(itemGenerator.createRandom())}>Add Item</button>
       <button on:click={() => itemStore.clearEntries()}>Remove All</button>
    {/if}

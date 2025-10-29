@@ -14,7 +14,7 @@
    export let item = void 0;
 
    /** @type {import('#arrayObjectContext').ItemContext} */
-   const { canEdit, itemStore, menuItems } = getContext('#external').itemContext;
+   const { itemStore, menuItems } = getContext('#external').itemContext;
 
    /**
     * The dynamic table cell tags allowing reuse of this component across grid / table element layouts.
@@ -51,7 +51,7 @@
    <svelte:element this={cell} class=grid-cell>{i + 1}</svelte:element>
    <ItemName {item} />
    <ItemCategory {item} />
-   {#if canEdit}
+   {#if item.canEdit}
       <svelte:element this={cell} class=grid-cell><TJSIconButton {button} /></svelte:element>
    {/if}
 </svelte:element>

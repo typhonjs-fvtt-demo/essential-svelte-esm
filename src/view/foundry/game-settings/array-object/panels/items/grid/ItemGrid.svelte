@@ -11,18 +11,18 @@
    setContext('tableTags', { cell: 'div', row: 'section' });
 
    /** @type {import('#arrayObjectContext').ItemContext} */
-   const { canEdit, itemStore } = getContext('#external').itemContext;
+   const { itemStore } = getContext('#external').itemContext;
 
    const dataReducer = itemStore.dataReducer;
 </script>
 
 {#if $dataReducer.length > 0}
-   <main class:can-edit={canEdit}>
+   <main class:can-edit={itemStore.canEdit}>
       <section class="grid-row header">
          <div class=grid-cell>#</div>
          <div class=grid-cell>Name</div>
          <div class=grid-cell>Category</div>
-         {#if canEdit}
+         {#if itemStore.canEdit}
             <div class=grid-cell><!-- Empty --></div>
          {/if}
       </section>

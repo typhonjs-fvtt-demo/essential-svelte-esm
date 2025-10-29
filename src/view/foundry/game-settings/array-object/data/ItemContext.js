@@ -88,7 +88,6 @@ export class ItemContext
       this.#application = new WeakRef(application);
 
       this.#data = {
-         canEdit: scope === 'world' ? globalThis.game.user.isGM : true,
          itemGenerator: new ItemGenerator(),
          itemStore: ItemContext.#itemStores[scope],
          layoutType:
@@ -100,14 +99,6 @@ export class ItemContext
          scrollTop: application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObjectScrolltop}${scope}`, 0),
          searchFilter: ItemContext.#searchFilters[scope]
       };
-   }
-
-   /**
-    * @returns {boolean} Can the current user edit items?
-    */
-   get canEdit()
-   {
-      return this.#data.canEdit;
    }
 
    /**
