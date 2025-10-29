@@ -26,7 +26,7 @@ export class MenuItems
       /** @type {import('#standard/component/menu').TJSMenuData.Items[]} */
       const items = [];
 
-      if (this.#itemContext.canEdit)
+      if (item.canEdit)
       {
          items.push({
             icon: 'fas fa-xmark',
@@ -59,7 +59,7 @@ export class MenuItems
          {
             // An example where cross-realm / window handling is important. To copy data to the clipboard when popped
             // out you must provide the current active window which is done via `CrossWindow.getWindow(event)`.
-            ClipboardAccess.writeText(JSON.stringify(item.toJSON() ?? ''), CrossWindow.getWindow(event));
+            ClipboardAccess.writeText(JSON.stringify(item.toJSON()), CrossWindow.getWindow(event));
          }
       });
 
