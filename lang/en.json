@@ -35,11 +35,15 @@
 
       "foundry": {
         "settings": {
-          "user": {
-            "title": "GameSettingArrayObject (user scope)"
-          },
-          "world": {
-            "title": "GameSettingArrayObject (world scope)"
+          "array-object": {
+            "item": {
+              "name": "Name",
+              "category": "Category"
+            },
+            "title": {
+              "user": "GameSettingArrayObject (user scope)",
+              "world": "GameSettingArrayObject (world scope)"
+            }
           }
         }
       },
