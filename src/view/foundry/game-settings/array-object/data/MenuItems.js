@@ -4,6 +4,9 @@ import {
    ClipboardAccess,
    CrossWindow }     from '#runtime/util/browser';
 
+/**
+ * Provides menu item data generation that is accessible from `ItemContext`.
+ */
 export class MenuItems
 {
    #itemContext;
