@@ -12,9 +12,6 @@
    /** @type {import('#arrayObjectContext').ItemEntryStore} */
    export let item = void 0;
 
-   /** @type {import('#arrayObjectContext').ItemContext} */
-   const { itemGenerator } = getContext('#external').itemContext;
-
    /**
     * The dynamic table cell tag allowing reuse of this component across grid / table element layouts.
     *
@@ -34,7 +31,7 @@
 {#if item.canEdit}
    <svelte:element this={cell} class=grid-cell>
       <select on:change={onChange}>
-         {#each itemGenerator.categories as category}
+         {#each item.categories as category}
             <option selected={item.category === category}>{category}</option>
          {/each}
       </select>

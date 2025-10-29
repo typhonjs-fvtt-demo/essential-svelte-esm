@@ -6,7 +6,7 @@
 
    /** @type {import('#arrayObjectContext').ItemContext} */
    const {
-      itemGenerator,
+      ItemGenerator,
       itemStore,
       maxItems,
       searchFilter } = getContext('#external').itemContext;
@@ -16,10 +16,16 @@
     */
    const dataReducer = itemStore.dataReducer;
 
+   /**
+    * The TJSInput data configuration connecting to `searchFilter` which is associated with `itemStore` for
+    * filtering item entries.
+    */
    const input = {
       store: searchFilter,
       placeholder: 'Search',
       type: 'search',
+
+      // When false, the TJSInput text color turns red. This is handled in a reactive statement below.
       storeIsValid: writable(true)
    }
 
@@ -28,6 +34,7 @@
     */
    let itemCount = '';
 
+   // Update `itemCount` and `input.storeIsValid` if there are valid search results or not.
    $:
    {
       const reducerLength = $dataReducer.length;
@@ -43,7 +50,7 @@
 
 <section>
    {#if itemStore.canEdit}
-      <button disabled={$itemStore.length >= maxItems} on:click={() => itemStore.createEntry(itemGenerator.createRandom())}>Add Item</button>
+      <button disabled={$itemStore.length >= maxItems} on:click={() => itemStore.createEntry(ItemGenerator.createRandom())}>Add Item</button>
       <button on:click={() => itemStore.clearEntries()}>Remove All</button>
    {/if}
    <TJSInput {input}/>

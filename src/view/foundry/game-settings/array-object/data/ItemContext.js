@@ -88,7 +88,8 @@ export class ItemContext
       this.#application = new WeakRef(application);
 
       this.#data = {
-         itemGenerator: new ItemGenerator(),
+         // itemGenerator: new ItemGenerator(),
+         ItemGenerator,
          itemStore: ItemContext.#itemStores[scope],
          layoutType:
           application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObjectLayout}${scope}`, 'grid'),
@@ -102,11 +103,11 @@ export class ItemContext
    }
 
    /**
-    * @returns {ItemGenerator} Item generator instance.
+    * @returns {typeof ItemGenerator} Item generator instance.
     */
-   get itemGenerator()
+   get ItemGenerator()
    {
-      return this.#data.itemGenerator;
+      return this.#data.ItemGenerator;
    }
 
    /**
@@ -259,6 +260,14 @@ export class ItemEntryStore extends GameSettingArrayObject.EntryStore
          this._data.category = category;
          this._updateSubscribers();
       }
+   }
+
+   /**
+    * @returns {Readonly<string[]>} All supported item categories.
+    */
+   get categories()
+   {
+      return ItemGenerator.categories;
    }
 
    /**

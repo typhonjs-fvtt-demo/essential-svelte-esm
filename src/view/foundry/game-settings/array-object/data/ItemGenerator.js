@@ -1,6 +1,9 @@
+/**
+ * Provides `ItemEntryData` creation of randomized whimsical mock items for the game setting array object demo.
+ */
 export class ItemGenerator
 {
-   #adjectives = [
+   static #adjectives = [
       'Singing', 'Cursed', 'Invisible', 'Dancing', 'Fuming', 'Shimmering', 'Laughing', 'Weeping',
       'Eldritch', 'Enchanted', 'Rusty', 'Glittering', 'Polka-Dotted', 'Slimy', 'Howling', 'Melancholy',
       'Giggling', 'Explosive', 'Sticky', 'Bubbling', 'Haunted', 'Gilded', 'Soggy', 'Irritable', 'Moss-Covered',
@@ -15,7 +18,7 @@ export class ItemGenerator
       'Heroic', 'Suspicious', 'Arcane', 'Vibrating', 'Draconic', 'Noble', 'Miniature', 'Terrified'
    ];
 
-   #categories = Object.freeze([
+   static #categories = Object.freeze([
       'Arcane Trinkets',
       'Cursed Relics',
       'Dungeon Snacks',
@@ -24,7 +27,7 @@ export class ItemGenerator
       'Royal Fashion'
    ]);
 
-   #nouns = [
+   static #nouns = [
       'Teapot', 'Boots', 'Toad', 'Helmet', 'Mirror', 'Goblet', 'Muffin', 'Amulet', 'Lute', 'Cauldron',
       'Ferret', 'Umbrella', 'Broom', 'Trousers', 'Tome', 'Candle', 'Feather', 'Pan', 'Cloak', 'Pumpkin',
       'Key', 'Bell', 'Spoon', 'Gem', 'Mask', 'Slippers', 'Scroll', 'Compass', 'Lantern', 'Ring',
@@ -40,7 +43,7 @@ export class ItemGenerator
    /**
     * @returns {Readonly<string[]>} Item categories.
     */
-   get categories()
+   static get categories()
    {
       return this.#categories;
    }
@@ -48,7 +51,7 @@ export class ItemGenerator
    /**
     * @returns {import('#arrayObjectContext').ItemEntryData} Random item data.
     */
-   createRandom()
+   static createRandom()
    {
       const category = this.#categories[Math.floor(Math.random() * this.#categories.length)];
       const adj = this.#adjectives[Math.floor(Math.random() * this.#adjectives.length)];
