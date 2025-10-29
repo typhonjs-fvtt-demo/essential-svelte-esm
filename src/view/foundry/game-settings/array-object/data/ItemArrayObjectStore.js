@@ -75,7 +75,7 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
    }
 
    /**
-    * Just a convenience function to not embed the `ItemGenerator` reference in the UI / Svelte components.
+    * Just a convenience method to not embed the `ItemGenerator` reference in the UI / Svelte components.
     */
    addItem()
    {
