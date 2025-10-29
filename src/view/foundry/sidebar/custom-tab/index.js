@@ -13,11 +13,15 @@ export *                      from './SidebarCustomTabApp.js';
  */
 Hooks.on('init', () =>
 {
-   const addTabEnabled = globalThis.sessionStorage.getItem(sessionConstants.sidebarCustomTab);
-   const replaceTabEnabled = globalThis.sessionStorage.getItem(sessionConstants.sidebarReplaceTab);
-   const removeTabEnabled = globalThis.sessionStorage.getItem(sessionConstants.sidebarRemoveTab);
+   let sidebarTabs = { custom: false, remove: false, replace: false };
 
-   if (addTabEnabled === 'true')
+   try
+   {
+      sidebarTabs = JSON.parse(globalThis.sessionStorage.getItem(sessionConstants.sidebarTabs));
+   }
+   catch { /**/ }
+
+   if (sidebarTabs.custom)
    {
       FVTTSidebarControl.add({
          id: 'custom-tab',
@@ -35,7 +39,7 @@ Hooks.on('init', () =>
       });
    }
 
-   if (replaceTabEnabled === 'true')
+   if (sidebarTabs.replace)
    {
       FVTTSidebarControl.replace({
          id: 'combat',
@@ -67,7 +71,7 @@ Hooks.on('init', () =>
    }
 
    // Remove the `journal` tab. Note: removing tabs is not recommended but is possible.
-   if (removeTabEnabled === 'true')
+   if (sidebarTabs.remove)
    {
       FVTTSidebarControl.remove({ id: 'journal' });
    }

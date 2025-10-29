@@ -30,9 +30,7 @@ const sessionConstants = {
    menuKeyForward: `${constants.moduleId}.menus-key-forward`,
    themeDarkMode: `${constants.moduleId}.theme.dark`,
    scrollbarState: `${constants.moduleId}.scrollbar-state`,
-   sidebarCustomTab: `${constants.moduleId}.sidebar.custom-tab`,
-   sidebarReplaceTab: `${constants.moduleId}.sidebar.replace-tab`,
-   sidebarRemoveTab: `${constants.moduleId}.sidebar.remove-tab`
+   sidebarTabs: `${constants.moduleId}.sidebar-tabs`
 };
 
 
@@ -55,11 +53,7 @@ export { constants, sessionConstants, settings };
  *
  * @property {string} scrollbarState Serializes scrollbar height state in `/src/view/standard-components/menu` demo.
  *
- * @property {string} sidebarCustomTab Indicates whether to load a custom Svelte sidebar tab.
- *
- * @property {string} sidebarReplaceTab Indicates whether to replace combat tracker with Svelte sidebar tab.
- *
- * @property {string} sidebarRemoveTab Indicates whether to remove the chat sidebar tab.
+ * @property {string} sidebarTabs Stores sidebar tab state for `src/view/foundry/sidebar/custom-tab` demo.
  */
 
 /**

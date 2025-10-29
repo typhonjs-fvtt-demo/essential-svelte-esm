@@ -3,6 +3,7 @@
    import { derived, get }       from 'svelte/store';
 
    import { ApplicationShell }   from '#runtime/svelte/component/application';
+   import { propertyStore }      from '#runtime/svelte/store/writable-derived';
 
    import { sessionConstants }   from '#constants';
 
@@ -10,9 +11,15 @@
 
    const { application } = getContext('#external');
 
-   const storeAddTab = application.reactive.sessionStorage.getStore(sessionConstants.sidebarCustomTab, false);
-   const storeReplaceTab = application.reactive.sessionStorage.getStore(sessionConstants.sidebarReplaceTab, false);
-   const storeRemoveTab = application.reactive.sessionStorage.getStore(sessionConstants.sidebarRemoveTab, false);
+   const storeTabs = application.reactive.sessionStorage.getStore(sessionConstants.sidebarTabs, {
+      custom: false,
+      remove: false,
+      replace: false
+   });
+
+   const storeAddTab = propertyStore(storeTabs, 'custom');
+   const storeRemoveTab = propertyStore(storeTabs, 'remove');
+   const storeReplaceTab = propertyStore(storeTabs, 'replace');
 
    const initialState = [get(storeAddTab), get(storeReplaceTab), get(storeRemoveTab)];
    let initialized = false;
