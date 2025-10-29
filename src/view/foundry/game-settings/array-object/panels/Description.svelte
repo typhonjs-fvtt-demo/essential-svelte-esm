@@ -13,7 +13,7 @@
    <fieldset>
       <legend>Description</legend>
       <p>
-         The current user ({globalThis.game.user.name}) {itemStore.canUserEdit ? msgCanEdit : msgCannotEdit} which is `{scope}`
+         The current user ({globalThis.game.user.name}) {itemStore.canUserModify ? msgCanEdit : msgCannotEdit} which is `{scope}`
          scoped{#if scope === 'user'}&nbsp;and unique to this user{/if}.
       </p>
       <p>

@@ -52,7 +52,7 @@
 </script>
 
 <section>
-   {#if itemStore.canUserEdit}
+   {#if itemStore.canUserModify}
       <button disabled={$itemStore.length >= maxItems} on:click={() => itemStore.addItem()}>Add Item</button>
       <button on:click={() => itemStore.clearEntries()}>Remove All</button>
    {/if}

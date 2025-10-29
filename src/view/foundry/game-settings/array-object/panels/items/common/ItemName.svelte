@@ -118,7 +118,7 @@
 
    function onStartEdit(event)
    {
-      if (item.canUserEdit && !editing)
+      if (item.canUserModify && !editing)
       {
          initialValue = item.name;
          editing = true;
@@ -153,10 +153,10 @@
    </svelte:element>
 {:else}
    <svelte:element this={cell} class=grid-cell role=cell bind:this={divEl}
-       class:can-edit={item.canUserEdit}
+       class:can-edit={item.canUserModify}
        on:click={onStartEdit}
        on:keyup={onKeyup}
-       tabindex={item.canUserEdit ? 0 : null}>
+       tabindex={item.canUserModify ? 0 : null}>
       <span>{item.name}</span>
    </svelte:element>
 {/if}
