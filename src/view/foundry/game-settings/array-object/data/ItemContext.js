@@ -88,7 +88,6 @@ export class ItemContext
       this.#application = new WeakRef(application);
 
       this.#data = {
-         // itemGenerator: new ItemGenerator(),
          ItemGenerator,
          itemStore: ItemContext.#itemStores[scope],
          layoutType:
