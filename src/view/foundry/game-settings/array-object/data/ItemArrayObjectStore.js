@@ -9,6 +9,9 @@ import { constants }                from '#constants';
 import { gameSettings }             from '#gameSettings';
 
 /**
+ * Provides additional functionality on top of `GameSettingArrayObject` such as sorting logic and encapsulation of
+ * all data related to controlling the item entries store instance.
+ *
  * @augments {GameSettingArrayObject<ItemEntryStore>}
  */
 export class ItemArrayObjectStore extends GameSettingArrayObject
@@ -72,6 +75,17 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
    }
 
    /**
+    * Just a convenience function to not embed the `ItemGenerator` reference in the UI / Svelte components.
+    */
+   addItem()
+   {
+      this.createEntry(ItemGenerator.createRandom());
+   }
+
+   /**
+    * The sorting control logic is encapsulated here. When a header column for `name` or `category` is clicked in
+    * `ItemSortBy.svelte`
+    *
     * @param {'name' | 'category'} prop - Item property to toggle sort by state.
     */
    toggleSortBy(prop)

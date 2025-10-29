@@ -1,5 +1,4 @@
 import { ItemArrayObjectStore }  from './ItemArrayObjectStore.js';
-import { ItemGenerator }         from './ItemGenerator.js';
 import { MenuItems }             from './MenuItems.js';
 
 import {
@@ -71,7 +70,6 @@ export class ItemContext
       this.#application = new WeakRef(application);
 
       this.#data = {
-         ItemGenerator,
          itemStore: ItemContext.#itemStores[scope],
          layoutType:
           application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObjectLayout}${scope}`, 'grid'),
@@ -81,14 +79,6 @@ export class ItemContext
          scope,
          scrollTop: application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObjectScrolltop}${scope}`, 0),
       };
-   }
-
-   /**
-    * @returns {typeof ItemGenerator} Item generator instance.
-    */
-   get ItemGenerator()
-   {
-      return this.#data.ItemGenerator;
    }
 
    /**

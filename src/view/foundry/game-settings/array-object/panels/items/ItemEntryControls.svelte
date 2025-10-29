@@ -6,7 +6,6 @@
 
    /** @type {import('#arrayObjectContext').ItemContext} */
    const {
-      ItemGenerator,
       itemStore,
       maxItems } = getContext('#external').itemContext;
 
@@ -54,7 +53,7 @@
 
 <section>
    {#if itemStore.canEdit}
-      <button disabled={$itemStore.length >= maxItems} on:click={() => itemStore.createEntry(ItemGenerator.createRandom())}>Add Item</button>
+      <button disabled={$itemStore.length >= maxItems} on:click={() => itemStore.addItem()}>Add Item</button>
       <button on:click={() => itemStore.clearEntries()}>Remove All</button>
    {/if}
    <TJSInput {input}/>
