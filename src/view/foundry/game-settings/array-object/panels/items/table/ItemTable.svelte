@@ -24,7 +24,7 @@
          <th>#</th>
          <th><ItemSortBy prop={'name'} /></th>
          <th><ItemSortBy prop={'category'} /></th>
-         {#if itemStore.canEdit}
+         {#if itemStore.canUserEdit}
             <th><!-- Empty --></th>
          {/if}
       </tr>

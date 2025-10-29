@@ -28,7 +28,7 @@
    }
 </script>
 
-{#if item.canEdit}
+{#if item.canUserEdit}
    <svelte:element this={cell} class=grid-cell>
       <select on:change={onChange}>
          {#each item.categories as category}

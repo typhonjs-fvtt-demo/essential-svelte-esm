@@ -31,7 +31,7 @@ export class MenuItems
       /** @type {import('#standard/component/menu').TJSMenuData.Items[]} */
       const items = [];
 
-      if (item.canEdit)
+      if (item.canUserEdit)
       {
          items.push({
             icon: 'fas fa-xmark',

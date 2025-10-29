@@ -2,7 +2,7 @@
    import { getContext } from 'svelte';
 
    /** @type {import('#arrayObjectContext').ItemContext} */
-   const { canEdit, scope } = getContext('#external').itemContext;
+   const { itemStore, scope } = getContext('#external').itemContext;
 
    const msgCanEdit = 'can read and edit the data table';
    const msgCannotEdit = 'can not edit, but can read the data table';
@@ -13,7 +13,7 @@
    <fieldset>
       <legend>Description</legend>
       <p>
-         The current user ({globalThis.game.user.name}) {canEdit ? msgCanEdit : msgCannotEdit} which is `{scope}`
+         The current user ({globalThis.game.user.name}) {itemStore.canUserEdit ? msgCanEdit : msgCannotEdit} which is `{scope}`
          scoped{#if scope === 'user'}&nbsp;and unique to this user{/if}.
       </p>
       <p>

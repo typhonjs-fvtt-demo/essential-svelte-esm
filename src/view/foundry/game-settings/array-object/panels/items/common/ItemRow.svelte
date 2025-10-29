@@ -51,7 +51,7 @@
    <svelte:element this={cell} class=grid-cell>{i + 1}</svelte:element>
    <ItemName {item} />
    <ItemCategory {item} />
-   {#if item.canEdit}
+   {#if item.canUserEdit}
       <svelte:element this={cell} class=grid-cell><TJSIconButton {button} /></svelte:element>
    {/if}
 </svelte:element>

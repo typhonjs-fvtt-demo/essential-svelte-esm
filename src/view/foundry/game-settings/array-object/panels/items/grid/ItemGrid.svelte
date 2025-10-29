@@ -18,12 +18,12 @@
 </script>
 
 {#if $dataReducer.length > 0}
-   <main class:can-edit={itemStore.canEdit}>
+   <main class:can-edit={itemStore.canUserEdit}>
       <section class="grid-row header">
          <div class=grid-cell>#</div>
          <div class=grid-cell><ItemSortBy prop={'name'} /></div>
          <div class=grid-cell><ItemSortBy prop={'category'} /></div>
-         {#if itemStore.canEdit}
+         {#if itemStore.canUserEdit}
             <div class=grid-cell><!-- Empty --></div>
          {/if}
       </section>
