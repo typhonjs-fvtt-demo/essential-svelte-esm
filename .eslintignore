@@ -6,6 +6,7 @@ packs/
 scripts/
 styles/
 src/**/*.svelte
+src/**/*.ts
 
 # Temporary until ESLint v9 upgrade
 vite.config.js
