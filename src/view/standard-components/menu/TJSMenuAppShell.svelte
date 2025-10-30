@@ -95,13 +95,13 @@
     * page reloads.
     */
 
-   const storageStore = application.reactive.sessionStorage.getStore(sessionConstants.appStateMenu);
+   const storageStore = application.reactive.sessionStorage.getStore(sessionConstants.menusAppState);
 
    // Application position store reference. Stores need to be a top level variable to be accessible for reactivity.
    const position = application.position;
 
    // A debounced callback that serializes application state after 500-millisecond delay.
-   const storeAppState = Timing.debounce(() => $storageStore = application.state.current(), 500);
+   const storeAppState = Timing.debounce((pos) => $storageStore = application.state.current(), 500);
 
    // Reactive statement to invoke debounce callback on TJSPosition changes.
    $: storeAppState($position);
