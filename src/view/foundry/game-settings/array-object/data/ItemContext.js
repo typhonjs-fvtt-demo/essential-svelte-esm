@@ -44,24 +44,25 @@ import {
 export class ItemContext
 {
    /**
-    * Provides the item entry stores.
+    * Provides the item entry store.
     *
-    * @type {({
-    *    user?: ItemArrayObjectStore,
-    *    world?: ItemArrayObjectStore
-    * })}
+    * @type {ItemArrayObjectStore}
     */
-   static #itemStores = {};
+   #itemStore;
 
    /**
-    * @type {WeakRef<import('#runtime/svelte/application').SvelteApp>}
+    * Stores the context data.
+    *
+    * @type {{ [key: string]: any }}
     */
-   #application;
-
    #data;
 
+   /**
+    * @param {import('../GameSettingArrayObjectApp').GameSettingArrayObjectApp}  application -
+    */
    constructor(application)
    {
+      // @ts-expect-error - We can type the extra app options, but only reference it here.
       const scope = application?.options?.settingScope;
 
       if (scope !== 'user' && scope !== 'world') { throw new Error(`'settingScope' must be 'user' or 'world'.`); }
@@ -72,23 +73,17 @@ export class ItemContext
          sortBy: { prop: '', state: 'none' }
       });
 
-      // Initialize backing array object store for given scope.
-      if (ItemContext.#itemStores[scope] === void 0)
-      {
-         ItemContext.#itemStores[scope] = new ItemArrayObjectStore({
-            key: scope === 'user' ? settings.userItemsArray : settings.worldItemsArray,
-            scope,
-            sortBy: propertyStore(sessionStore, 'sortBy')
-         });
-      }
-
-      this.#application = new WeakRef(application);
+      this.#itemStore = new ItemArrayObjectStore({
+         key: scope === 'user' ? settings.userItemsArray : settings.worldItemsArray,
+         scope,
+         sortBy: propertyStore(sessionStore, 'sortBy')
+      });
 
       this.#data = {
-         itemStore: ItemContext.#itemStores[scope],
+         itemStore: this.#itemStore,
          layoutType: propertyStore(sessionStore, 'layoutType'),
          maxItems: 25,
-         menuItems: new MenuItems(this),
+         menuItems: new MenuItems(application, this),
          scope,
          scrollTop: propertyStore(sessionStore, 'scrollTop')
       };
@@ -140,18 +135,6 @@ export class ItemContext
    get scrollTop()
    {
       return this.#data.scrollTop;
-   }
-
-   // Package scope --------------------------------------------------------------------------------------------------
-
-   /**
-    * @package
-    *
-    * @returns {import('#runtime/svelte/application').SvelteApp | undefined} SvelteApp reference.
-    */
-   get application()
-   {
-      return this.#application.deref();
    }
 }
 

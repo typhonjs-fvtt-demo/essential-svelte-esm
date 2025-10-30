@@ -15,6 +15,20 @@ import { ItemContext }        from '#arrayObjectContext';
 export class GameSettingArrayObjectApp extends SvelteApp
 {
    /**
+    * Defines the context passed to Svelte components.
+    *
+    * @type {ItemContext}
+    */
+   #context;
+
+   constructor(options)
+   {
+      super(options);
+
+      this.#context = new ItemContext(this);
+   }
+
+   /**
     * Default Application options
     *
     * @returns {SvelteApp.Options} options - SvelteApp options.
@@ -38,10 +52,7 @@ export class GameSettingArrayObjectApp extends SvelteApp
              *
              * @returns {object} Item entries context.
              */
-            context: function()
-            {
-               return { itemContext: new ItemContext(this) };
-            }
+            context: function() { return { itemContext: this.#context }; }
          }
       });
    }

@@ -9,13 +9,18 @@ import {
  */
 export class MenuItems
 {
+   #application;
+
    #itemContext;
 
    /**
+    * @param {import('../GameSettingArrayObjectApp').GameSettingArrayObjectApp} application -
+    *
     * @param {import('#arrayObjectContext').ItemContext} itemContext -
     */
-   constructor(itemContext)
+   constructor(application, itemContext)
    {
+      this.#application = application;
       this.#itemContext = itemContext;
    }
 
@@ -41,7 +46,7 @@ export class MenuItems
                this.#itemContext.itemStore.deleteEntry(item.id);
 
                // Row / event target is being deleted, so focus the app content.
-               this.#itemContext.application?.elementContent?.focus();
+               this.#application?.elementContent?.focus();
             }
          });
 
@@ -82,7 +87,7 @@ export class MenuItems
             this.#itemContext.layoutType.set(currentLayoutType === 'grid' ? 'table' : 'grid');
 
             // Entire item entries table is being swapped out, so focus the app content.
-            this.#itemContext.application?.elementContent?.focus();
+            this.#application?.elementContent?.focus();
          }
       });
 
