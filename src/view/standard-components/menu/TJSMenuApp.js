@@ -17,7 +17,7 @@ export class TJSMenuApp extends SvelteApp
       try
       {
          // Attempt to parse session storage item and set to application state.
-         this.state.set(JSON.parse(sessionStorage.getItem(sessionConstants.appStateMenu)));
+         this.state.set(JSON.parse(sessionStorage.getItem(sessionConstants.menusAppState)));
       }
       catch { /**/ }
    }
