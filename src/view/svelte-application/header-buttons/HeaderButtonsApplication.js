@@ -6,22 +6,8 @@ import HeaderButtonsAppShell  from './HeaderButtonsAppShell.svelte';
 import TestSCComponent        from './TestSCComponent.svelte';
 import ProgressBar            from './ProgressBar.svelte';
 
-import { sessionConstants }   from '#constants';
-
 export class HeaderButtonsApplication extends SvelteApp
 {
-   constructor(options)
-   {
-      super(options);
-
-      // Initialize the session storage state to the current platform theme dark state if not already set.
-      const themeDarkMode = this.reactive.sessionStorage.getItem(sessionConstants.themeDarkMode,
-       ThemeObserver.isTheme('dark'));
-
-      // Set explicit app theme based on current session storage state.
-      this.reactive.themeName = themeDarkMode ? 'dark' : 'light';
-   }
-
    /**
     * Default Application options
     *
@@ -78,8 +64,12 @@ export class HeaderButtonsApplication extends SvelteApp
    {
       const buttons = super._getHeaderButtons();
 
-      const storage = this.reactive.sessionStorage;
-      const themeDarkMode = storage.getItem(sessionConstants.themeDarkMode);
+      /**
+       * Retrieve the current dark theme / mode state.
+       *
+       * @type {boolean}
+       */
+      let themeDarkMode = ThemeObserver.isTheme('dark');
 
       buttons.unshift({
          class: 'theme-dark', // You can add a class
@@ -91,13 +81,13 @@ export class HeaderButtonsApplication extends SvelteApp
          // The button data can be modified and reactive updates occur after the function completes.
          onPress: ({ button }) =>
          {
-            const newThemeDarkMode = storage.swapItemBoolean(sessionConstants.themeDarkMode);
+            themeDarkMode = !themeDarkMode;
 
             // Reactive control over local app theme by theme name.
-            this.reactive.themeName = newThemeDarkMode ? 'dark' : 'light';
+            this.reactive.themeName = themeDarkMode ? 'dark' : 'light';
 
-            button.label = newThemeDarkMode ? 'Light Theme' : 'Dark Theme';
-            button.styles = newThemeDarkMode ? { color: 'lightblue' } : { color: 'white' };
+            button.label = themeDarkMode ? 'Light Theme' : 'Dark Theme';
+            button.styles = themeDarkMode ? { color: 'lightblue' } : { color: 'white' };
          }
 
          /**

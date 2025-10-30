@@ -26,10 +26,8 @@ const sessionConstants = {
    menusAppState: `${constants.moduleId}.menus-app-state`,
    menusUIState: `${constants.moduleId}.menus-ui-state`,
    arrayObject: `${constants.moduleId}.arrayobject-`,
-   themeDarkMode: `${constants.moduleId}.theme.dark`,
    sidebarTabs: `${constants.moduleId}.sidebar-tabs`
 };
-
 
 export { constants, sessionConstants, settings };
 
@@ -41,8 +39,6 @@ export { constants, sessionConstants, settings };
  * @property {string} menusAppState Stores the app state in /src/view/standard-components/menu demo.
  *
  * @property {string} menusUIState Stores the UI state in /src/view/standard-components/menu demo.
- *
- * @property {string} themeDarkMode Indicates whether dark mode is enabled.
  *
  * @property {string} sidebarTabs Stores sidebar tab state for `src/view/foundry/sidebar/custom-tab` demo.
  */
