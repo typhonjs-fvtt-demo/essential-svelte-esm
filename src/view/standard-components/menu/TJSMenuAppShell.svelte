@@ -15,19 +15,17 @@
 
    export let elementRoot = void 0;
 
-   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
-   const { application } = getContext('#external');
+   /** @type {import('./types').External} */
+   const { application, stores } = getContext('#external');
 
    // ----------------------------------------------------------------------------------------------------------------
 
    // Session storage store for `TJSScrollContainer` keyboard focus / tab navigation enabled.
-   const storeContainerKeyFocus = application.reactive.sessionStorage.getStore(
-    sessionConstants.menuContainerFocus, false);
+   const storeKeyFocus = stores.scrollContainer.keyFocus;
 
    // Session storage store for `TJSScrollContainer` to enable / disable scroll key event propagation. Foundry doesn't
    // respect key events for scrolling accessibility. IE spacebar, up / down arrows, etc.
-   const storeContainerKeyPropagate = application.reactive.sessionStorage.getStore(sessionConstants.menuKeyPropagate,
-    false);
+   const storeKeyPropagate = stores.scrollContainer.keyPropagate;
 
    /**
     * Configuration object for `TJSScrollContainer` component.
@@ -63,7 +61,7 @@
        * Session storage store that saves scroll container top. Close and open the app to see that the scroll bars
        * retain state. Note: `scrollLeft` is also supported.
        */
-      scrollTop: application.reactive.sessionStorage.getStore(sessionConstants.scrollbarState, 0),
+      scrollTop: stores.scrollContainer.scrollTop,
 
       /**
        * The following defines the box-shadow for the scroll container when keyboard / tab navigation is enabled.
@@ -77,13 +75,13 @@
 
    let fontSize;
 
-   const storeMenuScale = application.reactive.sessionStorage.getStore(sessionConstants.menuScale, 200);
+   const storeFontScale = stores.fontScale;
 
    // A very fun use of Svelte easing / `quadIn` to modify font-size reactively from 1 to 1.5em using quad in easing.
    // This gives a very natural feeling when increasing / decreasing the elements displayed.
    // see https://svelte.dev/repl/easing and select 'quad' & 'ease in' to see the curve applied.
    $: {
-      const adjustedItemHeight = $storeMenuScale / 10;
+      const adjustedItemHeight = $storeFontScale / 10;
       const easing = quadIn((adjustedItemHeight - 20) / 30 );
       fontSize = `${1 + (easing * 0.5)}em`;
    }
@@ -112,7 +110,7 @@
 <ApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
    <MenuBar />
 
-   <TJSScrollContainer {container} allowTabFocus={$storeContainerKeyFocus} keyPropagate={$storeContainerKeyPropagate}>
+   <TJSScrollContainer {container} allowTabFocus={$storeKeyFocus} keyPropagate={$storeKeyPropagate}>
       <!-- Note: using local calculated `fontSize` from scaling session store to control `font-size` -->
       <section class=text
                style:font-size={fontSize}>

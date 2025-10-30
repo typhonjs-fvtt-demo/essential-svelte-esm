@@ -23,13 +23,10 @@ const settings = {
  * @type {ESSessionConstants} Defines all the module session storage static constants.
  */
 const sessionConstants = {
-   appStateMenu: `${constants.moduleId}.menus-app-state`,
+   menusAppState: `${constants.moduleId}.menus-app-state`,
+   menusUIState: `${constants.moduleId}.menus-ui-state`,
    arrayObject: `${constants.moduleId}.arrayobject-`,
-   menuScale: `${constants.moduleId}.menus-font-scale`,
-   menuContainerFocus: `${constants.moduleId}.menus-container-focus`,
-   menuKeyForward: `${constants.moduleId}.menus-key-forward`,
    themeDarkMode: `${constants.moduleId}.theme.dark`,
-   scrollbarState: `${constants.moduleId}.scrollbar-state`,
    sidebarTabs: `${constants.moduleId}.sidebar-tabs`
 };
 
@@ -39,19 +36,13 @@ export { constants, sessionConstants, settings };
 /**
  * @typedef {object} ESSessionConstants
  *
- * @property {string} appStateMenu Stores the current app state in /src/view/standard-components/menu demo.
- *
  * @property {string} arrayObject Stores all state in /src/view/foundry/game-settings/array-object demo.
  *
- * @property {string} menuScale Stores the font scale state in `/src/view/standard-components/menu` demo.
+ * @property {string} menusAppState Stores the app state in /src/view/standard-components/menu demo.
  *
- * @property {string} menuContainerFocus Stores keyboard focus state in `/src/view/standard-components/menu` demo.
- *
- * @property {string} menuKeyPropagate Stores scroll key propagate state in `/src/view/standard-components/menu` demo.
+ * @property {string} menusUIState Stores the UI state in /src/view/standard-components/menu demo.
  *
  * @property {string} themeDarkMode Indicates whether dark mode is enabled.
- *
- * @property {string} scrollbarState Serializes scrollbar height state in `/src/view/standard-components/menu` demo.
  *
  * @property {string} sidebarTabs Stores sidebar tab state for `src/view/foundry/sidebar/custom-tab` demo.
  */

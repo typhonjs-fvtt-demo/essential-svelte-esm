@@ -14,10 +14,8 @@
 
    import { createMenuItems }       from './createMenuItems.js';
 
-   import { sessionConstants }      from "#constants";
-
-   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
-   const { application } = getContext('#external');
+   /** @type {import('./types').External} */
+   const { application, stores } = getContext('#external');
 
    /**
     * Defines the configuration object for `TJSToggleButton` to show / hide a slotted `TJSMenu`.
@@ -44,7 +42,7 @@
       label: 'Scale:',
       min: 200,
       max: 500,
-      store: application.reactive.sessionStorage.getStore(sessionConstants.menuScale, 200)
+      store: stores.fontScale
    }
 
    /**
@@ -53,7 +51,7 @@
    const scrollKeyFocusButton = {
       icon: 'fas fa-keyboard',
       efx: ripple(),
-      store: application.reactive.sessionStorage.getStore(sessionConstants.menuContainerFocus, false),
+      store: stores.scrollContainer.keyFocus,
       tooltip: 'Enable Container Key Focus',
       tooltipSelected: 'Disable Container Key Focus'
    };
@@ -65,7 +63,7 @@
    const scrollKeyPropagateButton = {
       icon: 'fas fa-circle-play',
       efx: ripple(),
-      store: application.reactive.sessionStorage.getStore(sessionConstants.menuKeyPropagate, false),
+      store: stores.scrollContainer.keyPropagate,
       tooltip: 'Allow Container Key Propagation',
       tooltipSelected: 'Stop Container Key Propagation'
    };
