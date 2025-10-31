@@ -1,15 +1,17 @@
 <script>
+   import { getContext }         from 'svelte';
+
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
    import { TJSInput }           from '#standard/component/form';
    import { TJSSideSlideLayer }  from '#standard/component/layer/side-slide';
 
    import { createLayerProps }   from './createLayerProps.js';
-   import { createUIData }       from './createUIData.js';
 
    export let elementRoot = void 0;
 
-   const { stores, inputs } = createUIData();
+   /** @type {import('./types').External} */
+   const { stores, inputs } = getContext('#external');
 
    // Bound stores must be defined at the top level, so destructure them.
    const { allowLocking, clickToOpen, duration, easingIn, easingOut, side, top } = stores;

@@ -6,6 +6,7 @@ import { TJSSideSlideLayer }  from '#standard/component/layer/side-slide';
 import SideSlideAppShell      from './SideSlideAppShell.svelte';
 
 import { createLayerProps }   from './createLayerProps.js';
+import { SideSlideContext }   from './SideSlideContext.js';
 
 import {
    constants,
@@ -15,6 +16,8 @@ import { gameSettings }       from '#gameSettings';
 
 export class SideSlideApp extends SvelteApp
 {
+   #context;
+
    /**
     * Stores the TJSSideSlideLayer instance that is mounted to `#ui-middle`.
     */
@@ -26,28 +29,7 @@ export class SideSlideApp extends SvelteApp
    {
       super();
 
-      /**
-       * Register a world game setting w/ TJSGameSettings. This makes a world object store available to store
-       * TJSSideSlideLayer props. See * {@link createUIData} / `createStores` where further `propertyStores` are
-       * created for individual properties.
-       *
-       * The default values below are included so that the modification UI initializes with correct data for the first
-       * time executed.
-       */
-      gameSettings.register({
-         namespace: constants.moduleId,
-         key: settings.sideSlideLayer,
-         options: {
-            scope: 'world',
-            config: false,
-            default: {
-               top: 10,             // Numbers are treated as pixels unless `topUnit` defined / otherwise valid `top` CSS string.
-               easingIn: 'linear',  // The name of a Svelte easing function.
-               easingOut: 'linear', // The name of a Svelte easing function.
-            },
-            type: Object
-         }
-      });
+      this.#context = new SideSlideContext();
 
       // Mounts an instance of TJSSideSlideLayer to the `#ui-middle` div of the Foundry UI to "dock" it next to the
       // Foundry sidebar. This component will stay active after this app has been closed.
@@ -90,7 +72,14 @@ export class SideSlideApp extends SvelteApp
 
          svelte: {
             class: SideSlideAppShell,
-            target: document.body
+            target: document.body,
+
+            /**
+             * @this {SideSlideApp}
+             *
+             * @returns {object} SideSlide context.
+             */
+            context: function() { return this.#context; }
          }
       });
    }
