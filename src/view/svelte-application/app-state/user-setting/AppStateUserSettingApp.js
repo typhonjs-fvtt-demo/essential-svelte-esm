@@ -56,20 +56,7 @@ export class AppStateUserSettingApp extends SvelteApp
 
          svelte: {
             class: UserSettingAppShell,
-            target: document.body,
-
-            /**
-             * You can provide a function and the `this` context is the application when invoked.
-             *
-             * @this {AppStateUserSettingApp}
-             *
-             * @returns {object} Props for Svelte component.
-             */
-            props: function()
-            {
-               // Creates a store
-               return { settingStore: gameSettings.getStore(settings.appStateUser) };
-            }
+            target: document.body
          }
       });
    }

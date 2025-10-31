@@ -4,16 +4,20 @@
    import { ApplicationShell }   from '#runtime/svelte/component/application';
    import { Timing }             from '#runtime/util';
 
+   import { settings }           from '#constants';
+   import { gameSettings }       from '#gameSettings';
+
    export let elementRoot = void 0;
-   export let settingStore = void 0;
 
    const { application } = getContext('#external');
+
+   const settingStore = gameSettings.getStore(settings.appStateUser);
 
    // Application position store reference. Stores need to be a top level variable to be accessible for reactivity.
    const position = application.position;
 
    // A debounced callback that serializes application state after 500-millisecond delay.
-   const storePosition = Timing.debounce(() => $settingStore = application.state.current(), 500);
+   const storePosition = Timing.debounce((pos) => $settingStore = application.state.current(), 500);
 
    // Reactive statement to invoke debounce callback on TJSPosition changes.
    $: storePosition($position);

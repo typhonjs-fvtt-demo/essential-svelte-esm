@@ -23,9 +23,10 @@ const settings = {
  * @type {ESSessionConstants} Defines all the module session storage static constants.
  */
 const sessionConstants = {
+   arrayObject: `${constants.moduleId}.arrayobject-`,
    menusAppState: `${constants.moduleId}.menus-app-state`,
    menusUIState: `${constants.moduleId}.menus-ui-state`,
-   arrayObject: `${constants.moduleId}.arrayobject-`,
+   sessionAppState: `${constants.moduleId}.session-app-state`,
    sidebarTabs: `${constants.moduleId}.sidebar-tabs`
 };
 
@@ -39,6 +40,9 @@ export { constants, sessionConstants, settings };
  * @property {string} menusAppState Stores the app state in /src/view/standard-components/menu demo.
  *
  * @property {string} menusUIState Stores the UI state in /src/view/standard-components/menu demo.
+ *
+ * @property {string} sessionAppState Stores the app state for `src/view/svelte-application/app-state/session-storage`
+ * demo.
  *
  * @property {string} sidebarTabs Stores sidebar tab state for `src/view/foundry/sidebar/custom-tab` demo.
  */
