@@ -17,7 +17,7 @@
 
    function handleChange()
    {
-      itemStore.toggleSortBy(prop);
+      sortBy.toggleProp(prop);
    }
 
    function onKeyup(event)
@@ -28,7 +28,7 @@
    /**
     * Gets the current sort icon.
     *
-    * @param {{ prop: string, state: 'none' | 'asc' | 'desc' }} data - Sort by data.
+    * @param {import('#runtime/svelte/store/reducer').DynReducerHelper.Sort.ObjectByPropData} data - Sort by data.
     */
    function getIcon(data)
    {

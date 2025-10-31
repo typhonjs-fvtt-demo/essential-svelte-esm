@@ -69,8 +69,7 @@ export class ItemContext
 
       const sessionStore = application.reactive.sessionStorage.getStore(`${sessionConstants.arrayObject}${scope}`, {
          scrollTop: 0,
-         layoutType: 'grid',
-         sortBy: { prop: '', state: 'none' }
+         layoutType: 'grid'
       });
 
       this.#itemStore = new ItemArrayObjectStore({

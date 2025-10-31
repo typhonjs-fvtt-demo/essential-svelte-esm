@@ -1,5 +1,3 @@
-import { get }                      from 'svelte/store';
-
 import { GameSettingArrayObject }   from '#runtime/svelte/store/fvtt/settings/array-object';
 import { DynReducerHelper }         from '#runtime/svelte/store/reducer';
 
@@ -17,14 +15,9 @@ import { gameSettings }             from '#gameSettings';
 export class ItemArrayObjectStore extends GameSettingArrayObject
 {
    /**
-    * @type {'name' | 'category' | undefined}
-    */
-   #sortByProp;
-
-   /**
     * @type {Readonly<{
     *    searchFilter: DynReducerHelper.FilterFn.regexObjectQuery;
-    *    sortBy: import('svelte/store').Writable<{ prop: string, state: 'none' | 'asc' | 'desc' }>
+    *    sortBy: DynReducerHelper.Sort.ObjectByProp<ItemEntryStore>;
     * }>}
     */
    #stores;
@@ -36,8 +29,8 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
     *
     * @param {'user' | 'world'} options.scope - Game setting scope.
     *
-    * @param {import('svelte/store').Writable<any>} options.sortBy - Sort by property store associated w/
-    *        sessionStorage.
+    * @param {import('svelte/store').Writable} options.sortBy - Sort by property store associated w/
+    *        sessionStorage storing any changes to sort ordering.
     */
    constructor({ key, scope, sortBy })
    {
@@ -52,35 +45,18 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
 
       this.#stores = Object.freeze({
          searchFilter: DynReducerHelper.filters.regexObjectQuery(['name', 'category']),
-         sortBy
+         sortBy: DynReducerHelper.sort.objectByProp({ store: sortBy })
       });
 
-      // The sortBy store is coming from a session storage property store, so set initial `#sortByProp` manually.
-      const currentSortBy = get(sortBy);
-      this.#sortByProp = currentSortBy?.state !== 'none' ? currentSortBy?.prop : void 0;
-
-      // @ts-expect-error - This is OK despite type differences.
       this.dataReducer.filters.add(this.#stores.searchFilter);
 
-      // Add an inline sort function referencing `this.#sortByProp` which is managed by `toggleSortBy`.
-      // There are other dynamic ways to configure sorting, but since the sort by logic is encapsulated locally
-      // this is efficient.
-      this.dataReducer.sort.set((a, b) =>
-      {
-         return this.#sortByProp && a?.[this.#sortByProp] && b?.[this.#sortByProp] ?
-          a[this.#sortByProp].localeCompare(b[this.#sortByProp]) : 0;
-      });
-
-      if (this.#sortByProp && currentSortBy?.state === 'desc')
-      {
-         this.dataReducer.reversed = true;
-      }
+      this.dataReducer.sort.set(this.#stores.sortBy);
    }
 
    /**
     * @returns {Readonly<{
     *    searchFilter: DynReducerHelper.FilterFn.regexObjectQuery;
-    *    sortBy: import('svelte/store').Writable<{ prop: string, state: 'none' | 'asc' | 'desc' }>
+    *    sortBy: DynReducerHelper.Sort.ObjectByProp<ItemEntryStore>;
     * }>} Associated item stores.
     */
    get stores()
@@ -96,54 +72,26 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
       this.createEntry(ItemGenerator.createRandom());
    }
 
-   /**
-    * The sorting control logic is encapsulated here. When a header column for `name` or `category` is clicked in
-    * `ItemSortBy.svelte`
-    *
-    * @param {'name' | 'category'} prop - Item property to toggle sort by state.
-    */
-   toggleSortBy(prop)
+   clearEntries()
    {
-      // Usually you should avoid using `get()` with a store, but this is OK / not a performance pathway.
-      const currentSortBy = get(this.#stores.sortBy);
+      super.clearEntries();
+      this.#stores.sortBy.reset();
+   }
 
-      /**
-       * Determine current state. If the `prop` being toggled is the current `sortBy` prop then use the stored state.
-       * Otherwise, this is a new property to toggle and start from `none`.
-       *
-       * @type {string}
-       */
-      const current = currentSortBy?.prop === prop ? currentSortBy?.state : 'none';
+  /**
+   * Deletes a given entry store by ID from this array object store instance.
+   *
+   * @param {string} id - ID of entry to delete.
+   *
+   * @returns {boolean} Delete operation successful.
+   */
+   deleteEntry(id)
+   {
+      const result = super.deleteEntry(id);
 
-      /** @type {'none' | 'asc' | 'desc'} */
-      let newState = 'none';
+      if (this.length === 0) { this.#stores.sortBy.reset(); }
 
-      switch (current)
-      {
-         case 'none':
-            newState = 'asc';
-            break;
-
-         case 'asc':
-            newState = 'desc';
-            break;
-
-         case 'desc':
-            newState = 'none';
-            break;
-
-         default:
-            newState = 'none';
-            break;
-      }
-
-      this.#sortByProp = newState !== 'none' ? prop : void 0;
-
-      // Update the current sorting mode.
-      this.#stores.sortBy.set({ prop, state: newState });
-
-      // Forces an index update / sorting is triggered.
-      this.dataReducer.reversed = newState === 'desc';
+      return result;
    }
 }
 
