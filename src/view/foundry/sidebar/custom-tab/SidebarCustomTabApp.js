@@ -1,10 +1,29 @@
 import { SvelteApp }             from '#runtime/svelte/application';
+
 import { deepMerge }             from '#runtime/util/object';
 
+import { SidebarContext }        from './SidebarContext.js';
 import SidebarCustomTabAppShell  from './SidebarCustomTabAppShell.svelte';
 
+/**
+ * @augments {SvelteApp<import('./types').Options>}
+ */
 export class SidebarCustomTabApp extends SvelteApp
 {
+   /**
+    * Defines the additional external context / derived WebStorage stores passed to the app shell / Svelte.
+    *
+    * @type {SidebarContext}
+    */
+   #context;
+
+   constructor(options)
+   {
+      super(options);
+
+      this.#context = new SidebarContext(this);
+   }
+
    /**
     * Default Application options
     *
@@ -23,7 +42,14 @@ export class SidebarCustomTabApp extends SvelteApp
 
          svelte: {
             class: SidebarCustomTabAppShell,
-            target: document.body
+            target: document.body,
+
+            /**
+             * @this {SidebarCustomTabApp}
+             *
+             * @returns {object} Tab store context.
+             */
+            context: function() { return this.#context; }
          }
       });
    }

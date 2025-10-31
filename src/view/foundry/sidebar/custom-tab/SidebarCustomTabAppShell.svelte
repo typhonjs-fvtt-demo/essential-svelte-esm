@@ -1,48 +1,14 @@
 <script>
    import { getContext }         from 'svelte';
-   import { derived, get }       from 'svelte/store';
 
    import { ApplicationShell }   from '#runtime/svelte/component/application';
-   import { propertyStore }      from '#runtime/svelte/store/writable-derived';
-
-   import { sessionConstants }   from '#constants';
 
    export let elementRoot = void 0;
 
-   const { application } = getContext('#external');
+   /** @type {import('./types').External} */
+   const { stores } = getContext('#external');
 
-   const storeTabs = application.reactive.sessionStorage.getStore(sessionConstants.sidebarTabs, {
-      custom: false,
-      remove: false,
-      replace: false
-   });
-
-   const storeAddTab = propertyStore(storeTabs, 'custom');
-   const storeRemoveTab = propertyStore(storeTabs, 'remove');
-   const storeReplaceTab = propertyStore(storeTabs, 'replace');
-
-   const initialState = [get(storeAddTab), get(storeReplaceTab), get(storeRemoveTab)];
-   let initialized = false;
-
-   // Create a derived store which detects when any boolean state does not match initial state on load.
-   const flagsChanged = derived(
-      [storeAddTab, storeReplaceTab, storeRemoveTab],
-      ([$a, $b, $c], set) =>
-      {
-         if (!initialized)
-         {
-            initialized = true;
-            set(false);
-            return;
-         }
-
-         const current = [$a, $b, $c];
-
-         const changed = current.some((v, i) => v !== initialState[i]);
-         set(changed);
-      },
-      false
-   );
+   const { reloadRequired, tabAdd, tabRemove, tabReplace } = stores;
 </script>
 
 <svelte:options accessors={true}/>
@@ -54,22 +20,22 @@
 
       <div>
          <span>Enable / disable:</span>
-         {#if $flagsChanged}
+         {#if $reloadRequired}
             <span class=reload>Reload Required</span>
          {/if}
       </div>
 
       <label>
-         <span>- Custom tab (before chat):</span>
-         <input type=checkbox bind:checked={$storeAddTab}>
-      </label>
-      <label>
-         <span>- Replace combat tracker tab:</span>
-         <input type=checkbox bind:checked={$storeReplaceTab}>
+         <span>- Add custom tab (before chat):</span>
+         <input type=checkbox bind:checked={$tabAdd}>
       </label>
       <label>
          <span>- Remove journal tab:</span>
-         <input type=checkbox bind:checked={$storeRemoveTab}>
+         <input type=checkbox bind:checked={$tabRemove}>
+      </label>
+      <label>
+         <span>- Replace combat tracker tab:</span>
+         <input type=checkbox bind:checked={$tabReplace}>
       </label>
    </main>
 </ApplicationShell>
