@@ -70,6 +70,11 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
          return this.#sortByProp && a?.[this.#sortByProp] && b?.[this.#sortByProp] ?
           a[this.#sortByProp].localeCompare(b[this.#sortByProp]) : 0;
       });
+
+      if (this.#sortByProp && currentSortBy?.state === 'desc')
+      {
+         this.dataReducer.reversed = true;
+      }
    }
 
    /**
@@ -116,15 +121,15 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
       switch (current)
       {
          case 'none':
-            newState = 'desc';
+            newState = 'asc';
             break;
 
          case 'asc':
-            newState = 'none';
+            newState = 'desc';
             break;
 
          case 'desc':
-            newState = 'asc';
+            newState = 'none';
             break;
 
          default:
@@ -138,7 +143,7 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
       this.#stores.sortBy.set({ prop, state: newState });
 
       // Forces an index update / sorting is triggered.
-      this.dataReducer.reversed = newState === 'asc';
+      this.dataReducer.reversed = newState === 'desc';
    }
 }
 
