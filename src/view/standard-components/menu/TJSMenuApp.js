@@ -21,9 +21,9 @@ export class TJSMenuApp extends SvelteApp
     */
    #context;
 
-   constructor()
+   constructor(options)
    {
-      super();
+      super(options);
 
       try
       {
