@@ -1,8 +1,8 @@
 <script>
    /**
     * Defines a table cell that can be edited via an `input` element. Note `item` is `ItemEntryStore` and to
-    * reactively update the data simply setting the new data to `item.name` will trigger serialization to the
-    * Foundry DB.
+    * reactively update the data simply setting the new data to `item[prop]` will trigger serialization to the
+    * Foundry DB. The property is to edit is passed as the `prop` prop..
     *
     * This component is a bit more complex because it takes into account keyboard / accessibility and `<Tab>` /
     * `<Shift-Tab>` traversal. In edit mode all events to automatically stop editing when the user navigates
@@ -16,9 +16,12 @@
       tick }               from 'svelte';
 
    import { CrossWindow }  from '#runtime/util/browser';
+   import { hasSetter }    from '#runtime/util/object';
 
    /** @type {import('#arrayObjectContext').ItemEntryStore} */
    export let item = void 0;
+
+   export let prop = void 0;
 
    /**
     * The dynamic table cell tag allowing reuse of this component across grid / table element layouts.
@@ -41,6 +44,9 @@
 
    let initialValue;
 
+   // The prop is editable if user can modify and there is a setter for the prop on item.
+   $: isPropEditable = item.canUserModify && hasSetter(item, prop);
+
    onDestroy(() => onClose());
 
    /**
@@ -48,7 +54,7 @@
     */
    function onChange(event)
    {
-      item.name = event.target.value;
+      item[prop] = event.target.value;
 
       onClose(event);
    }
@@ -118,9 +124,9 @@
 
    function onStartEdit(event)
    {
-      if (item.canUserModify && !editing)
+      if (isPropEditable && !editing)
       {
-         initialValue = item.name;
+         initialValue = item[prop];
          editing = true;
 
          tick().then(() => inputEl?.focus());
@@ -149,15 +155,15 @@
              on:change={onChange}
              on:keydown={onKeydownInput}
              on:keyup={onKeyupInput}
-             value={item.name} />
+             value={item[prop]} />
    </svelte:element>
 {:else}
    <svelte:element this={cell} class=grid-cell role=cell bind:this={divEl}
-       class:can-edit={item.canUserModify}
+       class:can-edit={isPropEditable}
        on:click={onStartEdit}
        on:keyup={onKeyup}
-       tabindex={item.canUserModify ? 0 : null}>
-      <span>{item.name}</span>
+       tabindex={isPropEditable ? 0 : null}>
+      <span>{item[prop]}</span>
    </svelte:element>
 {/if}
 

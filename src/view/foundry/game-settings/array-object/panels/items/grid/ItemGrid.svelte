@@ -23,6 +23,7 @@
          <div class=grid-cell>#</div>
          <div class=grid-cell><ItemSortBy prop={'name'} /></div>
          <div class=grid-cell><ItemSortBy prop={'category'} /></div>
+         <div class=grid-cell><ItemSortBy prop={'cost'} /></div>
          {#if itemStore.canUserModify}
             <div class=grid-cell><!-- Empty --></div>
          {/if}
@@ -38,13 +39,15 @@
       --grid-template-columns:
          1.5rem
          1fr
-         1fr;
+         1fr
+         0.8fr;
 
       &.can-edit {
          --grid-template-columns:
             1.5rem
             1fr
             1fr
+            0.8fr
             2.5rem;
       }
 

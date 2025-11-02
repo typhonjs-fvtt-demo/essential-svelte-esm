@@ -5,7 +5,7 @@
    import { TJSIconButton }   from '#standard/component/button';
 
    import ItemCategory        from './ItemCategory.svelte';
-   import ItemName            from './ItemName.svelte';
+   import ItemPropInput       from './ItemPropInput.svelte';
 
    /** @type {number} */
    export let i = 0;
@@ -49,8 +49,9 @@
 
 <svelte:element this={row} class=grid-row role=row tabindex=-1 on:contextmenu={onContextMenu}>
    <svelte:element this={cell} class=grid-cell>{i + 1}</svelte:element>
-   <ItemName {item} />
+   <ItemPropInput {item} prop={'name'} />
    <ItemCategory {item} />
+   <ItemPropInput {item} prop={'cost'} />
    {#if item.canUserModify}
       <svelte:element this={cell} class=grid-cell><TJSIconButton {button} /></svelte:element>
    {/if}

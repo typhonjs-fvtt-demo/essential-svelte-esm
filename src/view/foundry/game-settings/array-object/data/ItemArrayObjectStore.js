@@ -1,6 +1,7 @@
 import { GameSettingArrayObject }   from '#runtime/svelte/store/fvtt/settings/array-object';
 import { DynReducerHelper }         from '#runtime/svelte/store/reducer';
 
+import { CompareCurrency }          from './CompareCurrency.js';
 import { ItemGenerator }            from './ItemGenerator.js';
 
 import { constants }                from '#constants';
@@ -44,8 +45,13 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
       });
 
       this.#stores = Object.freeze({
-         searchFilter: DynReducerHelper.filters.regexObjectQuery(['name', 'category']),
-         sortBy: DynReducerHelper.sort.objectByProp({ store: sortBy })
+         searchFilter: DynReducerHelper.filters.regexObjectQuery(['name', 'category', 'cost']),
+         sortBy: DynReducerHelper.sort.objectByProp({
+            store: sortBy,
+            customCompareFnMap: {
+               cost: CompareCurrency
+            }
+         })
       });
 
       this.dataReducer.filters.add(this.#stores.searchFilter);
@@ -120,6 +126,7 @@ export class ItemEntryStore extends GameSettingArrayObject.EntryStore
    {
       if (typeof data.name === 'string') { this._data.name = data.name; }
       if (typeof data.category === 'string') { this._data.category = data.category; }
+      if (typeof data.cost === 'string') { this._data.cost = data.cost; }
    }
 
    /**
@@ -169,14 +176,24 @@ export class ItemEntryStore extends GameSettingArrayObject.EntryStore
          this._updateSubscribers();
       }
    }
+
+   /**
+    * @returns {string} Item cost.
+    */
+   get cost()
+   {
+      return this._data.cost ?? '';
+   }
 }
 
 /**
- * @typedef {object} ItemEntryData
+ * @typedef {object} ItemEntryData Defines the unique data for an item entry.
  *
  * @property {string} [id] - UUIDv4; automatically assigned.
  *
  * @property {string} category - Item category.
  *
  * @property {string} name - Item name.
+ *
+ * @property {string} cost - Item cost.
  */

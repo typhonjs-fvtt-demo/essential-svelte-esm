@@ -3,6 +3,68 @@
  */
 export class ItemGenerator
 {
+   /**
+    * @returns {Readonly<string[]>} Item categories.
+    */
+   static get categories()
+   {
+      return this.#categories;
+   }
+
+   /**
+    * @returns {import('#arrayObjectContext').ItemEntryData} Random item data.
+    */
+   static createRandom()
+   {
+      const category = this.#categories[Math.floor(Math.random() * this.#categories.length)];
+      const adj = this.#adjectives[Math.floor(Math.random() * this.#adjectives.length)];
+      const noun = this.#nouns[Math.floor(Math.random() * this.#nouns.length)];
+
+      const name = `${adj} ${noun}`;
+
+      return { category, name, cost: this.#generateCurrency() };
+   }
+
+   // Internal Implementation ----------------------------------------------------------------------------------------
+
+   /**
+    * Generate a realistic D&D 5e-style currency string.
+    *
+    * Typical ratios:
+    *   1 pp = 10 gp = 100 sp = 1000 cp
+    *
+    * Value ranges chosen for believable game economy.
+    *
+    * @returns {string} Item cost.
+    */
+   static #generateCurrency()
+   {
+      const denominations = [
+         { unit: 'cp', max: 100, weight: 3 },
+         { unit: 'sp', max: 50,  weight: 2.5 },
+         { unit: 'gp', max: 20,  weight: 2.5 },
+         { unit: 'pp', max: 10,  weight: 2 },
+      ];
+
+      // Weighted random pick (copper most common, platinum rarest)
+      const totalWeight = denominations.reduce((a, d) => a + d.weight, 0);
+      let roll = Math.random() * totalWeight;
+      let selected = denominations[0];
+
+      for (const denom of denominations)
+      {
+         if (roll < denom.weight)
+         {
+            selected = denom;
+            break;
+         }
+         roll -= denom.weight;
+      }
+
+      const amount = Math.floor(Math.random() * selected.max) + 1;
+      return `${amount} ${selected.unit}`;
+   }
+
    static #adjectives = [
       'Singing', 'Cursed', 'Invisible', 'Dancing', 'Fuming', 'Shimmering', 'Laughing', 'Weeping',
       'Eldritch', 'Enchanted', 'Rusty', 'Glittering', 'Polka-Dotted', 'Slimy', 'Howling', 'Melancholy',
@@ -39,26 +101,4 @@ export class ItemGenerator
       'Torch', 'Potion', 'Elixir', 'Crystal', 'Relic', 'Totem', 'Idol', 'Horn', 'Chalice', 'Banner',
       'Crown', 'Brooch', 'Chainmail', 'Talisman', 'Cape', 'Horseshoe', 'Pipe', 'Censer', 'Anvil', 'Drum'
    ];
-
-   /**
-    * @returns {Readonly<string[]>} Item categories.
-    */
-   static get categories()
-   {
-      return this.#categories;
-   }
-
-   /**
-    * @returns {import('#arrayObjectContext').ItemEntryData} Random item data.
-    */
-   static createRandom()
-   {
-      const category = this.#categories[Math.floor(Math.random() * this.#categories.length)];
-      const adj = this.#adjectives[Math.floor(Math.random() * this.#adjectives.length)];
-      const noun = this.#nouns[Math.floor(Math.random() * this.#nouns.length)];
-
-      const name = `${adj} ${noun}`;
-
-      return { category, name };
-   }
 }

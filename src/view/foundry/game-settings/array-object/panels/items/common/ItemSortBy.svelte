@@ -6,7 +6,7 @@
    /**
     * Item property to target.
     *
-    * @type {'name' | 'category'}
+    * @type {keyof import('#arrayObjectContext').ItemEntryData}
     */
    export let prop = void 0;
 

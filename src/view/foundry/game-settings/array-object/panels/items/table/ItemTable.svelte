@@ -24,6 +24,7 @@
          <th>#</th>
          <th><ItemSortBy prop={'name'} /></th>
          <th><ItemSortBy prop={'category'} /></th>
+         <th><ItemSortBy prop={'cost'} /></th>
          {#if itemStore.canUserModify}
             <th><!-- Empty --></th>
          {/if}
@@ -44,17 +45,17 @@
       overflow: unset;
 
       --table-col-min-width: 2rem;
-      --table-cols-width: 50%;
+      --table-cols-width: 33%;
 
       :global(td) {
          padding: var(--table-cell-padding);
       }
 
-      :global(td:nth-child(1)), :global(td:nth-child(4)) {
+      :global(td:nth-child(1)), :global(td:nth-child(5)) {
          width: var(--table-col-min-width);
       }
 
-      :global(td:nth-child(2)), :global(td:nth-child(3)) {
+      :global(td:nth-child(2)), :global(td:nth-child(3)), :global(td:nth-child(3)) {
          width: var(--table-cols-width);
       }
 
