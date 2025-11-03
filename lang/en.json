@@ -37,8 +37,9 @@
         "settings": {
           "array-object": {
             "item": {
-              "name": "Name",
-              "category": "Category"
+              "category": "Category",
+              "cost": "Cost",
+              "name": "Name"
             },
             "title": {
               "user": "GameSettingArrayObject (user scope)",
