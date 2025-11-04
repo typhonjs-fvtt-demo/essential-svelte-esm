@@ -15,7 +15,7 @@
       onDestroy,
       tick }               from 'svelte';
 
-   import { CrossRealm }   from '#runtime/util/browser';
+   import { CrossRealm }   from '#runtime/util';
    import { hasSetter }    from '#runtime/util/object';
 
    /** @type {import('#arrayObjectContext').ItemEntryStore} */

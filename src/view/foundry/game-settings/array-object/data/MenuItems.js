@@ -1,8 +1,7 @@
-import { get }       from 'svelte/store';
+import { get }             from 'svelte/store';
 
-import {
-   ClipboardAccess,
-   CrossRealm }      from '#runtime/util/browser';
+import { CrossRealm }      from '#runtime/util';
+import { ClipboardAccess } from '#runtime/util/browser';
 
 /**
  * Provides menu item data generation that is accessible from `ItemContext`.
