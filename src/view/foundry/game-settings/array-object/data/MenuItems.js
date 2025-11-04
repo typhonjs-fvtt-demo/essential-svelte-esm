@@ -2,7 +2,7 @@ import { get }       from 'svelte/store';
 
 import {
    ClipboardAccess,
-   CrossWindow }     from '#runtime/util/browser';
+   CrossRealm }      from '#runtime/util/browser';
 
 /**
  * Provides menu item data generation that is accessible from `ItemContext`.
@@ -68,8 +68,8 @@ export class MenuItems
          onPress: ({ event }) =>
          {
             // An example where cross-realm / window handling is important. To copy data to the clipboard when popped
-            // out you must provide the current active window which is done via `CrossWindow.getWindow(event)`.
-            ClipboardAccess.writeText(JSON.stringify(item.toJSON()), CrossWindow.getWindow(event));
+            // out you must provide the current active window which is done via `CrossRealm.getWindow(event)`.
+            ClipboardAccess.writeText(JSON.stringify(item.toJSON()), CrossRealm.getWindow(event));
          }
       });
 

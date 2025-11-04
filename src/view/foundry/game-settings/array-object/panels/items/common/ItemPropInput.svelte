@@ -15,7 +15,7 @@
       onDestroy,
       tick }               from 'svelte';
 
-   import { CrossWindow }  from '#runtime/util/browser';
+   import { CrossRealm }   from '#runtime/util/browser';
    import { hasSetter }    from '#runtime/util/object';
 
    /** @type {import('#arrayObjectContext').ItemEntryStore} */
@@ -65,7 +65,7 @@
    function onClose(event)
    {
       // Early out if the pointer down is inside the input element.
-      if (CrossWindow.isNode(event?.target) && (event.target === inputEl || inputEl?.contains(event.target)))
+      if (CrossRealm.isNode(event?.target) && (event.target === inputEl || inputEl?.contains(event.target)))
       {
          return;
       }
@@ -131,7 +131,7 @@
 
          tick().then(() => inputEl?.focus());
 
-         activeWindow = CrossWindow.getWindow(event);
+         activeWindow = CrossRealm.getWindow(event);
 
          /** @type {Element} */
          const activeEl = activeWindow.document.activeElement;
