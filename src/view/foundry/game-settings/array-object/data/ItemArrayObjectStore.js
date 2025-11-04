@@ -45,7 +45,13 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
       });
 
       this.#stores = Object.freeze({
+         // The searchFilter store is a function and a subscribable store used for the search input box. The text
+         // entered into the search input will filter against the item properties `name`, `category`, and `cost`.
          searchFilter: DynReducerHelper.filters.regexObjectQuery(['name', 'category', 'cost']),
+
+         // `DynReducerHelper.sort.objectByProp` provides an integrated sort / compare function implementation that
+         // automatically performs comparisons for common data types, but allows custom comparison extension. The `cost`
+         // property is assigned `CompareCurrency`.
          sortBy: DynReducerHelper.sort.objectByProp({
             store: sortBy,
             customCompareFnMap: {
@@ -109,6 +115,11 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
  *
  * This provides the store implementation for serialized {@link ItemEntryData} with accessors
  * for the item properties that update the underlying subscribers.
+ *
+ * One particular implementation detail is that the `ItemPropInput` Svelte component will only be editable if there
+ * is a setter accessor for the property specified below. In this demo `cost` only has a getter, so while it is
+ * displayed by `ItemPropInput` it is automatically not editable because of the absence of a setter in the
+ * `ItemEntryStore` data model.
  *
  * @see https://typhonjs-fvtt-lib.github.io/api-docs/classes/_runtime_svelte_store_fvtt_settings_array-object.FVTTObjectEntryStore.html
  * @see https://typhonjs-fvtt-lib.github.io/api-docs/classes/_runtime_svelte_store_reducer_array-object.ObjectEntryStore.html
