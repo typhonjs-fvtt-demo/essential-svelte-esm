@@ -11,7 +11,8 @@ import {
    ChatDialogContent,
    EmbeddedDocApplication,
    SidebarCustomTabApp,
-   GameSettingArrayObjectApp }   from './foundry';
+   GameSettingArrayObjectApp,
+   GameSettingUIApp }            from './foundry';
 
 import {
    ColorPickerApp,
@@ -206,7 +207,8 @@ export class MenuApplication extends SvelteApp
                      id: 'tjs-array-object-items-world-esm',
                      title: 'EssentialESM.apps.foundry.settings.array-object.title.world'
                   }
-               }
+               },
+               { title: 'TJSGameSettingsWithUI', class: GameSettingUIApp }
             ]
          },
          {
