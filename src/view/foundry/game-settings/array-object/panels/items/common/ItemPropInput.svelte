@@ -21,6 +21,7 @@
    /** @type {import('#arrayObjectContext').ItemEntryStore} */
    export let item = void 0;
 
+   /** @type {string} */
    export let prop = void 0;
 
    /**

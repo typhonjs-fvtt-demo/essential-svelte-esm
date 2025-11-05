@@ -23,6 +23,9 @@
     */
    const { cell, row } = getContext('tableTags');
 
+   /**
+    * Delete button props.
+    */
    const button = {
       icon: 'fas fa-xmark',
       tooltip: 'Delete',
@@ -35,7 +38,7 @@
     */
    function onContextMenu(event)
    {
-      const items = menuItems.createRow(item);
+      const items = menuItems.contextRow(item);
 
       if (items.length)
       {

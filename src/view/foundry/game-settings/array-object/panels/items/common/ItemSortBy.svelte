@@ -15,11 +15,17 @@
 
    const { sortBy } = itemStore.stores;
 
+   /**
+    * Toggle sortBy prop.
+    */
    function handleChange()
    {
       sortBy.toggleProp(prop);
    }
 
+   /**
+    * @param {KeyboardEvent} event -
+    */
    function onKeyup(event)
    {
       if (event.code === 'Enter') { handleChange(); }
