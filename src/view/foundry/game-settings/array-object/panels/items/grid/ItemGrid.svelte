@@ -40,14 +40,14 @@
          1.5rem
          1fr
          1fr
-         0.8fr;
+         3rem;
 
       &.can-edit {
          --grid-template-columns:
             1.5rem
             1fr
             1fr
-            0.8fr
+            3rem
             2.5rem;
       }
 

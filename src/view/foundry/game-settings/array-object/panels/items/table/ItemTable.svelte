@@ -43,20 +43,10 @@
       // Adjust Foundry core styles removing `margin` and `overflow` to allow sticky header.
       margin: 0;
       overflow: unset;
-
-      --table-col-min-width: 2rem;
-      --table-cols-width: 33%;
+      table-layout: fixed;
 
       :global(td) {
          padding: var(--table-cell-padding);
-      }
-
-      :global(td:nth-child(1)), :global(td:nth-child(5)) {
-         width: var(--table-col-min-width);
-      }
-
-      :global(td:nth-child(2)), :global(td:nth-child(3)), :global(td:nth-child(3)) {
-         width: var(--table-cols-width);
       }
 
       th {
@@ -65,12 +55,20 @@
          filter: drop-shadow(2px 2px 1px black);
       }
 
-      th:nth-child(1), th:nth-child(4) {
-         width: var(--table-col-min-width);
+      th:nth-child(1) {
+         width: 1.5rem;
       }
 
       th:nth-child(2), th:nth-child(3) {
-         width: var(--table-cols-width);
+         width: auto;
+      }
+
+      th:nth-child(4) {
+         width: 3rem;
+      }
+
+      th:nth-child(5) {
+         width: 2.5rem;
       }
    }
 
