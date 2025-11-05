@@ -12,7 +12,7 @@ import {
    EmbeddedDocApplication,
    SidebarCustomTabApp,
    GameSettingArrayObjectApp,
-   GameSettingUIApp }            from './foundry';
+   TJSGameSettingWithUIApp }            from './foundry';
 
 import {
    ColorPickerApp,
@@ -208,7 +208,7 @@ export class MenuApplication extends SvelteApp
                      title: 'EssentialESM.apps.foundry.settings.array-object.title.world'
                   }
                },
-               { title: 'TJSGameSettingsWithUI', class: GameSettingUIApp }
+               { title: 'TJSGameSettingsWithUI', class: TJSGameSettingWithUIApp }
             ]
          },
          {
