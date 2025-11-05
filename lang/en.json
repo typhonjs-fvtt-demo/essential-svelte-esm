@@ -45,6 +45,9 @@
               "user": "GameSettingArrayObject (user scope)",
               "world": "GameSettingArrayObject (world scope)"
             }
+          },
+          "with-ui": {
+            "title": "TJSGameSettingsWithUI"
           }
         }
       },
