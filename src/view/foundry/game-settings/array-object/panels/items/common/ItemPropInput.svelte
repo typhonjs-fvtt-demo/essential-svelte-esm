@@ -15,8 +15,8 @@
       onDestroy,
       tick }               from 'svelte';
 
-   import { CrossRealm }   from '#runtime/util';
    import { hasSetter }    from '#runtime/util/object';
+   import { CrossRealm }   from '#runtime/util/realm';
 
    /** @type {import('#arrayObjectContext').ItemEntryStore} */
    export let item = void 0;
@@ -66,7 +66,7 @@
    function onClose(event)
    {
       // Early out if the pointer down is inside the input element.
-      if (CrossRealm.isNode(event?.target) && (event.target === inputEl || inputEl?.contains(event.target)))
+      if (CrossRealm.browser.isNode(event?.target) && (event.target === inputEl || inputEl?.contains(event.target)))
       {
          return;
       }
@@ -106,6 +106,7 @@
             event.preventDefault();
             // Fallthrough
          case 'Tab':
+            hasInitialKeyFocus = true;
             inputEl.value = initialValue;
             onClose();
             break;
@@ -132,7 +133,7 @@
 
          tick().then(() => inputEl?.focus());
 
-         activeWindow = CrossRealm.getWindow(event);
+         activeWindow = CrossRealm.browser.getWindow(event);
 
          /** @type {Element} */
          const activeEl = activeWindow.document.activeElement;
