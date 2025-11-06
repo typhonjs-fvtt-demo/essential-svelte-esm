@@ -91,12 +91,6 @@
    }
 
    main {
-      // Create forced stacking context; this is necessary as the `blur` on `window-content` for dark mode for core
-      // forces a stacking context. This ensures that light mode also has the same stacking context for the side slide
-      // layer.
-      position: relative;
-      z-index: 0;
-
       display: flex;
       flex-direction: column;
       gap: 0.5em;
@@ -105,8 +99,8 @@
       // Alignment number inputs / TJSInputRangeNumber.
       --tjs-input-number-text-align: center;
 
-      // Provide a margin for the side slide layer offsetting it further right / up.
-      --tjs-side-slide-layer-margin: 0 -8px 0 -8px;
+      // Provide a margin for the side slide layer offsetting it down and out from left / right border.
+      --tjs-side-slide-layer-margin: 8px 8px 0 8px;
 
       // An example of changing the side slide layer tab size
       //--tjs-side-slide-layer-item-diameter: 50px;
