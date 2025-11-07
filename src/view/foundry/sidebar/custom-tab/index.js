@@ -21,7 +21,7 @@ Hooks.on('init', () =>
    }
    catch { /**/ }
 
-   if (sidebarTabs.custom)
+   if (sidebarTabs?.custom)
    {
       FVTTSidebarControl.add({
          id: 'custom-tab',
@@ -39,7 +39,7 @@ Hooks.on('init', () =>
       });
    }
 
-   if (sidebarTabs.replace)
+   if (sidebarTabs?.replace)
    {
       FVTTSidebarControl.replace({
          id: 'combat',
@@ -71,7 +71,7 @@ Hooks.on('init', () =>
    }
 
    // Remove the `journal` tab. Note: removing tabs is not recommended but is possible.
-   if (sidebarTabs.remove)
+   if (sidebarTabs?.remove)
    {
       FVTTSidebarControl.remove({ id: 'journal' });
    }
