@@ -7,13 +7,6 @@ import GameSettingUIAppShell        from './GameSettingUIAppShell.svelte';
 
 export class TJSGameSettingWithUIApp extends SvelteApp
 {
-   constructor(options)
-   {
-      super(options);
-
-      demoGameSettingsWithUI.initialize();
-   }
-
    /**
     * Default Application options
     *
