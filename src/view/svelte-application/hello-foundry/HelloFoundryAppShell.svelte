@@ -47,7 +47,7 @@
 
 <ApplicationShell bind:elementRoot>
    <!-- You may use the core style `scrollable` to make the main content scrollable. Another option is
-        `TJSScrollContainer`. -->
+        `TJSScrollContainer` which is more robust. -->
    <main class=scrollable>
       <h1>Hello {message}!</h1>
       <section>
