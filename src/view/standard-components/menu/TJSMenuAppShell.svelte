@@ -34,6 +34,12 @@
     */
    const container = {
       /**
+       * Sets the scrollbar gutter to `stable`; this is a convenience when there is no wrapping element around
+       * `TJSScrollContainer` to set a CSS variable.
+       */
+      gutterStable: true,
+
+      /**
        * The scroll container has a convenience method to support `contextmenu` press callbacks. This is handy if you
        * would like to show a context menu for the entire container.
        *
@@ -107,13 +113,12 @@
 
 <svelte:options accessors={true}/>
 
-<ApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
+<ApplicationShell bind:elementRoot paddingToBorder={true}>
    <MenuBar />
 
    <TJSScrollContainer {container} allowTabFocus={$storeKeyFocus} keyPropagate={$storeKeyPropagate}>
       <!-- Note: using local calculated `fontSize` from scaling session store to control `font-size` -->
-      <section class=text
-               style:font-size={fontSize}>
+      <section style:font-size={fontSize}>
          <p>
             This advanced demo shows off `TJSMenu` and `TJSContextMenu` providing three separate menu option examples.
             Additionally, several other supporting components are also included such as `TJSToggleButton` and an example
@@ -148,12 +153,13 @@
 <style lang=scss>
    section {
       display: flex;
+      flex-direction: column;
       justify-content: center;
 
-      &.text {
-         flex-direction: column;
-         padding: 0 1rem;
-      }
+      // A very handy convenience CSS variable. By default this is inline (left / right) `1rem` padding where the right
+      // padding takes into account the stable scrollbar gutter width. Remove `-inline` from the end for `1rem`
+      // top / bottom padding values as well.
+      padding: var(--tjs-scrollbar-gutter-stable-padding-inline);
    }
 
    ul {
