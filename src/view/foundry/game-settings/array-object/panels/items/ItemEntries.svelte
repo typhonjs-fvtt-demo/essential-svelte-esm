@@ -43,7 +43,6 @@
 
       // Adjust scroll container defaults.
       --tjs-scroll-container-max-height: 300px;
-      --tjs-scroll-container-scrollbar-gutter: auto;
 
       display: flex;
       flex-direction: column;
