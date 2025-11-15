@@ -22,6 +22,8 @@ export class TJSGameSettingWithUIApp extends SvelteApp
          minimizable: true,
          width: 800,
          height: 500,
+         minWidth: 400,
+         minHeight: 200,
 
          title: 'EssentialESM.apps.foundry.settings.with-ui.title',
 
