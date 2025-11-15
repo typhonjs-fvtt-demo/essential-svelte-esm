@@ -117,8 +117,9 @@
    <MenuBar />
 
    <TJSScrollContainer {container} allowTabFocus={$storeKeyFocus} keyPropagate={$storeKeyPropagate}>
+      <!-- Note: The use of the `tjs-content-vars` class. This is a special class w/ dynamic CSS vars  -->
       <!-- Note: using local calculated `fontSize` from scaling session store to control `font-size` -->
-      <section style:font-size={fontSize}>
+      <section class=tjs-content-vars style:font-size={fontSize}>
          <p>
             This advanced demo shows off `TJSMenu` and `TJSContextMenu` providing three separate menu option examples.
             Additionally, several other supporting components are also included such as `TJSToggleButton` and an example
@@ -156,10 +157,24 @@
       flex-direction: column;
       justify-content: center;
 
-      // A very handy convenience CSS variable. By default this is inline (left / right) `1rem` padding where the right
-      // padding takes into account the stable scrollbar gutter width. Remove `-inline` from the end for `1rem`
-      // top / bottom padding values as well.
+      // A very handy convenience CSS variable accessible by elements that use the `tjs-content-vars` class. By default,
+      // this is inline (left / right) `1rem` padding where the right padding takes into account the stable scrollbar
+      // gutter width. Remove `-inline` from the end for `1rem` top & bottom padding values as well.
       padding: var(--tjs-scrollbar-gutter-stable-padding-inline);
+
+      // The following CSS variables are available to globally modify and are used as overrides in `tjs-content-vars`
+      // scoped variables like the `padding` above. Be mindful to scope your overrides to your particular applications!
+
+      //--tjs-content-padding-length: 3rem;        // All sides.
+
+      //--tjs-content-padding-right: 3rem;         // Explicit override of right padding.
+      //--tjs-content-padding-left: 3rem;          // Explicit override of left padding.
+
+      // Available to use with `--tjs-scrollbar-gutter-stable-padding` / not inline variant; remove `-inline` from
+      // above `padding` variable.
+
+      //--tjs-content-padding-top: 3rem;           // Explicit override of top padding.
+      //--tjs-content-padding-bottom: 3rem;        // Explicit override of bottom padding.
    }
 
    ul {
