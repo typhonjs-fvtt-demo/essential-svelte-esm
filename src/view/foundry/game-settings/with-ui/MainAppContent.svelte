@@ -4,16 +4,14 @@
 <main>
    <section class=text>
       <p>
-         SvelteApp allows easy reactive control of CSS classes added / deleted from the main app window through the
-         `activeClasses` Set available from `application.reactive.activeClasses`. It is a Readable reactive store
-         that provides subscriber notifications when entries change. The `classes` SvelteApp option provides the
-         base entries in the `activeClasses` Set. Other runtime classes like the current theme are not included in
-         `activeClasses`; just the classes that you specify and add / delete at runtime. Of note, the main SvelteApp
-         `classes` option is _not_ modified reactively, so any changes at runtime are only applied to the app window.
+         `TJSGameSettingsWithUI` from the TRL standard library is an extension to `TJSGameSettings` providing a default
+         way to embed editing game settings directly into your applications. This is an optional mechanism that you may
+         prefer as it allows a more direct method to edit settings than requiring users to go through several menus in
+         the core Foundry UI including locating your specific package. The TRL settings editor is reactive and changes
+         to settings update immediately versus the form based / submission process in the core settings editor.
       </p>
       <p>
-         This example is visually busy, but you can use this feature to change modes or other CSS / style
-         modifications for your entire app.
+         There are many options to configuring the TRL settings editor.
       </p>
    </section>
 </main>
