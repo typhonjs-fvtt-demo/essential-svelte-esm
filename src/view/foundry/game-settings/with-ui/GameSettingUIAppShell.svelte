@@ -9,7 +9,6 @@
 
    import MainAppContent         from './MainAppContent.svelte';
 
-   import Header                 from './settings/Header.svelte';
    import Footer                 from './settings/Footer.svelte';
 
    export let elementRoot = void 0;
@@ -22,9 +21,6 @@
 
 <ApplicationShell bind:elementRoot>
    <TJSSettingsSwap settings={demoGameSettingsWithUI} options={{ efx: 'ripple', storage: application.reactive.sessionStorage }}>
-      <!-- Uncomment line below to add header to settings edit panel. -->
-       <Header slot=settings-header />
-
       <MainAppContent />
 
       <!-- Uncomment line below to add footer to settings edit panel. -->
