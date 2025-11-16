@@ -113,7 +113,7 @@
 
 <svelte:options accessors={true}/>
 
-<ApplicationShell bind:elementRoot paddingToBorder={true}>
+<ApplicationShell bind:elementRoot padToVisualEdge={true}>
    <MenuBar />
 
    <TJSScrollContainer {container} allowTabFocus={$storeKeyFocus} keyPropagate={$storeKeyPropagate}>
