@@ -12,13 +12,14 @@ import {
    EmbeddedDocApplication,
    SidebarCustomTabApp,
    GameSettingArrayObjectApp,
-   TJSGameSettingWithUIApp }            from './foundry';
+   TJSGameSettingWithUIApp }     from './foundry';
 
 import {
    ColorPickerApp,
    FilePickerApp,
    SideSlideApp,
-   TJSMenuApp }                  from './standard-components';
+   TJSMenuApp,
+   TJSScrollContainerApp }       from './standard-components';
 
 import {
    ContentEditableApp,
@@ -158,6 +159,7 @@ export class MenuApplication extends SvelteApp
          {
             title: 'Standard Components',
             entries: [
+               { title: 'Basic Scroll Container', class: TJSScrollContainerApp },
                { title: 'Menus / Scroll Container', class: TJSMenuApp },
                { title: 'Color Picker', class: ColorPickerApp },
                { title: 'File Picker Buttons', class: FilePickerApp },
