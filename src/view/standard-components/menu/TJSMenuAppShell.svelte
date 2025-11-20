@@ -3,10 +3,10 @@
    import { quadIn }                from 'svelte/easing';
 
    import { ApplicationShell }      from '#runtime/svelte/component/application';
+   import { TJSScrollContainer }    from '#runtime/svelte/component/container';
    import { Timing }                from '#runtime/util';
 
    import { TJSContextMenu }        from '#standard/application/menu';
-   import { TJSScrollContainer }    from '#standard/component/container';
 
    import { createMenuItems }       from './createMenuItems.js';
    import MenuBar                   from './MenuBar.svelte';

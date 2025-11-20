@@ -1,7 +1,7 @@
 <script>
    import { getContext }         from 'svelte';
 
-   import { TJSScrollContainer } from '#standard/component/container';
+   import { TJSScrollContainer } from '#runtime/svelte/component/container';
 
    import ItemEntryControls      from './ItemEntryControls.svelte';
    import ItemGrid               from './grid/ItemGrid.svelte';
