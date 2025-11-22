@@ -19,7 +19,7 @@
 
 <svelte:options accessors={true}/>
 
-<ApplicationShell bind:elementRoot scrollContainer={{ gutterStable: true }}>
+<ApplicationShell bind:elementRoot scrollContainer={true}>
    <TJSSettingsSwap settings={demoGameSettingsWithUI} options={{ efx: 'ripple', storage: application.reactive.sessionStorage }}>
       <MainAppContent />
 

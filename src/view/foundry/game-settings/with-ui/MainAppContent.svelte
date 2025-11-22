@@ -18,6 +18,6 @@
    main {
       display: flex;
       flex-direction: column;
-      padding: var(--tjs-scrollbar-gutter-stable-padding-right);
+      padding-right: 1rem;
    }
 </style>
