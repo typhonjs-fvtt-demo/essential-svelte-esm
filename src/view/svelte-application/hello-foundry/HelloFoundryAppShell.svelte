@@ -46,9 +46,7 @@
 <svelte:options accessors={true}/>
 
 <ApplicationShell bind:elementRoot>
-   <!-- You may use the core style `scrollable` to make the main content scrollable. Another option is
-        `TJSScrollContainer` which is more robust. -->
-   <main class=scrollable>
+   <main>
       <h1>Hello {message}!</h1>
       <section>
          <label>

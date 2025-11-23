@@ -16,10 +16,11 @@ export class HelloFoundryApplication extends SvelteApp
       return deepMerge(super.defaultOptions, {
          id: 'hello-foundry-esm',
          classes: ['tjs-essential-svelte-esm'],
-         resizable: true,
          minimizable: true,
          width: 500,
          height: 'auto',
+         minWidth: 400,
+
          title: 'Essential Svelte (ESM) - Hello Foundry',
 
          svelte: {
