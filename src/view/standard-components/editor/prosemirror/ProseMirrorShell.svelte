@@ -15,6 +15,8 @@
     *
     * The following options data is mostly commented out. For the most part though the values shown for configuration
     * show the default values _or_ in some cases the type of data that you need to set.
+    *
+    * @type {import('#standard/component/fvtt/editor').TJSProseMirrorOptions}
     */
    const options = {
       /**
