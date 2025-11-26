@@ -21,7 +21,7 @@
        * To set up automatic serialization to a document you must provide a valid Foundry document _and_ a field name
        * to reference for content. This will automatically pull from and save content to that field name.
        */
-      // document: game.items.get('oLODiCTIEblM1QrZ'),   // An item to edit description; note: replace w/ valid doc.
+      // document: game.items.get('0MYOJFx3vkYA95B4'),   // An item to edit description; note: replace w/ valid doc.
       // fieldName: 'system.description.value',          // Path to data in `a.b.c`; note: this is a v10 field name.
 
       /**
@@ -30,19 +30,19 @@
       // collaborate: false,                             // Enables collaboration; requires document.
       // plugins: {  // Additional PM plugins to load; example below includes the highlight document matches plugin.
       //    highlightDocumentMatches: ProseMirror.ProseMirrorHighlightMatchesPlugin.build(ProseMirror.defaultSchema)
-      // }
+      // },
 
       /**
        *  Standard TRL editor options.
        *  Note: The PM editor doesn't support as many options as the TinyMCE / contenteditable editor.
        */
-      // button: true      // Show edit button to launch editor when hovered; when false editor is open by default.
+      // button: true,      // Show edit button to launch editor when hovered; when false editor is open by default.
       // classes: ['foo', 'bar'],   // Adds additional classes to `.tjs-editor` element.
       // clickToEdit: false,  // Clicking editor content initializes the editor; hides the edit button.
       // editable: true,   // Explicitly enable / disable editing; default: user is GM or when a document is
                            // assigned the user has ownership.
-      // enrichContent: true  // The default is true, but if you set it to false content is not enriched.
-      // enrichOptions: {}    // Additional `TextEditor.enrichHTML` options. See: EnrichmentOptions
+      // enrichContent: true, // The default is true, but if you set it to false content is not enriched.
+      // enrichOptions: {},   // Additional `TextEditor.enrichHTML` options. See: EnrichmentOptions
 
       // initialSelection: 'start', // The initial selection / cursor position: 'all', 'end', or 'start'.
       // keyCode: 'Enter',    // Defines the key event code to activate the editor when focused.
