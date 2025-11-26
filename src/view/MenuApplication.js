@@ -22,6 +22,7 @@ import {
    TJSScrollContainerApp }       from './standard-components';
 
 import {
+   CodeMirrorApp,
    ContentEditableApp,
    ProseMirrorApp }              from './standard-components/editor';
 
@@ -169,6 +170,7 @@ export class MenuApplication extends SvelteApp
          {
             title: 'Standard Components (Editor)',
             entries: [
+               { title: 'CodeMirror', class: CodeMirrorApp },
                { title: 'Content Editable', class: ContentEditableApp },
                { title: 'ProseMirror', class: ProseMirrorApp }
             ]
