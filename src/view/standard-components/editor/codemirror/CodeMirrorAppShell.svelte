@@ -29,20 +29,20 @@
        * Specific CodeMirror options:
        */
       language: 'javascript', // CM language support; options: `html`, `javascript`, `json`, `markdown`, `plain`.
-      // indent: 0,              // CM indentation level; positive integer between 0-8.
-      // nowrap: true            // CM wrap lines option.
+      // indent: 0,     // CM indentation level; positive integer between 0-8.
+      // nowrap: true,  // CM wrap lines option.
 
       /**
        *  Standard TRL editor options.
        *  Note: The CM editor doesn't support as many options as the contenteditable editor.
        */
-      // button: true,      // Show edit button to launch editor when hovered; when false editor is open by default.
+      // button: true,     // Show edit button to launch editor when hovered; when false editor is open by default.
       // classes: ['foo', 'bar'],   // Adds additional classes to `.tjs-editor` element.
       // clickToEdit: false,  // Clicking editor content initializes the editor; hides the edit button.
       // editable: true,   // Explicitly enable / disable editing; default: user is GM or when a document is
                            // assigned the user has ownership.
 
-      // keyCode: 'Enter',    // Defines the key event code to activate the editor when focused.
+      // keyCode: 'Enter', // Defines the key event code to activate the editor when focused.
 
       // styles: { '--tjs-editor-border': '2px solid red' } // Apply any inline styles / CSS variables
    };
