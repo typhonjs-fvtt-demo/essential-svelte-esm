@@ -22,8 +22,8 @@
       <div class=container>
          Options:
          <label><input type=checkbox bind:checked={$headerButtonNoClose}> No Close Button</label>
-         <label><input type=checkbox bind:checked={$headerButtonNoLabel}> No Button Labels</label>
-         <label><input type=checkbox bind:checked={$headerNoTitleMinimized}> No Title (Minimized)</label>
+         <label><input type=checkbox bind:checked={$headerButtonNoLabel}> No Button Tooltips</label>
+         <label><input type=checkbox bind:checked={$headerNoTitleMinimized}> No Title When Minimized</label>
       </div>
    </main>
 </ApplicationShell>
