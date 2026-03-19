@@ -135,9 +135,27 @@ export class ItemEntryStore extends GameSettingArrayObject.EntryStore
     */
    set(data)
    {
-      if (typeof data.name === 'string') { this._data.name = data.name; }
-      if (typeof data.category === 'string') { this._data.category = data.category; }
-      if (typeof data.cost === 'string') { this._data.cost = data.cost; }
+      let update = false;
+
+      if (typeof data.name === 'string' && this._data.name !== data.name)
+      {
+         this._data.name = data.name;
+         update = true;
+      }
+
+      if (typeof data.category === 'string' && this._data.category !== data.category)
+      {
+         this._data.category = data.category;
+         update = true;
+      }
+
+      if (typeof data.cost === 'string' && this._data.cost !== data.cost)
+      {
+         this._data.cost = data.cost;
+         update = true;
+      }
+
+      if (update) { this._updateSubscribers(); }
    }
 
    /**
@@ -153,7 +171,7 @@ export class ItemEntryStore extends GameSettingArrayObject.EntryStore
     */
    set category(category)
    {
-      if (typeof category === 'string')
+      if (typeof category === 'string' && this._data.category !== category)
       {
          this._data.category = category;
          this._updateSubscribers();
@@ -181,7 +199,7 @@ export class ItemEntryStore extends GameSettingArrayObject.EntryStore
     */
    set name(name)
    {
-      if (typeof name === 'string')
+      if (typeof name === 'string' && this._data.name !== name)
       {
          this._data.name = name;
          this._updateSubscribers();

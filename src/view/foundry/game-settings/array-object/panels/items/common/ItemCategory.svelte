@@ -32,10 +32,10 @@
    <svelte:element this={cell} class=grid-cell>
       <select on:change={onChange}>
          {#each item.categories as category}
-            <option selected={item.category === category}>{category}</option>
+            <option selected={$item.category === category}>{category}</option>
          {/each}
       </select>
    </svelte:element>
 {:else}
-   <svelte:element this={cell} class=grid-cell>{item.category}</svelte:element>
+   <svelte:element this={cell} class=grid-cell>{$item.category}</svelte:element>
 {/if}
