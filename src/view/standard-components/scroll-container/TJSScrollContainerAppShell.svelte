@@ -21,13 +21,23 @@
       gutterStable: true,
 
       /** You may define a context menu callback. */
-      onContextMenu: ({ event }) => console.log('!!!!! CONTEXT MENU'),
+      onContextMenu,
 
       /** Uncomment to dynamically load a content component */
       // svelte: {
       //    class: DynamicContent,
       //    // props: {} // etc etc.
       // }
+   }
+
+   /**
+    * Example context menu callback that swaps the current `scrollContainer` prop for `gutterStable`.
+    */
+   function onContextMenu()
+   {
+      container = { ...container, gutterStable: !container.gutterStable };
+
+      console.log(`!!!!! CONTEXT MENU - gutterStable: ${container.gutterStable}`);
    }
 
    /**
