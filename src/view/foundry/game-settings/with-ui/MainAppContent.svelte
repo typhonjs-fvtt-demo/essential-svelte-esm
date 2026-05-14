@@ -18,6 +18,5 @@
    main {
       display: flex;
       flex-direction: column;
-      padding-right: 1rem;
    }
 </style>
