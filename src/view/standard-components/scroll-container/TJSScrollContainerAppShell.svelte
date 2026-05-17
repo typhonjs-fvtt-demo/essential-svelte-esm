@@ -87,6 +87,11 @@
          <li>--tjs-scrollbar-gutter-stable-padding-right</li>
       </ol>
       <p>
+         By default, a special action in app shells calculates the appropriate gutter stable CSS variables based on any
+         current styles of the app window / border. This is handy across various game systems that modify app window
+         styles.
+      </p>
+      <p>
          You may globally alter though be sure to target your application ID / classes `--tjs-content-padding-length`
          to change the default padding margin away from `1rem`. See the `style` section in the associated demo
          component for more details.
