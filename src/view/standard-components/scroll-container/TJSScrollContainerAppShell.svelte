@@ -107,7 +107,7 @@
 
       // A very handy convenience CSS variable accessible in app shells. This particular variable is for right
       // `1rem` padding where the right padding takes into account the stable scrollbar gutter width.
-      padding: var(--tjs-scrollbar-gutter-stable-padding-right);
+      //padding: var(--tjs-scrollbar-gutter-stable-padding-right);
 
       // The following CSS variables are available to globally modify and are used as overrides in `tjs-content-vars`
       // scoped variables like the `padding` above. Be mindful to scope your overrides to your particular applications!
