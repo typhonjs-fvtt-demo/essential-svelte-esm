@@ -1,5 +1,3 @@
-import { TJSIconButton }         from '#standard/component/button';
-
 import { TJSGameSettingsWithUI } from '#standard/store/fvtt/settings';
 
 import { constants }             from '#constants';
@@ -11,6 +9,13 @@ import CustomSummaryEnd          from './settings/CustomSummaryEnd.svelte';
  * Provides a local instance of TJSGameSettingsWithUI just for this local demo. TJSGameSettingsWithUI extends
  * `TJSGameSettings` with the ability to display a UI for game settings in the application itself allowing you
  * to provide easy setting options directly from your app instead of in the default Foundry settings panel / app.
+ *
+ * To achieve this note the `configApp` property is set to `true` and the internal Foundry settings options for `config`
+ * is set to false. You may always opt to show certain settings both in app and the default Foundry game settings panel.
+ *
+ * The demo setup below only shows settings inside the demo app and not in the Foundry game settings panel.
+ *
+ * Note: Unlike the Foundry game settings panel changes in the in-app TRL settings are reactive.
  */
 class DemoGameSettingsWithUI extends TJSGameSettingsWithUI
 {
@@ -24,12 +29,15 @@ class DemoGameSettingsWithUI extends TJSGameSettingsWithUI
     */
    initialize()
    {
+      // Sanity exit if setting stores already registered.
+      if (this.size > 0) { return; }
+
       const namespace = this.namespace;
 
       /**
        * Constants for setting scope type.
        *
-       * @type {{ user: string, world: string }}
+       * @type {{ user: 'user', world: 'world' }}
        */
       const scope = {
          user: 'user',
@@ -40,6 +48,8 @@ class DemoGameSettingsWithUI extends TJSGameSettingsWithUI
        * @type {TJSGameSettingsWithUI.Options.GameSetting[]}
        */
       const settings = [];
+
+      //
 
       settings.push({
          namespace,
@@ -77,6 +87,7 @@ class DemoGameSettingsWithUI extends TJSGameSettingsWithUI
          namespace,
          key: 'test3',
          configApp: true,
+         readonly: true,
          options: {
             name: 'Test 3',
             hint: 'Test 3 Hint',
@@ -102,67 +113,85 @@ class DemoGameSettingsWithUI extends TJSGameSettingsWithUI
          }
       });
 
+      // You can separate settings into custom collapsible folders. In this case the following are all Foundry data
+      // fields.
+
       settings.push({
          namespace,
-         key: 'testA',
+         key: 'test1-data-field',
          configApp: true,
-         folder: 'Test Folder',
+         folder: 'Foundry Data Fields',
          options: {
-            name: 'Test A',
-            hint: 'Test A Hint',
-            scope: scope.world,
+            name: 'Test 1 data field',
+            hint: 'A `NumberField`',
+            scope: scope.user,
             config: false,
-            type: Boolean,
-            default: false
+            type: new foundry.data.fields.NumberField(),
+            default: 1,
+            units: 'ms'
          }
       });
 
       settings.push({
          namespace,
-         key: 'testB',
+         key: 'test1-data-field2',
          configApp: true,
-         folder: 'Test Folder',
+         folder: 'Foundry Data Fields',
          options: {
-            name: 'Test B',
-            hint: 'Test B Hint',
-            scope: scope.world,
+            name: 'Test 2 data field',
+            hint: 'A `ColorField`',
+            scope: scope.user,
             config: false,
-            type: Number,
-            default: 0,
-            range: { min: 0, max: 100 }
+            type: new foundry.data.fields.ColorField(),
+            default: '#ff0000'
          }
       });
 
       settings.push({
          namespace,
-         key: 'testC',
+         key: 'test1-data-field3',
          configApp: true,
-         folder: 'Test Folder',
+         folder: 'Foundry Data Fields',
          options: {
-            name: 'Test C',
-            hint: 'Test C Hint',
-            scope: scope.world,
+            name: 'Test 3 data field',
+            hint: 'A `JavaScriptField`',
+            scope: scope.user,
             config: false,
-            type: String,
-            default: '',
-            filePicker: 'image'
+            type: new foundry.data.fields.JavaScriptField(),
+            default: ''
          }
       });
 
       settings.push({
          namespace,
-         key: 'testD',
+         key: 'test-data-field4',
          configApp: true,
-         folder: 'Test Folder',
+         folder: 'Foundry Data Fields',
          options: {
-            name: 'Test D',
-            hint: 'Test D Hint',
-            scope: scope.world,
+            name: 'Test 4 data field',
+            hint: 'A `HueField`',
+            scope: scope.user,
             config: false,
-            type: Number,
-            default: 0
+            type: new foundry.data.fields.HueField()
          }
       });
+
+      settings.push({
+         namespace,
+         key: 'test-data-field5',
+         configApp: true,
+         folder: 'Foundry Data Fields',
+         options: {
+            name: 'Test 5 data field',
+            hint: 'A `SetField`',
+            scope: scope.user,
+            config: false,
+            type: new foundry.data.fields.SetField(
+               new foundry.data.fields.StringField({ choices: () => ({ a: 'a', b: 'b' }) }))
+         }
+      });
+
+      // You can also add a custom section / Svelte component.
 
       this.uiControl.addSection({
          folder: {
@@ -190,4 +219,4 @@ export { demoGameSettingsWithUI };
 
 // Normally you can initialize settings on the `ready` hook.
 
-// Hooks.once('ready', () => demoGameSettingsWithUI.initialize());
+Hooks.once('ready', () => demoGameSettingsWithUI.initialize());
