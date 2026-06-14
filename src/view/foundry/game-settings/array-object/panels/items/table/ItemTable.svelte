@@ -64,7 +64,7 @@
       }
 
       th:nth-child(4) {
-         width: 3rem;
+         width: 3.5rem;
       }
 
       th:nth-child(5) {
