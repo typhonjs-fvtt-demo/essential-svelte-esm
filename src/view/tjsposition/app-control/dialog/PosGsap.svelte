@@ -122,8 +122,8 @@
       flex-direction: column;
       gap: 0.5em;
 
-      background: var(--overlay-background-color);
-      border: var(--overlay-border);
+      background: var(--tjs-content-background);
+      border: var(--tjs-content-border);
       border-radius: var(--overlay-border-radius);
       padding: var(--overlay-padding);
 

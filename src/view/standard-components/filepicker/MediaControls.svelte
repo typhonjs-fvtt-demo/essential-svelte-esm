@@ -42,8 +42,8 @@
       --tjs-input-number-width: fit-content;
       --tjs-input-number-text-align: center;
 
-      background: var(--overlay-background-color);
-      border: var(--overlay-border);
+      background: var(--tjs-content-background);
+      border: var(--tjs-content-border);
       border-radius: var(--overlay-border-radius);
       padding: var(--overlay-padding);
 

@@ -8,6 +8,7 @@
    import { rippleFocus }        from '#standard/action/animate/composable';
    import { TJSInput }           from '#standard/component/form';
 
+   /** @type {HTMLElement} */
    export let elementRoot;
 
    const filterSearch = DynReducerHelper.filters.regexObjectQuery('type');
@@ -21,7 +22,7 @@
 
    const doc = new TJSDocument();
 
-   const wildcard = doc.embedded.create(Item, {
+   const wildcard = doc.embedded.create(foundry.documents.Item, {
       name: 'wildcard',
       filters: [filterSearch],
       sort: (a, b) => a.name.localeCompare(b.name)
@@ -98,8 +99,8 @@
       }
 
       div.drop {
-         background: var(--overlay-background-color);
-         border: var(--overlay-border);
+         background: var(--tjs-content-background);
+         border: var(--tjs-content-border);
          border-radius: var(--overlay-border-radius);
          padding: var(--overlay-padding);
 

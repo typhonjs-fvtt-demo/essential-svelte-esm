@@ -7,6 +7,7 @@
 
    export let elementRoot = void 0;
 
+   /** @type {import('#standard/component/color/picker-colord').TJSColordPickerOptions} */
    const options = {
       addons: [TJSColordPickerSavedColors],
       enabled: true,
@@ -34,7 +35,7 @@
          <label class=column>Button Bar:<input type=checkbox bind:checked={options.hasButtonBar}></label>
          <label class=column>Addons:<input type=checkbox bind:checked={options.hasAddons}></label>
 
-         <label class=column>Chrome Layout:<input type=checkbox on:change={(e) => options.layout = e.target.checked ? 'chrome' : void 0}></label>
+         <label class=column>Chrome Layout:<input type=checkbox on:change={(e) => options.layout = e.target?.checked ? 'chrome' : void 0}></label>
          <label class=column>Enable Alpha:<input type=checkbox bind:checked={options.hasAlpha}></label>
          <label class=column>Lock Text Format:<input type=checkbox bind:checked={options.lockTextFormat}></label>
          <label class=column>Popup:<input type=checkbox bind:checked={options.isPopup}></label>
@@ -112,8 +113,8 @@
       gap: 12px;
 
       &.styled {
-         background: var(--overlay-background-color);
-         border: var(--overlay-border);
+         background: var(--tjs-content-background);
+         border: var(--tjs-content-border);
          border-radius: var(--overlay-border-radius);
          padding: var(--overlay-padding);
       }
