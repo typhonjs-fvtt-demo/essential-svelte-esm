@@ -56,6 +56,9 @@
         "active-classes": {
           "title": "Reactive App Classes"
         },
+        "built-in-scroll-container": {
+          "title": "Built-in Scroll Container"
+        },
         "container-query": {
           "title": "Container Queries"
         },
