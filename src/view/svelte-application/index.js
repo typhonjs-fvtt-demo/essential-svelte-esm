@@ -5,3 +5,4 @@ export * from './container-query/ContainerQueryApp.js';
 export * from './explicit-theme/ExplicitThemeApp.js';
 export * from './header-buttons/HeaderButtonsApplication.js';
 export * from './hello-foundry/HelloFoundryApplication.js';
+export * from './built-in-scroll-container/TJSScrollContainerApp.js';

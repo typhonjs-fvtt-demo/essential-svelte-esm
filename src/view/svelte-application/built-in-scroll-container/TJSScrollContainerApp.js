@@ -21,7 +21,7 @@ export class TJSScrollContainerApp extends SvelteApp
          width: 400,
          height: 300,
 
-         title: 'EssentialESM.apps.components.scroll-container.title',
+         title: 'EssentialESM.apps.svelte-app.built-in-scroll-container.title',
 
          svelte: {
             class: TJSScrollContainerAppShell,

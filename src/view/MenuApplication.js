@@ -18,8 +18,7 @@ import {
    ColorPickerApp,
    FilePickerApp,
    SideSlideApp,
-   TJSMenuApp,
-   TJSScrollContainerApp }       from './standard-components';
+   TJSMenuApp }                  from './standard-components';
 
 import {
    CodeMirrorApp,
@@ -39,7 +38,8 @@ import {
    ContainerQueryApp,
    ExplicitThemeApp,
    HeaderButtonsApplication,
-   HelloFoundryApplication }     from './svelte-application';
+   HelloFoundryApplication,
+   TJSScrollContainerApp }       from './svelte-application';
 
 import {
    PositionApplication,
@@ -143,6 +143,7 @@ export class MenuApplication extends SvelteApp
                { title: 'Explicit App Theme', class: ExplicitThemeApp },
                { title: 'Header Buttons', class: HeaderButtonsApplication },
                { title: 'Container Queries', class: ContainerQueryApp },
+               { title: 'Built-in Scroll Container', class: TJSScrollContainerApp },
                { title: 'Reactive App Classes', class: ActiveClassesApp },
                { title: 'App State (Session Storage)', class: AppStateSessionApp },
                { title: 'App State (User Setting)', class: AppStateUserSettingApp },
@@ -160,7 +161,6 @@ export class MenuApplication extends SvelteApp
          {
             title: 'Standard Components',
             entries: [
-               { title: 'Basic Scroll Container', class: TJSScrollContainerApp },
                { title: 'Menus / Scroll Container', class: TJSMenuApp },
                { title: 'Color Picker', class: ColorPickerApp },
                { title: 'File Picker Buttons', class: FilePickerApp },
