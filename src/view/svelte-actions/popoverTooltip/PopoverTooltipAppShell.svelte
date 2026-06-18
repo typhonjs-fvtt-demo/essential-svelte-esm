@@ -48,43 +48,40 @@
             Hover Over / Click Me!
       </button>
 
-      <!-- Use `standard-form` class from Foundry / core styles -->
-      <section class=standard-form>
-         <fieldset>
-            <legend>Action controls</legend>
-            <div class=grid>
-               <label>
-                  <span>Direction:</span>
-                  <select bind:value={direction}>
-                     <option value={void 0}>Default (none)</option>
-                     <option value={'UP'}>Up</option>
-                     <option value={'DOWN'}>Down</option>
-                     <option value={'LEFT'}>Left</option>
-                     <option value={'RIGHT'}>Right</option>
-                     <option value={'CENTER'}>Center</option>
-                  </select>
-               </label>
-               <label>
-                  <span>Add Class:</span>
-                  <select bind:value={cssClass}>
-                     <option value={void 0}>Default (none)</option>
-                     <option value={'tjs-tooltip-blue-background'}>Blue Background</option>
-                     <option value={'tjs-tooltip-red-background'}>Red Background</option>
-                  </select>
-               </label>
-            </div>
-            <div class=row>
-               <label>
-                  <span>Locked:</span>
-                  <input type=checkbox bind:checked={locked} />
-               </label>
-               <label>
-                  <span style="margin-left: auto">Use HTML:</span>
-                  <input type=checkbox bind:checked={isHTML} />
-               </label>
-            </div>
-         </fieldset>
-      </section>
+      <fieldset class="tjs-panel-content tjs-panel-content--flex-col">
+         <legend class=tjs-panel-legend>Action controls</legend>
+         <div class=grid>
+            <label>
+               <span>Direction:</span>
+               <select bind:value={direction}>
+                  <option value={void 0}>Default (none)</option>
+                  <option value={'UP'}>Up</option>
+                  <option value={'DOWN'}>Down</option>
+                  <option value={'LEFT'}>Left</option>
+                  <option value={'RIGHT'}>Right</option>
+                  <option value={'CENTER'}>Center</option>
+               </select>
+            </label>
+            <label>
+               <span>Add Class:</span>
+               <select bind:value={cssClass}>
+                  <option value={void 0}>Default (none)</option>
+                  <option value={'tjs-tooltip-blue-background'}>Blue Background</option>
+                  <option value={'tjs-tooltip-red-background'}>Red Background</option>
+               </select>
+            </label>
+         </div>
+         <div class=row>
+            <label>
+               <span>Locked:</span>
+               <input type=checkbox bind:checked={locked} />
+            </label>
+            <label>
+               <span style="margin-left: auto">Use HTML:</span>
+               <input type=checkbox bind:checked={isHTML} />
+            </label>
+         </div>
+      </fieldset>
    </main>
 </ApplicationShell>
 
@@ -138,7 +135,7 @@
       text-align: center;
    }
 
-   .standard-form {
+   fieldset {
       margin: 40px auto 0 auto;
       height: fit-content;
       width: fit-content;

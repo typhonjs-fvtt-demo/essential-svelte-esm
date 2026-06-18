@@ -30,42 +30,39 @@
    $: if (!$resizeObservableWidth) { widthAuto = false; }
 </script>
 
-<!-- Use `standard-form` class from Foundry / core styles -->
-<section class=standard-form>
-   <fieldset>
-      <legend>App Window Content Constraints</legend>
-      <div class=row>
-         <label>
-            <span>Width:</span>
-            <input type=text value={`${Math.floor($contentWidth)}px`} readonly />
-         </label>
-         <label>
-            <span>Height:</span>
-            <input type=text value={`${Math.floor($contentHeight)}px`} readonly />
-         </label>
-      </div>
-      <div class=row>
-         <label>
-            <span>Width (auto):</span>
-            <input type=checkbox bind:checked={widthAuto} />
-         </label>
-         <label>
-            <span>Height (auto):</span>
-            <input type=checkbox bind:checked={heightAuto} />
-         </label>
-      </div>
-      <div class=row>
-         <label>
-            <span>Container Query Type:</span>
-            <select bind:value={$containerQueryType}>
-               <option value={void 0}>None</option>
-               <option value={'inline-size'}>inline-size</option>
-               <option value={'size'}>size</option>
-            </select>
-         </label>
-      </div>
-   </fieldset>
-</section>
+<fieldset class="tjs-panel-content tjs-panel-content--flex-col">
+   <legend class=tjs-panel-legend>App Window Content Constraints</legend>
+   <div class=row>
+      <label>
+         <span>Width:</span>
+         <input type=text value={`${Math.floor($contentWidth)}px`} readonly />
+      </label>
+      <label>
+         <span>Height:</span>
+         <input type=text value={`${Math.floor($contentHeight)}px`} readonly />
+      </label>
+   </div>
+   <div class=row>
+      <label>
+         <span>Width (auto):</span>
+         <input type=checkbox bind:checked={widthAuto} />
+      </label>
+      <label>
+         <span>Height (auto):</span>
+         <input type=checkbox bind:checked={heightAuto} />
+      </label>
+   </div>
+   <div class=row>
+      <label>
+         <span>Container Query Type:</span>
+         <select bind:value={$containerQueryType}>
+            <option value={void 0}>None</option>
+            <option value={'inline-size'}>inline-size</option>
+            <option value={'size'}>size</option>
+         </select>
+      </label>
+   </div>
+</fieldset>
 
 <style lang=scss>
    div {
@@ -90,17 +87,8 @@
       }
    }
 
-   .standard-form {
-      display: flex;
+   fieldset {
       margin: auto auto 0 auto;
-
-      height: fit-content;
-      width: fit-content;
-
-      fieldset {
-         justify-content: center;
-         gap: 0.25rem;
-         padding: 0.5rem;
-      }
+      justify-content: center;
    }
 </style>

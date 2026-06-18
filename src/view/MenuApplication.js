@@ -67,7 +67,13 @@ export class MenuApplication extends SvelteApp
             scope: 'user',
             config: false,
             default: {},
-            type: Object
+            type: Object,
+            onChange: (value, _, userId) =>
+            {
+               console.log(`!!! MenuApplication - onChange appStateMenuUser - change userId: ${userId}; game.user.id: ${game.userId}; wrong user: ${userId !== game.userId}`);
+               console.log(`!!! MenuApplication - onChange appStateMenuUser - change value: `, value?.position);
+               console.log(`!!! MenuApplication - onChange appStateMenuUser - stored value: `, game.settings.get(constants.moduleId, settings.appStateMenuUser)?.position);
+            }
          }
       });
 

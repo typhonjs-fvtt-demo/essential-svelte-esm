@@ -35,22 +35,19 @@
          </p>
       </section>
 
-      <!-- Use `standard-form` class from Foundry / core styles -->
-      <section class=standard-form>
-         <fieldset>
-            <legend>Explicit App Theme</legend>
-            <div class=row>
-               <label>
-                  <span>Choose theme:</span>
-                  <select bind:value={$appThemeName}>
-                     <option value={void 0}>Global Theme ({$globalThemeName})</option>
-                     <option value={'dark'}>Dark (app override)</option>
-                     <option value={'light'}>Light (app override)</option>
-                  </select>
-               </label>
-            </div>
-         </fieldset>
-      </section>
+      <fieldset class=tjs-panel-content>
+         <legend class=tjs-panel-legend>Explicit App Theme</legend>
+         <div class=row>
+            <label>
+               <span>Choose theme:</span>
+               <select bind:value={$appThemeName}>
+                  <option value={void 0}>Global Theme ({$globalThemeName})</option>
+                  <option value={'dark'}>Dark (app override)</option>
+                  <option value={'light'}>Light (app override)</option>
+               </select>
+            </label>
+         </div>
+      </fieldset>
    </main>
 </ApplicationShell>
 
@@ -85,9 +82,7 @@
       }
    }
 
-   .standard-form {
+   fieldset {
       margin: auto auto 0 auto;
-      height: fit-content;
-      width: fit-content;
    }
 </style>

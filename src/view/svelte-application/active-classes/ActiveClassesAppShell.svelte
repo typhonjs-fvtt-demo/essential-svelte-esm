@@ -41,24 +41,21 @@
          </p>
       </section>
 
-      <!-- Use `standard-form` class from Foundry / core styles -->
-      <section class=standard-form>
-         <fieldset>
-            <legend>Active App Classes</legend>
-            <div class=grid>
-                  <span>{$activeClasses.has('foo') ? 'Delete' : 'Add'} `foo`:</span>
-                  <input type='checkbox' on:change={() => addDeleteClass('foo')} />
-                  <span>(background transparent red)</span>
+      <fieldset class="tjs-panel-content tjs-panel-content--flex-col">
+         <legend class=tjs-panel-legend>Active App Classes</legend>
+         <div class=grid>
+               <span>{$activeClasses.has('foo') ? 'Delete' : 'Add'} `foo`:</span>
+               <input type='checkbox' on:change={() => addDeleteClass('foo')} />
+               <span>(background transparent red)</span>
 
-                  <span>{$activeClasses.has('bar') ? 'Delete' : 'Add'} `bar`:</span>
-                  <input type='checkbox' on:change={() => addDeleteClass('bar')} />
-                  <span>(invert filter)</span>
-            </div>
-            <div class=row>
-               Current active classes: {JSON.stringify([...$activeClasses])}
-            </div>
-         </fieldset>
-      </section>
+               <span>{$activeClasses.has('bar') ? 'Delete' : 'Add'} `bar`:</span>
+               <input type='checkbox' on:change={() => addDeleteClass('bar')} />
+               <span>(invert filter)</span>
+         </div>
+         <div class=row>
+            Current active classes: {JSON.stringify([...$activeClasses])}
+         </div>
+      </fieldset>
    </main>
 </ApplicationShell>
 
@@ -93,12 +90,6 @@
       }
    }
 
-   label {
-      //display: flex;
-      //align-items: center;
-      //gap: 0.5rem;
-   }
-
    main {
       display: flex;
       flex-direction: column;
@@ -115,9 +106,9 @@
       }
    }
 
-   .standard-form {
+   fieldset {
+      background: transparent;
       margin: auto auto 0 auto;
-      height: fit-content;
       width: 425px;
    }
 </style>

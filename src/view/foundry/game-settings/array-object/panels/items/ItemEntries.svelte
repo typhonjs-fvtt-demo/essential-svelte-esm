@@ -47,6 +47,8 @@
       display: flex;
       flex-direction: column;
 
+      background: var(--tjs-content-background);
+
       border: 2px solid var(--color-warm-2);
       border-radius: 0.5rem;
 

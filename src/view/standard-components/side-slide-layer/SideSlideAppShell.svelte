@@ -51,26 +51,23 @@
          </p>
       </section>
 
-      <!-- Use `standard-form` class from Foundry / core styles -->
-      <section class=standard-form>
-         <fieldset>
-            <legend>Side Slide Controls</legend>
+      <fieldset class="tjs-panel-content tjs-panel-content--flex-col">
+         <legend class=tjs-panel-legend>Side Slide Controls</legend>
 
-            <div class=row>
-               <TJSInput input={inputs.side} />
-               <TJSInput input={inputs.easingIn} />
-               <TJSInput input={inputs.easingOut} />
-            </div>
+         <div class=row>
+            <TJSInput input={inputs.side} />
+            <TJSInput input={inputs.easingIn} />
+            <TJSInput input={inputs.easingOut} />
+         </div>
 
-            <div class=grid>
-               <TJSInput input={inputs.duration} />
-               <TJSInput input={inputs.allowLocking} />
+         <div class=grid>
+            <TJSInput input={inputs.duration} />
+            <TJSInput input={inputs.allowLocking} />
 
-               <TJSInput input={inputs.top} />
-               <TJSInput input={inputs.clickToOpen} />
-            </div>
-         </fieldset>
-      </section>
+            <TJSInput input={inputs.top} />
+            <TJSInput input={inputs.clickToOpen} />
+         </div>
+      </fieldset>
    </main>
 </ApplicationShell>
 
