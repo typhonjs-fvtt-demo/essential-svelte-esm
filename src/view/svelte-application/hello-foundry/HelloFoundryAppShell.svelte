@@ -59,7 +59,7 @@
          </label>
       </section>
       <button on:click={onClick}>Launch a modal dialog</button>
-      <div class=container>
+      <div class="tjs-panel-content container">
          Make application:
          <label><input type=checkbox bind:checked={draggable}> Draggable</label>
          <label><input type=checkbox bind:checked={$storeMinimizable}> Minimizable</label>
@@ -88,12 +88,6 @@
          display: flex;
          align-items: center;
          justify-content: center;
-
-         background: var(--tjs-content-background);
-         border: var(--tjs-content-border);
-         border-radius: var(--overlay-border-radius);
-         padding: var(--overlay-padding);
-
          margin-top: auto;
       }
 

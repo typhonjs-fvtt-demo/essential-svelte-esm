@@ -29,7 +29,8 @@
       Drop a document below (change the doc name to see reactivity):
 
       <!-- `preventDefault` on `dragover` is necessary for cross browser window drag & drop -->
-      <section on:drop|preventDefault|stopPropagation={onDrop}
+      <section class=tjs-panel-content
+               on:drop|preventDefault|stopPropagation={onDrop}
                on:dragover|preventDefault
                aria-dropeffect=none
                aria-label="Document drop target">
@@ -51,10 +52,5 @@
       display: flex;
       flex-direction: column;
       min-height: 2em;
-
-      background: var(--tjs-content-background);
-      border: var(--tjs-content-border);
-      border-radius: var(--overlay-border-radius);
-      padding: var(--overlay-padding);
    }
 </style>

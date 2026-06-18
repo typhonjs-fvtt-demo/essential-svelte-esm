@@ -49,7 +49,7 @@
    <main>
       <h1>Reactive Embedded Collections</h1>
       <!-- `preventDefault` on `dragover` is necessary for cross browser window drag & drop -->
-      <div class=drop
+      <div class=tjs-panel-content
            on:drop={onDrop}
            on:dragover|preventDefault
            role=region
@@ -60,15 +60,13 @@
             Name: {$doc?.name}
          {/if}
       </div>
-      <div class=container>
-         <div class=column>
-            <div style="display: flex; align-items: center;">Items by type ->&nbsp;<TJSInput {input}/>&nbsp;: {$wildcard.index.length}</div>
-            <ol>
-               {#each [...$wildcard] as item (item.id)}
-                  <li animate:flip={{duration: 200}}>{item.name}</li>
-               {/each}
-            </ol>
-         </div>
+      <div class="column tjs-panel-content">
+         <div class=item-by-type>Items by type ->&nbsp;<TJSInput {input}/>&nbsp;: {$wildcard.index.length}</div>
+         <ol>
+            {#each [...$wildcard] as item (item.id)}
+               <li animate:flip={{duration: 200}}>{item.name}</li>
+            {/each}
+         </ol>
       </div>
    </main>
 </ApplicationShell>
@@ -79,13 +77,9 @@
       display: flex;
       flex-direction: column;
       max-height: 90vh;
+      gap: 0.5em;
 
       --tjs-input-text-width: 100px;
-
-      div.container {
-         display: flex;
-         justify-content: flex-start;
-      }
 
       div.column {
          display: flex;
@@ -93,18 +87,18 @@
          align-items: flex-start;
          justify-content: flex-start;
          width: 100%;
-         border-radius: 10px;
-         border: 1px solid var(--content-link-border-color);
-         padding: 10px;
+
+         &.tjs-panel-content {
+            --tjs-panel-padding: 0 0 0.5rem 0;
+         }
       }
 
-      div.drop {
-         background: var(--tjs-content-background);
-         border: var(--tjs-content-border);
-         border-radius: var(--overlay-border-radius);
-         padding: var(--overlay-padding);
-
-         margin-bottom: 0.25em;
+      div.item-by-type {
+         display: flex;
+         align-self: center;
+         align-items: center;
+         padding: 0.5rem;
+         border-bottom: var(--tjs-content-border);
       }
 
       h1 {
@@ -115,12 +109,20 @@
       }
 
       li {
-         text-align: start
+         text-align: start;
+
+         &:first-of-type {
+            margin-top: 0.5rem;
+         }
       }
 
       ol {
          overflow-y: auto;
          max-height: 75vh;
+
+         // Note: this just keeps list oriented numbers simple for 0-99.
+         padding: 0 0.5rem 0 2rem;
+         margin: 0;
       }
    }
 </style>

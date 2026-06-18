@@ -11,16 +11,26 @@
    import '#runtime/svelte/animate/gsap/plugin/MotionPathPlugin';
    import '#runtime/svelte/animate/gsap/plugin/bonus/CustomWiggle';
 
-   export let position = void 0;
+   /**
+    * @type {import('#runtime/svelte/store/position').TJSPosition}
+    */
+   export let position;
 
    // Defines a custom ease w/ the CustomWiggle plugin. This is used below to set a variable amount of wiggle count
    // depending on the duration of the animation; more wiggles the lower the duration.
    const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${count}, type: ${type} })`;
 
+   /** @type {import('#runtime/svelte/animate/gsap').GsapEasingReference} */
    let easeName = 'linear';
+
    let duration = 1;
    let gsapTimeline, gsapTween;
-   let innerHeight, innerWidth;
+
+   /** @type {number} */
+   let innerHeight;
+
+   /** @type {number} */
+   let innerWidth;
 
    $: ease = getGsapEasingFunc(easeName);
 
@@ -85,9 +95,9 @@
    }
 </script>
 
-<svelte:window bind:innerWidth bind:innerHeight/>
+<svelte:window bind:innerWidth bind:innerHeight />
 
-<section>
+<section class=tjs-panel-content>
    <div>
       <label>Duration:
          <input type=range min=0 max=3 step=0.1 bind:value={duration}>
@@ -121,11 +131,6 @@
       display: flex;
       flex-direction: column;
       gap: 0.5em;
-
-      background: var(--tjs-content-background);
-      border: var(--tjs-content-border);
-      border-radius: var(--overlay-border-radius);
-      padding: var(--overlay-padding);
 
       input[type=text] {
          max-width: 2.5em;

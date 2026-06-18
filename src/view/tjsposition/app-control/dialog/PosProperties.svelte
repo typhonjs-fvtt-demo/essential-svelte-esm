@@ -2,18 +2,30 @@
    /**
     * @type {import('#runtime/svelte/store/position').TJSPosition}
     */
-   export let position = void 0;
+   export let position;
 
    let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex;
 
    let minWidth, minHeight, maxWidth, maxHeight;
 
-   ({top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex} = position.stores);
+   ({ top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex } = position.stores);
 
-   ({minWidth, minHeight, maxWidth, maxHeight} = position.stores);
+   ({ minWidth, minHeight, maxWidth, maxHeight } = position.stores);
 
-   let innerWidth, innerHeight;
-   let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale;
+   /** @type {number} */
+   let innerWidth;
+
+   /** @type {number} */
+   let innerHeight;
+
+   /** @type {number | 'null'} */
+   let nullishRotateX = 'null';
+   /** @type {number | 'null'} */
+   let nullishRotateY;
+   /** @type {number | 'null'} */
+   let nullishRotateZ;
+   /** @type {number | 'null'} */
+   let nullishScale;
 
    $: if (rotateX) { nullishRotateX = Number.isFinite($rotateX) ? $rotateX : 'null'; }
    $: if (rotateY) { nullishRotateY = Number.isFinite($rotateY) ? $rotateY : 'null'; }
@@ -31,7 +43,7 @@
 
 <svelte:window bind:innerWidth bind:innerHeight/>
 
-<section>
+<section class=tjs-panel-content>
    <div>
       <label>top:
          <input type=range min=0 max={innerHeight} bind:value={$top}>
@@ -126,11 +138,6 @@
       display: flex;
       flex-direction: column;
       gap: 0.5em;
-
-      background: var(--tjs-content-background);
-      border: var(--tjs-content-border);
-      border-radius: var(--overlay-border-radius);
-      padding: var(--overlay-padding);
 
       input[type=text] {
          max-width: 4em;

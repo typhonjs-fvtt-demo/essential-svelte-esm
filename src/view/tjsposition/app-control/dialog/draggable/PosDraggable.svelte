@@ -13,7 +13,7 @@
    }
 </script>
 
-<section>
+<section class=tjs-panel-content>
    <div>
       <label>Draggable Implementation:
          <select bind:value={$storeDraggable}>
@@ -32,11 +32,6 @@
       text-align: center;
       display: flex;
       flex-direction: column;
-
-      background: var(--tjs-content-background);
-      border: var(--tjs-content-border);
-      border-radius: var(--overlay-border-radius);
-      padding: var(--overlay-padding);
 
       select {
          width: fit-content;

@@ -56,7 +56,7 @@
 </script>
 
 <section>
-   <div>
+   <div class=tjs-panel-content>
       <label>Duration:
          <!--
             Creates a range input controlling animation duration from 0-3 seconds.
@@ -140,11 +140,6 @@
       display: flex;
       flex-direction: column;
       gap: 0.5em;
-
-      background: var(--tjs-content-background);
-      border: var(--tjs-content-border);
-      border-radius: var(--overlay-border-radius);
-      padding: var(--overlay-padding);
 
       input[type=text] {
          max-width: 2.5em;

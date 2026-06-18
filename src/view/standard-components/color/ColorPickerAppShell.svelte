@@ -30,7 +30,7 @@
 
 <ApplicationShell bind:elementRoot>
    <main>
-      <section class=styled>
+      <section class=tjs-panel-content>
          <label class=column>Text Input:<input type=checkbox bind:checked={options.hasTextInput}></label>
          <label class=column>Button Bar:<input type=checkbox bind:checked={options.hasButtonBar}></label>
          <label class=column>Addons:<input type=checkbox bind:checked={options.hasAddons}></label>
@@ -42,7 +42,7 @@
          <label class=column>Enabled:<input type=checkbox bind:checked={options.enabled}></label>
       </section>
 
-      <section class=styled>
+      <section class=tjs-panel-content>
          <label>Format:
             <select bind:value={options.format}>
                <option value=hex>HEX</option>
@@ -111,12 +111,5 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 12px;
-
-      &.styled {
-         background: var(--tjs-content-background);
-         border: var(--tjs-content-border);
-         border-radius: var(--overlay-border-radius);
-         padding: var(--overlay-padding);
-      }
    }
 </style>
