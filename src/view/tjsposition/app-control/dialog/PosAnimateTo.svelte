@@ -55,8 +55,8 @@
    let duration = 1;
 </script>
 
-<section>
-   <div class=tjs-panel-content>
+<section class=tjs-panel-content>
+   <div>
       <label>Duration:
          <!--
             Creates a range input controlling animation duration from 0-3 seconds.
