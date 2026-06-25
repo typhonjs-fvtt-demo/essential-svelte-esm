@@ -12,6 +12,8 @@
    import { TJSApplicationShell }   from '#runtime/svelte/component/application';
    import { Timing }                from '#runtime/util';
 
+   import { TJSScrollContainer }    from '#runtime/svelte/component/container';
+
    import MenuAppSection            from './MenuAppSection.svelte';
 
    // ApplicationShell Contract
@@ -40,9 +42,11 @@
 <TJSApplicationShell bind:elementRoot transition={scale} transitionOptions={{duration: 1000}}>
    <main>
       <h1>Launch demo apps below:</h1>
-      {#each sections as section}
-         <MenuAppSection {section} />
-      {/each}
+      <TJSScrollContainer>
+         {#each sections as section}
+            <MenuAppSection {section} />
+         {/each}
+      </TJSScrollContainer>
       <div class=bottom>
          <hr>
          <a href="https://v4.svelte.dev/tutorial/basics" target=_blank>Interactive Svelte tutorial</a>
@@ -58,6 +62,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      max-height: 90vh;
 
       a:focus-visible {
          outline: var(--tjs-default-outline-focus-visible);
