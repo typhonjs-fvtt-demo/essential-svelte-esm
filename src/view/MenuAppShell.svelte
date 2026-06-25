@@ -62,7 +62,9 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      max-height: 90vh;
+
+      max-height: 90vh;                      // Limit panel to 90% vertical height
+      --tjs-scroll-container-gap: 0.5rem;    // Add gap to TJSScrollContainer content.
 
       a:focus-visible {
          outline: var(--tjs-default-outline-focus-visible);
