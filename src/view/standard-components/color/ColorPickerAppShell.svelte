@@ -30,7 +30,7 @@
 
 <ApplicationShell bind:elementRoot>
    <main>
-      <section class=tjs-panel-content>
+      <section class="tjs-panel-content tjs-panel-content--flex-row">
          <label class=column>Text Input:<input type=checkbox bind:checked={options.hasTextInput}></label>
          <label class=column>Button Bar:<input type=checkbox bind:checked={options.hasButtonBar}></label>
          <label class=column>Addons:<input type=checkbox bind:checked={options.hasAddons}></label>
@@ -42,7 +42,7 @@
          <label class=column>Enabled:<input type=checkbox bind:checked={options.enabled}></label>
       </section>
 
-      <section class=tjs-panel-content>
+      <section class="tjs-panel-content tjs-panel-content--flex-row">
          <label>Format:
             <select bind:value={options.format}>
                <option value=hex>HEX</option>
@@ -61,12 +61,14 @@
          <label>Width: <input type=range min=50 max=400 bind:value={options.width} style="width: 100px"> ({options.width})</label>
       </section>
 
-      <section>
-         <span>Value of the main `color` prop: {typeof color === 'object' ? JSON.stringify(color) : color}</span>
-      </section>
+      <section class="tjs-panel-content tjs-panel-content--flex-col">
+         <section>
+            <span>Value of the main `color` prop: {typeof color === 'object' ? JSON.stringify(color) : color}</span>
+         </section>
 
-      <section>
-         <TJSColordPicker bind:color options={options} />
+         <section>
+            <TJSColordPicker bind:color options={options} />
+         </section>
       </section>
    </main>
 </ApplicationShell>
@@ -102,14 +104,5 @@
 
    span {
       flex: 2;
-   }
-
-   section {
-      clear: both;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px;
    }
 </style>
