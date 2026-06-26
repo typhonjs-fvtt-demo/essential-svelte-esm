@@ -1,0 +1,30 @@
+import { SvelteApp }          from '#runtime/svelte/application';
+import { deepMerge }          from '#runtime/util/object';
+
+import StandardStylesAppShell from './StandardStylesAppShell.svelte';
+
+export class StandardStylesApp extends SvelteApp
+{
+   /**
+    * Default Application options
+    *
+    * @returns {SvelteApp.Options} options - SvelteApp options.
+    * @see https://typhonjs-fvtt-lib.github.io/api-docs/interfaces/_runtime_svelte_application.SvelteApp.Options.html
+    */
+   static get defaultOptions()
+   {
+      return deepMerge(super.defaultOptions, {
+         id: 'trl-standard-styles-esm',
+         title: 'Standard Style Patterns',
+         classes: ['tjs-essential-svelte-esm'],
+         resizable: true,
+         width: 1200,
+         height: 825,
+
+         svelte: {
+            class: StandardStylesAppShell,
+            target: document.body
+         }
+      });
+   }
+}
