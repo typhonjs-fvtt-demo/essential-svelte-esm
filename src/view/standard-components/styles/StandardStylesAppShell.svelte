@@ -42,7 +42,7 @@ padding: var(--tjs-panel-padding);
       </section>
 
       <fieldset class=tjs-panel-content>
-         <legend class=tjs-panel-legend>A Legend Header</legend>
+         <legend class=tjs-panel-legend>A Fieldset / Legend Header</legend>
          A common pattern with core Foundry styles is a &lt;fieldset&gt; element with a child &lt;legend&gt; element,
          but the core Foundry styles only take effect when this &lt;fieldset&gt; is nested in another element using
          `.standard-form`. Svelte isn't necessarily form based like Handlebars and this style pattern simplifies
@@ -53,7 +53,7 @@ padding: var(--tjs-panel-padding);
          <pre>
 
 &lt;fieldset class=tjs-panel-content&gt;
-   &lt;legend class=tjs-panel-legend>A Legend Header&lt;/legend&gt;
+   &lt;legend class=tjs-panel-legend>A Fieldset / Legend Header&lt;/legend&gt;
 &lt;/fieldset&gt;
          </pre>
       </fieldset>
