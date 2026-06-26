@@ -23,6 +23,21 @@
 
   // You can opt to use box shadow for manually focused / navigated components. In this case remove the outline above.
   // --tjs-default-box-shadow-focus-visible: undefined
+
+  // -----------------------------------------------------------------------------------------------------------------
+
+  // See the Standard Components -> Standard Style Patterns demo for a discussion on optional global CSS
+  // classes that provide theme / core Foundry constraint compliant use cases.
+
+  // Uncomment the CSS variable below to change all `.tjs-panel-content` uses in this project to a mix of the
+  // base content panel background color and `rebeccapurple`.
+  //--tjs-content-background: color-mix(in srgb, rebeccapurple 20%, var(--_tjs-content-background));
+
+  // For content panels and standard components the main color CSS variables do define a separate independent base CSS
+  // var such that it is possible redefine the color in reference to the base color.
+
+  // Uncomment to remove the background entirely for all content panels.
+  //--tjs-content-background: transparent;
 }
 
 // App content background for main demo menu. The CSS below handles when the `themed` class is included or omitted from
