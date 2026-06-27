@@ -16,8 +16,9 @@ export class PositionBasicOverlayApp extends SvelteApp
       return deepMerge(super.defaultOptions, {
          id: 'position-basic-overlay',
          classes: ['tjs-essential-svelte-esm'],
-         width: 300,
-         height: 300,
+         width: 305,
+         height: 225,
+         minWidth: 305,
 
          svelte: {
             class: Overlay,

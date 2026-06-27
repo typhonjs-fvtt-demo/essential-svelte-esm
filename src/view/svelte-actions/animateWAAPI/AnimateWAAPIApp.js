@@ -18,7 +18,7 @@ export class AnimateWAAPIApp extends SvelteApp
          classes: ['tjs-essential-svelte-esm'],
          title: 'EssentialESM.apps.actions.animate-waapi.title',
          height: 'auto',
-         width: '400px',
+         width: 425,
 
          svelte: {
             class: AnimateWAAPIAppShell,

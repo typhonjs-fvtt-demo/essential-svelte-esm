@@ -107,7 +107,6 @@
    }
 
    fieldset {
-      background: transparent;
       margin: auto auto 0 auto;
       width: 425px;
    }

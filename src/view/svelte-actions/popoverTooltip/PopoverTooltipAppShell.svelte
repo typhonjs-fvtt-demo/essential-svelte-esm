@@ -49,7 +49,7 @@
       </button>
 
       <fieldset class="tjs-panel-content tjs-panel-content--flex-col">
-         <legend class=tjs-panel-legend>Action controls</legend>
+         <legend class=tjs-panel-legend>Action Controls</legend>
          <div class=grid>
             <label>
                <span>Direction:</span>

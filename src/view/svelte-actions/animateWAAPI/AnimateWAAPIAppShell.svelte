@@ -60,7 +60,8 @@
          </button>
       </section>
 
-      <section class=controls>
+      <fieldset class="tjs-panel-content tjs-panel-content--flex-col">
+         <legend class=tjs-panel-legend>Action Controls</legend>
          <div class=row>
             <TJSInput input={inputData.enabled} />
             <TJSInput input={inputData.keyframes} />
@@ -70,7 +71,7 @@
             <TJSInput input={inputData.event} />
          </div>
          <div class=row><TJSInput input={inputData.duration} /></div>
-      </section>
+      </fieldset>
    </main>
 </ApplicationShell>
 
@@ -78,27 +79,12 @@
    main {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      padding: 0 0.25rem;
+      gap: 1.5rem;
    }
 
    button {
       width: fit-content;
       margin: 0 auto;
-   }
-
-   section {
-      display: flex;
-   }
-
-   .controls {
-      flex-direction: column;
-      gap: 0.5rem;
-
-      background: rgba(0, 0, 0, 0.1);
-      border: 1px solid black;
-      border-radius: 0.25rem;
-      padding: 0.25rem;
    }
 
    .row {

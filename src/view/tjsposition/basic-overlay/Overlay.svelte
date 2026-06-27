@@ -32,10 +32,12 @@
    <div class="drag-target scrollable" use:draggable={{ position, hasTargetClassList: ['drag-target'] }}
         on:contextmenu={() => application.close()}
         role=application>
-      <h3 class=drag-target>Context click to close</h3>
-      <input type=text placeholder="An input showing focus control" />
-      <label>Always on top: <input type=checkbox bind:checked={$alwaysOnTop}></label>
-      <label>Resizable: <input type=checkbox bind:checked={$resizable}></label>
+       <h3 class=drag-target>Context click to close</h3>
+       <input type=text placeholder="An input showing focus control" />
+       <section class="tjs-panel-content tjs-panel-content--flex-row">
+          <label>Always on top: <input type=checkbox bind:checked={$alwaysOnTop}></label>
+          <label>Resizable: <input type=checkbox bind:checked={$resizable}></label>
+       </section>
    </div>
 </EmptyApplicationShell>
 
@@ -43,17 +45,17 @@
    div {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: var(--tjs-content-gap);
       height: 100%;
       width: 100%;
-      padding: 8px;
+      padding: var(--tjs-panel-padding);
       touch-action: none;
    }
 
    label {
       display: flex;
       align-items: center;
-      gap: 0.5em;
+      gap: var(--tjs-content-gap-half);
 
       /* This can be removed once Foundry core updates styles for themed labels */
       color: var(--color-text-primary);

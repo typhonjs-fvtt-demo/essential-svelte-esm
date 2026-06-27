@@ -19,7 +19,7 @@
    <main class=scrollable>
       <h1>Reactive Header Buttons</h1>
       <br>
-      <div class=container>
+      <div class="tjs-panel-content tjs-panel-content--flex-row">
          Options:
          <label><input type=checkbox bind:checked={$headerButtonNoClose}> No Close Button</label>
          <label><input type=checkbox bind:checked={$headerButtonNoLabel}> No Button Labels</label>
@@ -34,15 +34,9 @@
       display: flex;
       flex-direction: column;
 
-      div.container {
-         display: flex;
+      .tjs-panel-content {
          align-items: center;
          justify-content: center;
-         border-radius: 10px;
-         border: 1px solid var(--content-link-border-color);
-         padding: 10px;
-         margin-top: auto;
-         margin-bottom: 10px;
       }
 
       h1 {
@@ -56,6 +50,7 @@
          display: flex;
          align-items: center;
          justify-content: center;
+         gap: var(--tjs-content-gap-half)
       }
    }
 </style>
