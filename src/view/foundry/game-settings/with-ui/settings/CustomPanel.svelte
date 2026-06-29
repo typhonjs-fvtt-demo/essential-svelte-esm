@@ -15,8 +15,6 @@
       justify-content: center;
       align-items: center;
       height: fit-content;
-
-      background: var(--tjs-component-background);
-      padding: 0.5rem;
+      padding: var(--tjs-content-padding);
    }
 </style>
