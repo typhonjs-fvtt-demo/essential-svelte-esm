@@ -65,4 +65,25 @@ export class TJSGameSettingWithUIApp extends SvelteApp
 
       return buttons;
    }
+
+   /**
+    * Overrides the internal App V1 `_render` method to swap to the game settings UI component if `render` is invoked
+    * with `showSettings` option.
+    *
+    * @param {boolean} force     Render and display the application even if it is not currently displayed.
+    *
+    * @param {object} options    Additional options which update the current values of the Application#options object
+    *
+    * @returns {Promise<void>}   A Promise that resolves to the Application once rendering is complete
+    * @protected
+    */
+   async _render(force, options = {})
+   {
+      await super._render(force, options);
+
+      const { showSettings } = options;
+
+      // Swaps to the settings UI after render.
+      if (showSettings) { demoGameSettingsWithUI.uiControl.showSettings = true; }
+   }
 }

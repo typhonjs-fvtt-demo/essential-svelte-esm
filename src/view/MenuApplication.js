@@ -51,11 +51,37 @@ import {
 import { constants, settings }   from "#constants";
 import { gameSettings }          from "#gameSettings";
 
+/**
+ * @augments {SvelteApp<import('./types').Options>}
+ */
 export class MenuApplication extends SvelteApp
 {
+   /**
+    * Holds all demo apps created. Set as an external context.
+    *
+    * @type {Map<string, SvelteApp>}
+    */
+   #demoApps = new Map();
+
    constructor()
    {
       super();
+
+      Hooks.on('TJS.essential-svelte.game-settings', () =>
+      {
+         const id = TJSGameSettingWithUIApp.defaultOptions.id;
+         let app = this.#demoApps.get(id);
+         if (app)
+         {
+            app.render(true, { showSettings: true });
+         }
+         else
+         {
+            app = new TJSGameSettingWithUIApp();
+            app.render(true);
+            this.#demoApps.set(id, app);
+         }
+      });
 
       /**
        * Register a `user` game setting w/ TJSGameSettings; available since `v13` of Foundry. This makes a user setting
@@ -111,6 +137,18 @@ export class MenuApplication extends SvelteApp
             class: MenuAppShell,
             target: document.body,
             intro: true,
+
+            /**
+             * You can provide a function and the `this` context is the application when invoked.
+             *
+             * @this {MenuApplication}
+             *
+             * @returns {object} External context for Svelte component.
+             */
+            context: function()
+            {
+               return { demoApps: this.#demoApps };
+            },
 
             /**
              * You can provide a function and the `this` context is the application when invoked.

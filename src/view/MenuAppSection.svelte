@@ -1,15 +1,16 @@
 <script>
    import { getContext }   from 'svelte';
 
+   import { SvelteApp }    from '#runtime/svelte/application';
    import { isObject }     from '#runtime/util/object';
 
    import { TJSSvgFolder } from '#standard/component/folder';
 
    /** @type {object} */
-   export let section = void 0;
+   export let section;
 
-   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
-   const { application } = getContext('#external');
+   /** @type {import('./types').External} */
+   const { application, demoApps } = getContext('#external');
 
    /**
     * @type {import('#standard/component/folder').TJSFolder.Data}
@@ -19,8 +20,6 @@
       options: { focusChevron: true },
       store: application.reactive.sessionStorage.getStore(`trl-essential-esm-folder-${section.title}`, false)
    }
-
-   const apps = new Map();
 
    /**
     * @param {object}   button -
@@ -35,9 +34,9 @@
          app = button.onPress();
 
          // If an Application is returned then attempt to select an existing app by ID / render it.
-         if (app instanceof Application)
+         if (app instanceof SvelteApp)
          {
-            const existingApp = apps.get(app.id);
+            const existingApp = demoApps.get(app.id);
 
             if (existingApp)
             {
@@ -45,7 +44,7 @@
             }
             else
             {
-               apps.set(app.id, app.render(true, { focus: true }));
+               demoApps.set(app.id, app.render(true, { focus: true }));
             }
          }
       }
@@ -58,7 +57,7 @@
          const options = isObject(button.options) ? button.options : {};
          const id = options.id ?? NewApplication.defaultOptions.id;
 
-         const existingApp = apps.get(id);
+         const existingApp = demoApps.get(id);
 
          if (existingApp)
          {
@@ -67,7 +66,7 @@
          else
          {
             const app = new NewApplication(options).render(true, { focus: true });
-            apps.set(id, app);
+            demoApps.set(id, app);
          }
       }
    }

@@ -31,7 +31,7 @@
          (async () =>
          {
             // The macro script data to open the quest via the public QuestAPI.
-            const command = `ui.notifications.info('TJSGameSettingsWithUI demo macro test!');`;
+            const command = `ui.notifications.info('TJSGameSettingsWithUI demo macro test!'); Hooks.call('TJS.essential-svelte.game-settings');`;
 
             const macroData = {
                name: 'TJSGameSettingsWithUI Demo Macro',
@@ -82,6 +82,7 @@
       display: flex;
       background: var(--tjs-component-background-alt);
       border-top: var(--tjs-component-border);
+      filter: drop-shadow(0px -3px 3px var(--tjs-component-color-shadow));
 
       align-items: center;
       justify-content: center;
