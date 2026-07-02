@@ -84,6 +84,12 @@ export class TJSGameSettingWithUIApp extends SvelteApp
       const { showSettings } = options;
 
       // Swaps to the settings UI after render.
-      if (showSettings) { demoGameSettingsWithUI.uiControl.showSettings = true; }
+      if (showSettings)
+      {
+         demoGameSettingsWithUI.uiControl.showSettings = true;
+
+         // Updates header buttons to show correct swap settings state.
+         this.reactive.updateHeaderButtons();
+      }
    }
 }
