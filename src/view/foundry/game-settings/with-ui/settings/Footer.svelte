@@ -6,6 +6,10 @@
     * and defining a single macro without duplication across users. While the macro in this demo below posts a UI
     * notification please do create your own macro, perhaps fire a hook that opens your application, etc.
     *
+    * This demo fires a hook that opens `TJSGameSettingsWithUIApp` and switches to the settings UI instantly.
+    *
+    * The receiving hook is defined in the `MenuApplication` constructor.
+    *
     * @componentDescription
     */
 
@@ -15,10 +19,21 @@
 
    onMount(() =>
    {
+      // Respond to Foundry hotbar drop hook and stop listening when component destroyed.
       Hooks.on('hotbarDrop', hotbarDrop);
       return () => Hooks.off('hotbarDrop', hotbarDrop);
    });
 
+   /**
+    * Handles the Foundry hotbar drop hook event. Deduplicates macros searching for an existing macro with the same
+    * script otherwise creates a new macro in response to the drop event.
+    *
+    * @param hotbar -
+    *
+    * @param data -
+    *
+    * @param slot -
+    */
    function hotbarDrop(hotbar, data, slot)
    {
       let handled = false;
@@ -30,8 +45,8 @@
          // Wrap the handling code in an async IIFE.
          (async () =>
          {
-            // The macro script data to open the quest via the public QuestAPI.
-            const command = `ui.notifications.info('TJSGameSettingsWithUI demo macro test!'); Hooks.call('TJS.essential-svelte.game-settings');`;
+            // The macro script data to open game settings app / UI content..
+            const command = `Hooks.call('TJS.essential-svelte.game-settings');`;
 
             const macroData = {
                name: 'TJSGameSettingsWithUI Demo Macro',
