@@ -67,6 +67,8 @@ export class MenuApplication extends SvelteApp
    {
       super();
 
+      // A custom hook for the game settings UI / macro to automatically show the game settings embedded in
+      // the demo app. This is accomplished by passing a custom render option to `TJSGameSettingsWithUIApp`.
       Hooks.on('TJS.essential-svelte.game-settings', () =>
       {
          const id = TJSGameSettingWithUIApp.defaultOptions.id;
