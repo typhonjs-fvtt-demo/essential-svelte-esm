@@ -40,8 +40,9 @@
       direction: 'UP',
       isHTML: true,
       tooltip: 'When true and the effective DataField changes, synchronize the store to that field’s initial value. ' +
-       'When no valid DataField is available, synchronize the store to undefined. <br><br>When false, the store value' +
-        ' is not updated, but will be validated against the new effective DataField.'
+       'When no valid DataField is available, synchronize the store to undefined. <br><br>When false, the existing ' +
+        'store value is preserved across DataField changes whenever it remains compatible with the new DataField. ' +
+         'Otherwise, the store is synchronized to the initial value of the new DataField.'
    };
 
    /**
@@ -92,7 +93,13 @@
             stacked: formgroupStacked
          },
 
-         onValidationFailure: (err) => console.warn(err),
+         /**
+          * You may assign a callback that gets invoked from user changes with any validation failure.
+          * This simply logs it to the console. You might for instance want to post a UI notification, etc.
+          *
+          * @type {import('#standard/component/fvtt/datafield').TJSDataFieldValidationCallback}
+          */
+         onValidationFailure: (err, context) => console.warn(context, err),
 
          resetInitial
       };
@@ -151,7 +158,7 @@
       </fieldset>
 
       <fieldset class=tjs-panel-content>
-         <legend class=tjs-panel-legend>Bound store value</legend>
+         <legend class=tjs-panel-legend>Bound store value (typeof: {typeof $store})</legend>
          {JSON.stringify($store, null, 2)}
       </fieldset>
    </main>
