@@ -1,9 +1,9 @@
 import { SvelteApp }                from '#runtime/svelte/application';
 import { deepMerge }                from '#runtime/util/object';
 
-import BasicDataFieldInputAppShell  from './BasicDataFieldInputAppShell.svelte';
+import TJSDataFieldAppShell  from './TJSDataFieldAppShell.svelte';
 
-export class BasicDataFieldInputApp extends SvelteApp
+export class TJSDataFieldApp extends SvelteApp
 {
    /**
     * Default Application options
@@ -14,8 +14,8 @@ export class BasicDataFieldInputApp extends SvelteApp
    static get defaultOptions()
    {
       return deepMerge(super.defaultOptions, {
-         id: 'trl-basic-data-field-input-esm',
-         title: 'Basic Data Field Input',
+         id: 'trl-data-field-esm',
+         title: 'TJSDataField - Reactive DataFields',
          classes: ['tjs-essential-svelte-esm'],
          resizable: false,
          width: 900,
@@ -23,7 +23,7 @@ export class BasicDataFieldInputApp extends SvelteApp
          minWidth: 900,
 
          svelte: {
-            class: BasicDataFieldInputAppShell,
+            class: TJSDataFieldAppShell,
             target: document.body
          }
       });

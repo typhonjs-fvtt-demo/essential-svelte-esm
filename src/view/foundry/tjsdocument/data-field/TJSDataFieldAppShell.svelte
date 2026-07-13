@@ -131,8 +131,8 @@
          <label>
             <span>Type:</span>
             <select bind:value={datafieldType}>
-               <option value={'input'}>Just Input</option>
-               <option value={'group'}>As form group</option>
+               <option value={'input'}>Input Only</option>
+               <option value={'group'}>As Form Group</option>
             </select>
          </label>
          <label>
@@ -161,6 +161,12 @@
          <legend class=tjs-panel-legend>Bound store value (typeof: {typeof $store})</legend>
          {JSON.stringify($store, null, 2)}
       </fieldset>
+
+      <section class=tjs-panel-content>
+         `TJSDataField` provides a reactive Svelte wrapper around Foundry VTT DataField instances,
+         supporting dynamic DataField changes, bindable stores, and automatic synchronization between DataField cleaned
+         values and store-specific runtime representations when required.
+      </section>
    </main>
 </ApplicationShell>
 
