@@ -11,23 +11,19 @@
    /** @type {import('#runtime/svelte/component/application').AppShell.Context.InternalAppStores} */
    const {
       contentWidth,
-      contentHeight,
-      elementRoot } = getContext('#internal').stores;
+      contentHeight } = getContext('#internal').stores;
 
    const {
-      resizeObservableHeight,
-      resizeObservableWidth } = application.position.stores;
+      intrinsicHeight,
+      intrinsicWidth } = application.position.stores;
 
    const { containerQueryType } = application.reactive.storeAppOptions;
 
-   let heightAuto = $resizeObservableHeight;
-   let widthAuto = $resizeObservableWidth;
+   let heightAuto = $intrinsicHeight;
+   let widthAuto = $intrinsicWidth;
 
-   $: application.position.height = heightAuto ? 'auto' : $elementRoot?.offsetHeight ?? void 0;
-   $: application.position.width = widthAuto ? 'auto' : $elementRoot?.offsetWidth ?? void 0;
-
-   $: if (!$resizeObservableHeight) { heightAuto = false; }
-   $: if (!$resizeObservableWidth) { widthAuto = false; }
+   $: application.position.height = heightAuto ? 'auto' : null;
+   $: application.position.width = widthAuto ? 'auto' : null;
 </script>
 
 <fieldset class="tjs-panel-content tjs-panel-content--flex-col">
