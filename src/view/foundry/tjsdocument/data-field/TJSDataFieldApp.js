@@ -17,10 +17,10 @@ export class TJSDataFieldApp extends SvelteApp
          id: 'trl-data-field-esm',
          title: 'TJSDataField - Reactive DataFields',
          classes: ['tjs-essential-svelte-esm'],
-         resizable: false,
+         resizable: true,
          width: 900,
          height: 'auto',
-         minWidth: 900,
+         minWidth: 530,
 
          svelte: {
             class: TJSDataFieldAppShell,
