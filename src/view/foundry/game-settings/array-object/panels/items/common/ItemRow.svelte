@@ -11,7 +11,7 @@
    export let i = 0;
 
    /** @type {import('#arrayObjectContext').ItemEntryStore} */
-   export let item = void 0;
+   export let item;
 
    /** @type {import('#arrayObjectContext').ItemContext} */
    const { itemStore, menuItems } = getContext('#external').itemContext;

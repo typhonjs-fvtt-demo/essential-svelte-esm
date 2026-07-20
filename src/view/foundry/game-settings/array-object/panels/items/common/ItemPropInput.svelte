@@ -19,10 +19,10 @@
    import { CrossRealm }   from '#runtime/util/realm';
 
    /** @type {import('#arrayObjectContext').ItemEntryStore} */
-   export let item = void 0;
+   export let item;
 
-   /** @type {string} */
-   export let prop = void 0;
+   /** @type {keyof import('#arrayObjectContext').ItemEntryData} */
+   export let prop;
 
    /**
     * The dynamic table cell tag allowing reuse of this component across grid / table element layouts.
@@ -39,10 +39,12 @@
    /** @type {HTMLDivElement} */
    let divEl;
 
+   /** @type {Window | undefined} */
    let activeWindow;
 
    let hasInitialKeyFocus = false;
 
+   /** @type {string} */
    let initialValue;
 
    // The prop is editable if user can modify and there is a setter for the prop on item.
@@ -92,11 +94,17 @@
       }
    }
 
+   /**
+    * @param {KeyboardEvent} event
+    */
    function onKeyup(event)
    {
       if (event.code === 'Enter') { onStartEdit(event); }
    }
 
+   /**
+    * @param {KeyboardEvent} event
+    */
    function onKeydownInput(event)
    {
       switch (event.code)
@@ -113,6 +121,9 @@
       }
    }
 
+   /**
+    * @param {KeyboardEvent} event
+    */
    function onKeyupInput(event)
    {
       switch (event.code)
@@ -135,17 +146,17 @@
 
          activeWindow = CrossRealm.browser.getWindow(event);
 
-         /** @type {Element} */
-         const activeEl = activeWindow.document.activeElement;
+         /** @type {Element | null | undefined} */
+         const activeEl = activeWindow?.document.activeElement;
 
          // Track if table cell has initial key focus.
          hasInitialKeyFocus = activeEl?.matches(':focus-visible') && activeEl === divEl;
 
          // To support cases when the active window may be a popped out browser unregister directly.
-         activeWindow.document.body.addEventListener('pointerdown', onClose, true);
-         activeWindow.document.body.addEventListener('wheel', onClose, true);
-         activeWindow.addEventListener('blur', onClose);
-         activeWindow.addEventListener('resize', onClose);
+         activeWindow?.document.body.addEventListener('pointerdown', onClose, true);
+         activeWindow?.document.body.addEventListener('wheel', onClose, true);
+         activeWindow?.addEventListener('blur', onClose);
+         activeWindow?.addEventListener('resize', onClose);
       }
    }
 </script>

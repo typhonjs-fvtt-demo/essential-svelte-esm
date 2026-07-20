@@ -10,7 +10,7 @@
    import { getContext } from 'svelte';
 
    /** @type {import('#arrayObjectContext').ItemEntryStore} */
-   export let item = void 0;
+   export let item;
 
    /**
     * The dynamic table cell tag allowing reuse of this component across grid / table element layouts.

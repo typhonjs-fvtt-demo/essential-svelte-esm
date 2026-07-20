@@ -8,7 +8,7 @@
     *
     * @type {keyof import('#arrayObjectContext').ItemEntryData}
     */
-   export let prop = void 0;
+   export let prop;
 
    /** @type {import('#arrayObjectContext').ItemContext} */
    const { itemStore } = getContext('#external').itemContext;
