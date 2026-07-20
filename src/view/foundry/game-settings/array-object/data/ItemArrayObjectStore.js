@@ -30,7 +30,7 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
     *
     * @param {'user' | 'world'} options.scope - Game setting scope.
     *
-    * @param {import('svelte/store').Writable} options.sortBy - Sort by property store associated w/
+    * @param {import('svelte/store').Writable<unknown>} options.sortBy - Sort by property store associated w/
     *        sessionStorage storing any changes to sort ordering.
     */
    constructor({ key, scope, sortBy })

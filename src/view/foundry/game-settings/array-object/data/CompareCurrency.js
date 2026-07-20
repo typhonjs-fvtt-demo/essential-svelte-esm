@@ -26,16 +26,16 @@ export class CompareCurrency
    /**
     * Compare two currency strings.
     *
-    * @param {string}   a - Currency value A
+    * @param {any}   a - Currency value A
     *
-    * @param {string}   b - Currency value B
+    * @param {any}   b - Currency value B
     *
     * @returns {number} Sort order
     */
    static compare(a, b)
    {
-      const va = this.#valueInCopper(a);
-      const vb = this.#valueInCopper(b);
+      const va = CompareCurrency.#valueInCopper(a);
+      const vb = CompareCurrency.#valueInCopper(b);
 
       if (isNaN(va) && isNaN(vb)) { return 0; }
       if (isNaN(va)) { return 1; }
