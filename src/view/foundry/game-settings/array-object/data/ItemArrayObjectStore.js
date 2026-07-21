@@ -47,7 +47,7 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
       this.#stores = Object.freeze({
          // The searchFilter store is a function and a subscribable store used for the search input box. The text
          // entered into the search input will filter against the item properties `name`, `category`, and `cost`.
-         searchFilter: DynReducerHelper.filters.regexObjectQuery(['name', 'category', 'cost']),
+         searchFilter: DynReducerHelper.filters.regexObjectQuery([['name'], ['category'], ['cost']]),
 
          // `DynReducerHelper.sort.objectByProp` provides an integrated sort / compare function implementation that
          // automatically performs comparisons for common data types, but allows custom comparison extension. The `cost`
