@@ -15,13 +15,16 @@
       onDestroy,
       tick }               from 'svelte';
 
-   import { hasSetter }    from '#runtime/util/object';
+   import {
+      hasSetter,
+      safeSet }            from '#runtime/util/object';
+
    import { CrossRealm }   from '#runtime/util/realm';
 
    /** @type {import('#arrayObjectContext').ItemEntryStore} */
    export let item;
 
-   /** @type {keyof import('#arrayObjectContext').ItemEntryData} */
+   /** @type {import('#runtime/util/object').WritableDataPropertyKeys<import('#arrayObjectContext').ItemEntryData>} */
    export let prop;
 
    /**
@@ -45,7 +48,7 @@
    let hasInitialKeyFocus = false;
 
    /** @type {string} */
-   let initialValue;
+   let initialValue = '';
 
    // The prop is editable if user can modify and there is a setter for the prop on item.
    $: isPropEditable = item.canUserModify && hasSetter(item, prop);
@@ -53,11 +56,11 @@
    onDestroy(() => onClose());
 
    /**
-    * @param {Event & { currentTarget: HTMLInputElement, target: HTMLInputElement }} event -
+    * @type {import('svelte/elements').ChangeEventHandler<HTMLInputElement>}
     */
    function onChange(event)
    {
-      item[prop] = event.target.value;
+      safeSet(item, prop, event.currentTarget.value);
 
       onClose(event);
    }
@@ -79,7 +82,7 @@
       }
 
       editing = false;
-      initialValue = void 0;
+      initialValue = '';
       hasInitialKeyFocus = false;
 
       if (activeWindow)
@@ -103,7 +106,7 @@
    }
 
    /**
-    * @param {KeyboardEvent} event
+    * @param {KeyboardEvent} event -
     */
    function onKeydownInput(event)
    {
@@ -122,7 +125,7 @@
    }
 
    /**
-    * @param {KeyboardEvent} event
+    * @param {KeyboardEvent} event -
     */
    function onKeyupInput(event)
    {
@@ -135,6 +138,9 @@
       }
    }
 
+   /**
+    * @param {MouseEvent | KeyboardEvent} event -
+    */
    function onStartEdit(event)
    {
       if (isPropEditable && !editing)
@@ -150,7 +156,7 @@
          const activeEl = activeWindow?.document.activeElement;
 
          // Track if table cell has initial key focus.
-         hasInitialKeyFocus = activeEl?.matches(':focus-visible') && activeEl === divEl;
+         hasInitialKeyFocus = !!(activeEl?.matches(':focus-visible') && activeEl === divEl);
 
          // To support cases when the active window may be a popped out browser unregister directly.
          activeWindow?.document.body.addEventListener('pointerdown', onClose, true);

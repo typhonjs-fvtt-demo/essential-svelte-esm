@@ -20,11 +20,11 @@
    const { cell } = getContext('tableTags');
 
    /**
-    * @param {Event & { currentTarget: HTMLSelectElement, target: HTMLSelectElement }} event -
+    * @type {import('svelte/elements').ChangeEventHandler<HTMLSelectElement>}
     */
    function onChange(event)
    {
-      item.category = event.target.value;
+      item.category = event.currentTarget?.value;
    }
 </script>
 

@@ -6,7 +6,7 @@
    /**
     * Item property to target.
     *
-    * @type {keyof import('#arrayObjectContext').ItemEntryData}
+    * @type {import('#runtime/util/object').WritableDataPropertyKeys<import('#arrayObjectContext').ItemEntryData>}
     */
    export let prop;
 
@@ -20,7 +20,7 @@
     */
    function handleChange()
    {
-      sortBy.toggleProp(prop);
+      sortBy.togglePath(prop);
    }
 
    /**
@@ -34,13 +34,13 @@
    /**
     * Gets the current sort icon.
     *
-    * @param {import('#runtime/svelte/store/reducer').DynReducerHelper.Sort.ObjectByPropData} data - Sort by data.
+    * @param {import('#runtime/svelte/store/reducer').DynReducerHelper.Sort.ObjectByPathData} data - Sort by data.
     */
    function getIcon(data)
    {
       let icon = 'fas fa-sort';
 
-      if (data.prop !== prop || data.state === 'none') { return icon; }
+      if (data.path !== prop || data.state === 'none') { return icon; }
 
       return `${icon}${data.state === 'asc' ? '-up' : '-down'}`;
    }
