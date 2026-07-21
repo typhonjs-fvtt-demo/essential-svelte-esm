@@ -1,5 +1,6 @@
 import { GameSettingArrayObject }   from '#runtime/svelte/store/fvtt/settings/array-object';
 import { DynReducerHelper }         from '#runtime/svelte/store/reducer';
+import { PropertyPathMap }          from '#runtime/util/object';
 
 import { CompareCurrency }          from './CompareCurrency.js';
 import { ItemGenerator }            from './ItemGenerator.js';
@@ -18,7 +19,7 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
    /**
     * @type {Readonly<{
     *    searchFilter: DynReducerHelper.FilterFn.regexObjectQuery;
-    *    sortBy: DynReducerHelper.Sort.ObjectByProp<ItemEntryStore>;
+    *    sortBy: DynReducerHelper.Sort.ObjectByPath<ItemEntryStore>;
     * }>}
     */
    #stores;
@@ -30,8 +31,9 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
     *
     * @param {'user' | 'world'} options.scope - Game setting scope.
     *
-    * @param {import('svelte/store').Writable<unknown>} options.sortBy - Sort by property store associated w/
-    *        sessionStorage storing any changes to sort ordering.
+    * @param {(import('svelte/store').Writable<
+    *    import('#runtime/svelte/store/reducer').DynReducerHelper.Sort.ObjectByPathData>
+    * )} options.sortBy - Sort by property store associated w/ sessionStorage storing any changes to sort ordering.
     */
    constructor({ key, scope, sortBy })
    {
@@ -49,14 +51,12 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
          // entered into the search input will filter against the item properties `name`, `category`, and `cost`.
          searchFilter: DynReducerHelper.filters.regexObjectQuery([['name'], ['category'], ['cost']]),
 
-         // `DynReducerHelper.sort.objectByProp` provides an integrated sort / compare function implementation that
+         // `DynReducerHelper.sort.objectByPath` provides an integrated sort / compare function implementation that
          // automatically performs comparisons for common data types, but allows custom comparison extension. The `cost`
          // property is assigned `CompareCurrency`.
-         sortBy: DynReducerHelper.sort.objectByProp({
+         sortBy: DynReducerHelper.sort.objectByPath({
             store: sortBy,
-            customCompareFnMap: {
-               cost: CompareCurrency
-            }
+            customCompareFnMap: new PropertyPathMap([['cost', CompareCurrency]])
          })
       });
 
@@ -68,7 +68,7 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
    /**
     * @returns {Readonly<{
     *    searchFilter: DynReducerHelper.FilterFn.regexObjectQuery;
-    *    sortBy: DynReducerHelper.Sort.ObjectByProp<ItemEntryStore>;
+    *    sortBy: DynReducerHelper.Sort.ObjectByPath<ItemEntryStore>;
     * }>} Associated item stores.
     */
    get stores()

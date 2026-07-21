@@ -1,8 +1,8 @@
 /**
  * Provides a static custom compare function via the `DynReducer.Data.Sort` interface which can be added to
- * the `DynReducerHelper.sort.objectByProp` sorting helper for the `cost` property of {@link ItemEntryStore}.
+ * the `DynReducerHelper.sort.objectByPath` sorting helper for the `cost` property of {@link ItemEntryStore}.
  *
- * `DynReducerHelper.sort.objectByProp` accepts compare functions, or instances of or static classes matching the
+ * `DynReducerHelper.sort.objectByPath` accepts compare functions, or instances of or static classes matching the
  * `DynReducer.Data.Sort` interface. It can be handy to create an instance or static class for the compare operation to
  * encapsulate additional calculations or data. In the case of the currency conversion the mock item costs are in the
  * D&D 5e currency of `cp`, `sp`, `gp`, `pp` for `copper`, `silver`, `gold`, and `platinum`.
