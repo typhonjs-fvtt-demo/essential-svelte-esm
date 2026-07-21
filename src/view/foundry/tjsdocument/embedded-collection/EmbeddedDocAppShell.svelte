@@ -11,7 +11,17 @@
    /** @type {HTMLElement} */
    export let elementRoot;
 
+   /**
+    * DynReducerHelper provides several helpers to create filters and sorting functions.
+    * `regexObjectQuery` creates a filter for string values defined by a PropertyPath.
+    */
    const filterSearch = DynReducerHelper.filters.regexObjectQuery('type');
+
+   /**
+    * `objectByPath` creates a dynamic sort function that can handle a variety of data types with
+    * ascending / descending sort order state.
+    */
+   const sortSearch = DynReducerHelper.sort.objectByPath({ path: 'name', state: 'asc' });
 
    const input = {
       store: filterSearch,
@@ -25,7 +35,10 @@
    const wildcard = doc.embedded.create(foundry.documents.Item, {
       name: 'wildcard',
       filters: [filterSearch],
-      sort: (a, b) => a.name.localeCompare(b.name)
+      sort: sortSearch
+
+      // You can also provide a custom sort function.
+      // sort: (a, b) => a.name.localeCompare(b.name)
    });
 
    /**
@@ -37,7 +50,7 @@
    {
       try
       {
-         doc.setFromDataTransfer(JSON.parse(event.dataTransfer.getData('text/plain')));
+         doc.setFromDataTransfer(JSON.parse(event.dataTransfer.getData('text/plain')), { types: ['Actor'] });
       }
       catch (err) { /**/ }
    }
