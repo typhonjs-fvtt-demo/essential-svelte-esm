@@ -5,10 +5,10 @@
 
    import { TJSDataField }       from '#standard/component/fvtt/datafield';
 
-   /** 
+   /**
     * @import { TooltipOptions }          from '#runtime/svelte/action/dom/tooltip';
     * @import { MinimalWritable }         from '#runtime/svelte/store/util';
-    * 
+    *
     * @import {
     *    TJSDataFieldOptions,
     *    TJSDataFieldValidationCallback } from '#standard/component/fvtt/datafield';
@@ -20,14 +20,14 @@
    /**
     * @type {Map<string, fvtt.DataField>}
     */
-   const datafields = new Map([
+   const datafields = new Map(/** @type {Array<[string, fvtt.DataField]>} */ ([
       ['StringField', new foundry.data.fields.StringField({ initial: 'Hello to reactive data fields!' })],
       ['NumberField (basic)', new foundry.data.fields.NumberField({ initial: 666 })],
-      ['NumberField (range)', new foundry.data.fields.NumberField({ initial: 666, min: 0, max: 1000, step: '1' })],
-      ['AlphaField (range)', new foundry.data.fields.AlphaField({ step: '0.01' })],
-      ['AngleField (range)', new foundry.data.fields.AngleField({ step: '0.1' })],
+      ['NumberField (range)', new foundry.data.fields.NumberField({ initial: 666, min: 0, max: 1000, step: 1 })],
+      ['AlphaField (range)', new foundry.data.fields.AlphaField({ step: 0.01 })],
+      ['AngleField (range)', new foundry.data.fields.AngleField({ step: 1 })],
       ['BooleanField', new foundry.data.fields.BooleanField()],
-      ['HueField', new foundry.data.fields.HueField({ step: '0.01' })],
+      ['HueField', new foundry.data.fields.HueField({ step: 0.01 })],
       ['ColorField', new foundry.data.fields.ColorField({ initial: '#ff0000' })],
       ['FilePathField (images)', new foundry.data.fields.FilePathField({ categories: ['IMAGE']})],
       ['DocumentUUIDField (single)', new foundry.data.fields.DocumentUUIDField()],
@@ -40,7 +40,7 @@
       ['JSONField', new foundry.data.fields.JSONField()],
       ['GridOffsetsField', new foundry.data.fields.GridOffsetsField()],
       ['ShaderField (not implemented)', new foundry.data.fields.ShaderField()],
-   ]);
+   ]));
 
    /**
     * @type {TooltipOptions}
