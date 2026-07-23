@@ -53,7 +53,11 @@ import {
 import { constants, settings }   from "#constants";
 import { gameSettings }          from "#gameSettings";
 
-/** @import {Options}            from './types'; */
+/**
+ * @import {TJSPosition}         from '#runtime/svelte/store/position';
+ *
+ * @import {Options}             from './types';
+ */
 
 /**
  * @augments {SvelteApp<Options>}
@@ -121,6 +125,9 @@ export class MenuApplication extends SvelteApp
     */
    static get defaultOptions()
    {
+      /** @type {TJSPosition.API.Transform.Origin} */
+      const transformOrigin = 'center';
+
       return deepMerge(super.defaultOptions, {
          id: 'essential-svelte-esm',
 
@@ -134,7 +141,7 @@ export class MenuApplication extends SvelteApp
          width: 275,
          height: 'auto',
          positionOrtho: false,
-         transformOrigin: null,
+         transformOrigin,
          title: 'EssentialESM.apps.menu.title',
          zIndex: 95,
          themeName: 'dark',
