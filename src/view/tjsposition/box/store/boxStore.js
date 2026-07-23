@@ -7,6 +7,13 @@ import { isObject }        from '#runtime/util/object';
 
 import { AnimateControl }  from './AnimateControl.js';
 
+/** 
+ * @import { 
+ *    Subscriber,
+ *    Unsubscriber,
+ *    Writable }           from 'svelte/store';
+ */
+
 /**
  * Provides the main box custom store implementation. Various property stores are available for general
  * box control. All animation capabilities are facilitated through {@link AnimationControl} where built-in
@@ -45,21 +52,23 @@ class BoxStore
    #idCntr = 0;
 
    /**
-    *
+    * TODO: Incorrect type
+    * 
+    * @type {TJSPosition.API.Data.TJSPositionData[] | undefined}
     */
    #savedComponentData;
 
    /**
     * Stores the subscribers.
     *
-    * @type {import('svelte/store').Subscriber<Readonly<BoxData[]>>[]}
+    * @type {Subscriber<Readonly<BoxData[]>>[]}
     */
    #subscribers = [];
 
    /**
     * The box position validator attached to the app window bounds.
     *
-    * @type {import('#runtime/svelte/store/position').System.Validator.ValidatorSystem}
+    * @type {TJSPosition.API.System.Validator.ValidatorSystem}
     */
    #validator;
 
@@ -97,7 +106,7 @@ class BoxStore
    }
 
    /**
-    * @returns {import('#runtime/svelte/store/position').System.Validator.ValidatorSystem} The box data validator.
+    * @returns {TJSPosition.API.System.Validator.ValidatorSystem} The box data validator.
     */
    get validator()
    {
@@ -113,6 +122,12 @@ class BoxStore
    {
       const width = this.#validator.width;
       const height = this.#validator.height;
+
+      if (typeof width !== 'number' || typeof height !== 'number')
+      {
+         console.warn(`BoxStore warning: validator width or height not a number.`);
+         return;
+      }
 
       for (let cntr = count; --cntr >= 0;)
       {
@@ -186,7 +201,7 @@ class BoxStore
    /**
     * Saves all box store positions from position control layer.
     *
-    * @param {object[]} componentData - Exported component data from position control layer.
+    * @param {TJSPosition.API.Data.TJSPositionData[]} componentData - Exported component data from position control layer.
     */
    save(componentData)
    {
@@ -194,10 +209,10 @@ class BoxStore
    }
 
    /**
-    * @param {import('svelte/store').Subscriber<Readonly<BoxData[]>>} handler - Callback function that is invoked on
+    * @param {Subscriber<Readonly<BoxData[]>>} handler - Callback function that is invoked on
     *        update / changes. Receives a readonly copy of the box data.
     *
-    * @returns {import('svelte/store').Unsubscriber} Unsubscribe function.
+    * @returns {Unsubscriber} Unsubscribe function.
     */
    subscribe(handler)
    {
@@ -245,7 +260,7 @@ export const boxStore = new BoxStore();
  *
  * @property {number} id A unique ID for each box required by TJSPositionControlLayer.
  *
- * @property {import('#runtime/svelte/store/position').TJSPosition} position The associated position store.
+ * @property {TJSPosition} position The associated position store.
  *
  * @property {string} color The CSS color string for the box.
  *
@@ -255,13 +270,13 @@ export const boxStore = new BoxStore();
 /**
  * @typedef {object} BoxStores Defines the general property box stores.
  *
- * @property {import('svelte/store').Writable<boolean>} auto Use auto width / height boxes.
+ * @property {Writable<boolean>} auto Use auto width / height boxes.
  *
- * @property {import('svelte/store').Writable<boolean>} debug Use debug boxes.
+ * @property {Writable<boolean>} debug Use debug boxes.
  *
- * @property {import('svelte/store').Writable<boolean>} labels Show labels for debug boxes.
+ * @property {Writable<boolean>} labels Show labels for debug boxes.
  *
- * @property {import('svelte/store').Writable<boolean>} pclEnabled Enable position control layer.
+ * @property {Writable<boolean>} pclEnabled Enable position control layer.
  *
- * @property {import('svelte/store').Writable<boolean>} validatorEnabled Enable app window validation.
+ * @property {Writable<boolean>} validatorEnabled Enable app window validation.
  */

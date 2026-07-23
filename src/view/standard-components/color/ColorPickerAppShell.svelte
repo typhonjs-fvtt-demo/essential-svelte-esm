@@ -1,13 +1,18 @@
 <script>
-   import { ApplicationShell }      from '#runtime/svelte/component/application';
+   import { ApplicationShell }            from '#runtime/svelte/component/application';
 
    import {
       TJSColordPicker,
-      TJSColordPickerSavedColors }  from '#standard/component/color/picker-colord';
+      TJSColordPickerSavedColors }        from '#standard/component/color/picker-colord';
 
-   export let elementRoot = void 0;
+   /** 
+    * @import { TJSColordPickerOptions }  from '#standard/component/color/picker-colord';
+    */
 
-   /** @type {import('#standard/component/color/picker-colord').TJSColordPickerOptions} */
+   /** @type {HTMLElement} */
+   export let elementRoot;
+
+   /** @type {TJSColordPickerOptions} */
    const options = {
       addons: [TJSColordPickerSavedColors],
       enabled: true,

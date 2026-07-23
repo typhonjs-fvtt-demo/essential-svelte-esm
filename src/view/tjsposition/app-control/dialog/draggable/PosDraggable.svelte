@@ -1,11 +1,20 @@
 <script>
    import {
       optionComponents,
+      optionFnValues,
       optionStores,
-      optionValues,
-      storeDraggable }     from './index.js';
+      storeDraggable }              from './index.js';
 
-   let draggableOptions, draggableOptionComp;
+   /** 
+    * @import { SvelteComponent }   from 'svelte';
+    * @import { Readable }          from 'svelte/store';
+    */
+
+   /** @type {Readable<any>} */
+   let draggableOptions;
+
+   /** @type {typeof SvelteComponent<any>} */
+   let draggableOptionComp;
 
    $: {
       draggableOptionComp = optionComponents[$storeDraggable];
@@ -17,8 +26,8 @@
    <div>
       <label>Draggable Implementation:
          <select bind:value={$storeDraggable}>
-            {#each Object.entries(optionValues) as [key, value]}
-               <option value={value}>{key}</option>
+            {#each Object.keys(optionFnValues) as key}
+               <option value={key}>{key}</option>
             {/each}
          </select>
       </label>

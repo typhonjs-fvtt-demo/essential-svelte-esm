@@ -13,3 +13,4 @@ import { constants }       from '#constants';
  * @type {TJSGameSettings}
  */
 export const gameSettings = new TJSGameSettings(constants.moduleId);
+// export const gameSettings = new TJSGameSettings(constants.moduleId, { strictUserScoping: false });

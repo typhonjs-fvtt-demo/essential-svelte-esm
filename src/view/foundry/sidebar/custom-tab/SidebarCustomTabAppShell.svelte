@@ -3,9 +3,14 @@
 
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
-   export let elementRoot = void 0;
+   /**
+    * @import { External }       from './types';
+    */
 
-   /** @type {import('./types').External} */
+   /** @type { HTMLElement } */
+   export let elementRoot;
+
+   /** @type {External} */
    const { stores } = getContext('#external');
 
    const { reloadRequired, tabAdd, tabRemove, tabReplace } = stores;

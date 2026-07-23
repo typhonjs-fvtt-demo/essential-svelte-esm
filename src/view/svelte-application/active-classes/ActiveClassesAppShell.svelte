@@ -3,9 +3,14 @@
 
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
-   export let elementRoot = void 0;
+   /** 
+    * @import { SvelteApp }      from '#runtime/svelte/application';
+    */
 
-   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
+   /** @type {HTMLElement} */
+   export let elementRoot;
+
+   /** @type {SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
    const activeClasses = application.reactive.activeClasses;

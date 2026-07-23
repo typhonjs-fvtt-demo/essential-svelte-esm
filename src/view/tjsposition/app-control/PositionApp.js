@@ -9,15 +9,19 @@ import { deepMerge }       from '#runtime/util/object';
 import PositionAppShell    from './PositionAppShell.svelte';
 import DialogContent       from './dialog/DialogContent.svelte';
 
-export class PositionApplication extends SvelteApp
+/**
+ * @import { Writable }    from 'svelte/store';
+ */
+
+export class PositionApp extends SvelteApp
 {
-   /** @type {TJSDialog} */
+   /** @type {TJSDialog | undefined} */
    #dialog;
 
    /**
     * Provides a store to enable / disable debug mode which overlays the transform bounding box.
     *
-    * @type {import('svelte/store').Writable<boolean>}
+    * @type {Writable<boolean>}
     */
    #storeDebug = writable(false);
 
@@ -51,7 +55,6 @@ export class PositionApplication extends SvelteApp
 
    get dialog() { return this.#dialog; }
 
-   /** @inheritDoc */
    async close(options)
    {
       this.#dialog?.close();
@@ -60,7 +63,7 @@ export class PositionApplication extends SvelteApp
 
    onSvelteMount()
    {
-      // Offset dialog from current position.
+      // @ts-expect-error - Offset dialog from current position / `height` is a number.
       const top = this.position.top + this.position.height + 10;
 
       /**

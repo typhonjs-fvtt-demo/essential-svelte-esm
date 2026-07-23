@@ -1,17 +1,21 @@
 <script>
    import {
       getContext,
-      setContext }               from 'svelte';
+      setContext }            from 'svelte';
 
-   import ItemRow                from '../common/ItemRow.svelte';
-   import ItemSortBy             from '../common/ItemSortBy.svelte';
+   import ItemRow             from '../common/ItemRow.svelte';
+   import ItemSortBy          from '../common/ItemSortBy.svelte';
+
+   /**
+    * @import { ItemContext } from '#arrayObjectContext';
+    */
 
    /**
     * Set the table cell tag for reuse of components from `../common` across grid / table layouts.
     */
    setContext('tableTags', { cell: 'td', row: 'tr' });
 
-   /** @type {import('#arrayObjectContext').ItemContext} */
+   /** @type {ItemContext} */
    const { itemStore } = getContext('#external').itemContext;
 
    const dataReducer = itemStore.dataReducer;

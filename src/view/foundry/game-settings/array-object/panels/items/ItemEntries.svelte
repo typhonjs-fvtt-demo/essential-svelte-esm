@@ -7,7 +7,11 @@
    import ItemGrid               from './grid/ItemGrid.svelte';
    import ItemTable              from './table/ItemTable.svelte';
 
-   /** @type {import('#arrayObjectContext').ItemContext} */
+   /**
+    * @import { ItemContext }    from '#arrayObjectContext';
+    */
+
+   /** @type {ItemContext} */
    const { layoutType, scrollTop } = getContext('#external').itemContext;
 </script>
 

@@ -1,16 +1,23 @@
 <script>
-   import { TJSSvgFolder } from '#standard/component/folder';
+   import { writable }        from 'svelte/store';
 
-   import PosAnimateTo     from './PosAnimateTo.svelte';
-   import PosDraggable     from './draggable/PosDraggable.svelte';
-   import PosGsap          from './PosGsap.svelte';
-   import PosProperties    from './PosProperties.svelte';
+   import { TJSSvgFolder }    from '#standard/component/folder';
 
-   export let application = void 0;
+   import PosAnimateTo        from './PosAnimateTo.svelte';
+   import PosDraggable        from './draggable/PosDraggable.svelte';
+   import PosGsap             from './PosGsap.svelte';
+   import PosProperties       from './PosProperties.svelte';
+
+   /** 
+    * @import { PositionApp } from '../PositionApp';
+    */
+
+   /** @type {PositionApp} */
+   export let application;
 
    const storeDebug = application.storeDebug;
 
-   const { alwaysOnTop } = application.dialog.reactive.storeAppOptions;
+   const alwaysOnTop = application.dialog ? application.dialog.reactive.storeAppOptions.alwaysOnTop : writable(false);
 
    const position = application.position;
 </script>
@@ -32,7 +39,7 @@
    </TJSSvgFolder>
 
    <TJSSvgFolder label={'Draggable:'}>
-      <PosDraggable {position} />
+      <PosDraggable />
    </TJSSvgFolder>
 
    <hr>

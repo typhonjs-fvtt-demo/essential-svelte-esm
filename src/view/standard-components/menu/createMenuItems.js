@@ -1,6 +1,12 @@
-import { TJSDialog } from '#runtime/svelte/application';
+import { TJSDialog }       from '#runtime/svelte/application';
 
-import MenuItem      from './MenuItem.svelte';
+import MenuItem            from './MenuItem.svelte';
+
+/** 
+ * @import { SvelteApp }   from '#runtime/svelte/application';
+ * 
+ * @import { TJSMenuData } from '#standard/component/menu';
+ */
 
 /**
  * Creates the items for all menus via `TJSMenu` or `TJSContextMenu` components.
@@ -10,18 +16,18 @@ import MenuItem      from './MenuItem.svelte';
  *
  * @param {object} [options] - Conditional options for extra menu items.
  *
- * @param {import('#runtime/svelte/application').SvelteApp} [options.application] - Used to add additional
- *        `always on top` app state menu item when `application` reference present.
+ * @param {SvelteApp} [options.application] - Used to add additional `always on top` app state menu item when
+ *        `application` reference present.
  *
  * @param {boolean} [options.trailingHR] - When true and `application` defined add a trailing HR to separate demo
  *        slotted menu item in `MenuBar.svelte`. `TJSMenu` allows additional menu items to be defined by slots.
  *
- * @returns {Iterable<import('#standard/component/menu').TJSMenuData.Items>} Menu items.
+ * @returns {Iterable<TJSMenuData.Items>} Menu items.
  */
 export function createMenuItems({ application, trailingHR = false } = {})
 {
    /**
-    * @type {import('#standard/component/menu').TJSMenuData.Items[]}
+    * @type {TJSMenuData.Items[]}
     */
    const items = [
       {

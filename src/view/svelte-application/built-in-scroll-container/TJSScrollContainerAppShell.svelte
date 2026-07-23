@@ -1,9 +1,14 @@
 <script>
-   import { ApplicationShell }   from '#runtime/svelte/component/application';
+   import { ApplicationShell }            from '#runtime/svelte/component/application';
 
-   import DynamicContent         from './DynamicContent.svelte';
+   import DynamicContent                  from './DynamicContent.svelte';
 
-   export let elementRoot = void 0;
+   /** 
+    * @import { TJSScrollContainerData }  from '#runtime/svelte/component/container';
+    */
+
+   /** @type {HTMLElement} */
+   export let elementRoot;
 
    /**
     * Configuration object for `TJSScrollContainer` component. `ApplicationShell` and `TJSApplicationShell` can insert
@@ -14,7 +19,7 @@
     * Review all the options described by `TJSScrollContainerData` as there are several useful ones including
     * scrollbar serialization.
     *
-    * @type {import('#runtime/svelte/component/container').TJSScrollContainerData}
+    * @type {TJSScrollContainerData}
     */
    let container = {
       /** Sets the scrollbar gutter to `stable`. */

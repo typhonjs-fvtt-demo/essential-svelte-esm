@@ -12,6 +12,8 @@ import {
    EmbeddedDocApplication,
    SidebarCustomTabApp,
    GameSettingArrayObjectApp,
+   TJSDataFieldApp,
+   TJSDocDataFieldApp,
    TJSGameSettingWithUIApp }     from './foundry';
 
 import {
@@ -43,7 +45,7 @@ import {
    TJSScrollContainerApp }       from './svelte-application';
 
 import {
-   PositionApplication,
+   PositionApp,
    PositionBasicOverlayApp,
    PositionBoxApplication,
    PositionCarouselApp }         from './tjsposition';
@@ -51,8 +53,10 @@ import {
 import { constants, settings }   from "#constants";
 import { gameSettings }          from "#gameSettings";
 
+/** @import {Options}            from './types'; */
+
 /**
- * @augments {SvelteApp<import('./types').Options>}
+ * @augments {SvelteApp<Options>}
  */
 export class MenuApplication extends SvelteApp
 {
@@ -96,7 +100,13 @@ export class MenuApplication extends SvelteApp
             scope: 'user',
             config: false,
             default: {},
-            type: Object
+            type: Object,
+            onChange: (value, _, userId) =>
+            {
+               console.log(`!!! MenuApplication - onChange appStateMenuUser - change userId: ${userId}; game.user.id: ${game.userId}; wrong user: ${userId !== game.userId}`);
+               console.log(`!!! MenuApplication - onChange appStateMenuUser - change value: `, value?.position);
+               console.log(`!!! MenuApplication - onChange appStateMenuUser - stored value: `, game.settings.get(constants.moduleId, settings.appStateMenuUser)?.position);
+            }
          }
       });
 
@@ -194,7 +204,7 @@ export class MenuApplication extends SvelteApp
             title: 'TJSPosition',
             entries: [
                { title: 'Empty App / Basic Overlay', class: PositionBasicOverlayApp },
-               { title: 'App Control / Animation', class: PositionApplication },
+               { title: 'App Control / Animation', class: PositionApp },
                { title: 'Box Demo / Element Control', class: PositionBoxApplication },
                { title: '3D Carousel', class: PositionCarouselApp }
             ]
@@ -231,6 +241,8 @@ export class MenuApplication extends SvelteApp
             entries: [
                { title: 'Reactive Document (Basic)', class: BasicDocumentApp },
                { title: 'Reactive Embedded Collections', class: EmbeddedDocApplication },
+               { title: 'Reactive DataFields', class: TJSDataFieldApp },
+               { title: 'Reactive Document DataFields', class: TJSDocDataFieldApp }
             ]
          },
          {

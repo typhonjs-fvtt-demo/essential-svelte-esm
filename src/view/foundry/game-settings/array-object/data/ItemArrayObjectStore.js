@@ -8,6 +8,8 @@ import { ItemGenerator }            from './ItemGenerator.js';
 import { constants }                from '#constants';
 import { gameSettings }             from '#gameSettings';
 
+/** @import { Writable }            from 'svelte/store'; */
+
 /**
  * Provides additional functionality on top of `GameSettingArrayObject` such as sorting logic and encapsulation of
  * all data related to controlling the item entries store instance.
@@ -31,9 +33,8 @@ export class ItemArrayObjectStore extends GameSettingArrayObject
     *
     * @param {'user' | 'world'} options.scope - Game setting scope.
     *
-    * @param {(import('svelte/store').Writable<
-    *    import('#runtime/svelte/store/reducer').DynReducerHelper.Sort.ObjectByPathData>
-    * )} options.sortBy - Sort by property store associated w/ sessionStorage storing any changes to sort ordering.
+    * @param {Writable<DynReducerHelper.Sort.ObjectByPathData>} options.sortBy - Sort by property store associated
+    *        w/ sessionStorage storing any changes to sort ordering.
     */
    constructor({ key, scope, sortBy })
    {

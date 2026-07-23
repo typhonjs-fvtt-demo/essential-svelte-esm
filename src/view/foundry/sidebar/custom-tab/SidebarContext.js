@@ -5,6 +5,10 @@ import { propertyStore }      from '#runtime/svelte/store/writable-derived';
 import { sessionConstants }   from '#constants';
 
 /**
+ * @import { SidebarCustomTabApp } from './SidebarCustomTabApp';
+ */
+
+/**
  * So, what is all of this below? To keep the app UI state tidy by sharing one session storage object with
  * several derived stores using `propertyStore` from `writable-derived` these derived stores must be created in
  * the application scope and not internally to the Svelte component or the loading process. While it is safe to
@@ -19,7 +23,7 @@ import { sessionConstants }   from '#constants';
 export class SidebarContext
 {
    /**
-    * @param {import('./SidebarCustomTabApp').SidebarCustomTabApp}   application -
+    * @param {SidebarCustomTabApp}   application -
     */
    constructor(application)
    {
@@ -57,7 +61,7 @@ export class SidebarContext
       );
 
       /**
-       * @type {import('./types').External['stores']}
+       * @type {SidebarCustomTabApp.Context.External['stores']}
        */
       this.stores = {
          reloadRequired,

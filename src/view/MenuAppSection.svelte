@@ -1,19 +1,25 @@
 <script>
-   import { getContext }   from 'svelte';
+   import { getContext }      from 'svelte';
 
-   import { SvelteApp }    from '#runtime/svelte/application';
-   import { isObject }     from '#runtime/util/object';
+   import { SvelteApp }       from '#runtime/svelte/application';
+   import { isObject }        from '#runtime/util/object';
 
-   import { TJSSvgFolder } from '#standard/component/folder';
+   import { TJSSvgFolder }    from '#standard/component/folder';
 
-   /** @type {object} */
+   /** 
+    * @import { TJSFolder }   from '#standard/component/folder';
+    * 
+    * @import { External }    from './types';
+    */
+
+   /** @type {Record<string, any>} */
    export let section;
 
-   /** @type {import('./types').External} */
+   /** @type {External} */
    const { application, demoApps } = getContext('#external');
 
    /**
-    * @type {import('#standard/component/folder').TJSFolder.Data}
+    * @type {TJSFolder.Data}
     */
    const folder = {
       label: section.title,
@@ -22,7 +28,7 @@
    }
 
    /**
-    * @param {object}   button -
+    * @param {Record<string, any>}  button -
     */
    function onClick(button)
    {

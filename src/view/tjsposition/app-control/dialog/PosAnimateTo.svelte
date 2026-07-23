@@ -33,19 +33,24 @@
     * state API only saves / restores positional state.
     */
 
-   import { easingList }  from '#runtime/svelte/easing';
+   import { easingList }               from '#runtime/svelte/easing';
+
+   /** 
+    * @import { SvelteApp }            from '#runtime/svelte/application';
+    * @import { EasingFunctionName }   from '#runtime/svelte/easing';
+    */
 
    /**
     * The target Svelte application being animated.
     *
-    * @type {import('#runtime/svelte/application').SvelteApp}
+    * @type {SvelteApp}
     */
-   export let application = void 0;
+   export let application;
 
    /**
     * Svelte easing function name to apply to animation.
     *
-    * @type {import('#runtime/svelte/easing').EasingFunctionName}
+    * @type {EasingFunctionName}
     */
    let ease = 'linear';
 
@@ -99,7 +104,7 @@
          animations. Note the use of `transformOrigin: 'center'` which applies a center origin for the rotation during
          the animation.
       -->
-      <button on:click={() => application.position.animate.to({ rotateZ: application.position.rotateZ < 360 ? 360 : 0 }, { duration, ease, strategy: 'exclusive', transformOrigin: 'center' })}>Flip</button>
+      <button on:click={() => application.position.animate.to({ rotateZ: application.position.rotateZ ?? 0 < 360 ? 360 : 0 }, { duration, ease, strategy: 'exclusive', transformOrigin: 'center' })}>Flip</button>
       <div class=separator></div>
       <!--
          Resets any schedule animation and sets initial default position keeping the current `z-index`. This is the

@@ -1,30 +1,47 @@
 <script>
-   import { MathRandom }   from '#runtime/math/util';
+   import { MathRandom }               from '#runtime/math/util';
 
    import {
       getGsapEasingFunc,
       gsapEasingList,
-      GsapCompose }        from '#runtime/svelte/animate/gsap';
+      GsapCompose }                    from '#runtime/svelte/animate/gsap';
 
-   // Imports the loading code / automatic GSAP plugin registration.
+   /** 
+    * @import { GsapEasingReference }  from '#runtime/svelte/animate/gsap';
+    * @import { TJSPosition }          from '#runtime/svelte/store/position';
+    */   
+
+      // Imports the loading code / automatic GSAP plugin registration.
    import '#runtime/svelte/animate/gsap/plugin/CustomEase';
    import '#runtime/svelte/animate/gsap/plugin/MotionPathPlugin';
    import '#runtime/svelte/animate/gsap/plugin/bonus/CustomWiggle';
 
-   /**
-    * @type {import('#runtime/svelte/store/position').TJSPosition}
-    */
+
+   /** @type {TJSPosition} */
    export let position;
 
    // Defines a custom ease w/ the CustomWiggle plugin. This is used below to set a variable amount of wiggle count
    // depending on the duration of the animation; more wiggles the lower the duration.
    const customWiggle = (count = 10, type = 'anticipate') => `wiggle({ wiggles: ${count}, type: ${type} })`;
 
-   /** @type {import('#runtime/svelte/animate/gsap').GsapEasingReference} */
+   /** @type {GsapEasingReference} */
    let easeName = 'linear';
 
    let duration = 1;
-   let gsapTimeline, gsapTween;
+
+   /** 
+    * GSAP timeline instance.
+    * 
+    * @type {Record<string, any> | undefined}
+    */   
+   let gsapTimeline;
+
+   /** 
+    * GSAP tween instance.
+    * 
+    * @type {Record<string, any> | undefined}
+    */   
+   let gsapTween;
 
    /** @type {number} */
    let innerHeight;

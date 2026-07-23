@@ -5,6 +5,15 @@
 
    import { TJSDataField }       from '#standard/component/fvtt/datafield';
 
+   /** 
+    * @import { TooltipOptions }          from '#runtime/svelte/action/dom/tooltip';
+    * @import { MinimalWritable }         from '#runtime/svelte/store/util';
+    * 
+    * @import {
+    *    TJSDataFieldOptions,
+    *    TJSDataFieldValidationCallback } from '#standard/component/fvtt/datafield';
+    */
+
    /** @type {HTMLElement} */
    export let elementRoot;
 
@@ -34,7 +43,7 @@
    ]);
 
    /**
-    * @type {import('#runtime/svelte/action/dom/tooltip').TooltipOptions}
+    * @type {TooltipOptions}
     */
    const resetInitialTooltip = {
       direction: 'UP',
@@ -46,7 +55,7 @@
    };
 
    /**
-    * @type {import('#standard/component/fvtt/datafield').TJSDataFieldOptions}
+    * @type {TJSDataFieldOptions}
     */
    let datafieldOptions;
 
@@ -97,7 +106,7 @@
           * You may assign a callback that gets invoked from user changes with any validation failure.
           * This simply logs it to the console. You might for instance want to post a UI notification, etc.
           *
-          * @type {import('#standard/component/fvtt/datafield').TJSDataFieldValidationCallback}
+          * @type {TJSDataFieldValidationCallback}
           */
          onValidationFailure: (err, context) => console.warn(context, err),
 
@@ -108,7 +117,7 @@
    /**
     * This demo example binds to the internal store of `TJSDataField`. You may provide an external store as well.
     *
-    * @type {import('#runtime/svelte/store/util').MinimalWritable<unknown>}
+    * @type {MinimalWritable<unknown>}
     */
    let store;
 </script>

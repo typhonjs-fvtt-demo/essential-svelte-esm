@@ -1,19 +1,24 @@
 <script>
-   import { getContext }   from 'svelte';
+   import { getContext }      from 'svelte';
 
-   import CQDemoColorBars  from './CQDemoColorBars.svelte';
+   import CQDemoColorBars     from './CQDemoColorBars.svelte';
+
+   /** 
+    * @import { SvelteApp }   from '#runtime/svelte/application';
+    * @import { AppShell }    from '#runtime/svelte/component/application';
+    */
 
    /**
     * When a component is embedded in an app shell there is an `#internal` context w/ additional stores. `cqEnabled`
     * has the enabled state for container queries.
     *
-    * @type {import('#runtime/svelte/component/application').AppShell.Context.InternalAppStores}
+    * @type {AppShell.Context.InternalAppStores}
     */
    const { cqEnabled } = getContext('#internal').stores;
 
    // Create a dynamic CQ disabled message based on CQ state ---------------------------------------------------------
 
-   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
+   /** @type {SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
    const { containerQueryType } = application.reactive.storeAppOptions;

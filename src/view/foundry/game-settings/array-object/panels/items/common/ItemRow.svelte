@@ -7,19 +7,26 @@
    import ItemCategory        from './ItemCategory.svelte';
    import ItemPropInput       from './ItemPropInput.svelte';
 
+   /** 
+    * @import { 
+    *   ItemContext,
+    *   ItemEntryStore,
+    *   TableTags }           from '#arrayObjectContext';
+    */
+
    /** @type {number} */
    export let i = 0;
 
-   /** @type {import('#arrayObjectContext').ItemEntryStore} */
+   /** @type {ItemEntryStore} */
    export let item;
 
-   /** @type {import('#arrayObjectContext').ItemContext} */
+   /** @type {ItemContext} */
    const { itemStore, menuItems } = getContext('#external').itemContext;
 
    /**
     * The dynamic table cell tags allowing reuse of this component across grid / table element layouts.
     *
-    * @type {import('#arrayObjectContext').TableTags}
+    * @type {TableTags}
     */
    const { cell, row } = getContext('tableTags');
 

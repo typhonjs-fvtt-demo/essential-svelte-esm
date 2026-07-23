@@ -1,11 +1,15 @@
 <script>
-   import { easingList }   from '#runtime/svelte/easing';
-   import { slideFade }    from '#runtime/svelte/transition';
+   import { easingList }      from '#runtime/svelte/easing';
+   import { slideFade }       from '#runtime/svelte/transition';
+
+   /** 
+    * @import { TJSPosition } from '#runtime/svelte/store/position';
+    */ 
 
    /**
-    * @type {import('#runtime/svelte/store/position').IDraggableOptions}
+    * @type {TJSPosition.Action.DraggableOptionsStore}
     */
-   export let options = void 0;
+   export let options;
 </script>
 
 <section transition:slideFade={{duration: 150}}>

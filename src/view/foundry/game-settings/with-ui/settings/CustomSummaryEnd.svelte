@@ -1,7 +1,13 @@
 <script>
-   import { getContext } from 'svelte';
+   import { getContext }      from 'svelte';
 
-   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
+   /** 
+    * @import { Writable }    from 'svelte/store';
+    * 
+    * @import { SvelteApp }   from '#runtime/svelte/application';
+    */
+
+   /** @type {SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
    /**
@@ -12,7 +18,7 @@
     * This allows you to potentially provide a custom summary end component that is stateful. IE perhaps some custom
     * buttons related to the custom panel added.
     *
-    * @type {import('svelte/store').Writable<boolean>}
+    * @type {Writable<boolean>}
     */
    const storeFolder = application.reactive.sessionStorage.getStore(
     'essential-svelte-esm-settings-folder-Custom Svelte Panel');

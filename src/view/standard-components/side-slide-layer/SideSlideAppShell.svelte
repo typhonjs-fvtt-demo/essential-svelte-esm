@@ -8,9 +8,14 @@
 
    import { createLayerProps }   from './createLayerProps.js';
 
-   export let elementRoot = void 0;
+   /** 
+    * @import { External }       from './types';
+    */
 
-   /** @type {import('./types').External} */
+   /** @type {HTMLElement} */
+   export let elementRoot;
+
+   /** @type {External} */
    const { stores, inputs } = getContext('#external');
 
    // Bound stores must be defined at the top level, so destructure them.

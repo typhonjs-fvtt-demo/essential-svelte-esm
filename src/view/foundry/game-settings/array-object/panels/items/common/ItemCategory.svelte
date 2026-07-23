@@ -7,20 +7,28 @@
     * @componentDescription
     */
 
+   /** 
+    * @import { ChangeEventHandler }   from 'svelte/elements';
+    * 
+    * @import { 
+    *    ItemEntryStore,
+    *    TableTags }                   from '#arrayObjectContext';
+    */
+
    import { getContext } from 'svelte';
 
-   /** @type {import('#arrayObjectContext').ItemEntryStore} */
+   /** @type {ItemEntryStore} */
    export let item;
 
    /**
     * The dynamic table cell tag allowing reuse of this component across grid / table element layouts.
     *
-    * @type {import('#arrayObjectContext').TableTags}
+    * @type {TableTags}
     */
    const { cell } = getContext('tableTags');
 
    /**
-    * @type {import('svelte/elements').ChangeEventHandler<HTMLSelectElement>}
+    * @type {ChangeEventHandler<HTMLSelectElement>}
     */
    function onChange(event)
    {

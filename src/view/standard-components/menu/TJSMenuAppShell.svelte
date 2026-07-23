@@ -13,9 +13,16 @@
 
    import { sessionConstants }      from '#constants';
 
-   export let elementRoot = void 0;
+   /** 
+    * @import { TJSScrollContainerData } from '#runtime/svelte/component/container';
+    * 
+    * @import { External }               from './types';
+    */
+   
+   /** @type {HTMLElement} */
+   export let elementRoot;
 
-   /** @type {import('./types').External} */
+   /** @type {External} */
    const { application, stores } = getContext('#external');
 
    // ----------------------------------------------------------------------------------------------------------------
@@ -30,7 +37,7 @@
    /**
     * Configuration object for `TJSScrollContainer` component.
     *
-    * @type {import('#standard/component/container').TJSScrollContainerData}
+    * @type {TJSScrollContainerData}
     */
    const container = {
       /**
@@ -79,6 +86,7 @@
 
    // Dynamic font size ----------------------------------------------------------------------------------------------
 
+   /** @type {string} */
    let fontSize;
 
    const storeFontScale = stores.fontScale;

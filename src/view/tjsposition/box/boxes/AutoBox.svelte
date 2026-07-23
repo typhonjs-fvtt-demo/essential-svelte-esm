@@ -1,12 +1,14 @@
 <script>
    import { resizeObserver }  from '#runtime/svelte/action/dom/observer';
-
    import { draggableGsap }   from '#runtime/svelte/animate/gsap';
-
    import { applyPosition }   from '#runtime/svelte/store/position';
 
-   /** @type {import('../boxStore').BoxData} */
-   export let box = void 0;
+   /**
+    * @import { BoxData }     from '../store/boxStore';
+    */
+
+   /** @type {BoxData} */
+   export let box;
 
    // This is run once when the component is created. It sets the position width / height to 'auto'.
    box.position.set({ width: 'auto', height: 'auto' });

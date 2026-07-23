@@ -1,10 +1,14 @@
 <script>
-   import { getContext }         from 'svelte';
-   import { writable }           from 'svelte/store';
+   import { getContext }      from 'svelte';
+   import { writable }        from 'svelte/store';
 
-   import { TJSInput }           from '#standard/component/form';
+   import { TJSInput }        from '#standard/component/form';
 
-   /** @type {import('#arrayObjectContext').ItemContext} */
+   /** 
+    * @import { ItemContext } from '#arrayObjectContext';
+    */
+
+   /** @type {ItemContext} */
    const {
       itemStore,
       maxItems } = getContext('#external').itemContext;

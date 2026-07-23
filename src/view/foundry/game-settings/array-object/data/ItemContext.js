@@ -7,6 +7,12 @@ import {
    settings,
    sessionConstants }            from '#constants';
 
+/** 
+ * @import { Writable }          from 'svelte/store';
+ * 
+ * @import { SvelteApp }         from '#runtime/svelte/application';
+ */
+   
 /**
  * It is best practice to configure and initialize data sources separately from your UI facing components.
  * `ItemContext` automatically configures the reactive `GameSettingArrayObject` stores associated with reactive
@@ -30,7 +36,7 @@ import {
  *
  * @example
  * ```js
- * /** @type {import('#arrayObjectContext').ItemContext} *\/
+ * /** @type {ItemContext } *\/
  * const { itemStore } = getContext('#external').itemContext;
  * ```
  *
@@ -58,7 +64,7 @@ export class ItemContext
    #data;
 
    /**
-    * @param {import('../GameSettingArrayObjectApp').GameSettingArrayObjectApp}  application -
+    * @param {SvelteApp}  application -
     */
    constructor(application)
    {
@@ -97,7 +103,7 @@ export class ItemContext
    }
 
    /**
-    * @returns {import('svelte/store').Writable<string>} Item entries layout type; 'grid' or 'table'.
+    * @returns {Writable<string>} Item entries layout type; 'grid' or 'table'.
     */
    get layoutType()
    {
@@ -129,7 +135,7 @@ export class ItemContext
    }
 
    /**
-    * @returns {import('svelte/store').Writable<number>} Session storage store for `TJSScrollContainer`.
+    * @returns {Writable<number>} Session storage store for `TJSScrollContainer`.
     */
    get scrollTop()
    {

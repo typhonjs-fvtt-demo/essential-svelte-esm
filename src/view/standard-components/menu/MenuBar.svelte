@@ -14,7 +14,11 @@
 
    import { createMenuItems }       from './createMenuItems.js';
 
-   /** @type {import('./types').External} */
+   /** 
+    * @import { External }          from './types';
+    */
+
+   /** @type {External} */
    const { application, stores } = getContext('#external');
 
    /**

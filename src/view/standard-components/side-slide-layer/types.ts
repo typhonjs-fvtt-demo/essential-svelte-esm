@@ -1,9 +1,10 @@
-import type { Writable }      from 'svelte/store';
+import type { Writable }         from 'svelte/store';
 
-import type { SvelteApp }     from '#runtime/svelte/application';
+import type { SvelteApp }        from '#runtime/svelte/application';
+import type { EasingReference }  from '#runtime/svelte/easing';
 
-import type { SideSlideApp }  from './SideSlideApp';
-import type SideSlideAppShell from './SideSlideAppShell.svelte';
+import type { SideSlideApp }     from './SideSlideApp';
+import type SideSlideAppShell    from './SideSlideAppShell.svelte';
 
 /**
  * You may extend the `#external` default context with additional data. Accessed via `getContext('#external')` in
@@ -16,9 +17,9 @@ interface External extends SvelteApp.Context.External<SideSlideApp> {
       allowLocking: Writable<boolean>
       clickToOpen: Writable<boolean>;
       duration: Writable<number>;
-      easingIn: Writable<string>;
-      easingOut: Writable<string>;
-      side: Writable<string>;
+      easingIn: Writable<EasingReference>;
+      easingOut: Writable<EasingReference>;
+      side: Writable<'left' | 'right'>;
       top: Writable<number>;
    }
 }

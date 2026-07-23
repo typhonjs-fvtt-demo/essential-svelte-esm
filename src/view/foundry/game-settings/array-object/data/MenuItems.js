@@ -3,19 +3,31 @@ import { get }             from 'svelte/store';
 import { ClipboardAccess } from '#runtime/util/browser';
 import { CrossRealm }      from '#runtime/util/realm';
 
+/** 
+ * @import { SvelteApp }   from '#runtime/svelte/application';
+ * 
+ * @import { TJSMenuData } from '#standard/component/menu';
+ * 
+ * @import { 
+ *    ItemContext,
+ *    ItemEntryStore }     from '#arrayObjectContext';
+ */
+
 /**
  * Provides menu item data generation that is accessible from `ItemContext`.
  */
 export class MenuItems
 {
+   /** @type {SvelteApp} */
    #application;
 
+   /** @type {ItemContext} */
    #itemContext;
 
    /**
-    * @param {import('../GameSettingArrayObjectApp').GameSettingArrayObjectApp} application -
+    * @param {SvelteApp} application -
     *
-    * @param {import('#arrayObjectContext').ItemContext} itemContext -
+    * @param {ItemContext} itemContext -
     */
    constructor(application, itemContext)
    {
@@ -26,13 +38,13 @@ export class MenuItems
    /**
     * Creates the context menu items to display for a table row.
     *
-    * @param {import('#arrayObjectContext').ItemEntryStore} item - An item entry store.
+    * @param {ItemEntryStore} item - An item entry store.
     *
-    * @returns {import('#standard/component/menu').TJSMenuData.Items[]} Menu items.
+    * @returns {TJSMenuData.Items[]} Menu items.
     */
    contextRow(item)
    {
-      /** @type {import('#standard/component/menu').TJSMenuData.Items[]} */
+      /** @type {TJSMenuData.Items[]} */
       const items = [];
 
       if (item.canUserModify)

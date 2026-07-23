@@ -4,6 +4,16 @@ import {
    getGsapEasingFunc,
    GsapCompose }           from '#runtime/svelte/animate/gsap';
 
+import { isFinite }        from '#runtime/util/predicate';
+
+/** 
+ * @import { TJSPosition } from '#runtime/svelte/store/position';
+ * 
+ * @import { AnimateData } from './AnimateControl';
+ * 
+ * @import { BoxData }     from './boxStore';
+ */
+
 // Imports the loading code / automatic GSAP plugin registration.
 import '#runtime/svelte/animate/gsap/plugin/CustomEase';
 import '#runtime/svelte/animate/gsap/plugin/MotionPathPlugin';
@@ -17,6 +27,7 @@ import '#runtime/svelte/animate/gsap/plugin/bonus/InertiaPlugin';
  */
 export class GsapAnimation
 {
+   /** @type {AnimateData} */
    #animData;
 
    /**
@@ -28,16 +39,27 @@ export class GsapAnimation
 
    /**
     * The GSAP timeline.
+    * 
+    * @type {Record<string, any> | undefined}
+    * 
+    * @see https://gsap.com/docs/v3/GSAP/Timeline/
     */
    #gsapTimeline;
 
    /**
     * The box position validator attached to the app window bounds.
     *
-    * @type {import('#runtime/svelte/store/position').System.Validator.ValidatorSystem}
+    * @type {TJSPosition.API.System.Validator.ValidatorSystem}
     */
    #validator;
 
+   /**
+    * @param {BoxData[]} boxData -
+    * 
+    * @param {TJSPosition.API.System.Validator.ValidatorSystem} validator -
+    * 
+    * @param {AnimateData} animData -
+    */
    constructor(boxData, validator, animData)
    {
       this.#boxData = boxData;
@@ -52,6 +74,12 @@ export class GsapAnimation
    {
       const width = this.#validator.width;
       const height = this.#validator.height;
+
+      if (!isFinite(width) || !isFinite(height))
+      {
+         console.warn(`GsapAnimation warning: validator width or height not a number.`);
+         return;
+      }
 
       // width & height divided by 6; used for motion path.
       const width6 = width / 6;
@@ -102,6 +130,15 @@ export class GsapAnimation
          { type: 'to', vars: { rotation: MathRandom.getInt(540, 720), duration, ease }, position: '<' }
       ];
 
+      /**
+       * TODO: Alas GsapCompose needs a types workover as there are many intricate options. 
+       * In the future this will have well defined types to import / apply.
+       * 
+       * This higher order function receives an index for the box data and returns the `position` GSAP 
+       * property staggering the box start times. 
+       * 
+       * @type {((time?: number) => (options: { index: number }) => number)}
+       */
       const staggerFunc = (time = 0.1) => ({ index }) => index * time;
 
       this.#gsapTimeline.add(GsapCompose.timeline(this.#boxData, createTimelineData,

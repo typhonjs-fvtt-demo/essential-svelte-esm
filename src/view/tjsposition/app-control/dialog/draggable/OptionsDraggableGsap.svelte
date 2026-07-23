@@ -1,15 +1,22 @@
 <script>
-   import { gsapEasingList }   from '#runtime/svelte/animate/gsap';
-   import { slideFade }    from '#runtime/svelte/transition';
+   import { gsapEasingList }  from '#runtime/svelte/animate/gsap';
+   import { slideFade }       from '#runtime/svelte/transition';
+
+   /** 
+    * @import { Action }      from '#runtime/svelte/animate/gsap';
+    */
 
    // Imports the loading / automatic GSAP plugin registration.
    import '#runtime/svelte/animate/gsap/plugin/bonus/InertiaPlugin';
 
-   /**
-    * @type {import('#runtime/svelte/animate/gsap').IDraggableGsapOptions}
-    */
-   export let options = void 0;
+   /** @type {Action.DraggableGsapOptionsStore} */
+   export let options;
 
+   /** 
+    * Inertia end on grid callback.
+    * 
+    * @type {(coords: {top: number, left: number}) => {top: number, left: number}}
+    */
    const tweenEnd = ({ top, left }) => ({ top: Math.round(top / 100) * 100, left: Math.round(left / 100) * 100 });
 
    let endOnGrid = false;

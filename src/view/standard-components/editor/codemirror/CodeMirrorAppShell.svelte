@@ -1,9 +1,14 @@
 <script>
-   import { ApplicationShell }   from '#runtime/svelte/component/application';
+   import { ApplicationShell }         from '#runtime/svelte/component/application';
 
-   import { TJSCodeMirror }      from '#standard/component/fvtt/editor';
+   import { TJSCodeMirror }            from '#standard/component/fvtt/editor';
 
-   export let elementRoot = void 0;
+   /** 
+    * @import { TJSCodeMirrorOptions } from '#standard/component/fvtt/editor';
+    */
+
+   /** @type {HTMLElement} */
+   export let elementRoot;
 
    /**
     * You can set a document to load / save content from given a `fieldName` in the format of `a.b.c`.
@@ -15,7 +20,7 @@
     * The following options data is mostly commented out. For the most part though the values shown for configuration
     * show the default values _or_ in some cases the type of data that you need to set.
     *
-    * @type {import('#standard/component/fvtt/editor').TJSCodeMirrorOptions}
+    * @type {TJSCodeMirrorOptions}
     */
    const options = {
       /**

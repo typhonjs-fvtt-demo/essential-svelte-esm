@@ -5,11 +5,18 @@
    import { ApplicationShell }   from '#runtime/svelte/component/application';
 
    import {
+      optionFnValues,
       optionStores,
       storeDraggable }           from './dialog/draggable/index.js';
 
-   export let elementRoot = void 0;
+   /**
+    * @import { PositionApp }    from './PositionApp';
+    */
 
+   /** @type {HTMLElement} */
+   export let elementRoot;
+
+   /** @type {PositionApp} */
    const application = getContext('#external').application;
 
    const { top, left, width, height, rotateX, rotateY, rotateZ, scale, zIndex } = application.position.stores;
@@ -18,17 +25,15 @@
 
    const storeDebug = application.storeDebug;
 
-   let nullishRotateX, nullishRotateY, nullishRotateZ, nullishScale;
+   $: nullishRotateX = String($rotateX);
+   $: nullishRotateY = String($rotateY);
+   $: nullishRotateZ = String($rotateZ);
+   $: nullishScale = String($scale);
 
-   $: nullishRotateX = Number.isFinite($rotateX) ? $rotateX : 'null';
-   $: nullishRotateY = Number.isFinite($rotateY) ? $rotateY : 'null';
-   $: nullishRotateZ = Number.isFinite($rotateZ) ? $rotateZ : 'null';
-
-   $: nullishScale = Number.isFinite($scale) ? $scale : 'null';
-
+   /** @type {Record<string, string>} */
    let stylesDebug = {};
 
-   const transform = application.position.stores.transform;
+   const { transform } = application.position.stores;
 
    let draggableOptionsStore;
 
@@ -42,12 +47,13 @@
       stylesDebug.top = `${boundingRect.y}px`;
       stylesDebug.width = `${boundingRect.width}px`;
       stylesDebug.height = `${boundingRect.height}px`;
+      stylesDebug['z-index'] = `${($zIndex ?? 0) + 1}`;
    }
 </script>
 
 <svelte:options accessors={true}/>
 
-<ApplicationShell bind:elementRoot draggable={$storeDraggable} draggableOptions={$draggableOptionsStore}>
+<ApplicationShell bind:elementRoot draggable={optionFnValues[$storeDraggable]} draggableOptions={$draggableOptionsStore}>
    <main class=scrollable>
       <h1>Reactive `position`</h1>
 
@@ -110,7 +116,5 @@
       position: absolute;
       background: rgba(100, 200, 255, 0.2);
       pointer-events: none;
-      will-change: top, left, width, height;
-      z-index: 999999;
    }
 </style>

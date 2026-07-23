@@ -1,20 +1,25 @@
 <script>
-   import { getContext }         from 'svelte';
+   import { getContext }               from 'svelte';
 
-   import { ApplicationShell }   from '#runtime/svelte/component/application';
+   import { ApplicationShell }         from '#runtime/svelte/component/application';
 
-   import { TJSSettingsSwap }    from '#standard/component/fvtt/settings';
+   import { TJSSettingsSwap }          from '#standard/component/fvtt/settings';
 
-   import { demoGameSettingsWithUI } from './gameSettingsWithUI.js';
+   import { demoGameSettingsWithUI }   from './gameSettingsWithUI.js';
 
-   import MainAppContent         from './MainAppContent.svelte';
+   import MainAppContent               from './MainAppContent.svelte';
 
-   import Header                 from './settings/Header.svelte';
-   import Footer                 from './settings/Footer.svelte';
+   import Header                       from './settings/Header.svelte';
+   import Footer                       from './settings/Footer.svelte';
 
-   export let elementRoot = void 0;
+   /** 
+    * @import { SvelteApp }            from '#runtime/svelte/application';
+    */
 
-   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
+   /** @type { HTMLElement } */
+   export let elementRoot;
+
+   /** @type {SvelteApp.Context.External} */
    const { application } = getContext('#external');
 </script>
 

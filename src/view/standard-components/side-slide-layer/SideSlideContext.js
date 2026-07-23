@@ -11,6 +11,10 @@ import {
    constants,
    settings }              from '#constants';
 
+/** 
+ * @import { External }    from './types';
+ */
+
 /**
  * So, what is all of this below?
  *
@@ -55,10 +59,10 @@ export class SideSlideContext
          }
       });
 
-      /** @type {import('./types').External['stores']} */
+      /** @type {External['stores']} */
       this.stores = this.#createStores();
 
-      /** @type {import('./types').External['inputs']} */
+      /** @type {External['inputs']} */
       this.inputs = this.#createInputs(this.stores);
 
       Object.seal(this);
@@ -67,9 +71,9 @@ export class SideSlideContext
    /**
     * Creates the `input` prop data for all TJSInput components used in the modification UI.
     *
-    * @param {import('./types').External['stores']} stores -
+    * @param {External['stores']} stores -
     *
-    * @returns {import('./types').External['inputs']} The `input` prop data for `TJSInput`.
+    * @returns {External['inputs']} The `input` prop data for `TJSInput`.
     */
    #createInputs(stores)
    {
@@ -146,12 +150,14 @@ export class SideSlideContext
    }
 
    /**
-    * @returns {import('./types').External['stores']} The property stores that are persisted to Foundry game settings.
+    * @returns {External['stores']} The property stores that are persisted to Foundry game settings.
     */
    #createStores()
    {
       // Retrieves the single world object storing all prop parameters for the side slide layer.
       const worldObject = gameSettings.getStore(settings.sideSlideLayer);
+
+      if (!worldObject) { throw new Error('Unable to create world settings store.'); }
 
       return {
          // These properties are serialized in the world object setting store and shared between `SideSlideAppShell.svelte`

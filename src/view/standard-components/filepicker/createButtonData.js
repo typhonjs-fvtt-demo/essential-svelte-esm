@@ -4,6 +4,10 @@ import { ripple }                from '#standard/action/animate/composable';
 import { FVTTFilePickerControl } from '#standard/application/control/filepicker';
 import { TJSContextMenu }        from '#standard/application/menu';
 
+/** 
+ * @import {TJSFileButton}       from '#standard/component/fvtt/filepicker/button';
+ */
+
 /**
  * Provides a convenience function to create the button data for the file picker button components to make the
  * example easier to read. This also gives an example of defining your UI / component data separately.
@@ -13,7 +17,7 @@ import { TJSContextMenu }        from '#standard/application/menu';
  * @param {string}   idPrepend - A unique string to prepend to picker CSS IDs. Creates unique IDs between normal app
  *        version and modal demo.
  *
- * @returns {import('#standard/component/fvtt/filepicker/button').TJSFileButton.Props[]} Button data.
+ * @returns {TJSFileButton.Props[]} Button data.
  */
 export function createButtonData(idPrepend)
 {

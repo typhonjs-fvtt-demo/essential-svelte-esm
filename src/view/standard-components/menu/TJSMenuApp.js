@@ -9,25 +9,34 @@ import TJSMenuAppShell        from './TJSMenuAppShell.svelte';
 
 import { sessionConstants }   from '#constants';
 
+/** 
+ * @import {
+ *    External,
+ *    Options }               from './types';
+ */
+
 /**
- * @augments {SvelteApp<import('./types').Options>}
+ * @augments {SvelteApp<Options>}
  */
 export class TJSMenuApp extends SvelteApp
 {
    /**
     * Defines the additional external context / derived WebStorage stores passed to the app shell / Svelte.
     *
-    * @type {Partial<import('./types').External>}
+    * @type {Partial<External>}
     */
    #context;
 
+   /**
+    * @param {SvelteApp.Options} options - SvelteApp options.
+    */
    constructor(options)
    {
       super(options);
 
       try
       {
-         // Attempt to parse session storage item and set to application state.
+         // @ts-expect-error - Attempt to parse session storage item and set to application state.
          this.state.set(JSON.parse(sessionStorage.getItem(sessionConstants.menusAppState)));
       }
       catch { /**/ }

@@ -109,7 +109,27 @@ class DemoGameSettingsWithUI extends TJSGameSettingsWithUI
             scope: scope.world,
             config: false,
             type: Number,
-            default: 0
+            default: 0,
+            units: 'ms'
+         }
+      });
+
+      settings.push({
+         namespace,
+         key: 'test5',
+         configApp: true,
+         options: {
+            name: 'Test 5 (require reload)',
+            hint: 'When this setting is changed the user is prompted to reload.',
+            scope: scope.user,
+            config: false,
+            requiresReload: true, // Confirm w/ user to reload on exiting settings edit.
+            type: String,
+            choices: {
+               on: 'On',
+               off: 'Off',
+            },
+            default: 'on'
          }
       });
 
@@ -125,10 +145,25 @@ class DemoGameSettingsWithUI extends TJSGameSettingsWithUI
             name: 'Test 1 data field',
             hint: 'A `NumberField`',
             scope: scope.user,
-            config: false,
-            type: new foundry.data.fields.NumberField(),
+            config: true,
+            type: new foundry.data.fields.NumberField({ step: '1' }),
             default: 1,
             units: 'ms'
+         }
+      });
+
+      settings.push({
+         namespace,
+         key: 'testA-data-field',
+         configApp: true,
+         folder: 'Foundry Data Fields',
+         options: {
+            name: 'Test A data field',
+            hint: 'A `StringField`',
+            scope: scope.user,
+            config: false,
+            type: new foundry.data.fields.StringField(),
+            default: 'Some Text',
          }
       });
 
@@ -141,8 +176,8 @@ class DemoGameSettingsWithUI extends TJSGameSettingsWithUI
             name: 'Test 2 data field',
             hint: 'A `ColorField`',
             scope: scope.user,
-            config: false,
-            type: new foundry.data.fields.ColorField(),
+            config: true,
+            type: new foundry.data.fields.ColorField({ initial: '#ff0000' }),
             default: '#ff0000'
          }
       });
@@ -171,7 +206,7 @@ class DemoGameSettingsWithUI extends TJSGameSettingsWithUI
             name: 'Test 4 data field',
             hint: 'A `HueField`',
             scope: scope.user,
-            config: false,
+            config: true,
             type: new foundry.data.fields.HueField()
          }
       });

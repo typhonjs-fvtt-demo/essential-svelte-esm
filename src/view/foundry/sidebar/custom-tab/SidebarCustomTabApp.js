@@ -5,8 +5,12 @@ import { deepMerge }             from '#runtime/util/object';
 import { SidebarContext }        from './SidebarContext.js';
 import SidebarCustomTabAppShell  from './SidebarCustomTabAppShell.svelte';
 
+/** 
+ * @import { Options }           from './types';
+ */
+
 /**
- * @augments {SvelteApp<import('./types').Options>}
+ * @augments {SvelteApp<Options>}
  */
 export class SidebarCustomTabApp extends SvelteApp
 {
@@ -17,6 +21,9 @@ export class SidebarCustomTabApp extends SvelteApp
     */
    #context;
 
+   /**
+    * @param {SvelteApp.Options} options - SvelteApp options.
+    */
    constructor(options)
    {
       super(options);

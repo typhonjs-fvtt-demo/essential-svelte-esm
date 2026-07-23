@@ -21,16 +21,27 @@
 
    import { CrossRealm }   from '#runtime/util/realm';
 
-   /** @type {import('#arrayObjectContext').ItemEntryStore} */
+   /** 
+    * @import { ChangeEventHandler }         from 'svelte/elements';
+    * 
+    * @import { WritableDataPropertyKeys }   from '#runtime/util/object';
+    * 
+    * @import { 
+    *     ItemEntryData,
+    *     ItemEntryStore,
+    *     TableTags }                        from '#arrayObjectContext';
+    */
+
+   /** @type {ItemEntryStore} */
    export let item;
 
-   /** @type {import('#runtime/util/object').WritableDataPropertyKeys<import('#arrayObjectContext').ItemEntryData>} */
+   /** @type {WritableDataPropertyKeys<ItemEntryData>} */
    export let prop;
 
    /**
     * The dynamic table cell tag allowing reuse of this component across grid / table element layouts.
     *
-    * @type {import('#arrayObjectContext').TableTags}
+    * @type {TableTags}
     */
    const { cell } = getContext('tableTags');
 
@@ -56,7 +67,7 @@
    onDestroy(() => onClose());
 
    /**
-    * @type {import('svelte/elements').ChangeEventHandler<HTMLInputElement>}
+    * @type {ChangeEventHandler<HTMLInputElement>}
     */
    function onChange(event)
    {

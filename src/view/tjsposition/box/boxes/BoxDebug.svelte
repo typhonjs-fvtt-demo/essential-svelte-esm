@@ -7,8 +7,12 @@
 
    import { boxStore }        from '../store/boxStore.js';
 
-   /** @type {import('../store/boxStore').BoxData} */
-   export let box = void 0;
+   /**
+    * @import { BoxData }     from '../store/boxStore';
+    */
+
+   /** @type {BoxData} */
+   export let box;
 
    const labels = boxStore.stores.labels;
    const transform = box.position.stores.transform;
@@ -18,6 +22,7 @@
 
    let cornersText = '';
 
+   /** @type {{[key: string]: string | null}} */
    let stylesDebug = {};
 
    $:
@@ -26,11 +31,12 @@
       const corners = $transform.corners;
 
       const scale = box.position.scale;
+      const rotateZ = box.position.rotateZ;
 
-      cornersText = `(${parseInt(corners[0][0], 10)}, ${parseInt(corners[0][1], 10)})<br>(${
-       parseInt(corners[1][0], 10)}, ${parseInt(corners[1][1], 10)})<br>(${parseInt(corners[2][0], 10)}, ${
-        parseInt(corners[2][1], 10)})<br>(${parseInt(corners[3][0], 10)}, ${parseInt(corners[3][1], 10)})<br>Rot: ${
-         Math.round(box.position.rotateZ)}°<br>Scale: ${scale ? scale.toFixed(2) : 1}`;
+      cornersText = `(${Math.round(corners[0][0])}, ${Math.round(corners[0][1])})<br>(${
+       Math.round(corners[1][0])}, ${Math.round(corners[1][1])})<br>(${Math.round(corners[2][0])}, ${
+        Math.round(corners[2][1])})<br>(${Math.round(corners[3][0])}, ${Math.round(corners[3][1])})<br>Rot: ${
+         Math.round(rotateZ ? rotateZ : 0)}°<br>Scale: ${scale ? scale.toFixed(2) : 1}`;
 
       stylesDebug.left = `${boundingRect.x}px`;
       stylesDebug.top = `${boundingRect.y}px`;

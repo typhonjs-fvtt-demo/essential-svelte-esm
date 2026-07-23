@@ -1,14 +1,19 @@
 <script>
-   import { getContext }   from 'svelte';
+   import { getContext }      from 'svelte';
+
+   /** 
+    * @import { SvelteApp }   from '#runtime/svelte/application';
+    * @import { AppShell }    from '#runtime/svelte/component/application';
+    */
 
    // The following is to support this demo showcasing the dynamic application of CQ and protection the app shells
    // have to enable / disable CQ when positional `width` or `height` changes to `auto`. `inline-size` CQ is
    // indeterminate when `width` is `auto`. `size` CQ is indeterminate when either `width` or `height` is `auto`.
 
-   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
+   /** @type {SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
-   /** @type {import('#runtime/svelte/component/application').AppShell.Context.InternalAppStores} */
+   /** @type {AppShell.Context.InternalAppStores} */
    const {
       contentWidth,
       contentHeight } = getContext('#internal').stores;

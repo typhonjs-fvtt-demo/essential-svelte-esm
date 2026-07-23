@@ -21,6 +21,9 @@ export class GameSettingArrayObjectApp extends SvelteApp
     */
    #context;
 
+   /**
+    * @param {SvelteApp.Options} options - SvelteApp options.
+    */
    constructor(options)
    {
       super(options);

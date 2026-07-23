@@ -1,3 +1,5 @@
+/** @import { ItemEntryData } from '#arrayObjectContext'; */
+
 /**
  * Provides `ItemEntryData` creation of randomized whimsical mock items for the game setting array object demo.
  */
@@ -12,7 +14,7 @@ export class ItemGenerator
    }
 
    /**
-    * @returns {import('#arrayObjectContext').ItemEntryData} Random item data.
+    * @returns {ItemEntryData} Random item data.
     */
    static createRandom()
    {

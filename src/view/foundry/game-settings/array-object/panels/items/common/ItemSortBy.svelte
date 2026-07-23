@@ -3,14 +3,24 @@
 
    import { localize }     from '#runtime/util/i18n';
 
+   /** 
+    * @import { DynReducerHelper }          from '#runtime/svelte/store/reducer';
+    * 
+    * @import { WritableDataPropertyKeys }  from '#runtime/util/object';
+    * 
+    * @import {
+    *    ItemContext,
+    *    ItemEntryData }                    from '#arrayObjectContext';
+    */
+
    /**
     * Item property to target.
     *
-    * @type {import('#runtime/util/object').WritableDataPropertyKeys<import('#arrayObjectContext').ItemEntryData>}
+    * @type {WritableDataPropertyKeys<ItemEntryData>}
     */
    export let prop;
 
-   /** @type {import('#arrayObjectContext').ItemContext} */
+   /** @type {ItemContext} */
    const { itemStore } = getContext('#external').itemContext;
 
    const { sortBy } = itemStore.stores;
@@ -34,7 +44,7 @@
    /**
     * Gets the current sort icon.
     *
-    * @param {import('#runtime/svelte/store/reducer').DynReducerHelper.Sort.ObjectByPathData} data - Sort by data.
+    * @param {DynReducerHelper.Sort.ObjectByPathData} data - Sort by data.
     */
    function getIcon(data)
    {

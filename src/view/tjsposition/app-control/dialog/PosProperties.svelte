@@ -1,16 +1,24 @@
 <script>
    /**
-    * @type {import('#runtime/svelte/store/position').TJSPosition}
+    * This component provides the properties panel of the secondary dialog that pops up controlling the main apps position store.
+    * 
+    * @componentDescription 
+    */
+
+   /** 
+    * @import { TJSPosition } from '#runtime/svelte/store/position';
+    */   
+
+   /**
+    * The controlled app position store.
+    * 
+    * @type {TJSPosition}
     */
    export let position;
 
-   let top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex;
+   const { top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex } = position.stores;
 
-   let minWidth, minHeight, maxWidth, maxHeight;
-
-   ({ top, left, width, height, rotateX, rotateY, rotateZ, scale, transformOrigin, zIndex } = position.stores);
-
-   ({ minWidth, minHeight, maxWidth, maxHeight } = position.stores);
+   const { minWidth, minHeight, maxWidth, maxHeight } = position.stores;
 
    /** @type {number} */
    let innerWidth;
@@ -18,27 +26,14 @@
    /** @type {number} */
    let innerHeight;
 
-   /** @type {number | 'null'} */
-   let nullishRotateX = 'null';
-   /** @type {number | 'null'} */
-   let nullishRotateY;
-   /** @type {number | 'null'} */
-   let nullishRotateZ;
-   /** @type {number | 'null'} */
-   let nullishScale;
-
-   $: if (rotateX) { nullishRotateX = Number.isFinite($rotateX) ? $rotateX : 'null'; }
-   $: if (rotateY) { nullishRotateY = Number.isFinite($rotateY) ? $rotateY : 'null'; }
-   $: if (rotateZ) { nullishRotateZ = Number.isFinite($rotateZ) ? $rotateZ : 'null'; }
-
-   $: if (scale) { nullishScale = Number.isFinite($scale) ? $scale : 'null'; }
-
-   let nullishMinWidth, nullishMinHeight, nullishMaxWidth, nullishMaxHeight;
-
-   $: if (minWidth) { nullishMinWidth = Number.isFinite($minWidth) ? $minWidth : 'null'; }
-   $: if (minHeight) { nullishMinHeight = Number.isFinite($minHeight) ? $minHeight : 'null'; }
-   $: if (maxWidth) { nullishMaxWidth = Number.isFinite($maxWidth) ? $maxWidth : 'null'; }
-   $: if (maxHeight) { nullishMaxHeight = Number.isFinite($maxHeight) ? $maxHeight : 'null'; }
+   $: nullishMinWidth = String($minWidth);
+   $: nullishMinHeight = String($minHeight);
+   $: nullishMaxWidth = String($maxWidth);
+   $: nullishMaxHeight = String($maxHeight);
+   $: nullishRotateX = String($rotateX);
+   $: nullishRotateY = String($rotateY);
+   $: nullishRotateZ = String($rotateZ);
+   $: nullishScale = String($scale);
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight/>
