@@ -30,6 +30,7 @@
       "allow": [
         "document",
         "event",
+        "isFinite",
         "name",
         "parent",
         "status",
