@@ -3,7 +3,7 @@
    import { applyPosition }   from '#runtime/svelte/store/position';
 
    /**
-    * @import { BoxData }     from '../store/boxStore';
+    * @import { BoxData }     from '../types-local';
     */
 
    /** @type {BoxData} */

@@ -14,9 +14,20 @@
    import BoxDebug                     from './boxes/BoxDebug.svelte';
    import BoxHeader                    from './BoxHeader.svelte';
 
-   export let elementRoot = void 0;
+   /**
+    * @import { SvelteComponent }      from 'svelte';
+    *
+    * @import { SvelteApp }            from '#runtime/svelte/application';
+    *
+    * @import {
+    *    TJSPositionControlLayerAPI }  from '#standard/component/layer/position';
+    */
 
-   const application = getContext('#external').application;
+   /** @type {HTMLElement} */
+   export let elementRoot;
+
+   /** @type {SvelteApp.Context.External} */
+   const { application } = getContext('#external');
 
    const storeMinimized = application.reactive.storeUIState.minimized;
 
@@ -25,8 +36,19 @@
    const storePCL = boxStore.stores.pclEnabled;
    const storeValidator = boxStore.stores.validatorEnabled;
 
+   /**
+    * The component instance currently representing the boxes.
+    *
+    * @type {typeof SvelteComponent<any>}
+    */
    let component;
-   let controls;
+
+   /**
+    * Bound to the controls API for the position control layer. This is passed as a prop to the `BoxHeader` component.
+    *
+    * @type {TJSPositionControlLayerAPI.Controls}
+    */
+   let pclControls;
 
    const boundingRect = new DOMRect(0, 0, 0, 0);
 
@@ -39,6 +61,13 @@
 
    $: boxStore.validator.enabled = $storeValidator;
 
+   /**
+    * Receives resize observer updates for when the `main` / box surface dimensions change.
+    *
+    * @param {number} offsetWidth -
+    *
+    * @param {number} offsetHeight -
+    */
    function setDimension(offsetWidth, offsetHeight)
    {
       // When the application is minimized do not update the validator / app constraints.
@@ -51,6 +80,7 @@
       // closing can cause a loop in the Svelte runtime. This can happen occasionally, so just avoid it entirely.
       if (!application.rendered) { return; }
 
+      // Set the dimensions for the box validator.
       boxStore.validator.setDimension(offsetWidth, offsetHeight);
 
       boundingRect.width = offsetWidth;
@@ -61,11 +91,11 @@
 <svelte:options accessors={true}/>
 
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
-   <BoxHeader {controls} />
+   <BoxHeader {pclControls} />
    <main use:resizeObserver={setDimension}>
-      <TJSPositionControlLayer enabled={$storePCL} {boundingRect} bind:controls
-                            components={$boxStore}
-                            validate={$storeValidator}>
+      <TJSPositionControlLayer enabled={$storePCL} {boundingRect} bind:controls={pclControls}
+                               entries={$boxStore}
+                               validate={$storeValidator}>
       {#each $boxStore as box (box.id)}
          <svelte:component this={component} {box} />
       {/each}

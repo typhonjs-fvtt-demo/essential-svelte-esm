@@ -5,10 +5,10 @@ import { isFinite }           from '#runtime/util/predicate';
 
 /**
  * @import { BasicAnimation } from '#runtime/util/animate';
- * 
+ *
  * @import { AnimateData }    from './AnimateControl';
  *
- * @import { BoxData }        from './boxStore';
+ * @import { BoxData }        from '../types-local';
  */
 
 /**
@@ -148,7 +148,7 @@ export class PositionAnimation
 
    /**
     * Animate the scale / rotation of all boxes randomly.
-    * 
+    *
     * Example of using the `finished` Promise to log to console when animation is done.
     */
    toScaleRot()

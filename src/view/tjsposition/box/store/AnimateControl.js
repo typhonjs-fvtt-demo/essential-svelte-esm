@@ -5,13 +5,13 @@ import { propertyStore }      from '#runtime/svelte/store/writable-derived';
 import { GsapAnimation }      from './GsapAnimation.js';
 import { PositionAnimation }  from './PositionAnimation.js';
 
-/** 
+/**
  * @import { Writable }             from 'svelte/store';
- * 
+ *
  * @import { GsapEasingReference }  from '#runtime/svelte/animate/gsap';
  * @import { TJSPosition }          from '#runtime/svelte/store/position';
- * 
- * @import { BoxData }              from './boxStore';
+ *
+ * @import { BoxData }              from '../types-local';
  */
 
 /**
@@ -37,7 +37,7 @@ export class AnimateControl
 
    /**
     * @param {BoxData[]} boxData -
-    * 
+    *
     * @param {TJSPosition.API.System.Validator.ValidatorSystem} validator -
     */
    constructor(boxData, validator)

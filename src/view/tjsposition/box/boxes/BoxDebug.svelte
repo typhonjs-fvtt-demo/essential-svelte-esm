@@ -8,7 +8,7 @@
    import { boxStore }        from '../store/boxStore.js';
 
    /**
-    * @import { BoxData }     from '../store/boxStore';
+    * @import { BoxData }     from '../types-local';
     */
 
    /** @type {BoxData} */

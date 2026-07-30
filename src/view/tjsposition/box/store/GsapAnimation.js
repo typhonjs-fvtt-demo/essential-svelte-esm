@@ -6,12 +6,12 @@ import {
 
 import { isFinite }        from '#runtime/util/predicate';
 
-/** 
+/**
  * @import { TJSPosition } from '#runtime/svelte/store/position';
- * 
+ *
  * @import { AnimateData } from './AnimateControl';
- * 
- * @import { BoxData }     from './boxStore';
+ *
+ * @import { BoxData }     from '../types-local';
  */
 
 // Imports the loading code / automatic GSAP plugin registration.
@@ -39,9 +39,9 @@ export class GsapAnimation
 
    /**
     * The GSAP timeline.
-    * 
+    *
     * @type {Record<string, any> | undefined}
-    * 
+    *
     * @see https://gsap.com/docs/v3/GSAP/Timeline/
     */
    #gsapTimeline;
@@ -55,9 +55,9 @@ export class GsapAnimation
 
    /**
     * @param {BoxData[]} boxData -
-    * 
+    *
     * @param {TJSPosition.API.System.Validator.ValidatorSystem} validator -
-    * 
+    *
     * @param {AnimateData} animData -
     */
    constructor(boxData, validator, animData)
@@ -131,12 +131,12 @@ export class GsapAnimation
       ];
 
       /**
-       * TODO: Alas GsapCompose needs a types workover as there are many intricate options. 
+       * TODO: Alas GsapCompose needs a types workover as there are many intricate options.
        * In the future this will have well defined types to import / apply.
-       * 
-       * This higher order function receives an index for the box data and returns the `position` GSAP 
-       * property staggering the box start times. 
-       * 
+       *
+       * This higher order function receives an index for the box data and returns the `position` GSAP
+       * property staggering the box start times.
+       *
        * @type {((time?: number) => (options: { index: number }) => number)}
        */
       const staggerFunc = (time = 0.1) => ({ index }) => index * time;

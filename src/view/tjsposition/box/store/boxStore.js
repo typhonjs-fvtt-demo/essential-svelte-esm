@@ -7,11 +7,17 @@ import { isObject }        from '#runtime/util/object';
 
 import { AnimateControl }  from './AnimateControl.js';
 
-/** 
- * @import { 
+/**
+ * @import {
+ *    Readable,
  *    Subscriber,
  *    Unsubscriber,
  *    Writable }           from 'svelte/store';
+ *
+ * @import { BoxData }     from '../types-local';
+ *
+ * @import {
+ *    TJSPositionControlLayerAPI }  from '#standard/component/layer/position';
  */
 
 /**
@@ -19,6 +25,8 @@ import { AnimateControl }  from './AnimateControl.js';
  * box control. All animation capabilities are facilitated through {@link AnimationControl} where built-in
  * TJSPosition animation and GSAP animation are separated respectively in {@link PositionAnimation} and
  * {@link GsapAnimation}.
+ *
+ * @implements {Readable<Readonly<BoxData[]>>}
  */
 class BoxStore
 {
@@ -52,11 +60,9 @@ class BoxStore
    #idCntr = 0;
 
    /**
-    * TODO: Incorrect type
-    * 
-    * @type {TJSPosition.API.Data.TJSPositionData[] | undefined}
+    * @type {TJSPositionControlLayerAPI.Data.Export | undefined}
     */
-   #savedComponentData;
+   #savedPCLExport;
 
    /**
     * Stores the subscribers.
@@ -183,15 +189,19 @@ class BoxStore
     */
    restore()
    {
-      if (isObject(this.#savedComponentData))
+      if (isObject(this.#savedPCLExport))
       {
+         // Remove old box data without destroying the array.
          this.#boxData.length = 0;
 
-         for (const component of this.#savedComponentData.components)
+         for (const entry of this.#savedPCLExport.entries)
          {
-            // Must add a new TJSPosition and a new unique ID.
-            const position = new TJSPosition({ ...component.position, validator: this.#validator });
-            this.#boxData.push({ ...component, id: this.#idCntr++, position });
+            // Must add a new BoxData object with new unique ID and TJSPosition instance.
+            this.#boxData.push({
+               ...entry,
+               id: this.#idCntr++,
+               position: new TJSPosition({ ...entry.position, validator: this.#validator })
+            });
          }
 
          this.#updateSubscribers();
@@ -201,11 +211,13 @@ class BoxStore
    /**
     * Saves all box store positions from position control layer.
     *
-    * @param {TJSPosition.API.Data.TJSPositionData[]} componentData - Exported component data from position control layer.
+    * @param {TJSPositionControlLayerAPI.Data.Export | undefined} pclExportData - Exported component data from position
+    *        control layer.
     */
-   save(componentData)
+   save(pclExportData)
    {
-      this.#savedComponentData = componentData;
+      console.log(`!!! boxStore - save - pclExportData:\n`, JSON.stringify(pclExportData, null, 2));
+      this.#savedPCLExport = pclExportData;
    }
 
    /**
@@ -254,18 +266,6 @@ class BoxStore
  * @type {BoxStore}
  */
 export const boxStore = new BoxStore();
-
-/**
- * @typedef {object} BoxData Defines the data stored in `boxStore`.
- *
- * @property {number} id A unique ID for each box required by TJSPositionControlLayer.
- *
- * @property {TJSPosition} position The associated position store.
- *
- * @property {string} color The CSS color string for the box.
- *
- * @property {{ width: number, height: number }} initialBounds The initial bounds of the box.
- */
 
 /**
  * @typedef {object} BoxStores Defines the general property box stores.
