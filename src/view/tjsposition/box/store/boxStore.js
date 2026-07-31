@@ -15,9 +15,6 @@ import { AnimateControl }  from './AnimateControl.js';
  *    Writable }           from 'svelte/store';
  *
  * @import { BoxData }     from '../types-local';
- *
- * @import {
- *    TJSPositionControlLayerAPI }  from '#standard/component/layer/position';
  */
 
 /**
@@ -46,7 +43,6 @@ class BoxStore
       auto: false,
       debug: false,
       labels: false,
-      pclEnabled: false,
       validatorEnabled: true
    };
 
@@ -58,11 +54,6 @@ class BoxStore
     * @type {number}
     */
    #idCntr = 0;
-
-   /**
-    * @type {TJSPositionControlLayerAPI.Data.Export | undefined}
-    */
-   #savedPCLExport;
 
    /**
     * Stores the subscribers.
@@ -86,7 +77,6 @@ class BoxStore
          auto: propertyStore(propStore, 'auto'),
          debug: propertyStore(propStore, 'debug'),
          labels: propertyStore(propStore, 'labels'),
-         pclEnabled: propertyStore(propStore, 'pclEnabled'),
          validatorEnabled: propertyStore(propStore, 'validatorEnabled')
       });
 
@@ -189,35 +179,33 @@ class BoxStore
     */
    restore()
    {
-      if (isObject(this.#savedPCLExport))
-      {
-         // Remove old box data without destroying the array.
-         this.#boxData.length = 0;
+      console.log(`!!! boxStore - restore - TO IMPLEMENT`);
 
-         for (const entry of this.#savedPCLExport.entries)
-         {
-            // Must add a new BoxData object with new unique ID and TJSPosition instance.
-            this.#boxData.push({
-               ...entry,
-               id: this.#idCntr++,
-               position: new TJSPosition({ ...entry.position, validator: this.#validator })
-            });
-         }
-
-         this.#updateSubscribers();
-      }
+      // if (isObject(this.#savedPCLExport))
+      // {
+      //    // Remove old box data without destroying the array.
+      //    this.#boxData.length = 0;
+      //
+      //    for (const entry of this.#savedPCLExport.entries)
+      //    {
+      //       // Must add a new BoxData object with new unique ID and TJSPosition instance.
+      //       this.#boxData.push({
+      //          ...entry,
+      //          id: this.#idCntr++,
+      //          position: new TJSPosition({ ...entry.position, validator: this.#validator })
+      //       });
+      //    }
+      //
+      //    this.#updateSubscribers();
+      // }
    }
 
    /**
-    * Saves all box store positions from position control layer.
-    *
-    * @param {TJSPositionControlLayerAPI.Data.Export | undefined} pclExportData - Exported component data from position
-    *        control layer.
+    * Saves all box store positions and current state.
     */
-   save(pclExportData)
+   save()
    {
-      console.log(`!!! boxStore - save - pclExportData:\n`, JSON.stringify(pclExportData, null, 2));
-      this.#savedPCLExport = pclExportData;
+      console.log(`!!! boxStore - save - TO IMPLEMENT`);
    }
 
    /**

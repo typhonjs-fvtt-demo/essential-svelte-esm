@@ -4,8 +4,6 @@
    import { resizeObserver }           from '#runtime/svelte/action/dom/observer';
    import { TJSApplicationShell }      from '#runtime/svelte/component/application';
 
-   import { TJSPositionControlLayer }  from '#standard/component/layer/position';
-
    import { boxStore }                 from './store/boxStore.js';
 
    import AutoBox                      from './boxes/AutoBox.svelte';
@@ -18,9 +16,6 @@
     * @import { SvelteComponent }      from 'svelte';
     *
     * @import { SvelteApp }            from '#runtime/svelte/application';
-    *
-    * @import {
-    *    TJSPositionControlLayerAPI }  from '#standard/component/layer/position';
     */
 
    /** @type {HTMLElement} */
@@ -33,7 +28,6 @@
 
    const storeAuto = boxStore.stores.auto;
    const storeDebug = boxStore.stores.debug;
-   const storePCL = boxStore.stores.pclEnabled;
    const storeValidator = boxStore.stores.validatorEnabled;
 
    /**
@@ -42,13 +36,6 @@
     * @type {typeof SvelteComponent<any>}
     */
    let component;
-
-   /**
-    * Bound to the controls API for the position control layer. This is passed as a prop to the `BoxHeader` component.
-    *
-    * @type {TJSPositionControlLayerAPI.Controls}
-    */
-   let pclControls;
 
    const boundingRect = new DOMRect(0, 0, 0, 0);
 
@@ -91,15 +78,11 @@
 <svelte:options accessors={true}/>
 
 <TJSApplicationShell bind:elementRoot stylesContent={{ padding: 0 }}>
-   <BoxHeader {pclControls} />
+   <BoxHeader />
    <main use:resizeObserver={setDimension}>
-      <TJSPositionControlLayer enabled={$storePCL} {boundingRect} bind:controls={pclControls}
-                               entries={$boxStore}
-                               validate={$storeValidator}>
       {#each $boxStore as box (box.id)}
          <svelte:component this={component} {box} />
       {/each}
-      </TJSPositionControlLayer>
    </main>
 </TJSApplicationShell>
 

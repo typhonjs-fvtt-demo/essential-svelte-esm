@@ -3,18 +3,6 @@
 
    import { boxStore }                 from './store/boxStore.js';
 
-   /**
-    * @import {
-    *    TJSPositionControlLayerAPI }  from '#standard/component/layer/position';
-    */
-
-   /**
-    * Position control layer controls.
-    *
-    * @type {TJSPositionControlLayerAPI.Controls}
-    */
-   export let pclControls;
-
    const storeStagger = boxStore.animate.stores.stagger;
    const storeDuration = boxStore.animate.stores.duration;
    const storeEase = boxStore.animate.stores.ease;
@@ -22,7 +10,6 @@
    const storeAuto = boxStore.stores.auto;
    const storeDebug = boxStore.stores.debug;
    const storeLabels = boxStore.stores.labels;
-   const storePCL = boxStore.stores.pclEnabled;
    const storeValidator = boxStore.stores.validatorEnabled;
 </script>
 
@@ -59,9 +46,7 @@
          <label><input type=checkbox bind:checked={$storeLabels}>Labels</label>
       </div>
       <div class=flex>
-         <span data-tooltip="Position Control Layer">PCL:</span>
-         <label><input type=checkbox bind:checked={$storePCL}>Enable</label>
-         <button on:click={() => boxStore.save(pclControls.export({ compact: true, selected: true }))} style="margin-left: 0.25em">Save</button>
+         <button on:click={() => boxStore.save()} style="margin-left: 0.25em">Save</button>
          <button on:click={() => boxStore.restore()}>Restore</button>
       </div>
    </div>
