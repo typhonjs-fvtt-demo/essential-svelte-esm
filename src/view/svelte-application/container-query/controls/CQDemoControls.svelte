@@ -1,7 +1,7 @@
 <script>
    import { getContext }      from 'svelte';
 
-   /** 
+   /**
     * @import { SvelteApp }   from '#runtime/svelte/application';
     * @import { AppShell }    from '#runtime/svelte/component/application';
     */
@@ -19,13 +19,13 @@
       contentHeight } = getContext('#internal').stores;
 
    const {
-      intrinsicHeight,
-      intrinsicWidth } = application.position.stores;
+      hasVariableHeight,
+      hasVariableWidth } = application.position.stores;
 
    const { containerQueryType } = application.reactive.storeAppOptions;
 
-   let heightAuto = $intrinsicHeight;
-   let widthAuto = $intrinsicWidth;
+   let heightAuto = $hasVariableHeight;
+   let widthAuto = $hasVariableWidth;
 
    $: application.position.height = heightAuto ? 'auto' : null;
    $: application.position.width = widthAuto ? 'auto' : null;
