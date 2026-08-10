@@ -55,7 +55,7 @@
          <label class=duration>
             Duration (seconds):
             <input type=range min=0 max=3 step=0.1 bind:value={$storeDuration}>
-            <input type=text bind:value={$storeDuration} readonly>
+            <input type=number bind:value={$storeDuration} readonly>
          </label>
       </div>
       <div class=flex>
@@ -110,7 +110,7 @@
 
    input { color: white; margin: 3px 3px }
    input[type=range] { max-width: 3.75em }
-   input[type=text] { max-width: 2em; pointer-events: none; }
+   input[type=number] { max-width: 3em; pointer-events: none; text-align: center; }
 
    select {
       color: white;

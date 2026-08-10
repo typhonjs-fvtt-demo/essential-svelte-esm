@@ -17,7 +17,7 @@ export class PositionBoxApplication extends SvelteApp
          id: 'position-box',
          classes: ['tjs-essential-svelte-esm'],
          title: 'Position (Box)',
-         width: 860,
+         width: 900,
          height: 800,
          resizable: true,
          minimizable: true,
