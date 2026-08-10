@@ -55,10 +55,10 @@ export class PositionApp extends SvelteApp
 
    get dialog() { return this.#dialog; }
 
-   async close(options)
+   async close()
    {
       this.#dialog?.close();
-      return super.close(options);
+      return super.close();
    }
 
    onSvelteMount()
