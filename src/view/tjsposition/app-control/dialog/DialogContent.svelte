@@ -8,7 +8,7 @@
    import PosGsap             from './PosGsap.svelte';
    import PosProperties       from './PosProperties.svelte';
 
-   /** 
+   /**
     * @import { PositionApp } from '../PositionApp';
     */
 
