@@ -11,10 +11,13 @@ import { AnimateControl }  from './AnimateControl.js';
  * @import {
  *    Readable,
  *    Subscriber,
- *    Unsubscriber,
- *    Writable }           from 'svelte/store';
+ *    Unsubscriber }       from 'svelte/store';
  *
- * @import { BoxData }     from '../types-local';
+ * @import {
+ *   BoxData,
+ *   BoxSaveData,
+ *   BoxStoreData,
+ *   BoxStores }           from '../types-local';
  */
 
 /**
@@ -39,14 +42,31 @@ class BoxStore
     */
    #boxData = [];
 
-   #propData = {
+   /**
+    * Stores any current save state to potentially be restored.
+    *
+    * @type {BoxSaveData | undefined}
+    */
+   #boxSaveData;
+
+   /**
+    * The underlying box control store data.
+    *
+    * @type {BoxStoreData}
+    */
+   #boxStoreData = {
       auto: false,
       debug: false,
       labels: false,
       validatorEnabled: true
    };
 
-   #propStores;
+   /**
+    * Provides property stores for box control.
+    *
+    * @type {Readonly<BoxStores>}
+    */
+   #boxStores;
 
    /**
     * Provides a running ID for new box data creation.
@@ -71,13 +91,13 @@ class BoxStore
 
    constructor()
    {
-      const propStore = writable(this.#propData);
+      const boxStoresAll = writable(this.#boxStoreData);
 
-      this.#propStores = Object.freeze({
-         auto: propertyStore(propStore, 'auto'),
-         debug: propertyStore(propStore, 'debug'),
-         labels: propertyStore(propStore, 'labels'),
-         validatorEnabled: propertyStore(propStore, 'validatorEnabled')
+      this.#boxStores = Object.freeze({
+         auto: propertyStore(boxStoresAll, 'auto'),
+         debug: propertyStore(boxStoresAll, 'debug'),
+         labels: propertyStore(boxStoresAll, 'labels'),
+         validatorEnabled: propertyStore(boxStoresAll, 'validatorEnabled')
       });
 
       this.#validator = new TJSPosition.Validators.TransformBounds({ constrain: false });
@@ -98,7 +118,7 @@ class BoxStore
     */
    get stores()
    {
-      return this.#propStores;
+      return this.#boxStores;
    }
 
    /**
@@ -179,25 +199,30 @@ class BoxStore
     */
    restore()
    {
-      console.log(`!!! boxStore - restore - TO IMPLEMENT`);
+      if (isObject(this.#boxSaveData))
+      {
+         // Remove old box data without destroying the array.
+         this.#boxData.length = 0;
 
-      // if (isObject(this.#savedPCLExport))
-      // {
-      //    // Remove old box data without destroying the array.
-      //    this.#boxData.length = 0;
-      //
-      //    for (const entry of this.#savedPCLExport.entries)
-      //    {
-      //       // Must add a new BoxData object with new unique ID and TJSPosition instance.
-      //       this.#boxData.push({
-      //          ...entry,
-      //          id: this.#idCntr++,
-      //          position: new TJSPosition({ ...entry.position, validator: this.#validator })
-      //       });
-      //    }
-      //
-      //    this.#updateSubscribers();
-      // }
+         // Add any saved box data with new IDs.
+         for (const entry of this.#boxSaveData.boxData)
+         {
+            // Must add a new BoxData object with new unique ID and TJSPosition instance.
+            this.#boxData.push({
+               ...entry,
+               id: this.#idCntr++,
+               position: new TJSPosition({ ...entry.position, validator: this.#validator })
+            });
+         }
+
+         // Set box control state.
+         this.#boxStores.auto.set(this.#boxSaveData.boxStoreData.auto);
+         this.#boxStores.debug.set(this.#boxSaveData.boxStoreData.debug);
+         this.#boxStores.labels.set(this.#boxSaveData.boxStoreData.labels);
+         this.#boxStores.validatorEnabled.set(this.#boxSaveData.boxStoreData.validatorEnabled);
+
+         this.#updateSubscribers();
+      }
    }
 
    /**
@@ -205,7 +230,11 @@ class BoxStore
     */
    save()
    {
-      console.log(`!!! boxStore - save - TO IMPLEMENT`);
+      this.#boxSaveData = {
+         boxData: this.#boxData.map((entry) => ({ ...entry, position: entry.position.get() })),
+
+         boxStoreData: window.structuredClone(this.#boxStoreData)
+      };
    }
 
    /**
@@ -254,15 +283,3 @@ class BoxStore
  * @type {BoxStore}
  */
 export const boxStore = new BoxStore();
-
-/**
- * @typedef {object} BoxStores Defines the general property box stores.
- *
- * @property {Writable<boolean>} auto Use auto width / height boxes.
- *
- * @property {Writable<boolean>} debug Use debug boxes.
- *
- * @property {Writable<boolean>} labels Show labels for debug boxes.
- *
- * @property {Writable<boolean>} validatorEnabled Enable app window validation.
- */
