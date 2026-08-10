@@ -6,18 +6,20 @@ import { draggableGsap }         from '#runtime/svelte/animate/gsap';
 import OptionsDraggable          from './OptionsDraggable.svelte';
 import OptionsDraggableGsap      from './OptionsDraggableGsap.svelte';
 
-/** 
+/**
  * @import { SvelteComponent }   from 'svelte';
- * 
- * @import { 
- *    Readable, 
+ *
+ * @import {
+ *    Readable,
  *    Writable }                 from 'svelte/store';
  */
 
+/* eslint-disable quote-props, object-shorthand */
+
 /**
  * Stores the associated Svelte components for manipulating respective draggable options.
- * 
- * @type {Record<string, typeof SvelteComponent<any>}
+ *
+ * @type {Record<string, typeof SvelteComponent<any>>}
  */
 export const optionComponents = {
   'draggable': OptionsDraggable,
@@ -27,7 +29,7 @@ export const optionComponents = {
 /**
  * Stores respective draggable options stores for easy UI manipulation. The default values match the SvelteApp
  * defaults.
- * 
+ *
  * @type {Record<string, Readable<unknown>>}
  */
 export const optionStores = {
@@ -37,7 +39,7 @@ export const optionStores = {
 
 /**
  * Stores the draggable and draggableGsap options for selection.
- * 
+ *
  * @type {Record<string, Function>}
  */
 export const optionFnValues = {
