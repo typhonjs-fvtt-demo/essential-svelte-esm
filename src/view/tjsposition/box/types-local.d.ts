@@ -3,6 +3,7 @@ import type {
    Writable }                   from 'svelte/store';
 
 import type {
+   TJSPosition,
    TJSPositionControlLayerAPI } from '#standard/component/layer/position';
 
 /**
@@ -16,9 +17,19 @@ export interface BoxData extends TJSPositionControlLayerAPI.Data.EntryInput
    color: string;
 
    /**
+    * A unique string or number for `#each` usage in Svelte template.
+    */
+   id: string | number;
+
+   /**
     * The initial bounds of the box.
     */
    initialBounds: { width: number, height: number };
+
+   /**
+    * Position instance controlling box location.
+    */
+   position: TJSPosition;
 }
 
 /**

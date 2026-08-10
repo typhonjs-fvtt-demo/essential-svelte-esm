@@ -264,7 +264,5 @@ export const boxStore = new BoxStore();
  *
  * @property {Writable<boolean>} labels Show labels for debug boxes.
  *
- * @property {Writable<boolean>} pclEnabled Enable position control layer.
- *
  * @property {Writable<boolean>} validatorEnabled Enable app window validation.
  */
