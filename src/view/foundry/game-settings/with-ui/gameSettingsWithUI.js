@@ -146,7 +146,7 @@ class DemoGameSettingsWithUI extends TJSGameSettingsWithUI
             hint: 'A `NumberField`',
             scope: scope.user,
             config: true,
-            type: new foundry.data.fields.NumberField({ step: '1' }),
+            type: new foundry.data.fields.NumberField({ min: 0, max: 1000, step: 1 }),
             default: 1,
             units: 'ms'
          }

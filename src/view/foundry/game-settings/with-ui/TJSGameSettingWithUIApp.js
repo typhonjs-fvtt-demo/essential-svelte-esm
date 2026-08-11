@@ -72,7 +72,7 @@ export class TJSGameSettingWithUIApp extends SvelteApp
     *
     * @param {boolean} force     Render and display the application even if it is not currently displayed.
     *
-    * @param {object} options    Additional options which update the current values of the Application#options object
+    * @param {Record<string, any>} options    Additional options which update the current values of the Application#options object
     *
     * @returns {Promise<void>}   A Promise that resolves to the Application once rendering is complete
     * @protected

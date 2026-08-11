@@ -1,7 +1,7 @@
 <script>
    import { getContext }      from 'svelte';
 
-   /** 
+   /**
     * @import { ItemContext } from '#arrayObjectContext';
     */
 
@@ -15,7 +15,8 @@
 <fieldset class="tjs-panel-content tjs-panel-content--flex-col">
    <legend class=tjs-panel-legend>Description</legend>
    <p>
-      The current user ({globalThis.game.user.name}) {itemStore.canUserModify ? msgCanEdit : msgCannotEdit} which is `{scope}`
+      <!-- svelte-ignore missing-declaration -->
+      The current user ({game.user.name}) {itemStore.canUserModify ? msgCanEdit : msgCannotEdit} which is `{scope}`
       scoped{#if scope === 'user'}&nbsp;and unique to this user{/if}.
    </p>
    <p>

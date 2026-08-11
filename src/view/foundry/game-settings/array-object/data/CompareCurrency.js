@@ -54,8 +54,11 @@ export class CompareCurrency
    static #valueInCopper(currency)
    {
       const match = currency?.trim?.().match(this.#currencyMatch);
-      if (!match) { return NaN; }
 
-      return parseFloat(match.groups.number) * this.#convertRate[match.groups.unit.toLowerCase()];
+      const groups = /** @type {{ number: string; unit: 'cp' | 'sp' | 'gp' | 'pp'; } | undefined} */ (match?.groups);
+
+      if (!groups) { return NaN; }
+
+      return parseFloat(groups.number) * this.#convertRate[groups.unit];
    }
 }

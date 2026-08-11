@@ -3,12 +3,12 @@ import { get }             from 'svelte/store';
 import { ClipboardAccess } from '#runtime/util/browser';
 import { CrossRealm }      from '#runtime/util/realm';
 
-/** 
+/**
  * @import { SvelteApp }   from '#runtime/svelte/application';
- * 
+ *
  * @import { TJSMenuData } from '#standard/component/menu';
- * 
- * @import { 
+ *
+ * @import {
  *    ItemContext,
  *    ItemEntryStore }     from '#arrayObjectContext';
  */
@@ -76,7 +76,7 @@ export class MenuItems
       items.push({
          icon: 'fas fa-copy',
          label: 'Copy JSON',
-         onPress: ({ event }) =>
+         onPress: /** @type {TJSMenuData.Item.OnPressHandler} */ ({ event }) =>
          {
             // An example where cross-realm / window handling is important. To copy data to the clipboard when popped
             // out you must provide the current active window which is done via `CrossRealm.browser.getWindow(event)`.
