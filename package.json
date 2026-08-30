@@ -14,14 +14,17 @@
     "#standard/*": "@typhonjs-fvtt/standard/*",
     "#constants": "./src/constants.js",
     "#gameSettings": "./src/gameSettings.js",
-    "#arrayObjectContext": "./src/view/foundry/game-settings/array-object/data/types.js"
+    "#arrayObjectContext": "./src/view/foundry/game-settings/array-object/data/types.js",
+    "#svelte/*": "svelte/*",
+    "#svelte": "svelte"
   },
   "dependencies": {
     "@typhonjs-fvtt/runtime": "^0.3.0-next.4",
     "@typhonjs-fvtt/standard": "^0.3.0-next.4",
-    "svelte": "^4.2.20"
+    "svelte": "4.2.20"
   },
   "devDependencies": {
+    "@7h3laughingman/foundry-types": "^14.363.0",
     "@typhonjs-config/eslint-config": "^0.6.0",
     "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
     "eslint": "^8"
