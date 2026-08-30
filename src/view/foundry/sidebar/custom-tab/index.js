@@ -17,7 +17,7 @@ Hooks.on('init', () =>
 
    try
    {
-      sidebarTabs = JSON.parse(globalThis.sessionStorage.getItem(sessionConstants.sidebarTabs));
+      sidebarTabs = JSON.parse(window.sessionStorage.getItem(sessionConstants.sidebarTabs));
    }
    catch { /**/ }
 
