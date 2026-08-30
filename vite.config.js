@@ -40,8 +40,7 @@ export default ({ mode }) =>
 
       resolve: {
          // Used in bundling particularly during development. If you npm-link packages to your project add them here.
-         // dedupe: ['svelte'],
-         dedupe: ['svelte', '@typhonjs-fvtt/runtime', '@typhonjs-fvtt/standard'],
+         dedupe: ['svelte'],
          conditions: ['browser', 'import']
       },
 
@@ -65,7 +64,7 @@ export default ({ mode }) =>
       // static resources / project.
       server: {
          port: 30001,
-         open: false, // '/game',
+         open: '/game',
          proxy: {
             // Serves static files from main Foundry server.
             [`^(/${s_PACKAGE_ID}/(assets|lang|packs|dist/${moduleJSON.id}.css))`]: 'http://localhost:30000',
