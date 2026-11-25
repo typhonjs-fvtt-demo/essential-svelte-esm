@@ -67,7 +67,7 @@ export class MenuApplication extends SvelteApp
    /**
     * Holds all demo apps created. Set as an external context.
     *
-    * @type {Map<string, SvelteApp>}
+    * @type {Map<string | undefined, SvelteApp>}
     */
    #demoApps = new Map();
 
@@ -111,7 +111,10 @@ export class MenuApplication extends SvelteApp
       try
       {
          // Attempt to parse user game setting and set application state.
-         const appState = game.settings.get(constants.moduleId, settings.appStateMenuUser);
+
+         const appState = /** @type {SvelteApp.API.State.Data | undefined} */
+          (game.settings.get(constants.moduleId, settings.appStateMenuUser));
+
          if (appState?.position) { this.state.set(appState); }
       }
       catch (err) { /**/ }

@@ -16,30 +16,44 @@
 
    import MenuAppSection            from './MenuAppSection.svelte';
 
-   // ApplicationShell Contract
-   export let elementRoot = void 0;
+   /**
+    * @import { Writable }          from 'svelte/store';
+    *
+    * @import { SvelteApp }         from '#runtime/svelte/application';
+    */
 
-   // Menu section demo data.
-   export let sections = void 0;
+   /** @type {HTMLElement} */
+   export let elementRoot;
 
-   // Game setting store.
-   export let settingStore = void 0;
+   /**
+    * Menu section demo data.
+    *  @type {Record<string, any>[]}
+    */
+   export let sections;
 
+   /**
+    * Game setting store.
+    *
+    * @type {Writable<SvelteApp.API.State.Data>}
+    */
+   export let settingStore;
+
+   /** @type {SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
    // Application position store reference. Stores need to be a top level variable to be accessible for reactivity.
    const position = application.position;
 
    // A debounced callback that serializes application state after 500-millisecond delay.
-   const storePosition = Timing.debounce(() => $settingStore = application.state.current(), 500);
+   const storeAppState = Timing.debounce((pos) => $settingStore = application.state.current(), 500);
 
    // Reactive statement to invoke debounce callback on TJSPosition changes.
-   $: storePosition($position);
+   $: storeAppState($position);
 </script>
 
 <svelte:options accessors={true}/>
 
-<TJSApplicationShell bind:elementRoot transition={scale} transitionOptions={{duration: 1000}}>
+<TJSApplicationShell bind:elementRoot transition={scale} transitionOptions={{ duration: 1000 }}>
    <main>
       <h1>Launch demo apps below:</h1>
       <TJSScrollContainer>
