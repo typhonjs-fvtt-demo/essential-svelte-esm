@@ -81,10 +81,8 @@ export class TJSGameSettingWithUIApp extends SvelteApp
    {
       await super._render(force, options);
 
-      const { showSettings } = options;
-
       // Swaps to the settings UI after render.
-      if (showSettings)
+      if (options?.renderContext === 'showSettings')
       {
          demoGameSettingsWithUI.uiControl.showSettings = true;
 
