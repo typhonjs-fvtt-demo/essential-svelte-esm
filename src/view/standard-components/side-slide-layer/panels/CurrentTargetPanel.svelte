@@ -51,7 +51,7 @@
          if (tokenDoc?.object)
          {
             tokenDoc.object?.control({ releaseOthers: true });
-            canvas.animatePan(tokenDoc.object.center);
+            await canvas.animatePan(tokenDoc.object.center);
          }
       }
    }
