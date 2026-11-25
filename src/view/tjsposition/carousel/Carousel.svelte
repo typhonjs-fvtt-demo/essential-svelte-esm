@@ -33,11 +33,9 @@
       // Cell count has changed.
       if (currentLength !== length)
       {
-         const currentIndex = $selectedIndex;
-
          // Calculates a circular index `newIndex` within the bounds of the old array, ensuring it handles positive or
          // negative indices correctly.
-         const newIndex = (currentIndex % currentLength + currentLength) % currentLength;
+         const newIndex = ($selectedIndex % currentLength + currentLength) % currentLength;
 
          // Adjust index to within bounds of the length in the case that there are fewer cells.
          const cappedIndex = newIndex >= length ? length - 1 : newIndex;
@@ -49,7 +47,7 @@
          // Apply the reset angle animating w/ `bounceOut` while cancelling any current animation of `rotateY`.
          // A `fromTo` animation is used to reset the current unbounded rotation via the modulus operator of the
          // current `rotateY` preventing "over rotation" regardless how far rotation has progressed outside 360 degrees.
-         position.animate.fromTo({ rotateY: position.rotateY % 360 }, { rotateY: resetAngle },
+         position.animate.fromTo({ rotateY: position.rotateY ?? 0 % 360 }, { rotateY: resetAngle },
           { duration: 1, ease: 'bounceOut', strategy: 'cancel' });
 
          quickTranslateZ(-carouselStore.radius);

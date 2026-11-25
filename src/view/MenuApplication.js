@@ -187,7 +187,7 @@ export class MenuApplication extends SvelteApp
     */
    static #createSections()
    {
-      const sections = [
+      return [
          {
             title: 'SvelteApp',
             entries: [
@@ -286,7 +286,5 @@ export class MenuApplication extends SvelteApp
             ]
          }
       ];
-
-      return sections;
    }
 }
