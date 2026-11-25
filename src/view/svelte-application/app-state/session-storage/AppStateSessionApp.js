@@ -13,8 +13,10 @@ export class AppStateSessionApp extends SvelteApp
 
       try
       {
+         const appState = sessionStorage.getItem(sessionConstants.sessionAppState);
+
          // Attempt to parse session storage item and set to application state.
-         this.state.set(JSON.parse(sessionStorage.getItem(sessionConstants.sessionAppState)));
+         if (appState) { this.state.set(JSON.parse(appState)); }
       }
       catch (err) { /**/ }
    }

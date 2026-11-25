@@ -7,10 +7,19 @@
    import { settings }           from '#constants';
    import { gameSettings }       from '#gameSettings';
 
-   export let elementRoot = void 0;
+   /** 
+    * @import { SvelteApp }         from '#runtime/svelte/application';
+    * 
+    * @import { MinimalWritable }   from '#runtime/svelte/store/util';
+    */
 
+   /** @type {HTMLElement} */
+   export let elementRoot;
+
+   /** @type {SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
+   /** @type {MinimalWritable<SvelteApp.API.State.Data> | undefined} */
    const settingStore = gameSettings.getStore(settings.appStateUser);
 
    // Application position store reference. Stores need to be a top level variable to be accessible for reactivity.

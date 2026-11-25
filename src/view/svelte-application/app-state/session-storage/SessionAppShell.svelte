@@ -6,8 +6,14 @@
 
    import { sessionConstants }   from '#constants';
 
-   export let elementRoot = void 0;
+   /** 
+    * @import { SvelteApp }         from '#runtime/svelte/application';
+    */
 
+   /** @type {HTMLElement} */
+   export let elementRoot;
+
+   /** @type {SvelteApp.Context.External} */
    const { application } = getContext('#external');
 
    const storageStore = application.reactive.sessionStorage.getStore(sessionConstants.sessionAppState);

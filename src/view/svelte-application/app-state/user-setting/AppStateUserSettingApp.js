@@ -32,8 +32,11 @@ export class AppStateUserSettingApp extends SvelteApp
 
       try
       {
-         // Attempt to parse user game setting and set application state.
-         this.state.set(game.settings.get(constants.moduleId, settings.appStateUser));
+         const appState = /** @type {SvelteApp.API.State.Data | undefined} */
+          (game.settings.get(constants.moduleId, settings.appStateUser, {}));
+
+         // Attempt to parse session storage item and set to application state.
+         if (appState) { this.state.set(appState); }
       }
       catch (err) { /**/ }
    }
