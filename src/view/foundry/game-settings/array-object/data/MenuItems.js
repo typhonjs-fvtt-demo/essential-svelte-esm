@@ -76,11 +76,11 @@ export class MenuItems
       items.push({
          icon: 'fas fa-copy',
          label: 'Copy JSON',
-         onPress: /** @type {TJSMenuData.Item.OnPressHandler} */ ({ event }) =>
+         onPress: /** @type {TJSMenuData.Item.OnPressHandler} */ async ({ event }) =>
          {
             // An example where cross-realm / window handling is important. To copy data to the clipboard when popped
             // out you must provide the current active window which is done via `CrossRealm.browser.getWindow(event)`.
-            ClipboardAccess.writeText(JSON.stringify(item.toJSON()), CrossRealm.browser.getWindow(event));
+            await ClipboardAccess.writeText(JSON.stringify(item.toJSON()), CrossRealm.browser.getWindow(event));
          }
       });
 
