@@ -66,6 +66,5 @@
       position: absolute;
       background: rgba(100, 200, 255, 0.2);
       pointer-events: none;
-      will-change: top, left, width, height;
    }
 </style>
